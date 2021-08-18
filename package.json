@@ -1,6 +1,6 @@
 {
-    "name": "cassidy-theme",
-    "displayName": "Cassidy Theme",
+    "name": "cassidy-dark",
+    "displayName": "Cassidy Dark",
     "description": "Dark theme inspired by Monokai",
     "version": "0.0.1",
     "engines": {
@@ -12,7 +12,7 @@
     "contributes": {
         "themes": [
             {
-                "label": "Cassidy Theme",
+                "label": "Cassidy Dark",
                 "uiTheme": "vs-dark",
                 "path": "./themes/cassidy-color-theme.json"
             }
