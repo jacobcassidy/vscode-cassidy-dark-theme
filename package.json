@@ -1,6 +1,6 @@
 {
-    "name": "cassidy-dark",
-    "displayName": "Cassidy Dark",
+    "name": "cassidy-vscode-theme",
+    "displayName": "Cassidy Dark Theme",
     "description": "Dark theme inspired by Monokai",
     "version": "0.0.1",
     "engines": {
