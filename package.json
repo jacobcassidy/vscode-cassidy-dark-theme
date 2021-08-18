@@ -1,0 +1,21 @@
+{
+    "name": "cassidy-theme",
+    "displayName": "Cassidy Theme",
+    "description": "Dark theme inspired by Monokai",
+    "version": "0.0.1",
+    "engines": {
+        "vscode": "^1.59.0"
+    },
+    "categories": [
+        "Themes"
+    ],
+    "contributes": {
+        "themes": [
+            {
+                "label": "Cassidy Theme",
+                "uiTheme": "vs-dark",
+                "path": "./themes/cassidy-color-theme.json"
+            }
+        ]
+    }
+}
