@@ -1,9 +1,9 @@
 # README
 ## Cassidy Dark Monokai Theme
-A slowly evolving theme inspired by the Monokai classic, Monokai Pro, and Monokai Dark Soda color schemes. The UI was developed with true gray colors and a minimal, clean design.
+A slowly evolving Visual Studio Code theme inspired by the Monokai classic, Monokai Pro, and Monokai Dark Soda color schemes. The UI uses true gray colors with a minimal, clean, flat design.
 
 ## Inspiration Color Schemes
-Cassidy Dark Monokai theme colors draws from the follow...
+The Cassidy Dark Monokai theme draws inspiration from the follow color schemes...
 
 ### TRUE GRAY COLORS
 - `rgb000` `#000000`
@@ -123,36 +123,36 @@ Cassidy Dark Monokai theme colors draws from the follow...
 ## THEME COLOR THEME
 
 ### THEME DEFAULTS (EVOLVING)
-- `xxxxxx` Blue
-- `xxxxxx` Cyan
-- `xxxxxx` Green
-- `xxxxxx` Orange
+- `#xxxxxx` Blue
+- `#xxxxxx` Cyan
+- `#xxxxxx` Green
+- `#xxxxxx` Orange
 - `#F3B4C5` Pink
-- `xxxxxx` Purple
-- `xxxxxx` Red
-- `xxxxxx` Yellow
+- `#xxxxxx` Purple
+- `#xxxxxx` Red
+- `#xxxxxx` Yellow
 - `#F0F0F0` White
 - `#BEBEBE` Off-White
 - `#646464` Comments
 - `#403D3D` Selection (Monokai Dark Soda selection)
-- `xxxxxx` Error
-- `xxxxxx` Warning
-- `xxxxxx` Info
+- `#xxxxxx` Error
+- `#xxxxxx` Warning
+- `#xxxxxx` Info
 
 ### GIT COLORS
-- `xxxxxx` Deleted
-- `xxxxxx` Modified
-- `xxxxxx` Added/Untracked
+- `#xxxxxx` Deleted
+- `#xxxxxx` Modified
+- `#xxxxxx` Added/Untracked
 - `#646464` Ignored
 
 ### TERMINAL COLORS - (if different than defaults)
-- `xxxxxx` Blue
-- `xxxxxx` Green
-- `xxxxxx` Red
+- `#xxxxxx` Blue
+- `#xxxxxx` Green
+- `#xxxxxx` Red
 
 ### COLOR USES
 - Blue
-  -
+  - *xxxx*
 - Cyan
   - *Support text*
 - Green
