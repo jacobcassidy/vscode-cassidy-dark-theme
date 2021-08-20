@@ -1,8 +1,8 @@
 # Change Log
-## Cassidy Dark Theme
+## Cassidy Dark Monokai Theme
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
 ## [Unreleased]
 
-- Initial release
+- Under active development
