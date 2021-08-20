@@ -1,6 +1,6 @@
 # README
 ## Cassidy Dark Monokai Theme
-A slowly evolving Visual Studio Code theme inspired by the Monokai classic, Monokai Pro, and Monokai Dark Soda color schemes. The UI uses true gray colors with a minimal, clean, flat design.
+A slowly evolving Visual Studio Code theme inspired by the Monokai Classic, Monokai Pro, and Monokai Dark Soda color schemes. The UI uses true gray colors with a minimal, clean, flat design.
 
 ## Inspiration Color Schemes
 The Cassidy Dark Monokai theme draws inspiration from the follow color schemes...
@@ -8,31 +8,30 @@ The Cassidy Dark Monokai theme draws inspiration from the follow color schemes..
 ### TRUE GRAY COLORS
 - `rgb000` `#000000`
 - `rgb005` `#050505`
-- `rgb010` `#0a0a0a` - Window active border
-- `rgb015` `#0f0f0f` - ActivityBar BG
-- `rgb020` `#141414` - StatusBar BG, TitleBar active BG
-- `rgb025` `#191919` - Sidebar BG
-- `rgb030` `#1e1e1e` - Widget shadow, TitleBar inactive BG
-- `rgb035` `#232323` - Editor BG
-- `rgb040` `#282828` - Terminal BG, Top tabs border
+- `rgb010` `#0a0a0a` - UI window active border
+- `rgb015` `#0f0f0f` - UI backgrounds (activityBar)
+- `rgb020` `#141414` - UI backgrounds (statusBar and titleBar)
+- `rgb025` `#191919` - UI backgrounds (sidebar)
+- `rgb030` `#1e1e1e` - UI backgrounds and shadows
+- `rgb035` `#232323` - UI backgrounds (editor)
+- `rgb040` `#282828` - UI backgrounds (terminal) and tab borders
 - `rgb045` `#2d2d2d`
-- `rgb050` `#323232` - Panel BG, focus border, list inactive select BG, splitview border, etc
-- `rgb055` `#373737` - focus border, list indent guide
-- `rgb060` `#3c3c3c` - sash hover border, list hover BG, terminal.ansiBlack
+- `rgb050` `#323232` - UI backgrounds (panel) and borders
+- `rgb055` `#373737` - UI indent guide
+- `rgb060` `#3c3c3c` - UI borders and hovers
 - `rgb065` `#414141`
-- `rgb070` `#464646` - Editor inactive line #s
+- `rgb070` `#464646` - UI inactive line numbers
 - `rgb075` `#4b4b4b`
-- `rgb080` `#505050` - Editor active indent guide, activityBar inactive icons
-- `rgb085` `#555555`
+- `rgb080` `#505050` - UI icons and guides
 - `rgb090` `#5a5a5a`
 - `rgb095` `#5f5f5f`
-- `rgb100` `#646464` - Sidebar header titles, statusBar text, git ignore
+- `rgb100` `#646464` - Dark Gray for color scheme
 - `rgb105` `#696969`
 - `rgb110` `#6e6e6e`
 - `rgb115` `#737373`
 - `rgb120` `#787878`
 - `rgb125` `#7d7d7d`
-- `rgb130` `#828282` - Panel inactive title text
+- `rgb130` `#828282` - Light Gray for color scheme
 - `rgb135` `#878787`
 - `rgb140` `#8c8c8c`
 - `rgb145` `#919191`
@@ -44,7 +43,7 @@ The Cassidy Dark Monokai theme draws inspiration from the follow color schemes..
 - `rgb175` `#afafaf`
 - `rgb180` `#b4b4b4`
 - `rgb185` `#b9b9b9`
-- `rgb190` `#bebebe` - activityBar active icon, sidebar text, editor text, editor active line #s, Off-white
+- `rgb190` `#bebebe` - Off-white for color scheme
 - `rgb195` `#c3c3c3`
 - `rgb200` `#c8c8c8`
 - `rgb205` `#cdcdcd`
@@ -54,7 +53,7 @@ The Cassidy Dark Monokai theme draws inspiration from the follow color schemes..
 - `rgb225` `#e1e1e1`
 - `rgb230` `#e6e6e6`
 - `rgb235` `#ebebeb`
-- `rgb240` `#f0f0f0` - Theme White
+- `rgb240` `#f0f0f0` - White for color scheme
 - `rgb245` `#f5f5f5`
 - `rgb250` `#fafafa`
 - `rbb255` `#ffffff`
