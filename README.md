@@ -31,9 +31,9 @@ The Cassidy Dark Monokai theme draws inspiration from the follow color schemes..
 - `rgb115` `#737373`
 - `rgb120` `#787878`
 - `rgb125` `#7d7d7d`
-- `rgb130` `#828282` - Light Gray for color scheme
+- `rgb130` `#828282`
 - `rgb135` `#878787`
-- `rgb140` `#8c8c8c`
+- `rgb140` `#8c8c8c` - Light Gray for color scheme
 - `rgb145` `#919191`
 - `rgb150` `#969696`
 - `rgb155` `#9b9b9b`
@@ -43,7 +43,7 @@ The Cassidy Dark Monokai theme draws inspiration from the follow color schemes..
 - `rgb175` `#afafaf`
 - `rgb180` `#b4b4b4`
 - `rgb185` `#b9b9b9`
-- `rgb190` `#bebebe` - Off-white for color scheme
+- `rgb190` `#bebebe` - Off-White for color scheme
 - `rgb195` `#c3c3c3`
 - `rgb200` `#c8c8c8`
 - `rgb205` `#cdcdcd`
