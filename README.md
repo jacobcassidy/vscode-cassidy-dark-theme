@@ -6,58 +6,58 @@ A slowly evolving theme inspired by the Monokai classic, Monokai Pro, and Monoka
 Cassidy Dark Monokai theme colors draws from the follow...
 
 ### TRUE GRAY COLORS
-- rgb000 `#000000`
-- rgb005 `#050505`
-- rgb010 `#0a0a0a` - Window active border
-- rgb015 `#0f0f0f` - ActivityBar BG
-- rgb020 `#141414` - StatusBar BG, TitleBar active BG
-- rgb025 `#191919` - Sidebar BG
-- rgb030 `#1e1e1e` - Widget shadow, TitleBar inactive BG
-- rgb035 `#232323` - Editor BG
-- rgb040 `#282828` - Terminal BG, Top tabs border
-- rgb045 `#2d2d2d`
-- rgb050 `#323232` - Panel BG, focus border, list inactive select BG, splitview border, etc
-- rgb055 `#373737` - focus border, list indent guide
-- rgb060 `#3c3c3c` - sash hover border, list hover BG, terminal.ansiBlack
-- rgb065 `#414141`
-- rgb070 `#464646` - Editor inactive line #s
-- rgb075 `#4b4b4b`
-- rgb080 `#505050` - Editor active indent guide, activityBar inactive icons
-- rgb085 `#555555`
-- rgb090 `#5a5a5a`
-- rgb095 `#5f5f5f`
-- rgb100 `#646464` - Sidebar header titles, statusBar text, git ignore
-- rgb105 `#696969`
-- rgb110 `#6e6e6e`
-- rgb115 `#737373`
-- rgb120 `#787878`
-- rgb125 `#7d7d7d`
-- rgb130 `#828282` - Panel inactive title text
-- rgb135 `#878787`
-- rgb140 `#8c8c8c`
-- rgb145 `#919191`
-- rgb150 `#969696`
-- rgb155 `#9b9b9b`
-- rgb160 `#a0a0a0`
-- rgb165 `#a5a5a5`
-- rgb170 `#aaaaaa`
-- rgb175 `#afafaf`
-- rgb180 `#b4b4b4`
-- rgb185 `#b9b9b9`
-- rgb190 `#bebebe` - activityBar active icon, sidebar text, editor text, editor active line #s, Off-white
-- rgb195 `#c3c3c3`
-- rgb200 `#c8c8c8`
-- rgb205 `#cdcdcd`
-- rgb210 `#d2d2d2`
-- rgb215 `#d7d7d7`
-- rgb220 `#dcdcdc`
-- rgb225 `#e1e1e1`
-- rgb230 `#e6e6e6`
-- rgb235 `#ebebeb`
-- rgb240 `#f0f0f0` - Theme White
-- rgb245 `#f5f5f5`
-- rgb250 `#fafafa`
-- rbb255 `#ffffff`
+- `rgb000` `#000000`
+- `rgb005` `#050505`
+- `rgb010` `#0a0a0a` - Window active border
+- `rgb015` `#0f0f0f` - ActivityBar BG
+- `rgb020` `#141414` - StatusBar BG, TitleBar active BG
+- `rgb025` `#191919` - Sidebar BG
+- `rgb030` `#1e1e1e` - Widget shadow, TitleBar inactive BG
+- `rgb035` `#232323` - Editor BG
+- `rgb040` `#282828` - Terminal BG, Top tabs border
+- `rgb045` `#2d2d2d`
+- `rgb050` `#323232` - Panel BG, focus border, list inactive select BG, splitview border, etc
+- `rgb055` `#373737` - focus border, list indent guide
+- `rgb060` `#3c3c3c` - sash hover border, list hover BG, terminal.ansiBlack
+- `rgb065` `#414141`
+- `rgb070` `#464646` - Editor inactive line #s
+- `rgb075` `#4b4b4b`
+- `rgb080` `#505050` - Editor active indent guide, activityBar inactive icons
+- `rgb085` `#555555`
+- `rgb090` `#5a5a5a`
+- `rgb095` `#5f5f5f`
+- `rgb100` `#646464` - Sidebar header titles, statusBar text, git ignore
+- `rgb105` `#696969`
+- `rgb110` `#6e6e6e`
+- `rgb115` `#737373`
+- `rgb120` `#787878`
+- `rgb125` `#7d7d7d`
+- `rgb130` `#828282` - Panel inactive title text
+- `rgb135` `#878787`
+- `rgb140` `#8c8c8c`
+- `rgb145` `#919191`
+- `rgb150` `#969696`
+- `rgb155` `#9b9b9b`
+- `rgb160` `#a0a0a0`
+- `rgb165` `#a5a5a5`
+- `rgb170` `#aaaaaa`
+- `rgb175` `#afafaf`
+- `rgb180` `#b4b4b4`
+- `rgb185` `#b9b9b9`
+- `rgb190` `#bebebe` - activityBar active icon, sidebar text, editor text, editor active line #s, Off-white
+- `rgb195` `#c3c3c3`
+- `rgb200` `#c8c8c8`
+- `rgb205` `#cdcdcd`
+- `rgb210` `#d2d2d2`
+- `rgb215` `#d7d7d7`
+- `rgb220` `#dcdcdc`
+- `rgb225` `#e1e1e1`
+- `rgb230` `#e6e6e6`
+- `rgb235` `#ebebeb`
+- `rgb240` `#f0f0f0` - Theme White
+- `rgb245` `#f5f5f5`
+- `rgb250` `#fafafa`
+- `rbb255` `#ffffff`
 
 ### MONOKAI PRO COLORS
 - `#FF6188` Red
@@ -96,29 +96,29 @@ Cassidy Dark Monokai theme colors draws from the follow...
 - `#90E7F7` Cyan
 
 ### GOGH COLORS
-- #243342` Black
-- #34495e` Bright black
-- #c54133` Red
-- #e74c3c` Bright red
-- #27ae60` Green
-- #2ecc71` Bright green
-- #eeb209` Yellow
-- #f2c40e` Bright yellow
-- #2479d0` Blue
-- #3498db` Bright blue
-- #7d3ea0` Magenta
-- #9b59b6` Bright magenta
-- #51adbf` Cyan
-- #2aa198` Bright cyan
-- #c9cccd` White
-- #edf0f1` Bright white
+- `#243342` Black
+- `#34495e` Bright black
+- `#c54133` Red
+- `#e74c3c` Bright red
+- `#27ae60` Green
+- `#2ecc71` Bright green
+- `#eeb209` Yellow
+- `#f2c40e` Bright yellow
+- `#2479d0` Blue
+- `#3498db` Bright blue
+- `#7d3ea0` Magenta
+- `#9b59b6` Bright magenta
+- `#51adbf` Cyan
+- `#2aa198` Bright cyan
+- `#c9cccd` White
+- `#edf0f1` Bright white
 
 ### OTHER POSSIBLE COLOR OPTIONS
-- Red        #FF3366
-- Off-White  #f8f8f0
-- Hot Pink   #FD5FF0, #FF90F4
-- Pink       #F3B4C5, FFB2F9
-- Purple     #9B59B6, #7D3EA0
+- `#FF3366` - Red
+- `#f8f8f0` - Off-white
+- `#FD5FF0`, `#FF90F4` - Magenta
+- `#F3B4C5`, `FFB2F9`
+- `#9B59B6`, `#7D3EA0` - Purple
 
 ## THEME COLOR THEME
 
@@ -154,24 +154,24 @@ Cassidy Dark Monokai theme colors draws from the follow...
 - Blue
   -
 - Cyan
-  - Support text
+  - *Support text*
 - Green
-  - Entities
+  - *Entities*
 - Orange
-  - CSS/HTML IDs, parameters & arguments
+  - *CSS/HTML IDs, parameters & arguments*
 - Pink
-  - Variables
+  - *Variables*
 - Purple
-  - Booleans, numbers, constants
+  - *Booleans, numbers, constants*
 - Red
-  - Keywords
+  - *Keywords*
 - Yellow
-  - Strings
+  - *Strings*
 - White
-  - Specificed non-colored text)
+  - *Specificed non-colored text)*
 - Off-White
-  - Default text)
+  - *Default text)*
 - Light Gray
-  - Punctuation
+  - *Punctuation*
 - Dark Gray
-  - Comments
+  - *Comments*
