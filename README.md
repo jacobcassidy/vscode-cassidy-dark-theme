@@ -1,11 +1,11 @@
 # README
-## Cassidy Dark Monokai Theme
-A slowly evolving Visual Studio Code theme inspired by the Monokai Classic, Monokai Pro, and Monokai Dark Soda color schemes. The UI uses true gray colors with a minimal, clean, flat design.
+## Cassidy Dark Theme
+A Visual Studio Code theme initally inspired by the Monokai color scheme and slowly evolving into a custom rainbow color wheel scheme. The UI uses true gray colors with a minimal, clean, flat design.
 
-## Inspiration Color Schemes
-The Cassidy Dark Monokai theme draws inspiration from the follow color schemes...
+## Inspirational Color Schemes
+The Cassidy Dark theme draws inspiration from the follow color schemes...
 
-### TRUE GRAY COLORS
+### True Gray Colors
 - `rgb000` `#000000`
 - `rgb005` `#050505`
 - `rgb010` `#0a0a0a` - UI window active border
@@ -58,7 +58,7 @@ The Cassidy Dark Monokai theme draws inspiration from the follow color schemes..
 - `rgb250` `#fafafa`
 - `rbb255` `#ffffff`
 
-### MONOKAI PRO COLORS
+### Monokai Pro Colors
 - `#FF6188` Red
 - `#FC9867` Orange
 - `#FFD866` Yellow
@@ -67,7 +67,7 @@ The Cassidy Dark Monokai theme draws inspiration from the follow color schemes..
 - `#AB9DF2` Purple
 - `#2D2A2E` Black
 
-### MONOKAI CLASSIC COLORS
+### Monokai Classic Colors
 - `#F92672` Red
 - `#FD971F` Orange
 - `#E6DB74` Yellow
@@ -76,7 +76,7 @@ The Cassidy Dark Monokai theme draws inspiration from the follow color schemes..
 - `#AE81FF` Purple
 - `#272822` Black
 
-### MONOKAI DARK SODA COLORS
+### Monokai Dark Soda Colors
 - `#242424` (background)
 - `#3D3D3D` (current line)
 - `#403D3D` (selection)
@@ -94,7 +94,7 @@ The Cassidy Dark Monokai theme draws inspiration from the follow color schemes..
 - `#66D9EF` Bright cyan
 - `#90E7F7` Cyan
 
-### GOGH COLORS
+### Gogh colors
 - `#243342` Black
 - `#34495e` Bright black
 - `#c54133` Red
@@ -112,16 +112,9 @@ The Cassidy Dark Monokai theme draws inspiration from the follow color schemes..
 - `#c9cccd` White
 - `#edf0f1` Bright white
 
-### OTHER POSSIBLE COLOR OPTIONS
-- `#FF3366` - Red
-- `#f8f8f0` - Off-white
-- `#FD5FF0`, `#FF90F4` - Magenta
-- `#F3B4C5`, `FFB2F9`
-- `#9B59B6`, `#7D3EA0` - Purple
+## Theme Color Scheme
 
-## THEME COLOR THEME
-
-### THEME DEFAULTS (EVOLVING)
+### Defaults (evolving)
 - `#xxxxxx` Blue
 - `#xxxxxx` Cyan
 - `#xxxxxx` Green
@@ -138,18 +131,18 @@ The Cassidy Dark Monokai theme draws inspiration from the follow color schemes..
 - `#xxxxxx` Warning
 - `#xxxxxx` Info
 
-### GIT COLORS
+### Git Colors
 - `#xxxxxx` Deleted
 - `#xxxxxx` Modified
 - `#xxxxxx` Added/Untracked
 - `#646464` Ignored
 
-### TERMINAL COLORS - (if different than defaults)
+### Terminal Colors (if different than defaults)
 - `#xxxxxx` Blue
 - `#xxxxxx` Green
 - `#xxxxxx` Red
 
-### COLOR USES
+### Uses of Colors
 - Blue
   - *xxxx*
 - Cyan
