@@ -1,30 +1,100 @@
 {
-	"name": "Cassidy Theme",
-	"type": "dark",
-    //--- COLOR SCHEME USED ---
-    //- DEFAULTS -
-    // Blue
-    // Cyan     "#66d9ef"
-    // Green
-    // Orange   "#fd971f"
-    // Pink
-    // Purple
-    // Red
-    // Yellow   "#e6db74"
-    // White
+  "$schema": "vscode://schemas/color-theme",
+  "name": "Cassidy Dark",
+  "type": "dark",
+  "author": "Jacob Cassidy",
+  // "semanticHighlighting": true,
+  // "cassidy-dark": {
+  //   DRACULA THEME COLORS
+  //   "base": [
+  //       "#282A36",
+  //       "#F8F8F2",
+  //       "#44475A",
+  //       "#6272A4",
+  //       "#8BE9FD",
+  //       "#50FA7B",
+  //       "#FFB86C",
+  //       "#FF79C6",
+  //       "#BD93F9",
+  //       "#FF5555",
+  //       "#F1FA8C"
+  //   ],
+  //   "ansi": [
+  //       "#21222C",
+  //       "#FF5555",
+  //       "#50FA7B",
+  //       "#F1FA8C",
+  //       "#BD93F9",
+  //       "#FF79C6",
+  //       "#8BE9FD",
+  //       "#F8F8F2",
+  //       "#6272A4",
+  //       "#FF6E6E",
+  //       "#69FF94",
+  //       "#FFFFA5",
+  //       "#D6ACFF",
+  //       "#FF92DF",
+  //       "#A4FFFF",
+  //       "#FFFFFF"
+  //   ],
+  //   "brightOther": [
+  //       "#E9F284",
+  //       "#8BE9FE"
+  //   ],
+  //   "other": [
+  //       "#44475A75",
+  //       "#FFFFFF1A",
+  //       "#FFFFFF",
+  //       "#44475A70",
+  //       "#424450",
+  //       "#343746",
+  //       "#21222C",
+  //       "#191A21"
+  //   ]
+  // },
+  // "semanticTokenColors": {
+  //   "function": {
+  //     // "foreground": "#ffc600"
+  //   },
+  //   "variable": "#fff",
+  //   "interface": {
+  //     // "foreground": "#ff0088",
+  //     "foreground": "#FF68B8",
+  //     "italic": true
+  //   },
+  //   "type": {
+  //     // "foreground": "#ff0088",
+  //     "foreground": "#FF68B8",
+  //     "italic": true
+  //   },
+  //   // This colours both object definiton properties, as well as references. If the property does not exist, it will be white\.
+  //   "property": "#9effff",
+  // },
 
-    //- EDITOR -
+  //--- COLOR SCHEME USED ---
+  //- DEFAULTS -
+  // Blue
+  // Cyan     "#66d9ef"
+  // Green
+  // Orange   "#fd971f"
+  // Pink
+  // Purple
+  // Red
+  // Yellow   "#e6db74"
+  // White
 
-    //- GIT -
-    // ADDED (?)              #27ae60
-    // DELETED (RED)			    #c54133
-    // MODIFIED (YELLOW)	                     // #e6db74, #eeb209
-    // UNTRACKED (GREEN)      #9b59b6
-    // IGNORED (GRAY)         #616161
+  //- EDITOR -
 
-    //- GRAYS -
+  //- GIT -
+  // ADDED (?)              #27ae60
+  // DELETED (RED)			    #c54133
+  // MODIFIED (YELLOW)	                     // #e6db74, #eeb209
+  // UNTRACKED (GREEN)      #9b59b6
+  // IGNORED (GRAY)         #616161
 
-    //- TERMINAL -
+  //- GRAYS -
+
+  //- TERMINAL -
 
 	"colors": {
     // VSC UI COLORS (not code syntax colors):

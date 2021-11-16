@@ -94,7 +94,7 @@ The Cassidy Dark theme draws inspiration from the follow color schemes...
 - `#66D9EF` Bright cyan
 - `#90E7F7` Cyan
 
-### Gogh colors
+### Gogh Colors
 - `#243342` Black
 - `#34495e` Bright black
 - `#c54133` Red

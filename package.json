@@ -1,21 +1,32 @@
 {
-    "name": "cassidy-vscode-theme",
-    "displayName": "Cassidy Dark Theme",
-    "description": "Dark theme inspired by Monokai",
-    "version": "0.0.1",
-    "engines": {
-        "vscode": "^1.59.0"
-    },
-    "categories": [
-        "Themes"
-    ],
-    "contributes": {
-        "themes": [
-            {
-                "label": "Cassidy Dark",
-                "uiTheme": "vs-dark",
-                "path": "./themes/cassidy-color-theme.json"
-            }
-        ]
-    }
+  "name": "cassidy-dark",
+  "displayName": "Cassidy Dark",
+  "description": "A VS Code theme inspired by Monokai",
+  "version": "0.0.2",
+  "publisher": "//to be updated upon v1",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jacobcassidy/cassidy-vscode-theme"
+  },
+  "keywords": [
+    "Theme",
+    "Dark Theme",
+    "Monokai",
+    "Night Theme"
+  ],
+  "engines": {
+    "vscode": "^1.59.0"
+  },
+  "categories": [
+    "Themes"
+  ],
+  "contributes": {
+    "themes": [
+      {
+        "label": "Cassidy Dark",
+        "uiTheme": "vs-dark",
+        "path": "./themes/cassidy-dark-color-theme.json"
+      }
+    ]
+  }
 }
