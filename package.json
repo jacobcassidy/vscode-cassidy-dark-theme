@@ -6,7 +6,7 @@
   "publisher": "//to be updated upon v1",
   "repository": {
     "type": "git",
-    "url": "https://github.com/jacobcassidy/cassidy-vscode-theme"
+    "url": "https://github.com/jacobcassidy/cassidy-dark-vscode-theme"
   },
   "keywords": [
     "Theme",
@@ -15,7 +15,7 @@
     "Night Theme"
   ],
   "engines": {
-    "vscode": "^1.59.0"
+    "vscode": "^1.64.2"
   },
   "categories": [
     "Themes"

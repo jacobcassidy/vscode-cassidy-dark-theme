@@ -1,6 +1,6 @@
 # README
 ## Cassidy Dark Theme
-A Visual Studio Code theme initally inspired by the Monokai color scheme and slowly evolving into a custom rainbow color wheel scheme. The UI uses true gray colors with a minimal, clean, flat design.
+A modern, clean, flat Visual Studio Code dark theme inspired by Monokai.
 
 ## Inspirational Color Schemes
 The Cassidy Dark theme draws inspiration from the follow color schemes...
