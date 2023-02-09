@@ -1,0 +1,22 @@
+{
+  "$schema": "vscode://schemas/color-theme",
+  "name": "Cassidy Dark (Dev)",
+  "type": "dark",
+  "author": "Jacob Cassidy",
+  "colors": {
+
+  },
+  "semanticHighlighting": true,
+  "semanticTokenColors": {
+
+  },
+  "tokenColors":[
+    {
+      "scope": "keyword.operator",
+      "settings": {
+        "foreground": "#FF0000"
+      }
+    }
+  ]
+}
+
