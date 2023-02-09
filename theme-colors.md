@@ -404,6 +404,36 @@ The Cassidy Dark theme draws inspiration from the follow color schemes...
 - `rgb250` `#fafafa`
 - `rbb255` `#ffffff`
 
+### [Default VSCode Dark Colors](https://github.com/microsoft/vscode/blob/94c9ea46838a9a619aeafb7e8afd1170c967bb55/extensions/theme-defaults/themes/dark_vs.json)
+
+- `#1e1e1e`
+- `#d4d4d4`
+- `#3a3d41`
+- `#404040`
+- `#707070`
+- `#add6ff26`
+- `#383b3d`
+- `#bbbbbb`
+- `#a6a6a6`
+- `#252526`
+- `#cccccc`
+- `#fff`
+- `#0000`
+- `#ccc3`
+- `#808080`
+- `#646695`
+- `#000080`
+- `#6796e6`
+- `#569cd6`
+- `#9cdcfe`
+- `#16825D`
+- `#6A9955`
+- `#b5cea8`
+- `#f44747`
+- `#d16969`
+- `#ce9178`
+- `#d7ba7d`
+
 ### Monokai Pro Colors
 
 - `#FF6188` Red
