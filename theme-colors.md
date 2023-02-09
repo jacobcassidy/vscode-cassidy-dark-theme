@@ -225,12 +225,12 @@
 
 ## 16% drop
 
-- hsla(0, 0%, 96%, 1) #f5f5f5 WHITE
-- hsla(0, 0%, 80%, 1) #cccccc OFF WHITE
-- hsla(0, 0%, 64%, 1) #a3a3a3 LIGHT GRAY
-- hsla(0, 0%, 48%, 1) #7a7a7a DARK GRAY
-- hsla(0, 0%, 32%, 1) #525252 FADE GRAY
-- hsla(0, 0%, 16%, 1) #292929 BLACK
+- `hsla(0, 0%, 96%, 1)` `#f5f5f5` WHITE
+- `hsla(0, 0%, 80%, 1)` `#cccccc` OFF WHITE
+- `hsla(0, 0%, 64%, 1)` `#a3a3a3` LIGHT GRAY
+- `hsla(0, 0%, 48%, 1)` `#7a7a7a` DARK GRAY
+- `hsla(0, 0%, 32%, 1)` `#525252` FADE GRAY
+- `hsla(0, 0%, 16%, 1)` `#292929` BLACK
 
 ## 15% drop
 
