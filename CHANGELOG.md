@@ -1,8 +1,8 @@
-# Change Log
-## Cassidy Dark VSCode Theme
+# Changelog - Cassidy Dark Theme
 
-Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
+All notable changes to this project will be documented in this file.
 
-## [Unreleased]
+## Unreleased
 
-- Under development
+- Theme UI colors
+- Language syntax highlighting
