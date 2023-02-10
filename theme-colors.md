@@ -9,6 +9,7 @@
 - `hsla(120, 50%, 70%, 1)`  `#8cd98c` BRIGHT GREEN
 - `hsla(180, 50%, 70%, 1)`  `#8cd9d9` CYAN
 - `hsla(210, 83%, 70%, 1)`  `#73b2f2` BLUE
+- `hsla(210, 83%, 50%, 1)`  `#167fe9` BLUE BRIGHT
 - `hsla(240, 100%, 83%, 1)` `#a8a8ff` PURPLE BLUE
 - `hsla(270, 100%, 83%, 1)` `#d4a8ff` PURPLE
 - `hsla(300, 50%, 70%, 1)`  `#d98cd9` MAGENTA
@@ -45,9 +46,7 @@
 - `hsla(360, 100%, 50%, 1)` `#ff0000` PINK
 - `hsla(360, 100%, 50%, 1)` `#ff0000` RED
 
-## ALT COLORS
 
-- `hsla(210, 83%, 50%, 1)` `#167fe9` BLUE - FOR BUTTONS OR INFO
 
 ## PREVIOUS USED COLORS
 
@@ -225,12 +224,12 @@
 
 ## 16% drop
 
-- `hsla(0, 0%, 96%, 1)` `#f5f5f5` WHITE
-- `hsla(0, 0%, 80%, 1)` `#cccccc` OFF WHITE
-- `hsla(0, 0%, 64%, 1)` `#a3a3a3` LIGHT GRAY
-- `hsla(0, 0%, 48%, 1)` `#7a7a7a` DARK GRAY
-- `hsla(0, 0%, 32%, 1)` `#525252` FADE GRAY
-- `hsla(0, 0%, 16%, 1)` `#292929` BLACK
+- `hsla(0, 0%, 96%, 1)` `#f5f5f5` GRAY WHITE
+- `hsla(0, 0%, 80%, 1)` `#cccccc` GRAY LIGHT
+- `hsla(0, 0%, 64%, 1)` `#a3a3a3` GRAY MEDIUM
+- `hsla(0, 0%, 48%, 1)` `#7a7a7a` GRAY DARK
+- `hsla(0, 0%, 32%, 1)` `#525252` GRAY FADE
+- `hsla(0, 0%, 16%, 1)` `#292929` GRAY BLACK
 
 ## 15% drop
 
@@ -242,7 +241,126 @@
 - `hsla(0, 0%, 20%, 1)` `#333333` FADE GRAY
 - `hsla(0, 0%, 5%, 1)`  `#0d0d0d` BLACK
 
-## UI GRAY COLORS - HSL(0, 0%, X%)
+## UI GRAY COLORS - HSL(0, 0%, X%) WITH 16% DROP
+- Black - 0%
+- Theme Gray Black - 16%
+- Theme Gray Fade - 32%
+- Theme Gray Dark - 48%
+- Theme Gray Medium - 64%
+- Theme Gray Light - 80%
+- Theme Gray White - 96%
+- black-gray-black - 8%
+- gray-black-fade - 24%
+- gray-fade-dark - 40%
+- gray-dark-medium - 56%
+- gray-medium-light - 72%
+- gray-light-white - 88%
+
+- 00% `#000000` - BLACK
+- 01% `#030303`
+- 02% `#050505`
+- 03% `#080808`
+- 04% `#0a0a0a`
+- 05% `#0d0d0d`
+- 06% `#0f0f0f`
+- 07% `#121212`
+- 08% `#141414` - black-gray-black [split editor border]
+- 09% `#171717`
+- 10% `#1a1a1a` [line hightlight bg]
+- 11% `#1c1c1c`
+- 12% `#1f1f1f` [widget shadow + scrollbar shadow]
+- 13% `#212121`
+- 14% `#242424` [editor + terminal]
+- 15% `#262626`
+- 16% `#292929` - GRAY BLACK [sidebar bg]
+- 17% `#2b2b2b`
+- 18% `#2e2e2e` [inactive title bar + panel bg]
+- 19% `#303030`
+- 20% `#333333` [sidebar header + activity bar bg]
+- 21% `#363636`
+- 22% `#383838` [status bar + title bar + panel border]
+- 23% `#3b3b3b`
+- 24% `#3d3d3d` - gray-black-fade [cursor + focus border]
+- 25% `#404040`
+- 26% `#424242` [line numbers]
+- 27% `#454545`
+- 28% `#474747`
+- 29% `#4a4a4a`
+- 30% `#4d4d4d`
+- 31% `#4f4f4f`
+- 32% `#525252` - GRAY FADE
+- 33% `#545454`
+- 34% `#575757`
+- 35% `#595959`
+- 36% `#5c5c5c`
+- 37% `#5e5e5e`
+- 38% `#616161`
+- 39% `#636363`
+- 40% `#666666` - gray-fade-dark [badge bg]
+- 41% `#696969`
+- 42% `#6b6b6b`
+- 43% `#6e6e6e`
+- 44% `#707070`
+- 45% `#737373`
+- 46% `#757575`
+- 47% `#787878`
+- 48% `#7a7a7a` - GRAY DARK
+- 49% `#7d7d7d`
+- 50% `#808080`
+- 51% `#828282`
+- 52% `#858585`
+- 53% `#878787`
+- 54% `#8a8a8a`
+- 55% `#8c8c8c`
+- 56% `#8f8f8f` - gray-dark-medium  [status bar foreground + ignored resources foreground]
+- 57% `#919191`
+- 58% `#949494`
+- 59% `#969696`
+- 60% `#999999`
+- 61% `#9c9c9c`
+- 62% `#9e9e9e`
+- 63% `#a1a1a1`
+- 64% `#a3a3a3` - GRAY MEDIUM [active line number]
+- 65% `#a6a6a6`
+- 66% `#a8a8a8`
+- 67% `#ababab`
+- 68% `#adadad`
+- 69% `#b0b0b0`
+- 70% `#b3b3b3`
+- 71% `#b5b5b5`
+- 72% `#b8b8b8` - gray-medium-light
+- 73% `#bababa`
+- 74% `#bdbdbd`
+- 75% `#bfbfbf`
+- 76% `#c2c2c2`
+- 77% `#c4c4c4`
+- 78% `#c7c7c7`
+- 79% `#c9c9c9`
+- 80% `#cccccc` - GRAY LIGHT
+- 81% `#cfcfcf`
+- 82% `#d1d1d1`
+- 83% `#d4d4d4`
+- 84% `#d6d6d6`
+- 85% `#d9d9d9`
+- 86% `#dbdbdb`
+- 87% `#dedede`
+- 88% `#e0e0e0` - gray-light-white
+- 89% `#e3e3e3`
+- 90% `#e6e6e6`
+- 91% `#cfcfcf`
+- 92% `#ebebeb`
+- 93% `#ededed`
+- 94% `#f0f0f0`
+- 95% `#f2f2f2`
+- 96% `#f5f5f5` - GRAY WHITE
+- 97% `#f7f7f7`
+- 98% `#fafafa`
+- 99% `#fcfcfc`
+- 100% `#ffffff`
+
+
+
+## UI GRAY COLORS - HSL(0, 0%, X%) WITH 18% DROP
 
 - 0% `#000000`
 - 1% `#030303`
@@ -250,7 +368,7 @@
 - 3% `#080808`
 - 4% `#0a0a0a`
 - 5% `#0d0d0d`
-- 6% `#0f0f0f` - BLACK
+- 6% `#0f0f0f` - GRAY BLACK
 - 7% `#121212`
 - 8% `#141414` - Activity bar badge foreground + Split view border + Window active border
 - 9% `#171717`
@@ -268,7 +386,7 @@
 - 21% `#363636`
 - 22% `#383838` - Title bar + Status bar + Dropdown select list bg + Panel border + input border
 - 23% `#3b3b3b`
-- 24% `#3d3d3d` - FADE GRAY
+- 24% `#3d3d3d` - GRAY FADE
 - 25% `#404040`
 - 26% `#424242` - Focus border
 - 27% `#454545`
@@ -286,7 +404,7 @@
 - 39% `#636363`
 - 40% `#666666`
 - 41% `#696969`
-- 42% `#6b6b6b` - DARK GRAY
+- 42% `#6b6b6b` - GRAY DARK
 - 43% `#6e6e6e`
 - 44% `#707070`
 - 45% `#737373`
@@ -304,7 +422,7 @@
 - 57% `#919191`
 - 58% `#949494`
 - 59% `#969696`
-- 60% `#999999` - LIGHT GRAY
+- 60% `#999999` - GRAY MEDIUM
 - 61% `#9c9c9c`
 - 62% `#9e9e9e`
 - 63% `#a1a1a1`
@@ -322,7 +440,7 @@
 - 75% `#bfbfbf`
 - 76% `#c2c2c2`
 - 77% `#c4c4c4`
-- 78% `#c7c7c7` - OFF WHITE
+- 78% `#c7c7c7` - GRAY LIGHT
 - 79% `#c9c9c9`
 - 80% `#cccccc`
 - 81% `#cfcfcf`
@@ -340,7 +458,7 @@
 - 93% `#ededed`
 - 94% `#f0f0f0`
 - 95% `#f2f2f2`
-- 96% `#f5f5f5` - WHITE
+- 96% `#f5f5f5` - GRAY WHITE
 - 97% `#f7f7f7`
 - 98% `#fafafa`
 - 99% `#fcfcfc`
