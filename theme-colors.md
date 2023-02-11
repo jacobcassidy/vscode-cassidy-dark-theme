@@ -266,13 +266,13 @@
 - 07% `#121212`
 - 08% `#141414` - black-gray-black [split editor border]
 - 09% `#171717`
-- 10% `#1a1a1a` [line hightlight bg]
+- 10% `#1a1a1a` [line highlight bg]
 - 11% `#1c1c1c`
 - 12% `#1f1f1f` [widget shadow + scrollbar shadow]
 - 13% `#212121`
 - 14% `#242424` [editor + terminal]
 - 15% `#262626`
-- 16% `#292929` - GRAY BLACK [sidebar bg]
+- 16% `#292929` - GRAY BLACK [sidebar bg + widget bg]
 - 17% `#2b2b2b`
 - 18% `#2e2e2e` [inactive title bar + panel bg]
 - 19% `#303030`
@@ -280,9 +280,9 @@
 - 21% `#363636`
 - 22% `#383838` [status bar + title bar + panel border]
 - 23% `#3b3b3b`
-- 24% `#3d3d3d` - gray-black-fade [cursor + focus border]
+- 24% `#3d3d3d` - gray-black-fade [cursor + focus border + input]
 - 25% `#404040`
-- 26% `#424242` [line numbers]
+- 26% `#424242` [line numbers + input bg]
 - 27% `#454545`
 - 28% `#474747`
 - 29% `#4a4a4a`
@@ -300,7 +300,7 @@
 - 41% `#696969`
 - 42% `#6b6b6b`
 - 43% `#6e6e6e`
-- 44% `#707070`
+- 44% `#707070` - comments
 - 45% `#737373`
 - 46% `#757575`
 - 47% `#787878`
@@ -308,7 +308,7 @@
 - 49% `#7d7d7d`
 - 50% `#808080`
 - 51% `#828282`
-- 52% `#858585`
+- 52% `#858585` - [ignore resources]
 - 53% `#878787`
 - 54% `#8a8a8a`
 - 55% `#8c8c8c`
