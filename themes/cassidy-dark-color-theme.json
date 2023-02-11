@@ -4,42 +4,110 @@
   "type": "dark",
   "author": "Jacob Cassidy",
   "colors": {
-
-    //*** UI DEFAULTS ***
-    "badge.foreground": "#f5f5f5", // theme gray white
-    "badge.background": "#525252", // theme gray fade
-    "button.background": "#167fe9", // theme blue bright - example: search settings in settings page
-    "checkbox.background": "#f5f5f51a", // theme gray white at 10% opacity - example: Settings UI checkbox
-    "checkbox.foreground": "#f5f5f5", // theme gray white
+    //*** BASE COLORS ***
     "descriptionForeground": "#f5f5f5", // theme gray white
-    "dropdown.background": "#3d3d3d", // theme gray-black-fade
-    "dropdown.listBackground": "#383838", //22% black (2 shades darker than dropdown.background)
-    "dropdown.foreground": "#f5f5f5", // theme gray white
     "errorForeground": "#f27373", // theme red
-    "focusBorder": "#3d3d3d", // theme gray-black-fade
+    "focusBorder": "#ffffff1a", // #3d3d3d theme gray-black-fade
     "foreground": "#cccccc", // theme gray light
     "icon.foreground": "#a3a3a3", // theme gray medium
-    "input.background": "#f5f5f51a", // theme gray white at 10% opacity
-    "input.border": "#383838", // 22% black (input and debug console border)
-    "input.foreground": "#f5f5f5", // theme gray white
-    "list.activeSelectionBackground": "#474747", // 28% black - example - Settings UI dropdown selector
-    "list.activeSelectionForeground": "#f5f5f5", // theme gray white
-    "list.focusBackground": "#333333", // 20% black - sidebar active item when moving with keyboard
-    "list.focusForeground": "#f5f5f5", // theme gray white
-    "list.hoverBackground": "#f5f5f51a", // theme gray white at 10% opacity
-    "list.hoverForeground": "#f5f5f5", // theme white - example: extensions sidebar list
-    "list.inactiveSelectionBackground": "#f5f5f533", // theme gray white at 20% opacity example: extensions sidebar list
-    "list.inactiveSelectionForeground": "#f5f5f5", // theme gray white
-    "list.errorForeground": "#f27373", // theme red - example: editor tab title
-    "list.warningForeground": "#f2b373", // theme orange
-    "progressBar.background": "#8cd98c", // theme green bright
     "sash.hoverBorder": "#525252", // theme gray fade - example: drag the sidebar
-    "scrollbar.shadow": "#1f1f1f", // 12% black - Two shades darker than editor background - example: editor tabs side scroll
-    "scrollbarSlider.activeBackground": "#7a7a7a66", // theme gray-fade-dark at 40% opacity - example: when selecting and dragging scrollbar location
-    "scrollbarSlider.background": "#7a7a7a33", // theme gray-fade-dark at 20% opacity - example: editor vertical scrollbar location
-    "scrollbarSlider.hoverBackground": "#7a7a7a4d", // theme gray-fade-dark at 30% opacity
-    "sideBySideEditor.horizontalBorder": "#141414", // theme black-gray-black
-    "sideBySideEditor.verticalBorder": "#141414", // theme black-gray-black (see split settings with Default and User side by side)
+    "widget.shadow": "#1f1f1f", // 12% black
+
+    //*** ACTIVITY BAR ***
+    "activityBar.background": "#333333", // 20% black (match sidebar header)
+    "activityBar.dropBorder": "#7a7a7a", // theme gray dark
+    "activityBar.foreground": "#cccccc", // theme gray light
+    "activityBar.inactiveForeground": "#7a7a7a", // theme gray dark
+    "activityBar.border": "#292929", // theme gray black (match sidebar bg)
+    "activityBarBadge.background": "#f8e6b0", // theme yellow
+    "activityBarBadge.foreground": "#141414", // theme black-gray-black
+    "activityBar.activeBorder": "#f8e6b080", // theme yellow at 50% opacity
+    "activityBar.activeBackground": "#292929", // theme gray black (match sidebar bg)
+    "activityBar.activeFocusBorder": "#3d3d3d", // theme gray-black-fade
+
+    //*** BADGE COLORS ***
+    "badge.foreground": "#f5f5f5", // theme gray white
+    "badge.background": "#525252", // theme gray fade
+
+    //*** BUTTON CONTROLS ***
+    "button.background": "#167fe9", // theme blue bright - example: search settings in settings page
+    "checkbox.background": "#ffffff1a", // white at 10% opacity - example: Settings UI checkbox
+    "checkbox.foreground": "#f5f5f5", // theme gray white
+
+    //*** DIFF EDITOR ***
+    "diffEditor.insertedTextBackground": "#8cd98c33", //33 theme green bright at 20% opacity
+    "diffEditor.removedTextBackground": "#f2737333", // heme red at 20% opacity
+    "diffEditor.insertedLineBackground": "#8cd98c1a", // theme green bright at 10% opacity
+    "diffEditor.removedLineBackground": "#f273731a", // theme red at 10% opacity
+    "diffEditorGutter.insertedLineBackground": "#8cd98c0d", // theme green bright at 5% opacity
+    "diffEditorGutter.removedLineBackground": "#f273730d", // theme red at 5% opacity
+    "diffEditorOverview.insertedForeground": "#8cd98c4d", // theme green bright at 30% opacity - example: scrollbar diff indicator
+    "diffEditorOverview.removedForeground": "#f273734d", // theme red at 30% opacity - example: scrollbar diff indicator
+
+    //*** DROPDOWN CONTROLS ***
+    "dropdown.background": "#3d3d3d", // theme gray-black-fade
+    "dropdown.listBackground": "#383838", // 22% black (2 shades darker than dropdown.background)
+    "dropdown.foreground": "#f5f5f5", // theme gray white
+
+    //*** EDITOR COLORS ***
+    // base
+    "editor.background": "#242424", // 14% black
+    "editor.foreground": "#cccccc", // theme gray light
+    // bracket
+    "editorBracketMatch.border": "#7a7a7a", // theme gray dark
+    // cursor
+    "editorCursor.background": "#3d3d3d", // theme gray-black-fade
+    "editorCursor.foreground": "#a3a3a3", // theme gray medium
+    // gutter
+    "editorGutter.addedBackground": "#8cd98c80", // theme green bright at 50% opacity - example: scrollbar and number line bar diff indicators
+    "editorGutter.deletedBackground": "#f2737380", // theme red at 50% opacity
+    "editorGutter.foldingControlForeground": "#7a7a7a", // theme gray dark
+    "editorGutter.modifiedBackground": "#f8e6b0", // theme yellow
+    // indent guide
+    "editorIndentGuide.background": "#3d3d3d", // theme gray-black-fade
+    "editorIndentGuide.activeBackground": "#525252", // theme gray fade
+    "editorWhitespace.foreground": "#3d3d3d", // theme gray-black-fade
+    // line
+    "editor.lineHighlightBackground": "#1a1a1a", // 10% black (4 shades darker than editor bg)
+    // line number
+    "editorLineNumber.foreground": "#424242", // 26% black
+    "editorLineNumber.activeForeground": "#a3a3a3", // theme gray medium
+    // link
+    "editorLink.activeForeground": "#f8e6b0", // theme
+    // match
+    "editor.findMatchHighlightBackground": "#ffb3664d", // theme orange bright at 30% opacity - Color of the other search matches
+    "editor.findRangeHighlightBackground": "#3d3d3d4d", // theme gray-black-fade at 30% opacity - example: using finder widget with selection search only
+    "editor.findMatchBackground": "#73b2f266", // theme blue at 40% opacity - example: current search match
+    // match selection
+    "editor.hoverHighlightBackground": "#73b2f21a", // theme blue at 10% opacity
+    // scrollbar
+    "editorOverviewRuler.background": "#242424", // 14% black (match editor bg)
+    "editorOverviewRuler.border": "#333333", // 20% black (scrollbar border)
+    "editorOverviewRuler.addedForeground": "#8cd98c80", // theme green bright at 50% opacity - example: scrollbar diff indicator
+    "editorOverviewRuler.deletedForeground": "#f2737380", // theme red at 50% opacity
+    "editorOverviewRuler.errorForeground": "#f27373", // theme red
+    "editorOverviewRuler.warningForeground": "#f2b373", // theme orange
+    "editorOverviewRuler.infoForeground": "#73b2f2", // theme blue
+    "editorOverviewRuler.bracketMatchForeground": "#7a7a7a", // theme gray dark
+    // selection
+    // widget
+    "editorWidget.foreground": "#cccccc", // theme light gray - example: the file search widget
+    "editorWidget.background": "#333333", // #2e2e2e 18% black (match panel bg) - example: finder widget
+    "editorWidget.border": "#3d3d3d", // theme gray-black-fade
+    "editorWidget.resizeBorder": "#424242", // 26% black
+    // word highlight
+    "editor.wordHighlightTextBackground": "#525252", // theme gray fade
+    // unicode
+    "editorUnicodeHighlight.border": "#f2b37380", // theme orange at 50% opacity
+    "editorUnicodeHighlight.background": "#f2b3734d", // theme orange at 30% opacity
+
+    //*** EDITOR GROUPS & TABS ***
+    // groups
+    "editorGroup.border": "#141414", // theme black-gray-black (split editor border)
+    "editorGroup.dropBackground": "#f5f5f533", // theme gray white at 20% opacity
+    "editorGroupHeader.noTabsBackground": "#292929", // theme gray black (match sidebar bg)
+    "editorGroupHeader.tabsBackground": "#2e2e2e", // 18% black (2 shades lighter than sidebar bg)
+    // tabs
     "tab.activeBackground": "#242424", // 14% black (match editor background)
     "tab.activeForeground": "#f5f5f5", // theme gray white
     "tab.border": "#242424", // 14% black (match editor background)
@@ -51,90 +119,51 @@
     "tab.unfocusedInactiveForeground": "#7a7a7a", // theme gray dark
     "tab.hoverForeground": "#f5f5f5", // theme gray white
     "tab.unfocusedHoverForeground": "#f5f5f5", // theme gray white
-    "tree.indentGuidesStroke": "#3d3d3d", // theme gray-black-fade (sidebar explorer tree)
-    "tree.tableColumnsBorder": "#333333", // 6 shades lighter than editor bg (see Keyboard Shortcuts page)
-    "tree.tableOddRowsBackground": "#1f1f1f", // 2 shades darker than editor bg (see Keyboard Shortcuts page)
-    "widget.shadow": "#1f1f1f", // 12% black
-
-    //*** ACTIVITY BAR ***
-    "activityBar.background": "#333333", // 20% black (match sidebar header)
-    "activityBar.dropBorder": "#7a7a7a", // theme gray dark
-    "activityBar.foreground": "#a3a3a3", // theme gray medium
-    "activityBar.inactiveForeground": "#7a7a7a", // theme gray dark
-    "activityBar.border": "#292929", // theme gray black (match sidebar bg)
-    "activityBarBadge.background": "#f8e6b0", // theme yellow
-    "activityBarBadge.foreground": "#141414", // theme black-gray-black
-    "activityBar.activeBorder": "#333333", // 20% black (match activity bar bg)
-    "activityBar.activeBackground": "#292929", // theme gray black (match sidebar bg)
-    "activityBar.activeFocusBorder": "#3d3d3d", // theme gray-black-fade
-
-    //*** DIFF EDITOR
-    "diffEditor.insertedTextBackground": "#8cd98c33", // theme green bright at 20% opacity
-    "diffEditor.removedTextBackground": "#f2737333", // heme red at 20% opacity
-    "diffEditor.insertedLineBackground": "#8cd98c1a", // theme green bright at 10% opacity
-    "diffEditor.removedLineBackground": "#f273731a", // theme red at 10% opacity
-    "diffEditorGutter.insertedLineBackground": "#8cd98c0d", // theme green bright at 5% opacity
-    "diffEditorGutter.removedLineBackground": "#f273730d", // theme red at 5% opacity
-    "diffEditorOverview.insertedForeground": "#8cd98c4d", // theme green bright at 30% opacity - example: scrollbar diff indicator
-    "diffEditorOverview.removedForeground": "#f273734d", // theme red at 30% opacity - example: scrollbar diff indicator
-
-    //*** EDITOR ***
-    "editor.background": "#242424", // 14% black
-    "editor.foreground": "#cccccc", // theme gray light
-    "editor.findMatchHighlightBackground": "#ffb3664d", // theme orange bright at 30% opacity - Color of the other search matches
-    "editor.findRangeHighlightBackground": "#3d3d3d4d", // theme gray-black-fade at 30% opacity - example: using finder widget with selection search only
-    "editor.hoverHighlightBackground": "#73b2f21a", // theme blue at 10% opacity
-    "editor.lineHighlightBackground": "#1a1a1a", // 10% black (4 shades darker than editor bg)
-    "editorBracketMatch.border": "#7a7a7a", // theme gray dark
-    "editorCursor.background": "#3d3d3d", // theme gray-black-fade
-    "editorCursor.foreground": "#a3a3a3", // theme gray medium
-    "editor.findMatchBackground": "#73b2f266", // theme blue at 40% opacity - example: current search match
-    "editorGroup.border": "#141414", // theme black-gray-black (split editor border)
-    "editorGroup.dropBackground": "#f5f5f533", // theme gray white at 20% opacity
-    "editorGroupHeader.noTabsBackground": "#292929", // theme gray black (match sidebar bg)
-    "editorGroupHeader.tabsBackground": "#2e2e2e", // 18% black (2 shades lighter than sidebar bg)
-    "editorGutter.addedBackground": "#8cd98c80", // theme green bright at 50% opacity - example: scrollbar and number line bar diff indicators
-    "editorGutter.deletedBackground": "#f2737380", // theme red at 50% opacity
-    "editorGutter.foldingControlForeground": "#7a7a7a", // theme gray dark
-    "editorGutter.modifiedBackground": "#f8e6b080", // theme yellow at 50% opacity
-    "editorIndentGuide.background": "#3d3d3d", // theme gray-black-fade
-    "editorIndentGuide.activeBackground": "#525252", // theme gray fade
-    "editorLineNumber.foreground": "#424242", // 26% black
-    "editorLineNumber.activeForeground": "#a3a3a3", // theme gray medium
-    "editorLink.activeForeground": "#f8e6b0", // theme yellow
-    "editorOverviewRuler.background": "#242424", // 14% black (match editor bg)
-    "editorOverviewRuler.border": "#333333", // 20% black (scrollbar border)
-    "editorOverviewRuler.addedForeground": "#8cd98c80", // theme green bright at 50% opacity - example: scrollbar diff indicator
-    "editorOverviewRuler.deletedForeground": "#f2737380", // theme red at 50% opacity
-    "editorOverviewRuler.errorForeground": "#f27373", // theme red
-    "editorOverviewRuler.warningForeground": "#f2b373", // theme orange
-    "editorOverviewRuler.infoForeground": "#73b2f2", // theme blue
-    "editorOverviewRuler.bracketMatchForeground": "#7a7a7a", // theme gray dark
-    "editorUnicodeHighlight.border": "#f2b37380", // theme orange at 50% opacity
-    "editorUnicodeHighlight.background": "#f2b3734d", // theme orange at 30% opacity
-    "editorWhitespace.foreground": "#3d3d3d", // theme gray-black-fade
-    "editorWidget.foreground": "#cccccc", // theme light gray - example: the file search widget
-    "editorWidget.background": "#2e2e2e", // 18% black (match panel bg) - example: finder widget
-    "editorWidget.border": "#3d3d3d", // theme gray-black-fade
-    "editorWidget.resizeBorder": "#424242", // 26% black
+    // side-by-side borders
+    "sideBySideEditor.horizontalBorder": "#141414", // theme black-gray-black
+    "sideBySideEditor.verticalBorder": "#141414", // theme black-gray-black (see split settings with Default and User side by side)
 
     //*** GIT DECORATION ***
-    "gitDecoration.addedResourceForeground": "#8cd98c", // theme green bright - example: editor list when new resource is staged but not committed
+    "gitDecoration.addedResourceForeground": "#d4a8ff", // theme purple - example: editor list when new resource is staged but not committed
     "gitDecoration.modifiedResourceForeground": "#f8e6b0", // theme yellow
     "gitDecoration.deletedResourceForeground": "#f27373", // theme red
     "gitDecoration.renamedResourceForeground": "#73b2f2", // theme blue"
     "gitDecoration.stageModifiedResourceForeground": "#f8e6b0", // theme yellow
     "gitDecoration.stageDeletedResourceForeground": "#f27373", // theme red
-    "gitDecoration.untrackedResourceForeground": "#d4a8ff", // theme purple
-    "gitDecoration.ignoredResourceForeground": "#a3a3a3", // theme gray medium
+    "gitDecoration.untrackedResourceForeground": "#8cd98c", // theme green bright
+    "gitDecoration.ignoredResourceForeground": "#858585", // 52% black (4 shades lighter than theme gray dark)
     "gitDecoration.conflictingResourceForeground": "#f2b373", // theme orange
 
+    //*** INPUT CONTROL ***
+    "input.background": "#3d3d3d", // theme gray-black-fade
+    "input.border": "#424242", // 26% black (input and debug console border)
+    "input.foreground": "#f5f5f5", // theme gray white
+
+    //*** LISTS & TREES ***
+    "list.activeSelectionBackground": "#ffffff33", // white at 20% opacity - example: settings UI dropdown selector
+    "list.activeSelectionForeground": "#f5f5f5", // theme white - sidebar active item when moving with keyboard
+    "list.focusAndSelectionOutline": "#fff0", // 0% opacity for no border showing
+    "list.focusForeground": "#f5f5f5", // theme gray white
+    "list.focusOutline": "#ffffff33", // white at 20% opacity
+    "list.hoverBackground": "#ffffff1a", // white at 10% opacity
+    "list.hoverForeground": "#f5f5f5", // theme white - example: extensions sidebar list
+    "list.inactiveSelectionBackground": "#ffffff0d", // white at 5% opacity example: extensions sidebar list
+    "list.inactiveSelectionForeground": "#f5f5f5", // theme gray white
+    "list.errorForeground": "#f27373", // theme red - example: editor tab title
+    "list.warningForeground": "#f2b373", // theme orange
+
+
+    // trees
+    "tree.indentGuidesStroke": "#3d3d3d", // theme gray-black-fade (sidebar explorer tree)
+    "tree.tableColumnsBorder": "#333333", // 6 shades lighter than editor bg (see Keyboard Shortcuts page)
+    "tree.tableOddRowsBackground": "#1f1f1f", // 2 shades darker than editor bg (see Keyboard Shortcuts page)
+
     //*** PANELS ***
-    "panel.background":  "#2e2e2e", // 18% black
+    "panel.background": "#2e2e2e", // 18% black
     "panel.border": "#383838", // 22% black (match title bar bg)
     "panel.dropBorder": "#7a7a7a", // theme gray dark
     "panelTitle.activeBorder": "#2e2e2e", // 18% black (match panel BG to hide border)
-    "panelTitle.activeForeground": "#f8e6b0", // theme Yellow
+    "panelTitle.activeForeground": "#f8e6b0", // theme yellow
     "panelTitle.inactiveForeground": "#7a7a7a", // theme gray dark
 
     //*** PEEK VIEW ***
@@ -142,6 +171,15 @@
     "peekViewTitle.background": "#333333", // 20% black (match activity bar bg)
     "peekViewTitleDescription.foreground": "#a3a3a3", // theme gray medium
     "peekViewTitleLabel.foreground": "#f5f5f5", // theme gray white
+
+    //*** PROGRESS BAR ***
+    "progressBar.background": "#8cd98c", // theme green bright
+
+    //*** SCROLLBAR CONTROL ***
+    "scrollbar.shadow": "#1f1f1f", // 12% black - Two shades darker than editor background - example: editor tabs side scroll
+    "scrollbarSlider.activeBackground": "#7a7a7a66", // theme gray-fade-dark at 40% opacity - example: when selecting and dragging scrollbar location
+    "scrollbarSlider.background": "#7a7a7a33", // theme gray-fade-dark at 20% opacity - example: editor vertical scrollbar location
+    "scrollbarSlider.hoverBackground": "#7a7a7a4d", // theme gray-fade-dark at 30% opacity
 
     //*** SETTINGS ***
     "settings.modifiedItemIndicator": "#f8e6b0", // theme yellow - example: vertical line color in Settings UI
@@ -151,7 +189,7 @@
     "sideBar.foreground": "#cccccc", // theme gray light
     "sideBar.border": "#292929", // theme gray Black
     "sideBar.dropBackground": "#2e2e2e", // 18% black - 2 shades darker than sidebar bg
-    "sideBarTitle.foreground": "#a3a3a3", // theme gray medium - EXPLORER TITLE
+    "sideBarTitle.foreground": "#707070", // 44% black (match comments) - EXPLORER TITLE
     "sideBarSectionHeader.background": "#333333", // 20% black (match activity bar bg)
     "sideBarSectionHeader.foreground": "#a3a3a3", // theme gray medium
     "sideBarSectionHeader.border": "#292929", // theme gray Black (match sidebar border)
@@ -167,7 +205,7 @@
     //*** TERMINAL ***
     "terminal.background": "#242424", // 14% black (match editor bg)
     "terminal.foreground": "#cccccc", // theme gray light
-    "terminal.ansiBlack": "#292929", // theme gray black
+    "terminal.ansiBlack": "#3d3d3d", // theme gray-black-fade
     "terminal.ansiBlue": "#167fe9", // theme blue bright
     "terminal.ansiBrightBlack": "#7a7a7a", // theme gray dark
     "terminal.ansiBrightBlue": "#73b2f2", // theme blue
@@ -185,7 +223,7 @@
     "terminal.ansiYellow": "#f8e6b0", // theme yellow
     "terminal.selectionBackground": "#73b2f250", // The selection background color of the terminal.
 
-    //*** TEXT ***
+    //*** TEXT COLORS ***
     "textBlockQuote.background": "#3d3d3d", // theme gray-black-fade - example: markdown > quote in preview mode
     "textBlockQuote.border": "#666666", // theme gray-fade-dark
     "textCodeBlock.background": "#525252", // theme gray fade - example: hover over settings json "workbench.startupEditor"
@@ -199,7 +237,7 @@
     "titleBar.inactiveBackground": "#2e2e2e", // 18% black (match editor inactive tabs bg)
     "titleBar.inactiveForeground": "#7a7a7a", // theme gray dark
 
-    //*** TOOLBAR ***
+    //*** TOOLBAR ACTION COLORS ***
     "toolbar.hoverBackground": "#f5f5f51a", // theme gray white at 10% opacity - example: Settings UI gear icons
     "toolbar.activeBackground": "#f5f5f533", // theme gray white at 20% opacity - example: Settings UI gear icons
   },
@@ -277,7 +315,7 @@
       }
     },
     {
-      "name": "Theme Gray Fade",
+      "name": "Theme Gray Fade (32%)",
       "scope": [
         //*** DEFAULT
         //*** CSS
@@ -299,7 +337,7 @@
       }
     },
     {
-      "name": "Theme Gray Dark",
+      "name": "44% Black",
       "scope": [
         //*** DEFAULT
         "comment",
@@ -319,11 +357,34 @@
         //*** XML
       ],
       "settings": {
+        "foreground": "#707070"
+      }
+    },
+
+    {
+      "name": "Theme Gray Dark (48%)",
+      "scope": [
+        //*** DEFAULT
+        //*** CSS
+        //*** HTML
+        //*** JAVASCRIPT
+        //*** JSON
+        //*** MARKDOWN
+        //*** PHP
+        //*** PYTHON
+        //*** REACT
+        //*** RUBY
+        //*** SHELL
+        //*** SCSS
+        //*** SQL
+        //*** XML
+      ],
+      "settings": {
         "foreground": "#7a7a7a"
       }
     },
     {
-      "name": "Theme Gray Medium",
+      "name": "Theme Gray Medium (64%)",
       "scope": [
         //*** DEFAULT
         "punctuation",
@@ -346,7 +407,7 @@
       }
     },
     {
-      "name": "Theme Gray Light",
+      "name": "Theme Gray Light (80%)",
       "scope": [
         //*** DEFAULT
         //*** CSS
@@ -368,7 +429,7 @@
       }
     },
     {
-      "name": "Theme Gray White",
+      "name": "Theme Gray White (96%)",
       "scope": [
         //*** DEFAULT
         //*** CSS
