@@ -7,10 +7,11 @@
     //*** BASE COLORS ***
     "descriptionForeground": "#f5f5f5", // theme gray white
     "errorForeground": "#f27373", // theme red
-    "focusBorder": "#ffffff1a", // #3d3d3d theme gray-black-fade
+    "focusBorder": "#ffffff1a", // white at 10% opacity
     "foreground": "#cccccc", // theme gray light
     "icon.foreground": "#a3a3a3", // theme gray medium
-    "sash.hoverBorder": "#525252", // theme gray fade - example: drag the sidebar
+    "sash.hoverBorder": "#ffffff1a", // white at 10% opacity
+    "widget.border": "#ffffff05", // white at 2% opacity
     "widget.shadow": "#1f1f1f", // 12% black
 
     //*** ACTIVITY BAR ***
@@ -52,17 +53,20 @@
     //*** EDITOR COLORS ***
     // base
     "editor.background": "#242424", // 14% black
-    "editor.foreground": "#cccccc", // theme gray light
+    "editor.foreground": "#525252", // theme gray fade //TEST
     // bracket
     "editorBracketMatch.border": "#7a7a7a", // theme gray dark
     // cursor
     "editorCursor.background": "#3d3d3d", // theme gray-black-fade
     "editorCursor.foreground": "#a3a3a3", // theme gray medium
     // gutter
-    "editorGutter.addedBackground": "#8cd98c80", // theme green bright at 50% opacity - example: scrollbar and number line bar diff indicators
-    "editorGutter.deletedBackground": "#f2737380", // theme red at 50% opacity
+    "editorGutter.addedBackground": "#8cd98c99", // theme green bright at 60% opacity - example: scrollbar and number line bar diff indicators
+    "editorGutter.deletedBackground": "#f2737399", // theme red at 60% opacity
     "editorGutter.foldingControlForeground": "#7a7a7a", // theme gray dark
-    "editorGutter.modifiedBackground": "#f8e6b0", // theme yellow
+    "editorGutter.modifiedBackground": "#f8e6b0cc", // theme yellow at 80% opacity
+    // lightbulb
+    "editorLightBulb.foreground": "#ffb366", // theme orange
+    "editorLightBulbAutoFix.foreground": "#73b2f2", // theme blue
     // indent guide
     "editorIndentGuide.background": "#3d3d3d", // theme gray-black-fade
     "editorIndentGuide.activeBackground": "#525252", // theme gray fade
@@ -83,8 +87,9 @@
     // scrollbar
     "editorOverviewRuler.background": "#242424", // 14% black (match editor bg)
     "editorOverviewRuler.border": "#333333", // 20% black (scrollbar border)
-    "editorOverviewRuler.addedForeground": "#8cd98c80", // theme green bright at 50% opacity - example: scrollbar diff indicator
-    "editorOverviewRuler.deletedForeground": "#f2737380", // theme red at 50% opacity
+    "editorOverviewRuler.modifiedForeground": "#f8e6b099", // theme yellow at 60% opacity
+    "editorOverviewRuler.addedForeground": "#8cd98c99", // theme green bright at 60% opacity - example: scrollbar diff indicator
+    "editorOverviewRuler.deletedForeground": "#f2737399", // theme red at 60% opacity
     "editorOverviewRuler.errorForeground": "#f27373", // theme red
     "editorOverviewRuler.warningForeground": "#f2b373", // theme orange
     "editorOverviewRuler.infoForeground": "#73b2f2", // theme blue
@@ -96,6 +101,8 @@
     "editorWidget.border": "#3d3d3d", // theme gray-black-fade
     "editorWidget.resizeBorder": "#424242", // 26% black
     // word highlight
+    "editor.wordHighlightBackground": "#525252", // theme gray fade (read-access, such as JS variable)
+    "editor.wordHighlightStrongBackground": "#73b2f266", // theme blue at 40% opacity (write-access, such as JS variable)
     "editor.wordHighlightTextBackground": "#525252", // theme gray fade
     // unicode
     "editorUnicodeHighlight.border": "#f2b37380", // theme orange at 50% opacity
@@ -138,6 +145,10 @@
     "input.background": "#3d3d3d", // theme gray-black-fade
     "input.border": "#424242", // 26% black (input and debug console border)
     "input.foreground": "#f5f5f5", // theme gray white
+    "input.placeholderForeground": "#7a7a7a", // theme gray dark
+    "inputOption.activeBackground": "#525252", // theme gray fade
+    "inputOption.activeBorder": "#666666", // theme gray-fade-dark
+    "inputOption.activeForeground": "#f8e6b0", // theme yellow
 
     //*** LISTS & TREES ***
     "list.activeSelectionBackground": "#ffffff33", // white at 20% opacity - example: settings UI dropdown selector
@@ -145,14 +156,12 @@
     "list.focusAndSelectionOutline": "#fff0", // 0% opacity for no border showing
     "list.focusForeground": "#f5f5f5", // theme gray white
     "list.focusOutline": "#ffffff33", // white at 20% opacity
-    "list.hoverBackground": "#ffffff1a", // white at 10% opacity
+    "list.hoverBackground": "#ffffff0d", // white at 5% opacity
     "list.hoverForeground": "#f5f5f5", // theme white - example: extensions sidebar list
     "list.inactiveSelectionBackground": "#ffffff0d", // white at 5% opacity example: extensions sidebar list
     "list.inactiveSelectionForeground": "#f5f5f5", // theme gray white
     "list.errorForeground": "#f27373", // theme red - example: editor tab title
     "list.warningForeground": "#f2b373", // theme orange
-
-
     // trees
     "tree.indentGuidesStroke": "#3d3d3d", // theme gray-black-fade (sidebar explorer tree)
     "tree.tableColumnsBorder": "#333333", // 6 shades lighter than editor bg (see Keyboard Shortcuts page)
@@ -221,7 +230,6 @@
     "terminal.ansiRed": "#f27373", // theme red
     "terminal.ansiWhite": "#f5f5f5", // theme gray white
     "terminal.ansiYellow": "#f8e6b0", // theme yellow
-    "terminal.selectionBackground": "#73b2f250", // The selection background color of the terminal.
 
     //*** TEXT COLORS ***
     "textBlockQuote.background": "#3d3d3d", // theme gray-black-fade - example: markdown > quote in preview mode
@@ -240,75 +248,131 @@
     //*** TOOLBAR ACTION COLORS ***
     "toolbar.hoverBackground": "#f5f5f51a", // theme gray white at 10% opacity - example: Settings UI gear icons
     "toolbar.activeBackground": "#f5f5f533", // theme gray white at 20% opacity - example: Settings UI gear icons
+
+    // TEST
+
   },
   "semanticHighlighting": true,
   "semanticTokenColors": {
+    // "defaultLibrary": "#0f0",
+    // "class": "#8cd9d9", // theme cyan
+    // "comment": "#f0f",
+    // "decorator": "#f0f",
+    // "enum": "#f0f",
+    // "enumMember": "#ff0000",
+    // "event": "#f0f",
+    // "function": "#8cd9d9", // theme cyan
+    // "interface": "#f0f",
+    // "label": "#f0f",
+    // "keyword": "#f0f",
+    // "macro": "#f0f",
+    // "method": "#f5f5f5", // theme white
+    // "namespace": "#f0f",
+    // "number": "#ff0000",
+    // "operator": "#ff0000",
+    // "parameter": "#f2b373", // theme orange
+    // "parameter.declaration": "#0f0",
+    // "parameter.definition": "#f0f",
+    // "parameter.readonly": "#00f",
+    // "parameter.static": "#ff0",
+    // "parameter.deprecated": "#f0f",
+    // "parameter.abstract": "#0ff",
+    // "parameter.async": "#99f",
+    // "parameter.modification": "#0f0",
+    // "parameter.documentation": "#9f9",
+    // "parameter.defaultLibrary": "#00f", // theme gray light
+    // "parameter.readwrite": "#ff0",
+
+
+
+    // "property": "#b3d98c", // theme green
+    // "regexp": "#f0f",
+    // "string": "#f8e6b0", // theme yellow
+    // "struct": "#f0f",
+    // "type": "#f0f",
+    // "typeParameter": "#f0f",
+    // "variable": "#ffc2d1", // theme pink
+    // "variable.declaration": "#0f0",
+    // "variable.definition": "#f0f",
+    // "variable.readonly": "#9f9",
+    // "variable.static": "#ff0",
+    // "variable.deprecated": "#f0f",
+    // "variable.abstract": "#0ff",
+    // "variable.async": "#99f",
+    // "variable.modification": "#f99",
+    // "variable.documentation": "#9f9",
+    // "variable.defaultLibrary": "#09f", // theme gray light
+
+    // "*.abstract": "#ff0",
+    // "*.async": "#ff0000",
+    // "*.declaration": "#ff0000",
+    // "*.deprecated": "#ff0000",
+    // "*.documentation": "#f0f",
+    // "*.modification": "#00f",
+    // "*.readonly": "#ff0000",
+    // "*.static": "#ff0000",
+
+
+
+
   },
   "tokenColors":[
     {
-      "name": "Bold",
+      "name": "TEST 1",
       "scope": [
-        //*** DEFAULT
-        //*** CSS
-        //*** HTML
-        //*** JAVASCRIPT
-        //*** JSON
-        //*** MARKDOWN
+
+      ],
+      "settings": {
+        "foreground": "#0f0",
+      }
+    },
+    {
+      "name": "TEST 2",
+      "scope": [
+
+      ],
+      "settings": {
+        "foreground": "#f0f",
+      }
+    },
+
+    {
+      "name": "BOLD",
+      "scope": [
+        //*** MARKDOWN ***
         "markup.bold.markdown",
-        //*** PHP
-        //*** PYTHON
-        //*** REACT
-        //*** SHELL
-        //*** SCSS
-        //*** SQL
-        //*** XML
       ],
       "settings": {
         "fontStyle": "bold"
       }
     },
     {
-      "name": "Italic",
+      "name": "ITALIC",
       "scope": [
-        //*** DEFAULT
+        //*** DEFAULT ***
         "comment",
+        "comment constant",
+        "comment entity.name.type",
+        "comment keyword",
+        "comment punctuation",
+        "comment storage",
+        "comment storage.type",
+        "comment variable",
         "punctuation.definition.comment",
-        //*** CSS
-        //*** HTML
-        //*** JAVASCRIPT
-        //*** JSON
-        //*** MARKDOWN
-        //*** PHP
-        //*** PYTHON
-        //*** REACT
-        //*** RUBY
-        //*** SHELL
-        //*** SCSS
-        //*** SQL
-        //*** XML
+        "variable.language.this",
+        //*** MARKDOWN ***
+        "entity.name.section.markdown",
+        "markup.italic.markdown"
       ],
       "settings": {
         "fontStyle": "italic"
       }
     },
     {
-      "name": "Bold Italic",
+      "name": "BOLD ITALIC",
       "scope": [
-        //*** DEFAULT
-        //*** CSS
-        //*** HTML
-        //*** JAVASCRIPT
-        //*** JSON
-        //*** MARKDOWN
+        //*** MARKDOWN ***
         "markup.bold.markdown markup.italic.markdown",
-        //*** PHP
-        //*** PYTHON
-        //*** REACT
-        //*** RUBY
-        //*** SHELL
-        //*** SCSS
-        //*** SQL
-        //*** XML
       ],
       "settings": {
         "fontStyle": "bold italic"
@@ -317,343 +381,324 @@
     {
       "name": "Theme Gray Fade (32%)",
       "scope": [
-        //*** DEFAULT
-        //*** CSS
-        //*** HTML
-        //*** JAVASCRIPT
-        //*** JSON
-        //*** MARKDOWN
-        //*** PHP
-        //*** PYTHON
-        //*** REACT
-        //*** RUBY
-        //*** SHELL
-        //*** SCSS
-        //*** SQL
-        //*** XML
+        //*** DEFAULT ***
+        "invalid",
       ],
       "settings": {
-        "foreground": "#525252"
+        "foreground": "#525252" // theme gray fade
       }
     },
     {
       "name": "44% Black",
       "scope": [
-        //*** DEFAULT
+        //*** DEFAULT ***
         "comment",
+        "comment constant",
+        "comment entity.name.type",
+        "comment keyword",
+        "comment punctuation",
+        "comment storage",
+        "comment storage.type",
+        "comment variable",
+        // "meta.tag.inline",
         "punctuation.definition.comment",
-        //*** CSS
-        //*** HTML
-        //*** JAVASCRIPT
-        //*** JSON
-        //*** MARKDOWN
-        //*** PHP
-        //*** PYTHON
-        //*** REACT
-        //*** RUBY
-        //*** SHELL
-        //*** SCSS
-        //*** SQL
-        //*** XML
+        //*** JSON ***
+        // "invalid.illegal.expected-dictionary-separator.json",
+        //*** MARKDOWN ***
+        "markup.heading.setext.1.markdown",
+        "markup.heading.setext.2.markdown",
+        "markup.underline.link.markdown",
+        "markup.underline.link.image.markdown",
+        "punctuation.definition.bold.markdown",
+        "punctuation.definition.heading.markdown",
+        "punctuation.definition.italic.markdown",
+        "punctuation.definition.link.markdown",
+        "punctuation.definition.link.description.begin.markdown",
+        "punctuation.definition.link.description.end.markdown",
+        "punctuation.definition.link.title.begin.markdown",
+        "punctuation.definition.link.title.end.markdown",
+        "punctuation.definition.metadata.markdown",
+        "punctuation.definition.quote.begin.markdown",
+        "text.html.markdown punctuation.definition.tag.begin.html",
+        "text.html.markdown punctuation.definition.tag.end.html"
       ],
       "settings": {
         "foreground": "#707070"
       }
     },
-
     {
       "name": "Theme Gray Dark (48%)",
       "scope": [
-        //*** DEFAULT
-        //*** CSS
-        //*** HTML
-        //*** JAVASCRIPT
-        //*** JSON
-        //*** MARKDOWN
-        //*** PHP
-        //*** PYTHON
-        //*** REACT
-        //*** RUBY
-        //*** SHELL
-        //*** SCSS
-        //*** SQL
-        //*** XML
+        //*** DEFAULT ***
       ],
       "settings": {
-        "foreground": "#7a7a7a"
+        "foreground": "#7a7a7a" // theme gray dark
       }
     },
     {
       "name": "Theme Gray Medium (64%)",
       "scope": [
-        //*** DEFAULT
+        //*** DEFAULT ***
+        // "entity.name.type", // semantic token type
+        "meta.brace",
+        "meta.at-rule.keyframes.body",
+        // "meta.embedded.block",
+        // "meta.embedded.line",
+        // "meta.property-list",
         "punctuation",
-        //*** CSS
-        //*** HTML
-        //*** JAVASCRIPT
-        //*** JSON
-        //*** MARKDOWN
-        //*** PHP
-        //*** PYTHON
-        //*** REACT
-        //*** RUBY
-        //*** SHELL
-        //*** SCSS
-        //*** SQL
-        //*** XML
+        //*** JAVASCRIPT ***
+        // "entity.name.label.js",
+        // "keyword.operator.type.annotation.js",
+        // "meta.block.js",
+        // "meta.function.expression.js",
+        // "meta.object-literal.key.js",
+        //*** MARKDOWN ***
+        "meta.separator.markdown",
+        "string.other.link.description.markdown",
+        //*** SHELL ***
+        // "meta.scope.group.shell",
+        // "meta.scope.if-block.shell",
+        //*** XML ***
+        // "entity.other.attribute-name.namespace.xml",
+        // "meta.tag.xml",
+        // "entity.other.attribute-name.xml",
+        // "meta.tag.preprocessor.xml",
       ],
       "settings": {
-        "foreground": "#a3a3a3"
+        "foreground": "#a3a3a3" // theme gray medium
       }
     },
     {
       "name": "Theme Gray Light (80%)",
       "scope": [
-        //*** DEFAULT
-        //*** CSS
-        //*** HTML
-        //*** JAVASCRIPT
-        //*** JSON
-        //*** MARKDOWN
-        //*** PHP
-        //*** PYTHON
-        //*** REACT
-        //*** RUBY
-        //*** SHELL
-        //*** SCSS
-        //*** SQL
-        //*** XML
+        //*** DEFAULT ***
+        "support.variable", // semantic token type for JS
+        "variable.other.object",
+        //*** CSS ***
+        // "meta.property-value.css support.function",
+        //*** HTML ***
+        "text.html",
+        // SHELL ***
+        // "meta.scope.subshell.shell",
+        //*** XML ***
+        // "text.xml"
       ],
       "settings": {
-        "foreground": "#cccccc"
+        "foreground": "#cccccc" // theme gray light
       }
     },
     {
       "name": "Theme Gray White (96%)",
       "scope": [
-        //*** DEFAULT
-        //*** CSS
-        //*** HTML
-        //*** JAVASCRIPT
-        //*** JSON
-        //*** MARKDOWN
-        //*** PHP
-        //*** PYTHON
-        //*** REACT
-        //*** RUBY
-        //*** SHELL
-        //*** SCSS
-        //*** SQL
-        //*** XML
+        // //*** DEFAULT ***
+        // "constant.other.color",
+        "entity.name.function.member", // semantic token type
+        "entity.other.attribute-name",
+        "meta.method-call entity.name.function",
+        "meta.property-value",
+        "support.function",
+        // "meta.object-literal",
+        //*** CSS ***
+        // "source.css punctuation.definition.interpolation",
+        // "support.constant.color.w3c-standard-color-name.css",,
+        //*** MARKDOWN ***
+        "meta.other.valid-ampersand.markdown",
+        "meta.other.valid-bracket.markdown",
+        "meta.paragraph.markdown",
+        // PYTHON
+        // "meta.embedded.block.python",
+        //*** SHELL ***
+        // "meta.scope.logical-expression.shell",
       ],
       "settings": {
-        "foreground": "#f5f5f5"
+        "foreground": "#f5f5f5" // theme gray white
       }
     },
     {
       "name": "Theme Blue",
       "scope": [
-        //*** DEFAULT
+        //*** DEFAULT ***
         "storage.type",
-        "entity.name.type.class",
-        "entity.other.inherited-class",
-        //*** CSS
-        //*** HTML
-        //*** JAVASCRIPT
-        //*** JSON
-        //*** MARKDOWN
-        //*** PHP
-        //*** PYTHON
-        //*** REACT
-        //*** RUBY
-        //*** SHELL
-        //*** SCSS
-        //*** SQL
-        //*** XML
+        // "entity.name.type.class",
+        // "entity.other.inherited-class",
+        //*** HTML ***
+        // "entity.other.attribute-name.html",
+        // "text.html.markdown entity.name.tag.html",
+        // "meta.attribute.href.html entity.other.attribute-name.html",
+        // "meta.attribute.href.html string",
+        //*** MARKDOWN ***
+        "string.other.link.title.markdown",
+        "constant.other.reference.link.markdown",
+        "meta.link.inet.markdown markup.underline.link.markdown",
       ],
       "settings": {
-        "foreground": "#73b2f2"
+        "foreground": "#73b2f2" // theme blue
+      }
+    },
+    {
+      "name": "Theme Blue at 50% opacity",
+      "scope": [
+        //*** MARKDOWN ***
+        "markup.strikethrough.markdown string.other.link.title.markdown",
+      ],
+      "settings": {
+        "foreground": "#73b2f280" // theme blue at 50% opacity
       }
     },
     {
       "name": "Theme Cyan",
       "scope": [
-        //*** DEFAULT
-        "storage",
+        //*** DEFAULT ***
+        "entity.name.type.class",
+        "entity.name.function",
+        "meta.at-rule.media.header",
+        "meta.attribute.style entity.other.attribute-name",
+        "meta.attribute.style string",
+        "meta.property-name",
+        "meta.property-value support.function",
+        // "storage",
         "support",
-        //*** CSS
-        //*** HTML
-        //*** JAVASCRIPT
-        //*** JSON
-        //*** MARKDOWN
-        //*** PHP
-        //*** PYTHON
-        //*** REACT
-        //*** RUBY
-        //*** SHELL
-        //*** SCSS
-        //*** SQL
-        //*** XML
+        // "support.constant.property-value",
+        //*** INI ***
+        // "keyword.other.definition.ini",
+        //*** SCSS ***
+        // "variable.parameter.url.scss",
       ],
       "settings": {
-        "foreground": "#8cd9d9"
+        "foreground": "#8cd9d9" // theme cyan
       }
     },
     {
       "name": "Theme Green",
       "scope": [
-        //*** DEFAULT
-        //*** CSS
-        //*** HTML
-        //*** JAVASCRIPT
-        //*** JSON
-        //*** MARKDOWN
-        //*** PHP
-        //*** PYTHON
-        //*** REACT
-        //*** RUBY
-        //*** SHELL
-        //*** SCSS
-        //*** SQL
-        //*** XML
+        //*** DEFAULT ***
+        "entity.other.attribute-name.class",
+        "meta.attribute.class entity.other.attribute-name",
+        "meta.attribute.class string",
+        // "meta.attribute-selector",
+        // "meta.attribute-selector entity",
+        "support.variable.property", // semantic token type
+        "variable.other.constant.property", // semantic token type
+        "variable.other.object.property",
+        "variable.other.property",
+        //*** XML ***
+        // "entity.other.attribute-name.localname.xml"
       ],
       "settings": {
-        "foreground": "#b3d98c"
+        "foreground": "#b3d98c" // theme green
       }
     },
     {
       "name": "Theme Orange",
       "scope": [
-        //*** DEFAULT
+        //*** DEFAULT ***
+        "entity.other.attribute-name.id",
+        "entity.other.attribute-name.id punctuation",
+        "entity.other.keyframe-offset.percentage",
+        "meta.at-rule.keyframes",
+        "meta.attribute.id entity.other.attribute-name",
+        "meta.attribute.id string",
+        // "punctuation.section.embedded",
         "variable.parameter",
-        //*** CSS
-        //*** HTML
-        //*** JAVASCRIPT
-        //*** JSON
-        //*** MARKDOWN
-        //*** PHP
-        //*** PYTHON
-        //*** REACT
-        //*** RUBY
-        //*** SHELL
-        //*** SCSS
-        //*** SQL
-        //*** XML
+        //*** SCSS ***
+        "entity.other.attribute-name.scss",
+
       ],
       "settings": {
-        "foreground": "#f2b373"
+        "foreground": "#f2b373" // theme orange
       }
     },
     {
       "name": "Theme Pink",
       "scope": [
-        //*** DEFAULT
+        //*** DEFAULT ***
+        "meta.function.variable support.function",
+        "punctuation.definition.variable",
         "variable",
-        //*** CSS
-        //*** HTML
-        //*** JAVASCRIPT
-        //*** JSON
-        //*** MARKDOWN
-        //*** PHP
-        //*** PYTHON
-        //*** REACT
-        //*** RUBY
-        //*** SHELL
-        //*** SCSS
-        //*** SQL
-        //*** XML
+        // "variable.language",
+        // "variable.other.constant",
+        //*** HTML ***
+        // "meta.attribute.defer.html entity.other.attribute-name.html",
+        // "meta.attribute.crossorigin.html entity.other.attribute-name.html",
       ],
       "settings": {
-        "foreground": "#ffc2d1"
+        "foreground": "#ffc2d1" // theme pink
       }
     },
     {
       "name": "Theme Purple",
       "scope": [
-        //*** DEFAULT
+        //*** DEFAULT ***
         "constant",
-        //*** CSS
-        //*** HTML
-        //*** JAVASCRIPT
-        //*** JSON
-        //*** MARKDOWN
-        //*** PHP
-        //*** PYTHON
-        //*** REACT
-        //*** RUBY
-        //*** SHELL
-        //*** SCSS
-        //*** SQL
-        //*** XML
+        "keyword.other.unit",
+        //*** CSS ***
+        // "constant.numeric.css",
+        // "keyword.control.unit.css",
+        //*** HTML ***
+        // "punctuation.definition.entity.html",
+        //*** INI ***
+        // "source.ini",
+        //*** JAVASCRIPT ***
+        // "constant.numeric.decimal.js meta",
+        //*** REGEX ***
+        "string.regexp",
+        "string.regexp punctuation",
+        "string.regexp keyword",
+        "string.regexp constant",
       ],
       "settings": {
-        "foreground": "#d4a8ff"
+        "foreground": "#d4a8ff" // theme purple
       }
     },
     {
       "name": "Theme Red",
       "scope": [
-        //*** DEFAULT
+        //*** DEFAULT ***
+        "entity.name.tag",
         "keyword",
-        //*** CSS
-        //*** HTML
-        //*** JAVASCRIPT
-        //*** JSON
-        //*** MARKDOWN
-        //*** PHP
-        //*** PYTHON
-        //*** REACT
-        //*** RUBY
-        //*** SHELL
-        //*** SCSS
-        //*** SQL
-        //*** XML
+        "support.function.construct",
+        "storage.modifier",
       ],
       "settings": {
-        "foreground": "#f27373"
+        "foreground": "#f27373" // theme red
+      }
+    },
+    {
+      "name": "Theme Red (Saturated)",
+      "scope": [
+        //*** DEFAULT ***
+      ],
+      "settings": {
+        "foreground": "#f66", // theme red saturated
       }
     },
     {
       "name": "Theme Yellow",
       "scope": [
-        //*** DEFAULT
+        //*** DEFAULT ***
         "string",
-        //*** CSS
-        //*** HTML
-        //*** JAVASCRIPT
-        //*** JSON
-        //*** MARKDOWN
-        //*** PHP
-        //*** PYTHON
-        //*** REACT
-        //*** RUBY
-        //*** SHELL
-        //*** SCSS
-        //*** SQL
-        //*** XML
+        "meta.attribute-selector entity.other.attribute-name",
+        //*** HTML ***
+        // "text.html.derivative entity",
+        // "entity.other.attribute-name.html", // for PHP
+        //*** MARKDOWN ***
+        "entity.name.section.markdown",
+        //*** SCSS ***
+        // "entity.other.attribute-name.attribute.scss",
+        "meta.attribute-selector.scss"
       ],
       "settings": {
-        "foreground": "#f8e6b0"
+        "foreground": "#f8e6b0" // theme yellow
       }
     },
     {
       "name": "Theme Yellow Gold",
       "scope": [
-        //*** DEFAULT
-        //*** CSS
-        //*** HTML
-        //*** JAVASCRIPT
-        //*** JSON
-        //*** MARKDOWN
+        //*** DEFAULT ***
+        //*** INI ***
+        // "entity.name.section.group-title.ini",
+        //*** MARKDOWN ***
         "markup.inline.raw.string.markdown",
-        //*** PHP
-        //*** PYTHON
-        //*** REACT
-        //*** RUBY
-        //*** SHELL
-        //*** SCSS
-        //*** SQL
-        //*** XML
       ],
       "settings": {
         "foreground": "#f2d273"
