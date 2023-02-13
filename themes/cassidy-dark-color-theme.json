@@ -254,67 +254,6 @@
   },
   "semanticHighlighting": true,
   "semanticTokenColors": {
-    // "defaultLibrary": "#0f0",
-    // "class": "#8cd9d9", // theme cyan
-    // "comment": "#f0f",
-    // "decorator": "#f0f",
-    // "enum": "#f0f",
-    // "enumMember": "#ff0000",
-    // "event": "#f0f",
-    // "function": "#8cd9d9", // theme cyan
-    // "interface": "#f0f",
-    // "label": "#f0f",
-    // "keyword": "#f0f",
-    // "macro": "#f0f",
-    // "method": "#f5f5f5", // theme white
-    // "namespace": "#f0f",
-    // "number": "#ff0000",
-    // "operator": "#ff0000",
-    // "parameter": "#f2b373", // theme orange
-    // "parameter.declaration": "#0f0",
-    // "parameter.definition": "#f0f",
-    // "parameter.readonly": "#00f",
-    // "parameter.static": "#ff0",
-    // "parameter.deprecated": "#f0f",
-    // "parameter.abstract": "#0ff",
-    // "parameter.async": "#99f",
-    // "parameter.modification": "#0f0",
-    // "parameter.documentation": "#9f9",
-    // "parameter.defaultLibrary": "#00f", // theme gray light
-    // "parameter.readwrite": "#ff0",
-
-
-
-    // "property": "#b3d98c", // theme green
-    // "regexp": "#f0f",
-    // "string": "#f8e6b0", // theme yellow
-    // "struct": "#f0f",
-    // "type": "#f0f",
-    // "typeParameter": "#f0f",
-    // "variable": "#ffc2d1", // theme pink
-    // "variable.declaration": "#0f0",
-    // "variable.definition": "#f0f",
-    // "variable.readonly": "#9f9",
-    // "variable.static": "#ff0",
-    // "variable.deprecated": "#f0f",
-    // "variable.abstract": "#0ff",
-    // "variable.async": "#99f",
-    // "variable.modification": "#f99",
-    // "variable.documentation": "#9f9",
-    // "variable.defaultLibrary": "#09f", // theme gray light
-
-    // "*.abstract": "#ff0",
-    // "*.async": "#ff0000",
-    // "*.declaration": "#ff0000",
-    // "*.deprecated": "#ff0000",
-    // "*.documentation": "#f0f",
-    // "*.modification": "#00f",
-    // "*.readonly": "#ff0000",
-    // "*.static": "#ff0000",
-
-
-
-
   },
   "tokenColors":[
     {
@@ -329,7 +268,6 @@
     {
       "name": "TEST 2",
       "scope": [
-
       ],
       "settings": {
         "foreground": "#f0f",
@@ -472,6 +410,7 @@
       "name": "Theme Gray Light (80%)",
       "scope": [
         //*** DEFAULT ***
+        "support.constant.property", // semantic token type for JS
         "support.variable", // semantic token type for JS
         "variable.other.object",
         //*** CSS ***
