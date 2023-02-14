@@ -254,6 +254,33 @@
   },
   "semanticHighlighting": true,
   "semanticTokenColors": {
+    "class": {
+      "foreground": "#8cd9d9", //** theme cyan
+    },
+    "function": {
+      "foreground": "#8cd9d9", //** theme cyan
+    },
+    "function.defaultLibrary": {
+      "foreground": "#f5f5f5", //** theme gray white
+    },
+    "method": {
+      "foreground": "#f5f5f5", //** theme gray white
+    },
+    "parameter": {
+      "foreground": "#f2b373", //** theme orange
+    },
+    "property": {
+      "foreground": "#b3d98c", //** theme green
+    },
+    "property.readonly.defaultLibrary": {
+      "foreground": "#c7c7c7", //** theme gray light
+    },
+    "variable": {
+      "foreground": "#ffc2d1", //** theme pink
+    },
+    "variable.defaultLibrary": {
+      "foreground": "#c7c7c7", //** theme gray light
+    },
   },
   "tokenColors":[
     {
