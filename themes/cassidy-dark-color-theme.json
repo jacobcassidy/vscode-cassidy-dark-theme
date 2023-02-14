@@ -316,14 +316,6 @@
       "scope": [
         //*** DEFAULT ***
         "comment",
-        "comment constant",
-        "comment entity.name.type",
-        "comment keyword",
-        "comment punctuation",
-        "comment storage",
-        "comment storage.type",
-        "comment variable",
-        "punctuation.definition.comment",
         "variable.language.this",
         //*** MARKDOWN ***
         "entity.name.section.markdown",
