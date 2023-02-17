@@ -273,13 +273,13 @@
       "foreground": "#b3d98c", // theme green
     },
     "property.readonly.defaultLibrary": {
-      "foreground": "#c7c7c7", // theme gray light
+      "foreground": "#cccccc", // theme gray light
     },
     "variable": {
       "foreground": "#ffc2d1", // theme pink
     },
     "variable.defaultLibrary": {
-      "foreground": "#c7c7c7", // theme gray light
+      "foreground": "#cccccc", // theme gray light
     },
   },
   "tokenColors":[
@@ -341,11 +341,8 @@
         "comment variable",
         "punctuation.definition.comment",
         "source.embedded",
-        //*** JSON ***
-        // "invalid.illegal.expected-dictionary-separator.json",
         //*** MARKDOWN ***
         "markup.underline.link",
-        "punctuation.definition",
       ],
       "settings": {
         "foreground": "#707070"
@@ -354,7 +351,6 @@
     {
       "name": "Theme Gray Dark (48%)",
       "scope": [
-        //*** DEFAULT ***
       ],
       "settings": {
         "foreground": "#7a7a7a" // theme gray dark
@@ -364,13 +360,12 @@
       "name": "Theme Gray Medium (64%)",
       "scope": [
         //*** DEFAULT ***
+        "entity.name",
         "meta.brace",
         "meta.at-rule.keyframes.body",
         "punctuation",
         //*** CSS ***
         "meta.property-list",
-        //*** MARKDOWN ***
-        "punctuation.definition.list.begin",
         //*** XML ***
         "meta.tag",
       ],
@@ -387,6 +382,8 @@
         "variable.other.object.property",
         //*** HTML ***
         "entity.other.attribute-name",
+        //*** JAVASCRIPT ***
+        "variable.other.object", // semantic token type for JS
         //*** SHELL ***
         "meta.scope",
       ],
@@ -398,10 +395,8 @@
       "name": "Theme Gray White (96%)",
       "scope": [
         //*** DEFAULT ***
-        "entity.name.function.member", // semantic token type
         "meta.method-call entity.name.function",
         "support.function",
-        "meta.object-literal",
         //*** CSS ***
         "entity.other.attribute-name.pseudo-class",
         "entity.other.attribute-name.pseudo-element",
@@ -450,7 +445,6 @@
         "meta.attribute.style string",
         "meta.property-name",
         "meta.property-value support.function",
-        // "storage",
         "support",
         //*** CSS ***
         "meta.property-value",
@@ -469,6 +463,7 @@
         //*** DEFAULT ***
         "entity.other.attribute-name.class",
         "meta.attribute.class string",
+        "meta.object-literal",
         "support.variable.property", // semantic token type
         "variable.other.constant.property", // semantic token type
         "variable.other.property",
@@ -524,9 +519,9 @@
         //*** REGEX ***
         "meta.group.regexp",
         "string.regexp",
-        "string.regexp punctuation",
-        "string.regexp keyword",
         "string.regexp constant",
+        "string.regexp keyword",
+        "string.regexp punctuation",
       ],
       "settings": {
         "foreground": "#d4a8ff" // theme purple
