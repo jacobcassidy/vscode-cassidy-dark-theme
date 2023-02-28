@@ -24,5 +24,3 @@ All notable changes to this project will be documented in this file.
 ## v0.0.1
 
 - Added syntax and workbench theme colors
-
-hsla(345, 63%, 83%, 1)
