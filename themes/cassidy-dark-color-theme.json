@@ -220,7 +220,7 @@
     "terminal.ansiBrightBlue": "#81baf3", // theme blue
     "terminal.ansiBrightCyan": "#97dddd", // theme cyan
     "terminal.ansiBrightGreen": "#b3d98c", // theme green
-    "terminal.ansiBrightMagenta": "#efb8b8", // theme pink
+    "terminal.ansiBrightMagenta": "#efb8c6", // theme pink
     "terminal.ansiBrightRed": "#ff6666", // theme red saturated
     "terminal.ansiBrightWhite": "#ffffff", // pure white
     "terminal.ansiBrightYellow": "#f3ba81", // theme orange
@@ -249,8 +249,6 @@
     "toolbar.hoverBackground": "#f5f5f51a", // theme gray white at 10% opacity - example: Settings UI gear icons
     "toolbar.activeBackground": "#f5f5f533", // theme gray white at 20% opacity - example: Settings UI gear icons
 
-    // TEST
-
   },
   "semanticHighlighting": true,
   "semanticTokenColors": {
@@ -276,7 +274,7 @@
       "foreground": "#cccccc", // theme gray light
     },
     "variable": {
-      "foreground": "#efb8b8", // theme pink
+      "foreground": "#efb8c6", // theme pink
     },
     "variable.defaultLibrary": {
       "foreground": "#cccccc", // theme gray light
@@ -503,7 +501,7 @@
         "meta.attribute.crossorigin entity.other.attribute-name",
       ],
       "settings": {
-        "foreground": "#efb8b8" // theme pink
+        "foreground": "#efb8c6" // theme pink
       }
     },
     {
