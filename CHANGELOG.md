@@ -20,7 +20,7 @@ All notable changes to this project will be documented in this file.
 | Cyan          | `hsla(180, 50%, 70%, 1)`  | `#8cd9d9`  | `hsla(180, 53%, 73%, 1)` | `#97dddd`  |
 | Blue          | `hsla(210, 83%, 70%, 1)`  | `#73b2f2`  | `hsla(210, 83%, 73%, 1)` | `#81baf3`  |
 | Blue Bright   | `hsla(210, 83%, 50%, 1)`  | `#167fe9`  | `hsla(210, 83%, 53%, 1)` | `#2487eb`  |
-| Purple        | `hsla(240, 100%, 83%, 1)` | `#a8a8ff`  | `hsla(270, 83%, 83%, 1)` | `#d4b0f8`  |
+| Purple        | `hsla(270, 100%, 83%, 1)` | `#d4a8ff`  | `hsla(270, 83%, 83%, 1)` | `#d4b0f8`  |
 | Pink          | `hsla(345, 100%, 88%, 1)` | `#ffc2d1`  | `hsla(345, 63%, 83%, 1)` | `#efb8c6`  |
 
 ## v0.0.1
