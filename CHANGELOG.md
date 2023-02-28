@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file.
 
 ## v0.0.2
 
+*2023-02-27*
+
 ### Updated theme colors:
 
 | COLOR         | v0.0.1 HSL                | v0.0.1 HEX | v0.0.2 HSL               | v0.0.2 HEX |
