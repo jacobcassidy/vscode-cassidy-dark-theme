@@ -53,7 +53,7 @@
     //*** EDITOR COLORS ***
     // base
     "editor.background": "#242424", // 14% black
-    "editor.foreground": "#525252", // theme gray fade //TEST
+    "editor.foreground": "#cccccc", // theme gray light
     // bracket
     "editorBracketMatch.border": "#7a7a7a", // theme gray dark
     // cursor
@@ -131,7 +131,7 @@
     "sideBySideEditor.verticalBorder": "#141414", // theme black-gray-black (see split settings with Default and User side by side)
 
     //*** GIT DECORATION ***
-    "gitDecoration.addedResourceForeground": "#d4b0f8", // theme purple - example: editor list when new resource is staged but not committed
+    "gitDecoration.addedResourceForeground": "#96df96", // theme green bright - example: editor list when new resource is staged but not committed
     "gitDecoration.modifiedResourceForeground": "#f8e6b0", // theme yellow
     "gitDecoration.deletedResourceForeground": "#f38181", // theme red
     "gitDecoration.renamedResourceForeground": "#81baf3", // theme blue"
@@ -218,13 +218,13 @@
     "terminal.ansiBlue": "#2487eb", // theme blue bright
     "terminal.ansiBrightBlack": "#7a7a7a", // theme gray dark
     "terminal.ansiBrightBlue": "#81baf3", // theme blue
-    "terminal.ansiBrightCyan": "#97dddd", // theme cyan
-    "terminal.ansiBrightGreen": "#b3d98c", // theme green
+    "terminal.ansiBrightCyan": "#96dfdf", // theme cyan
+    "terminal.ansiBrightGreen": "#badf96", // theme green
     "terminal.ansiBrightMagenta": "#efb8c6", // theme pink
-    "terminal.ansiBrightRed": "#ff6666", // theme red saturated
+    "terminal.ansiBrightRed": "#ef5252", // theme red bright
     "terminal.ansiBrightWhite": "#ffffff", // pure white
     "terminal.ansiBrightYellow": "#f3ba81", // theme orange
-    "terminal.ansiCyan": "#66ffff", // theme cyan saturated
+    "terminal.ansiCyan": "#81f3f3", // theme cyan bright
     "terminal.ansiGreen": "#96df96", // theme green bright
     "terminal.ansiMagenta": "#d4b0f8", // theme purple
     "terminal.ansiRed": "#f38181", // theme red
@@ -237,7 +237,7 @@
     "textCodeBlock.background": "#525252", // theme gray fade - example: hover over settings json "workbench.startupEditor"
     "textLink.activeForeground": "#f8e6b0", // theme yellow
     "textLink.foreground": "#81baf3", // theme blue - example: Settings UI text link
-    "textPreformat.foreground": "#f3d781", // theme gold
+    "textPreformat.foreground": "#efc852", // theme gold
 
     //*** TITLE BAR ***
     "titleBar.activeBackground": "#383838", // 22% black (match status bar bg)
@@ -253,10 +253,10 @@
   "semanticHighlighting": true,
   "semanticTokenColors": {
     "class": {
-      "foreground": "#97dddd", // theme cyan
+      "foreground": "#96dfdf", // theme cyan
     },
     "function": {
-      "foreground": "#97dddd", // theme cyan
+      "foreground": "#96dfdf", // theme cyan
     },
     "function.defaultLibrary": {
       "foreground": "#f5f5f5", // theme gray white
@@ -268,7 +268,7 @@
       "foreground": "#f3ba81", // theme orange
     },
     "property": {
-      "foreground": "#b3d98c", // theme green
+      "foreground": "#badf96", // theme green
     },
     "property.readonly.defaultLibrary": {
       "foreground": "#cccccc", // theme gray light
@@ -452,7 +452,7 @@
         "variable.parameter.url.scss",
       ],
       "settings": {
-        "foreground": "#97dddd" // theme cyan
+        "foreground": "#96dfdf" // theme cyan
       }
     },
     {
@@ -467,7 +467,7 @@
         "variable.other.property",
       ],
       "settings": {
-        "foreground": "#b3d98c" // theme green
+        "foreground": "#badf96" // theme green
       }
     },
     {
@@ -542,12 +542,12 @@
       }
     },
     {
-      "name": "Theme Red (Saturated)",
+      "name": "Theme Red Bright",
       "scope": [
         //*** DEFAULT ***
       ],
       "settings": {
-        "foreground": "#f66", // theme red saturated
+        // "foreground": "#ef5252", // theme red bright
       }
     },
     {
@@ -569,7 +569,7 @@
       }
     },
     {
-      "name": "Theme Yellow Gold",
+      "name": "Theme Yellow Bright",
       "scope": [
         //*** INI ***
         "entity.name.section.group-title",
@@ -577,7 +577,7 @@
         "markup.inline.raw.string.markdown",
       ],
       "settings": {
-        "foreground": "#f3d781"
+        "foreground": "#efc852"
       }
     },
   ]

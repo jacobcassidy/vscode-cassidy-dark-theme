@@ -2,11 +2,39 @@
 
 All notable changes to this project will be documented in this file.
 
+## v0.0.3
+
+*2023-03-05*
+
+- Corrected cyan color from `#97dddd` to `#96dfdf` for `hsla(180, 53%, 73%, 1)`
+- Corrected green color from `#b3d98c` to `#badf96` for `hsla(90, 53%, 73%, 1)`
+- Updated theme colors:
+
+| COLOR         | v0.0.2 HSL                | v0.0.2 HEX | v0.0.3 HSL               | v0.0.3 HEX |
+| ------------- | ------------------------- | ---------- | ------------------------ | ---------- |
+| Red           | `hsla(0, 83%, 73%, 1)`    | `#f38181`  | `No Change`              |            |
+| Red Bright    | `hsla(0, 100%, 70%, 1)`   | `#ff6666`  | `hsla(0, 83%, 63%, 1)`   | `#ef5252`  |
+| Orange        | `hsla(30, 83%, 73%, 1)`   | `#f3ba81`  | `No Change`              |            |
+| Orange Bright | `hsla(30, 83%, 53%, 1)`   | `#eb8724`  | `No Change`              |            |
+| Yellow        | `hsla(45, 83%, 83%, 1)`   | `#f8e6b0`  | `No Change`              |            |
+| Yellow Bright | `hsla(45, 83%, 73%, 1)`   | `#f3d781`  | `hsla(45, 83%, 63%, 1)`  | `#efc852`  |
+| Green         | `hsla(90, 53%, 73%, 1)`   | `#badf96`  | `No Change`              |            |
+| Green Bright  | `hsla(120, 53%, 73%, 1)`  | `#96df96`  | `No Change`              |            |
+| Cyan          | `hsla(180, 53%, 73%, 1)`  | `#96dfdf`  | `No Change`              |            |
+| Cyan Bright   | `hsla(180, 100%, 70%, 1)` | `#66ffff`  | `hsla(180, 53%, 63%, 1)` | `#6fd3d3`  |
+| Blue          | `hsla(210, 83%, 73%, 1)`  | `#81baf3`  | `No Change`              |            |
+| Blue Bright   | `hsla(210, 83%, 53%, 1)`  | `#2487eb`  | `No Change`              |            |
+| Purple        | `hsla(270, 83%, 83%, 1)`  | `#d4b0f8`  | `No Change`              |            |
+| Purple Bright | -                         | -          | `hsla(270, 83%, 73%, 1)` | `#ba81f3`  |
+| Pink          | `hsla(345, 63%, 83%, 1)`  | `#ffc2d1`  | `No Change`              |            |
+| Pink Bright   | -                         | -          | `hsla(345, 63%, 73%, 1)` | `#e68fa4`  |
+
+
 ## v0.0.2
 
 *2023-02-27*
 
-### Updated theme colors:
+- Updated theme colors:
 
 | COLOR         | v0.0.1 HSL                | v0.0.1 HEX | v0.0.2 HSL               | v0.0.2 HEX |
 | ------------- | ------------------------- | ---------- | ------------------------ | ---------- |

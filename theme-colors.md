@@ -1,5 +1,25 @@
 # CASSIDY DARK - COLOR SCHEME
 
+## Theme Colors
+
+`hsla(0, 83%, 73%, 1)`    `#f38181` - Red
+`hsla(0, 83%, 63%, 1)`    `#ef5252` - Red Bright
+`hsla(30, 83%, 73%, 1)`   `#f3ba81` - Orange
+`hsla(30, 83%, 53%, 1)`   `#eb8724` - Orange Bright
+`hsla(45, 83%, 83%, 1)`   `#f8e6b0` - Yellow
+`hsla(45, 83%, 63%, 1)`   `#efc852` - Yellow Bright
+`hsla(90, 53%, 73%, 1)`   `#badf96` - Green
+`hsla(120, 53%, 73%, 1)`  `#96df96` - Green Bright
+`hsla(180, 53%, 73%, 1)`  `#96dfdf` - Cyan
+`hsla(180, 53%, 63%, 1)`  `#6fd3d3` - Cyan Bright
+`hsla(210, 83%, 73%, 1)`  `#81baf3` - Blue
+`hsla(210, 83%, 53%, 1)`  `#2487eb` - Blue Bright
+`hsla(270, 83%, 83%, 1)`  `#d4b0f8` - Purple
+`hsla(270, 83%, 73%, 1)`  `#ba81f3` - Purple Bright
+`hsla(345, 63%, 83%, 1)`  `#efb8c6` - Pink
+`hsla(345, 63%, 73%, 1)`  `#e68fa4` - Pink Bright
+
+
 ## TEST COLORS 2023-02-26
 
 ### BRIGHT
@@ -1412,18 +1432,44 @@ hsla(300, 50%, 80%, 1) #e6b3e5
 
 #### v0.0.2 Colors
 
-- `hsla(0, 83%, 73%, 1)`   `#f38181` - keyword and error/delete
+- `hsla(0, 83%, 73%, 1)`   `#f38181` - keyword
+- `hsla(0, 83%, 63%, 1)`   `#ef5252` -
 - `hsla(30, 83%, 73%, 1)`  `#f3ba81` - parameter
 - `hsla(30, 83%, 53%, 1)`  `#eb8724` - highlights
 - `hsla(45, 83%, 83%, 1)`  `#f8e6b0` - string
-- `hsla(45, 83%, 73%, 1)`  `#f3d781` - code
+- `hsla(45, 83%, 63%, 1)`  `#efc852` - `code`
 - `hsla(90, 53%, 73%, 1)`  `#badf96` - property
 - `hsla(120, 53%, 73%, 1)` `#96df96` - git add
-- `hsla(180, 53%, 73%, 1)` `#97dddd` - function
+- `hsla(120, 63%, 83%, 1)` `#b8efb8`
+- `hsla(120, 53%, 78%, 1)   `#a9e5a9`
+- `hsla(180, 53%, 73%, 1)` `#96dfdf` - function
 - `hsla(210, 83%, 73%, 1)` `#81baf3` - support.type
 - `hsla(210, 83%, 53%, 1)` `#2487eb` - button
 - `hsla(270, 83%, 83%, 1)` `#d4b0f8` - constant
 - `hsla(345, 63%, 83%, 1)` `#efb8c6` - variable
+
+
+
+#### BASE
+- `hsla(0, 83%, 73%, 1)`   `#f38181`
+- `hsla(30, 83%, 73%, 1)`  `#f3ba81`
+- `hsla(45, 83%, 73%, 1)`  `#f3d781`
+- `hsla(90, 83%, 73%, 1)`  `#baf381`
+- `hsla(180, 83%, 73%, 1)` `#81f3f3`
+- `hsla(210, 83%, 73%, 1)` `#81baf3`
+- `hsla(270, 83%, 73%, 1)` `#ba81f3`
+- `hsla(330, 83%, 73%, 1)` `#f381ba
+
+
+- `hsla(0, 83%, 53%, 1)`   `#eb2424` - Bright Red         - error
+- `hsla(30, 83%, 53%, 1)`  `#eb8724` - Bright Orange      - search highlights
+- `hsla(45, 83%, 63%, 1)`  `#efc852` - Bright Yellow      - code
+- `hsla(90, 83%, 53%, 1)`  `#87eb24` - Bright Green       - git add
+- `hsla(120, 83%, 53%, 1)` `#24eb24` - Bright Neon Green
+- `hsla(180, 83%, 53%, 1)` `#24ebeb` - Bright Cyan
+- `hsla(210, 83%, 53%, 1)` `#2487eb` - Bright Blue        - button
+- `hsla(270, 83%, 53%, 1)` `#8724eb` - Bright Purple
+- `hsla(345, 63%, 63%, 1)` `#dc6583` - Bright Pink
 
 #### v0.0.1 Colors
 
