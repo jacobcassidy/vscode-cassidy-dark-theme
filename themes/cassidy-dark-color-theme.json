@@ -65,7 +65,7 @@
     "editorGutter.foldingControlForeground": "#7a7a7a", // theme gray dark
     "editorGutter.modifiedBackground": "#f8e6b0cc", // theme yellow at 80% opacity
     // lightbulb
-    "editorLightBulb.foreground": "#eb8724", // theme orange bright
+    "editorLightBulb.foreground": "#efc852", // theme yellow bright
     "editorLightBulbAutoFix.foreground": "#81baf3", // theme blue
     // indent guide
     "editorIndentGuide.background": "#3d3d3d", // theme gray-black-fade
