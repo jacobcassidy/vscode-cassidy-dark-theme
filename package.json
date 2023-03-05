@@ -26,11 +26,6 @@
         "label": "Cassidy Dark",
         "uiTheme": "vs-dark",
         "path": "./themes/cassidy-dark-color-theme.json"
-      },
-      {
-        "label": "Cassidy Dark (Dev)",
-        "uiTheme": "vs-dark",
-        "path": "./themes/cassidy-dark-dev-color-theme.json"
       }
     ]
   }
