@@ -12,6 +12,10 @@
     "type": "git",
     "url": "https://github.com/jacobcassidy/vscode-cassidy-dark-theme"
   },
+  "galleryBanner": {
+		"color": "#292929",
+		"theme": "dark"
+	},
   "keywords": [
     "Theme",
     "Dark Theme",
