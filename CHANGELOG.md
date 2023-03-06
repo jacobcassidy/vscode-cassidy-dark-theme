@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+## v0.0.5
+
+*2023-03-05*
+
+- Added errors and warnings foreground colors
+- Updated theme screenshot
+- Updated installation instructions in README for marketplace
+
+
 ## v0.0.4
 
 *2023-03-05*
