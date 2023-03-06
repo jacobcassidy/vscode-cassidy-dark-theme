@@ -359,6 +359,7 @@
       "scope": [
         //*** DEFAULT ***
         "entity.name",
+        "meta.block",
         "meta.brace",
         "meta.at-rule.keyframes.body",
         "punctuation",
@@ -375,6 +376,7 @@
       "name": "Theme Gray Light (80%)",
       "scope": [
         //*** DEFAULT ***
+        "entity.name.label",
         "support.constant.property", // semantic token type for JS
         "support.variable", // semantic token type for JS
         "variable.other.object.property",
