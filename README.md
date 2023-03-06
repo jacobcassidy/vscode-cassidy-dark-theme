@@ -6,7 +6,7 @@ The theme was designed with pure shades of gray for the workbench so the syntax 
 
 ## Screenshot
 
-![cassidy-dark-theme-screenshot](https://user-images.githubusercontent.com/1895973/221780760-a7d6e4d9-a7c8-49b1-8f32-9ac996ec8708.png)
+![cassidy-dark-theme-screenshot](https://github.com/jacobcassidy/vscode-cassidy-dark-theme/blob/main/images/cassidy-dark-theme-screenshot.png)
 
 ## Installation
 
