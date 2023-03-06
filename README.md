@@ -6,13 +6,13 @@ The theme was designed with pure shades of gray for the workbench so the syntax 
 
 ## Screenshot
 
-![cassidy-dark-theme-screenshot](https://github.com/jacobcassidy/vscode-cassidy-dark-theme/blob/main/images/cassidy-dark-theme-screenshot.png)
+![cassidy-dark-theme-screenshot](https://raw.githubusercontent.com/jacobcassidy/vscode-cassidy-dark-theme/main/images/cassidy-dark-theme-screenshot.png)
 
 ## Installation
 
-The theme is currently in beta. Once version 1.0 is reached, I'll publish the theme for free in the Visual Studio Code Marketplace for easy downloading.
+Search for `Cassidy Dark Theme` in the Visual Studio Code's Extensions Marketplace or click the install button on the [Cassidy Dark Theme Marketplace page](https://marketplace.visualstudio.com/items?itemName=jacobcassidy.cassidy-dark).
 
-For now, you'll have to manually install the theme if you'd like to use it by cloning this repository into `~/.vscode/extensions` and restarting the editor.
+You can also manually install the theme by cloning the [github repository](https://github.com/jacobcassidy/vscode-cassidy-dark-theme) into `~/.vscode/extensions` and restarting the VSCode editor.
 
 ## What's New?
 
