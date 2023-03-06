@@ -1,9 +1,13 @@
 {
   "name": "cassidy-dark",
-  "displayName": "Cassidy Dark",
-  "description": "A clean, modern Visual Studio Code dark theme originally inspired by Monokai",
-  "version": "0.0.3",
-  "publisher": "//to be updated upon release",
+  "displayName": "Cassidy Dark Theme",
+  "description": "A clean, modern, dark theme originally inspired by Monokai",
+  "version": "0.0.4",
+  "icon": "images/cassidy-dark-logo-512.png",
+  "publisher": "jacobcassidy",
+  "bugs": {
+    "url": "https://github.com/jacobcassidy/vscode-cassidy-dark-theme/issues"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/jacobcassidy/vscode-cassidy-dark-theme"
