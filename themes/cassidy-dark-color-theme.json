@@ -94,6 +94,12 @@
     "editorOverviewRuler.warningForeground": "#f3ba81", // theme orange
     "editorOverviewRuler.infoForeground": "#81baf3", // theme blue
     "editorOverviewRuler.bracketMatchForeground": "#7a7a7a", // theme gray dark
+    // errors and warnings
+    "editorError.foreground":"#f38181bf", // theme red at 75% opacity for error squiggly lines
+    "editorWarning.foreground": "#f3ba81bf", // theme orange at 75% opacity for warning squiggly lines
+    "editorInfo.foreground": "#81baf3bf", // theme blue at 75% opacity for warning squiggly lines
+    // unused code
+    "editorUnnecessaryCode.opacity": "#00000099", // 60% opacity
     // selection
     // widget
     "editorWidget.foreground": "#cccccc", // theme light gray - example: the file search widget
