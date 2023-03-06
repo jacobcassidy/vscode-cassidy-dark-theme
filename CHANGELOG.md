@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## v0.0.6
+
+*2023-03-05*
+
+- Added galleryBanner color for VSCode marketplace banner
+
 ## v0.0.5
 
 *2023-03-05*
