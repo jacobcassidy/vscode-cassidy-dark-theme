@@ -264,6 +264,9 @@
     "method": {
       "foreground": "#f5f5f5", // theme gray white
     },
+    "namespace": {
+      "foreground": "#ba81f3", // theme purple bright
+    },
     "parameter": {
       "foreground": "#f3ba81", // theme orange
     },
@@ -339,8 +342,6 @@
         "comment variable",
         "punctuation.definition.comment",
         "source.embedded",
-        //*** MARKDOWN ***
-        "markup.underline.link",
       ],
       "settings": {
         "foreground": "#707070"
@@ -349,6 +350,8 @@
     {
       "name": "Theme Gray Dark (48%)",
       "scope": [
+        //*** MARKDOWN ***
+        "markup.underline.link",
       ],
       "settings": {
         "foreground": "#7a7a7a" // theme gray dark
@@ -365,6 +368,8 @@
         "punctuation",
         //*** CSS ***
         "meta.property-list",
+        //*** MARKDOWN ***
+        "meta.separator.markdown",
         //*** XML ***
         "meta.tag",
       ],
