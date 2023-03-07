@@ -96,6 +96,7 @@
     "editorOverviewRuler.bracketMatchForeground": "#7a7a7a", // theme gray dark
     // errors and warnings
     "editorError.foreground":"#f38181bf", // theme red at 75% opacity for error squiggly lines
+    "editorHint.foreground": "#f8e6b0", // theme yellow for 3 dots underline
     "editorWarning.foreground": "#f3ba81bf", // theme orange at 75% opacity for warning squiggly lines
     "editorInfo.foreground": "#81baf3bf", // theme blue at 75% opacity for warning squiggly lines
     // unused code
@@ -186,6 +187,11 @@
     "peekViewTitle.background": "#333333", // 20% black (match activity bar bg)
     "peekViewTitleDescription.foreground": "#a3a3a3", // theme gray medium
     "peekViewTitleLabel.foreground": "#f5f5f5", // theme gray white
+
+    //*** PROBLEMS PANEL ***
+    "problemsErrorIcon.foreground": "#f27373", // problems panel icons
+    "problemsWarningIcon.foreground": "#f3ba81", // problems panel icons
+    "problemsInfoIcon.foreground": "#81baf3", // problems panel icons
 
     //*** PROGRESS BAR ***
     "progressBar.background": "#96df96", // theme green bright
