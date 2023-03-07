@@ -189,7 +189,7 @@
     "peekViewTitleLabel.foreground": "#f5f5f5", // theme gray white
 
     //*** PROBLEMS PANEL ***
-    "problemsErrorIcon.foreground": "#f27373", // problems panel icons
+    "problemsErrorIcon.foreground": "#f38181", // problems panel icons
     "problemsWarningIcon.foreground": "#f3ba81", // problems panel icons
     "problemsInfoIcon.foreground": "#81baf3", // problems panel icons
 
@@ -539,9 +539,21 @@
         "string.regexp constant",
         "string.regexp keyword",
         "string.regexp punctuation",
+        //*** XML ***
+        "punctuation.definition.constant.xml",
       ],
       "settings": {
         "foreground": "#d4b0f8" // theme purple
+      }
+    },
+    {
+      "name": "Theme Purple Bright",
+      "scope": [
+        //*** DEFAULT ***
+        "entity.other.attribute-name.namespace",
+      ],
+      "settings": {
+        "foreground": "#ba81f3", // theme purple bright
       }
     },
     {
@@ -578,6 +590,7 @@
         "meta.attribute-selector entity.other.attribute-name",
         //*** MARKDOWN ***
         "entity.name.section.markdown",
+        "meta.other.valid-ampersand.markdown",
         //*** SCSS ***
         "meta.attribute-selector.scss",
         //*** XML ***
