@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+## v0.0.7
+
+*2023-03-06*
+
+- Added problems panel icon colors for workbench
+- Added editorHint 3 dot underline color for workbench
+- Added "entity.other.attribute-name.namespace" with bright purple for namespaces
+- Added "meta.other.valid-ampersand.markdown" with yellow for headings
+- Added "punctuation.definition.constant.xml" with purple for constants
+
 ## v0.0.6
 
 *2023-03-05*
