@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## v0.0.8
+
+*2023-03-14*
+
+- Added variable.parameter.misc.css to red color for CSS clamp operators, such as +
+
 ## v0.0.7
 
 *2023-03-06*

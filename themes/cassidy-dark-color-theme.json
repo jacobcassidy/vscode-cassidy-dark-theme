@@ -564,6 +564,8 @@
         "keyword",
         "support.function.construct",
         "storage.modifier",
+        //*** CSS ***
+        "variable.parameter.misc.css",
         //*** SHELL ***
         "meta.scope support.function",
         "source.shell support.function"
