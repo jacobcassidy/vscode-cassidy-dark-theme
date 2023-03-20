@@ -2,7 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
-## v0.0.8
+## v0.0.9
+
+*2023-03-19*
+
+- Change "variable.other.object.property" syntax color from light gray to green to match property color.
 
 *2023-03-14*
 
