@@ -285,9 +285,6 @@
     "property": {
       "foreground": "#badf96", // theme green
     },
-    "property.readonly.defaultLibrary": {
-      "foreground": "#cccccc", // theme gray light
-    },
     "variable": {
       "foreground": "#efb8c6", // theme pink
     },
@@ -396,7 +393,6 @@
         "entity.name.label",
         "support.constant.property", // semantic token type for JS
         "support.variable", // semantic token type for JS
-        "variable.other.object.property",
         //*** HTML ***
         "entity.other.attribute-name",
         //*** JAVASCRIPT ***
@@ -484,6 +480,7 @@
         "support.variable.property", // semantic token type
         "variable.other.constant.property", // semantic token type
         "variable.other.property",
+        "variable.other.object.property",
       ],
       "settings": {
         "foreground": "#badf96" // theme green
