@@ -495,11 +495,13 @@
         "entity.other.attribute-name.id",
         "entity.other.attribute-name.id punctuation",
         "meta.attribute.id string",
-        "punctuation.section.embedded", // php start tag
         "variable.parameter",
         //*** CSS ***
         "entity.other.keyframe-offset.percentage",
         "meta.at-rule.keyframes",
+        //*** PHP ***
+        "punctuation.section.embedded.begin.php",
+        "punctuation.section.embedded.end.php",
         //*** SCSS ***
         "meta.at-rule.keyframes entity.name.function",
         "entity.other.attribute-name.scss",
