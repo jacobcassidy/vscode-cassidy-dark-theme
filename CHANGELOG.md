@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## v0.1.0
+
+*2023-04-06*
+
+- Replace `punctuation.section.embedded` with `punctuation.section.embedded.begin.php` and `punctuation.section.embedded.end.php` so Ruby string interpolation is not colorized incorrectly.
+
 ## v0.0.9
 
 *2023-03-19*
