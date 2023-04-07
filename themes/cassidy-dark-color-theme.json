@@ -456,6 +456,7 @@
         //*** DEFAULT ***
         "entity.name.type.class",
         "entity.name.function",
+        "keyword.other.special-method", // such as Ruby loop
         "meta.at-rule.media.header",
         "meta.attribute.style string",
         "meta.property-name",
