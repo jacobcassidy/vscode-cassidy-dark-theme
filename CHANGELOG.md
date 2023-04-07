@@ -2,17 +2,24 @@
 
 All notable changes to this project will be documented in this file.
 
+## v0.1.1
+
+*2023-04-07*
+
+- Added `keyword.other.special-method` to cyan color syntax for Ruby loops and other special methods
+- Deleted `support.function.construct` to fall back to `support.function` for syntax colors used for PHP echo, array(), etc to match other support.function instead of keywords color.
+
 ## v0.1.0
 
 *2023-04-06*
 
-- Replace `punctuation.section.embedded` with `punctuation.section.embedded.begin.php` and `punctuation.section.embedded.end.php` so Ruby string interpolation is not colorized incorrectly.
+- Replaced `punctuation.section.embedded` with `punctuation.section.embedded.begin.php` and `punctuation.section.embedded.end.php` so Ruby string interpolation is not colorized incorrectly.
 
 ## v0.0.9
 
 *2023-03-19*
 
-- Change "variable.other.object.property" syntax color from light gray to green to match property color.
+- Changed "variable.other.object.property" syntax color from light gray to green to match property color.
 
 *2023-03-14*
 
