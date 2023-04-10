@@ -373,9 +373,10 @@
       "scope": [
         //*** DEFAULT ***
         "entity.name",
+        "meta.at-rule.keyframes.body",
         "meta.block",
         "meta.brace",
-        "meta.at-rule.keyframes.body",
+        "meta.embedded.line",
         "punctuation",
         //*** CSS ***
         "meta.property-list",
