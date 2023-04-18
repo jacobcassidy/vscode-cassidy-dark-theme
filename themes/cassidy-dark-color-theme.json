@@ -86,6 +86,8 @@
     "editor.findMatchBackground": "#81baf366", // theme blue at 40% opacity - example: current search match
     // match selection
     "editor.hoverHighlightBackground": "#81baf31a", // theme blue at 10% opacity
+    // ruler
+    "editorRuler.foreground": "#f3ba801a", // theme orange at 10% opacity
     // scrollbar
     "editorOverviewRuler.background": "#242424", // 14% black (match editor bg)
     "editorOverviewRuler.border": "#333333", // 20% black (scrollbar border)
