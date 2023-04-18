@@ -469,6 +469,8 @@
         "keyword.other.definition",
         //*** SCSS ***
         "variable.parameter.url.scss",
+        //*** YAML ***
+        "entity.name.tag.yaml",
       ],
       "settings": {
         "foreground": "#96dfdf" // theme cyan
