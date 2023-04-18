@@ -2,7 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+## v0.1.3
+
+*2023-04-18*
+
+- Added `entity.name.tag.yaml` to match support name syntax color.
+
 ## v0.1.2
+
+*2023-04-10*
 
 - Added `meta.embedded.line` to match punctuation syntax color.
 
@@ -10,7 +18,7 @@ All notable changes to this project will be documented in this file.
 
 *2023-04-07*
 
-- Added `keyword.other.special-method` to cyan color syntax for Ruby loops and other special methods
+- Added `keyword.other.special-method` to cyan color syntax for Ruby loops and other special methods.
 - Deleted `support.function.construct` to fall back to `support.function` for syntax colors used for PHP echo, array(), etc to match other support.function instead of keywords color.
 
 ## v0.1.0
