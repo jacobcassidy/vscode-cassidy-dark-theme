@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## v0.1.4
+
+*2023-04-18*
+
+- Added `editorRuler.foreground` with theme orange color at 10% opacity to use as warning guides.
+
 ## v0.1.3
 
 *2023-04-18*
