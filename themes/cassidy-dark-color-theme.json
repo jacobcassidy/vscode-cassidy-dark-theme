@@ -493,6 +493,7 @@
         "variable.other.object.property",
         //*** MARKDOWN ***
         "entity.name.section.markdown",
+        "punctuation.definition.heading.markdown",
       ],
       "settings": {
         "foreground": "#9bce90" // theme green
@@ -510,7 +511,6 @@
         "entity.other.keyframe-offset.percentage",
         "meta.at-rule.keyframes",
         //*** MARKDOWN ***
-        "string.other.link.description.markdown",
         //*** PHP ***
         "meta.function.parameters.php variable",
         "meta.function.parameters.php punctuation.definition.variable",
@@ -605,8 +605,8 @@
         //*** CSS ***
         "meta.attribute-selector entity.other.attribute-name",
         //*** MARKDOWN ***
-        "entity.name.section.markdown",
         "meta.other.valid-ampersand.markdown",
+        "string.other.link.description.markdown",
         //*** SCSS ***
         "meta.attribute-selector.scss",
         //*** XML ***
