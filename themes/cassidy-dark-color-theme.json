@@ -493,6 +493,7 @@
         "variable.other.object.property",
         //*** MARKDOWN ***
         "entity.name.section.markdown",
+        "markup.heading.markdown string.other.link.title.markdown",
         "punctuation.definition.heading.markdown",
       ],
       "settings": {
