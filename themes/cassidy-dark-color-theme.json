@@ -438,6 +438,7 @@
         "meta.link.reference",
         "meta.link.reference constant",
         "meta.link.reference string",
+        "string.other.link.title.markdown",
       ],
       "settings": {
         "foreground": "#8cc3fc" // theme blue
@@ -489,6 +490,8 @@
         "variable.other.constant.property", // semantic token type
         "variable.other.property",
         "variable.other.object.property",
+        //*** MARKDOWN ***
+        "entity.name.section.markdown",
       ],
       "settings": {
         "foreground": "#9bce90" // theme green
@@ -505,6 +508,8 @@
         //*** CSS ***
         "entity.other.keyframe-offset.percentage",
         "meta.at-rule.keyframes",
+        //*** MARKDOWN ***
+        "string.other.link.description.markdown",
         //*** PHP ***
         "meta.function.parameters.php variable",
         "meta.function.parameters.php punctuation.definition.variable",
