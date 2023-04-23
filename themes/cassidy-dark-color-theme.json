@@ -6,7 +6,7 @@
   "colors": {
     //*** BASE COLORS ***
     "descriptionForeground": "#f5f5f5", // theme gray white
-    "errorForeground": "#f48587", // theme red
+    "errorForeground": "#ef646b", // theme red
     "focusBorder": "#ffffff1a", // white at 10% opacity
     "foreground": "#cccccc", // theme gray light
     "icon.foreground": "#a3a3a3", // theme gray medium
@@ -37,13 +37,13 @@
 
     //*** DIFF EDITOR ***
     "diffEditor.insertedTextBackground": "#7ac06b33", //33 theme green bright at 20% opacity
-    "diffEditor.removedTextBackground": "#f4858733", // theme red at 20% opacity
+    "diffEditor.removedTextBackground": "#ef646b33", // theme red at 20% opacity
     "diffEditor.insertedLineBackground": "#7ac06b1a", // theme green bright at 10% opacity
-    "diffEditor.removedLineBackground": "#f485871a", // theme red at 10% opacity
+    "diffEditor.removedLineBackground": "#ef646b1a", // theme red at 10% opacity
     "diffEditorGutter.insertedLineBackground": "#7ac06b0d", // theme green bright at 5% opacity
-    "diffEditorGutter.removedLineBackground": "#f485870d", // theme red at 5% opacity
+    "diffEditorGutter.removedLineBackground": "#ef646b0d", // theme red at 5% opacity
     "diffEditorOverview.insertedForeground": "#7ac06b4d", // theme green bright at 30% opacity - example: scrollbar diff indicator
-    "diffEditorOverview.removedForeground": "#f485874d", // theme red at 30% opacity - example: scrollbar diff indicator
+    "diffEditorOverview.removedForeground": "#ef646b4d", // theme red at 30% opacity - example: scrollbar diff indicator
 
     //*** DROPDOWN CONTROLS ***
     "dropdown.background": "#3d3d3d", // theme gray-black-fade
@@ -63,7 +63,7 @@
     "editor.foldBackground": "#8cc3fc26", // theme blue at 15% opacity
     // gutter
     "editorGutter.addedBackground": "#7ac06b99", // theme green bright at 60% opacity - example: scrollbar and number line bar diff indicators
-    "editorGutter.deletedBackground": "#f4858799", // theme red at 60% opacity
+    "editorGutter.deletedBackground": "#ef646b99", // theme red at 60% opacity
     "editorGutter.foldingControlForeground": "#7a7a7a", // theme gray dark
     "editorGutter.modifiedBackground": "#f5e3b4cc", // theme yellow at 80% opacity
     // lightbulb
@@ -81,13 +81,13 @@
     // link
     "editorLink.activeForeground": "#f5e3b4", // theme
     // match
-    "editor.findMatchHighlightBackground": "#d781004d", // theme orange bright at 30% opacity - Color of the other search matches
+    "editor.findMatchHighlightBackground": "#e597424d", // theme orange bright at 30% opacity - Color of the other search matches
     "editor.findRangeHighlightBackground": "#3d3d3d4d", // theme gray-black-fade at 30% opacity - example: using finder widget with selection search only
     "editor.findMatchBackground": "#8cc3fc66", // theme blue at 40% opacity - example: current search match
     // match selection
     "editor.hoverHighlightBackground": "#8cc3fc1a", // theme blue at 10% opacity
     // ruler
-    "editorRuler.foreground": "#ebb0771a", // theme orange at 10% opacity
+    "editorRuler.foreground": "#ebb0770a", // theme orange at 10% opacity
     // scrollbar
     "editorOverviewRuler.background": "#242424", // 14% black (match editor bg)
     "editorOverviewRuler.border": "#333333", // 20% black (scrollbar border)
@@ -142,13 +142,13 @@
     "sideBySideEditor.verticalBorder": "#141414", // theme black-gray-black (see split settings with Default and User side by side)
 
     //*** GIT DECORATION ***
-    "gitDecoration.addedResourceForeground": "#7ac06b", // theme green bright - example: editor list when new resource is staged but not committed
+    "gitDecoration.addedResourceForeground": "#9bce90", // theme green bright - example: editor list when new resource is staged but not committed
     "gitDecoration.modifiedResourceForeground": "#f5e3b4", // theme yellow
     "gitDecoration.deletedResourceForeground": "#f48587", // theme red
     "gitDecoration.renamedResourceForeground": "#8cc3fc", // theme blue"
     "gitDecoration.stageModifiedResourceForeground": "#f5e3b4", // theme yellow
     "gitDecoration.stageDeletedResourceForeground": "#f48587", // theme red
-    "gitDecoration.untrackedResourceForeground": "#7ac06b", // theme green bright
+    "gitDecoration.untrackedResourceForeground": "#9bce90", // theme green bright
     "gitDecoration.ignoredResourceForeground": "#858585", // 52% black (4 shades lighter than theme gray dark)
     "gitDecoration.conflictingResourceForeground": "#ebb077", // theme orange
 
@@ -198,7 +198,7 @@
     "problemsInfoIcon.foreground": "#8cc3fc", // problems panel icons
 
     //*** PROGRESS BAR ***
-    "progressBar.background": "#7ac06b", // theme green bright
+    "progressBar.background": "#9bce90", // theme green
 
     //*** SCROLLBAR CONTROL ***
     "scrollbar.shadow": "#1f1f1f", // 12% black - Two shades darker than editor background - example: editor tabs side scroll
@@ -214,7 +214,7 @@
     "sideBar.foreground": "#cccccc", // theme gray light
     "sideBar.border": "#292929", // theme gray Black
     "sideBar.dropBackground": "#2e2e2e", // 18% black - 2 shades darker than sidebar bg
-    "sideBarTitle.foreground": "#707070", // 44% black (match comments) - EXPLORER TITLE
+    "sideBarTitle.foreground": "#707070", // 44% black (match comments) - EXPLORER TITLEc
     "sideBarSectionHeader.background": "#333333", // 20% black (match activity bar bg)
     "sideBarSectionHeader.foreground": "#a3a3a3", // theme gray medium
     "sideBarSectionHeader.border": "#292929", // theme gray Black (match sidebar border)
@@ -235,12 +235,12 @@
     "terminal.ansiBrightBlack": "#7a7a7a", // theme gray dark
     "terminal.ansiBrightBlue": "#8cc3fc", // theme blue
     "terminal.ansiBrightCyan": "#8ee2e2", // theme cyan
-    "terminal.ansiBrightGreen": "#b5dfac", // theme green
+    "terminal.ansiBrightGreen": "#9bce90", // theme green
     "terminal.ansiBrightMagenta": "#ffbbcf", // theme pink
     "terminal.ansiBrightRed": "#ef646b", // theme red bright
     "terminal.ansiBrightWhite": "#ffffff", // pure white
     "terminal.ansiBrightYellow": "#ebb077", // theme orange
-    "terminal.ansiCyan": "#00c3c3", // theme cyan bright
+    "terminal.ansiCyan": "#65d2d2", // theme cyan bright
     "terminal.ansiGreen": "#7ac06b", // theme green bright
     "terminal.ansiMagenta": "#cdaef2", // theme purple
     "terminal.ansiRed": "#f48587", // theme red
@@ -253,7 +253,7 @@
     "textCodeBlock.background": "#525252", // theme gray fade - example: hover over settings json "workbench.startupEditor"
     "textLink.activeForeground": "#f5e3b4", // theme yellow
     "textLink.foreground": "#8cc3fc", // theme blue - example: Settings UI text link
-    "textPreformat.foreground": "#d7bb70", // theme gold
+    "textPreformat.foreground": "#d7bb70", // theme yellow deep
 
     //*** TITLE BAR ***
     "titleBar.activeBackground": "#383838", // 22% black (match status bar bg)
@@ -281,13 +281,13 @@
       "foreground": "#f5f5f5", // theme gray white
     },
     "namespace": {
-      "foreground": "#b178ec", // theme purple bright
+      "foreground": "#bf94ef", // theme purple bright
     },
     "parameter": {
       "foreground": "#ebb077", // theme orange
     },
     "property": {
-      "foreground": "#b5dfac", // theme green
+      "foreground": "#9bce90", // theme green
     },
     "variable": {
       "foreground": "#ffbbcf", // theme pink
@@ -491,7 +491,7 @@
         "variable.other.object.property",
       ],
       "settings": {
-        "foreground": "#b5dfac" // theme green
+        "foreground": "#9bce90" // theme green
       }
     },
     {
@@ -560,7 +560,7 @@
         "entity.other.attribute-name.namespace",
       ],
       "settings": {
-        "foreground": "#b178ec", // theme purple bright
+        "foreground": "#bf94ef", // theme purple bright
       }
     },
     {
