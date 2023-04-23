@@ -31,7 +31,7 @@
     "badge.background": "#525252", // theme gray fade
 
     //*** BUTTON CONTROLS ***
-    "button.background": "#2e9cfd", // theme blue bright - example: search settings in settings page
+    "button.background": "#0089ea", // theme blue bright - example: search settings in settings page
     "checkbox.background": "#ffffff1a", // white at 10% opacity - example: Settings UI checkbox
     "checkbox.foreground": "#f5f5f5", // theme gray white
 
@@ -231,13 +231,13 @@
     "terminal.background": "#242424", // 14% black (match editor bg)
     "terminal.foreground": "#cccccc", // theme gray light
     "terminal.ansiBlack": "#3d3d3d", // theme gray-black-fade
-    "terminal.ansiBlue": "#2e9cfd", // theme blue bright
+    "terminal.ansiBlue": "#0089ea", // theme blue bright
     "terminal.ansiBrightBlack": "#7a7a7a", // theme gray dark
     "terminal.ansiBrightBlue": "#8cc3fc", // theme blue
     "terminal.ansiBrightCyan": "#8ee2e2", // theme cyan
     "terminal.ansiBrightGreen": "#b5dfac", // theme green
     "terminal.ansiBrightMagenta": "#ffbbcf", // theme pink
-    "terminal.ansiBrightRed": "#e93b4f", // theme red bright
+    "terminal.ansiBrightRed": "#ef646b", // theme red bright
     "terminal.ansiBrightWhite": "#ffffff", // pure white
     "terminal.ansiBrightYellow": "#ebb077", // theme orange
     "terminal.ansiCyan": "#00c3c3", // theme cyan bright
@@ -586,7 +586,7 @@
         //*** DEFAULT ***
       ],
       "settings": {
-        // "foreground": "#e93b4f", // theme red bright
+        // "foreground": "#ef646b", // theme red bright
       }
     },
     {
