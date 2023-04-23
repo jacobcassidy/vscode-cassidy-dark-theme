@@ -40,8 +40,8 @@
     "diffEditor.removedTextBackground": "#ef646b33", // theme red at 20% opacity
     "diffEditor.insertedLineBackground": "#7ac06b1a", // theme green bright at 10% opacity
     "diffEditor.removedLineBackground": "#ef646b1a", // theme red at 10% opacity
-    "diffEditorGutter.insertedLineBackground": "#7ac06b0d", // theme green bright at 5% opacity
-    "diffEditorGutter.removedLineBackground": "#ef646b0d", // theme red at 5% opacity
+    "diffEditorGutter.insertedLineBackground": "#7ac06b1a", // theme green bright at 10% opacity
+    "diffEditorGutter.removedLineBackground": "#ef646b1a", // theme red at 10% opacity
     "diffEditorOverview.insertedForeground": "#7ac06b4d", // theme green bright at 30% opacity - example: scrollbar diff indicator
     "diffEditorOverview.removedForeground": "#ef646b4d", // theme red at 30% opacity - example: scrollbar diff indicator
 
