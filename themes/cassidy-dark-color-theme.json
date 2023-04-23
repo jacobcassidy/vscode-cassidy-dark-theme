@@ -434,6 +434,7 @@
         "storage.type",
         //*** HTML ***
         "meta.attribute.href string",
+        "meta.attribute.src.html string",
         //*** MARKDOWN ***
         "meta.link.reference",
         "meta.link.reference constant",
