@@ -550,7 +550,10 @@
         //*** INI ***
         "source.ini",
         //*** REGEX ***
+        "meta.assertion.look-ahead.regexp",
+        "meta.assertion.negative-look-ahead.regexp",
         "meta.group.regexp",
+        "meta.group.assertion.regexp",
         "string.regexp",
         "string.regexp constant",
         "string.regexp keyword",
