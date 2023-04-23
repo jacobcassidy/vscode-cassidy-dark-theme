@@ -506,6 +506,8 @@
         "entity.other.keyframe-offset.percentage",
         "meta.at-rule.keyframes",
         //*** PHP ***
+        "meta.function.parameters.php variable",
+        "meta.function.parameters.php punctuation.definition.variable",
         "punctuation.section.embedded.begin.php",
         "punctuation.section.embedded.end.php",
         //*** SCSS ***
