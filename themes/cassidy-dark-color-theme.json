@@ -87,7 +87,7 @@
     // match selection
     "editor.hoverHighlightBackground": "#8cc3fc1a", // theme blue at 10% opacity
     // ruler
-    "editorRuler.foreground": "#ebb0770a", // theme orange at 10% opacity
+    "editorRuler.foreground": "#ebb0771a", // theme orange at 10% opacity
     // scrollbar
     "editorOverviewRuler.background": "#242424", // 14% black (match editor bg)
     "editorOverviewRuler.border": "#333333", // 20% black (scrollbar border)
