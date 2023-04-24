@@ -4,6 +4,16 @@ Cassidy Dark is a clean, modern Visual Studio Code theme originally inspired by 
 
 The theme was designed with pure shades of gray for the workbench so the syntax color highlighting pops with no bias towards any single color.
 
+## Includes Missing CSS & SCSS Syntax Grammar
+
+VSCode does not update syntax grammar often. Cassidy Dark theme updates the CSS and SCSS grammar to include modern features for syntax highlighting.
+
+Added are:
+- `:is()` and `:where()` tokens in both CSS and SCSS.
+- `,` comma token for SCSS.
+- `>>`, `>`, `+`, `~` keyword operator combinator tokens in SCSS.
+- `content`, `cursor`, `filter`, `font`, and `mask` property names tokens in SCSS.
+
 ## Screenshot
 
 ![Cassidy Dark theme screenshot](https://raw.githubusercontent.com/jacobcassidy/vscode-cassidy-dark-theme/main/images/cassidy-dark-theme-screenshot.png)
