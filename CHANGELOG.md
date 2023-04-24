@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## v0.1.6
+
+*2023-04-24*
+
+- Updated logo to match v0.1.5 color updates.
+- Edited README wording.
+
 ## v0.1.5
 
 *2023-04-24*
