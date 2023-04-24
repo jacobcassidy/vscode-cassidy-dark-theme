@@ -6,7 +6,7 @@ The theme was designed with pure shades of gray for the workbench so the syntax 
 
 ## Includes Missing CSS & SCSS Syntax Grammar
 
-VSCode does not update syntax grammar often. Cassidy Dark theme updates the CSS and SCSS grammar to include modern features for syntax highlighting.
+VSCode does not update syntax grammar often. Cassidy Dark theme updates the CSS and SCSS grammar to include syntax highlighting for modern features.
 
 Added are:
 - `:is()` and `:where()` tokens in both CSS and SCSS.
