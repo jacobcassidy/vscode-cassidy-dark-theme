@@ -494,6 +494,7 @@
         //*** MARKDOWN ***
         "entity.name.section.markdown",
         "markup.heading.markdown string.other.link.title.markdown",
+        "markup.heading.markdown meta.other.valid-ampersand.markdown",
         "punctuation.definition.heading.markdown",
       ],
       "settings": {
@@ -609,7 +610,6 @@
         //*** CSS ***
         "meta.attribute-selector entity.other.attribute-name",
         //*** MARKDOWN ***
-        "meta.other.valid-ampersand.markdown",
         "string.other.link.description.markdown",
         //*** SCSS ***
         "meta.attribute-selector.scss",
