@@ -13,9 +13,9 @@
     "url": "https://github.com/jacobcassidy/vscode-cassidy-dark-theme"
   },
   "galleryBanner": {
-		"color": "#292929",
-		"theme": "dark"
-	},
+    "color": "#292929",
+    "theme": "dark"
+  },
   "keywords": [
     "Theme",
     "Dark Theme",
@@ -38,8 +38,8 @@
     ],
     "grammars": [
       {
-        "scopeName": "pseudo-classes.injection",
-        "path": "./syntaxes/pseudo-classes-injection.json",
+        "scopeName": "missing-css-syntax.injection",
+        "path": "./syntaxes/missing-css-syntax-injection.json",
         "injectTo": [
           "source.css"
         ]
