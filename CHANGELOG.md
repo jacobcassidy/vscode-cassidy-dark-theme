@@ -6,9 +6,9 @@ All notable changes to this project will be documented in this file.
 
 *2023-04-24*
 
-Two big changes has been added in this update:
-1. Syntax colors has been refactored base on the `oklch` format to improve how the colors look together with specific lightness and chroma values (see table below).
-2. Missing CSS & SCSS syntax grammar has been added to tokenize elements for color highlighting (see details below).
+Two big changes have been added in this update:
+1. Syntax colors have been refactored based on the `oklch` format to improve how the colors look together with specific lightness and chroma values (see table below).
+2. Missing CSS & SCSS syntax grammar have been added to tokenize elements for color highlighting (see details below).
 
 ### 1. Updated Syntax Colors
 
