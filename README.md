@@ -9,10 +9,10 @@ The theme was designed with pure shades of gray for the workbench so the syntax 
 VSCode does not update syntax grammar often. Cassidy Dark theme updates the CSS and SCSS grammar to include syntax highlighting for modern features.
 
 Added are:
-- `:is()` and `:where()` tokens in both CSS and SCSS.
+- `:is()` and `:where()` tokens for both CSS and SCSS.
 - `,` comma token for SCSS.
-- `>>`, `>`, `+`, `~` keyword operator combinator tokens in SCSS.
-- `content`, `cursor`, `filter`, `font`, and `mask` property names tokens in SCSS.
+- `>>`, `>`, `+`, `~` keyword operator combinator tokens for SCSS.
+- `content`, `cursor`, `filter`, `font`, and `mask` property names tokens for SCSS.
 
 ## Screenshot
 
