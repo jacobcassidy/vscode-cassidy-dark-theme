@@ -2,6 +2,58 @@
 
 All notable changes to this project will be documented in this file.
 
+## v0.1.5
+
+*2023-04-24*
+
+Two big changes has been added in this update:
+1. Syntax colors has been refactored base on the `oklch` format to improve how the colors look together with specific lightness and chroma values (see table below).
+2. Missing CSS & SCSS syntax grammar has been added to tokenize elements for color highlighting (see details below).
+
+### 1. Updated Syntax Colors
+
+| OKLCH VALUES         | v0.1.5 HEX | v0.0.3 HEX | COLORS       |
+| -------------------- | ---------- | ---------- | ------------ |
+| oklch(92% 0.064 90)  | `#f5e3b4`  | `#f8e6b0`  | Yellow       |
+| oklch(86% 0.082 195) | `#8ee2e2`  | `#96dfdf`  | Cyan         |
+| oklch(86% 0.082 360) | `#ffbbcf`  | `#ffc2d1`  | Pink         |
+| oklch(80% 0.1 65)    | `#ebb077`  | `#f3ba81`  | Orange       |
+| oklch(80% 0.1 140)   | `#9bce90`  | `#badf96`  | Green        |
+| oklch(80% 0.1 250)   | `#8cc3fc`  | `#81baf3`  | Blue         |
+| oklch(80% 0.1 305)   | `#cdaef2`  | `#d4b0f8`  | Purple       |
+| oklch(74% 0.136 20)  | `#f48587`  | `#f38181`  | Red          |
+| -                                                             |
+| oklch(80% 0.1 90)    | `#d7bb70`  | `#efc852`  | Deep Yellow  |
+| oklch(80% 0.1 195)   | `#65d2d2`  | `#6fd3d3`  | Deep Cyan    |
+| oklch(80% 0.1 360)   | `#f3a3bb`  | `#e68fa4`  | Deep Pink    |
+| oklch(74% 0.136 65)  | `#e59742`  | `#eb8724`  | Deep Orange  |
+| oklch(74% 0.136 140) | `#7ac06b`  | `#96df96`  | Deep Green   |
+| oklch(74% 0.136 305) | `#bf94ef`  | `#ba81f3`  | Deep Purple  |
+| oklch(68% 0.172 20)  | `#ef646b`  | `#ef5252`  | Deep Red     |
+| oklch(62% 0.175 250) | `#0089ea`  | `#2487eb`  | Deep Blue    |
+
+### 2. Added Missing CSS & SCSS Syntax Grammar for VSCode
+
+For both CSS & SCSS:
+- `:is()` and `:where()` pseudo classes are now tokenized using `entity.other.attribute-name.pseudo-class.css`. This matches other pseudo classes that are already defined in VSCode such as `:not()` and `:has()`.
+
+For SCSS only:
+- `,` commas are now tokenized using `punctuation.separator.list.comma.scss`.
+- `>>`, `>`, `+`, `~` keyword operator combinator are now tokenized using `keyword.operator.combinator.scss`.
+- `content`, `cursor`, `filter`, `font`, and `mask` property names are now tokenized using `support.type.property-name.scss`. This matches other property names already defined in VSCode.
+
+### 3. Other Updates in v0.1.5
+
+- Replaced theme screenshot to show new syntax highlighting.
+- Added additional regex tokens to purple syntax highlighting
+- Changed Markdown heading syntax highlighting from yellow to green
+- Added green syntax highlighting to heading hash `#`.
+- Added `meta.attribute.src.html string` to blue syntax highlighting.
+- Fixed opacity for `editorRuler.foreground`.
+- Renamed `Bright` to `Deep` for secondary colors.
+- Added `meta.function.parameters.php` to orange syntax highlighting to match global parameter color.
+- Updated `diffEditorGutter` opacity to match `diffEditor`.
+
 ## v0.1.4
 
 *2023-04-18*
@@ -37,52 +89,52 @@ All notable changes to this project will be documented in this file.
 
 *2023-03-19*
 
-- Changed "variable.other.object.property" syntax color from light gray to green to match property color.
+- Changed `variable.other.object.property` syntax color from light gray to green to match property color.
 
 *2023-03-14*
 
-- Added variable.parameter.misc.css to red color for CSS clamp operators, such as +
+- Added `variable.parameter.misc.css` to red color for CSS clamp operators, such as `+`.
 
 ## v0.0.7
 
 *2023-03-06*
 
-- Added problems panel icon colors for workbench
-- Added editorHint 3 dot underline color for workbench
-- Added "entity.other.attribute-name.namespace" with bright purple for namespaces
-- Added "meta.other.valid-ampersand.markdown" with yellow for headings
-- Added "punctuation.definition.constant.xml" with purple for constants
+- Added problems panel icon colors for workbench.
+- Added `editorHint` 3-dot underline color for workbench.
+- Added `entity.other.attribute-name.namespace` with bright purple for namespaces.
+- Added `meta.other.valid-ampersand.markdown` with yellow for headings.
+- Added `punctuation.definition.constant.xml` with purple for constants.
 
 ## v0.0.6
 
 *2023-03-05*
 
-- Added galleryBanner color for VSCode marketplace banner
+- Added `galleryBanner` color for VSCode marketplace banner.
 
 ## v0.0.5
 
 *2023-03-05*
 
-- Added errors and warnings foreground colors
-- Updated theme screenshot
-- Updated installation instructions in README for marketplace
+- Added errors and warnings foreground colors.
+- Updated theme screenshot.
+- Updated installation instructions in README for marketplace.
 
 
 ## v0.0.4
 
 *2023-03-05*
 
-- Added theme logo
-- Added MIT License
-- Moved development files out of production directory
-- Packaged theme for publishing on Visual Studio Code marketplace
+- Added theme logo.
+- Added MIT License.
+- Moved development files out of production directory.
+- Packaged theme for publishing on Visual Studio Code marketplace.
 
 ## v0.0.3
 
 *2023-03-04*
 
-- Corrected cyan color from `#97dddd` to `#96dfdf` to match `hsla(180, 53%, 73%, 1)`
-- Corrected green color from `#b3d98c` to `#badf96` to match `hsla(90, 53%, 73%, 1)`
+- Corrected cyan color from `#97dddd` to `#96dfdf` to match `hsla(180, 53%, 73%, 1)`.
+- Corrected green color from `#b3d98c` to `#badf96` to match `hsla(90, 53%, 73%, 1)`.
 - Updated and added additional theme bright colors:
 
 | COLOR         | v0.0.2 HSL                | v0.0.2 HEX | v0.0.3 HSL               | v0.0.3 HEX |
@@ -109,7 +161,7 @@ All notable changes to this project will be documented in this file.
 
 *2023-02-27*
 
-- Updated theme colors:
+Updated theme colors:
 
 | COLOR         | v0.0.1 HSL                | v0.0.1 HEX | v0.0.2 HSL               | v0.0.2 HEX |
 | ------------- | ------------------------- | ---------- | ------------------------ | ---------- |
@@ -128,4 +180,4 @@ All notable changes to this project will be documented in this file.
 
 ## v0.0.1
 
-- Added starter syntax and workbench theme colors
+- Added starter syntax and workbench theme colors.
