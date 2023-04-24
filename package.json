@@ -35,6 +35,22 @@
         "uiTheme": "vs-dark",
         "path": "./themes/cassidy-dark-color-theme.json"
       }
+    ],
+    "grammars": [
+      {
+        "scopeName": "pseudo-classes.injection",
+        "path": "./syntaxes/pseudo-classes-injection.json",
+        "injectTo": [
+          "source.css"
+        ]
+      },
+      {
+        "scopeName": "missing-scss-syntax.injection",
+        "path": "./syntaxes/missing-scss-syntax-injection.json",
+        "injectTo": [
+          "source.css.scss"
+        ]
+      }
     ]
   }
 }

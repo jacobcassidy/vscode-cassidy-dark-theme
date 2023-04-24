@@ -1,0 +1,41 @@
+{
+  "scopeName": "missing-scss-syntax.injection",
+  "injectionSelector": "L:meta.property-list.scss, L:source.css.scss",
+  "patterns": [
+    {
+      "include": "#missing-punctuation"
+    },
+    {
+      "include": "#missing-combinator"
+    },
+    {
+      "include": "#missing-properties"
+    }
+  ],
+  "repository": {
+    "missing-punctuation": {
+      "patterns": [
+        {
+          "match": ",",
+          "name": "punctuation.separator.list.comma.scss injection.scss"
+        }
+      ]
+    },
+    "missing-combinator": {
+      "patterns": [
+        {
+          "match": ">>|>|\\+|~",
+          "name": "keyword.operator.combinator.scss injection.scss"
+        }
+      ]
+    },
+    "missing-properties": {
+      "patterns": [
+        {
+          "match": "(content|cursor|filter|font|mask)(?=:)",
+          "name": "support.type.property-name.scss injection.scss"
+        }
+      ]
+    }
+  }
+}
