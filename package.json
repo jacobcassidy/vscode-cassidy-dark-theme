@@ -2,7 +2,7 @@
   "name": "cassidy-dark",
   "displayName": "Cassidy Dark Theme",
   "description": "A clean, modern, dark theme originally inspired by Monokai",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "icon": "images/cassidy-dark-logo-512.png",
   "publisher": "jacobcassidy",
   "bugs": {
