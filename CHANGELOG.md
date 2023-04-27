@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## v0.1.7
+
+*2023-04-27*
+
+- Add textmate grammar for missing CSS #property-keywords: `auto-fit` using the `support.constant.property-value.css` token.
+
 ## v0.1.6
 
 *2023-04-24*
