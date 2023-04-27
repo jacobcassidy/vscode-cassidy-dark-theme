@@ -4,6 +4,9 @@
   "patterns": [
     {
       "include": "#missing-pseudo-classes"
+    },
+    {
+      "include": "#missing-property-keywords"
     }
   ],
   "repository": {
@@ -37,6 +40,10 @@
           "include": "#tag-names"
         }
       ]
+    },
+    "missing-property-keywords": {
+      "match": "auto-fit",
+      "name": "support.constant.property-value.css"
     },
     "attribute-names": {
       "patterns": [
