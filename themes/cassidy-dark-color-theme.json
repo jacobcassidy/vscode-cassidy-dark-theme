@@ -332,6 +332,16 @@
       }
     },
     {
+      "name": "STRIKETHROUGH",
+      "scope": [
+        //*** MARKDOWN ***
+        "markup.strikethrough.markdown",
+      ],
+      "settings": {
+        "fontStyle": "strikethrough"
+      }
+    },
+    {
       "name": "Theme Gray Fade (32%)",
       "scope": [
         //*** DEFAULT ***
@@ -385,6 +395,7 @@
         "meta.property-list",
         //*** MARKDOWN ***
         "meta.separator.markdown",
+        "markup.strikethrough.markdown",
         //*** XML ***
         "meta.tag",
       ],
