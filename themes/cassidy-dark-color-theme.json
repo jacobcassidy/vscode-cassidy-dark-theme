@@ -94,15 +94,15 @@
     "editorOverviewRuler.modifiedForeground": "#f5e3b499", // theme yellow at 60% opacity
     "editorOverviewRuler.addedForeground": "#7ac06b99", // theme green deep at 60% opacity - example: scrollbar diff indicator
     "editorOverviewRuler.deletedForeground": "#f4858799", // theme red at 60% opacity
-    "editorOverviewRuler.errorForeground": "#f48587", // theme red
-    "editorOverviewRuler.warningForeground": "#ebb077", // theme orange
-    "editorOverviewRuler.infoForeground": "#8cc3fc", // theme blue
-    "editorOverviewRuler.bracketMatchForeground": "#7a7a7a", // theme gray dark
+    "editorOverviewRuler.errorForeground": "#f48587e6", // theme red at 90% opacity
+    "editorOverviewRuler.warningForeground": "#ebb077e6", // theme orange at 90% opacity
+    "editorOverviewRuler.infoForeground": "#8cc3fce6", // theme blue at 90% opacity
+    "editorOverviewRuler.bracketMatchForeground": "#7a7a7ae6", // theme gray dark at 90% opacity
     // errors and warnings
-    "editorError.foreground":"#f48587bf", // theme red at 75% opacity for error squiggly lines
+    "editorError.foreground":"#f48587", // theme red for error squiggly lines
     "editorHint.foreground": "#f5e3b4", // theme yellow for 3 dots underline
-    "editorWarning.foreground": "#ebb077bf", // theme orange at 75% opacity for warning squiggly lines
-    "editorInfo.foreground": "#8cc3fcbf", // theme blue at 75% opacity for warning squiggly lines
+    "editorWarning.foreground": "#ebb077", // theme orange for warning squiggly lines
+    "editorInfo.foreground": "#8cc3fc", // theme blue for info squiggly lines
     // unused code
     "editorUnnecessaryCode.opacity": "#00000099", // 60% opacity
     // selection
