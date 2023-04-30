@@ -524,7 +524,7 @@
         "meta.attribute.id string",
         "variable.parameter",
         //*** CSS ***
-        "entity.other.keyframe-offset.percentage",
+        "entity.other.keyframe-offset",
         "meta.at-rule.keyframes",
         //*** MARKDOWN ***
         //*** PHP ***
