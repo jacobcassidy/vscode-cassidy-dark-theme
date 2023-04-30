@@ -472,6 +472,8 @@
         "meta.property-value",
         //*** INI ***
         "keyword.other.definition",
+        //*** PHP ***
+        "support.function.basic_functions",
         //*** SCSS ***
         "variable.parameter.url.scss",
         //*** YAML ***
