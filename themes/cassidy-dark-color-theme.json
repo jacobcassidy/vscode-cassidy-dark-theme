@@ -235,13 +235,13 @@
     "terminal.ansiBrightBlack": "#7a7a7a", // theme gray dark
     "terminal.ansiBrightBlue": "#8cc3fc", // theme blue
     "terminal.ansiBrightCyan": "#8ee2e2", // theme cyan
-    "terminal.ansiBrightGreen": "#9bce90", // theme green
+    "terminal.ansiBrightGreen": "#7ac06b", // theme green deep
     "terminal.ansiBrightMagenta": "#ffbbcf", // theme pink
     "terminal.ansiBrightRed": "#ef646b", // theme red deep
     "terminal.ansiBrightWhite": "#ffffff", // pure white
     "terminal.ansiBrightYellow": "#ebb077", // theme orange
     "terminal.ansiCyan": "#65d2d2", // theme cyan deep
-    "terminal.ansiGreen": "#7ac06b", // theme green deep
+    "terminal.ansiGreen": "#9bce90", // theme green
     "terminal.ansiMagenta": "#cdaef2", // theme purple
     "terminal.ansiRed": "#f48587", // theme red
     "terminal.ansiWhite": "#f5f5f5", // theme gray white
@@ -392,10 +392,13 @@
         "meta.embedded.line",
         "punctuation",
         //*** CSS ***
+        "meta.function.calc.css", // For nesting parentheses in calc function
         "meta.property-list",
         //*** MARKDOWN ***
         "meta.separator.markdown",
         "markup.strikethrough.markdown",
+        //*** PHP ***
+        "meta.embedded.block.php source", // For else colon when using alternative syntax
         //*** XML ***
         "meta.tag",
       ],
@@ -427,6 +430,8 @@
         //*** DEFAULT ***
         "meta.method-call entity.name.function",
         "support.function",
+        //*** APACHE ***
+        "entity.helper.apacheconf", // Using Apache Conf extension for syntax grammar
         //*** CSS ***
         "entity.other.attribute-name.pseudo-class",
         "entity.other.attribute-name.pseudo-element",
@@ -444,6 +449,11 @@
       "scope": [
         //*** DEFAULT ***
         "storage.type",
+        //*** APACHE ***
+        "string.path.apacheconf",
+        //*** CSS ***
+        "meta.attribute.unrecognized.xmlns.html string",
+        "meta.attribute.unrecognized.xmlns:xlink.html string",
         //*** HTML ***
         "meta.attribute.href string",
         "meta.attribute.src.html string",
@@ -479,6 +489,8 @@
         "meta.property-name",
         "meta.property-value support.function",
         "support",
+        //*** APACHE ***
+        "entity.tag.apacheconf",
         //*** CSS ***
         "meta.property-value",
         //*** INI ***
@@ -505,6 +517,8 @@
         "variable.other.constant.property", // semantic token type
         "variable.other.property",
         "variable.other.object.property",
+        //*** APACHE ***
+        "entity.mime-type.apacheconf",
         //*** MARKDOWN ***
         "entity.name.section.markdown",
         "markup.heading.markdown string.other.link.title.markdown",
@@ -523,6 +537,8 @@
         "entity.other.attribute-name.id punctuation",
         "meta.attribute.id string",
         "variable.parameter",
+        //*** APACHE ***
+        "string.replacement.apacheconf",
         //*** CSS ***
         "entity.other.keyframe-offset",
         "meta.at-rule.keyframes",
@@ -560,6 +576,8 @@
         //*** DEFAULT ***
         "constant",
         "keyword.other.unit",
+        //*** APACHE ***
+        "entity.status.apacheconf",
         //*** HTML ***
         "constant punctuation.definition.entity", // html symbol entity
         //*** INI ***
@@ -599,6 +617,8 @@
         "storage.modifier",
         //*** CSS ***
         "variable.parameter.misc.css",
+        //*** PHP ***
+        "entity.name.goto-label.php", // For 'else' using alternative syntax
         //*** SHELL ***
         "meta.scope support.function",
         "source.shell support.function"
