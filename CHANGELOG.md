@@ -2,6 +2,27 @@
 
 All notable changes to this project are documented in this file.
 
+## v0.1.9
+
+*2023-05-31*
+
+- Added `support.function.basic_functions` to base function color for PHP.
+- Added strikethrough and punctuation color to `markup.strikethrough.markdown`.
+- Updated `entity.other.keyframe-offset` without postfix `.percentage` to apply to more CSS styles.
+- Flipped green and bright green colors for terminal.
+- Added `meta.function.calc.css` for parentheses color when nesting in calc function.
+- Added `meta.embedded.block.php source` for else colon when using alternative syntax.
+- Added `meta.attribute.unrecognized.xmlns.html string` to theme blue for link.
+- Added `meta.attribute.unrecognized.xmlns:xlink.html string` to theme blue for link.
+- Added `entity.name.goto-label.php` to theme red for 'else' keyword when using alternative syntax.
+- Added syntax color highlighting for apacheconf when using Apache Conf extension:
+  - Added `entity.helper.apacheconf` to theme white.
+  - Added `string.path.apacheconf` to theme blue.
+  - Added `entity.tag.apacheconf` to theme cyan.
+  - Added `entity.mime-type.apacheconf` to theme green.
+  - Added `string.replacement.apacheconf` to theme orange.
+  - Added `entity.status.apacheconf` to theme purple.
+
 ## v0.1.8
 
 *2023-04-30*
