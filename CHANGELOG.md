@@ -2,6 +2,12 @@
 
 All notable changes to this project are documented in this file.
 
+## v0.2.0
+
+*2023-06-01*
+
+- Updated `#missing-pseudo-classes` for nesting.
+
 ## v0.1.9
 
 *2023-05-31*
