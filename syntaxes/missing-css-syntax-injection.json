@@ -11,7 +11,7 @@
   ],
   "repository": {
     "missing-pseudo-classes": {
-      "begin": "(?i)(?<!\\/\\/.*)(:where|:is)(\\()",
+      "begin": "(?i)((:)(?:not|has|matches|where|is))(\\()",
       "beginCaptures": {
         "1": {
           "name": "entity.other.attribute-name.pseudo-class.css"
