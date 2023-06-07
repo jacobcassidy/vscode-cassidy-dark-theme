@@ -2,11 +2,24 @@
 
 All notable changes to this project are documented in this file.
 
+## v0.2.1
+
+*2023-06-07*
+
+- Added `meta.function.method.with-arguments.ruby storage.type` for Ruby's parameter block `&` operator to match punctuation syntax highlighting color.
+- Added `meta.element.structure.svg.text.html` for `<svg>` inner text color highlighting with theme yellow to match strings.
+- Added `meta.embedded.line.php` for closing bracket `}` punctuation color highlighting  when opening a new PHP tag.
+- Added `meta.attribute.srcset.html string` with theme blue to match links.
+- Added `meta.attribute.async.html entity.other.attribute-name` for HTML async attribute color highlighting with theme purple.
+- Added `meta.attribute.defer.html entity.other.attribute-name` for HTML defer attribute color highlighting with theme purple.
+- Removed unneeded `source` from `meta.embedded.block.php source`.
+
+
 ## v0.2.0
 
 *2023-06-01*
 
-- Updated `#missing-pseudo-classes` for nesting.
+- Updated `#missing-pseudo-classes` for correct syntax highlighting when nesting additional pseudo-classes.
 
 ## v0.1.9
 
