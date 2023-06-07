@@ -398,7 +398,10 @@
         "meta.separator.markdown",
         "markup.strikethrough.markdown",
         //*** PHP ***
-        "meta.embedded.block.php source", // For else colon when using alternative syntax
+        "meta.embedded.block.php", // For else colon when using alternative syntax
+        "meta.embedded.line.php", // For closing bracket } when opening a new PHP tag
+        //*** RUBY ***
+        "meta.function.method.with-arguments.ruby storage.type", // For Ruby's parameter block `&` operator
         //*** XML ***
         "meta.tag",
       ],
@@ -437,6 +440,7 @@
         "entity.other.attribute-name.pseudo-element",
         //*** HTML ***
         "text.html",
+        "meta.element.structure.svg.text.html",
         //*** XML ***
         "text.xml",
       ],
@@ -457,6 +461,7 @@
         //*** HTML ***
         "meta.attribute.href string",
         "meta.attribute.src.html string",
+        "meta.attribute.srcset.html string",
         //*** MARKDOWN ***
         "meta.link.reference",
         "meta.link.reference constant",
@@ -579,7 +584,9 @@
         //*** APACHE ***
         "entity.status.apacheconf",
         //*** HTML ***
-        "constant punctuation.definition.entity", // html symbol entity
+        "constant punctuation.definition.entity", // HTML symbol entity
+        "meta.attribute.async.html entity.other.attribute-name", // HTML async attribute
+        "meta.attribute.defer.html entity.other.attribute-name", // HTML defer attribute
         //*** INI ***
         "source.ini",
         //*** REGEX ***
