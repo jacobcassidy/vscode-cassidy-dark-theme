@@ -567,9 +567,6 @@
         //*** DEFAULT ***
         "punctuation.definition.variable",
         "variable",
-        //*** HTML ***
-        "meta.attribute.defer entity.other.attribute-name",
-        "meta.attribute.crossorigin entity.other.attribute-name",
       ],
       "settings": {
         "foreground": "#ffbbcf" // theme pink
@@ -585,8 +582,9 @@
         "entity.status.apacheconf",
         //*** HTML ***
         "constant punctuation.definition.entity", // HTML symbol entity
-        "meta.attribute.async.html entity.other.attribute-name", // HTML async attribute
-        "meta.attribute.defer.html entity.other.attribute-name", // HTML defer attribute
+        "meta.attribute.async.html entity.other.attribute-name",
+        "meta.attribute.crossorigin entity.other.attribute-name",
+        "meta.attribute.defer.html entity.other.attribute-name",
         //*** INI ***
         "source.ini",
         //*** REGEX ***
