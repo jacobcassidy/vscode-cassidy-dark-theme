@@ -2,6 +2,40 @@
 
 All notable changes to this project are documented in this file.
 
+## v0.2.2
+
+*2023-07-08*
+
+- Moved `meta.attribute.crossorigin entity.other.attribute-name` to theme purple to match HTML link tag's `defer` and `async` attributes.
+- Added `variable.other.property.php punctuation.definition.variable.php` to theme green to match other property colors.
+- Added `entity.other.inherited-class.php` for extends class and `entity.other.alias.php` use as to theme cyan highlighting.
+- Added `meta.parameter-expansion` for zsh to theme gray medium highlighting.
+- Added `comment support` and `comment storage.modifier` to match comment color highlighting.
+- Tweaked colors to provide slightly better contrast and balance between them...
+
+### Updated Syntax Colors for v0.2.2
+
+| OKLCH VALUES              | v0.2.2 HEX | v0.1.5 HEX | COLORS       |
+| ------------------------- | ---------- | ---------- | ------------ |
+| `oklch(74% 0.12893 30)`   | `#f18a79`  | `#f48587`  | Red          |
+| `oklch(80% 0.1142 70)`    | `#edb068`  | `#ebb077`  | Orange       |
+| `oklch(92% 0.06615 90)`   | `#f6e3b3`  | `#f5e3b4`  | Yellow       |
+| `oklch(80% 0.1213 140)`   | `#93d185`  | `#9bce90`  | Green        |
+| `oklch(86% 0.08074 195)`  | `#8fe2e1`  | `#8ee2e2`  | Cyan         |
+| `oklch(80% 0.098898 250)` | `#8cc3fb`  | `#8cc3fc`  | Blue         |
+| `oklch(80% 0.1143 305)`   | `#cfabf9`  | `#cdaef2`  | Purple       |
+| NO CHANGE                 | `#ffbbcf`  | `#ffbbcf`  | Pink         |
+| -                         |            |            |              |
+| `oklch(74% 0.15893 30`    | `#ff7f6d`  | `#ef646b`  | Deep Red     |
+| `oklch(80% 0.1622 70)`    | `#ffa82a`  | `#e59742`  | Deep Orange  |
+| `oklch(92% 0.10215 90)`   | `#ffe294`  | `#d7bb70`  | Deep Yellow  |
+| `oklch(80% 0.1891 140)`   | `#74da5d`  | `#7ac06b`  | Deep Green   |
+| `oklch(86% 0.1137 195)`   | `#67e8e8`  | `#65d2d2`  | Deep Cyan    |
+| NO CHANGE                 | `#0089ea`  | `#0089ea`  | Deep Blue    |
+| `oklch(74% 0.1685 305)`   | `#c48cff`  | `#bf94ef`  | Deep Purple  |
+| `oklch(80% 0.1245 360)`   | `#ff9bba`  | `#f3a3bb`  | Deep Pink    |
+
+
 ## v0.2.1
 
 *2023-06-07*
