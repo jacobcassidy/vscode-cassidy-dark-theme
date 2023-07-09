@@ -1,5 +1,7 @@
 # Cassidy Dark Theme
 
+![Cassidy Dark theme screenshot](https://raw.githubusercontent.com/jacobcassidy/vscode-cassidy-dark-theme/main/images/cassidy-dark-theme-screenshot.png)
+
 Cassidy Dark is a clean, modern Visual Studio Code theme originally inspired by the Monokai color palette.
 
 The theme was designed with pure shades of gray for the workbench so the syntax color highlighting pops with no bias towards any single color.
@@ -14,10 +16,6 @@ Added are:
 - `>>`, `>`, `+`, `~` keyword operator combinator tokens for SCSS.
 - `content`, `cursor`, `filter`, `font`, and `mask` property names tokens for SCSS.
 - `auto-fit` property value token for CSS.
-
-## Screenshot
-
-![Cassidy Dark theme screenshot](https://raw.githubusercontent.com/jacobcassidy/vscode-cassidy-dark-theme/main/images/cassidy-dark-theme-screenshot.png)
 
 ## Installation
 
