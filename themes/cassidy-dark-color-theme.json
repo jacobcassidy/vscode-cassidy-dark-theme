@@ -6,7 +6,7 @@
   "colors": {
     //*** BASE COLORS ***
     "descriptionForeground": "#f5f5f5", // theme gray white
-    "errorForeground": "#ff7f6d", // theme red
+    "errorForeground": "#ff7e77", // theme red
     "focusBorder": "#ffffff1a", // white at 10% opacity
     "foreground": "#cccccc", // theme gray light
     "icon.foreground": "#a3a3a3", // theme gray medium
@@ -37,13 +37,13 @@
 
     //*** DIFF EDITOR ***
     "diffEditor.insertedTextBackground": "#74da5d33", //33 theme green deep at 20% opacity
-    "diffEditor.removedTextBackground": "#ff7f6d33", // theme red at 20% opacity
+    "diffEditor.removedTextBackground": "#ff7e7733", // theme red at 20% opacity
     "diffEditor.insertedLineBackground": "#74da5d1a", // theme green deep at 10% opacity
-    "diffEditor.removedLineBackground": "#ff7f6d1a", // theme red at 10% opacity
+    "diffEditor.removedLineBackground": "#ff7e771a", // theme red at 10% opacity
     "diffEditorGutter.insertedLineBackground": "#74da5d1a", // theme green deep at 10% opacity
-    "diffEditorGutter.removedLineBackground": "#ff7f6d1a", // theme red at 10% opacity
+    "diffEditorGutter.removedLineBackground": "#ff7e771a", // theme red at 10% opacity
     "diffEditorOverview.insertedForeground": "#74da5d4d", // theme green deep at 30% opacity - example: scrollbar diff indicator
-    "diffEditorOverview.removedForeground": "#ff7f6d4d", // theme red at 30% opacity - example: scrollbar diff indicator
+    "diffEditorOverview.removedForeground": "#ff7e774d", // theme red at 30% opacity - example: scrollbar diff indicator
 
     //*** DROPDOWN CONTROLS ***
     "dropdown.background": "#3d3d3d", // theme gray-black-fade
@@ -60,15 +60,15 @@
     "editorCursor.background": "#3d3d3d", // theme gray-black-fade
     "editorCursor.foreground": "#a3a3a3", // theme gray medium
     // fold
-    "editor.foldBackground": "#8cc3fb26", // theme blue at 15% opacity
+    "editor.foldBackground": "#89c3ff26", // theme blue at 15% opacity
     // gutter
     "editorGutter.addedBackground": "#74da5d99", // theme green deep at 60% opacity - example: scrollbar and number line bar diff indicators
-    "editorGutter.deletedBackground": "#ff7f6d99", // theme red at 60% opacity
+    "editorGutter.deletedBackground": "#ff7e7799", // theme red at 60% opacity
     "editorGutter.foldingControlForeground": "#7a7a7a", // theme gray dark
     "editorGutter.modifiedBackground": "#f6e3b3cc", // theme yellow at 80% opacity
     // lightbulb
     "editorLightBulb.foreground": "#ffe294", // theme yellow deep
-    "editorLightBulbAutoFix.foreground": "#8cc3fb", // theme blue
+    "editorLightBulbAutoFix.foreground": "#89c3ff", // theme blue
     // indent guide
     "editorIndentGuide.background": "#3d3d3d", // theme gray-black-fade
     "editorIndentGuide.activeBackground": "#525252", // theme gray fade
@@ -83,9 +83,9 @@
     // match
     "editor.findMatchHighlightBackground": "#ffa82a4d", // theme orange deep at 30% opacity - Color of the other search matches
     "editor.findRangeHighlightBackground": "#3d3d3d4d", // theme gray-black-fade at 30% opacity - example: using finder widget with selection search only
-    "editor.findMatchBackground": "#8cc3fb66", // theme blue at 40% opacity - example: current search match
+    "editor.findMatchBackground": "#89c3ff66", // theme blue at 40% opacity - example: current search match
     // match selection
-    "editor.hoverHighlightBackground": "#8cc3fb1a", // theme blue at 10% opacity
+    "editor.hoverHighlightBackground": "#89c3ff1a", // theme blue at 10% opacity
     // ruler
     "editorRuler.foreground": "#edb0681a", // theme orange at 10% opacity
     // scrollbar
@@ -93,16 +93,16 @@
     "editorOverviewRuler.border": "#333333", // 20% black (scrollbar border)
     "editorOverviewRuler.modifiedForeground": "#f6e3b399", // theme yellow at 60% opacity
     "editorOverviewRuler.addedForeground": "#74da5d99", // theme green deep at 60% opacity - example: scrollbar diff indicator
-    "editorOverviewRuler.deletedForeground": "#f18a7999", // theme red at 60% opacity
-    "editorOverviewRuler.errorForeground": "#f18a79e6", // theme red at 90% opacity
+    "editorOverviewRuler.deletedForeground": "#f4877f99", // theme red at 60% opacity
+    "editorOverviewRuler.errorForeground": "#f4877fe6", // theme red at 90% opacity
     "editorOverviewRuler.warningForeground": "#edb068e6", // theme orange at 90% opacity
-    "editorOverviewRuler.infoForeground": "#8cc3fbe6", // theme blue at 90% opacity
+    "editorOverviewRuler.infoForeground": "#89c3ffe6", // theme blue at 90% opacity
     "editorOverviewRuler.bracketMatchForeground": "#7a7a7ae6", // theme gray dark at 90% opacity
     // errors and warnings
-    "editorError.foreground":"#f18a79", // theme red for error squiggly lines
+    "editorError.foreground":"#f4877f", // theme red for error squiggly lines
     "editorHint.foreground": "#f6e3b3", // theme yellow for 3 dots underline
     "editorWarning.foreground": "#edb068", // theme orange for warning squiggly lines
-    "editorInfo.foreground": "#8cc3fb", // theme blue for info squiggly lines
+    "editorInfo.foreground": "#89c3ff", // theme blue for info squiggly lines
     // unused code
     "editorUnnecessaryCode.opacity": "#00000099", // 60% opacity
     // selection
@@ -113,7 +113,7 @@
     "editorWidget.resizeBorder": "#424242", // 26% black
     // word highlight
     "editor.wordHighlightBackground": "#525252", // theme gray fade (read-access, such as JS variable)
-    "editor.wordHighlightStrongBackground": "#8cc3fb66", // theme blue at 40% opacity (write-access, such as JS variable)
+    "editor.wordHighlightStrongBackground": "#89c3ff66", // theme blue at 40% opacity (write-access, such as JS variable)
     "editor.wordHighlightTextBackground": "#525252", // theme gray fade
     // unicode
     "editorUnicodeHighlight.border": "#edb06880", // theme orange at 50% opacity
@@ -144,10 +144,10 @@
     //*** GIT DECORATION ***
     "gitDecoration.addedResourceForeground": "#93d185", // theme green - example: editor list when new resource is staged but not committed
     "gitDecoration.modifiedResourceForeground": "#f6e3b3", // theme yellow
-    "gitDecoration.deletedResourceForeground": "#f18a79", // theme red
-    "gitDecoration.renamedResourceForeground": "#8cc3fb", // theme blue"
+    "gitDecoration.deletedResourceForeground": "#f4877f", // theme red
+    "gitDecoration.renamedResourceForeground": "#89c3ff", // theme blue"
     "gitDecoration.stageModifiedResourceForeground": "#f6e3b3", // theme yellow
-    "gitDecoration.stageDeletedResourceForeground": "#f18a79", // theme red
+    "gitDecoration.stageDeletedResourceForeground": "#f4877f", // theme red
     "gitDecoration.untrackedResourceForeground": "#93d185", // theme green
     "gitDecoration.ignoredResourceForeground": "#858585", // 52% black (4 shades lighter than theme gray dark)
     "gitDecoration.conflictingResourceForeground": "#edb068", // theme orange
@@ -171,7 +171,7 @@
     "list.hoverForeground": "#f5f5f5", // theme white - example: extensions sidebar list
     "list.inactiveSelectionBackground": "#ffffff0d", // white at 5% opacity example: extensions sidebar list
     "list.inactiveSelectionForeground": "#f5f5f5", // theme gray white
-    "list.errorForeground": "#f18a79", // theme red - example: editor tab title
+    "list.errorForeground": "#f4877f", // theme red - example: editor tab title
     "list.warningForeground": "#edb068", // theme orange
     // trees
     "tree.indentGuidesStroke": "#3d3d3d", // theme gray-black-fade (sidebar explorer tree)
@@ -193,9 +193,9 @@
     "peekViewTitleLabel.foreground": "#f5f5f5", // theme gray white
 
     //*** PROBLEMS PANEL ***
-    "problemsErrorIcon.foreground": "#f18a79", // problems panel icons
+    "problemsErrorIcon.foreground": "#f4877f", // problems panel icons
     "problemsWarningIcon.foreground": "#edb068", // problems panel icons
-    "problemsInfoIcon.foreground": "#8cc3fb", // problems panel icons
+    "problemsInfoIcon.foreground": "#89c3ff", // problems panel icons
 
     //*** PROGRESS BAR ***
     "progressBar.background": "#93d185", // theme green
@@ -233,17 +233,17 @@
     "terminal.ansiBlack": "#3d3d3d", // theme gray-black-fade
     "terminal.ansiBlue": "#0089ea", // theme blue deep
     "terminal.ansiBrightBlack": "#7a7a7a", // theme gray dark
-    "terminal.ansiBrightBlue": "#8cc3fb", // theme blue
-    "terminal.ansiBrightCyan": "#8fe2e1", // theme cyan
+    "terminal.ansiBrightBlue": "#89c3ff", // theme blue
+    "terminal.ansiBrightCyan": "#8ee2e2", // theme cyan
     "terminal.ansiBrightGreen": "#74da5d", // theme green deep
     "terminal.ansiBrightMagenta": "#ffbbcf", // theme pink
-    "terminal.ansiBrightRed": "#ff7f6d", // theme red deep
+    "terminal.ansiBrightRed": "#ff7e77", // theme red deep
     "terminal.ansiBrightWhite": "#ffffff", // pure white
     "terminal.ansiBrightYellow": "#edb068", // theme orange
     "terminal.ansiCyan": "#67e8e8", // theme cyan deep
     "terminal.ansiGreen": "#93d185", // theme green
     "terminal.ansiMagenta": "#cfabf9", // theme purple
-    "terminal.ansiRed": "#f18a79", // theme red
+    "terminal.ansiRed": "#f4877f", // theme red
     "terminal.ansiWhite": "#f5f5f5", // theme gray white
     "terminal.ansiYellow": "#f6e3b3", // theme yellow
 
@@ -252,7 +252,7 @@
     "textBlockQuote.border": "#666666", // theme gray-fade-dark
     "textCodeBlock.background": "#525252", // theme gray fade - example: hover over settings json "workbench.startupEditor"
     "textLink.activeForeground": "#f6e3b3", // theme yellow
-    "textLink.foreground": "#8cc3fb", // theme blue - example: Settings UI text link
+    "textLink.foreground": "#89c3ff", // theme blue - example: Settings UI text link
     "textPreformat.foreground": "#ffe294", // theme yellow deep
 
     //*** TITLE BAR ***
@@ -269,10 +269,10 @@
   "semanticHighlighting": true,
   "semanticTokenColors": {
     "class": {
-      "foreground": "#8fe2e1", // theme cyan
+      "foreground": "#8ee2e2", // theme cyan
     },
     "function": {
-      "foreground": "#8fe2e1", // theme cyan
+      "foreground": "#8ee2e2", // theme cyan
     },
     "function.defaultLibrary": {
       "foreground": "#f5f5f5", // theme gray white
@@ -473,7 +473,7 @@
         "string.other.link.title.markdown",
       ],
       "settings": {
-        "foreground": "#8cc3fb" // theme blue
+        "foreground": "#89c3ff" // theme blue
       }
     },
     {
@@ -483,7 +483,7 @@
         "markup.strikethrough.markdown string.other.link.title.markdown",
       ],
       "settings": {
-        "foreground": "#8cc3fb80" // theme blue at 50% opacity
+        "foreground": "#89c3ff80" // theme blue at 50% opacity
       }
     },
     {
@@ -514,7 +514,7 @@
         "entity.name.tag.yaml",
       ],
       "settings": {
-        "foreground": "#8fe2e1" // theme cyan
+        "foreground": "#8ee2e2" // theme cyan
       }
     },
     {
@@ -637,7 +637,7 @@
         "source.shell support.function"
       ],
       "settings": {
-        "foreground": "#f18a79" // theme red
+        "foreground": "#f4877f" // theme red
       }
     },
     {
@@ -646,7 +646,7 @@
         //*** DEFAULT ***
       ],
       "settings": {
-        // "foreground": "#ff7f6d", // theme red deep
+        // "foreground": "#ff7e77", // theme red deep
       }
     },
     {
