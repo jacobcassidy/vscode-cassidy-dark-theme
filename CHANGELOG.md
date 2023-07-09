@@ -9,7 +9,7 @@ All notable changes to this project are documented in this file.
 - Updated blue color from `#8cc3fb` to `#89c3ff` for greater contrast from cyan.
 - Updated cyan color from `#8fe2e1` back to `#8ee2e2` for a slightly deeper color.
 - Updated red color from `#f18a79` to `#f4877f ` for greater contrast from orange.
-- Update red deep color from `#ff7f6d` to `#ff7e77` to match red color change.
+- Updated red deep color from `#ff7f6d` to `#ff7e77` to match red color change.
 
 ## v0.2.2
 
