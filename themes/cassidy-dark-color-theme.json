@@ -36,13 +36,13 @@
     "checkbox.foreground": "#f5f5f5", // theme gray white
 
     //*** DIFF EDITOR ***
-    "diffEditor.insertedTextBackground": "#74da5d33", //33 theme green deep at 20% opacity
+    "diffEditor.insertedTextBackground": "#73da5b33", //33 theme green deep at 20% opacity
     "diffEditor.removedTextBackground": "#ff7e7733", // theme red at 20% opacity
-    "diffEditor.insertedLineBackground": "#74da5d1a", // theme green deep at 10% opacity
+    "diffEditor.insertedLineBackground": "#73da5b1a", // theme green deep at 10% opacity
     "diffEditor.removedLineBackground": "#ff7e771a", // theme red at 10% opacity
-    "diffEditorGutter.insertedLineBackground": "#74da5d1a", // theme green deep at 10% opacity
+    "diffEditorGutter.insertedLineBackground": "#73da5b1a", // theme green deep at 10% opacity
     "diffEditorGutter.removedLineBackground": "#ff7e771a", // theme red at 10% opacity
-    "diffEditorOverview.insertedForeground": "#74da5d4d", // theme green deep at 30% opacity - example: scrollbar diff indicator
+    "diffEditorOverview.insertedForeground": "#73da5b4d", // theme green deep at 30% opacity - example: scrollbar diff indicator
     "diffEditorOverview.removedForeground": "#ff7e774d", // theme red at 30% opacity - example: scrollbar diff indicator
 
     //*** DROPDOWN CONTROLS ***
@@ -62,7 +62,7 @@
     // fold
     "editor.foldBackground": "#89c3ff26", // theme blue at 15% opacity
     // gutter
-    "editorGutter.addedBackground": "#74da5d99", // theme green deep at 60% opacity - example: scrollbar and number line bar diff indicators
+    "editorGutter.addedBackground": "#73da5b99", // theme green deep at 60% opacity - example: scrollbar and number line bar diff indicators
     "editorGutter.deletedBackground": "#ff7e7799", // theme red at 60% opacity
     "editorGutter.foldingControlForeground": "#7a7a7a", // theme gray dark
     "editorGutter.modifiedBackground": "#f6e3b3cc", // theme yellow at 80% opacity
@@ -92,7 +92,7 @@
     "editorOverviewRuler.background": "#242424", // 14% black (match editor bg)
     "editorOverviewRuler.border": "#333333", // 20% black (scrollbar border)
     "editorOverviewRuler.modifiedForeground": "#f6e3b399", // theme yellow at 60% opacity
-    "editorOverviewRuler.addedForeground": "#74da5d99", // theme green deep at 60% opacity - example: scrollbar diff indicator
+    "editorOverviewRuler.addedForeground": "#73da5b99", // theme green deep at 60% opacity - example: scrollbar diff indicator
     "editorOverviewRuler.deletedForeground": "#f4877f99", // theme red at 60% opacity
     "editorOverviewRuler.errorForeground": "#f4877fe6", // theme red at 90% opacity
     "editorOverviewRuler.warningForeground": "#edb068e6", // theme orange at 90% opacity
@@ -235,7 +235,7 @@
     "terminal.ansiBrightBlack": "#7a7a7a", // theme gray dark
     "terminal.ansiBrightBlue": "#89c3ff", // theme blue
     "terminal.ansiBrightCyan": "#8fe2e1", // theme cyan
-    "terminal.ansiBrightGreen": "#74da5d", // theme green deep
+    "terminal.ansiBrightGreen": "#73da5b", // theme green deep
     "terminal.ansiBrightMagenta": "#ffbbcf", // theme pink
     "terminal.ansiBrightRed": "#ff7e77", // theme red deep
     "terminal.ansiBrightWhite": "#ffffff", // pure white
