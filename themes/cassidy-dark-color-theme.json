@@ -142,13 +142,13 @@
     "sideBySideEditor.verticalBorder": "#141414", // theme black-gray-black (see split settings with Default and User side by side)
 
     //*** GIT DECORATION ***
-    "gitDecoration.addedResourceForeground": "#93d185", // theme green - example: editor list when new resource is staged but not committed
+    "gitDecoration.addedResourceForeground": "#91d283", // theme green - example: editor list when new resource is staged but not committed
     "gitDecoration.modifiedResourceForeground": "#f6e3b3", // theme yellow
     "gitDecoration.deletedResourceForeground": "#f4877f", // theme red
     "gitDecoration.renamedResourceForeground": "#89c3ff", // theme blue"
     "gitDecoration.stageModifiedResourceForeground": "#f6e3b3", // theme yellow
     "gitDecoration.stageDeletedResourceForeground": "#f4877f", // theme red
-    "gitDecoration.untrackedResourceForeground": "#93d185", // theme green
+    "gitDecoration.untrackedResourceForeground": "#91d283", // theme green
     "gitDecoration.ignoredResourceForeground": "#858585", // 52% black (4 shades lighter than theme gray dark)
     "gitDecoration.conflictingResourceForeground": "#edb068", // theme orange
 
@@ -198,7 +198,7 @@
     "problemsInfoIcon.foreground": "#89c3ff", // problems panel icons
 
     //*** PROGRESS BAR ***
-    "progressBar.background": "#93d185", // theme green
+    "progressBar.background": "#91d283", // theme green
 
     //*** SCROLLBAR CONTROL ***
     "scrollbar.shadow": "#1f1f1f", // 12% black - Two shades darker than editor background - example: editor tabs side scroll
@@ -234,14 +234,14 @@
     "terminal.ansiBlue": "#0089ea", // theme blue deep
     "terminal.ansiBrightBlack": "#7a7a7a", // theme gray dark
     "terminal.ansiBrightBlue": "#89c3ff", // theme blue
-    "terminal.ansiBrightCyan": "#8ee2e2", // theme cyan
+    "terminal.ansiBrightCyan": "#8fe2e1", // theme cyan
     "terminal.ansiBrightGreen": "#74da5d", // theme green deep
     "terminal.ansiBrightMagenta": "#ffbbcf", // theme pink
     "terminal.ansiBrightRed": "#ff7e77", // theme red deep
     "terminal.ansiBrightWhite": "#ffffff", // pure white
     "terminal.ansiBrightYellow": "#edb068", // theme orange
     "terminal.ansiCyan": "#67e8e8", // theme cyan deep
-    "terminal.ansiGreen": "#93d185", // theme green
+    "terminal.ansiGreen": "#91d283", // theme green
     "terminal.ansiMagenta": "#cfabf9", // theme purple
     "terminal.ansiRed": "#f4877f", // theme red
     "terminal.ansiWhite": "#f5f5f5", // theme gray white
@@ -269,10 +269,10 @@
   "semanticHighlighting": true,
   "semanticTokenColors": {
     "class": {
-      "foreground": "#8ee2e2", // theme cyan
+      "foreground": "#8fe2e1", // theme cyan
     },
     "function": {
-      "foreground": "#8ee2e2", // theme cyan
+      "foreground": "#8fe2e1", // theme cyan
     },
     "function.defaultLibrary": {
       "foreground": "#f5f5f5", // theme gray white
@@ -287,7 +287,7 @@
       "foreground": "#edb068", // theme orange
     },
     "property": {
-      "foreground": "#93d185", // theme green
+      "foreground": "#91d283", // theme green
     },
     "variable": {
       "foreground": "#ffbbcf", // theme pink
@@ -514,7 +514,7 @@
         "entity.name.tag.yaml",
       ],
       "settings": {
-        "foreground": "#8ee2e2" // theme cyan
+        "foreground": "#8fe2e1" // theme cyan
       }
     },
     {
@@ -539,7 +539,7 @@
         "variable.other.property.php punctuation.definition.variable.php",
       ],
       "settings": {
-        "foreground": "#93d185" // theme green
+        "foreground": "#91d283" // theme green
       }
     },
     {
