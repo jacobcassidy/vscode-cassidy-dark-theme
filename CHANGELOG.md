@@ -2,6 +2,13 @@
 
 All notable changes to this project are documented in this file.
 
+## v0.2.4
+
+*2023-07-16*
+
+- Updated green color from `#93d185` to `#91d283` to bring chroma to minus 0.1320 from max OKLCH chroma.
+- Reverted cyan color back to `#8fe2e1` for chroma match.
+
 ## v0.2.3
 
 *2023-07-09*
