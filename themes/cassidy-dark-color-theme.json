@@ -61,6 +61,9 @@
     "editorCursor.foreground": "#a3a3a3", // theme gray medium
     // fold
     "editor.foldBackground": "#89c3ff26", // theme blue at 15% opacity
+    // ghost text
+    "editorGhostText.foreground": "#a3a3a3", // theme gray medium
+    "editorGhostText.background": "#333", // 20% black
     // gutter
     "editorGutter.addedBackground": "#73da5b99", // theme green deep at 60% opacity - example: scrollbar and number line bar diff indicators
     "editorGutter.deletedBackground": "#ff7e7799", // theme red at 60% opacity
