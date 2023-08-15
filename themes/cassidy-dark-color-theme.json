@@ -67,7 +67,7 @@
     "editorGutter.foldingControlForeground": "#7a7a7a", // theme gray dark
     "editorGutter.modifiedBackground": "#f6e3b3cc", // theme yellow at 80% opacity
     // lightbulb
-    "editorLightBulb.foreground": "#ffe294", // theme yellow deep
+    "editorLightBulb.foreground": "#eece74", // theme yellow deep
     "editorLightBulbAutoFix.foreground": "#89c3ff", // theme blue
     // indent guide
     "editorIndentGuide.background": "#3d3d3d", // theme gray-black-fade
@@ -253,7 +253,7 @@
     "textCodeBlock.background": "#525252", // theme gray fade - example: hover over settings json "workbench.startupEditor"
     "textLink.activeForeground": "#f6e3b3", // theme yellow
     "textLink.foreground": "#89c3ff", // theme blue - example: Settings UI text link
-    "textPreformat.foreground": "#ffe294", // theme yellow deep
+    "textPreformat.foreground": "#eece74", // theme yellow deep
 
     //*** TITLE BAR ***
     "titleBar.activeBackground": "#383838", // 22% black (match status bar bg)
@@ -676,7 +676,7 @@
         "markup.inline.raw.string.markdown",
       ],
       "settings": {
-        "foreground": "#ffe294" // theme yellow deep
+        "foreground": "#eece74" // theme yellow deep
       }
     },
   ]
