@@ -7,8 +7,8 @@ All notable changes to this project are documented in this file.
 *2023-08-23*
 
 - Updated bright green color from `#74da5d` to `#73da5b` to be half way from max chroma and normal green color.
-- Update yellow deep from `#ffe294` to `#eece74` for greater contrast between yellow and orange colors. Which makes it minus 0.0600 below max chroma of `oklch(86% 0.17574 90)`.
-- Add GhostText workbench syntax highlighting for GitHub Copilot suggestions.
+- Updated yellow deep from `#ffe294` to `#eece74` for greater contrast between yellow and orange colors. Which makes it minus 0.0600 below max chroma of `oklch(86% 0.17574 90)`.
+- Added GhostText workbench syntax highlighting for GitHub Copilot suggestions.
 
 ## v0.2.4
 
