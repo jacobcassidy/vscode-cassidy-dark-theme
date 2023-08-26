@@ -16,7 +16,7 @@ Since VSCode does not often update syntax grammar, the Cassidy Dark theme update
 - `content`, `cursor`, `filter`, `font`, and `mask` property names tokens for SCSS.
 - `auto-fit` and `auto-fill` property value token for the CSS `repeat()` function. _(Currently being merged into the official grammar.)_
 
-**Removed tokens:**
+**Merged tokens:**
 - `:is()` and `:where()` tokens are now merged into the official [vscode-css repo](https://github.com/microsoft/vscode-css).
 
 
