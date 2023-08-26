@@ -511,8 +511,6 @@
         "support.function.basic_functions",
         "entity.other.inherited-class.php", // extends class
         "entity.other.alias.php", // use as
-        //*** SCSS ***
-        "variable.parameter.url.scss",
         //*** YAML ***
         "entity.name.tag.yaml",
       ],
