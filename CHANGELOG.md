@@ -2,6 +2,13 @@
 
 All notable changes to this project are documented in this file.
 
+## v0.2.6
+
+- Added `auto-fill` syntax highlight grammar for CSS `repeat()` function.
+- Removed `variable.parameter.url.scss` to keep syntax highlighting consistent with CSS.
+- Removed `missing-pseudo-classes` from grammar additions since the syntax is now merged into the official microsoft/vscode-css repo.
+
+
 ## v0.2.5
 
 *2023-08-23*
