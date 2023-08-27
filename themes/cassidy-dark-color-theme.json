@@ -238,7 +238,7 @@
     "terminal.ansiBrightBlack": "#7a7a7a", // theme gray dark
     "terminal.ansiBrightBlue": "#98bffe", // theme blue
     "terminal.ansiBrightCyan": "#91e0ee", // theme cyan
-    "terminal.ansiBrightGreen": "#47e200", // theme green deep
+    "terminal.ansiBrightGreen": "#7bd867", // theme green deep
     "terminal.ansiBrightMagenta": "#febccf", // theme pink
     "terminal.ansiBrightRed": "#ff7f72", // theme red deep
     "terminal.ansiBrightWhite": "#ffffff", // pure white
