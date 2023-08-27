@@ -6,8 +6,9 @@ All notable changes to this project are documented in this file.
 
 _2023-8-027_
 
-- Updated bright green with lower chroma to be more inline with other colors max chroma. From `oklch(80% 0.2575 140)` to `oklch(80% 0.175 140)`.
-- Updated logo to match the current color scheme.
+- Updated bright green with lower chroma to be more in line with other color's max chromas. From `oklch(80% 0.2575 140)` to `oklch(80% 0.175 140)` (#7bd867).
+- Updated theme logo to match the current color scheme.
+- Updated theme screenshot to match the updated color scheme.
 
 ## v0.2.8
 
@@ -40,7 +41,7 @@ Updated the color scheme with a split into two distinct groups:
 | `oklch(86% 0.127 210)`  | `#52e7ff`  | BRIGHT CYAN   |
 | `oklch(62% 0.205 260)`  | `#317fff`  | BRIGHT BLUE   |
 | `oklch(80% 0.1359 310)` | `#d9a4ff`  | BRIGHT PURPLE |
-| N/A                     | N/A        | BRIGHT PINK   |
+| `oklch(80% 0.1 360)`    | `#f3a3bb ` | BRIGHT PINK   |
 
 ## v0.2.7
 
