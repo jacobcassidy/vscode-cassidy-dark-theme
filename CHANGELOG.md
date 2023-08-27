@@ -2,16 +2,41 @@
 
 All notable changes to this project are documented in this file.
 
+## v0.2.7
+
+- Updated OKLCH chroma on color scheme for better balance. Now Cyan and Green have better contrast between them and Green OKLCH chroma matches other colors.
+
+### Updated Syntax Colors for v0.2.7
+
+| OKLCH VALUES            | v0.2.7 HEX | v0.2.2 HEX | COLORS        |
+| ----------------------- | ---------- | ---------- | ------------- |
+| `oklch(74% 0.12 20)`    | `#ed8b8b`  | `#f18a79`  | Red           |
+| `oklch(80% 0.1 70)`     | `#e7b375`  | `#edb068`  | Orange        |
+| `oklch(92% 0.06 95)`    | `#f1e5b8`  | `#f6e3b3`  | Yellow        |
+| `oklch(80% 0.1 145)`    | `#95cf96`  | `#93d185`  | Green         |
+| `oklch(86% 0.08 210)`   | `#91e0ee`  | `#8fe2e1`  | Cyan          |
+| `oklch(80% 0.1 260)`    | `#98bffe`  | `#8cc3fb`  | Blue          |
+| `oklch(80% 0.1 310)`    | `#d2acee`  | `#cfabf9`  | Purple        |
+| `oklch(86% 0.08 360)`   | `#febccf`  | `#ffbbcf`  | Pink          |
+| -                       |            |            |               |
+| `oklch(74% 0.1587 20)`  | `#ff7d80`  | `#ff7f6d`  | Bright Red    |
+| `oklch(80% 0.1622 70)`  | `#ffa82a`  | `#ffa82a`  | Bright Orange |
+| `oklch(92% 0.1269 95)`  | `#ffe47d`  | `#ffe294`  | Bright Yellow |
+| `oklch(80% 0.2516 145)` | `#00e541`  | `#74da5d`  | Bright Green  |
+| `oklch(86% 0.127 210)`  | `#52e7ff`  | `#67e8e8`  | Bright Cyan   |
+| `oklch(62% 0.205 260)`  | `#317fff`  | `#0089ea`  | Bright Blue   |
+| `oklch(80% 0.1359 310)` | `#d9a4ff`  | `#c48cff`  | Bright Purple |
+| `oklch(86% 0.081 360)`  | `#ffbbcf`  | `#ff9bba`  | Bright Pink   |
+
 ## v0.2.6
 
 - Added `auto-fill` syntax highlight grammar for CSS `repeat()` function.
 - Removed `variable.parameter.url.scss` to keep syntax highlighting consistent with CSS.
 - Removed `missing-pseudo-classes` from grammar additions since the syntax is now merged into the official microsoft/vscode-css repo.
 
-
 ## v0.2.5
 
-*2023-08-23*
+_2023-08-23_
 
 - Updated bright green color from `#74da5d` to `#73da5b` to be half way from max chroma and normal green color.
 - Updated yellow deep from `#ffe294` to `#eece74` for greater contrast between yellow and orange colors. Which makes it minus 0.0600 below max chroma of `oklch(86% 0.17574 90)`.
@@ -19,14 +44,14 @@ All notable changes to this project are documented in this file.
 
 ## v0.2.4
 
-*2023-07-16*
+_2023-07-16_
 
 - Updated green color from `#93d185` to `#91d283` to bring chroma to minus 0.1320 from max OKLCH chroma.
 - Reverted cyan color back to `#8fe2e1` for chroma match.
 
 ## v0.2.3
 
-*2023-07-09*
+_2023-07-09_
 
 - Updated blue color from `#8cc3fb` to `#89c3ff` for greater contrast from cyan.
 - Updated cyan color from `#8fe2e1` back to `#8ee2e2` for a slightly deeper color.
@@ -35,7 +60,7 @@ All notable changes to this project are documented in this file.
 
 ## v0.2.2
 
-*2023-07-08*
+_2023-07-08_
 
 - Moved `meta.attribute.crossorigin entity.other.attribute-name` to theme purple to match HTML link tag's `defer` and `async` attributes.
 - Added `variable.other.property.php punctuation.definition.variable.php` to theme green to match other property colors.
@@ -46,49 +71,47 @@ All notable changes to this project are documented in this file.
 
 ### Updated Syntax Colors for v0.2.2
 
-| OKLCH VALUES              | v0.2.2 HEX | v0.1.5 HEX | COLORS       |
-| ------------------------- | ---------- | ---------- | ------------ |
-| `oklch(74% 0.12893 30)`   | `#f18a79`  | `#f48587`  | Red          |
-| `oklch(80% 0.1142 70)`    | `#edb068`  | `#ebb077`  | Orange       |
-| `oklch(92% 0.06615 90)`   | `#f6e3b3`  | `#f5e3b4`  | Yellow       |
-| `oklch(80% 0.1213 140)`   | `#93d185`  | `#9bce90`  | Green        |
-| `oklch(86% 0.08074 195)`  | `#8fe2e1`  | `#8ee2e2`  | Cyan         |
-| `oklch(80% 0.098898 250)` | `#8cc3fb`  | `#8cc3fc`  | Blue         |
-| `oklch(80% 0.1143 305)`   | `#cfabf9`  | `#cdaef2`  | Purple       |
-| NO CHANGE                 | `#ffbbcf`  | `#ffbbcf`  | Pink         |
-| -                         |            |            |              |
-| `oklch(74% 0.15893 30`    | `#ff7f6d`  | `#ef646b`  | Deep Red     |
-| `oklch(80% 0.1622 70)`    | `#ffa82a`  | `#e59742`  | Deep Orange  |
-| `oklch(92% 0.10215 90)`   | `#ffe294`  | `#d7bb70`  | Deep Yellow  |
-| `oklch(80% 0.1891 140)`   | `#74da5d`  | `#7ac06b`  | Deep Green   |
-| `oklch(86% 0.1137 195)`   | `#67e8e8`  | `#65d2d2`  | Deep Cyan    |
-| NO CHANGE                 | `#0089ea`  | `#0089ea`  | Deep Blue    |
-| `oklch(74% 0.1685 305)`   | `#c48cff`  | `#bf94ef`  | Deep Purple  |
-| `oklch(80% 0.1245 360)`   | `#ff9bba`  | `#f3a3bb`  | Deep Pink    |
-
+| OKLCH VALUES              | v0.2.2 HEX | v0.1.5 HEX | COLORS      |
+| ------------------------- | ---------- | ---------- | ----------- |
+| `oklch(74% 0.12893 30)`   | `#f18a79`  | `#f48587`  | Red         |
+| `oklch(80% 0.1142 70)`    | `#edb068`  | `#ebb077`  | Orange      |
+| `oklch(92% 0.06615 90)`   | `#f6e3b3`  | `#f5e3b4`  | Yellow      |
+| `oklch(80% 0.1213 140)`   | `#93d185`  | `#9bce90`  | Green       |
+| `oklch(86% 0.08074 195)`  | `#8fe2e1`  | `#8ee2e2`  | Cyan        |
+| `oklch(80% 0.098898 250)` | `#8cc3fb`  | `#8cc3fc`  | Blue        |
+| `oklch(80% 0.1143 305)`   | `#cfabf9`  | `#cdaef2`  | Purple      |
+| NO CHANGE                 | `#ffbbcf`  | `#ffbbcf`  | Pink        |
+| -                         |            |            |             |
+| `oklch(74% 0.15893 30`    | `#ff7f6d`  | `#ef646b`  | Deep Red    |
+| `oklch(80% 0.1622 70)`    | `#ffa82a`  | `#e59742`  | Deep Orange |
+| `oklch(92% 0.10215 90)`   | `#ffe294`  | `#d7bb70`  | Deep Yellow |
+| `oklch(80% 0.1891 140)`   | `#74da5d`  | `#7ac06b`  | Deep Green  |
+| `oklch(86% 0.1137 195)`   | `#67e8e8`  | `#65d2d2`  | Deep Cyan   |
+| NO CHANGE                 | `#0089ea`  | `#0089ea`  | Deep Blue   |
+| `oklch(74% 0.1685 305)`   | `#c48cff`  | `#bf94ef`  | Deep Purple |
+| `oklch(80% 0.1245 360)`   | `#ff9bba`  | `#f3a3bb`  | Deep Pink   |
 
 ## v0.2.1
 
-*2023-06-07*
+_2023-06-07_
 
 - Added `meta.function.method.with-arguments.ruby storage.type` for Ruby's parameter block `&` operator to match punctuation syntax highlighting color.
 - Added `meta.element.structure.svg.text.html` for `<svg>` inner text color highlighting with theme yellow to match strings.
-- Added `meta.embedded.line.php` for closing bracket `}` punctuation color highlighting  when opening a new PHP tag.
+- Added `meta.embedded.line.php` for closing bracket `}` punctuation color highlighting when opening a new PHP tag.
 - Added `meta.attribute.srcset.html string` with theme blue to match links.
 - Added `meta.attribute.async.html entity.other.attribute-name` for HTML async attribute color highlighting with theme purple.
 - Added `meta.attribute.defer.html entity.other.attribute-name` for HTML defer attribute color highlighting with theme purple.
 - Removed unneeded `source` from `meta.embedded.block.php source`.
 
-
 ## v0.2.0
 
-*2023-06-01*
+_2023-06-01_
 
 - Updated `#missing-pseudo-classes` for correct syntax highlighting when nesting additional pseudo-classes.
 
 ## v0.1.9
 
-*2023-05-31*
+_2023-05-31_
 
 - Added `support.function.basic_functions` to base function color for PHP.
 - Added strikethrough and punctuation color to `markup.strikethrough.markdown`.
@@ -109,60 +132,63 @@ All notable changes to this project are documented in this file.
 
 ## v0.1.8
 
-*2023-04-30*
+_2023-04-30_
 
 - Updated `editorOverviewRuler` foreground colors.
 - Added `comment meta.tag.inline` to comment color.
 
 ## v0.1.7
 
-*2023-04-27*
+_2023-04-27_
 
 - Added textmate grammar for missing CSS #property-keywords: `auto-fit` using the `support.constant.property-value.css` token.
 
 ## v0.1.6
 
-*2023-04-24*
+_2023-04-24_
 
 - Updated logo to match v0.1.5 color updates.
 - Edited README wording.
 
 ## v0.1.5
 
-*2023-04-24*
+_2023-04-24_
 
 Two big changes have been added in this update:
+
 1. Syntax colors have been refactored based on the `oklch` format to improve how the colors look together with specific lightness and chroma values (see table below).
 2. Missing CSS & SCSS syntax grammar have been added to tokenize elements for color highlighting (see details below).
 
 ### 1. Updated Syntax Colors
 
-| OKLCH VALUES         | v0.1.5 HEX | v0.0.3 HEX | COLORS       |
-| -------------------- | ---------- | ---------- | ------------ |
-| oklch(92% 0.064 90)  | `#f5e3b4`  | `#f8e6b0`  | Yellow       |
-| oklch(86% 0.082 195) | `#8ee2e2`  | `#96dfdf`  | Cyan         |
-| oklch(86% 0.082 360) | `#ffbbcf`  | `#ffc2d1`  | Pink         |
-| oklch(80% 0.1 65)    | `#ebb077`  | `#f3ba81`  | Orange       |
-| oklch(80% 0.1 140)   | `#9bce90`  | `#badf96`  | Green        |
-| oklch(80% 0.1 250)   | `#8cc3fc`  | `#81baf3`  | Blue         |
-| oklch(80% 0.1 305)   | `#cdaef2`  | `#d4b0f8`  | Purple       |
-| oklch(74% 0.136 20)  | `#f48587`  | `#f38181`  | Red          |
-| -                                                             |
-| oklch(80% 0.1 90)    | `#d7bb70`  | `#efc852`  | Deep Yellow  |
-| oklch(80% 0.1 195)   | `#65d2d2`  | `#6fd3d3`  | Deep Cyan    |
-| oklch(80% 0.1 360)   | `#f3a3bb`  | `#e68fa4`  | Deep Pink    |
-| oklch(74% 0.136 65)  | `#e59742`  | `#eb8724`  | Deep Orange  |
-| oklch(74% 0.136 140) | `#7ac06b`  | `#96df96`  | Deep Green   |
-| oklch(74% 0.136 305) | `#bf94ef`  | `#ba81f3`  | Deep Purple  |
-| oklch(68% 0.172 20)  | `#ef646b`  | `#ef5252`  | Deep Red     |
-| oklch(62% 0.175 250) | `#0089ea`  | `#2487eb`  | Deep Blue    |
+| OKLCH VALUES         | v0.1.5 HEX | v0.0.3 HEX | COLORS      |
+| -------------------- | ---------- | ---------- | ----------- |
+| oklch(92% 0.064 90)  | `#f5e3b4`  | `#f8e6b0`  | Yellow      |
+| oklch(86% 0.082 195) | `#8ee2e2`  | `#96dfdf`  | Cyan        |
+| oklch(86% 0.082 360) | `#ffbbcf`  | `#ffc2d1`  | Pink        |
+| oklch(80% 0.1 65)    | `#ebb077`  | `#f3ba81`  | Orange      |
+| oklch(80% 0.1 140)   | `#9bce90`  | `#badf96`  | Green       |
+| oklch(80% 0.1 250)   | `#8cc3fc`  | `#81baf3`  | Blue        |
+| oklch(80% 0.1 305)   | `#cdaef2`  | `#d4b0f8`  | Purple      |
+| oklch(74% 0.136 20)  | `#f48587`  | `#f38181`  | Red         |
+| -                    |
+| oklch(80% 0.1 90)    | `#d7bb70`  | `#efc852`  | Deep Yellow |
+| oklch(80% 0.1 195)   | `#65d2d2`  | `#6fd3d3`  | Deep Cyan   |
+| oklch(80% 0.1 360)   | `#f3a3bb`  | `#e68fa4`  | Deep Pink   |
+| oklch(74% 0.136 65)  | `#e59742`  | `#eb8724`  | Deep Orange |
+| oklch(74% 0.136 140) | `#7ac06b`  | `#96df96`  | Deep Green  |
+| oklch(74% 0.136 305) | `#bf94ef`  | `#ba81f3`  | Deep Purple |
+| oklch(68% 0.172 20)  | `#ef646b`  | `#ef5252`  | Deep Red    |
+| oklch(62% 0.175 250) | `#0089ea`  | `#2487eb`  | Deep Blue   |
 
 ### 2. Added Missing CSS & SCSS Syntax Grammar for VSCode
 
 For both CSS & SCSS:
+
 - `:is()` and `:where()` pseudo classes are now tokenized using `entity.other.attribute-name.pseudo-class.css`. This matches other pseudo classes that are already defined in VSCode such as `:not()` and `:has()`.
 
 For SCSS only:
+
 - `,` commas are now tokenized using `punctuation.separator.list.comma.scss`.
 - `>>`, `>`, `+`, `~` keyword operator combinator are now tokenized using `keyword.operator.combinator.scss`.
 - `content`, `cursor`, `filter`, `font`, and `mask` property names are now tokenized using `support.type.property-name.scss`. This matches other property names already defined in VSCode.
@@ -181,48 +207,48 @@ For SCSS only:
 
 ## v0.1.4
 
-*2023-04-18*
+_2023-04-18_
 
 - Added `editorRuler.foreground` with theme orange color at 10% opacity to use as warning guides.
 
 ## v0.1.3
 
-*2023-04-18*
+_2023-04-18_
 
 - Added `entity.name.tag.yaml` to match support name syntax color.
 
 ## v0.1.2
 
-*2023-04-10*
+_2023-04-10_
 
 - Added `meta.embedded.line` to match punctuation syntax color.
 
 ## v0.1.1
 
-*2023-04-07*
+_2023-04-07_
 
 - Added `keyword.other.special-method` to cyan color syntax for Ruby loops and other special methods.
 - Deleted `support.function.construct` to fall back to `support.function` for syntax colors used for PHP echo, array(), etc to match other support.function instead of keywords color.
 
 ## v0.1.0
 
-*2023-04-06*
+_2023-04-06_
 
 - Replaced `punctuation.section.embedded` with `punctuation.section.embedded.begin.php` and `punctuation.section.embedded.end.php` so Ruby string interpolation is not colorized incorrectly.
 
 ## v0.0.9
 
-*2023-03-19*
+_2023-03-19_
 
 - Changed `variable.other.object.property` syntax color from light gray to green to match property color.
 
-*2023-03-14*
+_2023-03-14_
 
 - Added `variable.parameter.misc.css` to red color for CSS clamp operators, such as `+`.
 
 ## v0.0.7
 
-*2023-03-06*
+_2023-03-06_
 
 - Added problems panel icon colors for workbench.
 - Added `editorHint` 3-dot underline color for workbench.
@@ -232,22 +258,21 @@ For SCSS only:
 
 ## v0.0.6
 
-*2023-03-05*
+_2023-03-05_
 
 - Added `galleryBanner` color for VSCode marketplace banner.
 
 ## v0.0.5
 
-*2023-03-05*
+_2023-03-05_
 
 - Added errors and warnings foreground colors.
 - Updated theme screenshot.
 - Updated installation instructions in README for marketplace.
 
-
 ## v0.0.4
 
-*2023-03-05*
+_2023-03-05_
 
 - Added theme logo.
 - Added MIT License.
@@ -256,7 +281,7 @@ For SCSS only:
 
 ## v0.0.3
 
-*2023-03-04*
+_2023-03-04_
 
 - Corrected cyan color from `#97dddd` to `#96dfdf` to match `hsla(180, 53%, 73%, 1)`.
 - Corrected green color from `#b3d98c` to `#badf96` to match `hsla(90, 53%, 73%, 1)`.
@@ -281,10 +306,9 @@ For SCSS only:
 | Pink          | `hsla(345, 63%, 83%, 1)`  | `#ffc2d1`  | No Change                |            |
 | Pink Bright   | -                         | -          | `hsla(345, 63%, 73%, 1)` | `#e68fa4`  |
 
-
 ## v0.0.2
 
-*2023-02-27*
+_2023-02-27_
 
 Updated theme colors:
 
@@ -293,7 +317,7 @@ Updated theme colors:
 | Red           | `hsla(0, 83%, 70%, 1)`    | `#f27373`  | `hsla(0, 83%, 73%, 1)`   | `#f38181`  |
 | Orange        | `hsla(30, 83%, 70%, 1)`   | `#f2b373`  | `hsla(30, 83%, 73%, 1)`  | `#f3ba81`  |
 | Orange Bright | `hsla(30, 100%, 70%, 1)`  | `#ffb366`  | `hsla(30, 83%, 53%, 1)`  | `#eb8724`  |
-| Yellow        | `hsla(45, 83%, 83%, 1)`   | `#f8e6b0`  |  No Change               |            |
+| Yellow        | `hsla(45, 83%, 83%, 1)`   | `#f8e6b0`  | No Change                |            |
 | Yellow Gold   | `hsla(45, 83%, 70%, 1)`   | `#f2d273`  | `hsla(45, 83%, 73%, 1)`  | `#f3d781`  |
 | Green         | `hsla(80, 50%, 70%, 1)`   | `#b3d98c`  | `hsla(90, 53%, 73%, 1)`  | `#badf96`  |
 | Green Bright  | `hsla(120, 50%, 70%, 1)`  | `#8cd98c`  | `hsla(120, 53%, 73%, 1)` | `#96df96`  |
