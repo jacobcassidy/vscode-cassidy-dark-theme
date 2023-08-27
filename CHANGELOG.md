@@ -2,9 +2,43 @@
 
 All notable changes to this project are documented in this file.
 
+## v0.3.0
+
+_2023-08-28_
+
+Updated group 2 colors:
+
+| GROUP 1 OKLCH         | v0.3.0 HEX | COLOR         | UPDATED |
+| --------------------- | ---------- | ------------- | ------- |
+| oklch(74% 0.12 27.5)  | #ed8c81    | RED           | NO      |
+| oklch(80% 0.1 65)     | #ebb077    | ORANGE        | NO      |
+| oklch(92% 0.06 90)    | #f4e4b8    | YELLOW        | NO      |
+| oklch(80% 0.1 140)    | #9bce90    | GREEN         | NO      |
+| -                     | -          | -             | -       |
+| oklch(74% 0.158 27.5) | #ff7f72    | BRIGHT RED    | NO      |
+| oklch(80% 0.1499 65)  | #ffa747    | BRIGHT ORANGE | NO      |
+| oklch(92% 0.102 90)   | #ffe294    | BRIGHT YELLOW | NO      |
+| oklch(80% 0.15 140)   | #87d576    | BRIGHT GREEN  | YES     |
+
+| GROUP 2 OKLCH           | v0.3.0 HEX | COLOR         | UPDATED |
+| ----------------------- | ---------- | ------------- | ------- |
+| oklch(86% 0.08 202.5)   | #90e1e8    | CYAN          | YES     |
+| oklch(80% 0.1 255)      | #92c1fd    | BLUE          | YES     |
+| oklch(80% 0.1 307.5))   | #cfadf0    | PURPLE        | YES     |
+| oklch(86% 0.08 360)     | #febccf    | PINK          | NO      |
+| -                       | -          | -             | -       |
+| oklch(86% 0.13 202.5)   | #49eaf6    | BRIGHT CYAN   | YES     |
+| oklch(56% 0.18 255)     | #0a72da    | BRIGHT BLUE   | YES     |
+| oklch(80% 0.1308 307.5) | #d4a6ff    | BRIGHT PURPLE | YES     |
+| oklch(80% 0.124 360)    | #ff9bba    | BRIGHT PINK   | YES     |
+
+- Updated theme logo with the current color scheme.
+- Updated theme screenshot with the current color scheme.
+
+
 ## v0.2.9
 
-_2023-8-027_
+_2023-08-027_
 
 - Updated bright green with lower chroma to be more in line with other color's max chromas. From `oklch(80% 0.2575 140)` to `oklch(80% 0.175 140)` (#7bd867).
 - Updated theme logo to match the current color scheme.
