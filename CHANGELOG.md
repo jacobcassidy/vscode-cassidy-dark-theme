@@ -2,6 +2,13 @@
 
 All notable changes to this project are documented in this file.
 
+## UNRELEASED
+
+_UPCOMING_
+
+- Updated bright green with lower chroma to be more inline with other colors max chroma. From `oklch(80% 0.2575 140)` to `oklch(80% 0.175 140)`.
+- Updated logo to match the current color scheme.
+
 ## v0.2.8
 
 _2023-08-27_
