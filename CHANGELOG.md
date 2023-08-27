@@ -2,7 +2,42 @@
 
 All notable changes to this project are documented in this file.
 
+## v0.2.8
+
+_2023-08-27_
+
+Updated the color scheme with a split into two distinct groups:
+
+- Group 1 contains Hue values between 0 and 180.
+- Group 2 contains Hue values between 180 and 360.
+
+| GROUP 1 OKLCH           | v0.2.8 HEX | COLOR         |
+| ----------------------- | ---------- | ------------- |
+| `oklch(74% 0.12 27.5)`  | `#ed8c81`  | RED           |
+| `oklch(80% 0.1 65)`     | `#ebb077`  | ORANGE        |
+| `oklch(92% 0.06 90)`    | `#f4e4b8`  | YELLOW        |
+| `oklch(80% 0.1 140)`    | `#9bce90`  | GREEN         |
+| -                       |            |               |
+| `oklch(74% 0.158 27.5)` | `#ff7f72`  | BRIGHT RED    |
+| `oklch(80% 0.1499 65)`  | `#ffa747`  | BRIGHT ORANGE |
+| `oklch(92% 0.102 90)`   | `#ffe294`  | BRIGHT YELLOW |
+| `oklch(80% 0.2575 140)` | `#47e200`  | BRIGHT GREEN  |
+
+| GROUP 2 OKLCH           | v0.2.8 HEX | COLOR         |
+| ----------------------- | ---------- | ------------- |
+| `oklch(86% 0.08 210)`   | `#91e0ee`  | CYAN          |
+| `oklch(80% 0.1 260)`    | `#98bffe`  | BLUE          |
+| `oklch(80% 0.1 310)`    | `#d2acee`  | PURPLE        |
+| `oklch(86% 0.08 360)`   | `#febccf`  | PINK          |
+| -                       |            |               |
+| `oklch(86% 0.127 210)`  | `#52e7ff`  | BRIGHT CYAN   |
+| `oklch(62% 0.205 260)`  | `#317fff`  | BRIGHT BLUE   |
+| `oklch(80% 0.1359 310)` | `#d9a4ff`  | BRIGHT PURPLE |
+| N/A                     | N/A        | BRIGHT PINK   |
+
 ## v0.2.7
+
+_2023-08-27_
 
 - Updated OKLCH chroma on color scheme for better balance. Now Cyan and Green have better contrast between them and Green OKLCH chroma matches other colors.
 
@@ -29,6 +64,8 @@ All notable changes to this project are documented in this file.
 | `oklch(86% 0.081 360)`  | `#ffbbcf`  | `#ff9bba`  | Bright Pink   |
 
 ## v0.2.6
+
+_2023-08-26_
 
 - Added `auto-fill` syntax highlight grammar for CSS `repeat()` function.
 - Removed `variable.parameter.url.scss` to keep syntax highlighting consistent with CSS.
