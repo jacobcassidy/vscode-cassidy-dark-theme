@@ -2,6 +2,12 @@
 
 All notable changes to this project are documented in this file.
 
+## v0.3.1
+
+_2023-10-24_
+
+- Added `string.quoted.single.php` and `string.quoted.double.php` to theme yellow syntax highlighting to override `meta.attribute.src.html string` theme blue.
+
 ## v0.3.0
 
 _2023-08-28_
@@ -34,7 +40,6 @@ Updated group 2 colors:
 
 - Updated theme logo with the current color scheme.
 - Updated theme screenshot with the current color scheme.
-
 
 ## v0.2.9
 
