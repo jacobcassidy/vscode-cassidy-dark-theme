@@ -659,6 +659,9 @@
         "meta.attribute-selector entity.other.attribute-name",
         //*** MARKDOWN ***
         "string.other.link.description.markdown",
+        //*** PHP ***
+        "string.quoted.single.php", // Override for "meta.attribute.src.html string"
+        "string.quoted.double.php", // Override for "meta.attribute.src.html string"
         //*** SCSS ***
         "meta.attribute-selector.scss",
         //*** XML ***
