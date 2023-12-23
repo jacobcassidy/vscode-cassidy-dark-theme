@@ -2,6 +2,14 @@
 
 All notable changes to this project are documented in this file.
 
+## v0.3.2
+
+_2023-12-23_
+
+- Refactored deprecated VSCode properties.
+- Added `string.quoted.double.php punctuation.definition.variable.php` to punctuation's color for the `{}` braces syntax used in string interpolation.
+- Added `string.quoted.double.php variable.other.php punctuation.definition.variable.php` to variable's color for the `$` dollar sign used in string interpolation.
+
 ## v0.3.1
 
 _2023-10-24_
