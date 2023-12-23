@@ -577,6 +577,8 @@
         //*** DEFAULT ***
         "punctuation.definition.variable",
         "variable",
+        //*** PHP ***
+        "string.quoted.double.php variable.other.php punctuation.definition.variable.php", // for $ in string interpolation.
       ],
       "settings": {
         "foreground": "#febccf" // theme pink
