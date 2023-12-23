@@ -405,6 +405,7 @@
         //*** PHP ***
         "meta.embedded.block.php", // For else colon when using alternative syntax
         "meta.embedded.line.php", // For closing bracket } when opening a new PHP tag
+        "string.quoted.double.php punctuation.definition.variable.php", // for {} braces syntax used in string interpolation.
         //*** RUBY ***
         "meta.function.method.with-arguments.ruby storage.type", // For Ruby's parameter block `&` operator
         //*** XML ***
