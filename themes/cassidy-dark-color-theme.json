@@ -73,8 +73,8 @@
     "editorLightBulb.foreground": "#ffe294", // theme yellow deep
     "editorLightBulbAutoFix.foreground": "#92c1fd", // theme blue
     // indent guide
-    "editorIndentGuide.background": "#3d3d3d", // theme gray-black-fade
-    "editorIndentGuide.activeBackground": "#525252", // theme gray fade
+    "editorIndentGuide.background1": "#3d3d3d", // theme gray-black-fade
+    "editorIndentGuide.activeBackground1": "#525252", // theme gray fade
     "editorWhitespace.foreground": "#3d3d3d", // theme gray-black-fade
     // line
     "editor.lineHighlightBackground": "#1a1a1a", // 10% black (4 shades darker than editor bg)
