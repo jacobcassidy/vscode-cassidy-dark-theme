@@ -3,13 +3,13 @@
   "injectionSelector": "L:source.css",
   "patterns": [
     {
-      "include": "#missing-property-keywords"
+      "include": "#missing-"
     }
   ],
   "repository": {
-    "missing-property-keywords": {
-      "match": "(auto-fit|auto-fill)",
-      "name": "support.constant.property-value.css"
+    "missing-": {
+      "match": "",
+      "name": ""
     }
   }
 }
