@@ -2,6 +2,13 @@
 
 All notable changes to this project are documented in this file.
 
+## v0.3.3
+
+_2024-02-03_
+
+- Removed missing CSS syntax that is now merged into VSCode.
+- Updated ghost text and background syntax colors.
+
 ## v0.3.2
 
 _2023-12-23_
