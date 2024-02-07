@@ -62,8 +62,8 @@
     // fold
     "editor.foldBackground": "#92c1fd26", // theme blue at 15% opacity
     // ghost text
-    "editorGhostText.foreground": "#a3a3a3", // theme gray medium
-    "editorGhostText.background": "#333", // 20% black
+    "editorGhostText.foreground": "#707070", // theme gray comment
+    "editorGhostText.background": "#1f1f1f", // 12% black
     // gutter
     "editorGutter.addedBackground": "#9bce9099", // theme green at 60% opacity - example: scrollbar and number line bar diff indicators
     "editorGutter.deletedBackground": "#ff7f7299", // theme red at 60% opacity
@@ -115,9 +115,9 @@
     "editorWidget.border": "#3d3d3d", // theme gray-black-fade
     "editorWidget.resizeBorder": "#424242", // 26% black
     // word highlight
-    "editor.wordHighlightBackground": "#525252", // theme gray fade (read-access, such as JS variable)
+    "editor.wordHighlightBackground": "#52525299", // theme gray fade 60% opacity (read-access, such as JS variable)
     "editor.wordHighlightStrongBackground": "#92c1fd66", // theme blue at 40% opacity (write-access, such as JS variable)
-    "editor.wordHighlightTextBackground": "#525252", // theme gray fade
+    "editor.wordHighlightTextBackground": "#52525299", // theme gray fade at 60% opacity
     // unicode
     "editorUnicodeHighlight.border": "#ebb07780", // theme orange at 50% opacity
     "editorUnicodeHighlight.background": "#ebb0774d", // theme orange at 30% opacity
