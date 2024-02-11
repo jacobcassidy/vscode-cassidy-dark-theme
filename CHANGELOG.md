@@ -2,6 +2,13 @@
 
 All notable changes to this project are documented in this file.
 
+## v0.3.4
+
+_2024-02-11_
+
+- Added `keyword.other.type.php` for parameter and other type casting to theme blue.
+- Added `keyword.operator.return-value.php` for function return value type casting colon to theme gray matching punctuation.
+
 ## v0.3.3
 
 _2024-02-03_
