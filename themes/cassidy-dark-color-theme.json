@@ -403,6 +403,7 @@
         "meta.separator.markdown",
         "markup.strikethrough.markdown",
         //*** PHP ***
+        "keyword.operator.return-value.php", // For function return type colon
         "meta.embedded.block.php", // For else colon when using alternative syntax
         "meta.embedded.line.php", // For closing bracket } when opening a new PHP tag
         "string.quoted.double.php punctuation.definition.variable.php", // for {} braces syntax used in string interpolation.
@@ -475,6 +476,8 @@
         "meta.link.reference constant",
         "meta.link.reference string",
         "string.other.link.title.markdown",
+        //*** PHP ***
+        "keyword.other.type.php", // For parameter and other types
       ],
       "settings": {
         "foreground": "#92c1fd" // theme blue
