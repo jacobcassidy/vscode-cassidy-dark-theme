@@ -3,13 +3,13 @@
   "injectionSelector": "L:source.css",
   "patterns": [
     {
-      "include": "#missing-"
-    }
-  ],
-  "repository": {
-    "missing-": {
-      "match": "",
-      "name": ""
-    }
+			"include": "#"
+		}
+	],
+	"repository": {
+    "tag_parent_reference": {
+			"match": "&",
+			"name": "entity.name.tag.reference.css"
+		}
   }
 }
