@@ -102,7 +102,7 @@
     "editorOverviewRuler.infoForeground": "#92c1fde6", // theme blue at 90% opacity
     "editorOverviewRuler.bracketMatchForeground": "#7a7a7ae6", // theme gray dark at 90% opacity
     // errors and warnings
-    "editorError.foreground":"#ed8c81", // theme red for error squiggly lines
+    "editorError.foreground": "#ed8c81", // theme red for error squiggly lines
     "editorHint.foreground": "#f4e4b8", // theme yellow for 3 dots underline
     "editorWarning.foreground": "#ebb077", // theme orange for warning squiggly lines
     "editorInfo.foreground": "#92c1fd", // theme blue for info squiggly lines
@@ -315,6 +315,7 @@
       "scope": [
         //*** DEFAULT ***
         "comment",
+        "invalid",
         "variable.language.this",
         //*** MARKDOWN ***
         "entity.name.section.markdown",
