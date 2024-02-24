@@ -2,6 +2,13 @@
 
 All notable changes to this project are documented in this file.
 
+## v0.3.5
+
+- Moved `variable.parameter.misc.css` from theme red to theme orange for parameters such as "count" in `property-name: counter(count, decimal);`
+- Added `entity.other.attribute-name.parent-selector-suffix.css punctuation` to theme green style for highlighting SCSS &`__name`.
+- Added README note announcing the availability of the free [CSS Nesting Syntax Highlighting extension](https://marketplace.visualstudio.com/items?itemName=jacobcassidy.css-nesting-syntax-highlighting) I recently published.
+- Removed `meta.at-rule.media.header` from styles (individual items in header are styled instead).
+
 ## v0.3.4
 
 _2024-02-11_
