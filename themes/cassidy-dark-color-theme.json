@@ -568,7 +568,7 @@
         //*** CSS ***
         "entity.other.keyframe-offset",
         "meta.at-rule.keyframes",
-        "support.constant.container-name.container.css", // For @container names (token from my CSS Nesting Syntax Highlighting extension)
+        "support.constant.container-name.container.css", // For @container <container-name> (this token is from my CSS Nesting Syntax Highlighting extension)
         "variable.parameter.misc.css", // such as `content: counter(count, decimal);`
         //*** MARKDOWN ***
         //*** PHP ***
@@ -605,6 +605,8 @@
         "keyword.other.unit",
         //*** APACHE ***
         "entity.status.apacheconf",
+        //*** CSS ***
+        "support.constant.boolean.container.css", // for @container <style-query> boolean property-value (this token is from my CSS Nesting Syntax Highlighting extension)
         //*** HTML ***
         "constant punctuation.definition.entity", // HTML symbol entity
         "meta.attribute.async.html entity.other.attribute-name",
