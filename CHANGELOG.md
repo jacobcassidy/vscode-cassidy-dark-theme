@@ -2,7 +2,26 @@
 
 All notable changes to this project are documented in this file.
 
+## v0.3.6
+
+_2024-02-25_
+
+- Added italic style to `invalid`.
+- Added `meta.at-rule support.function` to theme cyan for functions such as `calc` and `var`.
+- Added `support.constant.container-name.container.css` to theme orange for `@container` names. (Note: this token is from my [CSS Nesting Syntax Highlighting extension](https://marketplace.visualstudio.com/items?itemName=jacobcassidy.css-nesting-syntax-highlighting).)
+- Added `comment keyword` for keywords in PHPdoc comment.
+- Added `comment keyword.other.type.php` for types PHPdoc comment.
+- Added `comment support.class` for classes in PHPdoc comment.
+- Added `meta.function.url string.quoted.double` to theme blue for CSS url() function.
+- Added `meta.function.url string.quoted.single` to theme blue for CSS url() function.
+- Added `support.constant.boolean.container.css` to theme purple for @container `<style-query>` boolean property-value. (Note: this token is from my [CSS Nesting Syntax Highlighting extension](https://marketplace.visualstudio.com/items?itemName=jacobcassidy.css-nesting-syntax-highlighting).)
+- Added `entity.name.type.namespace.php` to theme purple for namespace names.
+- Changed `entity.name.type.class` to `entity.name.type` to include other types such as `traits` in PHP.
+- Updated `editorLineNumber.foreground` and `editorLineNumber.activeForeground` to a brighter gray color for better contrast in diff view.
+
 ## v0.3.5
+
+_2024-02-25_
 
 - Moved `variable.parameter.misc.css` from theme red to theme orange for parameters such as "count" in `property-name: counter(count, decimal);`
 - Added `entity.other.attribute-name.parent-selector-suffix.css punctuation` to theme green style for highlighting SCSS &`__name`.
