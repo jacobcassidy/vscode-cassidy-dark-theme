@@ -372,6 +372,8 @@
         "comment variable",
         "punctuation.definition.comment",
         "source.embedded",
+        //*** PHP ***
+        "comment keyword.other.type.php", // example: `array` in @param array
       ],
       "settings": {
         "foreground": "#707070"
