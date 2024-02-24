@@ -471,6 +471,8 @@
         //*** CSS ***
         "meta.attribute.unrecognized.xmlns.html string",
         "meta.attribute.unrecognized.xmlns:xlink.html string",
+        "meta.function.url string.quoted.double", //css such as content: url("");
+        "meta.function.url string.quoted.single", //css such as content: url('');
         //*** HTML ***
         "meta.attribute.href string",
         "meta.attribute.src.html string",
