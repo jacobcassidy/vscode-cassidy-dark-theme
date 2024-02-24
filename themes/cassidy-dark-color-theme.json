@@ -79,8 +79,8 @@
     // line
     "editor.lineHighlightBackground": "#1a1a1a", // 10% black (4 shades darker than editor bg)
     // line number
-    "editorLineNumber.foreground": "#424242", // 26% black
-    "editorLineNumber.activeForeground": "#a3a3a3", // theme gray medium
+    "editorLineNumber.foreground": "#525252", // theme gray fade (32%)
+    "editorLineNumber.activeForeground": "#b8b8b8", // gray-medium-light (72%)
     // link
     "editorLink.activeForeground": "#f4e4b8", // theme
     // match
