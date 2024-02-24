@@ -508,6 +508,7 @@
         //*** APACHE ***
         "entity.tag.apacheconf",
         //*** CSS ***
+        "meta.at-rule support.function", // such as `calc` and `var`
         "meta.property-value",
         //*** INI ***
         "keyword.other.definition",
