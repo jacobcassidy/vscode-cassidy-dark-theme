@@ -614,6 +614,8 @@
         "meta.attribute.defer.html entity.other.attribute-name",
         //*** INI ***
         "source.ini",
+        //*** PHP ***
+        "entity.name.type.namespace.php", // namespace name
         //*** REGEX ***
         "meta.assertion.look-ahead.regexp",
         "meta.assertion.negative-look-ahead.regexp",
