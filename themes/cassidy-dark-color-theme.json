@@ -503,7 +503,7 @@
       "name": "Theme Cyan",
       "scope": [
         //*** DEFAULT ***
-        "entity.name.type.class",
+        "entity.name.type", // such are class or trait name in PHP
         "entity.name.function",
         "keyword.other.special-method", // such as Ruby loop
         "meta.attribute.style string",
