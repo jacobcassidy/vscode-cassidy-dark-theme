@@ -563,6 +563,7 @@
         //*** CSS ***
         "entity.other.keyframe-offset",
         "meta.at-rule.keyframes",
+        "support.constant.container-name.container.css", // For @container names (token from my CSS Nesting Syntax Highlighting extension)
         "variable.parameter.misc.css", // such as `content: counter(count, decimal);`
         //*** MARKDOWN ***
         //*** PHP ***
