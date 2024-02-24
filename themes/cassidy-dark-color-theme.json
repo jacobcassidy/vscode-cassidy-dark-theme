@@ -539,8 +539,10 @@
         "markup.heading.markdown string.other.link.title.markdown",
         "markup.heading.markdown meta.other.valid-ampersand.markdown",
         "punctuation.definition.heading.markdown",
-        // PHP
+        //*** PHP ***
         "variable.other.property.php punctuation.definition.variable.php",
+        //*** SCSS ***
+        "entity.other.attribute-name.parent-selector-suffix.css punctuation", // SCSS &__name
       ],
       "settings": {
         "foreground": "#9bce90" // theme green
@@ -559,6 +561,7 @@
         //*** CSS ***
         "entity.other.keyframe-offset",
         "meta.at-rule.keyframes",
+        "variable.parameter.misc.css", // such as `content: counter(count, decimal);`
         //*** MARKDOWN ***
         //*** PHP ***
         "meta.function.parameters.php variable",
@@ -634,10 +637,8 @@
         "entity.name.tag",
         "keyword",
         "storage.modifier",
-        //*** CSS ***
-        "variable.parameter.misc.css",
         //*** PHP ***
-        "entity.name.goto-label.php", // For 'else' using alternative syntax
+        "entity.name.goto-label.php", // For 'else' using alternative colon syntax
         //*** SHELL ***
         "meta.scope support.function",
         "source.shell support.function"
