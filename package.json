@@ -2,7 +2,7 @@
   "name": "cassidy-dark",
   "displayName": "Cassidy Dark Theme",
   "description": "A clean, modern, dark theme originally inspired by Monokai",
-  "version": "0.3.6",
+  "version": "0.3.7",
   "icon": "images/cassidy-dark-logo-512.png",
   "publisher": "jacobcassidy",
   "bugs": {
@@ -51,12 +51,10 @@
     "publisherId": "aee9e75c-ea26-4af1-b5e6-815e33288c4b",
     "publisherDisplayName": "Jacob Cassidy",
     "targetPlatform": "undefined",
-    "isApplicationScoped": false,
-    "updated": true,
+    "updated": false,
     "isPreReleaseVersion": false,
     "hasPreReleaseVersion": false,
-    "installedTimestamp": 1707322422213,
-    "pinned": false,
-    "preRelease": false
+    "installedTimestamp": 1708891243517,
+    "pinned": false
   }
 }
