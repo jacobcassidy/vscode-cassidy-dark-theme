@@ -2,6 +2,12 @@
 
 All notable changes to this project are documented in this file.
 
+## v0.3.7
+
+_2024-02-26_
+
+- Added syntax highlighting color scheme for Rainbow CSV extension.
+
 ## v0.3.6
 
 _2024-02-25_
