@@ -336,6 +336,16 @@
       }
     },
     {
+      "name": "NORMAL",
+      "scope": [
+        "comment.rainbow4", // For Rainbow CSV extension
+        "invalid.rainbow10", // For Rainbow CSV extension
+      ],
+      "settings": {
+        "fontStyle": ""
+      }
+    },
+    {
       "name": "STRIKETHROUGH",
       "scope": [
         //*** MARKDOWN ***
@@ -429,6 +439,8 @@
         "entity.name.label",
         "support.constant.property", // semantic token type for JS
         "support.variable", // semantic token type for JS
+        //*** EXTENSIONS ***
+        "comment.rainbow4", // For Rainbow CSV extension
         //*** HTML ***
         "entity.other.attribute-name",
         //*** JAVASCRIPT ***
@@ -451,6 +463,8 @@
         //*** CSS ***
         "entity.other.attribute-name.pseudo-class",
         "entity.other.attribute-name.pseudo-element",
+        //*** EXTENSIONS ***
+        "markup.bold.rainbow9", // For Rainbow CSV extension
         //*** HTML ***
         "text.html",
         "meta.element.structure.svg.text.html",
@@ -473,6 +487,8 @@
         "meta.attribute.unrecognized.xmlns:xlink.html string",
         "meta.function.url string.quoted.double", //css such as content: url("");
         "meta.function.url string.quoted.single", //css such as content: url('');
+        //*** EXTENSIONS ***
+        "constant.numeric.rainbow7", // For Rainbow CSV extension
         //*** HTML ***
         "meta.attribute.href string",
         "meta.attribute.src.html string",
@@ -515,6 +531,8 @@
         //*** CSS ***
         "meta.at-rule support.function", // such as `calc` and `var`
         "meta.property-value",
+        //*** EXTENSIONS ***
+        "rainbow1", // For Rainbow CSV extension
         //*** INI ***
         "keyword.other.definition",
         //*** PHP ***
@@ -541,6 +559,8 @@
         "variable.other.object.property",
         //*** APACHE ***
         "entity.mime-type.apacheconf",
+        //*** EXTENSIONS ***
+        "string.rainbow5", // For Rainbow CSV extension
         //*** MARKDOWN ***
         "entity.name.section.markdown",
         "markup.heading.markdown string.other.link.title.markdown",
@@ -570,7 +590,8 @@
         "meta.at-rule.keyframes",
         "support.constant.container-name.container.css", // For @container <container-name> (this token is from my CSS Nesting Syntax Highlighting extension)
         "variable.parameter.misc.css", // such as `content: counter(count, decimal);`
-        //*** MARKDOWN ***
+        //*** EXTENSIONS ***
+        "variable.parameter.rainbow6", // For Rainbow CSV extension
         //*** PHP ***
         "meta.function.parameters.php variable",
         "meta.function.parameters.php punctuation.definition.variable",
@@ -590,6 +611,8 @@
         //*** DEFAULT ***
         "punctuation.definition.variable",
         "variable",
+        //*** EXTENSIONS ***
+        "entity.name.type.rainbow8", // For Rainbow CSV extension
         //*** PHP ***
         "string.quoted.double.php variable.other.php punctuation.definition.variable.php", // for $ in string interpolation.
       ],
@@ -607,6 +630,8 @@
         "entity.status.apacheconf",
         //*** CSS ***
         "support.constant.boolean.container.css", // for @container <style-query> boolean property-value (this token is from my CSS Nesting Syntax Highlighting extension)
+        //*** EXTENSIONS ***
+        "entity.name.function.rainbow3", // For Rainbow CSV extension
         //*** HTML ***
         "constant punctuation.definition.entity", // HTML symbol entity
         "meta.attribute.async.html entity.other.attribute-name",
@@ -649,6 +674,8 @@
         "entity.name.tag",
         "keyword",
         "storage.modifier",
+        //*** EXTENSIONS ***
+        "invalid.rainbow10", // For Rainbow CSV extension
         //*** PHP ***
         "entity.name.goto-label.php", // For 'else' using alternative colon syntax
         //*** SHELL ***
@@ -675,6 +702,8 @@
         "string",
         //*** CSS ***
         "meta.attribute-selector entity.other.attribute-name",
+        //*** EXTENSIONS ***
+        "keyword.rainbow2", // For Rainbow CSV extension
         //*** MARKDOWN ***
         "string.other.link.description.markdown",
         //*** PHP ***
