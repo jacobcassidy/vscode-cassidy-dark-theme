@@ -2,6 +2,13 @@
 
 All notable changes to this project are documented in this file.
 
+## v1.0.0
+
+_2024-02-27_
+
+- Jumping to using 1.x.x versioning since the theme is no longer in beta.
+- Added `keyword.operator.nullable-type` to theme blue for nullable types using the question mark, such as `?callable` in PHP.
+
 ## v0.3.7
 
 _2024-02-26_
