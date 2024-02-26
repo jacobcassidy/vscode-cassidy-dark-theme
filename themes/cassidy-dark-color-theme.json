@@ -500,6 +500,7 @@
         "string.other.link.title.markdown",
         //*** PHP ***
         "keyword.other.type.php", // For parameter and other types
+        "keyword.operator.nullable-type", // For nullable types using the question mark, such as ?callable
       ],
       "settings": {
         "foreground": "#92c1fd" // theme blue
