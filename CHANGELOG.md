@@ -2,6 +2,12 @@
 
 All notable changes to this project are documented in this file.
 
+## v1.0.1
+
+_2024-03-06_
+
+- Added `comment keyword.operator.nullable-type` for PHPdoc nullable type hint such as ?array.
+
 ## v1.0.0
 
 _2024-02-27_
