@@ -416,6 +416,7 @@
         //*** PHP ***
         "comment keyword", // example: @package in PHPdoc comment
         "comment keyword.other.type.php", // example: `array` in @param array in PHPdoc comment
+        "comment keyword.operator.nullable-type", // example: ?array in docblock type hint
         "comment support.class", // example: `editor` in @return editor in PHPdoc comment
         "keyword.operator.return-value.php", // For function return type colon
         "meta.embedded.block.php", // For else colon when using alternative syntax
