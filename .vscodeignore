@@ -1,3 +1,4 @@
 .gitignore
 --dev-assets
+.dev-assets
 vscode-workbench-colors.json
