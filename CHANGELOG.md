@@ -2,6 +2,14 @@
 
 All notable changes to this project are documented in this file.
 
+## v1.0.2
+
+_2024-03-07_
+
+- Added `php-class-typehint-syntax.json` file to include syntax customization for a PHP Class typehint using the `keyword.other.type.cassidydark.php` token.
+- Added a new theme color at 50% of theme blue chroma for typehint syntax color.
+- Added  `keyword.other.type.php`, `keyword.operator.nullable-type.php`, `keyword.other.type.cassidydark.php`, `meta.function.php storage.type.php`, and `meta.function.php support.class.php` to typehint syntax color.
+
 ## v1.0.1
 
 _2024-03-06_
