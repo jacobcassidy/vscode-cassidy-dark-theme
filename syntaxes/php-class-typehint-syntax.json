@@ -1,0 +1,119 @@
+{
+  "scopeName": "php-class-typehint-syntax.injection",
+  "injectionSelector": "L:text.html.php",
+  "patterns": [
+    {
+      "match": "(?xi)\n((?:(?:public|private|protected|static|readonly)(?:\\s+|(?=\\?)))++)                     # At least one modifier\n(\n  # nullable type\n  (?:\\?\\s*)? [a-z0-9_\\x{7f}-\\x{10ffff}\\\\]+ |\n  # union, intersection or DNF type\n  (?: [a-z0-9_\\x{7f}-\\x{10ffff}\\\\]+ | \\(\\s* [a-z0-9_\\x{7f}-\\x{10ffff}\\\\]+(?:\\s*&\\s*[a-z0-9_\\x{7f}-\\x{10ffff}\\\\]+)+ \\s*\\) )\n  (?: \\s*[|&]\\s*\n  (?: [a-z0-9_\\x{7f}-\\x{10ffff}\\\\]+ | \\(\\s* [a-z0-9_\\x{7f}-\\x{10ffff}\\\\]+(?:\\s*&\\s*[a-z0-9_\\x{7f}-\\x{10ffff}\\\\]+)+ \\s*\\) )\n  )+\n)?\n\\s+ ((\\$)[a-z_\\x{7f}-\\x{10ffff}][a-z0-9_\\x{7f}-\\x{10ffff}]*)          # Variable name",
+      "captures": {
+        "1": {
+          "patterns": [
+            {
+              "match": "public|private|protected|static|readonly",
+              "name": "storage.modifier.php"
+            }
+          ]
+        },
+        "2": {
+          "patterns": [
+            {
+              "include": "#php-types"
+            }
+          ]
+        },
+        "3": {
+          "name": "variable.other.php"
+        },
+        "4": {
+          "name": "punctuation.definition.variable.php"
+        }
+      }
+    }
+  ],
+  "repository": {
+    "php-types": {
+      "patterns": [
+        {
+          "match": "\\?",
+          "name": "keyword.operator.nullable-type.php"
+        },
+        {
+          "match": "[|&]",
+          "name": "punctuation.separator.delimiter.php"
+        },
+        {
+          "match": "(?i)\\b(null|int|float|bool|string|array|object|callable|iterable|true|false|mixed|void)\\b",
+          "name": "keyword.other.type.php"
+        },
+        {
+          "match": "(?i)\\b(parent|self)\\b",
+          "name": "storage.type.php"
+        },
+        {
+          "match": "\\(",
+          "name": "punctuation.definition.type.begin.bracket.round.php"
+        },
+        {
+          "match": "\\)",
+          "name": "punctuation.definition.type.end.bracket.round.php"
+        },
+        {
+          "include": "#class-name"
+        }
+      ]
+    },
+    "class-name": {
+      "patterns": [
+        {
+          "begin": "(?i)(?=\\\\?[a-z_\\x{7f}-\\x{10ffff}][a-z0-9_\\x{7f}-\\x{10ffff}]*\\\\)",
+          "end": "(?xi)\n( [a-z_\\x{7f}-\\x{10ffff}] [a-z0-9_\\x{7f}-\\x{10ffff}]* )?\n(?![a-z0-9_\\x{7f}-\\x{10ffff}\\\\])",
+          "endCaptures": {
+            "1": {
+              "name": "support.class.php"
+            }
+          },
+          "patterns": [
+            {
+              "include": "#namespace"
+            }
+          ]
+        },
+        {
+          "include": "#class-builtin"
+        },
+        {
+          "begin": "(?i)(?=[\\\\a-z_\\x{7f}-\\x{10ffff}])",
+          "end": "(?xi)\n( [a-z_\\x{7f}-\\x{10ffff}] [a-z0-9_\\x{7f}-\\x{10ffff}]* )?\n(?![a-z0-9_\\x{7f}-\\x{10ffff}\\\\])",
+          "endCaptures": {
+            "1": {
+              "name": "support.class.php keyword.other.type.cassidydark.php"
+            }
+          },
+          "patterns": [
+            {
+              "include": "#namespace"
+            }
+          ]
+        }
+      ]
+    },
+    "namespace": {
+      "begin": "(?i)(?:(namespace)|[a-z_\\x{7f}-\\x{10ffff}][a-z0-9_\\x{7f}-\\x{10ffff}]*)?(\\\\)",
+      "beginCaptures": {
+        "1": {
+          "name": "variable.language.namespace.php"
+        },
+        "2": {
+          "name": "punctuation.separator.inheritance.php"
+        }
+      },
+      "end": "(?i)(?![a-z0-9_\\x{7f}-\\x{10ffff}]*\\\\)",
+      "name": "support.other.namespace.php",
+      "patterns": [
+        {
+          "match": "\\\\",
+          "name": "punctuation.separator.inheritance.php"
+        }
+      ]
+    }
+  }
+}
