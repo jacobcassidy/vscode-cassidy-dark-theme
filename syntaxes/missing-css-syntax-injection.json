@@ -3,13 +3,13 @@
   "injectionSelector": "L:source.css",
   "patterns": [
     {
-			"include": "#"
-		}
-	],
-	"repository": {
-    "tag_parent_reference": {
-			"match": "&",
-			"name": "entity.name.tag.reference.css"
-		}
+      "include": "#"
+    }
+  ],
+  "repository": {
+    "": {
+      "match": "",
+      "name": ""
+    }
   }
 }
