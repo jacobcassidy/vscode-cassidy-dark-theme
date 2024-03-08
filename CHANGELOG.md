@@ -2,6 +2,13 @@
 
 All notable changes to this project are documented in this file.
 
+## v1.0.3
+
+_2024-03-08_
+
+- Added syntax colors for the [nginx.conf syntax extension by shanoor](https://marketplace.visualstudio.com/items?itemName=shanoor.vscode-nginx).
+- Added syntax colors for the [Better Dockerfile Syntax extension by Jeff Hykin](https://marketplace.visualstudio.com/items?itemName=jeff-hykin.better-dockerfile-syntax).
+
 ## v1.0.2
 
 _2024-03-07_
