@@ -743,5 +743,55 @@
         "foreground": "#ffe294" // theme yellow deep
       }
     },
+
+    //--------------------------------------------------------------------------
+    // NGINX SYNTAX EXTENSION
+    // https://marketplace.visualstudio.com/items?itemName=shanoor.vscode-nginx
+    //--------------------------------------------------------------------------
+    {
+      "name": "[NGINX] - PUNCTUATION - Theme Gray Medium (64%)",
+      "scope": [
+        "source.nginx constant.character",
+      ],
+      "settings": {
+        "foreground": "#8f8f8f"
+      }
+    },
+    {
+      "name": "[NGINX] - Theme Gray Light (80%)",
+      "scope": [
+        "source.nginx",
+      ],
+      "settings": {
+        "foreground": "#ccc"
+      }
+    },
+    {
+      "name": "[NGINX] - BLUE",
+      "scope": [
+        "source.nginx constant.language.module",
+      ],
+      "settings": {
+        "foreground": "#92c1fd"
+      }
+    },
+    {
+      "name": "[NGINX] - CYAN",
+      "scope": [
+        "source.nginx constant.language",
+      ],
+      "settings": {
+        "foreground": "#90e1e8"
+      }
+    },
+    {
+      "name": "[NGINX] - RED",
+      "scope": [
+        "source.nginx constant.language.directive.module.main"
+      ],
+      "settings": {
+        "foreground": "#ed8c81"
+      }
+    },
   ]
 }
