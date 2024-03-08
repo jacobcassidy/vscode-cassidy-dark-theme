@@ -745,7 +745,57 @@
     },
 
     //--------------------------------------------------------------------------
-    // NGINX SYNTAX EXTENSION
+    // Better DockerFile Syntax - Extension
+    // https://marketplace.visualstudio.com/items?itemName=jeff-hykin.better-dockerfile-syntax
+    //--------------------------------------------------------------------------
+    {
+      "name": "[DOCKERFILE] - WHITE",
+      "scope": [
+        "source.dockerfile string",
+      ],
+      "settings": {
+        "foreground": "#f5f5f5"
+      }
+    },
+    {
+      "name": "[DOCKERFILE] - CYAN",
+      "scope": [
+        "source.dockerfile keyword.other.special-method",
+      ],
+      "settings": {
+        "foreground": "#90e1e8"
+      }
+    },
+    {
+      "name": "[DOCKERFILE] - GREEN",
+      "scope": [
+        "source.dockerfile entity.name",
+      ],
+      "settings": {
+        "foreground": "#9bce90"
+      }
+    },
+    {
+      "name": "[DOCKERFILE] - ORANGE",
+      "scope": [
+        "source.dockerfile constant.other.option",
+      ],
+      "settings": {
+        "foreground": "#ebb077", //
+      }
+    },
+    {
+      "name": "[DOCKERFILE] - RED",
+      "scope": [
+        "punctuation.separator.statement.and.shell.dockerfile",
+      ],
+      "settings": {
+        "foreground": "#ed8c81"
+      }
+    },
+
+    //--------------------------------------------------------------------------
+    // Nginx.conf - (Syntax) Extension
     // https://marketplace.visualstudio.com/items?itemName=shanoor.vscode-nginx
     //--------------------------------------------------------------------------
     {
