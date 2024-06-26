@@ -552,6 +552,8 @@
         "support.function.basic_functions",
         "entity.other.inherited-class.php", // extends class
         "entity.other.alias.php", // use as
+        //*** PYTHON ***
+        "meta.function-call.generic.python",
         //*** YAML ***
         "entity.name.tag.yaml",
       ],
@@ -610,6 +612,8 @@
         "meta.function.parameters.php punctuation.definition.variable",
         "punctuation.section.embedded.begin.php",
         "punctuation.section.embedded.end.php",
+        //*** PYTHON ***
+        "meta.function-call.arguments.python",
         //*** SCSS ***
         "meta.at-rule.keyframes entity.name.function",
         "entity.other.attribute-name.scss",
