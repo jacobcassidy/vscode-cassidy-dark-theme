@@ -2,6 +2,13 @@
 
 All notable changes to this project are documented in this file.
 
+## v1.0.4
+
+_2024-06-26_
+
+- Added `meta.function-call.generic.python` to theme cyan for Python non-defined function calls in docs.
+- Added `meta.function-call.arguments.python` to theme orange for Python arguments in non-defined function calls in docs.
+
 ## v1.0.3
 
 _2024-03-08_
