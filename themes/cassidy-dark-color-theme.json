@@ -612,8 +612,6 @@
         "meta.function.parameters.php punctuation.definition.variable",
         "punctuation.section.embedded.begin.php",
         "punctuation.section.embedded.end.php",
-        //*** PYTHON ***
-        "meta.function-call.arguments.python",
         //*** SCSS ***
         "meta.at-rule.keyframes entity.name.function",
         "entity.other.attribute-name.scss",
@@ -632,6 +630,8 @@
         "entity.name.type.rainbow8", // For Rainbow CSV extension
         //*** PHP ***
         "string.quoted.double.php variable.other.php punctuation.definition.variable.php", // for $ in string interpolation.
+        //*** PYTHON ***
+        "meta.function-call.arguments.python",
       ],
       "settings": {
         "foreground": "#febccf" // theme pink
