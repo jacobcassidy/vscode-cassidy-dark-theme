@@ -2,6 +2,12 @@
 
 All notable changes to this project are documented in this file.
 
+## v1.0.5
+
+_2024-06-27_
+
+- Updated `meta.function-call.arguments.python` to theme pink for Python arguments to match variable highlighting
+
 ## v1.0.4
 
 _2024-06-26_
