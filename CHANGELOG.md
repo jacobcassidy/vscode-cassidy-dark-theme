@@ -2,6 +2,18 @@
 
 All notable changes to this project are documented in this file.
 
+## v1.0.6
+
+_2024-08-23_
+
+- Updated color and gray-scale schemes based on OKLCH for uniformity.
+- Updated 'find/match' colors to provide better contrast and kind differentiation.
+- Added `textPreformat.background`.
+- Added `editorStickyScroll.background`.
+- Added PHP type hinting syntax.
+- Removed scrollbar border.
+
+
 ## v1.0.5
 
 _2024-06-27_
