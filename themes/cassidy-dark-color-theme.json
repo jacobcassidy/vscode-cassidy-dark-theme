@@ -6,7 +6,7 @@
   "colors": {
     //*** BASE COLORS ***
     "descriptionForeground": "#f8f8f8", // -color--gray-white
-    "errorForeground": "#db6656", // -color--red-base
+    "errorForeground": "#db6656", // -color--red-deep
     "focusBorder": "#ffffff1a", // -color--white at 10% opacity
     "foreground": "#c4c4c4", // -color--gray-light
     "icon.foreground": "#929292", // -color--gray-medium
