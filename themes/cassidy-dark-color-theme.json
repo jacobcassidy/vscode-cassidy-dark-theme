@@ -32,7 +32,7 @@
 
     //*** BUTTON CONTROLS ***
     "button.background": "#006fd9", // -color--blue-bg - example: search settings in settings page
-    "checkbox.background": "#ffffff1a", // -color--white at 10% opacity - example: Settings UI checkbox
+    "checkbox.background": "#ffffff26", // -color--white at 15% opacity - example: Settings UI checkbox
     "checkbox.foreground": "#f8f8f8", // -color--gray-white
 
     //*** DIFF EDITOR ***
@@ -60,14 +60,14 @@
     "editorCursor.background": "#383838", // -color--gray-fade
     "editorCursor.foreground": "#929292", // --color--gray-medium
     // fold
-    "editor.foldBackground": "#92c1fd26", // -color--blue-base at 15% opacity
+    "editor.foldBackground": "#d6aaea1a", // -color--purple-base at 10% opacity
     // ghost text
     "editorGhostText.foreground": "#7a7a7a", // -color--gray-medium-dark (OKLCH 58% - match comments)
     "editorGhostText.background": "#1f1f1f", // -color--oklch-24-gray
     // gutter
     "editorGutter.addedBackground": "#a2cd8b99", // -color--green-base at 60% opacity - example: scrollbar and number line bar diff indicators
-    "editorGutter.deletedBackground": "#db665699", // -color--red-deep at 60% opacity
-    "editorGutter.foldingControlForeground": "#636363", // -color--gray-dark
+    "editorGutter.deletedBackground": "#db6656cc", // -color--red-deep at 80% opacity
+    "editorGutter.foldingControlForeground": "#7a7a7a", // -color--gray-medium-dark (OKLCH 58% - match comments)
     "editorGutter.modifiedBackground": "#efddaccc", // -color--yellow-base at 80% opacity
     // lightbulb
     "editorLightBulb.foreground": "#d7bb70", // -color--yellow-deep
@@ -77,23 +77,32 @@
     "editorIndentGuide.activeBackground1": "#4d4d4d", // -color--gray-dark-fade
     "editorWhitespace.foreground": "#383838", // -color--gray-fade
     // line
-    "editor.lineHighlightBackground": "#1b1b1b", // -color--oklch-22-gray (4 shades darker than editor bg)
+    "editor.lineHighlightBackground": "#161616", // -color--oklch-20-gray (6 shades darker than editor bg)
+    // "editor.lineHighlightBorder": "#",
     // line number
-    "editorLineNumber.foreground": "#4d4d4d", // -color--gray-dark-fade (32%)
+    "editorLineNumber.foreground": "#4d4d4d", // -color--gray-dark-fade (OKLCH 42%)
     "editorLineNumber.activeForeground": "#ababab", // -color--gray-light-medium (OKLCH 74%)
     // link
     "editorLink.activeForeground": "#efddac", // -color--yellow-base
     // match
-    "editor.findMatchHighlightBackground": "#da883e4d", // -color--orange-deep at 30% opacity - Color of the other search matches
-    "editor.findRangeHighlightBackground": "#3838384d", // -color--gray-fade at 30% opacity - example: using finder widget with selection search only
-    "editor.findMatchBackground": "#92c1fd66", // -color--blue-base at 40% opacity - example: current search match
+    "editor.findMatchBackground": "#62a1f080", // -color--blue-base at 50% opacity - example: current search match
+    // "editor.findMatchBorder": "#62a1f080", // -color--blue-base at 50% opacity
+    "editor.findMatchForeground": "#ffffffe6", // -color-white at 90% opacity
+    "editor.findMatchHighlightBackground": "#62a1f066", // -color--blue-base at 40% opacity - Color of the other search matches
+    // "editor.findMatchHighlightBorder": "#62a1f073", // -color--blue-base at 45% opacity
+    "editor.findMatchHighlightForeground": "#ffffffe6", // -color-white at 90% opacity
+    "editor.findRangeHighlightBackground": "#ffffff1a", // -color--white at 10% opacity - example: using finder widget with selection search only
+    "editor.rangeHighlightBackground": "#62a1f033", // -color--blue-base at 20% opacity - example: current search match line
     // match selection
-    "editor.hoverHighlightBackground": "#92c1fd1a", // -color--blue-base at 10% opacity
+    "editor.hoverHighlightBackground": "#ffffff33", // -color--white at 20% opacity
+    "editor.selectionBackground": "#006fd980", // -color--blue-bg at 50% opacity
+    "editor.inactiveSelectionBackground": "#006fd94d", // -color--blue-bg at 30% opacity
+    "editor.selectionHighlightBackground": "#62a1f066", // -color-blue-base at 40% opacity | example: highlighting a word in the editor, the other words are highlighted
     // ruler
-    "editorRuler.foreground": "#eeae7b1a", // -color--orange-base at 10% opacity
+    "editorRuler.foreground": "#eeae7b1a", // -color--orange-base at 10% opacity - example line width guide line
     // scrollbar
     "editorOverviewRuler.background": "#242424", // -color--gray-fade-black (match editor bg)
-    "editorOverviewRuler.border": "#333333", // -color--oklch-32-gray (scrollbar border)
+    "editorOverviewRuler.border": "#242424", // -color--gray-fade-black (match editor bg)
     "editorOverviewRuler.modifiedForeground": "#efddac99", // -color--yellow-base at 60% opacity
     "editorOverviewRuler.addedForeground": "#a2cd8b99", // -color--green-base at 60% opacity - example: scrollbar diff indicator
     "editorOverviewRuler.deletedForeground": "#ef918299", // -color--red-base at 60% opacity
@@ -101,9 +110,11 @@
     "editorOverviewRuler.warningForeground": "#eeae7be6", // -color--orange-base at 90% opacity
     "editorOverviewRuler.infoForeground": "#92c1fde6", // -color--blue-base at 90% opacity
     "editorOverviewRuler.bracketMatchForeground": "#7a7a7ae6", // -color--gray-medium-dark at 90% opacity
+    "editorOverviewRuler.findMatchForeground": "#62a1f066",
     // errors and warnings
     "editorError.foreground": "#ef9182", // -color--red-base for error squiggly lines
     "editorHint.foreground": "#efddac", // -color--yellow-base for 3 dots underline
+    // "editorWarning.background": "#eeae7b4d", // -color--red-base at 30% opacity
     "editorWarning.foreground": "#eeae7b", // -color--orange-base for warning squiggly lines
     "editorInfo.foreground": "#92c1fd", // -color--blue-base for info squiggly lines
     // unused code
@@ -112,15 +123,18 @@
     // widget
     "editorWidget.foreground": "#c4c4c4", // -color--gray-light - example: the file search widget
     "editorWidget.background": "#333333", // -color--oklch-32-gray (match panel bg) - example: finder widget
+    "editorHoverWidget.background": "#383838", // -color--gray-fade
     "editorWidget.border": "#383838", // -color--gray-fade
     "editorWidget.resizeBorder": "#424242", // -color--oklch-38-gray
     // word highlight
-    "editor.wordHighlightBackground": "#4d4d4d99", // -color--gray-dark-fade at 60% opacity (read-access, such as JS variable)
+    "editor.wordHighlightBackground": "#ffffff33", // -color--white at 20% opacity (read-access, such as JS variable)
     "editor.wordHighlightStrongBackground": "#92c1fd66", // -color--blue-base at 40% opacity (write-access, such as JS variable)
-    "editor.wordHighlightTextBackground": "#4d4d4d99", // -color--gray-dark-fade at 60% opacity
+    "editor.wordHighlightTextBackground": "#ffffff33", // -color--white at 20% opacity
     // unicode
     "editorUnicodeHighlight.border": "#eeae7b80", // -color--orange-base at 50% opacity
     "editorUnicodeHighlight.background": "#eeae7b4d", // -color--orange-base at 30% opacity
+    // sticky stroll
+    "editorStickyScroll.background": "#292929",
 
     //*** EDITOR GROUPS & TABS ***
     // groups
@@ -152,7 +166,7 @@
     "gitDecoration.stageModifiedResourceForeground": "#efddac", // -color--yellow-base
     "gitDecoration.stageDeletedResourceForeground": "#ef9182", // -color--red-base
     "gitDecoration.untrackedResourceForeground": "#a2cd8b", // -color--green-base
-    "gitDecoration.ignoredResourceForeground": "#7a7a7a", // -color--gray-medium-dark
+    "gitDecoration.ignoredResourceForeground": "#929292", // -color--gray-medium
     "gitDecoration.conflictingResourceForeground": "#eeae7b", // -color--orange-base
 
     //*** INPUT CONTROL ***
@@ -170,7 +184,7 @@
     "list.focusAndSelectionOutline": "#ffffff00", // -color--white at 0% opacity for no border showing
     "list.focusForeground": "#f8f8f8", // -color--gray-white
     "list.focusOutline": "#ffffff33", // -color--white at 20% opacity
-    "list.hoverBackground": "#ffffff0d", // -color--white at 5% opacity
+    "list.hoverBackground": "#ffffff1a", // -color--white at 10% opacity
     "list.hoverForeground": "#f8f8f8", // -color--gray-white - example: extensions sidebar list
     "list.inactiveSelectionBackground": "#ffffff0d", // -color--white at 5% opacity example: extensions sidebar list
     "list.inactiveSelectionForeground": "#f8f8f8", // -color--gray-white
@@ -206,8 +220,11 @@
     //*** SCROLLBAR CONTROL ***
     "scrollbar.shadow": "#1f1f1f", // -color--oklch-24-gray - Two shades darker than editor background - example: editor tabs side scroll
     "scrollbarSlider.activeBackground": "#7a7a7a66", // -color--gray-medium-dark at 40% opacity - example: when selecting and dragging scrollbar location
-    "scrollbarSlider.background": "#7a7a7a33", // -color--gray-medium-dark at 20% opacity - example: editor vertical scrollbar location
-    "scrollbarSlider.hoverBackground": "#7a7a7a4d", // -color--gray-medium-dark at 30% opacity
+    "scrollbarSlider.background": "#7a7a7a40", // -color--gray-medium-dark at 25% opacity - example: editor vertical scrollbar location
+    "scrollbarSlider.hoverBackground": "#7a7a7a4d", //-color--gray-medium-dark at 30% opacity
+
+    //*** SELECTION ***
+    "selection.background": "#62a1f080", // -color--blue-base at 50% opacity - example: search input selection
 
     //*** SETTINGS ***
     "settings.modifiedItemIndicator": "#efddac", // -color--yellow-base - example: vertical line color in Settings UI
@@ -256,6 +273,7 @@
     "textCodeBlock.background": "#4d4d4d", // -color--gray-dark-fade - example: hover over settings json "workbench.startupEditor"
     "textLink.activeForeground": "#efddac", // -color--yellow-base
     "textLink.foreground": "#92c1fd", // -color--blue-base - example: Settings UI text link
+    "textPreformat.background": "#383838",
     "textPreformat.foreground": "#d7bb70", // -color--yellow-deep
 
     //*** TITLE BAR ***
@@ -267,7 +285,6 @@
     //*** TOOLBAR ACTION COLORS ***
     "toolbar.hoverBackground": "#f8f8f81a", // -color--gray-white at 10% opacity - example: Settings UI gear icons
     "toolbar.activeBackground": "#f8f8f833", // -color--gray-white at 20% opacity - example: Settings UI gear icons
-
   },
   "semanticHighlighting": true,
   "semanticTokenColors": {
@@ -321,8 +338,8 @@
         "entity.name.section.markdown",
         "markup.italic.markdown",
         //*** PHP ***
-        // "keyword.other.type.php",
-        // "meta.function.php support.class.php",
+        "keyword.other.type.php",
+        "meta.function.php support.class.php",
       ],
       "settings": {
         "fontStyle": "italic"
@@ -817,7 +834,7 @@
     // https://marketplace.visualstudio.com/items?itemName=shanoor.vscode-nginx
     //--------------------------------------------------------------------------
     {
-      "name": "[NGINX] - PUNCTUATION - Gray Medium (OKLCH 66%)",
+      "name": "[NGINX] - PUNCTUATION - GRAY MEDIUM (OKLCH 66%)",
       "scope": [
         "source.nginx constant.character",
       ],
@@ -826,7 +843,7 @@
       }
     },
     {
-      "name": "[NGINX] - Gray Light (OKLCH 82%)",
+      "name": "[NGINX] - GRAY LIGHT (OKLCH 82%)",
       "scope": [
         "source.nginx",
       ],
