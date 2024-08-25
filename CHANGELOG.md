@@ -2,11 +2,31 @@
 
 All notable changes to this project are documented in this file.
 
+## v1.0.9
+
+_2024-08-25_
+
+
+- Added syntax highlighting for the following tokens:
+`support.function.builtin.shell`
+`meta.expression.assignment.modified.shell`
+`entity.name.section.group-title`
+`variable.other.assignment.shell`
+`constant.other.symbol.hashkey.ruby`
+`constant.other.symbol.ruby`
+`log.date`
+`log.error`
+`log.warning`
+`meta.jsx.children`
+`meta.other.type.phpdoc.php`
+`variable.parameter.url`
+- Updated README.md Table of Contents
+
 ## v1.0.8
 
 _2024-08-25_
 
--  Updated `README.md` "Issues" content.
+- Updated `README.md` "Issues" content.
 
 ## v1.0.7
 
