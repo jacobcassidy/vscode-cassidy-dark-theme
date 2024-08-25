@@ -270,10 +270,10 @@
     //*** TEXT COLORS ***
     "textBlockQuote.background": "#383838", // -color--gray-fade - example: markdown > quote in preview mode
     "textBlockQuote.border": "#636363", // -color--gray-dark
-    "textCodeBlock.background": "#4d4d4d", // -color--gray-dark-fade - example: hover over settings json "workbench.startupEditor"
+    "textCodeBlock.background": "#ffffff1a", // -color--white at 10% opacity - example: hover over settings json "workbench.startupEditor"
     "textLink.activeForeground": "#efddac", // -color--yellow-base
     "textLink.foreground": "#92c1fd", // -color--blue-base - example: Settings UI text link
-    "textPreformat.background": "#383838",
+    "textPreformat.background": "#ffffff1a", // -color--white at 10% opacity
     "textPreformat.foreground": "#d7bb70", // -color--yellow-deep
 
     //*** TITLE BAR ***
@@ -338,6 +338,7 @@
         "entity.name.section.markdown",
         "markup.italic.markdown",
         //*** PHP ***
+        "keyword.operator.return-value.php",
         "keyword.other.type.php",
         "meta.function.php support.class.php",
       ],
@@ -435,7 +436,6 @@
         "markup.strikethrough.markdown",
         //*** PHP ***
         "comment keyword", // example: @package in PHPdoc comment
-        // "comment keyword.other.type.php", // example: `array` in @param array in PHPdoc comment
         "comment keyword.operator.nullable-type.php", // example: ?array in docblock type hint
         "comment support.class", // example: `editor` in @return editor in PHPdoc comment
         "keyword.operator.return-value.php", // For function return type colon
