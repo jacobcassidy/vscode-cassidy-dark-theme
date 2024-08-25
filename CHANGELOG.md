@@ -2,6 +2,14 @@
 
 All notable changes to this project are documented in this file.
 
+## v1.0.7
+
+_2024-08-25_
+
+- Added `keyword.operator.return-value.php` for PHP return typehint syntax color.
+- Updated `textCodeBlock.background` and `textPreformat.background` to `#ffffff1a` (-color--white at 10% opacity).
+- Commented out `comment keyword.other.type.php` since it is already covered with `keyword.other.type.php`.
+
 ## v1.0.6
 
 _2024-08-23_
