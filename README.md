@@ -5,8 +5,8 @@
 | [Overview](#overview) |
 | [Added Tokens](#added-tokens) |
 | [Installation](#installation) |
-| [What's New](#whats-new) |
-| [Reporting Issues](#issues) |
+| [What's New?](#whats-new) |
+| [Found an Issue?](#found-an-issue) |
 
 ## Overview
 
@@ -50,6 +50,6 @@ View the [Changelog](https://github.com/jacobcassidy/vscode-cassidy-dark-theme/b
 > Search for _CSS Nesting Syntax Highlighting_ in the Visual Studio Code's Extensions Marketplace or click the install button on the [CSS Nesting Syntax Highlighting Marketplace page](https://marketplace.visualstudio.com/items?itemName=jacobcassidy.css-nesting-syntax-highlighting).
 >
 
-## Issues?
+## Found an Issue?
 
 If you come across any issues, please feel free to [report them here](https://github.com/jacobcassidy/vscode-cassidy-dark-theme/issues). You can also [create a pull request](https://github.com/jacobcassidy/vscode-cassidy-dark-theme/pulls) to add any improvements.
