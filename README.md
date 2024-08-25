@@ -6,7 +6,7 @@
 | [Added Tokens](#added-tokens) |
 | [Installation](#installation) |
 | [What's New](#whats-new) |
-| [Issues](#issues) |
+| [Reporting Issues](#issues) |
 
 ## Overview
 
@@ -52,4 +52,4 @@ View the [Changelog](https://github.com/jacobcassidy/vscode-cassidy-dark-theme/b
 
 ## Issues?
 
-If you come across any issues, please feel free to report them [here](https://github.com/jacobcassidy/vscode-cassidy-dark-theme/issues).
+If you come across any issues, please feel free to [report them here](https://github.com/jacobcassidy/vscode-cassidy-dark-theme/issues). You can also [create a pull request](https://github.com/jacobcassidy/vscode-cassidy-dark-theme/pulls) to add any improvements.
