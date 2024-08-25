@@ -236,8 +236,8 @@
     "sideBar.dropBackground": "#2e2e2e", // -color--oklch-30-gray - 2 shades darker than sidebar bg
     "sideBarTitle.foreground": "#7a7a7a", // -color--gray-medium-dark (OKLCH 58% - match comments) - EXPLORER TITLE
     "sideBarSectionHeader.background": "#333333", // -color--oklch-32-gray (match activity bar bg)
-    "sideBarSectionHeader.foreground": "#929292", // -color--gray-medium
     "sideBarSectionHeader.border": "#292929", // -color--oklch-28-gray (match sidebar border)
+    "sideBarSectionHeader.foreground": "#929292", // -color--gray-medium
 
     //*** STATUS BAR ***
     "statusBar.background": "#383838", // -color--gray-fade (match title bar bg)
@@ -313,7 +313,7 @@
       "foreground": "#fcb7cb", // -color--pink-base
     },
     "variable.defaultLibrary": {
-      "foreground": "#c4c4c4", // -color--gray-light
+      "foreground": "#d1d1d1", // -color--gray-white-light-2
     },
   },
   "tokenColors":[
@@ -419,7 +419,7 @@
       }
     },
     {
-      "name": "Gray Medium (OKLCH 66%)",
+      "name": "Gray Medium (OKLCH 66%) [PUNCTUATION]",
       "scope": [
         //*** DEFAULT ***
         "entity.name",
@@ -444,6 +444,8 @@
         "string.quoted.double.php punctuation.definition.variable.php", // for {} braces syntax used in string interpolation.
         //*** RUBY ***
         "meta.function.method.with-arguments.ruby storage.type", // For Ruby's parameter block `&` operator
+        //*** SHELL ***
+        "meta.expression.assignment.modified.shell", //example `/` in .zshrc: export PATH=/opt/homebrew/bin:$PATH
         //*** XML ***
         "meta.tag",
         //*** ZSH ***
@@ -473,14 +475,20 @@
         "comment.rainbow4", // For Rainbow CSV extension
         //*** HTML ***
         "entity.other.attribute-name",
+      ],
+      "settings": {
+        "foreground": "#c4c4c4" // -color--gray-light
+      }
+    },
+    {
+      "name": "GRAY WHITE-LIGHT-2 (OKLCH 86%)",
+      "scope": [
         //*** JAVASCRIPT ***
         "variable.other.object", // semantic token type for JS
         //*** SHELL ***
         "meta.scope",
       ],
-      "settings": {
-        "foreground": "#c4c4c4" // -color--gray-light
-      }
+      "settings": { "foreground": "#d1d1d1" }
     },
     {
       "name": "Gray White (OKLCH 98%)",
@@ -498,6 +506,8 @@
         //*** HTML ***
         "text.html",
         "meta.element.structure.svg.text.html",
+        //*** JSX ***
+        "meta.jsx.children",
         //*** XML ***
         "text.xml",
       ],
@@ -523,11 +533,15 @@
         "meta.attribute.href string",
         "meta.attribute.src.html string",
         "meta.attribute.srcset.html string",
+        //*** LOG ***
+        "log.date",
         //*** MARKDOWN ***
         "meta.link.reference",
         "meta.link.reference constant",
         "meta.link.reference string",
         "string.other.link.title.markdown",
+        //*** SCSS ***
+        "variable.parameter.url", // SCSS `to` in background: linear-gradient(to ...); -- Red in CSS. Also for background:url(../../../../assets/images/icons/icon-phone-white.svg) without quotes.
       ],
       "settings": {
         "foreground": "#92c1fd" // -color--blue-base
@@ -538,6 +552,7 @@
       "scope": [
         //*** PHP - TYPEHINT ***
         "keyword.other.type.php", // For parameter type hinting and other types
+        "meta.other.type.phpdoc.php",
         "keyword.operator.nullable-type.php", // For nullable types using the question mark, such as ?callable
         // "keyword.other.type.cassidydark.php", // class typehint
         "meta.function.php storage.type.php", // ... : self
@@ -585,6 +600,8 @@
         "entity.other.alias.php", // use as
         //*** PYTHON ***
         "meta.function-call.generic.python",
+        //*** SHELL ***
+        "support.function.builtin.shell",
         //*** YAML ***
         "entity.name.tag.yaml",
       ],
@@ -614,6 +631,12 @@
         "punctuation.definition.heading.markdown",
         //*** PHP ***
         "variable.other.property.php punctuation.definition.variable.php",
+        //*** RUBY ***
+        "constant.other.symbol.hashkey.ruby",
+        "constant.other.symbol.ruby",
+        //*** SHELL ***
+        "entity.name.command",
+        "entity.name.section.group-title", // example: [difftool "sourcetree"] in .gitconfig
         //*** SCSS ***
         "entity.other.attribute-name.parent-selector-suffix.css punctuation", // SCSS &__name
       ],
@@ -638,6 +661,8 @@
         "variable.parameter.misc.css", // such as `content: counter(count, decimal);`
         //*** EXTENSIONS ***
         "variable.parameter.rainbow6", // For Rainbow CSV extension
+        //*** LOG ***
+        "log.warning",
         //*** PHP ***
         "meta.function.parameters.php variable",
         "meta.function.parameters.php punctuation.definition.variable",
@@ -663,6 +688,8 @@
         "string.quoted.double.php variable.other.php punctuation.definition.variable.php", // for $ in string interpolation.
         //*** PYTHON ***
         "meta.function-call.arguments.python",
+        //*** SHELL ***
+        "variable.other.assignment.shell",
       ],
       "settings": {
         "foreground": "#fcb7cb" // -color--pink-base
@@ -698,6 +725,11 @@
         "string.regexp constant",
         "string.regexp keyword",
         "string.regexp punctuation",
+        //*** SHELL ***
+        "constant.other.option", //example: -i in shell
+        "meta.arithmetic.shell", //example: $+functions[p10k]
+        "keyword.operator.logical.shell", //example: `-f` in if [ -f "$ray_php"]
+        "keyword.operator.expansion.shell", //example: ${tag//\%/%%}
         //*** XML ***
         "punctuation.definition.constant.xml",
       ],
@@ -724,11 +756,12 @@
         "storage.modifier",
         //*** EXTENSIONS ***
         "invalid.rainbow10", // For Rainbow CSV extension
+        //*** LOG ***
+        "log.error",
         //*** PHP ***
         "entity.name.goto-label.php", // For 'else' using alternative colon syntax
         //*** SHELL ***
-        "meta.scope support.function",
-        "source.shell support.function"
+        "punctuation.separator.statement.and.shell", //example: &&
       ],
       "settings": {
         "foreground": "#ef9182" // -color--red-base
@@ -769,8 +802,6 @@
     {
       "name": "Yellow Deep",
       "scope": [
-        //*** INI ***
-        "entity.name.section.group-title",
         //*** MARKDOWN ***
         "markup.inline.raw.string.markdown",
       ],
