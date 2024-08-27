@@ -2,25 +2,47 @@
 
 All notable changes to this project are documented in this file.
 
+## v1.1.0
+
+_2024-08-27_
+
+- Added comments with examples of what specific tokens colorize.
+- Added "Output Colorizer" extension syntax highlighting for `code.log support` and `code.log invalid`.
+- Added syntax highlighting for the following tokens:
+    - `editorStickyScrollHover.background`
+    - `keyword.operator.type.annotation.ts`
+    - `support.type.primitive.ts`
+    - `editorOverviewRuler.selectionHighlightForeground`
+    - `editorOverviewRuler.wordHighlightForeground`
+    - `editorOverviewRuler.wordHighlightStrongForeground`
+    - `editorOverviewRuler.wordHighlightTextForeground`
+- Moved Rainbow CSV extension syntax highlighting to its own section.
+- Organized order of gray shade tokens.
+- Replaced theme screenshot for v1.1.0.
+- Updated Readme "Found an Issue?" title to "Issues?".
+- Updated red used for diff from red-deep to red-base.
+- Updated logo with v1.1.0 colors.
+- Updated "-color--blue-base" to "-color--blue-deep" where deep blue is used.
+- Updated colors for `textBlockQuote.background` and `textBlockQuote.border`.
+
 ## v1.0.9
 
 _2024-08-25_
 
-
 - Added syntax highlighting for the following tokens:
-`support.function.builtin.shell`
-`meta.expression.assignment.modified.shell`
-`entity.name.section.group-title`
-`variable.other.assignment.shell`
-`constant.other.symbol.hashkey.ruby`
-`constant.other.symbol.ruby`
-`log.date`
-`log.error`
-`log.warning`
-`meta.jsx.children`
-`meta.other.type.phpdoc.php`
-`variable.parameter.url`
-- Updated README.md Table of Contents
+    - `support.function.builtin.shell`
+    - `meta.expression.assignment.modified.shell`
+    - `entity.name.section.group-title`
+    - `variable.other.assignment.shell`
+    - `constant.other.symbol.hashkey.ruby`
+    - `constant.other.symbol.ruby`
+    - `log.date`
+    - `log.error`
+    - `log.warning`
+    - `meta.jsx.children`
+    - `meta.other.type.phpdoc.php`
+    - `variable.parameter.url`
+- Updated README.md Table of Contents.
 
 ## v1.0.8
 
@@ -46,7 +68,6 @@ _2024-08-23_
 - Added `editorStickyScroll.background`.
 - Added PHP type hinting syntax.
 - Removed scrollbar border.
-
 
 ## v1.0.5
 
