@@ -37,13 +37,13 @@
 
     //*** DIFF EDITOR ***
     "diffEditor.insertedTextBackground": "#a2cd8b33", // -color--green-base at 20% opacity
-    "diffEditor.removedTextBackground": "#db665633", // -color--red-deep at 20% opacity
+    "diffEditor.removedTextBackground": "#ef918233", // -color--red-base at 20% opacity
     "diffEditor.insertedLineBackground": "#a2cd8b1a", // -color--green-base at 10% opacity
-    "diffEditor.removedLineBackground": "#db66561a", // -color--red-deep at 10% opacity
+    "diffEditor.removedLineBackground": "#ef91821a", // -color--red-base at 10% opacity
     "diffEditorGutter.insertedLineBackground": "#a2cd8b1a", // -color--green-base at 10% opacity
-    "diffEditorGutter.removedLineBackground": "#db66561a", // -color--red-deep at 10% opacity
+    "diffEditorGutter.removedLineBackground": "#ef91821a", // -color--red-base at 10% opacity
     "diffEditorOverview.insertedForeground": "#a2cd8b4d", // -color--green-base at 30% opacity - example: scrollbar diff indicator
-    "diffEditorOverview.removedForeground": "#db66564d", // -color--red-deep at 30% opacity - example: scrollbar diff indicator
+    "diffEditorOverview.removedForeground": "#ef91824d", // -color--red-base at 30% opacity - example: scrollbar diff indicator
 
     //*** DROPDOWN CONTROLS ***
     "dropdown.background": "#383838", // -color--gray-fade
@@ -66,7 +66,7 @@
     "editorGhostText.background": "#1f1f1f", // -color--oklch-24-gray
     // gutter
     "editorGutter.addedBackground": "#a2cd8b99", // -color--green-base at 60% opacity - example: scrollbar and number line bar diff indicators
-    "editorGutter.deletedBackground": "#db6656cc", // -color--red-deep at 80% opacity
+    "editorGutter.deletedBackground": "#ef9182cc", // -color--red-base at 80% opacity
     "editorGutter.foldingControlForeground": "#7a7a7a", // -color--gray-medium-dark (OKLCH 58% - match comments)
     "editorGutter.modifiedBackground": "#efddaccc", // -color--yellow-base at 80% opacity
     // lightbulb
@@ -85,32 +85,37 @@
     // link
     "editorLink.activeForeground": "#efddac", // -color--yellow-base
     // match
-    "editor.findMatchBackground": "#62a1f080", // -color--blue-base at 50% opacity - example: current search match
-    // "editor.findMatchBorder": "#62a1f080", // -color--blue-base at 50% opacity
+    "editor.findMatchBackground": "#62a1f080", // -color--blue-deep at 50% opacity - example: current search match
+    // "editor.findMatchBorder": "#62a1f080", // -color--blue-deep at 50% opacity
     "editor.findMatchForeground": "#ffffffe6", // -color-white at 90% opacity
-    "editor.findMatchHighlightBackground": "#62a1f066", // -color--blue-base at 40% opacity - Color of the other search matches
-    // "editor.findMatchHighlightBorder": "#62a1f073", // -color--blue-base at 45% opacity
+    "editor.findMatchHighlightBackground": "#62a1f066", // -color--blue-deep at 40% opacity - Color of the other search matches
+    // "editor.findMatchHighlightBorder": "#62a1f073", // -color--blue-deep at 45% opacity
     "editor.findMatchHighlightForeground": "#ffffffe6", // -color-white at 90% opacity
     "editor.findRangeHighlightBackground": "#ffffff1a", // -color--white at 10% opacity - example: using finder widget with selection search only
-    "editor.rangeHighlightBackground": "#62a1f033", // -color--blue-base at 20% opacity - example: current search match line
+    "editor.rangeHighlightBackground": "#62a1f033", // -color--blue-deep at 20% opacity - example: current search match line
     // match selection
-    "editor.hoverHighlightBackground": "#ffffff33", // -color--white at 20% opacity
-    "editor.selectionBackground": "#006fd980", // -color--blue-bg at 50% opacity
-    "editor.inactiveSelectionBackground": "#006fd94d", // -color--blue-bg at 30% opacity
-    "editor.selectionHighlightBackground": "#62a1f066", // -color-blue-base at 40% opacity | example: highlighting a word in the editor, the other words are highlighted
+    "editor.hoverHighlightBackground": "#ffffff33", // -color--white at 20% opacity | example: hovering over a word
+    "editor.selectionBackground": "#006fd980", // -color--blue-bg at 50% opacity | example: active selection bg
+    "editor.inactiveSelectionBackground": "#006fd94d", // -color--blue-bg at 30% opacity | example: inactive selection bg
+    "editor.selectionHighlightBackground": "#62a1f066", // -color--blue-deep at 40% opacity | example: highlighting a word in the editor, the other matching words are highlighted in this color
     // ruler
     "editorRuler.foreground": "#eeae7b1a", // -color--orange-base at 10% opacity - example line width guide line
     // scrollbar
+    "editorOverviewRuler.addedForeground": "#a2cd8b99", // -color--green-base at 60% opacity - example: scrollbar diff indicator
     "editorOverviewRuler.background": "#242424", // -color--gray-fade-black (match editor bg)
     "editorOverviewRuler.border": "#242424", // -color--gray-fade-black (match editor bg)
-    "editorOverviewRuler.modifiedForeground": "#efddac99", // -color--yellow-base at 60% opacity
-    "editorOverviewRuler.addedForeground": "#a2cd8b99", // -color--green-base at 60% opacity - example: scrollbar diff indicator
+    "editorOverviewRuler.bracketMatchForeground": "#7a7a7ae6", // -color--gray-medium-dark at 90% opacity
     "editorOverviewRuler.deletedForeground": "#ef918299", // -color--red-base at 60% opacity
     "editorOverviewRuler.errorForeground": "#ef9182e6", // -color--red-base at 90% opacity
-    "editorOverviewRuler.warningForeground": "#eeae7be6", // -color--orange-base at 90% opacity
+    "editorOverviewRuler.findMatchForeground":  "#62a1f066", // -color--blue-deep at 40% opacity
     "editorOverviewRuler.infoForeground": "#92c1fde6", // -color--blue-base at 90% opacity
-    "editorOverviewRuler.bracketMatchForeground": "#7a7a7ae6", // -color--gray-medium-dark at 90% opacity
-    "editorOverviewRuler.findMatchForeground": "#62a1f066",
+    "editorOverviewRuler.modifiedForeground": "#efddac99", // -color--yellow-base at 60% opacity
+    "editorOverviewRuler.selectionHighlightForeground": "#62a1f066", // -color--blue-deep at 40% opacity | example: match when highlighting a word (matches editor.selectionHighlightBackground)
+    "editorOverviewRuler.warningForeground": "#eeae7be6", // -color--orange-base at 90% opacity
+    "editorOverviewRuler.wordHighlightForeground": "#ffffff33", // -color--white at 20% opacity | example: match when cursor inside word that is a function callback (match editor.wordHighlightBackground)
+    "editorOverviewRuler.wordHighlightStrongForeground": "#ea8eab99", // -color--pink-base at 60% opacity | example: match when cursor inside word that is a function or variable definition (match editor.wordHighlightStrongBackground)
+    "editorOverviewRuler.wordHighlightTextForeground": "#ffffff33", // -color--white at 20% opacity | example: match when cursor inside word (match editor.wordHighlightTextBackground)
+
     // errors and warnings
     "editorError.foreground": "#ef9182", // -color--red-base for error squiggly lines
     "editorHint.foreground": "#efddac", // -color--yellow-base for 3 dots underline
@@ -127,14 +132,15 @@
     "editorWidget.border": "#383838", // -color--gray-fade
     "editorWidget.resizeBorder": "#424242", // -color--oklch-38-gray
     // word highlight
-    "editor.wordHighlightBackground": "#ffffff33", // -color--white at 20% opacity (read-access, such as JS variable)
-    "editor.wordHighlightStrongBackground": "#92c1fd66", // -color--blue-base at 40% opacity (write-access, such as JS variable)
-    "editor.wordHighlightTextBackground": "#ffffff33", // -color--white at 20% opacity
+    "editor.wordHighlightBackground": "#ffffff33", // -color--white at 20% opacity | example: match when cursor inside word that is a function callback
+    "editor.wordHighlightStrongBackground": "#ea8eab4d", // -color--pink-deep at 30% opacity | example: match when cursor inside word that is a function or variable definition
+    "editor.wordHighlightTextBackground": "#ffffff33", // -color--white at 20% opacity | example: match when cursor inside word in json file with scheme
     // unicode
     "editorUnicodeHighlight.border": "#eeae7b80", // -color--orange-base at 50% opacity
     "editorUnicodeHighlight.background": "#eeae7b4d", // -color--orange-base at 30% opacity
     // sticky stroll
     "editorStickyScroll.background": "#292929",
+    "editorStickyScrollHover.background": "#161616", // -color--oklch-20-gray (match editor.lineHighlightBackground)
 
     //*** EDITOR GROUPS & TABS ***
     // groups
@@ -224,7 +230,7 @@
     "scrollbarSlider.hoverBackground": "#7a7a7a4d", //-color--gray-medium-dark at 30% opacity
 
     //*** SELECTION ***
-    "selection.background": "#62a1f080", // -color--blue-base at 50% opacity - example: search input selection
+    "selection.background": "#62a1f080", // -color--blue-deep at 50% opacity - example: search input selection
 
     //*** SETTINGS ***
     "settings.modifiedItemIndicator": "#efddac", // -color--yellow-base - example: vertical line color in Settings UI
@@ -268,8 +274,8 @@
     "terminal.ansiYellow": "#efddac", // -color--yellow-base
 
     //*** TEXT COLORS ***
-    "textBlockQuote.background": "#383838", // -color--gray-fade - example: markdown > quote in preview mode
-    "textBlockQuote.border": "#636363", // -color--gray-dark
+    "textBlockQuote.background": "#ffffff12", // -color--gray-fade - example: markdown > quote in preview mode
+    "textBlockQuote.border": "#ffffff24", // -color--gray-dark
     "textCodeBlock.background": "#ffffff1a", // -color--white at 10% opacity - example: hover over settings json "workbench.startupEditor"
     "textLink.activeForeground": "#efddac", // -color--yellow-base
     "textLink.foreground": "#92c1fd", // -color--blue-base - example: Settings UI text link
@@ -317,6 +323,9 @@
     },
   },
   "tokenColors":[
+    //--------------------------------------------------------------------------
+    //--- FONT STYLES ---
+    //--------------------------------------------------------------------------
     {
       "name": "BOLD",
       "scope": [
@@ -341,6 +350,9 @@
         "keyword.operator.return-value.php",
         "keyword.other.type.php",
         "meta.function.php support.class.php",
+        //*** TYPESCRIPT ***
+        "keyword.operator.type.annotation.ts",
+        "support.type.primitive.ts",
       ],
       "settings": {
         "fontStyle": "italic"
@@ -356,16 +368,13 @@
         "fontStyle": "bold italic"
       }
     },
-    {
-      "name": "NORMAL",
-      "scope": [
-        "comment.rainbow4", // For Rainbow CSV extension
-        "invalid.rainbow10", // For Rainbow CSV extension
-      ],
-      "settings": {
-        "fontStyle": ""
-      }
-    },
+    // {
+    //   "name": "NORMAL",
+    //   "scope": [],
+    //   "settings": {
+    //     "fontStyle": ""
+    //   }
+    // },
     {
       "name": "STRIKETHROUGH",
       "scope": [
@@ -376,50 +385,71 @@
         "fontStyle": "strikethrough"
       }
     },
+
+    //--------------------------------------------------------------------------
+    //--- GRAY SHADES ---
+    //--------------------------------------------------------------------------
     {
-      "name": "Gray Dark Fade (OKLCH 42%)",
+      "name": "GRAY WHITE (OKLCH 98%)",
       "scope": [
         //*** DEFAULT ***
-        "invalid",
+        "meta.method-call entity.name.function",
+        "support.function",
+        //*** APACHE ***
+        "entity.helper.apacheconf", // Using Apache Conf extension for syntax grammar
+        //*** CSS ***
+        "entity.other.attribute-name.pseudo-class",
+        "entity.other.attribute-name.pseudo-element",
+        //*** HTML ***
+        "text.html",
+        "meta.element.structure.svg.text.html",
+        //*** JSX ***
+        "meta.jsx.children",
+        //*** XML ***
+        "text.xml",
       ],
       "settings": {
-        "foreground": "#4d4d4d" // -color--gray-dark-fade
+        "foreground": "#f8f8f8"
       }
     },
+    // {
+    //   "name": "GRAY WHITE-LIGHT (OKLCH 90%)",
+    //   "scope": [],
+    //   "settings": { "foreground": "#dedede" }
+    // },
     {
-      "name": "Gray Medium Dark (OKLCH 58%)",
+      "name": "GRAY WHITE-LIGHT-LIGHT (OKLCH 86%)",
+      "scope": [
+        //*** JAVASCRIPT ***
+        "variable.other.object", // semantic token type for JS
+        //*** SHELL ***
+        "meta.scope",
+      ],
+      "settings": { "foreground": "#d1d1d1" }
+    },
+    {
+      "name": "GRAY LIGHT (OKLCH 82%)",
       "scope": [
         //*** DEFAULT ***
-        "comment",
-        "comment constant",
-        "comment entity.name.type",
-        "comment keyword",
-        "comment meta.tag.inline",
-        "comment punctuation",
-        "comment storage",
-        "comment storage.modifier",
-        "comment storage.type",
-        "comment support",
-        "comment variable",
-        "punctuation.definition.comment",
-        "source.embedded",
+        "meta.embedded.block", // Such as  ```shell text``` in markdown
+        "support.constant.property", // semantic token type for JS
+        "support.variable", // semantic token type for JS
+        //*** HTML ***
+        "entity.other.attribute-name",
       ],
       "settings": {
-        "foreground": "#7a7a7a", // -color--gray-medium-dark
+        "foreground": "#c4c4c4"
       }
     },
+    // {
+    //   "name": "GRAY LIGHT-MEDIUM (OKLCH 74%)",
+    //   "scope": [],
+    //   "settings": {
+    //     "foreground": "#ababab"
+    //   }
+    // },
     {
-      "name": "Gray Dark (50% OKLCH)",
-      "scope": [
-        //*** MARKDOWN ***
-        "markup.underline.link",
-      ],
-      "settings": {
-        "foreground": "#636363" // -color--gray-dark
-      }
-    },
-    {
-      "name": "Gray Medium (OKLCH 66%) [PUNCTUATION]",
+      "name": "GRAY MEDIUM (OKLCH 66%) [PUNCTUATION]",
       "scope": [
         //*** DEFAULT ***
         "entity.name",
@@ -452,71 +482,59 @@
         "meta.parameter-expansion",
       ],
       "settings": {
-        "foreground": "#929292" // --color--gray-medium
+        "foreground": "#929292"
       }
     },
     {
-      "name": "Gray Light Medium (OKLCH 74%)",
-      "scope": [
-        // "comment keyword",
-      ],
-      "settings": {
-        "foreground": "#ababab" // -color--gray-light-medium
-      }
-    },
-    {
-      "name": "Gray Light (OKLCH 82%)",
+      "name": "GRAY MEDIUM-DARK (OKLCH 58%) [COMMENTS]",
       "scope": [
         //*** DEFAULT ***
-        "entity.name.label",
-        "support.constant.property", // semantic token type for JS
-        "support.variable", // semantic token type for JS
-        //*** EXTENSIONS ***
-        "comment.rainbow4", // For Rainbow CSV extension
-        //*** HTML ***
-        "entity.other.attribute-name",
+        "comment",
+        "comment constant",
+        "comment entity.name.type",
+        "comment keyword",
+        "comment meta.tag.inline",
+        "comment punctuation",
+        "comment storage",
+        "comment storage.modifier",
+        "comment storage.type",
+        "comment support",
+        "comment variable",
+        "punctuation.definition.comment",
+        "source.embedded",
       ],
       "settings": {
-        "foreground": "#c4c4c4" // -color--gray-light
+        "foreground": "#7a7a7a",
       }
     },
     {
-      "name": "GRAY WHITE-LIGHT-2 (OKLCH 86%)",
-      "scope": [
-        //*** JAVASCRIPT ***
-        "variable.other.object", // semantic token type for JS
-        //*** SHELL ***
-        "meta.scope",
-      ],
-      "settings": { "foreground": "#d1d1d1" }
-    },
-    {
-      "name": "Gray White (OKLCH 98%)",
+      "name": "GRAY DARK (OKLCH 50%)",
       "scope": [
         //*** DEFAULT ***
-        "meta.method-call entity.name.function",
-        "support.function",
-        //*** APACHE ***
-        "entity.helper.apacheconf", // Using Apache Conf extension for syntax grammar
-        //*** CSS ***
-        "entity.other.attribute-name.pseudo-class",
-        "entity.other.attribute-name.pseudo-element",
-        //*** EXTENSIONS ***
-        "markup.bold.rainbow9", // For Rainbow CSV extension
-        //*** HTML ***
-        "text.html",
-        "meta.element.structure.svg.text.html",
-        //*** JSX ***
-        "meta.jsx.children",
-        //*** XML ***
-        "text.xml",
+        "invalid",
+        //*** MARKDOWN ***
+        "markup.underline.link",
       ],
       "settings": {
-        "foreground": "#f8f8f8" // -color--gray-white
+        "foreground": "#636363"
       }
     },
+    // {
+    //   "name": "GRAY DARK-FADE (OKLCH 42%)",
+    //   "scope": [],
+    //   "settings": { "foreground": "#4d4d4d" }
+    // },
+    // {
+    //   "name": "GRAY FADE (OKLCH 34%)",
+    //   "scope": [],
+    //   "settings": { "foreground": "#525252" }
+    // },
+
+    //--------------------------------------------------------------------------
+    //--- COLOR CUSTOMIZATIONS ---
+    //--------------------------------------------------------------------------
     {
-      "name": "Blue Base",
+      "name": "BLUE BASE",
       "scope": [
         //*** DEFAULT ***
         "storage.type",
@@ -527,8 +545,6 @@
         "meta.attribute.unrecognized.xmlns:xlink.html string",
         "meta.function.url string.quoted.double", //css such as content: url("");
         "meta.function.url string.quoted.single", //css such as content: url('');
-        //*** EXTENSIONS ***
-        "constant.numeric.rainbow7", // For Rainbow CSV extension
         //*** HTML ***
         "meta.attribute.href string",
         "meta.attribute.src.html string",
@@ -547,8 +563,13 @@
         "foreground": "#92c1fd" // -color--blue-base
       }
     },
+    // {
+    //   "name": "BLUE DEEP",
+    //   "scope": [],
+    //   "settings": { "foreground": "#62a1f0" }
+    // },
     {
-      "name": "Blue Fade",
+      "name": "BLUE FADE",
       "scope": [
         //*** PHP - TYPEHINT ***
         "keyword.other.type.php", // For parameter type hinting and other types
@@ -559,23 +580,27 @@
         "meta.function.php support.class.php", // ... : DB
         "meta.function.parameter.typehinted.php support", // ( \WP_Query $query )
         "meta.other.type.phpdoc.php support.class", // @param \WP_Post
+        //*** TYPESCRIPT ***
+        "keyword.operator.type.annotation.ts",
+        "support.type.primitive.ts",
       ],
       "settings": {
-        "foreground": "#a9c0de" // -color--blue-fade
+        "foreground": "#a9c0de"
       }
     },
     {
-      "name": "Blue Base at 50% opacity",
+      "name": "BLUE 50 OPACITY",
       "scope": [
         //*** MARKDOWN ***
         "markup.strikethrough.markdown string.other.link.title.markdown",
       ],
       "settings": {
-        "foreground": "#92c1fd80" // -color--blue-base at 50% opacity
+        "foreground": "#92c1fd80"
       }
     },
+
     {
-      "name": "Cyan Base",
+      "name": "CYAN BASE",
       "scope": [
         //*** DEFAULT ***
         "entity.name.type", // such are class or trait name in PHP
@@ -590,8 +615,6 @@
         //*** CSS ***
         "meta.at-rule support.function", // such as `calc` and `var`
         "meta.property-value",
-        //*** EXTENSIONS ***
-        "rainbow1", // For Rainbow CSV extension
         //*** INI ***
         "keyword.other.definition",
         //*** PHP ***
@@ -606,13 +629,15 @@
         "entity.name.tag.yaml",
       ],
       "settings": {
-        "foreground": "#89dfdf" // -color--cyan-base
+        "foreground": "#89dfdf"
       }
     },
+
     {
-      "name": "Green Base",
+      "name": "GREEN BASE",
       "scope": [
         //*** DEFAULT ***
+        "entity.name.label",  // property??
         "entity.other.attribute-name.class",
         "meta.attribute.class string",
         "meta.object-literal",
@@ -622,8 +647,6 @@
         "variable.other.object.property",
         //*** APACHE ***
         "entity.mime-type.apacheconf",
-        //*** EXTENSIONS ***
-        "string.rainbow5", // For Rainbow CSV extension
         //*** MARKDOWN ***
         "entity.name.section.markdown",
         "markup.heading.markdown string.other.link.title.markdown",
@@ -641,11 +664,12 @@
         "entity.other.attribute-name.parent-selector-suffix.css punctuation", // SCSS &__name
       ],
       "settings": {
-        "foreground": "#a2cd8b" // -color--green-base
+        "foreground": "#a2cd8b"
       }
     },
+
     {
-      "name": "Orange Base",
+      "name": "ORANGE BASE",
       "scope": [
         //*** DEFAULT ***
         "entity.other.attribute-name.id",
@@ -659,8 +683,6 @@
         "meta.at-rule.keyframes",
         "support.constant.container-name.container.css", // For @container <container-name> (this token is from my CSS Nesting Syntax Highlighting extension)
         "variable.parameter.misc.css", // such as `content: counter(count, decimal);`
-        //*** EXTENSIONS ***
-        "variable.parameter.rainbow6", // For Rainbow CSV extension
         //*** LOG ***
         "log.warning",
         //*** PHP ***
@@ -673,17 +695,16 @@
         "entity.other.attribute-name.scss",
       ],
       "settings": {
-        "foreground": "#eeae7b" // -color--orange-base
+        "foreground": "#eeae7b"
       }
     },
+
     {
-      "name": "Pink Base",
+      "name": "PINK BASE",
       "scope": [
         //*** DEFAULT ***
         "punctuation.definition.variable",
         "variable",
-        //*** EXTENSIONS ***
-        "entity.name.type.rainbow8", // For Rainbow CSV extension
         //*** PHP ***
         "string.quoted.double.php variable.other.php punctuation.definition.variable.php", // for $ in string interpolation.
         //*** PYTHON ***
@@ -692,11 +713,12 @@
         "variable.other.assignment.shell",
       ],
       "settings": {
-        "foreground": "#fcb7cb" // -color--pink-base
+        "foreground": "#fcb7cb"
       }
     },
+
     {
-      "name": "Purple Base",
+      "name": "PURPLE BASE",
       "scope": [
         //*** DEFAULT ***
         "constant",
@@ -705,8 +727,6 @@
         "entity.status.apacheconf",
         //*** CSS ***
         "support.constant.boolean.container.css", // for @container <style-query> boolean property-value (this token is from my CSS Nesting Syntax Highlighting extension)
-        //*** EXTENSIONS ***
-        "entity.name.function.rainbow3", // For Rainbow CSV extension
         //*** HTML ***
         "constant punctuation.definition.entity", // HTML symbol entity
         "meta.attribute.async.html entity.other.attribute-name",
@@ -734,28 +754,27 @@
         "punctuation.definition.constant.xml",
       ],
       "settings": {
-        "foreground": "#d6aaea" // -color--purple-base
+        "foreground": "#d6aaea"
       }
     },
     {
-      "name": "Purple Deep",
+      "name": "PURPLE DEEP",
       "scope": [
         //*** DEFAULT ***
         "entity.other.attribute-name.namespace",
       ],
       "settings": {
-        "foreground": "#bd84d7", // -color--purple-deep
+        "foreground": "#bd84d7",
       }
     },
+
     {
-      "name": "Red Base",
+      "name": "RED BASE",
       "scope": [
         //*** DEFAULT ***
         "entity.name.tag",
         "keyword",
         "storage.modifier",
-        //*** EXTENSIONS ***
-        "invalid.rainbow10", // For Rainbow CSV extension
         //*** LOG ***
         "log.error",
         //*** PHP ***
@@ -764,27 +783,26 @@
         "punctuation.separator.statement.and.shell", //example: &&
       ],
       "settings": {
-        "foreground": "#ef9182" // -color--red-base
+        "foreground": "#ef9182"
       }
     },
     {
-      "name": "Red Deep",
+      "name": "RED DEEP",
       "scope": [
         //*** DEFAULT ***
       ],
       "settings": {
-        // "foreground": "#db6656", // -color--red-deep
+        // "foreground": "#db6656",
       }
     },
+
     {
-      "name": "Yellow Base",
+      "name": "YELLOW BASE",
       "scope": [
         //*** DEFAULT ***
         "string",
         //*** CSS ***
         "meta.attribute-selector entity.other.attribute-name",
-        //*** EXTENSIONS ***
-        "keyword.rainbow2", // For Rainbow CSV extension
         //*** MARKDOWN ***
         "string.other.link.description.markdown",
         //*** PHP ***
@@ -796,17 +814,17 @@
         "meta.tag.sgml.doctype.xml",
       ],
       "settings": {
-        "foreground": "#efddac" // -color--yellow-base
+        "foreground": "#efddac"
       }
     },
     {
-      "name": "Yellow Deep",
+      "name": "YELLOW DEEP",
       "scope": [
         //*** MARKDOWN ***
         "markup.inline.raw.string.markdown",
       ],
       "settings": {
-        "foreground": "#d7bb70" // -color--yellow-deep
+        "foreground": "#d7bb70"
       }
     },
 
@@ -829,7 +847,7 @@
         "source.dockerfile keyword.other.special-method",
       ],
       "settings": {
-        "foreground": "#89dfdf" // -color--cyan-base
+        "foreground": "#89dfdf"
       }
     },
     {
@@ -838,7 +856,7 @@
         "source.dockerfile entity.name",
       ],
       "settings": {
-        "foreground": "#a2cd8b" // -color--green-base
+        "foreground": "#a2cd8b"
       }
     },
     {
@@ -847,7 +865,7 @@
         "source.dockerfile constant.other.option",
       ],
       "settings": {
-        "foreground": "#eeae7b", // -color--orange-base
+        "foreground": "#eeae7b",
       }
     },
     {
@@ -856,7 +874,7 @@
         "punctuation.separator.statement.and.shell.dockerfile",
       ],
       "settings": {
-        "foreground": "#ef9182" // -color--red-base
+        "foreground": "#ef9182"
       }
     },
 
@@ -865,30 +883,31 @@
     // https://marketplace.visualstudio.com/items?itemName=shanoor.vscode-nginx
     //--------------------------------------------------------------------------
     {
-      "name": "[NGINX] - PUNCTUATION - GRAY MEDIUM (OKLCH 66%)",
-      "scope": [
-        "source.nginx constant.character",
-      ],
-      "settings": {
-        "foreground": "#929292", // -color--gray-medium
-      }
-    },
-    {
       "name": "[NGINX] - GRAY LIGHT (OKLCH 82%)",
       "scope": [
         "source.nginx",
       ],
       "settings": {
-        "foreground": "#c4c4c4" // -color--gray-light
+        "foreground": "#c4c4c4"
       }
     },
+    {
+      "name": "GRAY MEDIUM (OKLCH 66%) [PUNCTUATION]",
+      "scope": [
+        "source.nginx constant.character",
+      ],
+      "settings": {
+        "foreground": "#929292",
+      }
+    },
+
     {
       "name": "[NGINX] - BLUE BASE",
       "scope": [
         "source.nginx constant.language.module",
       ],
       "settings": {
-        "foreground": "#92c1fd" // -color--blue-base
+        "foreground": "#92c1fd"
       }
     },
     {
@@ -897,7 +916,7 @@
         "source.nginx constant.language",
       ],
       "settings": {
-        "foreground": "#89dfdf"  // -color--cyan-base
+        "foreground": "#89dfdf"
       }
     },
     {
@@ -906,7 +925,133 @@
         "source.nginx constant.language.directive.module.main"
       ],
       "settings": {
-        "foreground": "#ef9182" // -color--red-base
+        "foreground": "#ef9182"
+      }
+    },
+
+    //--------------------------------------------------------------------------
+    // Output Colorizer - Extension
+    // https://marketplace.visualstudio.com/items?itemName=IBM.output-colorizer
+    //--------------------------------------------------------------------------
+    {
+      "name": "GRAY WHITE (OKLCH 98%)",
+      "scope": [
+        "code.log support", // For "Output Colorizer" extension
+      ],
+      "settings": { "foreground": "#f8f8f8" }
+    },
+
+    {
+      "name": "RED BASE",
+      "scope": [
+        "code.log invalid",
+      ],
+      "settings": { "foreground": "#ef9182" }
+    },
+
+    //--------------------------------------------------------------------------
+    // Rainbow CSV - Extension
+    // https://marketplace.visualstudio.com/items?itemName=mechatroner.rainbow-csv
+    //--------------------------------------------------------------------------
+    {
+      "name": "NORMAL",
+      "scope": [
+        "comment.rainbow4",
+        "invalid.rainbow10",
+      ],
+      "settings": {
+        "fontStyle": ""
+      }
+    },
+    {
+      "name": "GRAY WHITE (OKLCH 98%)",
+      "scope": [
+        "markup.bold.rainbow9",
+      ],
+      "settings": {
+        "foreground": "#f8f8f8"
+      }
+    },
+    {
+      "name": "GRAY LIGHT (OKLCH 82%)",
+      "scope": [
+        "comment.rainbow4",
+      ],
+      "settings": {
+        "foreground": "#c4c4c4"
+      }
+    },
+
+    {
+      "name": "BLUE BASE",
+      "scope": [
+        "constant.numeric.rainbow7",
+      ],
+      "settings": {
+        "foreground": "#92c1fd"
+      }
+    },
+    {
+      "name": "CYAN BASE",
+      "scope": [
+        "rainbow1",
+      ],
+      "settings": {
+        "foreground": "#89dfdf"
+      }
+    },
+    {
+      "name": "GREEN BASE",
+      "scope": [
+        "string.rainbow5",
+      ],
+      "settings": {
+        "foreground": "#a2cd8b"
+      }
+    },
+    {
+      "name": "ORANGE BASE",
+      "scope": [
+        "variable.parameter.rainbow6",
+      ],
+      "settings": {
+        "foreground": "#eeae7b"
+      }
+    },
+    {
+      "name": "PINK BASE",
+      "scope": [
+        "entity.name.type.rainbow8",
+      ],
+      "settings": {
+        "foreground": "#fcb7cb"
+      }
+    },
+    {
+      "name": "PURPLE BASE",
+      "scope": [
+        "entity.name.function.rainbow3",
+      ],
+      "settings": {
+        "foreground": "#d6aaea"
+      }
+    },
+    {
+      "name": "RED BASE",
+      "scope": [
+        "invalid.rainbow10",
+      ],
+      "settings": {
+        "foreground": "#ef9182"
+      }
+    },
+    {
+      "name": "YELLOW BASE",
+      "scope": [
+        "keyword.rainbow2",
+      ],
+      "settings": {
+        "foreground": "#efddac"
       }
     },
   ]
