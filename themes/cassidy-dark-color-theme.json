@@ -102,8 +102,8 @@
     "editorRuler.foreground": "#eeae7b1a", // -color--orange-base at 10% opacity - example line width guide line
     // scrollbar
     "editorOverviewRuler.addedForeground": "#a2cd8b99", // -color--green-base at 60% opacity - example: scrollbar diff indicator
-    "editorOverviewRuler.background": "#242424", // -color--gray-fade-black (match editor bg)
-    "editorOverviewRuler.border": "#242424", // -color--gray-fade-black (match editor bg)
+    "editorOverviewRuler.background": "#0000000d", // -color--black at 5% opacity
+    "editorOverviewRuler.border": "#0000001a", // -color--black at 10% opacity
     "editorOverviewRuler.bracketMatchForeground": "#7a7a7ae6", // -color--gray-medium-dark at 90% opacity
     "editorOverviewRuler.deletedForeground": "#ef918299", // -color--red-base at 60% opacity
     "editorOverviewRuler.errorForeground": "#ef9182e6", // -color--red-base at 90% opacity
@@ -245,6 +245,8 @@
     "sideBarSectionHeader.border": "#292929", // -color--oklch-28-gray (match sidebar border)
     "sideBarSectionHeader.foreground": "#929292", // -color--gray-medium
 
+    "sideBarStickyScroll.background": "#2e2e2e",
+
     //*** STATUS BAR ***
     "statusBar.background": "#383838", // -color--gray-fade (match title bar bg)
     "statusBar.foreground": "#929292", // -color--gray-medium
@@ -272,6 +274,8 @@
     "terminal.ansiRed": "#ef9182", // -color--red-base
     "terminal.ansiWhite": "#f8f8f8", // -color--gray-white
     "terminal.ansiYellow": "#efddac", // -color--yellow-base
+
+    "terminalOverviewRuler.border": "#242424", // (match terminal bg)
 
     //*** TEXT COLORS ***
     "textBlockQuote.background": "#ffffff12", // -color--gray-fade - example: markdown > quote in preview mode
@@ -468,6 +472,7 @@
         "comment keyword", // example: @package in PHPdoc comment
         "comment keyword.operator.nullable-type.php", // example: ?array in docblock type hint
         "comment support.class", // example: `editor` in @return editor in PHPdoc comment
+        "keyword.other.phpdoc.php", // The PHPDoc block keywords
         "keyword.operator.return-value.php", // For function return type colon
         "meta.embedded.block.php", // For else colon when using alternative syntax
         "meta.embedded.line.php", // For closing bracket } when opening a new PHP tag
@@ -734,6 +739,8 @@
         "meta.attribute.defer.html entity.other.attribute-name",
         //*** INI ***
         "source.ini",
+        //*** JAVASCRIPT ***
+        "variable.other.constant.object.js",
         //*** PHP ***
         "entity.name.type.namespace.php", // namespace name
         //*** REGEX ***
