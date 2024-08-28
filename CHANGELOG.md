@@ -2,6 +2,17 @@
 
 All notable changes to this project are documented in this file.
 
+## v1.1.1
+
+_2024-08-28_
+
+- Added `variable.other.constant.object.js` to purple color.
+- Added `keyword.other.phpdoc.php` to gray medium (punctuation) color.
+- Added `sideBarStickyScroll.background` to #2e2e2e color.
+- Added `terminalOverviewRuler.border` to match terminal background color.
+- Updated `editorOverviewRuler.background` to #0000000d (black at 5% opacity).
+- Updated `editorOverviewRuler.border` to #0000001a (black at 10% opacity).
+
 ## v1.1.0
 
 _2024-08-27_
