@@ -85,14 +85,14 @@
     // link
     "editorLink.activeForeground": "#efddac", // -color--yellow-base
     // match
-    "editor.findMatchBackground": "#62a1f080", // -color--blue-deep at 50% opacity - example: current search match
+    "editor.findMatchBackground": "#d6aaeacc", // -color--purple-base at 80% opacity - example: current search match
     // "editor.findMatchBorder": "#62a1f080", // -color--blue-deep at 50% opacity
-    "editor.findMatchForeground": "#ffffffe6", // -color-white at 90% opacity
-    "editor.findMatchHighlightBackground": "#62a1f066", // -color--blue-deep at 40% opacity - Color of the other search matches
+    "editor.findMatchForeground": "#000000b3", // -color--black 70% opacity - example: Color of the other search matches
+    "editor.findMatchHighlightBackground": "#d6aaea80", // -color--purple-base at 50% opacity - Color of the other search matches
     // "editor.findMatchHighlightBorder": "#62a1f073", // -color--blue-deep at 45% opacity
-    "editor.findMatchHighlightForeground": "#ffffffe6", // -color-white at 90% opacity
-    "editor.findRangeHighlightBackground": "#ffffff1a", // -color--white at 10% opacity - example: using finder widget with selection search only
-    "editor.rangeHighlightBackground": "#62a1f033", // -color--blue-deep at 20% opacity - example: current search match line
+    "editor.findMatchHighlightForeground": "#000000e6", // -color--black at 90% opacity - current search match
+    "editor.findRangeHighlightBackground": "#d6aaea1a", // -color--purple-base at 10% opacity - example: selection search only
+    "editor.rangeHighlightBackground": "#d6aaea26", // -color--purple-base at 15% opacity - example: current search match line
     // match selection
     "editor.hoverHighlightBackground": "#ffffff33", // -color--white at 20% opacity | example: hovering over a word
     "editor.selectionBackground": "#006fd980", // -color--blue-bg at 50% opacity | example: active selection bg
@@ -107,7 +107,7 @@
     "editorOverviewRuler.bracketMatchForeground": "#7a7a7ae6", // -color--gray-medium-dark at 90% opacity
     "editorOverviewRuler.deletedForeground": "#ef918299", // -color--red-base at 60% opacity
     "editorOverviewRuler.errorForeground": "#ef9182e6", // -color--red-base at 90% opacity
-    "editorOverviewRuler.findMatchForeground":  "#62a1f066", // -color--blue-deep at 40% opacity
+    "editorOverviewRuler.findMatchForeground":  "#d6aaea80", // -color--purple-base at 50% opacity
     "editorOverviewRuler.infoForeground": "#92c1fde6", // -color--blue-base at 90% opacity
     "editorOverviewRuler.modifiedForeground": "#efddac99", // -color--yellow-base at 60% opacity
     "editorOverviewRuler.selectionHighlightForeground": "#62a1f066", // -color--blue-deep at 40% opacity | example: match when highlighting a word (matches editor.selectionHighlightBackground)
