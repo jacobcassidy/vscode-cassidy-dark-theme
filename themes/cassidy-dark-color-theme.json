@@ -113,7 +113,7 @@
     "editorOverviewRuler.selectionHighlightForeground": "#62a1f066", // -color--blue-deep at 40% opacity | example: match when highlighting a word (matches editor.selectionHighlightBackground)
     "editorOverviewRuler.warningForeground": "#eeae7be6", // -color--orange-base at 90% opacity
     "editorOverviewRuler.wordHighlightForeground": "#ffffff33", // -color--white at 20% opacity | example: match when cursor inside word that is a function callback (match editor.wordHighlightBackground)
-    "editorOverviewRuler.wordHighlightStrongForeground": "#ea8eab99", // -color--pink-base at 60% opacity | example: match when cursor inside word that is a function or variable definition (match editor.wordHighlightStrongBackground)
+    "editorOverviewRuler.wordHighlightStrongForeground": "#fcb7cb80", // -color--pink-base at 50% opacity | example: match when cursor inside word that is a function or variable definition (match editor.wordHighlightStrongBackground)
     "editorOverviewRuler.wordHighlightTextForeground": "#ffffff33", // -color--white at 20% opacity | example: match when cursor inside word (match editor.wordHighlightTextBackground)
 
     // errors and warnings
@@ -133,7 +133,7 @@
     "editorWidget.resizeBorder": "#424242", // -color--oklch-38-gray
     // word highlight
     "editor.wordHighlightBackground": "#ffffff33", // -color--white at 20% opacity | example: match when cursor inside word that is a function callback
-    "editor.wordHighlightStrongBackground": "#ea8eab4d", // -color--pink-deep at 30% opacity | example: match when cursor inside word that is a function or variable definition
+    "editor.wordHighlightStrongBackground": "#fcb7cb40", // -color--pink-base at 25% opacity | example: match when cursor inside word that is a function or variable definition
     "editor.wordHighlightTextBackground": "#ffffff33", // -color--white at 20% opacity | example: match when cursor inside word in json file with scheme
     // unicode
     "editorUnicodeHighlight.border": "#eeae7b80", // -color--orange-base at 50% opacity
