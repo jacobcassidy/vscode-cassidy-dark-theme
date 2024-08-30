@@ -110,7 +110,7 @@
     "editorOverviewRuler.findMatchForeground":  "#d6aaea80", // -color--purple-base at 50% opacity
     "editorOverviewRuler.infoForeground": "#92c1fde6", // -color--blue-base at 90% opacity
     "editorOverviewRuler.modifiedForeground": "#efddac99", // -color--yellow-base at 60% opacity
-    "editorOverviewRuler.selectionHighlightForeground": "#62a1f066", // -color--blue-deep at 40% opacity | example: match when highlighting a word (matches editor.selectionHighlightBackground)
+    "editorOverviewRuler.selectionHighlightForeground": "#62a1f066", // -color--blue-deep at 40% opacity | example: match when highlighting a word (matches editor.selectionHighlightBackground) - CURRENTLY BROKEN WHEN USING SOME EXTENSION COMBOS, SUCH AS PYLANCE AND PHP INTELEPHENSE
     "editorOverviewRuler.warningForeground": "#eeae7be6", // -color--orange-base at 90% opacity
     "editorOverviewRuler.wordHighlightForeground": "#ffffff33", // -color--white at 20% opacity | example: match when cursor inside word that is a function callback (match editor.wordHighlightBackground)
     "editorOverviewRuler.wordHighlightStrongForeground": "#fcb7cb80", // -color--pink-base at 50% opacity | example: match when cursor inside word that is a function or variable definition (match editor.wordHighlightStrongBackground)
