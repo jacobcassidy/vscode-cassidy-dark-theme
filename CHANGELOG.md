@@ -2,6 +2,14 @@
 
 All notable changes to this project are documented in this file.
 
+## v1.1.2
+
+_2024-08-30_
+
+- Added note of bug with `editorOverviewRuler.selectionHighlightForeground` setting.
+- Updated find match with purple-base color.
+- Updated definition highlights with pink-base color.
+
 ## v1.1.1
 
 _2024-08-28_
