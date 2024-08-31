@@ -4,103 +4,121 @@
   "type": "dark",
   "author": "Jacob Cassidy",
   "colors": {
-    //*** BASE COLORS ***
-    "descriptionForeground": "#f8f8f8", // -color--gray-white
-    "errorForeground": "#db6656", // -color--red-deep
-    "focusBorder": "#ffffff1a", // -color--white at 10% opacity
-    "foreground": "#c4c4c4", // -color--gray-light
-    "icon.foreground": "#929292", // -color--gray-medium
-    "sash.hoverBorder": "#ffffff1a", // -color--white at 10% opacity
-    "widget.border": "#ffffff05", // -color--white at 2% opacity
-    "widget.shadow": "#1f1f1f", // -color--oklch-24-gray
-
-    //*** ACTIVITY BAR ***
+    //*** ACTIVITY BAR ***//
+    "activityBar.activeBackground": "#292929", // -color--oklch-28-gray (match sidebar bg)
+    "activityBar.activeBorder": "#efddac80", // -color--yellow-base at 50% opacity
+    "activityBar.activeFocusBorder": "#383838", // -color--gray-fade
     "activityBar.background": "#333333", // -color--oklch-32-gray (match sidebar header)
+    "activityBar.border": "#292929", // -color--oklch-28-gray (match sidebar bg)
     "activityBar.dropBorder": "#636363", // -color--gray-dark
     "activityBar.foreground": "#c4c4c4", // -color--gray-light
     "activityBar.inactiveForeground": "#636363", // -color--gray-dark
-    "activityBar.border": "#292929", // -color--oklch-28-gray (match sidebar bg)
     "activityBarBadge.background": "#efddac", // -color--yellow-base
     "activityBarBadge.foreground": "#121212", // -color--gray-black
-    "activityBar.activeBorder": "#efddac80", // -color--yellow-base at 50% opacity
-    "activityBar.activeBackground": "#292929", // -color--oklch-28-gray (match sidebar bg)
-    "activityBar.activeFocusBorder": "#383838", // -color--gray-fade
-
-    //*** BADGE COLORS ***
-    "badge.foreground": "#f8f8f8", // -color--gray-white
+    //*** BADGE ***//
     "badge.background": "#4d4d4d", // -color--gray-dark-fade
-
-    //*** BUTTON CONTROLS ***
+    "badge.foreground": "#f8f8f8", // -color--gray-white
+    //*** BUTTON ***//
     "button.background": "#006fd9", // -color--blue-bg - example: search settings in settings page
+    //*** CHECKBOX ***//
     "checkbox.background": "#ffffff26", // -color--white at 15% opacity - example: Settings UI checkbox
     "checkbox.foreground": "#f8f8f8", // -color--gray-white
-
-    //*** DIFF EDITOR ***
-    "diffEditor.insertedTextBackground": "#a2cd8b33", // -color--green-base at 20% opacity
-    "diffEditor.removedTextBackground": "#ef918233", // -color--red-base at 20% opacity
+    //*** COMMAND CENTER ***//
+    "commandCenter.activeBackground": "#1f1f1f",
+    "commandCenter.activeBorder": "#1b1b1b",
+    "commandCenter.activeForeground": "#ababab",
+    "commandCenter.background": "#242424",  // -color--oklch-26-gray (match editor)
+    "commandCenter.border": "#1f1f1f", // -color--oklch-24-gray
+    "commandCenter.foreground": "#929292", // -color--gray-medium
+    "commandCenter.inactiveBorder": "#2e2e2e",
+    //*** DESCRIPTION ***//
+    "descriptionForeground": "#f8f8f8", // -color--gray-white
+    //*** DIFF EDITOR ***//
     "diffEditor.insertedLineBackground": "#a2cd8b1a", // -color--green-base at 10% opacity
+    "diffEditor.insertedTextBackground": "#a2cd8b33", // -color--green-base at 20% opacity
     "diffEditor.removedLineBackground": "#ef91821a", // -color--red-base at 10% opacity
+    "diffEditor.removedTextBackground": "#ef918233", // -color--red-base at 20% opacity
+    //*** DIFF EDITOR GUTTER ***//
     "diffEditorGutter.insertedLineBackground": "#a2cd8b1a", // -color--green-base at 10% opacity
     "diffEditorGutter.removedLineBackground": "#ef91821a", // -color--red-base at 10% opacity
+    //*** DIFF EDITOR OVERVIEW ***//
     "diffEditorOverview.insertedForeground": "#a2cd8b4d", // -color--green-base at 30% opacity - example: scrollbar diff indicator
     "diffEditorOverview.removedForeground": "#ef91824d", // -color--red-base at 30% opacity - example: scrollbar diff indicator
-
-    //*** DROPDOWN CONTROLS ***
+    //*** DISABLED ***//
+    "disabledForeground": "#636363", // -color--gray-dark
+    //*** DROPDOWN ***//
     "dropdown.background": "#383838", // -color--gray-fade
-    "dropdown.listBackground": "#333333", // -color--oklch-32-gray (2 shades darker than dropdown.background)
     "dropdown.foreground": "#f8f8f8", // -color--gray-white
-
-    //*** EDITOR COLORS ***
-    // base
+    "dropdown.listBackground": "#333333", // -color--oklch-32-gray (2 shades darker than dropdown.background)
+    //*** EDITOR BACKGROUND ***//
     "editor.background": "#242424", // -color--gray-fade-black
+    //*** EDITOR FIND MATCH ***//
+    "editor.findMatchBackground": "#d6aaeacc", // -color--purple-base at 80% opacity - example: current search match
+    "editor.findMatchForeground": "#000000b3", // -color--black 70% opacity - example: Color of the other search matches
+    "editor.findMatchHighlightBackground": "#d6aaea80", // -color--purple-base at 50% opacity - Color of the other search matches
+    "editor.findMatchHighlightForeground": "#000000e6", // -color--black at 90% opacity - current search match
+    "editor.findRangeHighlightBackground": "#d6aaea1a", // -color--purple-base at 10% opacity | example: selection search only
+    //*** EDITOR FOLD ***//
+    "editor.foldBackground": "#d6aaea1a", // -color--purple-base at 10% opacity
+    //*** EDITOR FOREGROUND ***//
     "editor.foreground": "#c4c4c4", // -color--gray-light
-    // bracket
+    //*** EDITOR HOVER ***//
+    "editor.hoverHighlightBackground": "#ffffff33", // -color--white at 20% opacity | example: hovering over a word
+    //*** EDITOR LINE HIGHLIGHT ***//
+    "editor.lineHighlightBackground": "#161616", // -color--oklch-20-gray (6 shades darker than editor bg)
+    "editor.lineHighlightBorder": "#161616", // -color--oklch-20-gray (match editor.lineHighlightBackground)
+    //*** EDITOR RANGE HIGHLIGHT ***//
+    "editor.rangeHighlightBackground": "#d6aaea26", // -color--purple-base at 15% opacity | example: current search match line
+    //*** EDITOR SELECTION ***//
+    "editor.inactiveSelectionBackground": "#006fd94d", // -color--blue-bg at 30% opacity | example: inactive selection bg
+    "editor.selectionBackground": "#006fd980", // -color--blue-bg at 50% opacity | example: active selection bg
+    "editor.selectionHighlightBackground": "#62a1f066", // -color--blue-deep at 40% opacity | example: highlighting a word in the editor, the other matching words are highlighted in this color
+    //*** EDITOR WORD HIGHLIGHT ***//
+    "editor.wordHighlightBackground": "#ffffff33", // -color--white at 20% opacity | example: match when cursor inside word that is a function callback
+    "editor.wordHighlightStrongBackground": "#fcb7cb40", // -color--pink-base at 25% opacity | example: match when cursor inside word that is a function or variable definition
+    "editor.wordHighlightTextBackground": "#ffffff33", // -color--white at 20% opacity | example: match when cursor inside word in json file with scheme
+    //*** EDITOR BRACKET MATCH ***//
     "editorBracketMatch.border": "#636363", // -color--gray-dark
-    // cursor
+    //*** EDITOR CURSOR ***//
     "editorCursor.background": "#383838", // -color--gray-fade
     "editorCursor.foreground": "#929292", // --color--gray-medium
-    // fold
-    "editor.foldBackground": "#d6aaea1a", // -color--purple-base at 10% opacity
-    // ghost text
-    "editorGhostText.foreground": "#7a7a7a", // -color--gray-medium-dark (OKLCH 58% - match comments)
+    //*** EDITOR ERROR ***//
+    "editorError.foreground": "#ef9182", // -color--red-base for error squiggly lines,
+    //*** EDITOR GHOST TEXT ***//
     "editorGhostText.background": "#1f1f1f", // -color--oklch-24-gray
-    // gutter
-    "editorGutter.addedBackground": "#a2cd8b99", // -color--green-base at 60% opacity - example: scrollbar and number line bar diff indicators
+    "editorGhostText.foreground": "#7a7a7a", // -color--gray-medium-dark (OKLCH 58% - match comments)
+    //*** EDITOR GROUP ***//
+    "editorGroup.border": "#121212", // -color--gray-black (split editor border)
+    "editorGroup.dropBackground": "#f8f8f833", // -color--gray-white at 20% opacity
+    "editorGroup.emptyBackground": "#242424",
+    //*** EDITOR GROUP HEADER ***//
+    "editorGroupHeader.border": "#242424",
+    "editorGroupHeader.noTabsBackground": "#292929", // -color--oklch-28-gray (match sidebar bg)
+    "editorGroupHeader.tabsBackground": "#2e2e2e", // -color--oklch-30-gray (2 shades lighter than sidebar bg)
+    "editorGroupHeader.tabsBorder": "#242424",
+    //*** EDITOR GUTTER ***//
+    "editorGutter.addedBackground": "#a2cd8b99", // -color--green-base at 60% opacity | example: scrollbar and number line bar diff indicators
     "editorGutter.deletedBackground": "#ef9182cc", // -color--red-base at 80% opacity
     "editorGutter.foldingControlForeground": "#7a7a7a", // -color--gray-medium-dark (OKLCH 58% - match comments)
     "editorGutter.modifiedBackground": "#efddaccc", // -color--yellow-base at 80% opacity
-    // lightbulb
+    //*** EDITOR HINT ***//
+    "editorHint.foreground": "#efddac", // -color--yellow-base for 3 dots underline
+    //*** EDITOR HOVER WIDGET ***//
+    "editorHoverWidget.background": "#383838", // -color--gray-fade
+    //*** EDITOR INDENT GUIDE ***//
+    "editorIndentGuide.activeBackground1": "#4d4d4d", // -color--gray-dark-fade
+    "editorIndentGuide.background1": "#383838", // -color--gray-fade
+    //*** EDITOR INFO ***//
+    "editorInfo.foreground": "#92c1fd", // -color--blue-base for info squiggly lines
+    //*** EDITOR LIGHTBULB ***//
     "editorLightBulb.foreground": "#d7bb70", // -color--yellow-deep
     "editorLightBulbAutoFix.foreground": "#92c1fd", // -color--blue-base
-    // indent guide
-    "editorIndentGuide.background1": "#383838", // -color--gray-fade
-    "editorIndentGuide.activeBackground1": "#4d4d4d", // -color--gray-dark-fade
-    "editorWhitespace.foreground": "#383838", // -color--gray-fade
-    // line
-    "editor.lineHighlightBackground": "#161616", // -color--oklch-20-gray (6 shades darker than editor bg)
-    // "editor.lineHighlightBorder": "#",
-    // line number
-    "editorLineNumber.foreground": "#4d4d4d", // -color--gray-dark-fade (OKLCH 42%)
+    //*** EDITOR LINE NUMBER ***//
     "editorLineNumber.activeForeground": "#ababab", // -color--gray-light-medium (OKLCH 74%)
-    // link
+    "editorLineNumber.foreground": "#4d4d4d", // -color--gray-dark-fade (OKLCH 42%)
+    //*** EDITOR LINK ***//
     "editorLink.activeForeground": "#efddac", // -color--yellow-base
-    // match
-    "editor.findMatchBackground": "#d6aaeacc", // -color--purple-base at 80% opacity - example: current search match
-    // "editor.findMatchBorder": "#62a1f080", // -color--blue-deep at 50% opacity
-    "editor.findMatchForeground": "#000000b3", // -color--black 70% opacity - example: Color of the other search matches
-    "editor.findMatchHighlightBackground": "#d6aaea80", // -color--purple-base at 50% opacity - Color of the other search matches
-    // "editor.findMatchHighlightBorder": "#62a1f073", // -color--blue-deep at 45% opacity
-    "editor.findMatchHighlightForeground": "#000000e6", // -color--black at 90% opacity - current search match
-    "editor.findRangeHighlightBackground": "#d6aaea1a", // -color--purple-base at 10% opacity - example: selection search only
-    "editor.rangeHighlightBackground": "#d6aaea26", // -color--purple-base at 15% opacity - example: current search match line
-    // match selection
-    "editor.hoverHighlightBackground": "#ffffff33", // -color--white at 20% opacity | example: hovering over a word
-    "editor.selectionBackground": "#006fd980", // -color--blue-bg at 50% opacity | example: active selection bg
-    "editor.inactiveSelectionBackground": "#006fd94d", // -color--blue-bg at 30% opacity | example: inactive selection bg
-    "editor.selectionHighlightBackground": "#62a1f066", // -color--blue-deep at 40% opacity | example: highlighting a word in the editor, the other matching words are highlighted in this color
-    // ruler
-    "editorRuler.foreground": "#eeae7b1a", // -color--orange-base at 10% opacity - example line width guide line
-    // scrollbar
+    //*** EDITOR OVERVIEW RULER ***//
     "editorOverviewRuler.addedForeground": "#a2cd8b99", // -color--green-base at 60% opacity - example: scrollbar diff indicator
     "editorOverviewRuler.background": "#0000000d", // -color--black at 5% opacity
     "editorOverviewRuler.border": "#0000001a", // -color--black at 10% opacity
@@ -115,152 +133,148 @@
     "editorOverviewRuler.wordHighlightForeground": "#ffffff33", // -color--white at 20% opacity | example: match when cursor inside word that is a function callback (match editor.wordHighlightBackground)
     "editorOverviewRuler.wordHighlightStrongForeground": "#fcb7cb80", // -color--pink-base at 50% opacity | example: match when cursor inside word that is a function or variable definition (match editor.wordHighlightStrongBackground)
     "editorOverviewRuler.wordHighlightTextForeground": "#ffffff33", // -color--white at 20% opacity | example: match when cursor inside word (match editor.wordHighlightTextBackground)
-
-    // errors and warnings
-    "editorError.foreground": "#ef9182", // -color--red-base for error squiggly lines
-    "editorHint.foreground": "#efddac", // -color--yellow-base for 3 dots underline
-    // "editorWarning.background": "#eeae7b4d", // -color--red-base at 30% opacity
-    "editorWarning.foreground": "#eeae7b", // -color--orange-base for warning squiggly lines
-    "editorInfo.foreground": "#92c1fd", // -color--blue-base for info squiggly lines
-    // unused code
-    "editorUnnecessaryCode.opacity": "#00000099", // -color--black at 60% opacity
-    // selection
-    // widget
-    "editorWidget.foreground": "#c4c4c4", // -color--gray-light - example: the file search widget
-    "editorWidget.background": "#333333", // -color--oklch-32-gray (match panel bg) - example: finder widget
-    "editorHoverWidget.background": "#383838", // -color--gray-fade
-    "editorWidget.border": "#383838", // -color--gray-fade
-    "editorWidget.resizeBorder": "#424242", // -color--oklch-38-gray
-    // word highlight
-    "editor.wordHighlightBackground": "#ffffff33", // -color--white at 20% opacity | example: match when cursor inside word that is a function callback
-    "editor.wordHighlightStrongBackground": "#fcb7cb40", // -color--pink-base at 25% opacity | example: match when cursor inside word that is a function or variable definition
-    "editor.wordHighlightTextBackground": "#ffffff33", // -color--white at 20% opacity | example: match when cursor inside word in json file with scheme
-    // unicode
-    "editorUnicodeHighlight.border": "#eeae7b80", // -color--orange-base at 50% opacity
-    "editorUnicodeHighlight.background": "#eeae7b4d", // -color--orange-base at 30% opacity
-    // sticky stroll
+    //*** EDITOR RULER ***//
+    "editorRuler.foreground": "#eeae7b1a", // -color--orange-base at 10% opacity - example line width guide line
+    //*** EDITOR STICKY SCROLL ***//
     "editorStickyScroll.background": "#292929",
+    "editorStickyScroll.border": "#292929",
+    "editorStickyScroll.shadow": "#1f1f1f",
     "editorStickyScrollHover.background": "#161616", // -color--oklch-20-gray (match editor.lineHighlightBackground)
-
-    //*** EDITOR GROUPS & TABS ***
-    // groups
-    "editorGroup.border": "#121212", // -color--gray-black (split editor border)
-    "editorGroup.dropBackground": "#f8f8f833", // -color--gray-white at 20% opacity
-    "editorGroupHeader.noTabsBackground": "#292929", // -color--oklch-28-gray (match sidebar bg)
-    "editorGroupHeader.tabsBackground": "#2e2e2e", // -color--oklch-30-gray (2 shades lighter than sidebar bg)
-    // tabs
-    "tab.activeBackground": "#242424", // -color--gray-fade-black (match editor background)
-    "tab.activeForeground": "#f8f8f8", // -color--gray-white
-    "tab.border": "#242424", // -color--gray-fade-black (match editor background)
-    "tab.unfocusedActiveBorderTop": "#242424", // -color--gray-fade-black (match editor background)
-    "tab.lastPinnedBorder": "#121212", // -color--gray-black (matches split view border)
-    "tab.inactiveBackground": "#2e2e2e", // -color--oklch-30-gray (match panels bg)
-    "tab.inactiveForeground": "#929292", // -color--gray-medium
-    "tab.unfocusedActiveForeground": "#929292", // -color--gray-medium
-    "tab.unfocusedInactiveForeground": "#636363", // -color--gray-dark
-    "tab.hoverForeground": "#f8f8f8", // -color--gray-white
-    "tab.unfocusedHoverForeground": "#f8f8f8", // -color--gray-white
-    // side-by-side borders
-    "sideBySideEditor.horizontalBorder": "#121212", // -color--gray-black
-    "sideBySideEditor.verticalBorder": "#121212", // -color--gray-black (see split settings with Default and User side by side)
-
-    //*** GIT DECORATION ***
+    //*** EDITOR UNICODE HIGHLIGHT ***//
+    "editorUnicodeHighlight.background": "#eeae7b4d", // -color--orange-base at 30% opacity
+    "editorUnicodeHighlight.border": "#eeae7b80", // -color--orange-base at 50% opacity
+    //*** EDITOR UNNECESSARY CODE ***//
+    "editorUnnecessaryCode.opacity": "#00000099", // -color--black at 60% opacity
+    //*** EDITOR WARNING ***//
+    "editorWarning.foreground": "#eeae7b", // -color--orange-base for warning squiggly lines
+    //*** EDITOR WATERMARK ***//
+    "editorWatermark.foreground": "#929292", // -color--gray-medium | example: text on empty vscode window
+    //*** EDITOR WHITESPACE ***//
+    "editorWhitespace.foreground": "#383838", // -color--gray-fade
+    //*** EDITOR WIDGET ***//
+    "editorWidget.background": "#333333", // -color--oklch-32-gray (match panel bg) - example: finder widget
+    "editorWidget.border": "#383838", // -color--gray-fade
+    "editorWidget.foreground": "#c4c4c4", // -color--gray-light - example: the file search widget
+    "editorWidget.resizeBorder": "#424242", // -color--oklch-38-gray
+    //*** ERROR ***//
+    "errorForeground": "#db6656", // -color--red-deep
+    //*** FOCUS ***//
+    "focusBorder": "#ffffff1a", // -color--white at 10% opacity
+    //*** FOREGROUND ***//
+    "foreground": "#c4c4c4", // -color--gray-light
+    //*** GIT DECORATION ***//
     "gitDecoration.addedResourceForeground": "#a2cd8b", // -color--green-base - example: editor list when new resource is staged but not committed
-    "gitDecoration.modifiedResourceForeground": "#efddac", // -color--yellow-base
-    "gitDecoration.deletedResourceForeground": "#ef9182", // -color--red-base
-    "gitDecoration.renamedResourceForeground": "#92c1fd", // -color--blue-base
-    "gitDecoration.stageModifiedResourceForeground": "#efddac", // -color--yellow-base
-    "gitDecoration.stageDeletedResourceForeground": "#ef9182", // -color--red-base
-    "gitDecoration.untrackedResourceForeground": "#a2cd8b", // -color--green-base
-    "gitDecoration.ignoredResourceForeground": "#929292", // -color--gray-medium
     "gitDecoration.conflictingResourceForeground": "#eeae7b", // -color--orange-base
-
-    //*** INPUT CONTROL ***
+    "gitDecoration.deletedResourceForeground": "#ef9182", // -color--red-base
+    "gitDecoration.ignoredResourceForeground": "#929292", // -color--gray-medium
+    "gitDecoration.modifiedResourceForeground": "#efddac", // -color--yellow-base
+    "gitDecoration.renamedResourceForeground": "#92c1fd", // -color--blue-base
+    "gitDecoration.stageDeletedResourceForeground": "#ef9182", // -color--red-base
+    "gitDecoration.stageModifiedResourceForeground": "#efddac", // -color--yellow-base
+    "gitDecoration.untrackedResourceForeground": "#a2cd8b", // -color--green-base
+    //*** ICON ***//
+    "icon.foreground": "#929292", // -color--gray-medium
+    //*** INPUT ***//
     "input.background": "#383838", // -color--gray-fade
     "input.border": "#424242", // -color--oklch-38-gray (input and debug console border)
     "input.foreground": "#f8f8f8", // -color--gray-white
     "input.placeholderForeground": "#636363", // -color--gray-dark
+    //*** INPUT OPTION ***//
     "inputOption.activeBackground": "#4d4d4d", // -color--gray-dark-fade
     "inputOption.activeBorder": "#636363", // -color--gray-dark
     "inputOption.activeForeground": "#efddac", // -color--yellow-base
-
-    //*** LISTS & TREES ***
+    //*** KEYBINDING LABEL ***//
+    "keybindingLabel.background": "#ffffff26",
+    "keybindingLabel.border": "#00000080",
+    "keybindingLabel.bottomBorder": "#00000080",
+    //*** LIST ACTIVE SELECTION ***//
     "list.activeSelectionBackground": "#ffffff33", // -color--white at 20% opacity - example: settings UI dropdown selector
     "list.activeSelectionForeground": "#f8f8f8", // -color--gray-white - sidebar active item when moving with keyboard
+    //*** LIST ERROR ***//
+    "list.errorForeground": "#ef9182", // -color--red-base - example: editor tab title
+    //*** LIST FOCUS ***//
     "list.focusAndSelectionOutline": "#ffffff00", // -color--white at 0% opacity for no border showing
     "list.focusForeground": "#f8f8f8", // -color--gray-white
     "list.focusOutline": "#ffffff33", // -color--white at 20% opacity
+    //*** LIST HOVER ***//
     "list.hoverBackground": "#ffffff1a", // -color--white at 10% opacity
     "list.hoverForeground": "#f8f8f8", // -color--gray-white - example: extensions sidebar list
+    //*** LIST INACTIVE ***//
     "list.inactiveSelectionBackground": "#ffffff0d", // -color--white at 5% opacity example: extensions sidebar list
     "list.inactiveSelectionForeground": "#f8f8f8", // -color--gray-white
-    "list.errorForeground": "#ef9182", // -color--red-base - example: editor tab title
+    //*** LIST WARNING ***//
     "list.warningForeground": "#eeae7b", // -color--orange-base
-    // trees
-    "tree.indentGuidesStroke": "#383838", // -color--gray-fade (sidebar explorer tree)
-    "tree.tableColumnsBorder": "#333333", // -color--oklch-32-gray - 6 shades lighter than editor bg (see Keyboard Shortcuts page)
-    "tree.tableOddRowsBackground": "#1f1f1f", // -color--oklch-24-gray - 2 shades darker than editor bg (see Keyboard Shortcuts page)
-
-    //*** PANELS ***
+    //*** PANEL ***//
     "panel.background": "#2e2e2e", // -color--oklch-30-gray
     "panel.border": "#383838", // -color--gray-fade (match title bar bg)
     "panel.dropBorder": "#636363", // -color--gray-dark
+    //*** PANEL TITLE ***//
     "panelTitle.activeBorder": "#2e2e2e", // -color--oklch-30-gray (match panel BG to hide border)
     "panelTitle.activeForeground": "#efddac", // -color--yellow-base
     "panelTitle.inactiveForeground": "#636363", // -color--gray-dark
-
-    //*** PEEK VIEW ***
+    //*** PEEK VIEW ***//
     "peekView.border": "#383838", // -color--gray-fade
+    //*** PEEK VIEW TITLE ***//
     "peekViewTitle.background": "#333333", // -color--oklch-32-gray (match activity bar bg)
     "peekViewTitleDescription.foreground": "#929292", // -color--gray-medium
     "peekViewTitleLabel.foreground": "#f8f8f8", // -color--gray-white
-
-    //*** PROBLEMS PANEL ***
+    //*** PROBLEMS ICON ***//
     "problemsErrorIcon.foreground": "#ef9182", // -color--red-base - problems panel icons
-    "problemsWarningIcon.foreground": "#eeae7b", // -color--orange-base - problems panel icons
     "problemsInfoIcon.foreground": "#92c1fd", // -color--blue-base - problems panel icons
-
-    //*** PROGRESS BAR ***
+    "problemsWarningIcon.foreground": "#eeae7b", // -color--orange-base - problems panel icons
+    //*** PROGRESS BAR ***//
     "progressBar.background": "#a2cd8b", // -color--green-base
-
-    //*** SCROLLBAR CONTROL ***
+    //*** SASH ***//
+    "sash.hoverBorder": "#ffffff1a", // -color--white at 10% opacity
+    //*** SCROLLBAR ***//
     "scrollbar.shadow": "#1f1f1f", // -color--oklch-24-gray - Two shades darker than editor background - example: editor tabs side scroll
+    //*** SCROLLBAR SLIDER ***//
     "scrollbarSlider.activeBackground": "#7a7a7a66", // -color--gray-medium-dark at 40% opacity - example: when selecting and dragging scrollbar location
     "scrollbarSlider.background": "#7a7a7a40", // -color--gray-medium-dark at 25% opacity - example: editor vertical scrollbar location
     "scrollbarSlider.hoverBackground": "#7a7a7a4d", //-color--gray-medium-dark at 30% opacity
-
-    //*** SELECTION ***
+    //*** SELECTION ***//
     "selection.background": "#62a1f080", // -color--blue-deep at 50% opacity - example: search input selection
-
-    //*** SETTINGS ***
+    //*** SETTINGS ***//
     "settings.modifiedItemIndicator": "#efddac", // -color--yellow-base - example: vertical line color in Settings UI
-
-    //*** SIDEBAR ***
+    //*** SIDEBAR ***//
     "sideBar.background": "#292929", // -color--oklch-28-gray
-    "sideBar.foreground": "#c4c4c4", // -color--gray-light
     "sideBar.border": "#292929", // -color--oklch-28-gray
-    "sideBar.dropBackground": "#2e2e2e", // -color--oklch-30-gray - 2 shades darker than sidebar bg
-    "sideBarTitle.foreground": "#7a7a7a", // -color--gray-medium-dark (OKLCH 58% - match comments) - EXPLORER TITLE
+    "sideBar.dropBackground": "#2e2e2e", // -color--oklch-30-gray - 2 shades darker than sidebar bg,
+    "sideBar.foreground": "#c4c4c4", // -color--gray-light
+    //*** SIDEBAR SECTION HEADER ***//
     "sideBarSectionHeader.background": "#333333", // -color--oklch-32-gray (match activity bar bg)
     "sideBarSectionHeader.border": "#292929", // -color--oklch-28-gray (match sidebar border)
     "sideBarSectionHeader.foreground": "#929292", // -color--gray-medium
-
-    "sideBarStickyScroll.background": "#2e2e2e",
-
-    //*** STATUS BAR ***
+    //*** SIDEBAR STICKY SCROLL ***//
+    "sideBarStickyScroll.background": "#2e2e2e", // -color--oklch-30-gra
+    //*** SIDEBAR TITLE ***//
+    "sideBarTitle.foreground": "#7a7a7a", // -color--gray-medium-dark (OKLCH 58% - match comments) - EXPLORER TITLE
+    //*** SIDE BY SIDE EDITOR ***//
+    "sideBySideEditor.horizontalBorder": "#121212", // -color--gray-black
+    "sideBySideEditor.verticalBorder": "#121212", // -color--gray-black (see split settings with Default and User side by side)
+    //*** STATUS BAR ***//
     "statusBar.background": "#383838", // -color--gray-fade (match title bar bg)
-    "statusBar.foreground": "#929292", // -color--gray-medium
     "statusBar.debuggingBackground": "#eeae7b", // -color--orange-base
     "statusBar.debuggingForeground": "#121212", // -color--gray-black
-    "statusBar.noFolderBackground": "#383838", // -color--gray-fade (match title bar bg)
+    "statusBar.foreground": "#929292", // -color--gray-medium
+    "statusBar.noFolderBackground": "#383838", // -color--gray-fade (match title bar bg),
     "statusBar.noFolderForeground": "#929292", // -color--gray-medium
-
-    //*** TERMINAL ***
-    "terminal.background": "#242424", // -color--gray-fade-black (match editor bg)
-    "terminal.foreground": "#c4c4c4", // -color--gray-light
+    //*** TAB ***//
+    "tab.activeBackground": "#242424", // -color--gray-fade-black (match editor background)
+    "tab.activeForeground": "#f8f8f8", // -color--gray-white
+    "tab.border": "#242424", // -color--gray-fade-black (match editor background)
+    "tab.hoverForeground": "#f8f8f8", // -color--gray-white
+    "tab.inactiveBackground": "#2e2e2e", // -color--oklch-30-gray (match panels bg)
+    "tab.inactiveForeground": "#929292", // -color--gray-medium
+    "tab.lastPinnedBorder": "#121212", // -color--gray-black (matches split view border)
+    "tab.unfocusedActiveBorderTop": "#242424", // -color--gray-fade-black (match editor background)
+    "tab.unfocusedActiveForeground": "#929292", // -color--gray-medium
+    "tab.unfocusedHoverForeground": "#f8f8f8", // -color--gray-white
+    "tab.unfocusedInactiveForeground": "#636363", // -color--gray-dark
+    //*** TERMINAL ANSI ***//
     "terminal.ansiBlack": "#383838", // -color--gray-fade
     "terminal.ansiBlue": "#62a1f0", // -color--blue-deep
-    "terminal.ansiBrightBlack": "#636363", // -color--gray-dark
+    "terminal.ansiBrightBlack": "#929292", // -color--gray-medium
     "terminal.ansiBrightBlue": "#92c1fd", // -color--blue-base
     "terminal.ansiBrightCyan": "#89dfdf", // -color--cyan-base
     "terminal.ansiBrightGreen": "#79b158", // -color--green-deep
@@ -274,27 +288,37 @@
     "terminal.ansiRed": "#ef9182", // -color--red-base
     "terminal.ansiWhite": "#f8f8f8", // -color--gray-white
     "terminal.ansiYellow": "#efddac", // -color--yellow-base
-
+    //*** TERMINAL ***//
+    "terminal.background": "#242424", // -color--gray-fade-black (match editor bg)
+    "terminal.foreground": "#c4c4c4", // -color--gray-light
+    //*** TERMINAL OVERVIEW RULER ***//
     "terminalOverviewRuler.border": "#242424", // (match terminal bg)
-
-    //*** TEXT COLORS ***
+    //*** TEXT BLOCKQUOTE ***//
     "textBlockQuote.background": "#ffffff12", // -color--gray-fade - example: markdown > quote in preview mode
     "textBlockQuote.border": "#ffffff24", // -color--gray-dark
+    //*** TEXT CODE BLOCK ***//
     "textCodeBlock.background": "#ffffff1a", // -color--white at 10% opacity - example: hover over settings json "workbench.startupEditor"
+    //*** TEXT LINK ***//
     "textLink.activeForeground": "#efddac", // -color--yellow-base
     "textLink.foreground": "#92c1fd", // -color--blue-base - example: Settings UI text link
+    //*** TEXT PREFORMAT ***//
     "textPreformat.background": "#ffffff1a", // -color--white at 10% opacity
-    "textPreformat.foreground": "#d7bb70", // -color--yellow-deep
-
-    //*** TITLE BAR ***
+    "textPreformat.foreground": "#d7bb70", // -color--yellow-deep,
+    //*** TITLE BAR ***//
     "titleBar.activeBackground": "#383838", // -color--gray-fade (match status bar bg)
     "titleBar.activeForeground": "#929292", // -color--gray-medium
     "titleBar.inactiveBackground": "#2e2e2e", // -color--oklch-30-gray (match editor inactive tabs bg)
     "titleBar.inactiveForeground": "#636363", // -color--gray-dark
-
-    //*** TOOLBAR ACTION COLORS ***
-    "toolbar.hoverBackground": "#f8f8f81a", // -color--gray-white at 10% opacity - example: Settings UI gear icons
+    //*** TOOLBAR ***//
     "toolbar.activeBackground": "#f8f8f833", // -color--gray-white at 20% opacity - example: Settings UI gear icons
+    "toolbar.hoverBackground": "#f8f8f81a", // -color--gray-white at 10% opacity - example: Settings UI gear icons
+    //*** TREE ***//
+    "tree.indentGuidesStroke": "#383838", // -color--gray-fade (sidebar explorer tree)
+    "tree.tableColumnsBorder": "#333333", // -color--oklch-32-gray - 6 shades lighter than editor bg (see Keyboard Shortcuts page)
+    "tree.tableOddRowsBackground": "#1f1f1f", // -color--oklch-24-gray - 2 shades darker than editor bg (see Keyboard Shortcuts page)
+    //*** WIDGET ***//
+    "widget.border": "#ffffff05", // -color--white at 2% opacity
+    "widget.shadow": "#1f1f1f", // -color--oklch-24-gray
   },
   "semanticHighlighting": true,
   "semanticTokenColors": {
@@ -311,7 +335,7 @@
       "foreground": "#f8f8f8", // -color--gray-white
     },
     "namespace": {
-      "foreground": "#bd84d7", // -color--purple-deep
+      "foreground": "#d6aaea", // -color--purple-base
     },
     "parameter": {
       "foreground": "#eeae7b", // -color--orange-base
