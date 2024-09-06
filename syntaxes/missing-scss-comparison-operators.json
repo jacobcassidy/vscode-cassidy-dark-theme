@@ -1,0 +1,108 @@
+{
+  "scopeName": "missing-scss-comparison-operators.injection",
+  "injectionSelector": "L:meta.property-list.scss, L:source.css.scss",
+  "patterns": [
+    {
+      "include": "#missing-comparisons"
+    }
+  ],
+  "repository": {
+    "missing-comparisons": {
+      "patterns": [
+        {
+          "begin": "^\\s*((@)media)\\b",
+          "beginCaptures": {
+            "1": {
+              "name": "keyword.control.at-rule.media.scss"
+            },
+            "2": {
+              "name": "punctuation.definition.keyword.scss"
+            }
+          },
+          "end": "\\s*(?={)",
+          "name": "meta.at-rule.media.scss",
+          "patterns": [
+            {
+              "include": "#comment_docblock"
+            },
+            {
+              "include": "#comment_block"
+            },
+            {
+              "include": "#comment_line"
+            },
+            {
+              "include": "source.css#media-query-list"
+            },
+            {
+              "match": "\\b(only)\\b",
+              "name": "keyword.control.operator.css.scss"
+            },
+            {
+              "begin": "\\(",
+              "beginCaptures": {
+                "0": {
+                  "name": "punctuation.definition.media-query.begin.bracket.round.scss"
+                }
+              },
+              "end": "\\)",
+              "endCaptures": {
+                "0": {
+                  "name": "punctuation.definition.media-query.end.bracket.round.scss"
+                }
+              },
+              "name": "meta.property-list.media-query.scss",
+              "patterns": [
+                {
+                  "begin": "(?<![-a-z])(?=[-a-z])",
+                  "end": "$|(?![-a-z])",
+                  "name": "meta.property-name.media-query.scss",
+                  "patterns": [
+                    {
+                      "include": "source.css#media-features"
+                    },
+                    {
+                      "include": "source.css#property-names"
+                    }
+                  ]
+                },
+                {
+                  "begin": "(:)\\s*(?!(\\s*{))",
+                  "beginCaptures": {
+                    "1": {
+                      "name": "punctuation.separator.key-value.scss"
+                    }
+                  },
+                  "end": "\\s*(;|(?=}|\\)))",
+                  "endCaptures": {
+                    "1": {
+                      "name": "punctuation.terminator.rule.scss"
+                    }
+                  },
+                  "contentName": "meta.property-value.media-query.scss",
+                  "patterns": [
+                    {
+                      "include": "#general"
+                    },
+                    {
+                      "include": "#property_values"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "include": "#variable"
+            },
+            {
+              "include": "#conditional_operators"
+            },
+            {
+              "include": "source.css#media-types"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
