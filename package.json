@@ -1,67 +1,74 @@
 {
-	"name": "cassidy-dark",
-	"displayName": "Cassidy Dark Theme",
-	"description": "A clean, modern, dark theme originally inspired by Monokai",
-	"version": "1.1.2",
-	"icon": "images/cassidy-dark-logo-512.png",
-	"publisher": "jacobcassidy",
-	"bugs": {
-		"url": "https://github.com/jacobcassidy/vscode-cassidy-dark-theme/issues"
-	},
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/jacobcassidy/vscode-cassidy-dark-theme"
-	},
-	"galleryBanner": {
-		"color": "#292929",
-		"theme": "dark"
-	},
-	"keywords": [
-		"Theme",
-		"Dark Theme",
-		"Monokai",
-		"Night Theme"
-	],
-	"engines": {
-		"vscode": "^1.64.2"
-	},
-	"categories": [
-		"Themes"
-	],
-	"contributes": {
-		"themes": [
-			{
-				"label": "Cassidy Dark",
-				"uiTheme": "vs-dark",
-				"path": "./themes/cassidy-dark-color-theme.json"
-			}
-		],
-		"grammars": [
-			{
-				"scopeName": "missing-scss-syntax.injection",
-				"path": "./syntaxes/missing-scss-syntax-injection.json",
-				"injectTo": [
-					"source.css.scss"
-				]
-			},
-			{
-				"path": "./syntaxes/php-class-typehint-syntax.json",
-				"scopeName": "php-class-typehint-syntax.injection",
-				"injectTo": [
-					"text.html.php"
-				]
-			}
-		]
-	},
-	"__metadata": {
-		"id": "e6e8b76c-3a7b-483e-a265-98594f79ba1c",
-		"publisherId": "aee9e75c-ea26-4af1-b5e6-815e33288c4b",
-		"publisherDisplayName": "Jacob Cassidy",
-		"targetPlatform": "undefined",
-		"updated": false,
-		"isPreReleaseVersion": false,
-		"hasPreReleaseVersion": false,
-		"installedTimestamp": 1710536963385,
-		"pinned": false
-	}
+  "name": "cassidy-dark",
+  "displayName": "Cassidy Dark Theme",
+  "description": "A clean, modern, dark theme originally inspired by Monokai",
+  "version": "1.1.2",
+  "icon": "images/cassidy-dark-logo-512.png",
+  "publisher": "jacobcassidy",
+  "bugs": {
+    "url": "https://github.com/jacobcassidy/vscode-cassidy-dark-theme/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jacobcassidy/vscode-cassidy-dark-theme"
+  },
+  "galleryBanner": {
+    "color": "#292929",
+    "theme": "dark"
+  },
+  "keywords": [
+    "Theme",
+    "Dark Theme",
+    "Monokai",
+    "Night Theme"
+  ],
+  "engines": {
+    "vscode": "^1.64.2"
+  },
+  "categories": [
+    "Themes"
+  ],
+  "contributes": {
+    "themes": [
+      {
+        "label": "Cassidy Dark",
+        "uiTheme": "vs-dark",
+        "path": "./themes/cassidy-dark-color-theme.json"
+      }
+    ],
+    "grammars": [
+      {
+        "scopeName": "missing-scss-comparison-operators.injection",
+        "path": "./syntaxes/missing-scss-comparison-operators.json",
+        "injectTo": [
+          "source.css.scss"
+        ]
+      },
+      {
+        "scopeName": "missing-scss-syntax.injection",
+        "path": "./syntaxes/missing-scss-syntax-injection.json",
+        "injectTo": [
+          "source.css.scss"
+        ]
+      },
+      {
+        "scopeName": "php-class-typehint-syntax.injection",
+        "path": "./syntaxes/php-class-typehint-syntax.json",
+        "injectTo": [
+          "text.html.php"
+        ]
+      }
+    ]
+  },
+  "__metadata": {
+    "id": "e6e8b76c-3a7b-483e-a265-98594f79ba1c",
+    "publisherId": "aee9e75c-ea26-4af1-b5e6-815e33288c4b",
+    "publisherDisplayName": "Jacob Cassidy",
+    "targetPlatform": "undefined",
+    "updated": false,
+    "isPreReleaseVersion": false,
+    "hasPreReleaseVersion": false,
+    "installedTimestamp": 1710536963385,
+    "pinned": false
+  }
 }
