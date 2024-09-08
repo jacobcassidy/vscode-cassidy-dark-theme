@@ -2,6 +2,11 @@
 
 All notable changes to this project are documented in this file.
 
+## Unreleased
+
+- Updated `terminal.ansiBrightBlack` to #929292 from #636363.
+- Updated semanticTokenColors namespace from purple-deep to purple-base color.
+
 ## v1.1.2
 
 _2024-08-30_
