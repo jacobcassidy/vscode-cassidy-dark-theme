@@ -4,6 +4,8 @@ All notable changes to this project are documented in this file.
 
 ## Unreleased
 
+- Added `missing-scss-comparison-operators.injection`
+- Added VSCode workplace `settings.json` file
 - Updated `terminal.ansiBrightBlack` to #929292 from #636363.
 - Updated semanticTokenColors namespace from purple-deep to purple-base color.
 
@@ -33,13 +35,13 @@ _2024-08-27_
 - Added comments with examples of what specific tokens colorize.
 - Added "Output Colorizer" extension syntax highlighting for `code.log support` and `code.log invalid`.
 - Added syntax highlighting for the following tokens:
-    - `editorStickyScrollHover.background`
-    - `keyword.operator.type.annotation.ts`
-    - `support.type.primitive.ts`
-    - `editorOverviewRuler.selectionHighlightForeground`
-    - `editorOverviewRuler.wordHighlightForeground`
-    - `editorOverviewRuler.wordHighlightStrongForeground`
-    - `editorOverviewRuler.wordHighlightTextForeground`
+  - `editorStickyScrollHover.background`
+  - `keyword.operator.type.annotation.ts`
+  - `support.type.primitive.ts`
+  - `editorOverviewRuler.selectionHighlightForeground`
+  - `editorOverviewRuler.wordHighlightForeground`
+  - `editorOverviewRuler.wordHighlightStrongForeground`
+  - `editorOverviewRuler.wordHighlightTextForeground`
 - Moved Rainbow CSV extension syntax highlighting to its own section.
 - Organized order of gray shade tokens.
 - Replaced theme screenshot for v1.1.0.
@@ -54,18 +56,18 @@ _2024-08-27_
 _2024-08-25_
 
 - Added syntax highlighting for the following tokens:
-    - `support.function.builtin.shell`
-    - `meta.expression.assignment.modified.shell`
-    - `entity.name.section.group-title`
-    - `variable.other.assignment.shell`
-    - `constant.other.symbol.hashkey.ruby`
-    - `constant.other.symbol.ruby`
-    - `log.date`
-    - `log.error`
-    - `log.warning`
-    - `meta.jsx.children`
-    - `meta.other.type.phpdoc.php`
-    - `variable.parameter.url`
+  - `support.function.builtin.shell`
+  - `meta.expression.assignment.modified.shell`
+  - `entity.name.section.group-title`
+  - `variable.other.assignment.shell`
+  - `constant.other.symbol.hashkey.ruby`
+  - `constant.other.symbol.ruby`
+  - `log.date`
+  - `log.error`
+  - `log.warning`
+  - `meta.jsx.children`
+  - `meta.other.type.phpdoc.php`
+  - `variable.parameter.url`
 - Updated README.md Table of Contents.
 
 ## v1.0.8
@@ -119,7 +121,7 @@ _2024-03-07_
 
 - Added `php-class-typehint-syntax.json` file to include syntax customization for a PHP Class typehint using the `keyword.other.type.cassidydark.php` token.
 - Added a new theme color at 50% of theme blue chroma for typehint syntax color.
-- Added  `keyword.other.type.php`, `keyword.operator.nullable-type.php`, `keyword.other.type.cassidydark.php`, `meta.function.php storage.type.php`, and `meta.function.php support.class.php` to typehint syntax color.
+- Added `keyword.other.type.php`, `keyword.operator.nullable-type.php`, `keyword.other.type.cassidydark.php`, `meta.function.php storage.type.php`, and `meta.function.php support.class.php` to typehint syntax color.
 
 ## v1.0.1
 
