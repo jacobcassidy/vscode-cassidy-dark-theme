@@ -4,6 +4,7 @@ All notable changes to this project are documented in this file.
 
 ## Unreleased
 
+- Full refactor of workbench colors
 - Added `missing-scss-comparison-operators.injection`
 - Added VSCode workplace `settings.json` file
 - Updated `terminal.ansiBrightBlack` to #929292 from #636363.
