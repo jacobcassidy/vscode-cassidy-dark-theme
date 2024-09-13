@@ -34,6 +34,16 @@
         "label": "Cassidy Dark",
         "uiTheme": "vs-dark",
         "path": "./themes/cassidy-dark-color-theme.json"
+      },
+      {
+        "label": "Cassidy Dark (v1)",
+        "uiTheme": "vs-dark",
+        "path": "./themes/cassidy-dark-color-theme-v1.1.2.json"
+      },
+      {
+        "label": "Cassidy Dark (Syntax-Only)",
+        "uiTheme": "vs-dark",
+        "path": "./themes/cassidy-dark-color-theme-syntax.json"
       }
     ],
     "grammars": [

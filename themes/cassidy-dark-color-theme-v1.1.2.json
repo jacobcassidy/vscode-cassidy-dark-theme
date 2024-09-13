@@ -1,0 +1,1089 @@
+{
+  "$schema": "vscode://schemas/color-theme",
+  "name": "Cassidy Dark",
+  "type": "dark",
+  "author": "Jacob Cassidy",
+  "colors": {
+    //*** ACTIVITY BAR ***//
+    "activityBar.activeBackground": "#292929", // -color--oklch-28-gray (match sidebar bg)
+    "activityBar.activeBorder": "#efddac80", // -color--yellow-base at 50% opacity
+    "activityBar.activeFocusBorder": "#383838", // -color--gray-fade
+    "activityBar.background": "#333333", // -color--oklch-32-gray (match sidebar header)
+    "activityBar.border": "#292929", // -color--oklch-28-gray (match sidebar bg)
+    "activityBar.dropBorder": "#636363", // -color--gray-dark
+    "activityBar.foreground": "#c4c4c4", // -color--gray-light
+    "activityBar.inactiveForeground": "#636363", // -color--gray-dark
+    "activityBarBadge.background": "#efddac", // -color--yellow-base
+    "activityBarBadge.foreground": "#121212", // -color--gray-black
+    //*** BADGE ***//
+    "badge.background": "#4d4d4d", // -color--gray-dark-fade
+    "badge.foreground": "#f8f8f8", // -color--gray-white
+    //*** BUTTON ***//
+    "button.background": "#006fd9", // -color--blue-bg - example: search settings in settings page
+    //*** CHECKBOX ***//
+    "checkbox.background": "#ffffff26", // -color--white at 15% opacity - example: Settings UI checkbox
+    "checkbox.foreground": "#f8f8f8", // -color--gray-white
+    //*** COMMAND CENTER ***//
+    "commandCenter.activeBackground": "#1f1f1f",
+    "commandCenter.activeBorder": "#1b1b1b",
+    "commandCenter.activeForeground": "#ababab",
+    "commandCenter.background": "#242424",  // -color--oklch-26-gray (match editor)
+    "commandCenter.border": "#1f1f1f", // -color--oklch-24-gray
+    "commandCenter.foreground": "#929292", // -color--gray-medium
+    "commandCenter.inactiveBorder": "#2e2e2e",
+    //*** DESCRIPTION ***//
+    "descriptionForeground": "#f8f8f8", // -color--gray-white
+    //*** DIFF EDITOR ***//
+    "diffEditor.insertedLineBackground": "#a2cd8b1a", // -color--green-base at 10% opacity
+    "diffEditor.insertedTextBackground": "#a2cd8b33", // -color--green-base at 20% opacity
+    "diffEditor.removedLineBackground": "#ef91821a", // -color--red-base at 10% opacity
+    "diffEditor.removedTextBackground": "#ef918233", // -color--red-base at 20% opacity
+    //*** DIFF EDITOR GUTTER ***//
+    "diffEditorGutter.insertedLineBackground": "#a2cd8b1a", // -color--green-base at 10% opacity
+    "diffEditorGutter.removedLineBackground": "#ef91821a", // -color--red-base at 10% opacity
+    //*** DIFF EDITOR OVERVIEW ***//
+    "diffEditorOverview.insertedForeground": "#a2cd8b4d", // -color--green-base at 30% opacity - example: scrollbar diff indicator
+    "diffEditorOverview.removedForeground": "#ef91824d", // -color--red-base at 30% opacity - example: scrollbar diff indicator
+    //*** DISABLED ***//
+    "disabledForeground": "#636363", // -color--gray-dark
+    //*** DROPDOWN ***//
+    "dropdown.background": "#383838", // -color--gray-fade
+    "dropdown.foreground": "#f8f8f8", // -color--gray-white
+    "dropdown.listBackground": "#333333", // -color--oklch-32-gray (2 shades darker than dropdown.background)
+    //*** EDITOR BACKGROUND ***//
+    "editor.background": "#242424", // -color--gray-fade-black
+    //*** EDITOR FIND MATCH ***//
+    "editor.findMatchBackground": "#d6aaeacc", // -color--purple-base at 80% opacity - example: current search match
+    "editor.findMatchForeground": "#000000b3", // -color--black 70% opacity - example: Color of the other search matches
+    "editor.findMatchHighlightBackground": "#d6aaea80", // -color--purple-base at 50% opacity - Color of the other search matches
+    "editor.findMatchHighlightForeground": "#000000e6", // -color--black at 90% opacity - current search match
+    "editor.findRangeHighlightBackground": "#d6aaea1a", // -color--purple-base at 10% opacity | example: selection search only
+    //*** EDITOR FOLD ***//
+    "editor.foldBackground": "#d6aaea1a", // -color--purple-base at 10% opacity
+    //*** EDITOR FOREGROUND ***//
+    "editor.foreground": "#c4c4c4", // -color--gray-light
+    //*** EDITOR HOVER ***//
+    "editor.hoverHighlightBackground": "#ffffff33", // -color--white at 20% opacity | example: hovering over a word
+    //*** EDITOR LINE HIGHLIGHT ***//
+    "editor.lineHighlightBackground": "#161616", // -color--oklch-20-gray (6 shades darker than editor bg)
+    "editor.lineHighlightBorder": "#161616", // -color--oklch-20-gray (match editor.lineHighlightBackground)
+    //*** EDITOR RANGE HIGHLIGHT ***//
+    "editor.rangeHighlightBackground": "#d6aaea26", // -color--purple-base at 15% opacity | example: current search match line
+    //*** EDITOR SELECTION ***//
+    "editor.inactiveSelectionBackground": "#006fd94d", // -color--blue-bg at 30% opacity | example: inactive selection bg
+    "editor.selectionBackground": "#006fd980", // -color--blue-bg at 50% opacity | example: active selection bg
+    "editor.selectionHighlightBackground": "#62a1f066", // -color--blue-deep at 40% opacity | example: highlighting a word in the editor, the other matching words are highlighted in this color
+    //*** EDITOR WORD HIGHLIGHT ***//
+    "editor.wordHighlightBackground": "#ffffff33", // -color--white at 20% opacity | example: match when cursor inside word that is a function callback
+    "editor.wordHighlightStrongBackground": "#fcb7cb40", // -color--pink-base at 25% opacity | example: match when cursor inside word that is a function or variable definition
+    "editor.wordHighlightTextBackground": "#ffffff33", // -color--white at 20% opacity | example: match when cursor inside word in json file with scheme
+    //*** EDITOR BRACKET MATCH ***//
+    "editorBracketMatch.border": "#636363", // -color--gray-dark
+    //*** EDITOR CURSOR ***//
+    "editorCursor.background": "#383838", // -color--gray-fade
+    "editorCursor.foreground": "#929292", // --color--gray-medium
+    //*** EDITOR ERROR ***//
+    "editorError.foreground": "#ef9182", // -color--red-base for error squiggly lines,
+    //*** EDITOR GHOST TEXT ***//
+    "editorGhostText.background": "#1f1f1f", // -color--oklch-24-gray
+    "editorGhostText.foreground": "#7a7a7a", // -color--gray-medium-dark (OKLCH 58% - match comments)
+    //*** EDITOR GROUP ***//
+    "editorGroup.border": "#121212", // -color--gray-black (split editor border)
+    "editorGroup.dropBackground": "#f8f8f833", // -color--gray-white at 20% opacity
+    "editorGroup.emptyBackground": "#242424",
+    //*** EDITOR GROUP HEADER ***//
+    "editorGroupHeader.border": "#242424",
+    "editorGroupHeader.noTabsBackground": "#292929", // -color--oklch-28-gray (match sidebar bg)
+    "editorGroupHeader.tabsBackground": "#2e2e2e", // -color--oklch-30-gray (2 shades lighter than sidebar bg)
+    "editorGroupHeader.tabsBorder": "#242424",
+    //*** EDITOR GUTTER ***//
+    "editorGutter.addedBackground": "#a2cd8b99", // -color--green-base at 60% opacity | example: scrollbar and number line bar diff indicators
+    "editorGutter.deletedBackground": "#ef9182cc", // -color--red-base at 80% opacity
+    "editorGutter.foldingControlForeground": "#7a7a7a", // -color--gray-medium-dark (OKLCH 58% - match comments)
+    "editorGutter.modifiedBackground": "#efddaccc", // -color--yellow-base at 80% opacity
+    //*** EDITOR HINT ***//
+    "editorHint.foreground": "#efddac", // -color--yellow-base for 3 dots underline
+    //*** EDITOR HOVER WIDGET ***//
+    "editorHoverWidget.background": "#383838", // -color--gray-fade
+    //*** EDITOR INDENT GUIDE ***//
+    "editorIndentGuide.activeBackground1": "#4d4d4d", // -color--gray-dark-fade
+    "editorIndentGuide.background1": "#383838", // -color--gray-fade
+    //*** EDITOR INFO ***//
+    "editorInfo.foreground": "#92c1fd", // -color--blue-base for info squiggly lines
+    //*** EDITOR LIGHTBULB ***//
+    "editorLightBulb.foreground": "#d7bb70", // -color--yellow-deep
+    "editorLightBulbAutoFix.foreground": "#92c1fd", // -color--blue-base
+    //*** EDITOR LINE NUMBER ***//
+    "editorLineNumber.activeForeground": "#ababab", // -color--gray-light-medium (OKLCH 74%)
+    "editorLineNumber.foreground": "#4d4d4d", // -color--gray-dark-fade (OKLCH 42%)
+    //*** EDITOR LINK ***//
+    "editorLink.activeForeground": "#efddac", // -color--yellow-base
+    //*** EDITOR OVERVIEW RULER ***//
+    "editorOverviewRuler.addedForeground": "#a2cd8b99", // -color--green-base at 60% opacity - example: scrollbar diff indicator
+    "editorOverviewRuler.background": "#0000000d", // -color--black at 5% opacity
+    "editorOverviewRuler.border": "#0000001a", // -color--black at 10% opacity
+    "editorOverviewRuler.bracketMatchForeground": "#7a7a7ae6", // -color--gray-medium-dark at 90% opacity
+    "editorOverviewRuler.deletedForeground": "#ef918299", // -color--red-base at 60% opacity
+    "editorOverviewRuler.errorForeground": "#ef9182e6", // -color--red-base at 90% opacity
+    "editorOverviewRuler.findMatchForeground":  "#d6aaea80", // -color--purple-base at 50% opacity
+    "editorOverviewRuler.infoForeground": "#92c1fde6", // -color--blue-base at 90% opacity
+    "editorOverviewRuler.modifiedForeground": "#efddac99", // -color--yellow-base at 60% opacity
+    "editorOverviewRuler.selectionHighlightForeground": "#62a1f066", // -color--blue-deep at 40% opacity | example: match when highlighting a word (matches editor.selectionHighlightBackground) - CURRENTLY BROKEN WHEN USING SOME EXTENSION COMBOS, SUCH AS PYLANCE AND PHP INTELEPHENSE
+    "editorOverviewRuler.warningForeground": "#eeae7be6", // -color--orange-base at 90% opacity
+    "editorOverviewRuler.wordHighlightForeground": "#ffffff33", // -color--white at 20% opacity | example: match when cursor inside word that is a function callback (match editor.wordHighlightBackground)
+    "editorOverviewRuler.wordHighlightStrongForeground": "#fcb7cb80", // -color--pink-base at 50% opacity | example: match when cursor inside word that is a function or variable definition (match editor.wordHighlightStrongBackground)
+    "editorOverviewRuler.wordHighlightTextForeground": "#ffffff33", // -color--white at 20% opacity | example: match when cursor inside word (match editor.wordHighlightTextBackground)
+    //*** EDITOR RULER ***//
+    "editorRuler.foreground": "#eeae7b1a", // -color--orange-base at 10% opacity - example line width guide line
+    //*** EDITOR STICKY SCROLL ***//
+    "editorStickyScroll.background": "#292929",
+    "editorStickyScroll.border": "#292929",
+    "editorStickyScroll.shadow": "#1f1f1f",
+    "editorStickyScrollHover.background": "#161616", // -color--oklch-20-gray (match editor.lineHighlightBackground)
+    //*** EDITOR UNICODE HIGHLIGHT ***//
+    "editorUnicodeHighlight.background": "#eeae7b4d", // -color--orange-base at 30% opacity
+    "editorUnicodeHighlight.border": "#eeae7b80", // -color--orange-base at 50% opacity
+    //*** EDITOR UNNECESSARY CODE ***//
+    "editorUnnecessaryCode.opacity": "#00000099", // -color--black at 60% opacity
+    //*** EDITOR WARNING ***//
+    "editorWarning.foreground": "#eeae7b", // -color--orange-base for warning squiggly lines
+    //*** EDITOR WATERMARK ***//
+    "editorWatermark.foreground": "#929292", // -color--gray-medium | example: text on empty vscode window
+    //*** EDITOR WHITESPACE ***//
+    "editorWhitespace.foreground": "#383838", // -color--gray-fade
+    //*** EDITOR WIDGET ***//
+    "editorWidget.background": "#333333", // -color--oklch-32-gray (match panel bg) - example: finder widget
+    "editorWidget.border": "#383838", // -color--gray-fade
+    "editorWidget.foreground": "#c4c4c4", // -color--gray-light - example: the file search widget
+    "editorWidget.resizeBorder": "#424242", // -color--oklch-38-gray
+    //*** ERROR ***//
+    "errorForeground": "#db6656", // -color--red-deep
+    //*** FOCUS ***//
+    "focusBorder": "#ffffff1a", // -color--white at 10% opacity
+    //*** FOREGROUND ***//
+    "foreground": "#c4c4c4", // -color--gray-light
+    //*** GIT DECORATION ***//
+    "gitDecoration.addedResourceForeground": "#a2cd8b", // -color--green-base - example: editor list when new resource is staged but not committed
+    "gitDecoration.conflictingResourceForeground": "#eeae7b", // -color--orange-base
+    "gitDecoration.deletedResourceForeground": "#ef9182", // -color--red-base
+    "gitDecoration.ignoredResourceForeground": "#929292", // -color--gray-medium
+    "gitDecoration.modifiedResourceForeground": "#efddac", // -color--yellow-base
+    "gitDecoration.renamedResourceForeground": "#92c1fd", // -color--blue-base
+    "gitDecoration.stageDeletedResourceForeground": "#ef9182", // -color--red-base
+    "gitDecoration.stageModifiedResourceForeground": "#efddac", // -color--yellow-base
+    "gitDecoration.untrackedResourceForeground": "#a2cd8b", // -color--green-base
+    //*** ICON ***//
+    "icon.foreground": "#929292", // -color--gray-medium
+    //*** INPUT ***//
+    "input.background": "#383838", // -color--gray-fade
+    "input.border": "#424242", // -color--oklch-38-gray (input and debug console border)
+    "input.foreground": "#f8f8f8", // -color--gray-white
+    "input.placeholderForeground": "#636363", // -color--gray-dark
+    //*** INPUT OPTION ***//
+    "inputOption.activeBackground": "#4d4d4d", // -color--gray-dark-fade
+    "inputOption.activeBorder": "#636363", // -color--gray-dark
+    "inputOption.activeForeground": "#efddac", // -color--yellow-base
+    //*** KEYBINDING LABEL ***//
+    "keybindingLabel.background": "#ffffff26",
+    "keybindingLabel.border": "#00000080",
+    "keybindingLabel.bottomBorder": "#00000080",
+    //*** LIST ACTIVE SELECTION ***//
+    "list.activeSelectionBackground": "#ffffff33", // -color--white at 20% opacity - example: settings UI dropdown selector
+    "list.activeSelectionForeground": "#f8f8f8", // -color--gray-white - sidebar active item when moving with keyboard
+    //*** LIST ERROR ***//
+    "list.errorForeground": "#ef9182", // -color--red-base - example: editor tab title
+    //*** LIST FOCUS ***//
+    "list.focusAndSelectionOutline": "#ffffff00", // -color--white at 0% opacity for no border showing
+    "list.focusForeground": "#f8f8f8", // -color--gray-white
+    "list.focusOutline": "#ffffff33", // -color--white at 20% opacity
+    //*** LIST HOVER ***//
+    "list.hoverBackground": "#ffffff1a", // -color--white at 10% opacity
+    "list.hoverForeground": "#f8f8f8", // -color--gray-white - example: extensions sidebar list
+    //*** LIST INACTIVE ***//
+    "list.inactiveSelectionBackground": "#ffffff0d", // -color--white at 5% opacity example: extensions sidebar list
+    "list.inactiveSelectionForeground": "#f8f8f8", // -color--gray-white
+    //*** LIST WARNING ***//
+    "list.warningForeground": "#eeae7b", // -color--orange-base
+    //*** PANEL ***//
+    "panel.background": "#2e2e2e", // -color--oklch-30-gray
+    "panel.border": "#383838", // -color--gray-fade (match title bar bg)
+    "panel.dropBorder": "#636363", // -color--gray-dark
+    //*** PANEL TITLE ***//
+    "panelTitle.activeBorder": "#2e2e2e", // -color--oklch-30-gray (match panel BG to hide border)
+    "panelTitle.activeForeground": "#efddac", // -color--yellow-base
+    "panelTitle.inactiveForeground": "#636363", // -color--gray-dark
+    //*** PEEK VIEW ***//
+    "peekView.border": "#383838", // -color--gray-fade
+    //*** PEEK VIEW TITLE ***//
+    "peekViewTitle.background": "#333333", // -color--oklch-32-gray (match activity bar bg)
+    "peekViewTitleDescription.foreground": "#929292", // -color--gray-medium
+    "peekViewTitleLabel.foreground": "#f8f8f8", // -color--gray-white
+    //*** PROBLEMS ICON ***//
+    "problemsErrorIcon.foreground": "#ef9182", // -color--red-base - problems panel icons
+    "problemsInfoIcon.foreground": "#92c1fd", // -color--blue-base - problems panel icons
+    "problemsWarningIcon.foreground": "#eeae7b", // -color--orange-base - problems panel icons
+    //*** PROGRESS BAR ***//
+    "progressBar.background": "#a2cd8b", // -color--green-base
+    //*** SASH ***//
+    "sash.hoverBorder": "#ffffff1a", // -color--white at 10% opacity
+    //*** SCROLLBAR ***//
+    "scrollbar.shadow": "#1f1f1f", // -color--oklch-24-gray - Two shades darker than editor background - example: editor tabs side scroll
+    //*** SCROLLBAR SLIDER ***//
+    "scrollbarSlider.activeBackground": "#7a7a7a66", // -color--gray-medium-dark at 40% opacity - example: when selecting and dragging scrollbar location
+    "scrollbarSlider.background": "#7a7a7a40", // -color--gray-medium-dark at 25% opacity - example: editor vertical scrollbar location
+    "scrollbarSlider.hoverBackground": "#7a7a7a4d", //-color--gray-medium-dark at 30% opacity
+    //*** SELECTION ***//
+    "selection.background": "#62a1f080", // -color--blue-deep at 50% opacity - example: search input selection
+    //*** SETTINGS ***//
+    "settings.modifiedItemIndicator": "#efddac", // -color--yellow-base - example: vertical line color in Settings UI
+    //*** SIDEBAR ***//
+    "sideBar.background": "#292929", // -color--oklch-28-gray
+    "sideBar.border": "#292929", // -color--oklch-28-gray
+    "sideBar.dropBackground": "#2e2e2e", // -color--oklch-30-gray - 2 shades darker than sidebar bg,
+    "sideBar.foreground": "#c4c4c4", // -color--gray-light
+    //*** SIDEBAR SECTION HEADER ***//
+    "sideBarSectionHeader.background": "#333333", // -color--oklch-32-gray (match activity bar bg)
+    "sideBarSectionHeader.border": "#292929", // -color--oklch-28-gray (match sidebar border)
+    "sideBarSectionHeader.foreground": "#929292", // -color--gray-medium
+    //*** SIDEBAR STICKY SCROLL ***//
+    "sideBarStickyScroll.background": "#2e2e2e", // -color--oklch-30-gra
+    //*** SIDEBAR TITLE ***//
+    "sideBarTitle.foreground": "#7a7a7a", // -color--gray-medium-dark (OKLCH 58% - match comments) - EXPLORER TITLE
+    //*** SIDE BY SIDE EDITOR ***//
+    "sideBySideEditor.horizontalBorder": "#121212", // -color--gray-black
+    "sideBySideEditor.verticalBorder": "#121212", // -color--gray-black (see split settings with Default and User side by side)
+    //*** STATUS BAR ***//
+    "statusBar.background": "#383838", // -color--gray-fade (match title bar bg)
+    "statusBar.debuggingBackground": "#eeae7b", // -color--orange-base
+    "statusBar.debuggingForeground": "#121212", // -color--gray-black
+    "statusBar.foreground": "#929292", // -color--gray-medium
+    "statusBar.noFolderBackground": "#383838", // -color--gray-fade (match title bar bg),
+    "statusBar.noFolderForeground": "#929292", // -color--gray-medium
+    //*** TAB ***//
+    "tab.activeBackground": "#242424", // -color--gray-fade-black (match editor background)
+    "tab.activeForeground": "#f8f8f8", // -color--gray-white
+    "tab.border": "#242424", // -color--gray-fade-black (match editor background)
+    "tab.hoverForeground": "#f8f8f8", // -color--gray-white
+    "tab.inactiveBackground": "#2e2e2e", // -color--oklch-30-gray (match panels bg)
+    "tab.inactiveForeground": "#929292", // -color--gray-medium
+    "tab.lastPinnedBorder": "#121212", // -color--gray-black (matches split view border)
+    "tab.unfocusedActiveBorderTop": "#242424", // -color--gray-fade-black (match editor background)
+    "tab.unfocusedActiveForeground": "#929292", // -color--gray-medium
+    "tab.unfocusedHoverForeground": "#f8f8f8", // -color--gray-white
+    "tab.unfocusedInactiveForeground": "#636363", // -color--gray-dark
+    //*** TERMINAL ANSI ***//
+    "terminal.ansiBlack": "#383838", // -color--gray-fade
+    "terminal.ansiBlue": "#62a1f0", // -color--blue-deep
+    "terminal.ansiBrightBlack": "#929292", // -color--gray-medium
+    "terminal.ansiBrightBlue": "#92c1fd", // -color--blue-base
+    "terminal.ansiBrightCyan": "#89dfdf", // -color--cyan-base
+    "terminal.ansiBrightGreen": "#79b158", // -color--green-deep
+    "terminal.ansiBrightMagenta": "#fcb7cb", // -color--pink-base
+    "terminal.ansiBrightRed": "#db6656", // -color--red-deep
+    "terminal.ansiBrightWhite": "#ffffff", // -color--white
+    "terminal.ansiBrightYellow": "#eeae7b", // -color--orange-base
+    "terminal.ansiCyan": "#35c5c5", // -color--cyan-deep
+    "terminal.ansiGreen": "#a2cd8b", // -color--green-base
+    "terminal.ansiMagenta": "#d6aaea", // -color--purple-base
+    "terminal.ansiRed": "#ef9182", // -color--red-base
+    "terminal.ansiWhite": "#f8f8f8", // -color--gray-white
+    "terminal.ansiYellow": "#efddac", // -color--yellow-base
+    //*** TERMINAL ***//
+    "terminal.background": "#242424", // -color--gray-fade-black (match editor bg)
+    "terminal.foreground": "#c4c4c4", // -color--gray-light
+    //*** TERMINAL OVERVIEW RULER ***//
+    "terminalOverviewRuler.border": "#242424", // (match terminal bg)
+    //*** TEXT BLOCKQUOTE ***//
+    "textBlockQuote.background": "#ffffff12", // -color--gray-fade - example: markdown > quote in preview mode
+    "textBlockQuote.border": "#ffffff24", // -color--gray-dark
+    //*** TEXT CODE BLOCK ***//
+    "textCodeBlock.background": "#ffffff1a", // -color--white at 10% opacity - example: hover over settings json "workbench.startupEditor"
+    //*** TEXT LINK ***//
+    "textLink.activeForeground": "#efddac", // -color--yellow-base
+    "textLink.foreground": "#92c1fd", // -color--blue-base - example: Settings UI text link
+    //*** TEXT PREFORMAT ***//
+    "textPreformat.background": "#ffffff1a", // -color--white at 10% opacity
+    "textPreformat.foreground": "#d7bb70", // -color--yellow-deep,
+    //*** TITLE BAR ***//
+    "titleBar.activeBackground": "#383838", // -color--gray-fade (match status bar bg)
+    "titleBar.activeForeground": "#929292", // -color--gray-medium
+    "titleBar.inactiveBackground": "#2e2e2e", // -color--oklch-30-gray (match editor inactive tabs bg)
+    "titleBar.inactiveForeground": "#636363", // -color--gray-dark
+    //*** TOOLBAR ***//
+    "toolbar.activeBackground": "#f8f8f833", // -color--gray-white at 20% opacity - example: Settings UI gear icons
+    "toolbar.hoverBackground": "#f8f8f81a", // -color--gray-white at 10% opacity - example: Settings UI gear icons
+    //*** TREE ***//
+    "tree.indentGuidesStroke": "#383838", // -color--gray-fade (sidebar explorer tree)
+    "tree.tableColumnsBorder": "#333333", // -color--oklch-32-gray - 6 shades lighter than editor bg (see Keyboard Shortcuts page)
+    "tree.tableOddRowsBackground": "#1f1f1f", // -color--oklch-24-gray - 2 shades darker than editor bg (see Keyboard Shortcuts page)
+    //*** WIDGET ***//
+    "widget.border": "#ffffff05", // -color--white at 2% opacity
+    "widget.shadow": "#1f1f1f", // -color--oklch-24-gray
+  },
+  "semanticHighlighting": true,
+  "semanticTokenColors": {
+    "class": {
+      "foreground": "#89dfdf", // -color--cyan-base
+    },
+    "function": {
+      "foreground": "#89dfdf", // -color--cyan-base
+    },
+    "function.defaultLibrary": {
+      "foreground": "#f8f8f8", // -color--gray-white
+    },
+    "method": {
+      "foreground": "#f8f8f8", // -color--gray-white
+    },
+    "namespace": {
+      "foreground": "#d6aaea", // -color--purple-base
+    },
+    "parameter": {
+      "foreground": "#eeae7b", // -color--orange-base
+    },
+    "property": {
+      "foreground": "#a2cd8b", // -color--green-base
+    },
+    "variable": {
+      "foreground": "#fcb7cb", // -color--pink-base
+    },
+    "variable.defaultLibrary": {
+      "foreground": "#d1d1d1", // -color--gray-white-light-2
+    },
+  },
+  "tokenColors":[
+    //--------------------------------------------------------------------------
+    //--- FONT STYLES ---
+    //--------------------------------------------------------------------------
+    {
+      "name": "BOLD",
+      "scope": [
+        //*** MARKDOWN ***
+        "markup.bold.markdown",
+      ],
+      "settings": {
+        "fontStyle": "bold"
+      }
+    },
+    {
+      "name": "ITALIC",
+      "scope": [
+        //*** DEFAULT ***
+        "comment",
+        "invalid",
+        "variable.language.this",
+        //*** MARKDOWN ***
+        "entity.name.section.markdown",
+        "markup.italic.markdown",
+        //*** PHP ***
+        "keyword.operator.return-value.php",
+        "keyword.other.type.php",
+        "meta.function.php support.class.php",
+        //*** TYPESCRIPT ***
+        "keyword.operator.type.annotation.ts",
+        "support.type.primitive.ts",
+      ],
+      "settings": {
+        "fontStyle": "italic"
+      }
+    },
+    {
+      "name": "BOLD ITALIC",
+      "scope": [
+        //*** MARKDOWN ***
+        "markup.bold.markdown markup.italic.markdown",
+      ],
+      "settings": {
+        "fontStyle": "bold italic"
+      }
+    },
+    // {
+    //   "name": "NORMAL",
+    //   "scope": [],
+    //   "settings": {
+    //     "fontStyle": ""
+    //   }
+    // },
+    {
+      "name": "STRIKETHROUGH",
+      "scope": [
+        //*** MARKDOWN ***
+        "markup.strikethrough.markdown",
+      ],
+      "settings": {
+        "fontStyle": "strikethrough"
+      }
+    },
+
+    //--------------------------------------------------------------------------
+    //--- GRAY SHADES ---
+    //--------------------------------------------------------------------------
+    {
+      "name": "GRAY WHITE (OKLCH 98%)",
+      "scope": [
+        //*** DEFAULT ***
+        "meta.method-call entity.name.function",
+        "support.function",
+        //*** APACHE ***
+        "entity.helper.apacheconf", // Using Apache Conf extension for syntax grammar
+        //*** CSS ***
+        "entity.other.attribute-name.pseudo-class",
+        "entity.other.attribute-name.pseudo-element",
+        //*** HTML ***
+        "text.html",
+        "meta.element.structure.svg.text.html",
+        //*** JSX ***
+        "meta.jsx.children",
+        //*** XML ***
+        "text.xml",
+      ],
+      "settings": {
+        "foreground": "#f8f8f8"
+      }
+    },
+    // {
+    //   "name": "GRAY WHITE-LIGHT (OKLCH 90%)",
+    //   "scope": [],
+    //   "settings": { "foreground": "#dedede" }
+    // },
+    {
+      "name": "GRAY WHITE-LIGHT-LIGHT (OKLCH 86%)",
+      "scope": [
+        //*** JAVASCRIPT ***
+        "variable.other.object", // semantic token type for JS
+        //*** SHELL ***
+        "meta.scope",
+      ],
+      "settings": { "foreground": "#d1d1d1" }
+    },
+    {
+      "name": "GRAY LIGHT (OKLCH 82%)",
+      "scope": [
+        //*** DEFAULT ***
+        "meta.embedded.block", // Such as  ```shell text``` in markdown
+        "support.constant.property", // semantic token type for JS
+        "support.variable", // semantic token type for JS
+        //*** HTML ***
+        "entity.other.attribute-name",
+      ],
+      "settings": {
+        "foreground": "#c4c4c4"
+      }
+    },
+    // {
+    //   "name": "GRAY LIGHT-MEDIUM (OKLCH 74%)",
+    //   "scope": [],
+    //   "settings": {
+    //     "foreground": "#ababab"
+    //   }
+    // },
+    {
+      "name": "GRAY MEDIUM (OKLCH 66%) [PUNCTUATION]",
+      "scope": [
+        //*** DEFAULT ***
+        "entity.name",
+        "meta.at-rule.keyframes.body",
+        "meta.block",
+        "meta.brace",
+        "meta.embedded.line",
+        "punctuation",
+        //*** CSS ***
+        "meta.function.calc.css", // For nesting parentheses in calc function
+        "meta.property-list",
+        //*** MARKDOWN ***
+        "meta.separator.markdown",
+        "markup.strikethrough.markdown",
+        //*** PHP ***
+        "comment keyword", // example: @package in PHPdoc comment
+        "comment keyword.operator.nullable-type.php", // example: ?array in docblock type hint
+        "comment support.class", // example: `editor` in @return editor in PHPdoc comment
+        "keyword.other.phpdoc.php", // The PHPDoc block keywords
+        "keyword.operator.return-value.php", // For function return type colon
+        "meta.embedded.block.php", // For else colon when using alternative syntax
+        "meta.embedded.line.php", // For closing bracket } when opening a new PHP tag
+        "string.quoted.double.php punctuation.definition.variable.php", // for {} braces syntax used in string interpolation.
+        //*** RUBY ***
+        "meta.function.method.with-arguments.ruby storage.type", // For Ruby's parameter block `&` operator
+        //*** SHELL ***
+        "meta.expression.assignment.modified.shell", //example `/` in .zshrc: export PATH=/opt/homebrew/bin:$PATH
+        //*** XML ***
+        "meta.tag",
+        //*** ZSH ***
+        "meta.parameter-expansion",
+      ],
+      "settings": {
+        "foreground": "#929292"
+      }
+    },
+    {
+      "name": "GRAY MEDIUM-DARK (OKLCH 58%) [COMMENTS]",
+      "scope": [
+        //*** DEFAULT ***
+        "comment",
+        "comment constant",
+        "comment entity.name.type",
+        "comment keyword",
+        "comment meta.tag.inline",
+        "comment punctuation",
+        "comment storage",
+        "comment storage.modifier",
+        "comment storage.type",
+        "comment support",
+        "comment variable",
+        "punctuation.definition.comment",
+        "source.embedded",
+      ],
+      "settings": {
+        "foreground": "#7a7a7a",
+      }
+    },
+    {
+      "name": "GRAY DARK (OKLCH 50%)",
+      "scope": [
+        //*** DEFAULT ***
+        "invalid",
+        //*** MARKDOWN ***
+        "markup.underline.link",
+      ],
+      "settings": {
+        "foreground": "#636363"
+      }
+    },
+    // {
+    //   "name": "GRAY DARK-FADE (OKLCH 42%)",
+    //   "scope": [],
+    //   "settings": { "foreground": "#4d4d4d" }
+    // },
+    // {
+    //   "name": "GRAY FADE (OKLCH 34%)",
+    //   "scope": [],
+    //   "settings": { "foreground": "#525252" }
+    // },
+
+    //--------------------------------------------------------------------------
+    //--- COLOR CUSTOMIZATIONS ---
+    //--------------------------------------------------------------------------
+    {
+      "name": "BLUE BASE",
+      "scope": [
+        //*** DEFAULT ***
+        "storage.type",
+        //*** APACHE ***
+        "string.path.apacheconf",
+        //*** CSS ***
+        "meta.attribute.unrecognized.xmlns.html string",
+        "meta.attribute.unrecognized.xmlns:xlink.html string",
+        "meta.function.url string.quoted.double", //css such as content: url("");
+        "meta.function.url string.quoted.single", //css such as content: url('');
+        //*** HTML ***
+        "meta.attribute.href string",
+        "meta.attribute.src.html string",
+        "meta.attribute.srcset.html string",
+        //*** LOG ***
+        "log.date",
+        //*** MARKDOWN ***
+        "meta.link.reference",
+        "meta.link.reference constant",
+        "meta.link.reference string",
+        "string.other.link.title.markdown",
+        //*** SCSS ***
+        "variable.parameter.url", // SCSS `to` in background: linear-gradient(to ...); -- Red in CSS. Also for background:url(../../../../assets/images/icons/icon-phone-white.svg) without quotes.
+      ],
+      "settings": {
+        "foreground": "#92c1fd" // -color--blue-base
+      }
+    },
+    // {
+    //   "name": "BLUE DEEP",
+    //   "scope": [],
+    //   "settings": { "foreground": "#62a1f0" }
+    // },
+    {
+      "name": "BLUE FADE",
+      "scope": [
+        //*** PHP - TYPEHINT ***
+        "keyword.other.type.php", // For parameter type hinting and other types
+        "meta.other.type.phpdoc.php",
+        "keyword.operator.nullable-type.php", // For nullable types using the question mark, such as ?callable
+        // "keyword.other.type.cassidydark.php", // class typehint
+        "meta.function.php storage.type.php", // ... : self
+        "meta.function.php support.class.php", // ... : DB
+        "meta.function.parameter.typehinted.php support", // ( \WP_Query $query )
+        "meta.other.type.phpdoc.php support.class", // @param \WP_Post
+        //*** TYPESCRIPT ***
+        "keyword.operator.type.annotation.ts",
+        "support.type.primitive.ts",
+      ],
+      "settings": {
+        "foreground": "#a9c0de"
+      }
+    },
+    {
+      "name": "BLUE 50 OPACITY",
+      "scope": [
+        //*** MARKDOWN ***
+        "markup.strikethrough.markdown string.other.link.title.markdown",
+      ],
+      "settings": {
+        "foreground": "#92c1fd80"
+      }
+    },
+
+    {
+      "name": "CYAN BASE",
+      "scope": [
+        //*** DEFAULT ***
+        "entity.name.type", // such are class or trait name in PHP
+        "entity.name.function",
+        "keyword.other.special-method", // such as Ruby loop
+        "meta.attribute.style string",
+        "meta.property-name",
+        "meta.property-value support.function",
+        "support",
+        //*** APACHE ***
+        "entity.tag.apacheconf",
+        //*** CSS ***
+        "meta.at-rule support.function", // such as `calc` and `var`
+        "meta.property-value",
+        //*** INI ***
+        "keyword.other.definition",
+        //*** PHP ***
+        "support.function.basic_functions",
+        "entity.other.inherited-class.php", // extends class
+        "entity.other.alias.php", // use as
+        //*** PYTHON ***
+        "meta.function-call.generic.python",
+        //*** SHELL ***
+        "support.function.builtin.shell",
+        //*** YAML ***
+        "entity.name.tag.yaml",
+      ],
+      "settings": {
+        "foreground": "#89dfdf"
+      }
+    },
+
+    {
+      "name": "GREEN BASE",
+      "scope": [
+        //*** DEFAULT ***
+        "entity.name.label",  // property??
+        "entity.other.attribute-name.class",
+        "meta.attribute.class string",
+        "meta.object-literal",
+        "support.variable.property", // semantic token type
+        "variable.other.constant.property", // semantic token type
+        "variable.other.property",
+        "variable.other.object.property",
+        //*** APACHE ***
+        "entity.mime-type.apacheconf",
+        //*** MARKDOWN ***
+        "entity.name.section.markdown",
+        "markup.heading.markdown string.other.link.title.markdown",
+        "markup.heading.markdown meta.other.valid-ampersand.markdown",
+        "punctuation.definition.heading.markdown",
+        //*** PHP ***
+        "variable.other.property.php punctuation.definition.variable.php",
+        //*** RUBY ***
+        "constant.other.symbol.hashkey.ruby",
+        "constant.other.symbol.ruby",
+        //*** SHELL ***
+        "entity.name.command",
+        "entity.name.section.group-title", // example: [difftool "sourcetree"] in .gitconfig
+        //*** SCSS ***
+        "entity.other.attribute-name.parent-selector-suffix.css punctuation", // SCSS &__name
+      ],
+      "settings": {
+        "foreground": "#a2cd8b"
+      }
+    },
+
+    {
+      "name": "ORANGE BASE",
+      "scope": [
+        //*** DEFAULT ***
+        "entity.other.attribute-name.id",
+        "entity.other.attribute-name.id punctuation",
+        "meta.attribute.id string",
+        "variable.parameter",
+        //*** APACHE ***
+        "string.replacement.apacheconf",
+        //*** CSS ***
+        "entity.other.keyframe-offset",
+        "meta.at-rule.keyframes",
+        "support.constant.container-name.container.css", // For @container <container-name> (this token is from my CSS Nesting Syntax Highlighting extension)
+        "variable.parameter.misc.css", // such as `content: counter(count, decimal);`
+        //*** LOG ***
+        "log.warning",
+        //*** PHP ***
+        "meta.function.parameters.php variable",
+        "meta.function.parameters.php punctuation.definition.variable",
+        "punctuation.section.embedded.begin.php",
+        "punctuation.section.embedded.end.php",
+        //*** SCSS ***
+        "meta.at-rule.keyframes entity.name.function",
+        "entity.other.attribute-name.scss",
+      ],
+      "settings": {
+        "foreground": "#eeae7b"
+      }
+    },
+
+    {
+      "name": "PINK BASE",
+      "scope": [
+        //*** DEFAULT ***
+        "punctuation.definition.variable",
+        "variable",
+        //*** PHP ***
+        "string.quoted.double.php variable.other.php punctuation.definition.variable.php", // for $ in string interpolation.
+        //*** PYTHON ***
+        "meta.function-call.arguments.python",
+        //*** SHELL ***
+        "variable.other.assignment.shell",
+      ],
+      "settings": {
+        "foreground": "#fcb7cb"
+      }
+    },
+
+    {
+      "name": "PURPLE BASE",
+      "scope": [
+        //*** DEFAULT ***
+        "constant",
+        "keyword.other.unit",
+        //*** APACHE ***
+        "entity.status.apacheconf",
+        //*** CSS ***
+        "support.constant.boolean.container.css", // for @container <style-query> boolean property-value (this token is from my CSS Nesting Syntax Highlighting extension)
+        //*** HTML ***
+        "constant punctuation.definition.entity", // HTML symbol entity
+        "meta.attribute.async.html entity.other.attribute-name",
+        "meta.attribute.crossorigin entity.other.attribute-name",
+        "meta.attribute.defer.html entity.other.attribute-name",
+        //*** INI ***
+        "source.ini",
+        //*** JAVASCRIPT ***
+        "variable.other.constant.object.js",
+        //*** PHP ***
+        "entity.name.type.namespace.php", // namespace name
+        //*** REGEX ***
+        "meta.assertion.look-ahead.regexp",
+        "meta.assertion.negative-look-ahead.regexp",
+        "meta.group.regexp",
+        "meta.group.assertion.regexp",
+        "string.regexp",
+        "string.regexp constant",
+        "string.regexp keyword",
+        "string.regexp punctuation",
+        //*** SHELL ***
+        "constant.other.option", //example: -i in shell
+        "meta.arithmetic.shell", //example: $+functions[p10k]
+        "keyword.operator.logical.shell", //example: `-f` in if [ -f "$ray_php"]
+        "keyword.operator.expansion.shell", //example: ${tag//\%/%%}
+        //*** XML ***
+        "punctuation.definition.constant.xml",
+      ],
+      "settings": {
+        "foreground": "#d6aaea"
+      }
+    },
+    {
+      "name": "PURPLE DEEP",
+      "scope": [
+        //*** DEFAULT ***
+        "entity.other.attribute-name.namespace",
+      ],
+      "settings": {
+        "foreground": "#bd84d7",
+      }
+    },
+
+    {
+      "name": "RED BASE",
+      "scope": [
+        //*** DEFAULT ***
+        "entity.name.tag",
+        "keyword",
+        "storage.modifier",
+        //*** LOG ***
+        "log.error",
+        //*** PHP ***
+        "entity.name.goto-label.php", // For 'else' using alternative colon syntax
+        //*** SHELL ***
+        "punctuation.separator.statement.and.shell", //example: &&
+      ],
+      "settings": {
+        "foreground": "#ef9182"
+      }
+    },
+    {
+      "name": "RED DEEP",
+      "scope": [
+        //*** DEFAULT ***
+      ],
+      "settings": {
+        // "foreground": "#db6656",
+      }
+    },
+
+    {
+      "name": "YELLOW BASE",
+      "scope": [
+        //*** DEFAULT ***
+        "string",
+        //*** CSS ***
+        "meta.attribute-selector entity.other.attribute-name",
+        //*** MARKDOWN ***
+        "string.other.link.description.markdown",
+        //*** PHP ***
+        "string.quoted.single.php", // Override for "meta.attribute.src.html string"
+        "string.quoted.double.php", // Override for "meta.attribute.src.html string"
+        //*** SCSS ***
+        "meta.attribute-selector.scss",
+        //*** XML ***
+        "meta.tag.sgml.doctype.xml",
+      ],
+      "settings": {
+        "foreground": "#efddac"
+      }
+    },
+    {
+      "name": "YELLOW DEEP",
+      "scope": [
+        //*** MARKDOWN ***
+        "markup.inline.raw.string.markdown",
+      ],
+      "settings": {
+        "foreground": "#d7bb70"
+      }
+    },
+
+    //--------------------------------------------------------------------------
+    // Better DockerFile Syntax - Extension
+    // https://marketplace.visualstudio.com/items?itemName=jeff-hykin.better-dockerfile-syntax
+    //--------------------------------------------------------------------------
+    {
+      "name": "[DOCKERFILE] - GRAY WHITE",
+      "scope": [
+        "source.dockerfile string",
+      ],
+      "settings": {
+        "foreground": "#f8f8f8"
+      }
+    },
+    {
+      "name": "[DOCKERFILE] - CYAN BASE",
+      "scope": [
+        "source.dockerfile keyword.other.special-method",
+      ],
+      "settings": {
+        "foreground": "#89dfdf"
+      }
+    },
+    {
+      "name": "[DOCKERFILE] - GREEN BASE",
+      "scope": [
+        "source.dockerfile entity.name",
+      ],
+      "settings": {
+        "foreground": "#a2cd8b"
+      }
+    },
+    {
+      "name": "[DOCKERFILE] - ORANGE BASE",
+      "scope": [
+        "source.dockerfile constant.other.option",
+      ],
+      "settings": {
+        "foreground": "#eeae7b",
+      }
+    },
+    {
+      "name": "[DOCKERFILE] - RED BASE",
+      "scope": [
+        "punctuation.separator.statement.and.shell.dockerfile",
+      ],
+      "settings": {
+        "foreground": "#ef9182"
+      }
+    },
+
+    //--------------------------------------------------------------------------
+    // Nginx.conf - (Syntax) Extension
+    // https://marketplace.visualstudio.com/items?itemName=shanoor.vscode-nginx
+    //--------------------------------------------------------------------------
+    {
+      "name": "[NGINX] - GRAY LIGHT (OKLCH 82%)",
+      "scope": [
+        "source.nginx",
+      ],
+      "settings": {
+        "foreground": "#c4c4c4"
+      }
+    },
+    {
+      "name": "GRAY MEDIUM (OKLCH 66%) [PUNCTUATION]",
+      "scope": [
+        "source.nginx constant.character",
+      ],
+      "settings": {
+        "foreground": "#929292",
+      }
+    },
+
+    {
+      "name": "[NGINX] - BLUE BASE",
+      "scope": [
+        "source.nginx constant.language.module",
+      ],
+      "settings": {
+        "foreground": "#92c1fd"
+      }
+    },
+    {
+      "name": "[NGINX] - CYAN BASE",
+      "scope": [
+        "source.nginx constant.language",
+      ],
+      "settings": {
+        "foreground": "#89dfdf"
+      }
+    },
+    {
+      "name": "[NGINX] - RED BASE",
+      "scope": [
+        "source.nginx constant.language.directive.module.main"
+      ],
+      "settings": {
+        "foreground": "#ef9182"
+      }
+    },
+
+    //--------------------------------------------------------------------------
+    // Output Colorizer - Extension
+    // https://marketplace.visualstudio.com/items?itemName=IBM.output-colorizer
+    //--------------------------------------------------------------------------
+    {
+      "name": "GRAY WHITE (OKLCH 98%)",
+      "scope": [
+        "code.log support", // For "Output Colorizer" extension
+      ],
+      "settings": { "foreground": "#f8f8f8" }
+    },
+
+    {
+      "name": "RED BASE",
+      "scope": [
+        "code.log invalid",
+      ],
+      "settings": { "foreground": "#ef9182" }
+    },
+
+    //--------------------------------------------------------------------------
+    // Rainbow CSV - Extension
+    // https://marketplace.visualstudio.com/items?itemName=mechatroner.rainbow-csv
+    //--------------------------------------------------------------------------
+    {
+      "name": "NORMAL",
+      "scope": [
+        "comment.rainbow4",
+        "invalid.rainbow10",
+      ],
+      "settings": {
+        "fontStyle": ""
+      }
+    },
+    {
+      "name": "GRAY WHITE (OKLCH 98%)",
+      "scope": [
+        "markup.bold.rainbow9",
+      ],
+      "settings": {
+        "foreground": "#f8f8f8"
+      }
+    },
+    {
+      "name": "GRAY LIGHT (OKLCH 82%)",
+      "scope": [
+        "comment.rainbow4",
+      ],
+      "settings": {
+        "foreground": "#c4c4c4"
+      }
+    },
+
+    {
+      "name": "BLUE BASE",
+      "scope": [
+        "constant.numeric.rainbow7",
+      ],
+      "settings": {
+        "foreground": "#92c1fd"
+      }
+    },
+    {
+      "name": "CYAN BASE",
+      "scope": [
+        "rainbow1",
+      ],
+      "settings": {
+        "foreground": "#89dfdf"
+      }
+    },
+    {
+      "name": "GREEN BASE",
+      "scope": [
+        "string.rainbow5",
+      ],
+      "settings": {
+        "foreground": "#a2cd8b"
+      }
+    },
+    {
+      "name": "ORANGE BASE",
+      "scope": [
+        "variable.parameter.rainbow6",
+      ],
+      "settings": {
+        "foreground": "#eeae7b"
+      }
+    },
+    {
+      "name": "PINK BASE",
+      "scope": [
+        "entity.name.type.rainbow8",
+      ],
+      "settings": {
+        "foreground": "#fcb7cb"
+      }
+    },
+    {
+      "name": "PURPLE BASE",
+      "scope": [
+        "entity.name.function.rainbow3",
+      ],
+      "settings": {
+        "foreground": "#d6aaea"
+      }
+    },
+    {
+      "name": "RED BASE",
+      "scope": [
+        "invalid.rainbow10",
+      ],
+      "settings": {
+        "foreground": "#ef9182"
+      }
+    },
+    {
+      "name": "YELLOW BASE",
+      "scope": [
+        "keyword.rainbow2",
+      ],
+      "settings": {
+        "foreground": "#efddac"
+      }
+    },
+  ]
+}
