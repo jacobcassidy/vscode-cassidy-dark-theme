@@ -20,8 +20,10 @@
     "button.secondaryForeground": "#f8f8f8", // -color--gray-white [overrides core #ffffff at opacity]
     "button.secondaryHoverBackground": "#585858", // -color--oklch-gray-46 [overrides core #5c5c5c] (4 shades lighter than `button.secondaryBackground`)
     "charts.green": "#a2cd8b", // -color--green-base [overrides core green #89d185] | example: Incoming/Outgoing branch dot in source control sidebar
-    "charts.orange": "#eeae7b", // -color--orange-base [overrides `minimap.findMatchHighlight`] | example: Incoming/Outgoing second dot in source control sidebar
-    "charts.purple": "#d6aaea", // -color--purple-base [overrides core #b180d7] | example: Incoming/Outgoing second dot in source control sidebar
+    "charts.orange": "#eeae7b", // -color--orange-base [overrides `minimap.findMatchHighlight`] | example: Incoming/Outgoing dot in source control sidebar
+    "charts.purple": "#d6aaea", // -color--purple-base [overrides core #b180d7] | example: Incoming/Outgoing dot in source control sidebar
+    "charts.yellow": "#efddac", // [overrides `editorWarning.foreground`] | example: Incoming/Outgoing dot in source control sidebar
+    "commandCenter.activeForeground": "#c4c4c4", // [overrides `menubar.selectionForeground` || inherits lighten `titleBar.activeBackground`]| example: hover over commandCenter
     "debugIcon.pauseForeground": "#92c1fd", // -color--blue-base [overrides core #75beff]
     "debugIcon.restartForeground": "#a2cd8b", // -color--green-base [overrides core #89d185]
     "debugIcon.startForeground": "#a2cd8b", // -color--green-base[overrides core #89d185]
@@ -44,9 +46,9 @@
     "dropdown.foreground": "#c4c4c4", // -color--gray-white [overrides core #efefef] (match `foreground`)
     "dropdown.listBackground": "#333333", // -color--oklch-32-gray (2 shades darker than dropdown.background) [overrides `dropdown.background`] | example: settings UI page dropdowns
     "editor.background": "#242424", // -color--gray-fade-black [overrides core #1e1e1e]
-    "editor.findMatchBackground": "#9847b9e6", // -color--purple-bg at 90% opacity [overrides dimmed core blue #515c6a] | example: active search match
-    "editor.findMatchForeground": "#bd84d7e6", // -color--purple-deep at 90% opacity | example: inactive search match
-    "editor.findMatchHighlightBackground": "#9847b973", // -color--purple-bg at 45% opacity [overrides core orange at opacity #653618] | example: inactive search match
+    "editor.findMatchBackground": "#9847b9", // -color--purple-bg at 90% opacity [overrides dimmed core blue #515c6a] | example: active search match
+    "editor.findMatchForeground": "#bd84d7", // -color--purple-deep at 90% opacity | example: inactive search match
+    "editor.findMatchHighlightBackground": "#9847b980", // -color--purple-bg at 50% opacity [overrides core orange at opacity #653618] | example: inactive search match
     "editor.findMatchHighlightForeground": "#ffffffe6", // -color--white at 90% opacity [overrides `editor.findMatchForeground`] | example: active search match
     "editor.findRangeHighlightBackground": "#ffffff1a", // -color--white at 10% opacity [overrides core dimmed gray #2d2e30] | example: background when using finder widget with selection search only
     "editor.foldBackground": "#92c1fd26", // -color--blue-base at 15% opacity [overrides dimmed `editor.selectionBackground`]
@@ -111,9 +113,11 @@
     "focusBorder": "#62a1f0cc", // -color--blue-deep at 80% opacity [overrides core #0078d4] | example: active sidebar list item, active input border, active panel border
     "foreground": "#c4c4c4", // -color--gray-light [overrides core #cccccc] | examples: breadcrumbs, explorer sidebar, extension titles
     "gitDecoration.addedResourceForeground": "#79b158", // -color--green-deep [overrides core green #72c890] | example: filename in tabs and sidebar for staged/committed file
-    "gitDecoration.deletedResourceForeground": "#db6656", // -color--red-deep [overrides core red] | example: hover over source control sidebar incoming/outgoing list item that has a commit deletion or filename in tabs and sidebar for staged/committed file
+    "gitDecoration.deletedResourceForeground": "#ef9182", // -color--red-base [overrides core red] | example: hover over source control sidebar incoming/outgoing list item that has a commit deletion or filename in tabs and sidebar for non-staged file or committed file in source control graph popup widget
     "gitDecoration.ignoredResourceForeground": "#868686", // -color--oklch-gray-62 [overrides core #828282] | example: filename in tabs and sidebar
     "gitDecoration.modifiedResourceForeground": "#efddac", // -color--yellow-base [overrides core #e2c08d] | example: filename in tabs and sidebar of non-staged file
+    "gitDecoration.renamedResourceForeground": "#62a1f0", // -color--blue-deep [overrides core #60a177] | example: filename in tabs and sidebar for staged file
+    "gitDecoration.stageDeletedResourceForeground": "#db6656", // -color--red-deep [overrides core red #934234] | example: filename in tabs and sidebar for staged/committed file
     "gitDecoration.stageModifiedResourceForeground": "#d7bb70", // -color--yellow-deep [overrides core yellow #e2c08d] | example: filename in tabs and sidebar for staged file
     "gitDecoration.untrackedResourceForeground": "#a2cd8b", // -color--green-base [overrides core #508d65] | example: filename in tabs and sidebar of non-staged file
     "icon.foreground": "#929292", // -color--gray-medium [overrides core #cccccc] | example: most UI icons in widgets (not selection button) (includes sidebar folder arrows)
@@ -125,6 +129,9 @@
     "inputOption.activeBorder": "#efddac40", // -color--yellow-base at 25% opacity [core overrides #007acc] | example: editor finder widget selection only button
     "inputOption.activeForeground": "#efddac", // -color--yellow-base [overrides core #ffffff] | example: editor finder widget selection only button
     "inputOption.hoverBackground": "#efddac40", // -color--yellow-base at 25% opacity [overrides core white at opacity] | example: sidebar global search exclude button
+    "inputValidation.errorBackground": "#b71a0c", // -color--red-bg [overrides core #5a1d1d] | example: making a new file in the explorer sidebar with a period . for the name
+    "inputValidation.errorBorder": "#db6656", // -color--red-deep [overrides core #be1100] | example: making a new file in the explorer sidebar with a period . for the name
+    "inputValidation.errorForeground": "#f8f8f8", // -color--gray-white [overrides `foreground`] | example: making a new file in the explorer sidebar with a period . for the name
     "keybindingLabel.background": "#4d4d4d", // -color--gray-dark-fade [overrides core #343434]
     "keybindingLabel.border": "#525252", // [overrides core #3d3d3d] (2 shades lighter than `keybindingLabel.background`)
     "keybindingLabel.bottomBorder": "#585858", // [overrides core #484848] (2 shades lighter than `keybindingLabel.border`)
@@ -150,6 +157,7 @@
     "minimap.warningHighlight": "#eeae7bbf", // -color--orange-base at 75% opacity [overrides `editorWarning.foreground`]
     "multiDiffEditor.headerBackground": "#383838", // [override core #262626] | example: previewing a file that is in the Incoming/Outgoing list in the source control sidebar
     "notebook.cellBorderColor": "#ffffff1a", // -color--white at 10% opacity[override core white at opacity] | example: GitHub Copilot Suggestions page
+    "notifications.border": "#4d4d4d", // -color--gray-dark-fade [overrides core white at opacity #424242] (match `input.border`) | example: log icon in statusbar popup widget
     "outputViewStickyScroll.background": "#333333", // -color--oklch-gray-32 [overrides `panel.background`] (2 shades lighter than `panel.background`)
     "panel.background": "#2e2e2e", // -color--oklch-30-gray [overrides `editor.background`]
     "panel.border": "#2e2e2e", // -color--oklch-30-gray [overrides core #444444] (match `panel.background`)
@@ -169,6 +177,9 @@
     "profileBadge.foreground": "#f8f8f8", // -color--gray-white [overrides core #ffffff] (match `badge.border`)
     "progressBar.background": "#79b158", // -color--green-deep [overrides core #006abb]
     "quickInputTitle.background": "#424242", // [overrides core #484848] | example: popup when clicking on the "Open Repository" button in the source control sidebar or Copilot icon in the statusBar
+    "scmGraph.historyItemHoverAdditionsForeground": "#a2cd8b", // -color--green-base [overrides `gitDecoration.addedResourceForeground"`] | example: hover over source control sidebar incoming/outgoing list item that has a commit addition
+    "scmGraph.historyItemHoverDeletionsForeground": "#ef9182", // -color--red-base [overrides `gitDecoration.deletedResourceForeground`] | example: hover over source control sidebar incoming/outgoing list item that has a commit deletion
+    "scmGraph.historyItemHoverLabelForeground": "#161616", // [overrides `button.foreground`] | example: hover over source control sidebar incoming/outgoing list item that has a repo label
     "scrollbar.shadow": "#00000066", // -color--black at 40% opacity [overrides core #000] | example: editor tabs side scroll and breadcrumbs/editorStickyScroll
     "scrollbarSlider.activeBackground": "#7a7a7ab3", // -color--gray-medium-dark at 70% opacity [overrides core gray opacity #505050] - example: when selecting and dragging scrollbar location
     "scrollbarSlider.background": "#7a7a7a4d", // -color--gray-medium-dark at 30% opacity [overrides core gray opacity]- example: editor vertical scrollbar location
@@ -190,10 +201,15 @@
     "statusBar.foreground": "#929292", // -color--gray-medium [overrides core #ffffff] (match `titleBar.activeForeground`)
     "statusBar.noFolderBackground": "#1f1f1f", // -color--oklch-gray-24 [overrides `core #68217a`] (2 shades darker than `editor.background`)
     "statusBar.noFolderForeground": "#7a7a7a", // -color--gray-medium-dark [overrides `statusBar.foreground`]
+    "statusBarItem.errorBackground": "#b71a0c", // -color--red-bg [overrides core #972e20] | example: Prettier error in statusbar
+    "statusBarItem.errorForeground": "#f8f8f8", // -color--gray-white [overrides core #fff] | example: Prettier error in statusbar
+    "statusBarItem.errorHoverBackground": "#db6656", // -color--red-deep [overrides core #a4473b] | example: Prettier error in statusbar
+    "statusBarItem.errorHoverForeground": "#f8f8f8", // -color--gray-white [overrides `statusBarItem.hoverForeground`] | example: Prettier error in statusbar
     "statusBarItem.focusBorder": "#efddac", // [override core #929292] | example: click on the Remote Host button in the statusbar and the exit the popup panel and the button will have a focus border in this color
     "statusBarItem.hoverForeground": "#f8f8f8", // -color--gray-white [overrides `statusBar.foreground`]
+    "statusBarItem.prominentBackground": "#006fd9", // -color--blue-bg [overrides core black] | example: Prettier error in statusbar, log icon color
     "statusBarItem.remoteBackground": "#ffffff1a", // -color--white at 10% opacity [overrides `activityBarBadge.background` || core ##007acc] (4 shades lighter than `statusBar.background`) | example: Remote Host button in statusBar
-    "statusBarItem.remoteForeground": "#f8f8f8", // [inherits `activityBarBadge.foreground` || core white at opacity] | example: Remote Host button in statusBar
+    "statusBarItem.remoteForeground": "#f8f8f8", // -color--gray-white [overrides core white at opacity] | example: Remote Host button in statusBar
     "statusBarItem.remoteHoverBackground": "#efddac", // [overrides `statusBarItem.hoverBackground` || `activityBarBadge.background`]
     "statusBarItem.remoteHoverForeground": "#121212", // [overrides `statusBarItem.hoverForeground` || `statusBar.foreground`] | example: Remote Host button in statusBar
     "symbolIcon.classForeground": "#da883e", // -color--orange-deep [overrides core #c98727] | example: Previewing a css file in Incoming/Outgoing source control sidebar
