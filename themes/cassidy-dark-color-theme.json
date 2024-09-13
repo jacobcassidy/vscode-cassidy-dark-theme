@@ -24,11 +24,14 @@
     "charts.purple": "#d6aaea", // -color--purple-base [overrides core #b180d7] | example: Incoming/Outgoing dot in source control sidebar
     "charts.yellow": "#efddac", // [overrides `editorWarning.foreground`] | example: Incoming/Outgoing dot in source control sidebar
     "commandCenter.activeForeground": "#c4c4c4", // [overrides `menubar.selectionForeground` || inherits lighten `titleBar.activeBackground`]| example: hover over commandCenter
+    "debugIcon.disconnectForeground": "#ef9182", // -color--red-base [overrides core #f28670] | example: unplug icon in debug toolbar0
     "debugIcon.pauseForeground": "#92c1fd", // -color--blue-base [overrides core #75beff]
     "debugIcon.restartForeground": "#a2cd8b", // -color--green-base [overrides core #89d185]
     "debugIcon.startForeground": "#a2cd8b", // -color--green-base[overrides core #89d185]
     "debugIcon.stopForeground": "#ef9182", // -color--red-base [overrides core #f48771]
     "debugToolBar.background": "#383838", // -color--gray-fade [overrides core #333333]
+    "debugView.stateLabelBackground": "#a75c00", // -color--orange-bg [overrides core white with opacity] | example: labels for processes in the sidebar debug call stack
+    "debugView.stateLabelForeground": "#f8f8f8", // -color--gray-white [overrides core white with opacity] | example: labels for processes in the sidebar debug call stack
     "diffEditor.diagonalFill": "#4d4d4d", // -color--gray-dark-fade [overrides core #464646]
     "diffEditor.insertedLineBackground": "#a2cd8b1a", // -color--green-base at 10% opacity [overrides core green opacity]
     "diffEditor.insertedTextBackground": "#a2cd8b33", // -color--green-base at 20% opacity [overrides core green opacity]
@@ -40,7 +43,7 @@
     "diffEditor.unchangedRegionShadow": "#00000033", // -color--black at 20% opacity [overrides core black with opacity] (match `widget.shadow`) | example: previewing a file that is in the Incoming/Outgoing list in the source control sidebar
     "diffEditorGutter.insertedLineBackground": "#a2cd8b1a", // -color--green-base at 10% opacity [base]
     "diffEditorGutter.removedLineBackground": "#ef91821a", // -color--red-base at 10% opacity [base]
-    "disabledForeground": "#ffffff33", // -color--white at 20% opacity [overrides core white at opacity]
+    "disabledForeground": "#ffffff40", // -color--white at 25% opacity [overrides core white at opacity]
     "dropdown.background": "#383838", // -color--gray-fade [overrides core #3c3c3c] (match `input.background`) | example: output panel tasks selection
     "dropdown.border": "#4d4d4d", // -color--gray-dark-fade [base] (match `input.border`)
     "dropdown.foreground": "#c4c4c4", // -color--gray-white [overrides core #efefef] (match `foreground`)
@@ -195,8 +198,8 @@
     "sideBarTitle.foreground": "#929292", // -color--gray-medium [overrides `foreground`] (match `icon.foreground`) | example: EXPLORER TITLE
     "simpleFindWidget.sashBorder": "#ffffff0d", // -color--white at 5% opacity [overrides core #454545] | example: terminal finder widget resize border
     "statusBar.background": "#383838", // -color--gray-fade [override core #007acc] (match `titleBar.activeBackground`)
-    "statusBar.debuggingBackground": "#a75c00", // -color--orange-base [overrides core #cc6633]
-    "statusBar.debuggingForeground": "#eeae7b", // -color--gray-black [overrides `statusBar.foreground`]
+    "statusBar.debuggingBackground": "#a75c00", // -color--orange-bg [overrides core #cc6633]
+    "statusBar.debuggingForeground": "#eeae7b", // -color--orange-base [overrides `statusBar.foreground`]
     "statusBar.focusBorder": "#4d4d4d", // -color--gray-dark-fade [overrides `statusBar.foreground` || core #ffffff]
     "statusBar.foreground": "#929292", // -color--gray-medium [overrides core #ffffff] (match `titleBar.activeForeground`)
     "statusBar.noFolderBackground": "#1f1f1f", // -color--oklch-gray-24 [overrides `core #68217a`] (2 shades darker than `editor.background`)
@@ -213,8 +216,12 @@
     "statusBarItem.remoteHoverBackground": "#efddac", // [overrides `statusBarItem.hoverBackground` || `activityBarBadge.background`]
     "statusBarItem.remoteHoverForeground": "#121212", // [overrides `statusBarItem.hoverForeground` || `statusBar.foreground`] | example: Remote Host button in statusBar
     "symbolIcon.classForeground": "#da883e", // -color--orange-deep [overrides core #c98727] | example: Previewing a css file in Incoming/Outgoing source control sidebar
-    "symbolIcon.functionForeground": "#bd84d7", // -color--purple-deep [overrides core purple #936cb0] | example: box icon
-    "symbolIcon.variableForeground": "#62a1f0", // -color--blue-base [overrides core blue #72b8f6] | example: unknown prop in .prettierrc file
+    "symbolIcon.constantForeground": "#bd84d7", // -color--purple-deep [overrides `foreground`] | example: click in PHP define() constant and see icon in breadcrumbs
+    "symbolIcon.functionForeground": "#35c5c5", // -color--cyan-deep [overrides core purple #936cb0] | example: box icon
+    "symbolIcon.keywordForeground": "#ef9182", // -color--red-base [overrides `foreground`]
+    "symbolIcon.propertyForeground": "#a2cd8b", // -color--green-base [overrides `foreground`] | example: inactive wrench icon in suggestion widget
+    "symbolIcon.stringForeground": "#efddac", // -color--yellow-base [overrides `foreground`] | example: on setting.json user page, the [abc] in breadcrumbs
+    "symbolIcon.variableForeground": "#ea8eab", // -color--pink-deep [overrides core blue #72b8f6] | example: unknown prop in .prettierrc file
     "tab.activeForeground": "#f8f8f8", // -color--gray-white [overrides core #ffffff]
     "tab.border": "#00000040", // -color--black at 25% opacity [overrides core #252526]
     "tab.dragAndDropBorder": "#ffffff80", // -color--white at 50% opacity [overrides `tab.activeForeground`]
@@ -242,6 +249,8 @@
     "terminal.ansiYellow": "#efddac", // -color--yellow-base [overrides core yellow #e5e510]
     "terminal.background": "#242424", // -color--gray-fade-black [overrides `panel.background`] (match editor bg)
     "terminal.foreground": "#c4c4c4", // -color--gray-light [overrides core #cccccc] (includes cursor)
+    "terminal.tab.activeBorder": "#efddac", // -color--yellow-base [base] | example: terminal sidebar active tab border when multiple tabs are open
+    "terminalOverviewRuler.border": "#242424", // [overrides `editorOverviewRuler.border`] (match `terminal.background`)
     "terminalOverviewRuler.cursorForeground": "#929292", // --color--gray-medium [overrides core #878787] (match `editorCursor.foreground`) | example: current line match when using terminal search widget
     "textBlockQuote.background": "#383838", // -color--gray-fade [overrides core #222222] | example: markdown > quote in preview mode
     "textBlockQuote.border": "#636363", // -color--gray-dark [overrides core #1c5982]
