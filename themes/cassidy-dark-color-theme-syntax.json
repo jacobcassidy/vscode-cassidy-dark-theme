@@ -1,0 +1,728 @@
+{
+  "$schema": "vscode://schemas/color-theme",
+  "name": "Cassidy Dark",
+  "type": "dark",
+  "author": "Jacob Cassidy",
+  "colors": {},
+  "semanticHighlighting": true,
+  "semanticTokenColors": {
+    "class": {
+      "foreground": "#89dfdf" // -color--cyan-base
+    },
+    "function": {
+      "foreground": "#89dfdf" // -color--cyan-base
+    },
+    "function.defaultLibrary": {
+      "foreground": "#f8f8f8" // -color--gray-white
+    },
+    "method": {
+      "foreground": "#f8f8f8" // -color--gray-white
+    },
+    "namespace": {
+      "foreground": "#d6aaea" // -color--purple-base
+    },
+    "parameter": {
+      "foreground": "#eeae7b" // -color--orange-base
+    },
+    "property": {
+      "foreground": "#a2cd8b" // -color--green-base
+    },
+    "variable": {
+      "foreground": "#fcb7cb" // -color--pink-base
+    },
+    "variable.defaultLibrary": {
+      "foreground": "#d1d1d1" // -color--gray-white-light-2
+    }
+  },
+  "tokenColors": [
+    //--------------------------------------------------------------------------
+    //--- FONT STYLES ---
+    //--------------------------------------------------------------------------
+    {
+      "name": "BOLD",
+      "scope": [
+        //*** MARKDOWN ***
+        "markup.bold.markdown"
+      ],
+      "settings": {
+        "fontStyle": "bold"
+      }
+    },
+    {
+      "name": "ITALIC",
+      "scope": [
+        //*** DEFAULT ***
+        "comment",
+        "invalid",
+        "variable.language.this",
+        //*** MARKDOWN ***
+        "entity.name.section.markdown",
+        "markup.italic.markdown",
+        //*** PHP ***
+        "keyword.operator.return-value.php",
+        "keyword.other.type.php",
+        "meta.function.php support.class.php",
+        //*** TYPESCRIPT ***
+        "keyword.operator.type.annotation.ts",
+        "support.type.primitive.ts"
+      ],
+      "settings": {
+        "fontStyle": "italic"
+      }
+    },
+    {
+      "name": "BOLD ITALIC",
+      "scope": [
+        //*** MARKDOWN ***
+        "markup.bold.markdown markup.italic.markdown"
+      ],
+      "settings": {
+        "fontStyle": "bold italic"
+      }
+    },
+    // {
+    //   "name": "NORMAL",
+    //   "scope": [],
+    //   "settings": {
+    //     "fontStyle": ""
+    //   }
+    // },
+    {
+      "name": "STRIKETHROUGH",
+      "scope": [
+        //*** MARKDOWN ***
+        "markup.strikethrough.markdown"
+      ],
+      "settings": {
+        "fontStyle": "strikethrough"
+      }
+    },
+
+    //--------------------------------------------------------------------------
+    //--- GRAY SHADES ---
+    //--------------------------------------------------------------------------
+    {
+      "name": "GRAY WHITE (OKLCH 98%)",
+      "scope": [
+        //*** DEFAULT ***
+        "meta.method-call entity.name.function",
+        "support.function",
+        //*** APACHE ***
+        "entity.helper.apacheconf", // Using Apache Conf extension for syntax grammar
+        //*** CSS ***
+        "entity.other.attribute-name.pseudo-class",
+        "entity.other.attribute-name.pseudo-element",
+        //*** HTML ***
+        "text.html",
+        "meta.element.structure.svg.text.html",
+        //*** JSX ***
+        "meta.jsx.children",
+        //*** XML ***
+        "text.xml"
+      ],
+      "settings": {
+        "foreground": "#f8f8f8"
+      }
+    },
+    // {
+    //   "name": "GRAY WHITE-LIGHT (OKLCH 90%)",
+    //   "scope": [],
+    //   "settings": { "foreground": "#dedede" }
+    // },
+    {
+      "name": "GRAY WHITE-LIGHT-LIGHT (OKLCH 86%)",
+      "scope": [
+        //*** JAVASCRIPT ***
+        "variable.other.object", // semantic token type for JS
+        //*** SHELL ***
+        "meta.scope"
+      ],
+      "settings": { "foreground": "#d1d1d1" }
+    },
+    {
+      "name": "GRAY LIGHT (OKLCH 82%)",
+      "scope": [
+        //*** DEFAULT ***
+        "meta.embedded.block", // Such as  ```shell text``` in markdown
+        "support.constant.property", // semantic token type for JS
+        "support.variable", // semantic token type for JS
+        //*** HTML ***
+        "entity.other.attribute-name"
+      ],
+      "settings": {
+        "foreground": "#c4c4c4"
+      }
+    },
+    // {
+    //   "name": "GRAY LIGHT-MEDIUM (OKLCH 74%)",
+    //   "scope": [],
+    //   "settings": {
+    //     "foreground": "#ababab"
+    //   }
+    // },
+    {
+      "name": "GRAY MEDIUM (OKLCH 66%) [PUNCTUATION]",
+      "scope": [
+        //*** DEFAULT ***
+        "entity.name",
+        "meta.at-rule.keyframes.body",
+        "meta.block",
+        "meta.brace",
+        "meta.embedded.line",
+        "punctuation",
+        //*** CSS ***
+        "meta.function.calc.css", // For nesting parentheses in calc function
+        "meta.property-list",
+        //*** MARKDOWN ***
+        "meta.separator.markdown",
+        "markup.strikethrough.markdown",
+        //*** PHP ***
+        "comment keyword", // example: @package in PHPdoc comment
+        "comment keyword.operator.nullable-type.php", // example: ?array in docblock type hint
+        "comment support.class", // example: `editor` in @return editor in PHPdoc comment
+        "keyword.other.phpdoc.php", // The PHPDoc block keywords
+        "keyword.operator.return-value.php", // For function return type colon
+        "meta.embedded.block.php", // For else colon when using alternative syntax
+        "meta.embedded.line.php", // For closing bracket } when opening a new PHP tag
+        "string.quoted.double.php punctuation.definition.variable.php", // for {} braces syntax used in string interpolation.
+        //*** RUBY ***
+        "meta.function.method.with-arguments.ruby storage.type", // For Ruby's parameter block `&` operator
+        //*** SHELL ***
+        "meta.expression.assignment.modified.shell", //example `/` in .zshrc: export PATH=/opt/homebrew/bin:$PATH
+        //*** XML ***
+        "meta.tag",
+        //*** ZSH ***
+        "meta.parameter-expansion"
+      ],
+      "settings": {
+        "foreground": "#929292"
+      }
+    },
+    {
+      "name": "GRAY MEDIUM-DARK (OKLCH 58%) [COMMENTS]",
+      "scope": [
+        //*** DEFAULT ***
+        "comment",
+        "comment constant",
+        "comment entity.name.type",
+        "comment keyword",
+        "comment meta.tag.inline",
+        "comment punctuation",
+        "comment storage",
+        "comment storage.modifier",
+        "comment storage.type",
+        "comment support",
+        "comment variable",
+        "punctuation.definition.comment",
+        "source.embedded"
+      ],
+      "settings": {
+        "foreground": "#7a7a7a"
+      }
+    },
+    {
+      "name": "GRAY DARK (OKLCH 50%)",
+      "scope": [
+        //*** DEFAULT ***
+        "invalid",
+        //*** MARKDOWN ***
+        "markup.underline.link"
+      ],
+      "settings": {
+        "foreground": "#636363"
+      }
+    },
+    // {
+    //   "name": "GRAY DARK-FADE (OKLCH 42%)",
+    //   "scope": [],
+    //   "settings": { "foreground": "#4d4d4d" }
+    // },
+    // {
+    //   "name": "GRAY FADE (OKLCH 34%)",
+    //   "scope": [],
+    //   "settings": { "foreground": "#525252" }
+    // },
+
+    //--------------------------------------------------------------------------
+    //--- COLOR CUSTOMIZATIONS ---
+    //--------------------------------------------------------------------------
+    {
+      "name": "BLUE BASE",
+      "scope": [
+        //*** DEFAULT ***
+        "storage.type",
+        //*** APACHE ***
+        "string.path.apacheconf",
+        //*** CSS ***
+        "meta.attribute.unrecognized.xmlns.html string",
+        "meta.attribute.unrecognized.xmlns:xlink.html string",
+        "meta.function.url string.quoted.double", //css such as content: url("");
+        "meta.function.url string.quoted.single", //css such as content: url('');
+        //*** HTML ***
+        "meta.attribute.href string",
+        "meta.attribute.src.html string",
+        "meta.attribute.srcset.html string",
+        //*** LOG ***
+        "log.date",
+        //*** MARKDOWN ***
+        "meta.link.reference",
+        "meta.link.reference constant",
+        "meta.link.reference string",
+        "string.other.link.title.markdown",
+        //*** SCSS ***
+        "variable.parameter.url" // SCSS `to` in background: linear-gradient(to ...); -- Red in CSS. Also for background:url(../../../../assets/images/icons/icon-phone-white.svg) without quotes.
+      ],
+      "settings": {
+        "foreground": "#92c1fd" // -color--blue-base
+      }
+    },
+    // {
+    //   "name": "BLUE DEEP",
+    //   "scope": [],
+    //   "settings": { "foreground": "#62a1f0" }
+    // },
+    {
+      "name": "BLUE FADE",
+      "scope": [
+        //*** PHP - TYPEHINT ***
+        "keyword.other.type.php", // For parameter type hinting and other types
+        "meta.other.type.phpdoc.php",
+        "keyword.operator.nullable-type.php", // For nullable types using the question mark, such as ?callable
+        // "keyword.other.type.cassidydark.php", // class typehint
+        "meta.function.php storage.type.php", // ... : self
+        "meta.function.php support.class.php", // ... : DB
+        "meta.function.parameter.typehinted.php support", // ( \WP_Query $query )
+        "meta.other.type.phpdoc.php support.class", // @param \WP_Post
+        //*** TYPESCRIPT ***
+        "keyword.operator.type.annotation.ts",
+        "support.type.primitive.ts"
+      ],
+      "settings": {
+        "foreground": "#a9c0de"
+      }
+    },
+    {
+      "name": "BLUE 50 OPACITY",
+      "scope": [
+        //*** MARKDOWN ***
+        "markup.strikethrough.markdown string.other.link.title.markdown"
+      ],
+      "settings": {
+        "foreground": "#92c1fd80"
+      }
+    },
+
+    {
+      "name": "CYAN BASE",
+      "scope": [
+        //*** DEFAULT ***
+        "entity.name.type", // such are class or trait name in PHP
+        "entity.name.function",
+        "keyword.other.special-method", // such as Ruby loop
+        "meta.attribute.style string",
+        "meta.property-name",
+        "meta.property-value support.function",
+        "support",
+        //*** APACHE ***
+        "entity.tag.apacheconf",
+        //*** CSS ***
+        "meta.at-rule support.function", // such as `calc` and `var`
+        "meta.property-value",
+        //*** INI ***
+        "keyword.other.definition",
+        //*** PHP ***
+        "support.function.basic_functions",
+        "entity.other.inherited-class.php", // extends class
+        "entity.other.alias.php", // use as
+        //*** PYTHON ***
+        "meta.function-call.generic.python",
+        //*** SHELL ***
+        "support.function.builtin.shell",
+        //*** YAML ***
+        "entity.name.tag.yaml"
+      ],
+      "settings": {
+        "foreground": "#89dfdf"
+      }
+    },
+
+    {
+      "name": "GREEN BASE",
+      "scope": [
+        //*** DEFAULT ***
+        "entity.name.label", // property??
+        "entity.other.attribute-name.class",
+        "meta.attribute.class string",
+        "meta.object-literal",
+        "support.variable.property", // semantic token type
+        "variable.other.constant.property", // semantic token type
+        "variable.other.property",
+        "variable.other.object.property",
+        //*** APACHE ***
+        "entity.mime-type.apacheconf",
+        //*** MARKDOWN ***
+        "entity.name.section.markdown",
+        "markup.heading.markdown string.other.link.title.markdown",
+        "markup.heading.markdown meta.other.valid-ampersand.markdown",
+        "punctuation.definition.heading.markdown",
+        //*** PHP ***
+        "variable.other.property.php punctuation.definition.variable.php",
+        //*** RUBY ***
+        "constant.other.symbol.hashkey.ruby",
+        "constant.other.symbol.ruby",
+        //*** SHELL ***
+        "entity.name.command",
+        "entity.name.section.group-title", // example: [difftool "sourcetree"] in .gitconfig
+        //*** SCSS ***
+        "entity.other.attribute-name.parent-selector-suffix.css punctuation" // SCSS &__name
+      ],
+      "settings": {
+        "foreground": "#a2cd8b"
+      }
+    },
+
+    {
+      "name": "ORANGE BASE",
+      "scope": [
+        //*** DEFAULT ***
+        "entity.other.attribute-name.id",
+        "entity.other.attribute-name.id punctuation",
+        "meta.attribute.id string",
+        "variable.parameter",
+        //*** APACHE ***
+        "string.replacement.apacheconf",
+        //*** CSS ***
+        "entity.other.keyframe-offset",
+        "meta.at-rule.keyframes",
+        "support.constant.container-name.container.css", // For @container <container-name> (this token is from my CSS Nesting Syntax Highlighting extension)
+        "variable.parameter.misc.css", // such as `content: counter(count, decimal);`
+        //*** LOG ***
+        "log.warning",
+        //*** PHP ***
+        "meta.function.parameters.php variable",
+        "meta.function.parameters.php punctuation.definition.variable",
+        "punctuation.section.embedded.begin.php",
+        "punctuation.section.embedded.end.php",
+        //*** SCSS ***
+        "meta.at-rule.keyframes entity.name.function",
+        "entity.other.attribute-name.scss"
+      ],
+      "settings": {
+        "foreground": "#eeae7b"
+      }
+    },
+
+    {
+      "name": "PINK BASE",
+      "scope": [
+        //*** DEFAULT ***
+        "punctuation.definition.variable",
+        "variable",
+        //*** PHP ***
+        "string.quoted.double.php variable.other.php punctuation.definition.variable.php", // for $ in string interpolation.
+        //*** PYTHON ***
+        "meta.function-call.arguments.python",
+        //*** SHELL ***
+        "variable.other.assignment.shell"
+      ],
+      "settings": {
+        "foreground": "#fcb7cb"
+      }
+    },
+
+    {
+      "name": "PURPLE BASE",
+      "scope": [
+        //*** DEFAULT ***
+        "constant",
+        "keyword.other.unit",
+        //*** APACHE ***
+        "entity.status.apacheconf",
+        //*** CSS ***
+        "support.constant.boolean.container.css", // for @container <style-query> boolean property-value (this token is from my CSS Nesting Syntax Highlighting extension)
+        //*** HTML ***
+        "constant punctuation.definition.entity", // HTML symbol entity
+        "meta.attribute.async.html entity.other.attribute-name",
+        "meta.attribute.crossorigin entity.other.attribute-name",
+        "meta.attribute.defer.html entity.other.attribute-name",
+        //*** INI ***
+        "source.ini",
+        //*** JAVASCRIPT ***
+        "variable.other.constant.object.js",
+        //*** PHP ***
+        "entity.name.type.namespace.php", // namespace name
+        //*** REGEX ***
+        "meta.assertion.look-ahead.regexp",
+        "meta.assertion.negative-look-ahead.regexp",
+        "meta.group.regexp",
+        "meta.group.assertion.regexp",
+        "string.regexp",
+        "string.regexp constant",
+        "string.regexp keyword",
+        "string.regexp punctuation",
+        //*** SHELL ***
+        "constant.other.option", //example: -i in shell
+        "meta.arithmetic.shell", //example: $+functions[p10k]
+        "keyword.operator.logical.shell", //example: `-f` in if [ -f "$ray_php"]
+        "keyword.operator.expansion.shell", //example: ${tag//\%/%%}
+        //*** XML ***
+        "punctuation.definition.constant.xml"
+      ],
+      "settings": {
+        "foreground": "#d6aaea"
+      }
+    },
+    {
+      "name": "PURPLE DEEP",
+      "scope": [
+        //*** DEFAULT ***
+        "entity.other.attribute-name.namespace"
+      ],
+      "settings": {
+        "foreground": "#bd84d7"
+      }
+    },
+
+    {
+      "name": "RED BASE",
+      "scope": [
+        //*** DEFAULT ***
+        "entity.name.tag",
+        "keyword",
+        "storage.modifier",
+        //*** LOG ***
+        "log.error",
+        //*** PHP ***
+        "entity.name.goto-label.php", // For 'else' using alternative colon syntax
+        //*** SHELL ***
+        "punctuation.separator.statement.and.shell" //example: &&
+      ],
+      "settings": {
+        "foreground": "#ef9182"
+      }
+    },
+    {
+      "name": "RED DEEP",
+      "scope": [
+        //*** DEFAULT ***
+      ],
+      "settings": {
+        // "foreground": "#db6656",
+      }
+    },
+
+    {
+      "name": "YELLOW BASE",
+      "scope": [
+        //*** DEFAULT ***
+        "string",
+        //*** CSS ***
+        "meta.attribute-selector entity.other.attribute-name",
+        //*** MARKDOWN ***
+        "string.other.link.description.markdown",
+        //*** PHP ***
+        "string.quoted.single.php", // Override for "meta.attribute.src.html string"
+        "string.quoted.double.php", // Override for "meta.attribute.src.html string"
+        //*** SCSS ***
+        "meta.attribute-selector.scss",
+        //*** XML ***
+        "meta.tag.sgml.doctype.xml"
+      ],
+      "settings": {
+        "foreground": "#efddac"
+      }
+    },
+    {
+      "name": "YELLOW DEEP",
+      "scope": [
+        //*** MARKDOWN ***
+        "markup.inline.raw.string.markdown"
+      ],
+      "settings": {
+        "foreground": "#d7bb70"
+      }
+    },
+
+    //--------------------------------------------------------------------------
+    // Better DockerFile Syntax - Extension
+    // https://marketplace.visualstudio.com/items?itemName=jeff-hykin.better-dockerfile-syntax
+    //--------------------------------------------------------------------------
+    {
+      "name": "[DOCKERFILE] - GRAY WHITE",
+      "scope": ["source.dockerfile string"],
+      "settings": {
+        "foreground": "#f8f8f8"
+      }
+    },
+    {
+      "name": "[DOCKERFILE] - CYAN BASE",
+      "scope": ["source.dockerfile keyword.other.special-method"],
+      "settings": {
+        "foreground": "#89dfdf"
+      }
+    },
+    {
+      "name": "[DOCKERFILE] - GREEN BASE",
+      "scope": ["source.dockerfile entity.name"],
+      "settings": {
+        "foreground": "#a2cd8b"
+      }
+    },
+    {
+      "name": "[DOCKERFILE] - ORANGE BASE",
+      "scope": ["source.dockerfile constant.other.option"],
+      "settings": {
+        "foreground": "#eeae7b"
+      }
+    },
+    {
+      "name": "[DOCKERFILE] - RED BASE",
+      "scope": ["punctuation.separator.statement.and.shell.dockerfile"],
+      "settings": {
+        "foreground": "#ef9182"
+      }
+    },
+
+    //--------------------------------------------------------------------------
+    // Nginx.conf - (Syntax) Extension
+    // https://marketplace.visualstudio.com/items?itemName=shanoor.vscode-nginx
+    //--------------------------------------------------------------------------
+    {
+      "name": "[NGINX] - GRAY LIGHT (OKLCH 82%)",
+      "scope": ["source.nginx"],
+      "settings": {
+        "foreground": "#c4c4c4"
+      }
+    },
+    {
+      "name": "GRAY MEDIUM (OKLCH 66%) [PUNCTUATION]",
+      "scope": ["source.nginx constant.character"],
+      "settings": {
+        "foreground": "#929292"
+      }
+    },
+
+    {
+      "name": "[NGINX] - BLUE BASE",
+      "scope": ["source.nginx constant.language.module"],
+      "settings": {
+        "foreground": "#92c1fd"
+      }
+    },
+    {
+      "name": "[NGINX] - CYAN BASE",
+      "scope": ["source.nginx constant.language"],
+      "settings": {
+        "foreground": "#89dfdf"
+      }
+    },
+    {
+      "name": "[NGINX] - RED BASE",
+      "scope": ["source.nginx constant.language.directive.module.main"],
+      "settings": {
+        "foreground": "#ef9182"
+      }
+    },
+
+    //--------------------------------------------------------------------------
+    // Output Colorizer - Extension
+    // https://marketplace.visualstudio.com/items?itemName=IBM.output-colorizer
+    //--------------------------------------------------------------------------
+    {
+      "name": "GRAY WHITE (OKLCH 98%)",
+      "scope": [
+        "code.log support" // For "Output Colorizer" extension
+      ],
+      "settings": { "foreground": "#f8f8f8" }
+    },
+
+    {
+      "name": "RED BASE",
+      "scope": ["code.log invalid"],
+      "settings": { "foreground": "#ef9182" }
+    },
+
+    //--------------------------------------------------------------------------
+    // Rainbow CSV - Extension
+    // https://marketplace.visualstudio.com/items?itemName=mechatroner.rainbow-csv
+    //--------------------------------------------------------------------------
+    {
+      "name": "NORMAL",
+      "scope": ["comment.rainbow4", "invalid.rainbow10"],
+      "settings": {
+        "fontStyle": ""
+      }
+    },
+    {
+      "name": "GRAY WHITE (OKLCH 98%)",
+      "scope": ["markup.bold.rainbow9"],
+      "settings": {
+        "foreground": "#f8f8f8"
+      }
+    },
+    {
+      "name": "GRAY LIGHT (OKLCH 82%)",
+      "scope": ["comment.rainbow4"],
+      "settings": {
+        "foreground": "#c4c4c4"
+      }
+    },
+
+    {
+      "name": "BLUE BASE",
+      "scope": ["constant.numeric.rainbow7"],
+      "settings": {
+        "foreground": "#92c1fd"
+      }
+    },
+    {
+      "name": "CYAN BASE",
+      "scope": ["rainbow1"],
+      "settings": {
+        "foreground": "#89dfdf"
+      }
+    },
+    {
+      "name": "GREEN BASE",
+      "scope": ["string.rainbow5"],
+      "settings": {
+        "foreground": "#a2cd8b"
+      }
+    },
+    {
+      "name": "ORANGE BASE",
+      "scope": ["variable.parameter.rainbow6"],
+      "settings": {
+        "foreground": "#eeae7b"
+      }
+    },
+    {
+      "name": "PINK BASE",
+      "scope": ["entity.name.type.rainbow8"],
+      "settings": {
+        "foreground": "#fcb7cb"
+      }
+    },
+    {
+      "name": "PURPLE BASE",
+      "scope": ["entity.name.function.rainbow3"],
+      "settings": {
+        "foreground": "#d6aaea"
+      }
+    },
+    {
+      "name": "RED BASE",
+      "scope": ["invalid.rainbow10"],
+      "settings": {
+        "foreground": "#ef9182"
+      }
+    },
+    {
+      "name": "YELLOW BASE",
+      "scope": ["keyword.rainbow2"],
+      "settings": {
+        "foreground": "#efddac"
+      }
+    }
+  ]
+}
