@@ -8,9 +8,13 @@
     "activityBar.background": "#333333", // -color--oklch-32-gray [overrides core #3333333] (match sidebar header)
     "activityBar.dropBorder": "#ffffff80", // -color--white at 50% opacity [overrides `activityBar.foreground`]
     "activityBar.foreground": "#efddac", // -color--yellow-base [overrides core #ffffff]
-    "activityBar.inactiveForeground": "#7a7a7a", // -color--gray-medium-dark [overrides core #858585] (match comment)
+    "activityBar.inactiveForeground": "#7a7a7a", // -color--gray-medium-dark [overrides dimmed `activityBar.foreground` || core white at opacity] (match comment)
     "activityBarBadge.background": "#efddac", // -color--yellow-base [overrides core #007acc] (match comments)
     "activityBarBadge.foreground": "#121212", // -color--gray-black [overrides core #ffffff]
+    "activityBarTop.activeBackground": "#292929", // [base] (match `activityBar.activeBackground`) | example: active background of activityBar when activityBar is on top or bottom
+    "activityBarTop.background": "#333333", // [base] (match `activityBar.background`) | example: background of activityBar when activityBar is on top or bottom
+    "activityBarTop.foreground": "#efddac", // -color--yellow-base [overrides core #ffffff] (match `activityBar.foreground`) | example: foreground of active item when activityBar is on top or bottom
+    "activityBarTop.inactiveForeground": "#7a7a7a", // -color--gray-medium-dark [overrides dimmed `activityBarTop.foreground` || core white at opacity] (match `activityBar.inactiveForeground`)
     "badge.background": "#4d4d4d", // -color--gray-dark-fade [overrides core #4d4d4d] | example: problems panel in title
     "badge.foreground": "#f8f8f8", // -color--gray-white [overrides core #ffffff]
     "button.background": "#006fd9", // -color--blue-bg [overrides core #0e639c]
@@ -23,6 +27,11 @@
     "charts.orange": "#eeae7b", // -color--orange-base [overrides `minimap.findMatchHighlight`] | example: Incoming/Outgoing dot in source control sidebar
     "charts.purple": "#d6aaea", // -color--purple-base [overrides core #b180d7] | example: Incoming/Outgoing dot in source control sidebar
     "charts.yellow": "#efddac", // [overrides `editorWarning.foreground`] | example: Incoming/Outgoing dot in source control sidebar
+    "chat.avatarBackground": "#92c1fd26", // -color--blue-base at 15% opacity [overrides core #1f1f1f] | example: GitHub Copilot chat avatar background in chat panel
+    "chat.avatarForeground": "#c4c4c4", // [overrides core #cccccc] | example: GitHub Copilot chat avatar foreground in chat panel
+    "chat.requestBorder": "#92c1fd40", // -color--blue-base at 25% opacity [overrides core white at opacity #3b3b3c] | example: border between user's submitted chat prompts and CoPilot responses (includes avatar border)
+    "chat.slashCommandBackground": "#62a1f026", // -color--blue-deep at 15% opacity [base] | example: chat prompt background when entering a slash command
+    "chat.slashCommandForeground": "#62a1f0", // -color--blue-deep [overrides core #40a6ff] | example: chat prompt foreground when entering a slash command
     "commandCenter.activeForeground": "#c4c4c4", // [overrides `menubar.selectionForeground` || inherits lighten `titleBar.activeBackground`]| example: hover over commandCenter
     "debugIcon.disconnectForeground": "#ef9182", // -color--red-base [overrides core #f28670] | example: unplug icon in debug toolbar0
     "debugIcon.pauseForeground": "#92c1fd", // -color--blue-base [overrides core #75beff]
@@ -62,16 +71,18 @@
     "editor.lineHighlightBorder": "#161616", // -color--oklch-20-gray [overrides core #282828] (match editor.lineHighlightBackground)
     "editor.rangeHighlightBackground": "#ffffff1a", // -color--white at 10% opacity [overrides dimmed `editor.findRangeHighlightBackground`] (match `editor.findRangeHighlightBackground`) | example: current search match line
     "editor.selectionBackground": "#006fd980", // -color--blue-bg at 50% opacity [overrides core blue opacity #264f78]
+    "editor.snippetFinalTabstopHighlightBorder": "#92c1fd80", // -color--blue-base at 50% opacity [overrides core  #525252] | example: in a HTML document, type "!" and see the final snippet tabstop highlight
+    "editor.snippetTabstopHighlightBackground": "#92c1fd40", // -color--blue-base at 26% opacity [overrides core white at opacity #3e3e3e]
     "editor.wordHighlightBackground": "#7a7a7a80", // -gray-medium-dark at 50% opacity [overrides core #483f4d] | example: click in word and all the matches are colored
     "editor.wordHighlightStrongBackground": "#fcb7cb66", // -color--pink-base at 40% opacity [overrides core #063b58] | example: click on a class in a css file (Note: minimap uses `minimap.selectionOccurrenceHighlight` which is a different color)
     "editorBracketMatch.border": "#636363", // -color--gray-dark [overrides core #888888]
-    "editorCodeLens.foreground": "#d7bb70", // -color--yellow-deep [overrides core #929292] | example: debug arrow and text in editor
+    "editorCodeLens.foreground": "#929292", // -color--gray-medium [overrides core #939393] | example: debug arrow and text in editor
     "editorCursor.background": "#383838", // -color--gray-fade [overrides core #555456] | example: text inside cursor block
     "editorCursor.foreground": "#929292", // --color--gray-medium [overrides core #aeafad] | example: cursor block and current line highlight in overviewRuler
     "editorError.foreground": "#db6656", // -color--red-deep [overrides core red #ee4f47] | examples: squiggly underlines and panel error icon
     "editorGhostText.foreground": "#62a1f0", // -color--blue-deep | example: includes sidebar source control input placeholder text
     "editorGroup.border": "#00000080", // -color--black at 50% opacity [overrides core #444444] | example: split editor border
-    "editorGroup.dropBackground": "#92929280", // -color--gray-medium at 50% opacity [overrides core gray at opacity]
+    "editorGroup.dropBackground": "#63636380", // -color--gray-dark at 50% opacity [overrides core gray at opacity]
     "editorGroupHeader.tabsBackground": "#2e2e2e", // -color--oklch-30-gray (2 shades lighter than sidebar bg) [overrides core #252526]
     "editorGutter.addedBackground": "#a2cd8bbf", // -color--green-base at 75% opacity [overrides core green #487e02] | example: scrollbar and number line bar diff
     "editorGutter.commentRangeForeground": "#383838", // -color--gray-fade [overrides`list.inactiveSelectionBackground`] | example: next and plus buttons for git changes... foreground is controlled by `icon.foreground`
@@ -84,6 +95,7 @@
     "editorLightBulbAi.foreground": "#d7bb70", // -color--yellow-deep [overrides core #ffcc00] | example: double star icon
     "editorLightBulbAutoFix.foreground": "#92c1fd", // -color--blue-base [overrides core #75beff] | example: quick fix icon when clicking in a misspelled JS variable declaration
     "editorLineNumber.activeForeground": "#c4c4c4", // -color--gray-light [override core gray #c6c6c6]
+    "editorLineNumber.dimmedForeground": "#4d4d4d", // -color--gray-dark-fade [overrides `editorLineNumber.foreground`] | example: used when editor.renderFinalNewline is set to dimmed
     "editorLineNumber.foreground": "#636363", // -color--gray-dark [override core #858585]
     "editorLink.activeForeground": "#efddac", // -color--yellow-base [overrides core #4e94ce] | example: activating link in comments
     "editorOverviewRuler.addedForeground": "#a2cd8bbf", // [overrides dimmed `editorGutter.addedBackground`]
@@ -145,7 +157,7 @@
     "list.activeSelectionIconForeground": "#f8f8f8", // -color--gray-white [overrides core #ffffff at opacity]
     "list.dropBackground": "#92929240", // -color--gray-medium at 25% opacity [overrides core blue at opacity] | example: drag and hover a folder in the explorer into another folder
     "list.errorForeground": "#db6656", // -color--red-deep [overrides core #f88070] | example: editor tab title and sidebar filename
-    "list.focusAndSelectionOutline": "#ffffff33", // -color--white at 20% opacity [overrides `focusBorder`] (match `list.activeSelectionBackground`) | example: item clicked on in the explorer sidebar
+    "list.focusAndSelectionOutline": "#62a1f033", // -color--blue-deep at 20% opacity [overrides `focusBorder`] (match `focusBorder` at lighter opacity) | example: item clicked on in the explorer sidebar
     "list.highlightForeground": "#92c1fd", // -color--blue-base [overrides core #2aaaff] | example: editorSuggestionWidget typed char in all lines not overridden
     "list.hoverBackground": "#ffffff1a", // -color--white at 10% opacity [overrides core #2a2d2e]
     "list.hoverForeground": "#f8f8f8", // -color--gray-white [overrides `sideBar.foreground` || `quickInput.foreground`] | example: extensions sidebar list
@@ -215,19 +227,22 @@
     "statusBarItem.remoteForeground": "#f8f8f8", // -color--gray-white [overrides core white at opacity] | example: Remote Host button in statusBar
     "statusBarItem.remoteHoverBackground": "#efddac", // [overrides `statusBarItem.hoverBackground` || `activityBarBadge.background`]
     "statusBarItem.remoteHoverForeground": "#121212", // [overrides `statusBarItem.hoverForeground` || `statusBar.foreground`] | example: Remote Host button in statusBar
-    "symbolIcon.classForeground": "#da883e", // -color--orange-deep [overrides core #c98727] | example: Previewing a css file in Incoming/Outgoing source control sidebar
-    "symbolIcon.constantForeground": "#bd84d7", // -color--purple-deep [overrides `foreground`] | example: click in PHP define() constant and see icon in breadcrumbs
-    "symbolIcon.functionForeground": "#35c5c5", // -color--cyan-deep [overrides core purple #936cb0] | example: box icon
+    "symbolIcon.classForeground": "#eeae7b", // -color--orange-base [overrides core #c98727] | example: Previewing a css file in Incoming/Outgoing source control sidebar
+    "symbolIcon.constantForeground": "#d6aaea", // -color--purple-base [overrides `foreground`] | example: click in PHP define() constant and see icon in breadcrumbs
+    "symbolIcon.fieldForeground": "#ef9182", // -color--red-base [overrides core #74bcfc] | example: click on elements in a html file and see breadcrumbs icons
+    "symbolIcon.functionForeground": "#89dfdf", // -color--cyan-base [overrides core purple #936cb0] | example: box icon
     "symbolIcon.keywordForeground": "#ef9182", // -color--red-base [overrides `foreground`]
+    "symbolIcon.methodForeground": "#f8f8f8", // -color--gray-white | example: method definition in php class
     "symbolIcon.propertyForeground": "#a2cd8b", // -color--green-base [overrides `foreground`] | example: inactive wrench icon in suggestion widget
     "symbolIcon.stringForeground": "#efddac", // -color--yellow-base [overrides `foreground`] | example: on setting.json user page, the [abc] in breadcrumbs
-    "symbolIcon.variableForeground": "#ea8eab", // -color--pink-deep [overrides core blue #72b8f6] | example: unknown prop in .prettierrc file
+    "symbolIcon.variableForeground": "#fcb7cb", // -color--pink-base [overrides core blue #72b8f6] | example: unknown prop in .prettierrc file
     "tab.activeForeground": "#f8f8f8", // -color--gray-white [overrides core #ffffff]
     "tab.border": "#00000040", // -color--black at 25% opacity [overrides core #252526]
     "tab.dragAndDropBorder": "#ffffff80", // -color--white at 50% opacity [overrides `tab.activeForeground`]
     "tab.hoverForeground": "#f8f8f8", // -color--gray-white [overrides `tab.inactiveForeground`] | example: hover over inactive tab (match `tab.activeForeground`)`
     "tab.inactiveBackground": "#2e2e2e", // [overrides core #2d2d2d] (match `editorGroupHeader.tabsBackground`)
     "tab.inactiveForeground": "#929292", // -color--gray-medium [overrides dimmed `tab.activeForeground`] | example: non-active tabs, including the tab's icons
+    "tab.lastPinnedBorder": "#ffffff26", // -color--white at 15% opacity [overrides core white at opacity #424242] | example: pin a tab and see the border
     "tab.unfocusedActiveForeground": "#929292", // [overrides dimmed `tab.activeForeground`] | example: tabs in split editor
     "tab.unfocusedHoverForeground": "#929292", // [overrides dimmed `tab.hoverForeground`] | example: hover over inactive tab in unfocused split editor (includes X) (match `tab.inactiveForeground`)
     "tab.unfocusedInactiveForeground": "#636363", // -color--gray-dark [overrides dimmed `tab.inactiveForeground`] | example: tabs in split editor
@@ -249,6 +264,7 @@
     "terminal.ansiYellow": "#efddac", // -color--yellow-base [overrides core yellow #e5e510]
     "terminal.background": "#242424", // -color--gray-fade-black [overrides `panel.background`] (match editor bg)
     "terminal.foreground": "#c4c4c4", // -color--gray-light [overrides core #cccccc] (includes cursor)
+    "terminal.hoverHighlightBackground": "#ffffff1a", // -color--white at 10% opacity [overrides core #252f39] (match `editor.hoverHighlightBackground`) | example: hover over a linting issue outputted in terminal
     "terminal.tab.activeBorder": "#efddac", // -color--yellow-base [base] | example: terminal sidebar active tab border when multiple tabs are open
     "terminalOverviewRuler.border": "#242424", // [overrides `editorOverviewRuler.border`] (match `terminal.background`)
     "terminalOverviewRuler.cursorForeground": "#929292", // --color--gray-medium [overrides core #878787] (match `editorCursor.foreground`) | example: current line match when using terminal search widget
