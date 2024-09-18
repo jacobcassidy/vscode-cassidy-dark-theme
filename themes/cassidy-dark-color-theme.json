@@ -85,7 +85,7 @@
     "editorCursor.foreground": "#929292", // --color--gray-medium [overrides core #aeafad] | example: cursor block and current line highlight in overviewRuler
     "editorError.foreground": "#db6656", // -color--red-deep [overrides core red #ee4f47] | examples: squiggly underlines and panel error icon
     "editorGhostText.background": "#1e242c", // matches -color--blue-deep at 10% opacity on #242424 [base]
-    "editorGhostText.foreground": "#62a1f099", // -color--blue-deep at 60% opacity | example: includes sidebar source control input placeholder text
+    "editorGhostText.foreground": "#62a1f0bf", // -color--blue-deep at 75% opacity | example: includes sidebar source control input placeholder text
     "editorGroup.border": "#00000080", // -color--black at 50% opacity [overrides core #444444] | example: split editor border
     "editorGroup.dropBackground": "#63636380", // -color--gray-dark at 50% opacity [overrides core gray at opacity]
     "editorGroup.focusedEmptyBorder": "#62a1f0cc", // -color--blue-deep at 80% opacity[base] (match `focusBorder`) | example: split editor border when focused in empty group
@@ -265,13 +265,13 @@
     "terminal.ansiBrightBlue": "#62a1f0", // -color--blue-deep [overrides core #3b8eea]
     "terminal.ansiBrightCyan": "#35c5c5", // -color--cyan-deep [overrides core #29b8db]
     "terminal.ansiBrightGreen": "#79b158", // -color--green-deep [overrides core #23d18b]
-    "terminal.ansiBrightMagenta": "#bd84d7", // -color--purple-deep [overrides core #d670d6]
+    "terminal.ansiBrightMagenta": "#ea8eab", // -color--pink-deep [overrides core #d670d6]
     "terminal.ansiBrightRed": "#db6656", // -color--red-deep [overrides core red #f14c4c]
     "terminal.ansiBrightWhite": "#ffffff", // -color--white [overrides core #e5e5e5]
     "terminal.ansiBrightYellow": "#d7bb70", // -color--yellow-deep [overrides core #f5f543]
     "terminal.ansiCyan": "#89dfdf", // -color--cyan-base [overrides core #11a8cd]
     "terminal.ansiGreen": "#a2cd8b", // -color--green-base [overrides core green #0dbc79]
-    "terminal.ansiMagenta": "#d6aaea", // -color--purple-base [overrides core #bc3fbc]
+    "terminal.ansiMagenta": "#fcb7cb", // -color--pink-base [overrides core #bc3fbc]
     "terminal.ansiRed": "#ef9182", // -color--red-base [overrides core #cd3131]
     "terminal.ansiWhite": "#f8f8f8", // -color--gray-white [overrides core white #e5e5e5]
     "terminal.ansiYellow": "#efddac", // -color--yellow-base [overrides core yellow #e5e510]
@@ -290,10 +290,11 @@
     "textPreformat.foreground": "#d7bb70", // -color--yellow-deep [overrides core #d7ba7d]
     "titleBar.activeBackground": "#383838", // -color--gray-fade [override core ##3c3c3c] (match `statusBar.background`)
     "titleBar.activeForeground": "#929292", // -color--gray-medium [overrides core #cccccc] | example: all text and icons in title bar (match `statusBar.foreground`)
+    "titleBar.border": "#ffffff08", // -color-white at 3% opacity [base]
     "titleBar.inactiveBackground": "#2e2e2e", // -color--oklch-30-gray [overrides dimmed `titleBar.activeBackground`] (match `editorGroupHeader.tabsBackground`)
     "titleBar.inactiveForeground": "#636363", // -color--gray-fade [overrides dimmed `titleBar.activeForeground`]
     "toolbar.hoverBackground": "#ffffff1a", // -color--gray-white at 10% opacity [overrides core white at opacity] | example: Settings UI gear icons
-    "tree.indentGuidesStroke": "#424242", // -color--oklch-gray-38 [overrides core #585858] | example: sidebar explorer tree
+    "tree.indentGuidesStroke": "#383838", // -color--gray-fade [overrides core #585858] | example: sidebar explorer tree
     "tree.tableColumnsBorder": "#ffffff1a", // -color--white at 10% opacity [overrides core white at opacity] | example: Keyboard Shortcuts page
     "tree.tableOddRowsBackground": "#2e2e2e", // -color--oklch-30 [overrides core #2b2b2b] (2 shades darker than `editor.background`) | example: Keyboard Shortcuts page
     "walkthrough.stepTitle.foreground": "#f8f8f8", // -color--gray-white [overrides core #ffffff] | example: clicking on a title on the welcome page takes you to the walkthrough page.
