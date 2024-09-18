@@ -48,10 +48,10 @@
     "diffEditor.insertedTextBackground": "#a2cd8b33", // -color--green-base at 20% opacity [overrides core green opacity]
     "diffEditor.removedLineBackground": "#ef91821a", // -color--red-base at 10% opacity [overrides core red opacity]
     "diffEditor.removedTextBackground": "#ef918233", // -color--red-base at 20% opacity [overrides core red opacity]
-    "diffEditor.unchangedCodeBackground": "#92c1fd0d", // -color--blue-base at 5% opacity [overrides core black with opacity] | example: previewing a file that is in the Incoming/Outgoing list in the source control sidebar
-    "diffEditor.unchangedRegionBackground": "#92c1fd0d", // -color--blue-base at 5% opacity [overrides `sideBar.background`] | example: previewing a file that is in the Incoming/Outgoing list in the source control sidebar
+    "diffEditor.unchangedCodeBackground": "#ffffff0d", // -color--blue-base at 5% opacity [overrides core #313131] | example: previewing a file that is in the Incoming/Outgoing list in the source control sidebar
+    "diffEditor.unchangedRegionBackground": "#ffffff05", // -color--blue-base at 2% opacity [overrides `sideBar.background`] | example: previewing a file that is in the Incoming/Outgoing list in the source control sidebar
     "diffEditor.unchangedRegionForeground": "#929292", // -color--gray-medium [overrides `foreground`] (match `icon.foreground`) | example: previewing a file that is in the Incoming/Outgoing list in the source control sidebar
-    "diffEditor.unchangedRegionShadow": "#00000033", // -color--black at 20% opacity [overrides core black with opacity] (match `widget.shadow`) | example: previewing a file that is in the Incoming/Outgoing list in the source control sidebar
+    "diffEditor.unchangedRegionShadow": "#000000", // -color--black [overrides core black with opacity] (match `widget.shadow`) | example: previewing a file that is in the Incoming/Outgoing list in the source control sidebar
     "diffEditorGutter.insertedLineBackground": "#a2cd8b1a", // -color--green-base at 10% opacity [base]
     "diffEditorGutter.removedLineBackground": "#ef91821a", // -color--red-base at 10% opacity [base]
     "disabledForeground": "#ffffff40", // -color--white at 25% opacity [overrides core white at opacity]
