@@ -208,9 +208,9 @@
     "scmGraph.historyItemHoverDeletionsForeground": "#ef9182", // -color--red-base [overrides `gitDecoration.deletedResourceForeground`] | example: hover over source control sidebar incoming/outgoing list item that has a commit deletion
     "scmGraph.historyItemHoverLabelForeground": "#161616", // [overrides `button.foreground`] | example: hover over source control sidebar incoming/outgoing list item that has a repo label
     "scrollbar.shadow": "#00000066", // -color--black at 40% opacity [overrides core #000] | example: editor tabs side scroll and breadcrumbs/editorStickyScroll
-    "scrollbarSlider.activeBackground": "#7a7a7ab3", // -color--gray-medium-dark at 70% opacity [overrides core gray opacity #505050] - example: when selecting and dragging scrollbar location
-    "scrollbarSlider.background": "#7a7a7a4d", // -color--gray-medium-dark at 30% opacity [overrides core gray opacity]- example: editor vertical scrollbar location
-    "scrollbarSlider.hoverBackground": "#7a7a7a80", //-color--gray-medium-dark at 50% opacity [overrides core gray opacity]
+    "scrollbarSlider.activeBackground": "#7a7a7a80", // -color--gray-medium-dark at 50% opacity [overrides core gray opacity #505050] - example: when selecting and dragging scrollbar location
+    "scrollbarSlider.background": "#7a7a7a40", // -color--gray-medium-dark at 25% opacity [overrides core gray opacity]- example: editor vertical scrollbar location
+    "scrollbarSlider.hoverBackground": "#7a7a7a60", //-color--gray-medium-dark at 37.5% opacity [overrides core gray opacity]
     "selection.background": "#006fd980", // -color--blue-bg at 50% opacity [overrides core blue at opacity #5f83aa] (match `editor.selectionBackground`) | example: selecting text inside an editor popup widget
     "settings.focusedRowBorder": "#ffffff33", // -color--white at 20% opacity [overrides `focusBorder`]
     "settings.headerForeground": "#f8f8f8", // -color--gray-white [overrides core #ffffff]
@@ -261,21 +261,21 @@
     "tab.unfocusedActiveForeground": "#929292", // [overrides dimmed `tab.activeForeground`] | example: tabs in split editor
     "tab.unfocusedHoverForeground": "#929292", // [overrides dimmed `tab.hoverForeground`] | example: hover over inactive tab in unfocused split editor (includes X) (match `tab.inactiveForeground`)
     "tab.unfocusedInactiveForeground": "#636363", // -color--gray-dark [overrides dimmed `tab.inactiveForeground`] | example: tabs in split editor
-    "terminal.ansiBlack": "#383838", // -color--gray-fade [overrides core #000000]
+    "terminal.ansiBlack": "#636363", // -color--gray-dark [overrides core #000000]
     "terminal.ansiBlue": "#92c1fd", // -color--blue-base [overrides core #2472c8]
-    "terminal.ansiBrightBlack": "#636363", // -color--gray-dark [overrides core #666666]
+    "terminal.ansiBrightBlack": "#929292", // -color--gray-medium [overrides core #666666]
     "terminal.ansiBrightBlue": "#62a1f0", // -color--blue-deep [overrides core #3b8eea]
     "terminal.ansiBrightCyan": "#35c5c5", // -color--cyan-deep [overrides core #29b8db]
     "terminal.ansiBrightGreen": "#79b158", // -color--green-deep [overrides core #23d18b]
-    "terminal.ansiBrightMagenta": "#ea8eab", // -color--pink-deep [overrides core #d670d6]
+    "terminal.ansiBrightMagenta": "#bd84d7", // -color--pink-deep [overrides core #d670d6]
     "terminal.ansiBrightRed": "#db6656", // -color--red-deep [overrides core red #f14c4c]
-    "terminal.ansiBrightWhite": "#ffffff", // -color--white [overrides core #e5e5e5]
+    "terminal.ansiBrightWhite": "#f8f8f8", // -color--white [overrides core #e5e5e5]
     "terminal.ansiBrightYellow": "#d7bb70", // -color--yellow-deep [overrides core #f5f543]
     "terminal.ansiCyan": "#89dfdf", // -color--cyan-base [overrides core #11a8cd]
     "terminal.ansiGreen": "#a2cd8b", // -color--green-base [overrides core green #0dbc79]
-    "terminal.ansiMagenta": "#fcb7cb", // -color--pink-base [overrides core #bc3fbc]
+    "terminal.ansiMagenta": "#d6aaea", // -color--pink-base [overrides core #bc3fbc]
     "terminal.ansiRed": "#ef9182", // -color--red-base [overrides core #cd3131]
-    "terminal.ansiWhite": "#f8f8f8", // -color--gray-white [overrides core white #e5e5e5]
+    "terminal.ansiWhite": "#c4c4c4", // -color--gray-white [overrides core white #e5e5e5]
     "terminal.ansiYellow": "#efddac", // -color--yellow-base [overrides core yellow #e5e510]
     "terminal.background": "#242424", // -color--gray-fade-black [overrides `panel.background`] (match editor bg)
     "terminal.foreground": "#c4c4c4", // -color--gray-light [overrides core #cccccc] (includes cursor)
