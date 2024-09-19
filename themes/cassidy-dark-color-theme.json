@@ -37,14 +37,30 @@
     "chat.slashCommandBackground": "#62a1f026", // -color--blue-deep at 15% opacity [base] | example: chat prompt background when entering a slash command
     "chat.slashCommandForeground": "#62a1f0", // -color--blue-deep [overrides core #40a6ff] | example: chat prompt foreground when entering a slash command
     "commandCenter.activeForeground": "#c4c4c4", // [overrides `menubar.selectionForeground` || inherits lighten `titleBar.activeBackground`]| example: hover over commandCenter
+    "debugConsoleInputIcon.foreground": "#7a7a7a", // -color--gray-medium-dark [overrides core #555555] | example: debug console arrow icon when running a command
+    "debugIcon.breakpointCurrentStackframeForeground": "#d7bb70", // -color--yellow-deep [overrides core #f0c000]| example: icon in the editor gutter when viewing the parent folder file in the sidebar's call stack when running debugger
+    "debugIcon.breakpointDisabledForeground": "#929292", // -color--gray-medium [overrides core #6f6d69] | example: in the editor when viewing the parent folder file in the sidebar's call stack when running debugger
+    "debugIcon.breakpointForeground": "#db6656", // -color--red-deep [overrides core #e51400] | example: setting a breakpoint in editor
+    "debugIcon.breakpointStackframeForeground": "#da883e", // -color--blue-deep [overrides core green #87cd83] | example: click on a module in the sidebar's call stack when running debugger and see the icon in the editor gutter
+    "debugIcon.continueForeground": "#92c1fd", // -color--blue-base [overrides core #75beff]
     "debugIcon.disconnectForeground": "#ef9182", // -color--red-base [overrides core #f28670] | example: unplug icon in debug toolbar0
     "debugIcon.pauseForeground": "#92c1fd", // -color--blue-base [overrides core #75beff]
     "debugIcon.restartForeground": "#a2cd8b", // -color--green-base [overrides core #89d185]
     "debugIcon.startForeground": "#a2cd8b", // -color--green-base[overrides core #89d185]
+    "debugIcon.stepIntoForeground": "#92c1fd", // -color--blue-base [overrides core #75beff]
+    "debugIcon.stepOutForeground": "#92c1fd", // -color--blue-base [overrides core #75beff]
+    "debugIcon.stepOverForeground": "#92c1fd", // -color--blue-base [overrides core #75beff]
     "debugIcon.stopForeground": "#ef9182", // -color--red-base [overrides core #f48771]
+    "debugTokenExpression.boolean": "#d6aaea", // [overrides core #4b8cc1]
+    "debugTokenExpression.error": "#ef9182", // -color--red-base [overrides core #f48771] | example: run "start" in debug console when it's not defined
+    "debugTokenExpression.name": "#89dfdf", // [overrides core #c586c0]
+    "debugTokenExpression.number": "#d6aaea", // [overrides core #b2caa5]
+    "debugTokenExpression.string": "#efddac", // [overrides core #ce9178]
+    "debugTokenExpression.value": "#929292", // [overrides core #8a8a8a]
     "debugToolBar.background": "#383838", // -color--gray-fade [overrides core #333333]
     "debugView.stateLabelBackground": "#a75c00", // -color--orange-bg [overrides core white with opacity] | example: labels for processes in the sidebar debug call stack
     "debugView.stateLabelForeground": "#f8f8f8", // -color--gray-white [overrides core white with opacity] | example: labels for processes in the sidebar debug call stack
+    "debugView.valueChangedHighlight": "#62a1f080", // -color--blue-deep at 50% opacity [overrides core blue at opacity #374c5e] | example: when a variable changes value in the debug console, it will be highlighted in the sidebar's Run and Debug view variables section
     "diffEditor.diagonalFill": "#4d4d4d", // -color--gray-dark-fade [overrides core #464646]
     "diffEditor.insertedLineBackground": "#a2cd8b1a", // -color--green-base at 10% opacity [overrides core green opacity]
     "diffEditor.insertedTextBackground": "#a2cd8b33", // -color--green-base at 20% opacity [overrides core green opacity]
@@ -69,16 +85,19 @@
     "editor.findMatchHighlightBorder": "#ffffff08", // unneeded [base] | example: inactive search match
     "editor.findMatchHighlightForeground": "#ffffffe6", // -color--white at 90% opacity [overrides `editor.findMatchForeground`] | example: active search match
     "editor.findRangeHighlightBackground": "#ffffff1a", // -color--white at 10% opacity [overrides core dimmed gray #2d2e30] | example: background when using finder widget with selection search only
+    "editor.focusedStackFrameHighlightBackground": "#da883e40", // -color--blue-deep at 25% opacity [overrides core green at opacity #344834] | example: click on a module in the sidebar's call stack when running debugger and see the highlight in the editor
     "editor.foldBackground": "#92c1fd26", // -color--blue-base at 15% opacity [overrides dimmed `editor.selectionBackground`]
     "editor.foldPlaceholderForeground": "#929292", // -color--gray-medium [overrides core #808080] | example: dots at end of line that has been folded // wait to see if the core is set by any other settings first
     "editor.foreground": "#c4c4c4", // -color--gray-light [overrides core #bbbbbb] (match `foreground`) | example: extension page text, empty editor text
     "editor.hoverHighlightBackground": "#ffffff1a", // -color--white at 10% opacity [overrides core #252f39] | example: hover over a word in json object
     "editor.lineHighlightBackground": "#161616", // -color--oklch-20-gray [base] (6 shades darker than editor bg)
     "editor.lineHighlightBorder": "#161616", // -color--oklch-20-gray [overrides core #282828] (match editor.lineHighlightBackground)
+    "editor.linkedEditingBackground": "#a75c0040", // -color--orange-bg at 25% opacity [overrides core #661919] | example: click inside HTML tag and see the linked editing background when the setting is enabled
     "editor.rangeHighlightBackground": "#ffffff1a", // -color--white at 10% opacity [overrides dimmed `editor.findRangeHighlightBackground`] (match `editor.findRangeHighlightBackground`) | example: current search match line
     "editor.selectionBackground": "#006fd980", // -color--blue-bg at 50% opacity [overrides core blue opacity #264f78]
     "editor.snippetFinalTabstopHighlightBorder": "#92c1fd80", // -color--blue-base at 50% opacity [overrides core  #525252] | example: in a HTML document, type "!" and see the final snippet tabstop highlight
     "editor.snippetTabstopHighlightBackground": "#92c1fd40", // -color--blue-base at 26% opacity [overrides core white at opacity #3e3e3e]
+    "editor.stackFrameHighlightBackground": "#d7bb7033", // -color--yellow-deep at 20% opacity [overrides core #51511e] | example: The parent folder in the call stack when running debugger || Learn the Fundamentals walkthrough on the Welcome page example editor.stackFrameHighlightBackground
     "editor.wordHighlightBackground": "#7a7a7a80", // -gray-medium-dark at 50% opacity [overrides core #483f4d] | example: click in word and all the matches are colored
     "editor.wordHighlightStrongBackground": "#fcb7cb66", // -color--pink-base at 40% opacity [overrides core #063b58] | example: click on a class in a css file (Note: minimap uses `minimap.selectionOccurrenceHighlight` which is a different color)
     "editorBracketMatch.border": "#636363", // -color--gray-dark [overrides core #888888]
@@ -165,6 +184,7 @@
     "list.activeSelectionBackground": "#ffffff33", // -color--white at 20% opacity [overrides core #04395e] | example: commandCenter dropdown selection line
     "list.activeSelectionForeground": "#f8f8f8", // -color--gray-white [overrides core #ffffff] | example: sidebar active item when moving with keyboard
     "list.activeSelectionIconForeground": "#f8f8f8", // -color--gray-white [overrides core #ffffff at opacity]
+    "list.deemphasizedForeground": "#929292", // -color--gray-medium [overrides core #686868] | example: file path of inactive module in sidebar Call Stack when running debugger
     "list.dropBackground": "#92929240", // -color--gray-medium at 25% opacity [overrides core blue at opacity] | example: drag and hover a folder in the explorer into another folder
     "list.errorForeground": "#ef9182", // -color--red-base [overrides core #f88070] | example: editor tab title and sidebar filename
     "list.focusAndSelectionOutline": "#62a1f033", // -color--blue-deep at 20% opacity [overrides `focusBorder`] (match `focusBorder` at lighter opacity) | example: item clicked on in the explorer sidebar
@@ -242,12 +262,18 @@
     "statusBarItem.remoteForeground": "#f8f8f8", // -color--gray-white [overrides core white at opacity] | example: Remote Host button in statusBar
     "statusBarItem.remoteHoverBackground": "#efddac", // [overrides `statusBarItem.hoverBackground` || `activityBarBadge.background`]
     "statusBarItem.remoteHoverForeground": "#121212", // [overrides `statusBarItem.hoverForeground` || `statusBar.foreground`] | example: Remote Host button in statusBar
-    "symbolIcon.classForeground": "#eeae7b", // -color--orange-base [overrides core #c98727] | example: Previewing a css file in Incoming/Outgoing source control sidebar
+    "symbolIcon.arrayForeground": "#929292", // -color--gray-medium [overrides `foreground] | example: an array in a json file
+    "symbolIcon.booleanForeground": "#d6aaea", // -color--purple-base [overrides `foreground`] | example: click in misspelled word in the editor and the icon will be in the breadcrumbs || click on a boolean in a json file and see the icon in the breadcrumbs
+    "symbolIcon.classForeground": "#92c1fd", // -color--blue-base [overrides core #c98727] | example: Previewing a css file in Incoming/Outgoing source control sidebar
     "symbolIcon.constantForeground": "#d6aaea", // -color--purple-base [overrides `foreground`] | example: click in PHP define() constant and see icon in breadcrumbs
+    "symbolIcon.enumeratorForeground": "#eeae7b", // -color--orange-base [overrides core #ee9d28] | example: in a JSON file, type " to start a property and see the icon in the suggestions widget
     "symbolIcon.fieldForeground": "#ef9182", // -color--red-base [overrides core #74bcfc] | example: click on elements in a html file and see breadcrumbs icons
     "symbolIcon.functionForeground": "#89dfdf", // -color--cyan-base [overrides core purple #936cb0] | example: box icon
-    "symbolIcon.keywordForeground": "#ef9182", // -color--red-base [overrides `foreground`]
+    "symbolIcon.keywordForeground": "#ef9182", // -color--red-base [overrides `foreground`] | example: start typing a HTML tag and see the suggestion widget icon
     "symbolIcon.methodForeground": "#f8f8f8", // -color--gray-white | example: method definition in php class
+    "symbolIcon.moduleForeground": "#636363", // -color--gray-dark [overrides `foreground`] | example: on setting.json user page, the {} in breadcrumbs
+    "symbolIcon.namespaceForeground": "#d6aaea", // -color--purple-base [overrides `foreground`] | example: click on a namespace in a php file and see icon in breadcrumbs
+    "symbolIcon.numberForeground": "#d6aaea", // -color--purple-base [overrides `foreground`] | example: a "lockfileVersion" property in a json file
     "symbolIcon.propertyForeground": "#a2cd8b", // -color--green-base [overrides `foreground`] | example: inactive wrench icon in suggestion widget
     "symbolIcon.stringForeground": "#efddac", // -color--yellow-base [overrides `foreground`] | example: on setting.json user page, the [abc] in breadcrumbs
     "symbolIcon.variableForeground": "#fcb7cb", // -color--pink-base [overrides core blue #72b8f6] | example: unknown prop in .prettierrc file
@@ -281,6 +307,8 @@
     "terminal.foreground": "#c4c4c4", // -color--gray-light [overrides core #cccccc] (includes cursor)
     "terminal.hoverHighlightBackground": "#ffffff1a", // -color--white at 10% opacity [overrides core #252f39] (match `editor.hoverHighlightBackground`) | example: hover over a linting issue outputted in terminal
     "terminal.tab.activeBorder": "#efddac", // -color--yellow-base [base] | example: terminal sidebar active tab border when multiple tabs are open
+    "terminalCommandDecoration.successBackground": "#79b158", // -color--green-deep [overrides core #1b81a8] | example: Run Build Task success message
+    "terminalCommandGuide.foreground": "#ffffff40", // -color-white at 25% opacity [base] | example: Run Build Task terminal command guide text left border when hovering over the text
     "terminalOverviewRuler.border": "#242424", // [overrides `editorOverviewRuler.border`] (match `terminal.background`)
     "terminalOverviewRuler.cursorForeground": "#929292", // --color--gray-medium [overrides core #878787] (match `editorCursor.foreground`) | example: current line match when using terminal search widget
     "textBlockQuote.background": "#383838", // -color--gray-fade [overrides core #222222] | example: markdown > quote in preview mode
