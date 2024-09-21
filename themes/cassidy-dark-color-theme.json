@@ -28,7 +28,7 @@
     "charts.blue": "#92c1fd", // -color--blue-base [overrides `editorInfo.foreground`] | example: Incoming/Outgoing dot in source control sidebar
     "charts.green": "#a2cd8b", // -color--green-base [overrides core green #89d185] | example: Incoming/Outgoing branch dot in source control sidebar
     "charts.orange": "#eeae7b", // -color--orange-base [overrides `minimap.findMatchHighlight`] | example: Incoming/Outgoing dot in source control sidebar
-    "charts.purple": "#d6aaea", // -color--purple-base [overrides core #b180d7] | example: Incoming/Outgoing dot in source control sidebar
+    "charts.purple": "#d6aaea", // -color--purple-deep [overrides core #b180d7] | example: Incoming/Outgoing dot in source control sidebar
     "charts.red": "#ef9182", // -color--red-base [overrides `editorError.foreground`] | example: Incoming/Outgoing dot in source control sidebar
     "charts.yellow": "#efddac", // [overrides `editorWarning.foreground`] | example: Incoming/Outgoing dot in source control sidebar
     "chat.avatarBackground": "#92c1fd26", // -color--blue-base at 15% opacity [overrides core #1f1f1f] | example: GitHub Copilot chat avatar background in chat panel
@@ -104,6 +104,7 @@
     "editorCodeLens.foreground": "#929292", // -color--gray-medium [overrides core #939393] | example: debug arrow and text in editor
     "editorCursor.background": "#383838", // -color--gray-fade [overrides core #555456] | example: text inside cursor block
     "editorCursor.foreground": "#929292", // --color--gray-medium [overrides core #aeafad] | example: cursor block and current line highlight in overviewRuler
+    "editorError.background": "#db665640", // -color--red-deep at 25% opacity [base]
     "editorError.foreground": "#db6656", // -color--red-deep [overrides core red #ee4f47] | examples: squiggly underlines and panel error icon
     "editorGhostText.background": "#1e242c", // matches -color--blue-deep at 10% opacity on #242424 [base]
     "editorGhostText.foreground": "#62a1f0bf", // -color--blue-deep at 75% opacity | example: includes sidebar source control input placeholder text
@@ -118,6 +119,7 @@
     "editorGutter.modifiedBackground": "#efddacbf", // -color--yellow-base at 75% opacity [overrides core #1b81a8]
     "editorHint.foreground": "#92c1fd", // -color--blue-base [overrides core #949494] | example: 3 dots underline
     "editorIndentGuide.activeBackground1": "#4d4d4d", // -color--gray-dark-fade [overrides `editorWhitespace.foreground`]
+    "editorInfo.background": "#92c1fd40", // -color--blue-base at 25% opacity [base]
     "editorInfo.foreground": "#92c1fd", // -color--blue-base [overrides core #3275c3] | example: info squiggly underlines and panel info icon
     "editorLightBulb.foreground": "#d7bb70", // -color--yellow-deep [overrides core #ffcc00]
     "editorLightBulbAi.foreground": "#d7bb70", // -color--yellow-deep [overrides core #ffcc00] | example: double star icon
@@ -145,6 +147,7 @@
     "editorUnicodeHighlight.background": "#eeae7b40", // -color--orange-base at 25% opacity [base]
     "editorUnicodeHighlight.border": "#eeae7b80", // -color--orange-base at 50% opacity [overrides `editorWarning.foreground`]
     "editorUnnecessaryCode.opacity": "#0009", // -color--black at 60% opacity [overrides core black opacity]
+    "editorWarning.background": "#eeae7b40", // -color--orange-base at 25% opacity [base]
     "editorWarning.foreground": "#eeae7b", // -color--orange-base [overrides core yellow #cca700] | example: warning squiggly underlines and panel warning icon
     "editorWhitespace.foreground": "#383838", // -color--gray-fade [overrides core #424342]
     "editorWidget.background": "#333333", // -color--oklch-32-gray [overrides core #252526] | example: finder widget or hover popup info
@@ -176,6 +179,9 @@
     "inputValidation.errorBorder": "#db6656", // -color--red-deep [overrides core #be1100] | example: making a new file in the explorer sidebar with a period . for the name
     "inputValidation.errorForeground": "#f8f8f8", // -color--gray-white [overrides `foreground`] | example: making a new file in the explorer sidebar with a period . for the name
     "inputValidation.infoBorder": "#92c1fd80", // -color--blue-base at 50% opacity [overrides core #007acc] | example: Using the "Quick Fix" keybinding to active a code action when there is no active code action
+    "inputValidation.warningBackground": "#a75c00", // -color--orange-bg , // #352a05
+    "inputValidation.warningBorder": "#da883e", // -color--orange-deep  // #b89500
+    "inputValidation.warningForeground": "#f8f8f8", // [overrides `foreground`] | example: warning message in the sidebar source control input when too many changes (10,000+) are made at once
     "keybindingLabel.background": "#4d4d4d", // -color--gray-dark-fade [overrides core #343434]
     "keybindingLabel.border": "#525252", // [overrides core #3d3d3d] (2 shades lighter than `keybindingLabel.background`)
     "keybindingLabel.bottomBorder": "#585858", // [overrides core #484848] (2 shades lighter than `keybindingLabel.border`)
@@ -266,6 +272,7 @@
     "symbolIcon.booleanForeground": "#d6aaea", // -color--purple-base [overrides `foreground`] | example: click in misspelled word in the editor and the icon will be in the breadcrumbs || click on a boolean in a json file and see the icon in the breadcrumbs
     "symbolIcon.classForeground": "#92c1fd", // -color--blue-base [overrides core #c98727] | example: Previewing a css file in Incoming/Outgoing source control sidebar
     "symbolIcon.constantForeground": "#d6aaea", // -color--purple-base [overrides `foreground`] | example: click in PHP define() constant and see icon in breadcrumbs
+    "symbolIcon.constructorForeground": "#92c1fd", // -color--blue-base [overrides core #a377c5] | example: click on a constructor in a js or php file and see icon in breadcrumbs
     "symbolIcon.enumeratorForeground": "#eeae7b", // -color--orange-base [overrides core #ee9d28] | example: in a JSON file, type " to start a property and see the icon in the suggestions widget
     "symbolIcon.fieldForeground": "#ef9182", // -color--red-base [overrides core #74bcfc] | example: click on elements in a html file and see breadcrumbs icons
     "symbolIcon.functionForeground": "#89dfdf", // -color--cyan-base [overrides core purple #936cb0] | example: box icon
@@ -307,6 +314,8 @@
     "terminal.foreground": "#c4c4c4", // -color--gray-light [overrides core #cccccc] (includes cursor)
     "terminal.hoverHighlightBackground": "#ffffff1a", // -color--white at 10% opacity [overrides core #252f39] (match `editor.hoverHighlightBackground`) | example: hover over a linting issue outputted in terminal
     "terminal.tab.activeBorder": "#efddac", // -color--yellow-base [base] | example: terminal sidebar active tab border when multiple tabs are open
+    "terminalCommandDecoration.defaultBackground": "#62a1f0", // -color--blue-deep [overrides core gray #464646] | example: Terminal gutter icon when starting Run Build Task
+    "terminalCommandDecoration.errorBackground": "#db6656", // -color--red-deep
     "terminalCommandDecoration.successBackground": "#79b158", // -color--green-deep [overrides core #1b81a8] | example: Run Build Task success message
     "terminalCommandGuide.foreground": "#ffffff40", // -color-white at 25% opacity [base] | example: Run Build Task terminal command guide text left border when hovering over the text
     "terminalOverviewRuler.border": "#242424", // [overrides `editorOverviewRuler.border`] (match `terminal.background`)
