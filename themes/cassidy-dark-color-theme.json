@@ -552,7 +552,9 @@
         "comment support",
         "comment variable",
         "punctuation.definition.comment",
-        "source.embedded"
+        "source.embedded",
+        //*** MARKDOWN ***
+        "markup.underline.link"
       ],
       "settings": {
         "foreground": "#7a7a7a"
@@ -562,9 +564,7 @@
       "name": "GRAY DARK (OKLCH 50%)",
       "scope": [
         //*** DEFAULT ***
-        "invalid",
-        //*** MARKDOWN ***
-        "markup.underline.link"
+        "invalid"
       ],
       "settings": {
         "foreground": "#636363"
