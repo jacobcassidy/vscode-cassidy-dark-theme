@@ -79,12 +79,12 @@
     "dropdown.listBackground": "#333333", // -color--oklch-32-gray (2 shades darker than dropdown.background) [overrides `dropdown.background`] | example: settings UI page dropdowns
     "editor.background": "#242424", // -color--gray-fade-black [overrides core #1e1e1e]
     "editor.findMatchBackground": "#9847b9", // -color--purple-bg at 90% opacity [overrides dimmed core blue #515c6a] | example: active search match
-    "editor.findMatchBorder": "#ffffff08", // unneeded [base] | example: active search match
+    "editor.findMatchBorder": "#ffffff08", // -color--white at 3% opacity [base] | example: active search match
     "editor.findMatchForeground": "#bd84d7", // -color--purple-deep at 90% opacity | example: inactive search match
     "editor.findMatchHighlightBackground": "#9847b980", // -color--purple-bg at 50% opacity [overrides core orange at opacity #653618] | example: inactive search match
-    "editor.findMatchHighlightBorder": "#ffffff08", // unneeded [base] | example: inactive search match
+    "editor.findMatchHighlightBorder": "#ffffff08", // -color--white at 3% opacity [base] | example: inactive search match
     "editor.findMatchHighlightForeground": "#ffffffe6", // -color--white at 90% opacity [overrides `editor.findMatchForeground`] | example: active search match
-    "editor.findRangeHighlightBackground": "#ffffff1a", // -color--white at 10% opacity [overrides core dimmed gray #2d2e30] | example: background when using finder widget with selection search only
+    "editor.findRangeHighlightBackground": "#ffffff0d", // -color--white at 5% opacity [overrides core dimmed gray #2d2e30] | example: background when using finder widget with selection search only
     "editor.focusedStackFrameHighlightBackground": "#da883e40", // -color--blue-deep at 25% opacity [overrides core green at opacity #344834] | example: click on a module in the sidebar's call stack when running debugger and see the highlight in the editor
     "editor.foldBackground": "#92c1fd26", // -color--blue-base at 15% opacity [overrides dimmed `editor.selectionBackground`]
     "editor.foldPlaceholderForeground": "#929292", // -color--gray-medium [overrides core #808080] | example: dots at end of line that has been folded // wait to see if the core is set by any other settings first
@@ -93,7 +93,7 @@
     "editor.lineHighlightBackground": "#161616", // -color--oklch-20-gray [base] (6 shades darker than editor bg)
     "editor.lineHighlightBorder": "#161616", // -color--oklch-20-gray [overrides core #282828] (match editor.lineHighlightBackground)
     "editor.linkedEditingBackground": "#a75c0040", // -color--orange-bg at 25% opacity [overrides core #661919] | example: click inside HTML tag and see the linked editing background when the setting is enabled
-    "editor.rangeHighlightBackground": "#ffffff1a", // -color--white at 10% opacity [overrides dimmed `editor.findRangeHighlightBackground`] (match `editor.findRangeHighlightBackground`) | example: current search match line
+    "editor.rangeHighlightBackground": "#ffffff0d", // -color--white at 5% opacity [overrides core white at opacity #2d2d2d] | example: current search match line
     "editor.selectionBackground": "#006fd980", // -color--blue-bg at 50% opacity [overrides core blue opacity #264f78]
     "editor.snippetFinalTabstopHighlightBorder": "#92c1fd80", // -color--blue-base at 50% opacity [overrides core  #525252] | example: in a HTML document, type "!" and see the final snippet tabstop highlight
     "editor.snippetTabstopHighlightBackground": "#92c1fd40", // -color--blue-base at 26% opacity [overrides core white at opacity #3e3e3e]
@@ -121,6 +121,8 @@
     "editorIndentGuide.activeBackground1": "#4d4d4d", // -color--gray-dark-fade [overrides `editorWhitespace.foreground`]
     "editorInfo.background": "#92c1fd40", // -color--blue-base at 25% opacity [base]
     "editorInfo.foreground": "#92c1fd", // -color--blue-base [overrides core #3275c3] | example: info squiggly underlines and panel info icon
+    "editorInlayHint.foreground": "#929292", // -color--gray-medium [overrides core #969696] | example: turn on javascript inlay hints in settings and see js file with inlay hints.
+    "editorInlayHint.typeForeground": "#a9c0de99", // -color--blue-fade at 60% opacity [overrides `editorInlayHint.foreground`] | example: turn on javascript inlay hints in settings and see js file with inlay hints.
     "editorLightBulb.foreground": "#d7bb70", // -color--yellow-deep [overrides core #ffcc00]
     "editorLightBulbAi.foreground": "#d7bb70", // -color--yellow-deep [overrides core #ffcc00] | example: double star icon
     "editorLightBulbAutoFix.foreground": "#92c1fd", // -color--blue-base [overrides core #75beff] | example: quick fix icon when clicking in a misspelled JS variable declaration
@@ -137,6 +139,7 @@
     "editorOverviewRuler.findMatchForeground": "#9847b9bf", // -color--purple-bg at 75% opacity [overrides core dimmed orange #77531c]
     "editorOverviewRuler.infoForeground": "#92c1fdbf", // -color--blue-base at 75% opacity [overrides `editorInfo.foreground`]
     "editorOverviewRuler.modifiedForeground": "#efddacbf", // -color--yellow-base at 75% opacity [overrides dimmed `editorGutter.modifiedBackground`]
+    "editorOverviewRuler.rangeHighlightForeground": "#ffffff1a", // [overrides core blue at opacity #0d5687] | example: using find symbol from the command palette
     "editorOverviewRuler.selectionHighlightForeground": "#7a7a7a61", // -color--gray-medium-dark at 75% of 50% opacity = 37.5% (round to 38% opacity) [overrides core #86808a] | example: click in word and all the matches are colored (match `editor.wordHighlightBackground`)
     "editorOverviewRuler.warningForeground": "#eeae7bbf", // -color--orange-base at 75% opacity [overrides `editorWarning.foreground`]
     "editorOverviewRuler.wordHighlightForeground": "#7a7a7a61", // -color--gray-medium-dark at 75% of 50% opacity = 37.5% (round to 38% opacity) [overrides core #868686] (match `editorOverviewRuler.selectionHighlightForeground`) | example: click on a recurring property in a css file
@@ -159,6 +162,7 @@
     "focusBorder": "#62a1f0cc", // -color--blue-deep at 80% opacity [overrides core #0078d4] | example: active sidebar list item, active input border, active panel border
     "foreground": "#c4c4c4", // -color--gray-light [overrides core #cccccc] | examples: breadcrumbs, explorer sidebar, extension titles
     "gitDecoration.addedResourceForeground": "#a2cd8b", // -color--green-base [overrides core green #72c890] | example: filename in tabs and sidebar for staged/committed file
+    "gitDecoration.conflictingResourceForeground": "#db6656", // -color--red-deep [overrides core red #a75255] | example: conflicting file in source control sidebar
     "gitDecoration.deletedResourceForeground": "#ef9182", // -color--red-base [overrides core red] | example: hover over source control sidebar incoming/outgoing list item that has a commit deletion or filename in tabs and sidebar for non-staged file or committed file in source control graph popup widget
     "gitDecoration.ignoredResourceForeground": "#868686", // -color--oklch-gray-62 [overrides core #828282] | example: filename in tabs and sidebar
     "gitDecoration.modifiedResourceForeground": "#efddac", // -color--yellow-base [overrides core #e2c08d] | example: filename in tabs and sidebar of non-staged file
@@ -199,6 +203,16 @@
     "list.hoverForeground": "#f8f8f8", // -color--gray-white [overrides `sideBar.foreground` || `quickInput.foreground`] | example: extensions sidebar list
     "list.inactiveSelectionBackground": "#ffffff0d", // -color--white at 5% opacity [overrides core #37373d]
     "list.warningForeground": "#eeae7b", // -color--orange-base [overrides core #cca700] | example: includes tab foreground
+    "merge.currentHeaderBackground": "#35c5c580", // -color--cyan-deep [overrides core green with opacity #2a4540]
+    "merge.incomingHeaderBackground": "#62a1f080", // -color--blue-deep [overrides core blue with opacity #326592]
+    "mergeEditor.change.background": "#a2cd8b1a", // -color--green-base at 10% opacity [overrides core green with opacity #3c422e]
+    "mergeEditor.change.word.background": "#a2cd8b33", // -color--green-base at 20% opacity [overrides core green with opacity #4f5e2e]
+    "mergeEditor.conflict.handled.minimapOverViewRuler": "#92c1fd80", // -color--blue-base at 50% opacity [overrides core #a1a1a1]
+    "mergeEditor.conflict.handledFocused.border": "#92c1fd80", // -color--blue-base at 50% opacity [overrides core #a1a1a1]
+    "mergeEditor.conflict.handledUnfocused.border": "#92c1fd40", // -color--blue-base at 25% opacity [overrides core white with opacity]
+    "mergeEditor.conflict.unhandled.minimapOverViewRuler": "#eeae7be6", // -color--orange-base at 90% opacity [overrides core #fcba03]
+    "mergeEditor.conflict.unhandledFocused.border": "#eeae7be6", // -color--orange-base at 90% opacity [overrides core #ffa600]
+    "mergeEditor.conflict.unhandledUnfocused.border": "#eeae7b80", //  -color--orange-base at 50% opacity [overrides core #946b18]
     "minimap.errorHighlight": "#db6656bf", // -color--red-deep at 75% opacity [overrides core red #dc1d1d]
     "minimap.findMatchHighlight": "#9847b9bf", // -color--purple-bg at 75% opacity [overrides core orange #d18616] | example: editor search widget matches
     "minimap.foregroundOpacity": "#00000080", // 50% opacity [base]
