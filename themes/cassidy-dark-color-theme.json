@@ -551,6 +551,8 @@
         "meta.function.method.with-arguments.ruby storage.type", // For Ruby's parameter block `&` operator
         //*** SHELL ***
         "meta.expression.assignment.modified.shell", //example `/` in .zshrc: export PATH=/opt/homebrew/bin:$PATH
+        //*** SNIPPETS ***
+        "custom.punctuation.separator.colon.json.comments.snippets", // example: `javascript.json` vscode snippets
         //*** XML ***
         "meta.tag",
         //*** ZSH ***
@@ -736,7 +738,9 @@
         "entity.name.command",
         "entity.name.section.group-title", // example: [difftool "sourcetree"] in .gitconfig
         //*** SCSS ***
-        "entity.other.attribute-name.parent-selector-suffix.css punctuation" // SCSS &__name
+        "entity.other.attribute-name.parent-selector-suffix.css punctuation", // SCSS &__name
+        //*** SNIPPETS ***
+        "meta.insertion.placeholder.json.comments.snippets string" // example: `javascript.json` vscode snippets
       ],
       "settings": {
         "foreground": "#a2cd8b"
@@ -767,7 +771,12 @@
         "punctuation.section.embedded.end.php",
         //*** SCSS ***
         "meta.at-rule.keyframes entity.name.function",
-        "entity.other.attribute-name.scss"
+        "entity.other.attribute-name.scss",
+        //*** SNIPPETS ***
+        "custom.punctuation.section.insertion.dollar.simple.json.comments.snippets", // example: `javascript.json` vscode snippets
+        "custom.punctuation.section.insertion.dollar.brackets.json.comments.snippets", // example: `javascript.json` vscode snippets
+        "custom.punctuation.section.insertion.bracket.json.comments.snippets", // example: `javascript.json` vscode snippets
+        "custom.variable.other.normal.numeric.json.comments.snippets" // example: `javascript.json` vscode snippets
       ],
       "settings": {
         "foreground": "#eeae7b"
@@ -887,6 +896,8 @@
         "string.quoted.double.php", // Override for "meta.attribute.src.html string"
         //*** SCSS ***
         "meta.attribute-selector.scss",
+        //*** SNIPPETS ***
+        "string meta.any.json.comments.snippets", // example: `javascript.json` vscode snippets
         //*** XML ***
         "meta.tag.sgml.doctype.xml"
       ],
