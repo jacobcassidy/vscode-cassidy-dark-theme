@@ -221,7 +221,9 @@
     "minimap.selectionOccurrenceHighlight": "#7a7a7a61", // -color--gray-medium-dark at 75% of 50% opacity = 37.5% (round to 38% opacity) [overrides core #676767] | example: click in word and all the matches are colored
     "minimap.warningHighlight": "#eeae7bbf", // -color--orange-base at 75% opacity [overrides `editorWarning.foreground`]
     "multiDiffEditor.headerBackground": "#383838", // [override core #262626] | example: previewing a file that is in the Incoming/Outgoing list in the source control sidebar
-    "notebook.cellBorderColor": "#ffffff1a", // -color--white at 10% opacity[override core white at opacity] | example: GitHub Copilot Suggestions page
+    "notebook.cellBorderColor": "#ffffff1a", // -color--white at 10% opacity [override core white at opacity] | example: includes GitHub Copilot Suggestions page
+    "notebook.cellStatusBarItemHoverBackground": "#4d4d4d", // -color--gray-dark-fade [overrides core #494949] match `badge.background` | example: hover over a cell language in the notebook editor
+    "notebook.cellToolbarSeparator": "#383838", // -color--gray-fade [overrides core white at opacity #444] | example: the separator between cell toolbar buttons in the notebook editor
     "notificationCenterHeader.background": "#3d3d3d", // [overrides lighten `editorWidget.background`]
     "notifications.border": "#4d4d4d", // -color--gray-dark-fade [overrides core white at opacity #424242] (match `input.border`) | example: log icon in statusbar popup widget
     "outputViewStickyScroll.background": "#333333", // -color--oklch-gray-32 [overrides `panel.background`] (2 shades lighter than `panel.background`)
@@ -244,9 +246,16 @@
     "profileBadge.foreground": "#f8f8f8", // -color--gray-white [overrides core #ffffff] (match `badge.border`)
     "progressBar.background": "#79b158", // -color--green-deep [overrides core #006abb]
     "quickInputTitle.background": "#424242", // [overrides core #484848] | example: popup when clicking on the "Open Repository" button in the source control sidebar or Copilot icon in the statusBar
+    "radio.inactiveBackground": "#383838", // -color--gray-fade [base] | example: radio buttons on profiles page
+    "scmGraph.foreground1": "#a2cd8b", // -color--green-base [overrides core #ffb000`] | example: Incoming/Outgoing branch dot in source control sidebar
+    "scmGraph.foreground2": "#efddac", // -color--yellow-base [overrides core #dc267f] | example: Incoming/Outgoing branch dot in source control sidebar
+    "scmGraph.foreground3": "#ef9182", // -color--red-base [overrides core #994f00] | example: Incoming/Outgoing branch dot in source control sidebar
+    "scmGraph.foreground4": "#fcb7cb", // -color--pink-base [overrides core #40b0a6] | example: Incoming/Outgoing branch dot in source control sidebar
+    "scmGraph.foreground5": "#89dfdf", // -color--cyan-base [overrides core #b66dff] | example: Incoming/Outgoing branch dot in source control sidebar
+    "scmGraph.historyItemBaseRefColor": "#eeae7b", // -color--orange-base [overrides core #ea5c00] | example: color of commit in sidebar source control graph if base branch if different from the current one
     "scmGraph.historyItemHoverAdditionsForeground": "#a2cd8b", // -color--green-base [overrides `gitDecoration.addedResourceForeground"`] | example: hover over source control sidebar incoming/outgoing list item that has a commit addition
     "scmGraph.historyItemHoverDeletionsForeground": "#ef9182", // -color--red-base [overrides `gitDecoration.deletedResourceForeground`] | example: hover over source control sidebar incoming/outgoing list item that has a commit deletion
-    "scmGraph.historyItemHoverLabelForeground": "#161616", // [overrides `button.foreground`] | example: hover over source control sidebar incoming/outgoing list item that has a repo label
+    "scmGraph.historyItemHoverLabelForeground": "#161616", // [overrides `button.foreground`] | example: source control sidebar incoming/outgoing list item that has a non-default repo label
     "scrollbar.shadow": "#00000066", // -color--black at 40% opacity [overrides core #000] | example: editor tabs side scroll and breadcrumbs/editorStickyScroll
     "scrollbarSlider.activeBackground": "#7a7a7a80", // -color--gray-medium-dark at 50% opacity [overrides core gray opacity #505050] - example: when selecting and dragging scrollbar location
     "scrollbarSlider.background": "#7a7a7a40", // -color--gray-medium-dark at 25% opacity [overrides core gray opacity]- example: editor vertical scrollbar location
