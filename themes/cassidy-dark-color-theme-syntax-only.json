@@ -429,6 +429,7 @@
         "punctuation.definition.variable",
         "variable",
         //*** PHP ***
+        "entity.name.variable.parameter.php", // -color--pink-base || example: "default" in: #[LanguageLevelTypeAware(['8.0' => 'CurlHandle|false'], default: 'resource|false')]
         "string.quoted.double.php variable.other.php punctuation.definition.variable.php", // for $ in string interpolation.
         //*** PYTHON ***
         "meta.function-call.arguments.python",
