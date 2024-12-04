@@ -12,8 +12,14 @@
     "function": {
       "foreground": "#89dfdf" // -color--cyan-base
     },
+    "function.builtin": {
+      "foreground": "#f8f8f8" // -color--gray-white || example: Python's str()
+    },
     "function.defaultLibrary": {
       "foreground": "#f8f8f8" // -color--gray-white
+    },
+    "keyword": {
+      "foreground": "#ef9182" // -color--red-base || example: Python's match keyword
     },
     "method": {
       "foreground": "#f8f8f8" // -color--gray-white
@@ -61,7 +67,8 @@
         //*** PHP ***
         "keyword.operator.return-value.php",
         "keyword.other.type.php",
-        "meta.function.php support.class.php",
+        "meta.function.parameter.typehinted.php",
+        // "meta.function.php support.class.php",
         //*** TYPESCRIPT ***
         "keyword.operator.type.annotation.ts",
         "support.type.primitive.ts"
@@ -115,6 +122,8 @@
         //*** HTML ***
         "text.html",
         "meta.element.structure.svg.text.html",
+        //*** JS ***
+        "meta.function-call.js entity.name.function.js", // example: some JS built-in methods
         //*** JSX ***
         "meta.jsx.children",
         //*** XML ***
@@ -132,8 +141,6 @@
     {
       "name": "GRAY WHITE-LIGHT-LIGHT (OKLCH 86%)",
       "scope": [
-        //*** JAVASCRIPT ***
-        "variable.other.object", // semantic token type for JS
         //*** SHELL ***
         "meta.scope"
       ],
@@ -153,17 +160,20 @@
         "foreground": "#c4c4c4"
       }
     },
-    // {
-    //   "name": "GRAY LIGHT-MEDIUM (OKLCH 74%)",
-    //   "scope": [],
-    //   "settings": {
-    //     "foreground": "#ababab"
-    //   }
-    // },
+    {
+      "name": "GRAY LIGHT-MEDIUM (OKLCH 74%)",
+      "scope": ["comment variable"],
+      "settings": {
+        "foreground": "#ababab"
+      }
+    },
     {
       "name": "GRAY MEDIUM (OKLCH 66%) [PUNCTUATION]",
       "scope": [
         //*** DEFAULT ***
+        "comment storage.type punctuation",
+        "comment storage.type",
+        // "comment variable",
         "entity.name",
         "meta.at-rule.keyframes.body",
         "meta.block",
@@ -177,7 +187,6 @@
         "markup.strikethrough.markdown",
         "meta.separator.markdown",
         //*** PHP ***
-        "comment keyword", // example: @package in PHPdoc comment
         "comment keyword.operator.nullable-type.php", // example: ?array in docblock type hint
         "comment support.class", // example: `editor` in @return editor in PHPdoc comment
         "keyword.operator.return-value.php", // For function return type colon
@@ -213,10 +222,8 @@
         "comment punctuation",
         "comment storage",
         "comment storage.modifier",
-        "comment storage.type",
         "comment support",
-        "comment variable",
-        "punctuation.definition.comment",
+        // "punctuation.definition.comment",
         "source.embedded",
         //*** MARKDOWN ***
         "markup.underline.link"
@@ -287,15 +294,20 @@
     {
       "name": "BLUE FADE",
       "scope": [
+        // DEFAULTS
+        "comment support", // example: PHPDoc  @return \PhpParser\Node[]
+        "comment support.class", // example: PHPDoc  @return \PhpParser\Node[]
         //*** PHP - TYPEHINT ***
         "keyword.other.type.php", // For parameter type hinting and other types
         "meta.other.type.phpdoc.php",
         "keyword.operator.nullable-type.php", // For nullable types using the question mark, such as ?callable
-        // "keyword.other.type.cassidydark.php", // class typehint
+        "keyword.other.type.cassidydark.php", // class typehint
         "meta.function.php storage.type.php", // ... : self
-        "meta.function.php support.class.php", // ... : DB
+        // "meta.function.php support.class.php", // ... : DB
+
         "meta.function.parameter.typehinted.php support", // ( \WP_Query $query )
-        "meta.other.type.phpdoc.php support.class", // @param \WP_Post
+        // "meta.other.type.phpdoc.php support.class", // @param \WP_Post
+        // "meta.other.type.phpdoc.php support", //  @return \PhpParser\Node[]
         //*** TYPESCRIPT ***
         "keyword.operator.type.annotation.ts",
         "support.type.primitive.ts"
