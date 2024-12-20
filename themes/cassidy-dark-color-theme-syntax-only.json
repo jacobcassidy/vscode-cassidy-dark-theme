@@ -218,7 +218,6 @@
       "scope": [
         //*** DEFAULT ***
         "comment constant",
-        "comment entity.name.type",
         "comment keyword",
         "comment meta.tag.inline",
         "comment punctuation",
@@ -297,6 +296,7 @@
       "name": "BLUE FADE",
       "scope": [
         // DEFAULTS
+        "comment entity.name.type", // example: 'Event' in JSdoc: @param {Event} name
         "comment support.class", // example: PHPDoc  @return \PhpParser\Node[]
         //*** PHP - TYPEHINT ***
         "keyword.other.type.php", // For parameter type hinting and other types
