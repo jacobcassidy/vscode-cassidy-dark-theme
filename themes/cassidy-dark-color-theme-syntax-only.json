@@ -6,8 +6,14 @@
   "colors": {},
   "semanticHighlighting": true,
   "semanticTokenColors": {
+    "builtinConstant": {
+      "foreground": "#d6aaea" // -color--purple-base | example: Python boolean value
+    },
     "class": {
       "foreground": "#89dfdf" // -color--cyan-base
+    },
+    "class.builtin": {
+      "foreground": "#f8f8f8" // Such as python's str()
     },
     "function": {
       "foreground": "#89dfdf" // -color--cyan-base
@@ -67,8 +73,6 @@
         //*** PHP ***
         "keyword.operator.return-value.php",
         "keyword.other.type.php",
-        "meta.function.parameter.typehinted.php",
-        // "meta.function.php support.class.php",
         //*** TYPESCRIPT ***
         "keyword.operator.type.annotation.ts",
         "support.type.primitive.ts"
@@ -152,7 +156,6 @@
         //*** DEFAULT ***
         "meta.embedded.block", // Such as  ```shell text``` in markdown
         "support.constant.property", // semantic token type for JS
-        "support.variable", // semantic token type for JS
         //*** HTML ***
         "entity.other.attribute-name"
       ],
@@ -172,8 +175,7 @@
       "scope": [
         //*** DEFAULT ***
         "comment storage.type punctuation",
-        "comment storage.type",
-        // "comment variable",
+        "comment storage.type", // | example: JSDoc @version
         "entity.name",
         "meta.at-rule.keyframes.body",
         "meta.block",
@@ -188,7 +190,8 @@
         "meta.separator.markdown",
         //*** PHP ***
         "comment keyword.operator.nullable-type.php", // example: ?array in docblock type hint
-        "comment support.class", // example: `editor` in @return editor in PHPdoc comment
+        "comment punctuation.separator.inheritance.php", // | example: PHPDoc: @var Gravity_Forms\Gravity_Forms\Save_Form\GF_Save_Form_Helper
+        "comment support.other.namespace.php", // | example: PHPDoc: @var Gravity_Forms\Gravity_Forms\Save_Form\GF_Save_Form_Helper
         "keyword.operator.return-value.php", // For function return type colon
         "keyword.other.phpdoc.php", // The PHPDoc block keywords
         "meta.embedded.block.php", // For else colon when using alternative syntax
@@ -214,16 +217,15 @@
       "name": "GRAY MEDIUM-DARK (OKLCH 58%) [COMMENTS]",
       "scope": [
         //*** DEFAULT ***
-        "comment",
         "comment constant",
         "comment entity.name.type",
         "comment keyword",
         "comment meta.tag.inline",
         "comment punctuation",
-        "comment storage",
         "comment storage.modifier",
+        "comment storage",
         "comment support",
-        // "punctuation.definition.comment",
+        "comment",
         "source.embedded",
         //*** MARKDOWN ***
         "markup.underline.link"
@@ -295,7 +297,6 @@
       "name": "BLUE FADE",
       "scope": [
         // DEFAULTS
-        "comment support", // example: PHPDoc  @return \PhpParser\Node[]
         "comment support.class", // example: PHPDoc  @return \PhpParser\Node[]
         //*** PHP - TYPEHINT ***
         "keyword.other.type.php", // For parameter type hinting and other types
@@ -303,11 +304,7 @@
         "keyword.operator.nullable-type.php", // For nullable types using the question mark, such as ?callable
         "keyword.other.type.cassidydark.php", // class typehint
         "meta.function.php storage.type.php", // ... : self
-        // "meta.function.php support.class.php", // ... : DB
-
         "meta.function.parameter.typehinted.php support", // ( \WP_Query $query )
-        // "meta.other.type.phpdoc.php support.class", // @param \WP_Post
-        // "meta.other.type.phpdoc.php support", //  @return \PhpParser\Node[]
         //*** TYPESCRIPT ***
         "keyword.operator.type.annotation.ts",
         "support.type.primitive.ts"
@@ -499,7 +496,14 @@
       "name": "PURPLE DEEP",
       "scope": [
         //*** DEFAULT ***
-        "entity.other.attribute-name.namespace"
+        "entity.other.attribute-name.namespace",
+        //*** PHP ***
+        "entity.name.type.namespace.php",
+        "keyword.other.class", // example: 'class' in self::class for PHP"
+        "meta.function-call.php", // slash prepending constants
+        "meta.method-call.php", // slash prepending constants
+        "punctuation.separator.inheritance.php", // for namespaces
+        "support.other.namespace.php"
       ],
       "settings": {
         "foreground": "#bd84d7"
@@ -530,7 +534,7 @@
         //*** DEFAULT ***
       ],
       "settings": {
-        // "foreground": "#db6656",
+        "foreground": "#db6656"
       }
     },
 
