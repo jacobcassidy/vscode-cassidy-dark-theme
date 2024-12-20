@@ -463,10 +463,7 @@
         "markup.italic.markdown",
         //*** PHP ***
         "keyword.operator.return-value.php",
-        "keyword.other.type.php",
-        //*** TYPESCRIPT ***
-        "keyword.operator.type.annotation.ts",
-        "support.type.primitive.ts"
+        "keyword.other.type.php"
       ],
       "settings": {
         "fontStyle": "italic"
@@ -695,10 +692,7 @@
         "keyword.operator.nullable-type.php", // For nullable types using the question mark, such as ?callable
         "keyword.other.type.cassidydark.php", // class typehint
         "meta.function.php storage.type.php", // ... : self
-        "meta.function.parameter.typehinted.php support", // ( \WP_Query $query )
-        //*** TYPESCRIPT ***
-        "keyword.operator.type.annotation.ts",
-        "support.type.primitive.ts"
+        "meta.function.parameter.typehinted.php support" // ( \WP_Query $query )
       ],
       "settings": {
         "foreground": "#a9c0de"
