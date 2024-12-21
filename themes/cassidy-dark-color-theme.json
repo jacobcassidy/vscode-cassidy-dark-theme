@@ -841,6 +841,8 @@
         //*** DEFAULT ***
         "constant",
         "keyword.other.unit",
+        "variable.language.this punctuation.definition.variable",
+        "variable.language.this",
         //*** APACHE ***
         "entity.status.apacheconf",
         //*** CSS ***
@@ -893,11 +895,6 @@
       "settings": {
         "foreground": "#bd84d7"
       }
-    },
-    {
-      "name": "PURPLE FADE",
-      "scope": ["variable.language.this", "variable.language.this punctuation.definition.variable"],
-      "settings": { "foreground": "#cab5d4" }
     },
 
     {
