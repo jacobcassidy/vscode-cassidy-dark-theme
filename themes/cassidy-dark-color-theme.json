@@ -463,7 +463,8 @@
         "markup.italic.markdown",
         //*** PHP ***
         "keyword.operator.return-value.php",
-        "keyword.other.type.php"
+        "keyword.other.type.php",
+        "meta.function.parameter.typehinted.php" // ( \WP_Query $query )
       ],
       "settings": {
         "fontStyle": "italic"
