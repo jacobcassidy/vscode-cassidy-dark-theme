@@ -584,7 +584,8 @@
         "meta.embedded.block.php", // For else colon when using alternative syntax
         "meta.embedded.line.php", // For closing bracket } when opening a new PHP tag
         "meta.function.parameter.default", // | example: the \ in a php: function get_home_url($blog_id = \null, $path = '', $scheme = \null) {}
-        "string.quoted.double.php punctuation.definition.variable.php", // for {} braces syntax used in string interpolation.
+        "meta.function.parameter.typehinted.php punctuation.separator.inheritance.php",
+        "string.quoted.double.php punctuation.definition.variable.php", // for {} braces syntax used in
         //*** RUBY ***
         "meta.function.method.with-arguments.ruby storage.type", // For Ruby's parameter block `&` operator
         //*** SHELL ***
