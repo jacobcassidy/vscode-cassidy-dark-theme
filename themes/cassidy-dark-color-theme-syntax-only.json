@@ -407,8 +407,9 @@
         //*** LOG ***
         "log.warning",
         //*** PHP ***
-        "meta.function.parameters.php variable",
         "meta.function.parameters.php punctuation.definition.variable",
+        "meta.function.parameters.php variable",
+        "meta.function.parameters.php",
         "punctuation.section.embedded.begin.php",
         "punctuation.section.embedded.end.php",
         //*** SCSS ***
