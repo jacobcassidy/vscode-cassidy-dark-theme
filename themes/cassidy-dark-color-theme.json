@@ -504,7 +504,6 @@
       "name": "GRAY WHITE (OKLCH 98%)",
       "scope": [
         //*** DEFAULT ***
-        "meta.method-call entity.name.function",
         "support.function",
         //*** APACHE ***
         "entity.helper.apacheconf", // Using Apache Conf extension for syntax grammar
