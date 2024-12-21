@@ -73,7 +73,8 @@
         //*** PHP ***
         "keyword.operator.return-value.php",
         "keyword.other.type.php",
-        "meta.function.parameter.typehinted.php" // ( \WP_Query $query )
+        "meta.function.parameter.typehinted.php punctuation.separator.inheritance.php",
+        "meta.function.parameter.typehinted.php support" // ( \WP_Query $query )
       ],
       "settings": {
         "fontStyle": "italic"
