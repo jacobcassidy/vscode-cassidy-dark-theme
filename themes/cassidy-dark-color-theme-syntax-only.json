@@ -115,6 +115,7 @@
       "name": "GRAY WHITE (OKLCH 98%)",
       "scope": [
         //*** DEFAULT ***
+        "meta.path.basename", // | example: when using global search results in editor instead of search panel
         "support.function",
         //*** APACHE ***
         "entity.helper.apacheconf", // Using Apache Conf extension for syntax grammar
@@ -153,6 +154,7 @@
       "scope": [
         //*** DEFAULT ***
         "meta.embedded.block", // Such as  ```shell text``` in markdown
+        "meta.resultLinePrefix.matchLinePrefix.search meta", // match `editorLineNumber.activeForeground` | example: when using global search results in editor instead of search panel
         "support.constant.property", // semantic token type for JS
         //*** HTML ***
         "entity.other.attribute-name"
@@ -179,6 +181,7 @@
         "meta.block",
         "meta.brace",
         "meta.embedded.line",
+        "meta.path.dirname.search", // -color--gray-medium | example: when using global search results in editor instead of search panel
         "punctuation",
         //*** CSS ***
         "meta.function.calc.css", // For nesting parentheses in calc function
@@ -236,7 +239,8 @@
       "name": "GRAY DARK (OKLCH 50%)",
       "scope": [
         //*** DEFAULT ***
-        "invalid"
+        "invalid",
+        "meta.resultLinePrefix.contextLinePrefix.search meta" // match `"editorLineNumber.foreground` | example: when using global search results in editor instead of search panel
       ],
       "settings": {
         "foreground": "#636363"
