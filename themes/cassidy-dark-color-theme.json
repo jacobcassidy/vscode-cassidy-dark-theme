@@ -460,12 +460,13 @@
         "variable.language.this",
         //*** MARKDOWN ***
         "entity.name.section.markdown",
+        "fenced_code.block.language.markdown",
         "markup.italic.markdown",
         //*** PHP ***
         "keyword.operator.return-value.php",
         "keyword.other.type.php",
-        "meta.function.php punctuation.separator.inheritance.php", // function parameter and return typehint
-        "meta.function.php support.class.php" // function parameter and return typehint
+        "meta.function.php punctuation.separator.inheritance.php" // function parameter and return typehint
+        // "meta.function.php support.class.php" // function parameter and return typehint
       ],
       "settings": {
         "fontStyle": "italic"
@@ -578,6 +579,7 @@
         "meta.function.calc.css", // For nesting parentheses in calc function
         "meta.property-list",
         //*** MARKDOWN ***
+        "fenced_code.block.language.markdown",
         "markup.strikethrough.markdown",
         "meta.separator.markdown",
         //*** PHP ***
@@ -691,13 +693,13 @@
       "scope": [
         // DEFAULTS
         "comment entity.name.type", // example: 'Event' in JSdoc: @param {Event} name
-        "comment support.class", // example: PHPDoc  @return \PhpParser\Node[]
+        // "comment support.class", // example: PHPDoc  @return \PhpParser\Node[]
         //*** PHP - TYPEHINT ***
         "keyword.operator.nullable-type.php", // For nullable types using the question mark, such as ?callable
         "keyword.other.type.cassidydark.php", // class typehint
         "keyword.other.type.php", // For parameter type hinting and other types
         "meta.function.php storage.type.php", // ... : self
-        "meta.function.php support.class.php", // function parameter and return typehint
+        // "meta.function.php support.class.php", // function parameter and return typehint
         "meta.other.type.phpdoc.php"
       ],
       "settings": {
