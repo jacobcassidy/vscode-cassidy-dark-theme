@@ -1,0 +1,39 @@
+{
+  "scopeName": "php-comment-variable-syntax.injection",
+  "injectionSelector": "L:text.html.php",
+  "patterns": [
+    {
+      "include": "#missing-phpdoc-variable"
+    }
+  ],
+  "repository": {
+    "missing-phpdoc-variable": {
+      "patterns": [
+        {
+          "begin": "/\\*\\*(?=\\s)",
+          "beginCaptures": {
+            "0": {
+              "name": "punctuation.definition.comment.php"
+            }
+          },
+          "end": "\\*/",
+          "endCaptures": {
+            "0": {
+              "name": "punctuation.definition.comment.php"
+            }
+          },
+          "name": "comment.block.documentation.phpdoc.php",
+          "patterns": [
+            {
+              "include": "source.php#php_doc"
+            },
+            {
+              "match": "\\$\\w+",
+              "name": "variable.other.phpdoc.php.cassidydark"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
