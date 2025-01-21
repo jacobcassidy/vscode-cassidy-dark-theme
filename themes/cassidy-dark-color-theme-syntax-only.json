@@ -453,6 +453,14 @@
       }
     },
 
+    //---- SYNTAX PURPLE ----//
+    {
+      "name": "PURPLE FADE",
+      "scope": ["string.regexp punctuation"],
+      "settings": {
+        "foreground": "#cab5d4"
+      }
+    },
     {
       "name": "PURPLE BASE",
       "scope": [
@@ -477,14 +485,8 @@
         //*** PHP ***
         "entity.name.type.namespace.php", // namespace name
         //*** REGEX ***
-        "meta.assertion.look-ahead.regexp",
-        "meta.assertion.negative-look-ahead.regexp",
-        "meta.group.regexp",
-        "meta.group.assertion.regexp",
         "string.regexp",
-        "string.regexp constant",
-        "string.regexp keyword",
-        "string.regexp punctuation",
+        "meta.group.regexp",
         //*** SHELL ***
         "constant.other.option", //example: -i in shell
         "meta.arithmetic.shell", //example: $+functions[p10k]
@@ -508,7 +510,10 @@
         "meta.function-call.php", // slash prepending constants
         "meta.method-call.php", // slash prepending constants
         "punctuation.separator.inheritance.php", // for namespaces
-        "support.other.namespace.php"
+        "support.other.namespace.php",
+        //*** REGEX ***
+        "string.regexp keyword",
+        "string.regexp meta.assertion"
       ],
       "settings": {
         "foreground": "#bd84d7"
