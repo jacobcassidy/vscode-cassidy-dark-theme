@@ -48,8 +48,15 @@
   },
   "tokenColors": [
     //--------------------------------------------------------------------------
-    //--- FONT STYLES ---
+    // --- FONT STYLES ---
     //--------------------------------------------------------------------------
+    {
+      "name": "NORMAL",
+      "scope": [],
+      "settings": {
+        "fontStyle": ""
+      }
+    },
     {
       "name": "BOLD",
       "scope": [
@@ -74,8 +81,8 @@
         //*** PHP ***
         "keyword.operator.return-value.php",
         "keyword.other.type.php",
-        "meta.function.php punctuation.separator.inheritance.php" // function parameter and return typehint
-        // "meta.function.php support.class.php" // function parameter and return typehint
+        "meta.function.php punctuation.separator.inheritance.php", // function parameter and return typehint
+        "meta.function.php support.class.php" // function parameter and return typehint, such as function func_name( \WP_REST_Request $request ): \WP_REST_Response {}
       ],
       "settings": {
         "fontStyle": "italic"
@@ -91,13 +98,6 @@
         "fontStyle": "bold italic"
       }
     },
-    // {
-    //   "name": "NORMAL",
-    //   "scope": [],
-    //   "settings": {
-    //     "fontStyle": ""
-    //   }
-    // },
     {
       "name": "STRIKETHROUGH",
       "scope": [
@@ -108,9 +108,16 @@
         "fontStyle": "strikethrough"
       }
     },
+    {
+      "name": "UNDERLINE",
+      "scope": [],
+      "settings": {
+        "fontStyle": "underline"
+      }
+    },
 
     //--------------------------------------------------------------------------
-    //--- GRAY SHADES ---
+    // --- GRAYS ---
     //--------------------------------------------------------------------------
     {
       "name": "GRAY WHITE (OKLCH 98%)",
@@ -137,11 +144,11 @@
         "foreground": "#f8f8f8"
       }
     },
-    // {
-    //   "name": "GRAY WHITE-LIGHT (OKLCH 90%)",
-    //   "scope": [],
-    //   "settings": { "foreground": "#dedede" }
-    // },
+    {
+      "name": "GRAY WHITE-LIGHT (OKLCH 90%)",
+      "scope": [],
+      "settings": { "foreground": "#dedede" }
+    },
     {
       "name": "GRAY WHITE-LIGHT-LIGHT (OKLCH 86%)",
       "scope": [
@@ -200,7 +207,6 @@
         "meta.embedded.block.php", // For else colon when using alternative syntax
         "meta.embedded.line.php", // For closing bracket } when opening a new PHP tag
         "meta.function.parameter.default", // | example: the \ in a php: function get_home_url($blog_id = \null, $path = '', $scheme = \null) {}
-        "meta.function.php punctuation.separator.inheritance.php", // function parameter and return typehint
         "string.quoted.double.php punctuation.definition.variable.php", // for {} braces syntax used in string interpolation.
         //*** RUBY ***
         "meta.function.method.with-arguments.ruby storage.type", // For Ruby's parameter block `&` operator
@@ -225,8 +231,8 @@
         "comment keyword",
         "comment meta.tag.inline",
         "comment punctuation",
-        "comment storage.modifier",
         "comment storage",
+        "comment storage.modifier",
         "comment support",
         "comment",
         "source.embedded",
@@ -248,20 +254,40 @@
         "foreground": "#636363"
       }
     },
-    // {
-    //   "name": "GRAY DARK-FADE (OKLCH 42%)",
-    //   "scope": [],
-    //   "settings": { "foreground": "#4d4d4d" }
-    // },
-    // {
-    //   "name": "GRAY FADE (OKLCH 34%)",
-    //   "scope": [],
-    //   "settings": { "foreground": "#525252" }
-    // },
+    {
+      "name": "GRAY DARK-FADE (OKLCH 42%)",
+      "scope": [],
+      "settings": { "foreground": "#4d4d4d" }
+    },
+    {
+      "name": "GRAY FADE (OKLCH 34%)",
+      "scope": [],
+      "settings": { "foreground": "#525252" }
+    },
 
     //--------------------------------------------------------------------------
-    //--- COLOR CUSTOMIZATIONS ---
+    // --- BLUES ---
     //--------------------------------------------------------------------------
+    {
+      "name": "BLUE FADE",
+      "scope": [
+        // DEFAULTS
+        "comment entity.name.type", // example: 'Event' in JSdoc: @param {Event} name
+        // "comment support.class", // example: PHPDoc  @return \PhpParser\Node[]
+        //*** PHP - TYPEHINT ***
+        "meta.other.type.phpdoc.php support.class.php", // PHPDoc comment such as WP_REST_Request in @param WP_REST_Request $request The submitted form data.
+        "keyword.operator.nullable-type.php", // For nullable types using the question mark, such as ?callable
+        "keyword.other.type.cassidydark.php", // class typehint
+        "keyword.other.type.php", // For parameter type hinting and other types
+        "meta.function.php punctuation.separator.inheritance.php", // function parameter and return typehint
+        "meta.function.php storage.type.php", // ... : self
+        "meta.function.php support.class.php", // function parameter and return typehint, such as function func_name( \WP_REST_Request $request ): \WP_REST_Response {}
+        "meta.other.type.phpdoc.php"
+      ],
+      "settings": {
+        "foreground": "#a9c0de"
+      }
+    },
     {
       "name": "BLUE BASE",
       "scope": [
@@ -281,9 +307,9 @@
         //*** LOG ***
         "log.date",
         //*** MARKDOWN ***
-        "meta.link.reference",
         "meta.link.reference constant",
         "meta.link.reference string",
+        "meta.link.reference",
         "string.other.link.title.markdown",
         //*** SCSS ***
         "variable.parameter.url" // SCSS `to` in background: linear-gradient(to ...); -- Red in CSS. Also for background:url(../../../../assets/images/icons/icon-phone-white.svg) without quotes.
@@ -292,27 +318,11 @@
         "foreground": "#92c1fd" // -color--blue-base
       }
     },
-    // {
-    //   "name": "BLUE DEEP",
-    //   "scope": [],
-    //   "settings": { "foreground": "#62a1f0" }
-    // },
     {
-      "name": "BLUE FADE",
-      "scope": [
-        // DEFAULTS
-        "comment entity.name.type", // example: 'Event' in JSdoc: @param {Event} name
-        // "comment support.class", // example: PHPDoc  @return \PhpParser\Node[]
-        //*** PHP - TYPEHINT ***
-        "keyword.operator.nullable-type.php", // For nullable types using the question mark, such as ?callable
-        "keyword.other.type.cassidydark.php", // class typehint
-        "keyword.other.type.php", // For parameter type hinting and other types
-        "meta.function.php storage.type.php", // ... : self
-        // "meta.function.php support.class.php", // function parameter and return typehint
-        "meta.other.type.phpdoc.php"
-      ],
+      "name": "BLUE DEEP",
+      "scope": [],
       "settings": {
-        "foreground": "#a9c0de"
+        "foreground": "#62a1f0"
       }
     },
     {
@@ -326,12 +336,22 @@
       }
     },
 
+    //--------------------------------------------------------------------------
+    // --- CYANS ---
+    //--------------------------------------------------------------------------
+    {
+      "name": "CYAN FADE",
+      "scope": [],
+      "settings": {
+        "foreground": "#afd7d6"
+      }
+    },
     {
       "name": "CYAN BASE",
       "scope": [
         //*** DEFAULT ***
-        "entity.name.type", // such are class or trait name in PHP
         "entity.name.function",
+        "entity.name.type", // such are class or trait name in PHP
         "keyword.other.special-method", // such as Ruby loop
         "meta.attribute.style string",
         "meta.property-name",
@@ -345,9 +365,9 @@
         //*** INI ***
         "keyword.other.definition",
         //*** PHP ***
-        "support.function.basic_functions",
-        "entity.other.inherited-class.php", // extends class
         "entity.other.alias.php", // use as
+        "entity.other.inherited-class.php", // extends class
+        "support.function.basic_functions",
         //*** PYTHON ***
         "meta.function-call.generic.python",
         //*** SHELL ***
@@ -359,7 +379,24 @@
         "foreground": "#89dfdf"
       }
     },
+    {
+      "name": "CYAN DEEP",
+      "scope": [],
+      "settings": {
+        "foreground": "#35c5c5"
+      }
+    },
 
+    //--------------------------------------------------------------------------
+    // --- GREENS ---
+    //--------------------------------------------------------------------------
+    {
+      "name": "GREEN FADE",
+      "scope": [],
+      "settings": {
+        "foreground": "#b0c5a5"
+      }
+    },
     {
       "name": "GREEN BASE",
       "scope": [
@@ -370,14 +407,14 @@
         "meta.object-literal",
         "support.variable.property", // semantic token type
         "variable.other.constant.property", // semantic token type
-        "variable.other.property",
         "variable.other.object.property",
+        "variable.other.property",
         //*** APACHE ***
         "entity.mime-type.apacheconf",
         //*** MARKDOWN ***
         "entity.name.section.markdown",
-        "markup.heading.markdown string.other.link.title.markdown",
         "markup.heading.markdown meta.other.valid-ampersand.markdown",
+        "markup.heading.markdown string.other.link.title.markdown",
         "punctuation.definition.heading.markdown",
         //*** PHP ***
         "variable.other.property.php punctuation.definition.variable.php",
@@ -396,7 +433,24 @@
         "foreground": "#a2cd8b"
       }
     },
+    {
+      "name": "GREEN DEEP",
+      "scope": [],
+      "settings": {
+        "foreground": "#79b158"
+      }
+    },
 
+    //--------------------------------------------------------------------------
+    // --- ORANGES ---
+    //--------------------------------------------------------------------------
+    {
+      "name": "ORANGE FADE",
+      "scope": [],
+      "settings": {
+        "foreground": "#d7b79e"
+      }
+    },
     {
       "name": "ORANGE BASE",
       "scope": [
@@ -433,7 +487,24 @@
         "foreground": "#eeae7b"
       }
     },
+    {
+      "name": "ORANGE DEEP",
+      "scope": [],
+      "settings": {
+        "foreground": "#da883e"
+      }
+    },
 
+    //--------------------------------------------------------------------------
+    // --- PINKS ---
+    //--------------------------------------------------------------------------
+    {
+      "name": "PINK FADE",
+      "scope": [],
+      "settings": {
+        "foreground": "#e6c3cc"
+      }
+    },
     {
       "name": "PINK BASE",
       "scope": [
@@ -452,8 +523,17 @@
         "foreground": "#fcb7cb"
       }
     },
+    {
+      "name": "PINK DEEP",
+      "scope": [],
+      "settings": {
+        "foreground": "#ea8eab"
+      }
+    },
 
-    //---- SYNTAX PURPLE ----//
+    //--------------------------------------------------------------------------
+    // --- PURPLES ---
+    //--------------------------------------------------------------------------
     {
       "name": "PURPLE FADE",
       "scope": ["string.regexp punctuation"],
@@ -520,6 +600,16 @@
       }
     },
 
+    //--------------------------------------------------------------------------
+    // --- REDS ---
+    //--------------------------------------------------------------------------
+    {
+      "name": "RED FADE",
+      "scope": [],
+      "settings": {
+        "foreground": "#d0a198"
+      }
+    },
     {
       "name": "RED BASE",
       "scope": [
@@ -548,6 +638,16 @@
       }
     },
 
+    //--------------------------------------------------------------------------
+    // --- YELLOWS ---
+    //--------------------------------------------------------------------------
+    {
+      "name": "YELLOW FADE",
+      "scope": [],
+      "settings": {
+        "foreground": "#e6dec6"
+      }
+    },
     {
       "name": "YELLOW BASE",
       "scope": [
