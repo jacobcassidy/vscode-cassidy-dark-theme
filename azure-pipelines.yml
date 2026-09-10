@@ -1,11 +1,8 @@
-pool:
-  vmImage: ubuntu-latest
-
 steps:
 - task: AzureCLI@2
   displayName: 'Get identity details'
   inputs:
-    azureSubscription: vscode_publishing_connection
+    azureSubscription: 'vscode_publishing_connection'
     scriptType: pscore
     scriptLocation: inlineScript
     inlineScript: |
