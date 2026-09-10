@@ -3,13 +3,13 @@
   "injectionSelector": "L:source.css",
   "patterns": [
     {
-      "include": "#"
+      "include": "#missing-logical-properties"
     }
   ],
   "repository": {
-    "": {
-      "match": "",
-      "name": ""
+    "missing-logical-properties": {
+      "match": "border-(block|inline)(?=\\s*:)",
+      "name": "support.type.property-name.css.cassidydark"
     }
   }
 }

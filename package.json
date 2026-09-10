@@ -53,6 +53,13 @@
     ],
     "grammars": [
       {
+        "scopeName": "missing-css-syntax.injection",
+        "path": "./syntaxes/missing-css-syntax-injection.json",
+        "injectTo": [
+          "source.css"
+        ]
+      },
+      {
         "scopeName": "missing-scss-comparison-operators.injection",
         "path": "./syntaxes/missing-scss-comparison-operators.json",
         "injectTo": [
