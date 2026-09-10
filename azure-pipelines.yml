@@ -1,5 +1,5 @@
 steps:
-- task: AzureCLI@2
+- task: AzureCLI@3
   displayName: 'Get identity details'
   inputs:
     azureSubscription: 'vscode_publishing_connection'
