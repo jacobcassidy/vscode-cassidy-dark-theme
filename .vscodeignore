@@ -1,4 +1,7 @@
-.gitignore
---dev-assets
+# Directories to ignore
 .dev-assets
-vscode-workbench-colors.json
+.vscode
+
+# Files to ignore
+.gitignore
+azure-pipelines.yml
