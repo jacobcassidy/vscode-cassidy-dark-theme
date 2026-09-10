@@ -2,7 +2,7 @@ steps:
 - task: AzureCLI@2
   displayName: 'Get identity details'
   inputs:
-    azureSubscription: 'jacob_managed_id'
+    azureSubscription: vscode_publishing_connection
     scriptType: pscore
     scriptLocation: inlineScript
     inlineScript: |
