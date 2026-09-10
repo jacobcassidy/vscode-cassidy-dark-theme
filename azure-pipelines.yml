@@ -1,8 +1,7 @@
 steps:
 - task: AzureCLI@3
   inputs:
-    connectionType: 'azureRM'
     azureSubscription: 'vscode_publishing_connection'
-    scriptType: 'ps'
+    scriptType: 'pscore'
     scriptLocation: 'inlineScript'
     inlineScript: 'az rest -u https://app.vssps.visualstudio.com/_apis/profile/profiles/me --resource 499b84ac-1321-427f-aa17-267ca6975798'
