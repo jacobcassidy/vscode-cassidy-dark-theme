@@ -3,8 +3,15 @@
 .vscode
 docs
 previews
+scripts
 
 # Files to ignore
+.editorconfig
 .gitignore
+.markdownlint-cli2.jsonc
+.prettierignore
+.shellcheckrc
 azure-pipelines.yml
-publish-azure.sh
+eslint.config.js
+lefthook.yml
+prettier.config.js
