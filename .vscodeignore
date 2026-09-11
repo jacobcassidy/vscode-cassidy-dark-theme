@@ -1,6 +1,7 @@
 # Directories to ignore
 .dev-assets
 .vscode
+docs
 previews
 
 # Files to ignore
