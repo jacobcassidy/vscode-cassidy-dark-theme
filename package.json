@@ -70,5 +70,8 @@
     "hasPreReleaseVersion": false,
     "installedTimestamp": 1710536963385,
     "pinned": false
+  },
+  "scripts": {
+    "publish:azure": "az pipelines run --organization https://dev.azure.com/jacobcassidy --project \"Cassidy Dark Theme\" --name \"jacobcassidy.vscode-cassidy-dark-theme\" --branch \"$(git branch --show-current)\" --open"
   }
 }
