@@ -53,32 +53,7 @@
   "contributes": {
     "themes": [
       {
-        "label": "Cassidy Dark Dev (Blank)",
-        "uiTheme": "vs-dark",
-        "path": "./themes/cassidy-dark-color-theme-blank.json"
-      },
-      {
-        "label": "Cassidy Dark Dev (Dev)",
-        "uiTheme": "vs-dark",
-        "path": "./themes/cassidy-dark-color-theme-blank.json"
-      },
-      {
-        "label": "Cassidy Dark Dev (Syntax-Only)",
-        "uiTheme": "vs-dark",
-        "path": "./themes/cassidy-dark-color-theme-syntax-only.json"
-      },
-      {
-        "label": "Cassidy Dark Dev (v1.1.2)",
-        "uiTheme": "vs-dark",
-        "path": "./themes/cassidy-dark-color-theme-v1.1.2.json"
-      },
-      {
-        "label": "Cassidy Dark Dev (Official v1.2.0)",
-        "uiTheme": "vs-dark",
-        "path": "./themes/cassidy-dark-color-theme-v1.2.0-official.json"
-      },
-      {
-        "label": "Cassidy Dark Dev",
+        "label": "Cassidy Dark",
         "uiTheme": "vs-dark",
         "path": "./themes/cassidy-dark-color-theme.json"
       }
