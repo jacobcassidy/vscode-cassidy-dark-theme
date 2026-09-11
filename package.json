@@ -56,29 +56,6 @@
         "uiTheme": "vs-dark",
         "path": "./themes/cassidy-dark-color-theme.json"
       }
-    ],
-    "grammars": [
-      {
-        "scopeName": "missing-scss-comparison-operators.injection",
-        "path": "./syntaxes/missing-scss-comparison-operators.json",
-        "injectTo": [
-          "source.css.scss"
-        ]
-      },
-      {
-        "scopeName": "missing-scss-syntax.injection",
-        "path": "./syntaxes/missing-scss-syntax-injection.json",
-        "injectTo": [
-          "source.css.scss"
-        ]
-      },
-      {
-        "scopeName": "php-class-typehint-syntax.injection",
-        "path": "./syntaxes/php-class-typehint-syntax.json",
-        "injectTo": [
-          "text.html.php"
-        ]
-      }
     ]
   },
   "scripts": {
