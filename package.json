@@ -1,27 +1,48 @@
 {
   "name": "cassidy-dark",
   "displayName": "Cassidy Dark Theme",
-  "description": "A clean, modern, dark theme originally inspired by Monokai",
   "version": "1.1.3",
-  "icon": "images/cassidy-dark-logo-512.png",
+  "description": "A clean, modern, dark theme originally inspired by Monokai",
   "publisher": "jacobcassidy",
-  "bugs": {
-    "url": "https://github.com/jacobcassidy/vscode-cassidy-dark-theme/issues"
+  "author": {
+    "name": "Jacob Cassidy",
+    "email": "hello@jacobcassidy.com",
+    "url": "https://jacobcassidy.com"
+  },
+  "icon": "images/cassidy-dark-logo-512.png",
+  "galleryBanner": {
+    "color": "#292929",
+    "theme": "dark"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/jacobcassidy/vscode-cassidy-dark-theme"
   },
-  "galleryBanner": {
-    "color": "#292929",
-    "theme": "dark"
+  "bugs": {
+    "url": "https://github.com/jacobcassidy/vscode-cassidy-dark-theme/issues"
   },
+  "license": "MIT",
   "keywords": [
     "Theme",
     "Dark Theme",
     "Monokai",
     "Night Theme"
   ],
+  "devDependencies": {
+    "@eslint/compat": "^2.1.1",
+    "@eslint/js": "^10.0.1",
+    "eslint": "^10.10.0",
+    "eslint-plugin-import-x": "^4.17.1",
+    "globals": "^17.12.0",
+    "lefthook": "^2.1.12",
+    "markdownlint-cli2": "^0.23.2",
+    "prettier": "^3.9.6",
+    "prettier-plugin-multiline-arrays": "^4.1.11"
+  },
+  "allowScripts": {
+    "lefthook@2.1.12": true,
+    "unrs-resolver@1.12.2": true
+  },
   "engines": {
     "vscode": "^1.64.2"
   },
@@ -61,6 +82,12 @@
     ]
   },
   "scripts": {
+    "check": "npx prettier . --check",
+    "format": "npx prettier . --write",
+    "lint:docs": "npx markdownlint-cli2 \"**/*.md\"",
+    "lint:docs:fix": "npx markdownlint-cli2 \"**/*.md\" --fix",
+    "lint:scripts": "npx eslint",
+    "lint:scripts:fix": "npx eslint --fix",
     "publish:azure": "bash publish-azure.sh"
   },
   "__metadata": {
