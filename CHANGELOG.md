@@ -4,28 +4,45 @@ All notable changes to this project are documented in this file.
 
 ## [Unreleased]
 
-- Full refactor of workbench colors
+### Added
+
 - Added `missing-scss-comparison-operators.injection`
 - Added VSCode workplace `settings.json` file
+
+### Changed
+
+- Full refactor of workbench colors
 - Updated `terminal.ansiBrightBlack` to #929292 from #636363.
 - Updated semanticTokenColors namespace from purple-deep to purple-base color.
 
 ## [1.1.2] - 2024-08-30
 
+### Added
+
 - Added note of bug with `editorOverviewRuler.selectionHighlightForeground` setting.
+
+### Changed
+
 - Updated find match with purple-base color.
 - Updated definition highlights with pink-base color.
 
 ## [1.1.1] - 2024-08-28
 
+### Added
+
 - Added `variable.other.constant.object.js` to purple color.
 - Added `keyword.other.phpdoc.php` to gray medium (punctuation) color.
 - Added `sideBarStickyScroll.background` to #2e2e2e color.
 - Added `terminalOverviewRuler.border` to match terminal background color.
+
+### Changed
+
 - Updated `editorOverviewRuler.background` to #0000000d (black at 5% opacity).
 - Updated `editorOverviewRuler.border` to #0000001a (black at 10% opacity).
 
 ## [1.1.0] - 2024-08-27
+
+### Added
 
 - Added comments with examples of what specific tokens colorize.
 - Added "Output Colorizer" extension syntax highlighting for `code.log support` and `code.log invalid`.
@@ -37,6 +54,9 @@ All notable changes to this project are documented in this file.
   - `editorOverviewRuler.wordHighlightForeground`
   - `editorOverviewRuler.wordHighlightStrongForeground`
   - `editorOverviewRuler.wordHighlightTextForeground`
+
+### Changed
+
 - Moved Rainbow CSV extension syntax highlighting to its own section.
 - Organized order of gray shade tokens.
 - Replaced theme screenshot for v1.1.0.
@@ -47,6 +67,8 @@ All notable changes to this project are documented in this file.
 - Updated colors for `textBlockQuote.background` and `textBlockQuote.border`.
 
 ## [1.0.9] - 2024-08-25
+
+### Added
 
 - Added syntax highlighting for the following tokens:
   - `support.function.builtin.shell`
@@ -61,42 +83,71 @@ All notable changes to this project are documented in this file.
   - `meta.jsx.children`
   - `meta.other.type.phpdoc.php`
   - `variable.parameter.url`
+
+### Changed
+
 - Updated README.md Table of Contents.
 
 ## [1.0.8] - 2024-08-25
+
+### Changed
 
 - Updated `README.md` "Issues" content.
 
 ## [1.0.7] - 2024-08-25
 
+### Added
+
 - Added `keyword.operator.return-value.php` for PHP return typehint syntax color.
+
+### Changed
+
 - Updated `textCodeBlock.background` and `textPreformat.background` to `#ffffff1a` (-color--white at 10% opacity).
+
+### Removed
+
 - Commented out `comment keyword.other.type.php` since it is already covered with `keyword.other.type.php`.
 
 ## [1.0.6] - 2024-08-23
 
-- Updated color and gray-scale schemes based on OKLCH for uniformity.
-- Updated 'find/match' colors to provide better contrast and kind differentiation.
+### Added
+
 - Added `textPreformat.background`.
 - Added `editorStickyScroll.background`.
 - Added PHP type hinting syntax.
+
+### Changed
+
+- Updated color and gray-scale schemes based on OKLCH for uniformity.
+- Updated 'find/match' colors to provide better contrast and kind differentiation.
+
+### Removed
+
 - Removed scrollbar border.
 
 ## [1.0.5] - 2024-06-27
 
+### Changed
+
 - Updated `meta.function-call.arguments.python` to theme pink for Python arguments to match variable highlighting
 
 ## [1.0.4] - 2024-06-26
+
+### Added
 
 - Added `meta.function-call.generic.python` to theme cyan for Python non-defined function calls in docs.
 - Added `meta.function-call.arguments.python` to theme orange for Python arguments in non-defined function calls in docs.
 
 ## [1.0.3] - 2024-03-08
 
+### Added
+
 - Added syntax colors for the [nginx.conf syntax extension](https://marketplace.visualstudio.com/items?itemName=shanoor.vscode-nginx).
 - Added syntax colors for the [Better Dockerfile Syntax extension](https://marketplace.visualstudio.com/items?itemName=jeff-hykin.better-dockerfile-syntax).
 
 ## [1.0.2] - 2024-03-07
+
+### Added
 
 - Added `php-class-typehint-syntax.json` file to include syntax customization for a PHP Class typehint using the `keyword.other.type.cassidydark.php` token.
 - Added a new theme color at 50% of theme blue chroma for typehint syntax color.
@@ -104,18 +155,29 @@ All notable changes to this project are documented in this file.
 
 ## [1.0.1] - 2024-03-06
 
+### Added
+
 - Added `comment keyword.operator.nullable-type` for PHPdoc nullable type hint such as ?array.
 
 ## [1.0.0] - 2024-02-27
 
-- Jumping to using 1.x.x versioning since the theme is no longer in beta.
+### Added
+
 - Added `keyword.operator.nullable-type` to theme blue for nullable types using the question mark, such as `?callable` in PHP.
 
+### Changed
+
+- Jumping to using 1.x.x versioning since the theme is no longer in beta.
+
 ## [0.3.7] - 2024-02-26
+
+### Added
 
 - Added syntax highlighting color scheme for Rainbow CSV extension.
 
 ## [0.3.6] - 2024-02-25
+
+### Added
 
 - Added italic style to `invalid`.
 - Added `meta.at-rule support.function` to theme cyan for functions such as `calc` and `var`.
@@ -127,39 +189,66 @@ All notable changes to this project are documented in this file.
 - Added `meta.function.url string.quoted.single` to theme blue for CSS url() function.
 - Added `support.constant.boolean.container.css` to theme purple for @container `<style-query>` boolean property-value. (Note: this token is from my [CSS Nesting Syntax Highlighting extension](https://marketplace.visualstudio.com/items?itemName=jacobcassidy.css-nesting-syntax-highlighting).)
 - Added `entity.name.type.namespace.php` to theme purple for namespace names.
+
+### Changed
+
 - Changed `entity.name.type.class` to `entity.name.type` to include other types such as `traits` in PHP.
 - Updated `editorLineNumber.foreground` and `editorLineNumber.activeForeground` to a brighter gray color for better contrast in diff view.
 
 ## [0.3.5] - 2024-02-25
 
-- Moved `variable.parameter.misc.css` from theme red to theme orange for parameters such as "count" in `property-name: counter(count, decimal);`
+### Added
+
 - Added `entity.other.attribute-name.parent-selector-suffix.css punctuation` to theme green style for highlighting SCSS &`__name`.
 - Added README note announcing the availability of the free [CSS Nesting Syntax Highlighting extension](https://marketplace.visualstudio.com/items?itemName=jacobcassidy.css-nesting-syntax-highlighting) I recently published.
+
+### Changed
+
+- Moved `variable.parameter.misc.css` from theme red to theme orange for parameters such as "count" in `property-name: counter(count, decimal);`
+
+### Removed
+
 - Removed `meta.at-rule.media.header` from styles (individual items in header are styled instead).
 
 ## [0.3.4] - 2024-02-11
+
+### Added
 
 - Added `keyword.other.type.php` for parameter and other type casting to theme blue.
 - Added `keyword.operator.return-value.php` for function return value type casting colon to theme gray matching punctuation.
 
 ## [0.3.3] - 2024-02-03
 
-- Removed missing CSS syntax that is now merged into VSCode.
+### Changed
+
 - Updated ghost text and background syntax colors.
+
+### Removed
+
+- Removed missing CSS syntax that is now merged into VSCode.
 
 ## [0.3.2] - 2023-12-23
 
-- Refactored deprecated VSCode properties.
+### Added
+
 - Added `string.quoted.double.php punctuation.definition.variable.php` to punctuation's color for the `{}` braces syntax used in string interpolation.
 - Added `string.quoted.double.php variable.other.php punctuation.definition.variable.php` to variable's color for the `$` dollar sign used in string interpolation.
 
+### Changed
+
+- Refactored deprecated VSCode properties.
+
 ## [0.3.1] - 2023-10-24
+
+### Added
 
 - Added `string.quoted.single.php` and `string.quoted.double.php` to theme yellow syntax highlighting to override `meta.attribute.src.html string` theme blue.
 
 ## [0.3.0] - 2023-08-28
 
-Updated group 2 colors:
+### Changed
+
+- Updated group 2 colors:
 
 | GROUP 1 OKLCH         | v0.3.0 HEX | COLOR         | UPDATED |
 | --------------------- | ---------- | ------------- | ------- |
@@ -190,13 +279,17 @@ Updated group 2 colors:
 
 ## [0.2.9] - 2023-08-027
 
+### Changed
+
 - Updated bright green with lower chroma to be more in line with other color's max chromas. From `oklch(80% 0.2575 140)` to `oklch(80% 0.175 140)` (#7bd867).
 - Updated theme logo to match the current color scheme.
 - Updated theme screenshot to match the updated color scheme.
 
 ## [0.2.8] - 2023-08-27
 
-Updated the color scheme with a split into two distinct groups:
+### Changed
+
+- Updated the color scheme with a split into two distinct groups:
 
 - Group 1 contains Hue values between 0 and 180.
 - Group 2 contains Hue values between 180 and 360.
@@ -227,9 +320,11 @@ Updated the color scheme with a split into two distinct groups:
 
 ## [0.2.7] - 2023-08-27
 
+### Changed
+
 - Updated OKLCH chroma on color scheme for better balance. Now Cyan and Green have better contrast between them and Green OKLCH chroma matches other colors.
 
-### Updated Syntax Colors for v0.2.7
+#### Updated Syntax Colors for v0.2.7
 
 | OKLCH VALUES            | v0.2.7 HEX | v0.2.2 HEX | COLORS        |
 | ----------------------- | ---------- | ---------- | ------------- |
@@ -253,22 +348,36 @@ Updated the color scheme with a split into two distinct groups:
 
 ## [0.2.6] - 2023-08-26
 
+### Added
+
 - Added `auto-fill` syntax highlight grammar for CSS `repeat()` function.
+
+### Removed
+
 - Removed `variable.parameter.url.scss` to keep syntax highlighting consistent with CSS.
 - Removed `missing-pseudo-classes` from grammar additions since the syntax is now merged into the official microsoft/vscode-css repo.
 
 ## [0.2.5] - 2023-08-23
 
-- Updated bright green color from `#74da5d` to `#73da5b` to be half way from max chroma and normal green color.
-- Updated yellow deep from `#ffe294` to `#eece74` for greater contrast between yellow and orange colors. Which makes it minus 0.0600 below max chroma of `oklch(86% 0.17574 90)`.
+### Added
+
 - Added GhostText workbench syntax highlighting for GitHub Copilot suggestions.
 
+### Changed
+
+- Updated bright green color from `#74da5d` to `#73da5b` to be half way from max chroma and normal green color.
+- Updated yellow deep from `#ffe294` to `#eece74` for greater contrast between yellow and orange colors. Which makes it minus 0.0600 below max chroma of `oklch(86% 0.17574 90)`.
+
 ## [0.2.4] - 2023-07-16
+
+### Changed
 
 - Updated green color from `#93d185` to `#91d283` to bring chroma to minus 0.1320 from max OKLCH chroma.
 - Reverted cyan color back to `#8fe2e1` for chroma match.
 
 ## [0.2.3] - 2023-07-09
+
+### Changed
 
 - Updated blue color from `#8cc3fb` to `#89c3ff` for greater contrast from cyan.
 - Updated cyan color from `#8fe2e1` back to `#8ee2e2` for a slightly deeper color.
@@ -277,14 +386,19 @@ Updated the color scheme with a split into two distinct groups:
 
 ## [0.2.2] - 2023-07-08
 
-- Moved `meta.attribute.crossorigin entity.other.attribute-name` to theme purple to match HTML link tag's `defer` and `async` attributes.
+### Added
+
 - Added `variable.other.property.php punctuation.definition.variable.php` to theme green to match other property colors.
 - Added `entity.other.inherited-class.php` for extends class and `entity.other.alias.php` use as to theme cyan highlighting.
 - Added `meta.parameter-expansion` for zsh to theme gray medium highlighting.
 - Added `comment support` and `comment storage.modifier` to match comment color highlighting.
+
+### Changed
+
+- Moved `meta.attribute.crossorigin entity.other.attribute-name` to theme purple to match HTML link tag's `defer` and `async` attributes.
 - Tweaked colors to provide slightly better contrast and balance between them...
 
-### Updated Syntax Colors for v0.2.2
+#### Updated Syntax Colors for v0.2.2
 
 | OKLCH VALUES              | v0.2.2 HEX | v0.1.5 HEX | COLORS      |
 | ------------------------- | ---------- | ---------- | ----------- |
@@ -308,24 +422,31 @@ Updated the color scheme with a split into two distinct groups:
 
 ## [0.2.1] - 2023-06-07
 
+### Added
+
 - Added `meta.function.method.with-arguments.ruby storage.type` for Ruby's parameter block `&` operator to match punctuation syntax highlighting color.
 - Added `meta.element.structure.svg.text.html` for `<svg>` inner text color highlighting with theme yellow to match strings.
 - Added `meta.embedded.line.php` for closing bracket `}` punctuation color highlighting when opening a new PHP tag.
 - Added `meta.attribute.srcset.html string` with theme blue to match links.
 - Added `meta.attribute.async.html entity.other.attribute-name` for HTML async attribute color highlighting with theme purple.
 - Added `meta.attribute.defer.html entity.other.attribute-name` for HTML defer attribute color highlighting with theme purple.
+
+### Removed
+
 - Removed unneeded `source` from `meta.embedded.block.php source`.
 
 ## [0.2.0] - 2023-06-01
+
+### Fixed
 
 - Updated `#missing-pseudo-classes` for correct syntax highlighting when nesting additional pseudo-classes.
 
 ## [0.1.9] - 2023-05-31
 
+### Added
+
 - Added `support.function.basic_functions` to base function color for PHP.
 - Added strikethrough and punctuation color to `markup.strikethrough.markdown`.
-- Updated `entity.other.keyframe-offset` without postfix `.percentage` to apply to more CSS styles.
-- Flipped green and bright green colors for terminal.
 - Added `meta.function.calc.css` for parentheses color when nesting in calc function.
 - Added `meta.embedded.block.php source` for else colon when using alternative syntax.
 - Added `meta.attribute.unrecognized.xmlns.html string` to theme blue for link.
@@ -339,28 +460,62 @@ Updated the color scheme with a split into two distinct groups:
   - Added `string.replacement.apacheconf` to theme orange.
   - Added `entity.status.apacheconf` to theme purple.
 
+### Changed
+
+- Updated `entity.other.keyframe-offset` without postfix `.percentage` to apply to more CSS styles.
+- Flipped green and bright green colors for terminal.
+
 ## [0.1.8] - 2023-04-30
 
-- Updated `editorOverviewRuler` foreground colors.
+### Added
+
 - Added `comment meta.tag.inline` to comment color.
 
+### Changed
+
+- Updated `editorOverviewRuler` foreground colors.
+
 ## [0.1.7] - 2023-04-27
+
+### Added
 
 - Added textmate grammar for missing CSS #property-keywords: `auto-fit` using the `support.constant.property-value.css` token.
 
 ## [0.1.6] - 2023-04-24
+
+### Changed
 
 - Updated logo to match v0.1.5 color updates.
 - Edited README wording.
 
 ## [0.1.5] - 2023-04-24
 
-Two big changes have been added in this update:
+### Added
 
-1. Syntax colors have been refactored based on the `oklch` format to improve how the colors look together with specific lightness and chroma values (see table below).
-2. Missing CSS & SCSS syntax grammar have been added to tokenize elements for color highlighting (see details below).
+- Missing CSS & SCSS syntax grammar have been added to tokenize elements for color highlighting (see details below).
 
-### 1. Updated Syntax Colors
+#### Missing CSS & SCSS Syntax Grammar for VSCode
+
+For both CSS & SCSS:
+
+- `:is()` and `:where()` pseudo classes are now tokenized using `entity.other.attribute-name.pseudo-class.css`. This matches other pseudo classes that are already defined in VSCode such as `:not()` and `:has()`.
+
+For SCSS only:
+
+- `,` commas are now tokenized using `punctuation.separator.list.comma.scss`.
+- `>>`, `>`, `+`, `~` keyword operator combinator are now tokenized using `keyword.operator.combinator.scss`.
+- `content`, `cursor`, `filter`, `font`, and `mask` property names are now tokenized using `support.type.property-name.scss`. This matches other property names already defined in VSCode.
+
+- Added additional regex tokens to purple syntax highlighting
+- Added green syntax highlighting to heading hash `#`.
+- Added `meta.attribute.src.html string` to blue syntax highlighting.
+- Added `meta.function.parameters.php` to orange syntax highlighting to match global parameter color.
+
+### Changed
+
+- Syntax colors have been refactored based on the `oklch` format to improve how the colors look together with specific lightness and chroma values (see table below).
+
+#### Updated Syntax Colors
 
 | OKLCH VALUES         | v0.1.5 HEX | v0.0.3 HEX | COLORS      |
 | -------------------- | ---------- | ---------- | ----------- |
@@ -382,57 +537,62 @@ Two big changes have been added in this update:
 | oklch(68% 0.172 20)  | `#ef646b`  | `#ef5252`  | Deep Red    |
 | oklch(62% 0.175 250) | `#0089ea`  | `#2487eb`  | Deep Blue   |
 
-### 2. Added Missing CSS & SCSS Syntax Grammar for VSCode
-
-For both CSS & SCSS:
-
-- `:is()` and `:where()` pseudo classes are now tokenized using `entity.other.attribute-name.pseudo-class.css`. This matches other pseudo classes that are already defined in VSCode such as `:not()` and `:has()`.
-
-For SCSS only:
-
-- `,` commas are now tokenized using `punctuation.separator.list.comma.scss`.
-- `>>`, `>`, `+`, `~` keyword operator combinator are now tokenized using `keyword.operator.combinator.scss`.
-- `content`, `cursor`, `filter`, `font`, and `mask` property names are now tokenized using `support.type.property-name.scss`. This matches other property names already defined in VSCode.
-
-### 3. Other Updates in v0.1.5
-
 - Replaced theme screenshot to show new syntax highlighting.
-- Added additional regex tokens to purple syntax highlighting
 - Changed Markdown heading syntax highlighting from yellow to green
-- Added green syntax highlighting to heading hash `#`.
-- Added `meta.attribute.src.html string` to blue syntax highlighting.
-- Fixed opacity for `editorRuler.foreground`.
 - Renamed `Bright` to `Deep` for secondary colors.
-- Added `meta.function.parameters.php` to orange syntax highlighting to match global parameter color.
 - Updated `diffEditorGutter` opacity to match `diffEditor`.
 
+### Fixed
+
+- Fixed opacity for `editorRuler.foreground`.
+
 ## [0.1.4] - 2023-04-18
+
+### Added
 
 - Added `editorRuler.foreground` with theme orange color at 10% opacity to use as warning guides.
 
 ## [0.1.3] - 2023-04-18
 
+### Added
+
 - Added `entity.name.tag.yaml` to match support name syntax color.
 
 ## [0.1.2] - 2023-04-10
+
+### Added
 
 - Added `meta.embedded.line` to match punctuation syntax color.
 
 ## [0.1.1] - 2023-04-07
 
+### Added
+
 - Added `keyword.other.special-method` to cyan color syntax for Ruby loops and other special methods.
+
+### Removed
+
 - Deleted `support.function.construct` to fall back to `support.function` for syntax colors used for PHP echo, array(), etc to match other support.function instead of keywords color.
 
 ## [0.1.0] - 2023-04-06
+
+### Fixed
 
 - Replaced `punctuation.section.embedded` with `punctuation.section.embedded.begin.php` and `punctuation.section.embedded.end.php` so Ruby string interpolation is not colorized incorrectly.
 
 ## [0.0.9] - 2023-03-19
 
-- Changed `variable.other.object.property` syntax color from light gray to green to match property color.
+### Added
+
 - Added `variable.parameter.misc.css` to red color for CSS clamp operators, such as `+`.
 
+### Changed
+
+- Changed `variable.other.object.property` syntax color from light gray to green to match property color.
+
 ## [0.0.7] - 2023-03-06
+
+### Added
 
 - Added problems panel icon colors for workbench.
 - Added `editorHint` 3-dot underline color for workbench.
@@ -442,25 +602,37 @@ For SCSS only:
 
 ## [0.0.6] - 2023-03-05
 
+### Added
+
 - Added `galleryBanner` color for VSCode marketplace banner.
 
 ## [0.0.5] - 2023-03-05
 
+### Added
+
 - Added errors and warnings foreground colors.
+
+### Changed
+
 - Updated theme screenshot.
 - Updated installation instructions in README for marketplace.
 
 ## [0.0.4] - 2023-03-05
 
+### Added
+
 - Added theme logo.
 - Added MIT License.
+
+### Changed
+
 - Moved development files out of production directory.
 - Packaged theme for publishing on Visual Studio Code marketplace.
 
 ## [0.0.3] - 2023-03-04
 
-- Corrected cyan color from `#97dddd` to `#96dfdf` to match `hsla(180, 53%, 73%, 1)`.
-- Corrected green color from `#b3d98c` to `#badf96` to match `hsla(90, 53%, 73%, 1)`.
+### Changed
+
 - Updated and added additional theme bright colors:
 
 | COLOR         | v0.0.2 HSL                | v0.0.2 HEX | v0.0.3 HSL               | v0.0.3 HEX |
@@ -482,9 +654,16 @@ For SCSS only:
 | Pink          | `hsla(345, 63%, 83%, 1)`  | `#ffc2d1`  | No Change                |            |
 | Pink Bright   | -                         | -          | `hsla(345, 63%, 73%, 1)` | `#e68fa4`  |
 
+### Fixed
+
+- Corrected cyan color from `#97dddd` to `#96dfdf` to match `hsla(180, 53%, 73%, 1)`.
+- Corrected green color from `#b3d98c` to `#badf96` to match `hsla(90, 53%, 73%, 1)`.
+
 ## [0.0.2] - 2023-02-27
 
-Updated theme colors:
+### Changed
+
+- Updated theme colors:
 
 | COLOR         | v0.0.1 HSL                | v0.0.1 HEX | v0.0.2 HSL               | v0.0.2 HEX |
 | ------------- | ------------------------- | ---------- | ------------------------ | ---------- |
@@ -502,5 +681,7 @@ Updated theme colors:
 | Pink          | `hsla(345, 100%, 88%, 1)` | `#ffc2d1`  | `hsla(345, 63%, 83%, 1)` | `#efb8c6`  |
 
 ## [0.0.1]
+
+### Added
 
 - Added starter syntax and workbench theme colors.
