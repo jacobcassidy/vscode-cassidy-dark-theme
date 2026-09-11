@@ -4,16 +4,45 @@ All notable changes to this project are documented in this file.
 
 ## [Unreleased]
 
-### Added
-
-- Added `missing-scss-comparison-operators.injection`
-- Added VSCode workplace `settings.json` file
-
 ### Changed
 
 - Full refactor of workbench colors
 - Updated `terminal.ansiBrightBlack` to #929292 from #636363.
 - Updated semanticTokenColors namespace from purple-deep to purple-base color.
+
+## [1.2.0] - 2026-09-12
+
+### Added
+
+- Added development linting and formatting config files:
+  - .vscode/extensions.md
+  - .vscode/settings.md
+  - .editorconfig
+  - .markdownlint-cli2.jsonc
+  - .prettierignore
+  - .shellcheckrc
+  - eslint.config.js
+  - lefthook.yml
+  - prettier.config.js
+- Added `scripts/publish-azure.sh` to only allow publishing from the main branch.
+- Added the `previews` directory for grammar previews of syntax highlighting. Seeded with a PHP preview file.
+- Added the `docs` directory for development notes and reference files.
+
+### Changed
+
+- Updated `.vscode/settings.json` to add new development linting and formatting settings.
+- Updated the formatting style of `CHANGELOG.md` to follow the formatting style of [keep a changelog](https://keepachangelog.com).
+
+### Removed
+
+- Removed grammar contribution files since they affect all themes when installed. These will be added to a separate independent extension later.
+- Removed the old `.vsixmanifest` file as it's no longer needed.
+
+## [1.1.3] - 2026-09-11
+
+### Added
+
+- Added `azure-pipelines.yml` to publish via an azure pipeline instead of a personal token (personal tokens will be phased out at the end of the year).
 
 ## [1.1.2] - 2024-08-30
 
