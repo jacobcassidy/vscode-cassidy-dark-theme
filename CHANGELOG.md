@@ -93,8 +93,8 @@ All notable changes to this project are documented in this file.
 
 ## [1.0.3] - 2024-03-08
 
-- Added syntax colors for the [nginx.conf syntax extension by shanoor](https://marketplace.visualstudio.com/items?itemName=shanoor.vscode-nginx).
-- Added syntax colors for the [Better Dockerfile Syntax extension by Jeff Hykin](https://marketplace.visualstudio.com/items?itemName=jeff-hykin.better-dockerfile-syntax).
+- Added syntax colors for the [nginx.conf syntax extension](https://marketplace.visualstudio.com/items?itemName=shanoor.vscode-nginx).
+- Added syntax colors for the [Better Dockerfile Syntax extension](https://marketplace.visualstudio.com/items?itemName=jeff-hykin.better-dockerfile-syntax).
 
 ## [1.0.2] - 2024-03-07
 
@@ -223,7 +223,7 @@ Updated the color scheme with a split into two distinct groups:
 | `oklch(86% 0.127 210)`  | `#52e7ff`  | BRIGHT CYAN   |
 | `oklch(62% 0.205 260)`  | `#317fff`  | BRIGHT BLUE   |
 | `oklch(80% 0.1359 310)` | `#d9a4ff`  | BRIGHT PURPLE |
-| `oklch(80% 0.1 360)`    | `#f3a3bb ` | BRIGHT PINK   |
+| `oklch(80% 0.1 360)`    | `#f3a3bb`  | BRIGHT PINK   |
 
 ## [0.2.7] - 2023-08-27
 
@@ -272,7 +272,7 @@ Updated the color scheme with a split into two distinct groups:
 
 - Updated blue color from `#8cc3fb` to `#89c3ff` for greater contrast from cyan.
 - Updated cyan color from `#8fe2e1` back to `#8ee2e2` for a slightly deeper color.
-- Updated red color from `#f18a79` to `#f4877f ` for greater contrast from orange.
+- Updated red color from `#f18a79` to `#f4877f` for greater contrast from orange.
 - Updated red deep color from `#ff7f6d` to `#ff7e77` to match red color change.
 
 ## [0.2.2] - 2023-07-08
@@ -372,7 +372,7 @@ Two big changes have been added in this update:
 | oklch(80% 0.1 250)   | `#8cc3fc`  | `#81baf3`  | Blue        |
 | oklch(80% 0.1 305)   | `#cdaef2`  | `#d4b0f8`  | Purple      |
 | oklch(74% 0.136 20)  | `#f48587`  | `#f38181`  | Red         |
-| -                    |
+| -                    |            |            |             |
 | oklch(80% 0.1 90)    | `#d7bb70`  | `#efc852`  | Deep Yellow |
 | oklch(80% 0.1 195)   | `#65d2d2`  | `#6fd3d3`  | Deep Cyan   |
 | oklch(80% 0.1 360)   | `#f3a3bb`  | `#e68fa4`  | Deep Pink   |
@@ -430,9 +430,6 @@ For SCSS only:
 ## [0.0.9] - 2023-03-19
 
 - Changed `variable.other.object.property` syntax color from light gray to green to match property color.
-
-_2023-03-14_
-
 - Added `variable.parameter.misc.css` to red color for CSS clamp operators, such as `+`.
 
 ## [0.0.7] - 2023-03-06
