@@ -60,6 +60,9 @@
       }
     ]
   },
+  "scripts": {
+    "publish:azure": "bash publish-azure.sh"
+  },
   "__metadata": {
     "id": "e6e8b76c-3a7b-483e-a265-98594f79ba1c",
     "publisherId": "aee9e75c-ea26-4af1-b5e6-815e33288c4b",
