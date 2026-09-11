@@ -55,6 +55,8 @@
         "label": "Cassidy Dark",
         "uiTheme": "vs-dark",
         "path": "./themes/cassidy-dark-color-theme.json"
+<<<<<<< HEAD
+=======
       },
       {
         "label": "Cassidy Dark (v1)",
@@ -70,6 +72,53 @@
         "label": "Cassidy Dark (Blank)",
         "uiTheme": "vs-dark",
         "path": "./themes/cassidy-dark-color-theme-blank.json"
+      }
+    ],
+    "grammars": [
+      {
+        "scopeName": "missing-css-syntax.injection",
+        "path": "./syntaxes/missing-css-syntax-injection.json",
+        "injectTo": [
+          "source.css"
+        ]
+      },
+      {
+        "scopeName": "missing-scss-comparison-operators.injection",
+        "path": "./syntaxes/missing-scss-comparison-operators.json",
+        "injectTo": [
+          "source.css.scss"
+        ]
+>>>>>>> refs/remotes/origin/dev
+      },
+      {
+        "label": "Cassidy Dark (v1)",
+        "uiTheme": "vs-dark",
+        "path": "./themes/cassidy-dark-color-theme-v1.1.2.json"
+      },
+      {
+<<<<<<< HEAD
+        "label": "Cassidy Dark (Syntax-Only)",
+        "uiTheme": "vs-dark",
+        "path": "./themes/cassidy-dark-color-theme-syntax-only.json"
+      },
+      {
+        "label": "Cassidy Dark (Blank)",
+        "uiTheme": "vs-dark",
+        "path": "./themes/cassidy-dark-color-theme-blank.json"
+=======
+        "scopeName": "php-class-typehint-syntax.injection",
+        "path": "./syntaxes/php-class-typehint-syntax.json",
+        "injectTo": [
+          "text.html.php"
+        ]
+      },
+      {
+        "scopeName": "php-comment-variable-syntax.injection",
+        "path": "./syntaxes/php-comment-variable-syntax.json",
+        "injectTo": [
+          "text.html.php"
+        ]
+>>>>>>> refs/remotes/origin/dev
       }
     ]
   },
