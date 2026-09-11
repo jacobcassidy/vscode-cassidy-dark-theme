@@ -14,6 +14,7 @@
     "color": "#292929",
     "theme": "dark"
   },
+  "type": "module",
   "repository": {
     "type": "git",
     "url": "https://github.com/jacobcassidy/vscode-cassidy-dark-theme"
@@ -52,73 +53,34 @@
   "contributes": {
     "themes": [
       {
-        "label": "Cassidy Dark",
+        "label": "Cassidy Dark Dev (Blank)",
+        "uiTheme": "vs-dark",
+        "path": "./themes/cassidy-dark-color-theme-blank.json"
+      },
+      {
+        "label": "Cassidy Dark Dev (Dev)",
+        "uiTheme": "vs-dark",
+        "path": "./themes/cassidy-dark-color-theme-blank.json"
+      },
+      {
+        "label": "Cassidy Dark Dev (Syntax-Only)",
+        "uiTheme": "vs-dark",
+        "path": "./themes/cassidy-dark-color-theme-syntax-only.json"
+      },
+      {
+        "label": "Cassidy Dark Dev (v1.1.2)",
+        "uiTheme": "vs-dark",
+        "path": "./themes/cassidy-dark-color-theme-v1.1.2.json"
+      },
+      {
+        "label": "Cassidy Dark Dev (Official v1.2.0)",
+        "uiTheme": "vs-dark",
+        "path": "./themes/cassidy-dark-color-theme-v1.2.0-official.json"
+      },
+      {
+        "label": "Cassidy Dark Dev",
         "uiTheme": "vs-dark",
         "path": "./themes/cassidy-dark-color-theme.json"
-<<<<<<< HEAD
-=======
-      },
-      {
-        "label": "Cassidy Dark (v1)",
-        "uiTheme": "vs-dark",
-        "path": "./themes/cassidy-dark-color-theme-v1.1.2.json"
-      },
-      {
-        "label": "Cassidy Dark (Syntax-Only)",
-        "uiTheme": "vs-dark",
-        "path": "./themes/cassidy-dark-color-theme-syntax-only.json"
-      },
-      {
-        "label": "Cassidy Dark (Blank)",
-        "uiTheme": "vs-dark",
-        "path": "./themes/cassidy-dark-color-theme-blank.json"
-      }
-    ],
-    "grammars": [
-      {
-        "scopeName": "missing-css-syntax.injection",
-        "path": "./syntaxes/missing-css-syntax-injection.json",
-        "injectTo": [
-          "source.css"
-        ]
-      },
-      {
-        "scopeName": "missing-scss-comparison-operators.injection",
-        "path": "./syntaxes/missing-scss-comparison-operators.json",
-        "injectTo": [
-          "source.css.scss"
-        ]
->>>>>>> refs/remotes/origin/dev
-      },
-      {
-        "label": "Cassidy Dark (v1)",
-        "uiTheme": "vs-dark",
-        "path": "./themes/cassidy-dark-color-theme-v1.1.2.json"
-      },
-      {
-<<<<<<< HEAD
-        "label": "Cassidy Dark (Syntax-Only)",
-        "uiTheme": "vs-dark",
-        "path": "./themes/cassidy-dark-color-theme-syntax-only.json"
-      },
-      {
-        "label": "Cassidy Dark (Blank)",
-        "uiTheme": "vs-dark",
-        "path": "./themes/cassidy-dark-color-theme-blank.json"
-=======
-        "scopeName": "php-class-typehint-syntax.injection",
-        "path": "./syntaxes/php-class-typehint-syntax.json",
-        "injectTo": [
-          "text.html.php"
-        ]
-      },
-      {
-        "scopeName": "php-comment-variable-syntax.injection",
-        "path": "./syntaxes/php-comment-variable-syntax.json",
-        "injectTo": [
-          "text.html.php"
-        ]
->>>>>>> refs/remotes/origin/dev
       }
     ]
   },
@@ -129,7 +91,8 @@
     "lint:docs:fix": "npx markdownlint-cli2 \"**/*.md\" --fix",
     "lint:scripts": "npx eslint",
     "lint:scripts:fix": "npx eslint --fix",
-    "publish:azure": "bash scripts/publish-azure.sh"
+    "publish:azure": "bash scripts/publish-azure.sh",
+    "sync:dev-pkg": "node scripts/sync-dev.js"
   },
   "__metadata": {
     "id": "e6e8b76c-3a7b-483e-a265-98594f79ba1c",
@@ -140,7 +103,6 @@
     "isPreReleaseVersion": false,
     "hasPreReleaseVersion": false,
     "installedTimestamp": 1710536963385,
-    "pinned": false,
-    "size": 11558066
+    "pinned": false
   }
 }
