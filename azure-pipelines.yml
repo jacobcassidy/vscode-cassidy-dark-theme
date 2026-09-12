@@ -9,17 +9,54 @@ steps:
 
   - script: |
       set -euo pipefail
+      if [[ "$BUILD_SOURCEBRANCH" != "refs/heads/main" ]]; then
+        echo "Publishing is only allowed from main."
+        exit 1
+      fi
+      if [[ -z "${GH_TOKEN:-}" || "$GH_TOKEN" == '$('* ]]; then
+        echo "Set the secret GH_TOKEN pipeline variable with repository Contents write access."
+        exit 1
+      fi
+      bash scripts/changelog-notes.sh > /dev/null
+      gh auth status
+      gh api repos/jacobcassidy/vscode-cassidy-dark-theme --silent
       npm install -g @vscode/vsce
-    displayName: 'Install vsce and dependencies'
-    workingDirectory: '$(Build.SourcesDirectory)'
+    displayName: "Check publishing configuration and install vsce"
+    workingDirectory: "$(Build.SourcesDirectory)"
+    env:
+      GH_TOKEN: $(GH_TOKEN)
+
+  - script: |
+      set -euo pipefail
+      version=$(node -p "require('./package.json').version")
+      vsix="$BUILD_ARTIFACTSTAGINGDIRECTORY/cassidy-dark-$version.vsix"
+      vsce package --out "$vsix"
+      echo "##vso[task.setvariable variable=ExtensionVsix]$vsix"
+    displayName: "Package extension"
+    workingDirectory: "$(Build.SourcesDirectory)"
+
+  - task: PublishPipelineArtifact@1
+    displayName: "Save VSIX for release recovery"
+    inputs:
+      targetPath: "$(ExtensionVsix)"
+      artifact: extension-vsix
 
   - task: AzureCLI@3
-    displayName: 'Publish extension using managed identity'
+    displayName: "Publish extension using managed identity"
     inputs:
-      azureSubscription: 'vscode_publishing_connection'
+      azureSubscription: "vscode_publishing_connection"
       scriptType: bash
       scriptLocation: inlineScript
-      workingDirectory: '$(Build.SourcesDirectory)'
+      workingDirectory: "$(Build.SourcesDirectory)"
       inlineScript: |
         set -euo pipefail
-        vsce publish --azure-credential
+        vsce publish --azure-credential --packagePath "$EXTENSION_VSIX"
+    env:
+      EXTENSION_VSIX: $(ExtensionVsix)
+
+  - script: bash scripts/create-github-release.sh "$EXTENSION_VSIX"
+    displayName: "Create GitHub release and attach VSIX"
+    workingDirectory: "$(Build.SourcesDirectory)"
+    env:
+      GH_TOKEN: $(GH_TOKEN)
+      EXTENSION_VSIX: $(ExtensionVsix)
