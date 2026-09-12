@@ -4,6 +4,9 @@
   "type": "dark",
   "author": "Jacob Cassidy",
   "colors": {},
+  "notes": {
+    "usage": "Only syntax here, no workbench styles."
+  },
   "semanticHighlighting": true,
   "semanticTokenColors": {
     "builtinConstant": {
@@ -147,7 +150,9 @@
     {
       "name": "GRAY WHITE-LIGHT (OKLCH 90%)",
       "scope": [],
-      "settings": { "foreground": "#dedede" }
+      "settings": {
+        "foreground": "#dedede"
+      }
     },
     {
       "name": "GRAY WHITE-LIGHT-LIGHT (OKLCH 86%)",
@@ -155,7 +160,9 @@
         //*** SHELL ***
         "meta.scope"
       ],
-      "settings": { "foreground": "#d1d1d1" }
+      "settings": {
+        "foreground": "#d1d1d1"
+      }
     },
     {
       "name": "GRAY LIGHT (OKLCH 82%)",
@@ -173,7 +180,9 @@
     },
     {
       "name": "GRAY LIGHT-MEDIUM (OKLCH 74%)",
-      "scope": ["comment variable"],
+      "scope": [
+        "comment variable"
+      ],
       "settings": {
         "foreground": "#ababab"
       }
@@ -257,12 +266,16 @@
     {
       "name": "GRAY DARK-FADE (OKLCH 42%)",
       "scope": [],
-      "settings": { "foreground": "#4d4d4d" }
+      "settings": {
+        "foreground": "#4d4d4d"
+      }
     },
     {
       "name": "GRAY FADE (OKLCH 34%)",
       "scope": [],
-      "settings": { "foreground": "#525252" }
+      "settings": {
+        "foreground": "#525252"
+      }
     },
 
     //--------------------------------------------------------------------------
@@ -536,7 +549,9 @@
     //--------------------------------------------------------------------------
     {
       "name": "PURPLE FADE",
-      "scope": ["string.regexp punctuation"],
+      "scope": [
+        "string.regexp punctuation"
+      ],
       "settings": {
         "foreground": "#cab5d4"
       }
@@ -688,35 +703,45 @@
     //--------------------------------------------------------------------------
     {
       "name": "[DOCKERFILE] - GRAY WHITE",
-      "scope": ["source.dockerfile string"],
+      "scope": [
+        "source.dockerfile string"
+      ],
       "settings": {
         "foreground": "#f8f8f8"
       }
     },
     {
       "name": "[DOCKERFILE] - CYAN BASE",
-      "scope": ["source.dockerfile keyword.other.special-method"],
+      "scope": [
+        "source.dockerfile keyword.other.special-method"
+      ],
       "settings": {
         "foreground": "#89dfdf"
       }
     },
     {
       "name": "[DOCKERFILE] - GREEN BASE",
-      "scope": ["source.dockerfile entity.name"],
+      "scope": [
+        "source.dockerfile entity.name"
+      ],
       "settings": {
         "foreground": "#a2cd8b"
       }
     },
     {
       "name": "[DOCKERFILE] - ORANGE BASE",
-      "scope": ["source.dockerfile constant.other.option"],
+      "scope": [
+        "source.dockerfile constant.other.option"
+      ],
       "settings": {
         "foreground": "#eeae7b"
       }
     },
     {
       "name": "[DOCKERFILE] - RED BASE",
-      "scope": ["punctuation.separator.statement.and.shell.dockerfile"],
+      "scope": [
+        "punctuation.separator.statement.and.shell.dockerfile"
+      ],
       "settings": {
         "foreground": "#ef9182"
       }
@@ -728,14 +753,18 @@
     //--------------------------------------------------------------------------
     {
       "name": "[NGINX] - GRAY LIGHT (OKLCH 82%)",
-      "scope": ["source.nginx"],
+      "scope": [
+        "source.nginx"
+      ],
       "settings": {
         "foreground": "#c4c4c4"
       }
     },
     {
       "name": "GRAY MEDIUM (OKLCH 66%) [PUNCTUATION]",
-      "scope": ["source.nginx constant.character"],
+      "scope": [
+        "source.nginx constant.character"
+      ],
       "settings": {
         "foreground": "#929292"
       }
@@ -743,21 +772,27 @@
 
     {
       "name": "[NGINX] - BLUE BASE",
-      "scope": ["source.nginx constant.language.module"],
+      "scope": [
+        "source.nginx constant.language.module"
+      ],
       "settings": {
         "foreground": "#92c1fd"
       }
     },
     {
       "name": "[NGINX] - CYAN BASE",
-      "scope": ["source.nginx constant.language"],
+      "scope": [
+        "source.nginx constant.language"
+      ],
       "settings": {
         "foreground": "#89dfdf"
       }
     },
     {
       "name": "[NGINX] - RED BASE",
-      "scope": ["source.nginx constant.language.directive.module.main"],
+      "scope": [
+        "source.nginx constant.language.directive.module.main"
+      ],
       "settings": {
         "foreground": "#ef9182"
       }
@@ -772,13 +807,19 @@
       "scope": [
         "code.log support" // For "Output Colorizer" extension
       ],
-      "settings": { "foreground": "#f8f8f8" }
+      "settings": {
+        "foreground": "#f8f8f8"
+      }
     },
 
     {
       "name": "RED BASE",
-      "scope": ["code.log invalid"],
-      "settings": { "foreground": "#ef9182" }
+      "scope": [
+        "code.log invalid"
+      ],
+      "settings": {
+        "foreground": "#ef9182"
+      }
     },
 
     //--------------------------------------------------------------------------
@@ -787,21 +828,28 @@
     //--------------------------------------------------------------------------
     {
       "name": "NORMAL",
-      "scope": ["comment.rainbow4", "invalid.rainbow10"],
+      "scope": [
+        "comment.rainbow4",
+        "invalid.rainbow10"
+      ],
       "settings": {
         "fontStyle": ""
       }
     },
     {
       "name": "GRAY WHITE (OKLCH 98%)",
-      "scope": ["markup.bold.rainbow9"],
+      "scope": [
+        "markup.bold.rainbow9"
+      ],
       "settings": {
         "foreground": "#f8f8f8"
       }
     },
     {
       "name": "GRAY LIGHT (OKLCH 82%)",
-      "scope": ["comment.rainbow4"],
+      "scope": [
+        "comment.rainbow4"
+      ],
       "settings": {
         "foreground": "#c4c4c4"
       }
@@ -809,56 +857,72 @@
 
     {
       "name": "BLUE BASE",
-      "scope": ["constant.numeric.rainbow7"],
+      "scope": [
+        "constant.numeric.rainbow7"
+      ],
       "settings": {
         "foreground": "#92c1fd"
       }
     },
     {
       "name": "CYAN BASE",
-      "scope": ["rainbow1"],
+      "scope": [
+        "rainbow1"
+      ],
       "settings": {
         "foreground": "#89dfdf"
       }
     },
     {
       "name": "GREEN BASE",
-      "scope": ["string.rainbow5"],
+      "scope": [
+        "string.rainbow5"
+      ],
       "settings": {
         "foreground": "#a2cd8b"
       }
     },
     {
       "name": "ORANGE BASE",
-      "scope": ["variable.parameter.rainbow6"],
+      "scope": [
+        "variable.parameter.rainbow6"
+      ],
       "settings": {
         "foreground": "#eeae7b"
       }
     },
     {
       "name": "PINK BASE",
-      "scope": ["entity.name.type.rainbow8"],
+      "scope": [
+        "entity.name.type.rainbow8"
+      ],
       "settings": {
         "foreground": "#fcb7cb"
       }
     },
     {
       "name": "PURPLE BASE",
-      "scope": ["entity.name.function.rainbow3"],
+      "scope": [
+        "entity.name.function.rainbow3"
+      ],
       "settings": {
         "foreground": "#d6aaea"
       }
     },
     {
       "name": "RED BASE",
-      "scope": ["invalid.rainbow10"],
+      "scope": [
+        "invalid.rainbow10"
+      ],
       "settings": {
         "foreground": "#ef9182"
       }
     },
     {
       "name": "YELLOW BASE",
-      "scope": ["keyword.rainbow2"],
+      "scope": [
+        "keyword.rainbow2"
+      ],
       "settings": {
         "foreground": "#efddac"
       }
