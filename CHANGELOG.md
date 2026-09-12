@@ -31,11 +31,11 @@ All notable changes to this project are documented in this file.
   - `create-github-release.sh`
 - Added local dev workflow with `scripts/sync-dev.js`.
 
-## Changed
+### Changed
 
 - Moved `TODO.md` from `/docs` to `/dev`.
 
-## Removed
+### Removed
 
 - Removed `/docs` directory in favor of the `/dev` directory.
 
