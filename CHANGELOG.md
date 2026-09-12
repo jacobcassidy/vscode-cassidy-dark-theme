@@ -10,6 +10,35 @@ All notable changes to this project are documented in this file.
 - Updated `terminal.ansiBrightBlack` to #929292 from #636363.
 - Updated semanticTokenColors namespace from purple-deep to purple-base color.
 
+## [1.2.1] - 2026-09-12
+
+### Added
+
+- Added development reference files in `/dev/references`:
+  - `all-sematic-token-colors.json`
+  - `all-workbench-settings.json`
+  - `opacity.md`
+  - `palette-dev.md`
+  - `palette-oklch-colors.md`
+  - `palette-oklch-grays.md`
+  - `palette-other-themes.md`
+  - `palette-theme-versions.md`
+- Added development theme files in `/dev/themes`:
+  - `cassidy-dark-color-theme-test.json`
+  - `cassidy-dark-color-theme-v1.2.0-official.json`
+- Added additional Azure pipeline publishing scripts to auto-generate GitHub package releases with Changelog notes in `/scripts`:
+  - `changelog-notes.sh`
+  - `create-github-release.sh`
+- Added local dev workflow with `scripts/sync-dev.js`.
+
+## Changed
+
+- Moved `TODO.md` from `/docs` to `/dev`.
+
+## Removed
+
+- Removed `/docs` directory in favor of the `/dev` directory.
+
 ## [1.2.0] - 2026-09-12
 
 ### Added

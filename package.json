@@ -1,7 +1,7 @@
 {
   "name": "cassidy-dark",
   "displayName": "Cassidy Dark Theme",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "A clean, modern, dark theme originally inspired by Monokai",
   "publisher": "jacobcassidy",
   "author": {
@@ -14,6 +14,7 @@
     "color": "#292929",
     "theme": "dark"
   },
+  "type": "module",
   "repository": {
     "type": "git",
     "url": "https://github.com/jacobcassidy/vscode-cassidy-dark-theme"
@@ -65,7 +66,8 @@
     "lint:docs:fix": "npx markdownlint-cli2 \"**/*.md\" --fix",
     "lint:scripts": "npx eslint",
     "lint:scripts:fix": "npx eslint --fix",
-    "publish:azure": "bash scripts/publish-azure.sh"
+    "publish:azure": "bash scripts/publish-azure.sh",
+    "sync:dev-pkgJSON": "node scripts/sync-dev.js"
   },
   "__metadata": {
     "id": "e6e8b76c-3a7b-483e-a265-98594f79ba1c",

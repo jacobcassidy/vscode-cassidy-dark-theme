@@ -1,5 +1,7 @@
 # Cassidy Dark Theme
 
+[![Star on GitHub](https://img.shields.io/badge/GitHub-Star-blue?logo=github&logoColor=white)](https://github.com/jacobcassidy/vscode-cassidy-dark-theme) [![Install from VS Code Marketplace](https://img.shields.io/badge/VS_Code_Marketplace-Install-007ACC)](https://marketplace.visualstudio.com/items?itemName=jacobcassidy.cassidy-dark)
+
 Cassidy Dark is a clean, modern Visual Studio Code theme initially inspired by the Monokai color palette.
 
 The theme was designed with pure shades of gray for the workbench, so the syntax color highlighting pops with no bias towards any single color.
