@@ -67,6 +67,7 @@
     "lint:scripts": "npx eslint",
     "lint:scripts:fix": "npx eslint --fix",
     "publish:azure": "bash scripts/publish-azure.sh",
+    "setup:dev": "node scripts/setup-dev.js",
     "sync:dev-pkgJSON": "node scripts/sync-dev.js"
   },
   "__metadata": {
