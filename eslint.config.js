@@ -9,16 +9,15 @@
 
 import globals from "globals";
 import js from "@eslint/js";
-import { defineConfig, globalIgnores } from "eslint/config";
+import { defineConfig, globalIgnores, includeIgnoreFile } from "eslint/config";
 import { fileURLToPath } from "node:url";
 import { importX } from "eslint-plugin-import-x";
-import { includeIgnoreFile } from "@eslint/compat";
 
 const gitignorePath = fileURLToPath(new URL(".gitignore", import.meta.url));
 
 export default defineConfig([
-  globalIgnores(["**/*.min.js", "docs"]),
   includeIgnoreFile(gitignorePath, "Imported .gitignore patterns"),
+  globalIgnores(["**/*.min.js", "docs"]),
   {
     plugins: {
       "import-x": importX,
