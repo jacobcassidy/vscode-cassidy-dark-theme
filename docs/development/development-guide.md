@@ -13,7 +13,7 @@ Run the commands in this guide from the repository root unless stated otherwise.
 | [`themes/cassidy-dark-color-theme.json`](../../themes/cassidy-dark-color-theme.json)  | The theme shipped to users.                                                                                       |
 | [`dev/themes/`](../../dev/themes/)                                                    | Experimental and historical themes available through the local development extension.                             |
 | [`docs/references/`](../references/)                                                  | Palette, opacity, semantic token, and workbench color references. These are reference material, not build inputs. |
-| [`dev/previews/`](../../dev/previews/)                                                | Example source files for inspecting syntax highlighting, currently including PHP.                                 |
+| [`dev/samples/`](../../dev/samples/)                                                  | Example source files for inspecting syntax highlighting, currently including PHP.                                 |
 | [`images/`](../../images/)                                                            | Extension icons and the README screenshot.                                                                        |
 | [`scripts/dev/`](../../scripts/dev/) and [`scripts/release/`](../../scripts/release/) | Local development setup, pipeline submission, changelog extraction, and GitHub release creation.                  |
 | [`azure-pipelines.yml`](../../azure-pipelines.yml)                                    | Manual packaging and publication pipeline.                                                                        |
@@ -63,7 +63,7 @@ The development manifest registers:
 
 Run **Developer: Reload Window** in VS Code, then open **Preferences: Color Theme** and select a Cassidy Dark Dev theme. The development identity allows it to coexist with the Marketplace extension.
 
-Edits to linked theme files reach the development extension directly. Theme entries include `_watch: true`; reload the VS Code window if an edit is not reflected. Open the files in `dev/previews/` and representative files from other languages to inspect highlighting. **Developer: Inspect Editor Tokens and Scopes** helps identify which TextMate or semantic token rules apply.
+Edits to linked theme files reach the development extension directly. Theme entries include `_watch: true`; reload the VS Code window if an edit is not reflected. Open the files in `dev/samples/` and representative files from other languages to inspect highlighting. **Developer: Inspect Editor Tokens and Scopes** helps identify which TextMate or semantic token rules apply.
 
 After changing manifest metadata or adding or removing development theme files, regenerate the development manifest and reload VS Code:
 
@@ -122,7 +122,7 @@ npm run package -- /absolute/path/to/cassidy-dark-VERSION.vsix
 
 Relative output paths resolve from the repository root. Packaging does not publish or automatically run checks; the commands above and the pipeline run checks explicitly. In VS Code, use **Extensions: Install from VSIX...** to install the archive and inspect the packaged theme.
 
-The manifest selects `themes/cassidy-dark-color-theme.json` as the only published theme. `.vscodeignore` excludes development themes and previews, documentation, scripts, tests, editor settings, agent instructions, the Node.js version file, generated output, and the listed tooling configuration files. The package carries the production theme, manifest, and distributable assets such as the README, changelog, license, and images. `dist/` and generated `*.vsix` archives are ignored by Git.
+The manifest selects `themes/cassidy-dark-color-theme.json` as the only published theme. `.vscodeignore` excludes development themes and samples, documentation, scripts, tests, editor settings, agent instructions, the Node.js version file, generated output, and the listed tooling configuration files. The package carries the production theme, manifest, and distributable assets such as the README, changelog, license, and images. `dist/` and generated `*.vsix` archives are ignored by Git.
 
 The pipeline uses the same `npm run package` entry point with its artifact staging destination. Local development and the pipeline both use `npm ci` and the CLI resolved in `package-lock.json`; neither requires a global `vsce` installation. The manifest's `allowScripts` entries permit the declared Lefthook, resolver, and VSIX signing helper installation scripts when using npm versions that enforce that setting.
 

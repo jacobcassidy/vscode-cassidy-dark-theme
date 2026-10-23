@@ -11,7 +11,7 @@ All notable changes to this project are documented in this file.
 
 ### Changed
 
-- Grouped development and release scripts by purpose, moved preview samples into `dev/previews`, and retained existing npm command aliases.
+- Grouped development and release scripts by purpose, moved highlighting samples into `dev/samples` and renamed the PHP fixture to `php-grammar-sample.php`, and retained existing npm command aliases.
 - Made `npm run check` run formatting, Markdown linting, JavaScript linting, theme validation, and tests before pipeline packaging.
 - Curated the palette development reference and updated the development guide.
 - Removed installation metadata from the extension manifest and aligned the lockfile version.
