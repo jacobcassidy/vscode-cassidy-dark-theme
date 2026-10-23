@@ -94,8 +94,6 @@
     "chat.findMatchBackground": "#f00c",
     "chat.findMatchHighlightBackground": "#f00c",
     "chat.inputWorkingBorderColor1": "#f00c",
-    "chat.inputWorkingBorderColor2": "#f00c",
-    "chat.inputWorkingBorderColor3": "#f00c",
     "chat.linesAddedForeground": "#f00c",
     "chat.linesRemovedForeground": "#f00c",
     "chat.requestBackground": "#f00",
@@ -973,6 +971,23 @@
     "window.activeBorder": "#00f", // unneeded [base]
     "window.inactiveBorder": "#00f", // unneeded [base]
 
+    // NEW
+    "agentsDetail.background": "#f00",
+    "chat.mcpCompatibilityWarningForeground": "#f00",
+    "chat.sessionStateIndicator.inProgressBorder": "#f00",
+    "chat.sessionStateIndicator.needsInputBorder": "#f00",
+    "chat.sessionStateIndicator.unvisitedBorder": "#f00",
+    "chat.workingProgressInsidersIconForeground": "#f00",
+    "chat.workingProgressStableIconForeground": "#f00",
+    "editorGroupHeader.connectedTabsBackground": "#f00",
+    "editorWordWrapIndicator.foreground": "#f00",
+    "modernPanel.border": "#f00",
+    "modernSash.gripForeground": "#f00",
+    "modernUI.inactiveShellBackground": "#f00",
+    "modernUI.shellBackground": "#f00",
+    "statusBar.inactiveBackground": "#f00",
+    "tab.divider": "#f00",
+
     //** NOT ALLOWED **//
     "editorWatermark.foreground": "#00f", // [inherits `editor.foreground`] | example: text on empty vscode window
     "gitblame.inlineMessage": "#f00",
@@ -1005,6 +1020,8 @@
     "testing.message.error.decorationForeground": "#f00",
 
     //** DEPRECATED **//
+    "chat.inputWorkingBorderColor2": "#f00c",
+    "chat.inputWorkingBorderColor3": "#f00c",
     "editorActiveLineNumber.foreground": "#f00",
     "editorIndentGuide.activeBackground": "#f00",
     "editorIndentGuide.background": "#f00",

@@ -18,6 +18,7 @@
     "*.escapeCharacter": "#f0f",
     "*.invalid": "#f0f",
     "*.keywordArgument": "#f0f",
+    "*.library": "#f0f",
     "*.modification": "#f0f",
     "*.overridden": "#f0f",
     "*.readonly": "#f0f",
