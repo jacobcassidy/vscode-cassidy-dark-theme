@@ -77,7 +77,6 @@
     "release:queue": "bash scripts/release/publish-azure.sh",
     "release:github": "bash scripts/release/create-github-release.sh",
     "publish:azure": "npm run release:queue",
-    "setup:dev": "npm run dev:sync",
     "sync:dev-pkgJSON": "npm run dev:sync"
   }
 }
