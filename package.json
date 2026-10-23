@@ -75,8 +75,6 @@
     "check": "npm run format:check && npm run lint:docs && npm run lint:scripts && npm run check:theme && npm test",
     "package": "bash scripts/release/package.sh",
     "release:queue": "bash scripts/release/publish-azure.sh",
-    "release:github": "bash scripts/release/create-github-release.sh",
-    "publish:azure": "npm run release:queue",
-    "sync:dev-pkgJSON": "npm run dev:sync"
+    "release:github": "bash scripts/release/create-github-release.sh"
   }
 }

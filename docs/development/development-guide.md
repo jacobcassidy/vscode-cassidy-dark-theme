@@ -106,8 +106,6 @@ The editor settings in `.vscode/` recommend Prettier, ESLint, Markdown linting, 
 | `npm run check:theme`      | Parse production and development theme JSONC, check basic structure, and verify manifest theme and icon files.   |
 | `npm test`                 | Run the Node.js tests for validation failures and development extension protections using temporary directories. |
 
-The legacy `sync:dev-pkgJSON` command also runs `dev:sync`. `publish:azure` remains an alias for `release:queue`.
-
 [`lefthook.yml`](../../lefthook.yml) defines a pre-commit hook that runs ESLint, Markdown linting, and Prettier in that order against matching staged files. Each command can fix files and stage the fixes. To explicitly install the configured hooks locally, run:
 
 ```bash
