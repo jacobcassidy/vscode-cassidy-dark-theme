@@ -63,19 +63,19 @@
     ]
   },
   "scripts": {
-    "dev:sync": "node scripts/dev/sync.js",
+    "check": "npm run check:prettier && npm run lint && npm run check:theme && npm test",
     "check:prettier": "prettier . --check",
+    "check:theme": "node scripts/check-theme.js",
+    "dev:sync": "node scripts/dev/sync.js",
     "format": "prettier . --write",
     "lint": "npm run lint:md && npm run lint:es",
-    "lint:md": "markdownlint-cli2 \"**/*.md\"",
-    "lint:md:fix": "markdownlint-cli2 \"**/*.md\" --fix",
     "lint:es": "eslint",
     "lint:es:fix": "eslint --fix",
-    "check:theme": "node scripts/check-theme.js",
-    "test": "node --test",
-    "check": "npm run check:prettier && npm run lint && npm run check:theme && npm test",
+    "lint:md": "markdownlint-cli2 \"**/*.md\"",
+    "lint:md:fix": "markdownlint-cli2 \"**/*.md\" --fix",
     "package": "bash scripts/release/package.sh",
+    "release:github": "bash scripts/release/create-github-release.sh",
     "release:queue": "bash scripts/release/publish-azure.sh",
-    "release:github": "bash scripts/release/create-github-release.sh"
+    "test": "node --test"
   }
 }
