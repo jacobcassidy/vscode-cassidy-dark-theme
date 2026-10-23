@@ -13,7 +13,7 @@ Run the commands in this guide from the repository root unless stated otherwise.
 | [`themes/cassidy-dark-color-theme.json`](../../themes/cassidy-dark-color-theme.json)  | The theme shipped to users.                                                                                       |
 | [`dev/themes/`](../../dev/themes/)                                                    | Experimental and historical themes available through the local development extension.                             |
 | [`docs/references/`](../references/)                                                  | Palette, opacity, semantic token, and workbench color references. These are reference material, not build inputs. |
-| [`dev/samples/`](../../dev/samples/)                                                  | Example source files for inspecting syntax highlighting, currently including PHP.                                 |
+| [`dev/samples/`](../../dev/samples/)                                                  | Example source files for inspecting syntax highlighting, including JavaScript, Python, and PHP.                   |
 | [`images/`](../../images/)                                                            | Extension icons and the README screenshot.                                                                        |
 | [`scripts/dev/`](../../scripts/dev/) and [`scripts/release/`](../../scripts/release/) | Local development setup, pipeline submission, changelog extraction, and GitHub release creation.                  |
 | [`azure-pipelines.yml`](../../azure-pipelines.yml)                                    | Manual packaging and publication pipeline.                                                                        |
@@ -74,6 +74,18 @@ npm run dev:sync
 Both development commands run the same sync logic; `dev:setup` additionally prints the reload reminder. Importing the sync module does not install or change an extension. The function accepts an alternate repository root and extension directory for isolated testing. There is no file-watching process that continually regenerates the manifest. The CLI defaults to the standard `~/.vscode/extensions` location; it does not discover custom extension directories or alternate VS Code editions.
 
 For safety, the sync script refuses to use a symlink for the development extension directory or its generated manifest. Existing asset links must point to this checkout. If the checkout moves, inspect and repair those development links before running setup again.
+
+### Syntax samples
+
+The files in `dev/samples/` are source examples for visual inspection; no execution is required.
+
+| Sample                                                       | Coverage                                                                                                                                                                                                                                                                  |
+| ------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [JavaScript](../../dev/samples/javascript-grammar-sample.js) | ES modules, JSDoc types and tags, literals and escapes, regex groups and assertions, Unicode regex sets, templates, destructuring, private and static class members, operators, control flow, generators, and async code. Uses modern JavaScript supported by Node.js 24. |
+| [Python](../../dev/samples/python-grammar-sample.py)         | Python 3.12+ literals and string prefixes, f-strings, regexes, annotations and generic type parameters, decorators, protocols and data classes, comprehensions, pattern matching, exception groups, generators, context managers, and async code.                         |
+| [PHP](../../dev/samples/php-grammar-sample.php)              | Property types, visibility, nullable and qualified names, unions, intersections, constructor promotion, and grammar regression probes.                                                                                                                                    |
+
+Use the matching VS Code language mode. Inspect both a declaration and its references with **Developer: Inspect Editor Tokens and Scopes**. Compare the same text with semantic highlighting enabled and disabled in workspace settings; language tooling can refine the colors beyond the TextMate grammar. Python semantic highlighting depends on the installed Python language tooling. The JavaScript file uses the JavaScript grammar; JSX and TypeScript require their respective language modes and syntax.
 
 ### Editing and checks
 
