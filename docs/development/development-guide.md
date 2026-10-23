@@ -42,13 +42,13 @@ npm ci
 
 The repository uses ES modules (`"type": "module"`). Its npm dependencies support development tooling; the theme has no production npm dependencies.
 
-### Create the local development extension
+### Create and refresh the local development extension
 
 ```bash
-npm run dev:setup
+npm run dev:sync
 ```
 
-[`scripts/dev/setup.js`](../../scripts/dev/setup.js) explicitly calls the `syncDev` function exported by [`scripts/dev/sync.js`](../../scripts/dev/sync.js), which creates a separate extension directory at:
+[`scripts/dev/sync.js`](../../scripts/dev/sync.js) creates or refreshes a separate extension directory at:
 
 ```text
 ~/.vscode/extensions/jacobcassidy.cassidy-dark-dev/
@@ -65,13 +65,9 @@ Run **Developer: Reload Window** in VS Code, then open **Preferences: Color Them
 
 Edits to linked theme files reach the development extension directly. Theme entries include `_watch: true`; reload the VS Code window if an edit is not reflected. Open the files in `dev/samples/` and representative files from other languages to inspect highlighting. **Developer: Inspect Editor Tokens and Scopes** helps identify which TextMate or semantic token rules apply.
 
-After changing manifest metadata or adding or removing development theme files, regenerate the development manifest and reload VS Code:
+After changing manifest metadata or adding or removing development theme files, run `npm run dev:sync` again to refresh the development manifest and reload VS Code.
 
-```bash
-npm run dev:sync
-```
-
-Both development commands run the same sync logic; `dev:setup` additionally prints the reload reminder. Importing the sync module does not install or change an extension. The function accepts an alternate repository root and extension directory for isolated testing. There is no file-watching process that continually regenerates the manifest. The CLI defaults to the standard `~/.vscode/extensions` location; it does not discover custom extension directories or alternate VS Code editions.
+The command prints a reload reminder after synchronization. Importing the sync module does not install or change an extension. The function accepts an alternate repository root and extension directory for isolated testing. There is no file-watching process that continually regenerates the manifest. The CLI defaults to the standard `~/.vscode/extensions` location; it does not discover custom extension directories or alternate VS Code editions.
 
 For safety, the sync script refuses to use a symlink for the development extension directory or its generated manifest. Existing asset links must point to this checkout. If the checkout moves, inspect and repair those development links before running setup again.
 
@@ -110,7 +106,7 @@ The editor settings in `.vscode/` recommend Prettier, ESLint, Markdown linting, 
 | `npm run check:theme`      | Parse production and development theme JSONC, check basic structure, and verify manifest theme and icon files.   |
 | `npm test`                 | Run the Node.js tests for validation failures and development extension protections using temporary directories. |
 
-The existing `setup:dev`, `sync:dev-pkgJSON`, and `publish:azure` commands remain aliases for `dev:setup`, `dev:sync`, and `release:queue`, respectively.
+The legacy `setup:dev` and `sync:dev-pkgJSON` commands both run `dev:sync`. `publish:azure` remains an alias for `release:queue`.
 
 [`lefthook.yml`](../../lefthook.yml) defines a pre-commit hook that runs ESLint, Markdown linting, and Prettier in that order against matching staged files. Each command can fix files and stage the fixes. To explicitly install the configured hooks locally, run:
 
