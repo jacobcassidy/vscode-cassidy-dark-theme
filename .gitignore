@@ -1,6 +1,8 @@
+# IGNORE OS FILES
 .DS_Store
+
+# IGNORE DEVELOPMENT FILES
+docs/development/TODO.md
 node_modules
 .vsixmanifest
 *.vsix
---dev-assets
-.dev-assets
