@@ -32,9 +32,11 @@
   "devDependencies": {
     "@eslint/compat": "^2.1.1",
     "@eslint/js": "^10.0.1",
+    "@vscode/vsce": "^4.0.0",
     "eslint": "^10.10.0",
     "eslint-plugin-import-x": "^4.17.1",
     "globals": "^17.12.0",
+    "jsonc-parser": "^3.3.1",
     "lefthook": "^2.1.12",
     "markdownlint-cli2": "^0.23.2",
     "prettier": "^3.9.6",
@@ -42,7 +44,8 @@
   },
   "allowScripts": {
     "lefthook@2.1.12": true,
-    "unrs-resolver@1.12.2": true
+    "unrs-resolver@1.12.2": true,
+    "@vscode/vsce-sign@2.1.0": true
   },
   "engines": {
     "vscode": "^1.64.2"
@@ -60,25 +63,22 @@
     ]
   },
   "scripts": {
-    "check": "npx prettier . --check",
-    "format": "npx prettier . --write",
-    "lint:docs": "npx markdownlint-cli2 \"**/*.md\"",
-    "lint:docs:fix": "npx markdownlint-cli2 \"**/*.md\" --fix",
-    "lint:scripts": "npx eslint",
-    "lint:scripts:fix": "npx eslint --fix",
-    "publish:azure": "bash scripts/publish-azure.sh",
-    "setup:dev": "node scripts/setup-dev.js",
-    "sync:dev-pkgJSON": "node scripts/sync-dev.js"
-  },
-  "__metadata": {
-    "id": "e6e8b76c-3a7b-483e-a265-98594f79ba1c",
-    "publisherId": "aee9e75c-ea26-4af1-b5e6-815e33288c4b",
-    "publisherDisplayName": "Jacob Cassidy",
-    "targetPlatform": "undefined",
-    "updated": false,
-    "isPreReleaseVersion": false,
-    "hasPreReleaseVersion": false,
-    "installedTimestamp": 1710536963385,
-    "pinned": false
+    "dev:setup": "node scripts/dev/setup.js",
+    "dev:sync": "node scripts/dev/sync.js",
+    "format:check": "prettier . --check",
+    "format": "prettier . --write",
+    "lint:docs": "markdownlint-cli2 \"**/*.md\"",
+    "lint:docs:fix": "markdownlint-cli2 \"**/*.md\" --fix",
+    "lint:scripts": "eslint",
+    "lint:scripts:fix": "eslint --fix",
+    "check:theme": "node scripts/check-theme.js",
+    "test": "node --test",
+    "check": "npm run format:check && npm run lint:docs && npm run lint:scripts && npm run check:theme && npm test",
+    "package": "bash scripts/release/package.sh",
+    "release:queue": "bash scripts/release/publish-azure.sh",
+    "release:github": "bash scripts/release/create-github-release.sh",
+    "publish:azure": "npm run release:queue",
+    "setup:dev": "npm run dev:setup",
+    "sync:dev-pkgJSON": "npm run dev:sync"
   }
 }

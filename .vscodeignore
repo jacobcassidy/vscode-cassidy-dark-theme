@@ -3,10 +3,13 @@
 .vscode
 dev
 docs
-previews
+dist
+tests
 scripts
 
 # Files to ignore
+AGENTS.md
+.nvmrc
 .editorconfig
 .gitignore
 .markdownlint-cli2.jsonc

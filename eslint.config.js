@@ -30,7 +30,7 @@ export default defineConfig([
     files: ["**/*.js"],
     languageOptions: {
       globals: {
-        ...globals.browser,
+        ...globals.node,
       },
     },
     linterOptions: {

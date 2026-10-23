@@ -7,5 +7,5 @@
   "editor.formatOnSave": true,
   "editor.insertSpaces": true,
   "editor.tabSize": 2,
-  "prettier.configPath": "prettier.config.js",
+  "prettier.configPath": "prettier.config.js"
 }

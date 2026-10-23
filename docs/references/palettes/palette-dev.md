@@ -1,4 +1,14 @@
-# COLORS
+# Palette development reference
+
+This reference preserves palette experiments, historical color values, and terminal comparisons. Experimental and historical values are reference material; the shipped theme remains the source of truth for current colors.
+
+- [Current palette experiments](#current-palette-experiments)
+- [Historical palettes](#historical-palettes)
+- [Lightness and chroma experiments](#lightness-and-chroma-experiments)
+- [Terminal palette](#terminal-palette)
+- [Further palette experiments](#further-palette-experiments)
+
+## Current palette experiments
 
 | OKLCH                  | LEVEL      | HEX     |
 | ---------------------- | ---------- | ------- |
@@ -130,6 +140,7 @@ property name green
 
 ---
 
+```text
 oklch(0.95 0.025 0) #fee8ee
 oklch(0.9 0.05 0) #fcd1dc
 oklch(0.85 0.075 0) Light #f8bacc
@@ -139,7 +150,9 @@ oklch(0.7 0.15 0)
 oklch(0.65 0.175 0) Deep
 oklch(0.6 0.2 0)
 oklch(0.55 0.225 0) Bg (P3) #ce006c
+```
 
+```text
 oklch(0.9 0.05 30) #fed2cb
 oklch(0.85 0.075 30) Light
 oklch(0.8 0.1 30)
@@ -148,7 +161,9 @@ oklch(0.7 0.15 30)
 oklch(0.65 0.175 30) Deep
 oklch(0.6 0.2 30)
 oklch(0.55 0.225 30) Bg (P3) #d60400
+```
 
+```text
 oklch(0.9 0.05 60) #f8d7be
 oklch(0.85 0.075 60) Light
 oklch(0.8 0.1 60)
@@ -157,7 +172,9 @@ oklch(0.7 0.15 60) #e18528
 oklch(0.65 0.175 60) Deep (Rec2020) #d96f00
 oklch(0.6 0.2 60) none
 oklch(0.55 0.225 60) Bg none
+```
 
+```text
 oklch(0.9 0.05 90) #ebddb9
 oklch(0.85 0.075 90) Light
 oklch(0.8 0.1 90)
@@ -166,7 +183,9 @@ oklch(0.7 0.15 90) (P3) #c39900
 oklch(0.65 0.175 90) Deep none
 oklch(0.6 0.2 90) none
 oklch(0.55 0.225 90) Bg none
+```
 
+```text
 oklch(0.9 0.05 135) #d0e6c5
 oklch(0.85 0.075 135) Light
 oklch(0.8 0.1 135)
@@ -175,7 +194,9 @@ oklch(0.7 0.15 135)
 oklch(0.65 0.175 135) Deep
 oklch(0.6 0.2 135) (P3) #439800
 oklch(0.55 0.225 135) Bg none
+```
 
+```text
 oklch(0.9 0.05 195) #b8e9e8
 oklch(0.85 0.075 195) Light
 oklch(0.8 0.1 195)
@@ -184,7 +205,9 @@ oklch(0.7 0.15 195) (P3) #00b8b9
 oklch(0.65 0.175 195) Deep (Rec2020)
 oklch(0.6 0.2 195) (Rec2020)
 oklch(0.55 0.225 195) Bg
+```
 
+```text
 oklch(0.9 0.05 255) (P3)
 oklch(0.85 0.075 255) Light #add1ff
 oklch(0.8 0.1 255) #92c1fd
@@ -193,7 +216,9 @@ oklch(0.7 0.15 255)
 oklch(0.65 0.175 255) Deep
 oklch(0.6 0.2 255)
 oklch(0.55 0.225 255) Bg (P3) oklch(0.55 0.18112 255) #006fd7
+```
 
+```text
 oklch(0.9 0.05 315) #ebd5f5
 oklch(0.85 0.075 315) Light
 oklch(0.8 0.1 315)
@@ -202,9 +227,11 @@ oklch(0.7 0.15 315)
 oklch(0.65 0.175 315) Deep #b669d7
 oklch(0.6 0.2 315)
 oklch(0.55 0.225 315) Bg #a034c9
+```
 
 ---
 
+```text
 oklch(0.85 0.0775 315) Light
 oklch(0.8 0.1 315) #d6aaea
 oklch(0.75 0.1225 315) Base #cb96e3 | oklch(0.75 0.06125 315) Fade
@@ -212,7 +239,9 @@ oklch(0.7 0.145 315)
 oklch(0.65 0.1675 315) Deep #b56bd4
 oklch(0.6 0.19 315)
 oklch(0.55 0.2125 315) Bg
+```
 
+```text
 oklch(0.9 0.05 30)
 oklch(0.85 0.075 30) Light
 oklch(0.8 0.1 30)
@@ -221,7 +250,9 @@ oklch(0.7 0.15 30)
 oklch(0.65 0.175 30) Deep
 oklch(0.6 0.2 30)
 oklch(0.55 0.225 30) Bg
+```
 
+```text
 oklch(0.85 0.0775 60) Light
 oklch(0.8 0.1 60) #d6aaea
 oklch(0.75 0.1225 60) Base #cb96e3 | oklch(0.75 0.06125 60) Fade
@@ -229,7 +260,9 @@ oklch(0.7 0.145 60)
 oklch(0.65 0.1675 60) Deep (P3) #b56bd4
 oklch(0.6 0.19 60) none
 oklch(0.55 0.2125 60) Bg none #ad5700 #a75c00 oklch(0.5508 0.129253 59.942)
+```
 
+```text
 oklch(0.9 0.075 90) #f1dda5
 oklch(0.85 0.0775 90) Light
 oklch(0.8 0.1 90) #d6aaea
@@ -238,7 +271,9 @@ oklch(0.7 0.145 90) (P3)
 oklch(0.65 0.1675 90) Deep none #b56bd4
 oklch(0.6 0.19 90) none
 oklch(0.55 0.2125 90) Bg none
+```
 
+```text
 oklch(0.85 0.0775 135) Light #b8daa7
 oklch(0.8 0.1 135) #d6aaea
 oklch(0.75 0.1225 135) Base #cb96e3 | oklch(0.75 0.06125 135) Fade
@@ -246,7 +281,9 @@ oklch(0.7 0.145 135)
 oklch(0.65 0.1675 135) Deep #b56bd4
 oklch(0.6 0.19 135) (P3)
 oklch(0.55 0.2125 135) Bg none
+```
 
+```text
 oklch(0.85 0.0775 195) Light
 oklch(0.8 0.1 195) #d6aaea
 oklch(0.75 0.1225 195) Base #cb96e3 | oklch(0.75 0.06125 195) Fade
@@ -254,7 +291,9 @@ oklch(0.7 0.145 195)
 oklch(0.65 0.1675 195) Deep #b56bd4
 oklch(0.6 0.19 195)
 oklch(0.55 0.2125 195) Bg
+```
 
+```text
 oklch(0.85 0.0775 315) Light
 oklch(0.8 0.1 315) #d6aaea
 oklch(0.75 0.1225 315) Base #cb96e3 | oklch(0.75 0.06125 315) Fade
@@ -262,9 +301,11 @@ oklch(0.7 0.145 315)
 oklch(0.65 0.1675 315) Deep #b56bd4
 oklch(0.6 0.19 315)
 oklch(0.55 0.2125 315) Bg
+```
 
 ---
 
+```text
 oklch(0.9 0.05 315)
 oklch(0.85 0.075 315) Light
 oklch(0.8 0.1 315)
@@ -273,7 +314,9 @@ oklch(0.7 0.15 315)
 oklch(0.65 0.175 315) Deep
 oklch(0.6 0.2 315)
 oklch(0.55 0.225 315) Bg
+```
 
+```text
 oklch(0.85 0.0775 30) Light
 oklch(0.8 0.1 30)
 oklch(0.75 0.1225 30) Base #f18f7f | oklch(0.75 0.06125 30) Fade
@@ -281,7 +324,9 @@ oklch(0.7 0.145 30)
 oklch(0.65 0.1675 30) Deep
 oklch(0.6 0.19 30)
 oklch(0.55 0.2125 30) Bg
+```
 
+```text
 oklch(0.85 0.07542 255)
 oklch(0.85 0.0775 255) Light. #add1ff
 oklch(0.8 0.1 255)
@@ -290,11 +335,13 @@ oklch(0.7 0.145 255)
 oklch(0.65 0.1675 255) Deep
 oklch(0.6 0.19 255)
 oklch(0.55 0.2125 255) Bg
+```
 
 ---
 
 <!-- VSCODE DEFAULTS -->
 
+```text
 #007bcc oklch(0.5693 0.1535 248.07)
 #569CD6 storage.type, keyword, punctuation.definition.template-expression.begin
 #4FC1FF constant
@@ -307,11 +354,15 @@ oklch(0.55 0.2125 255) Bg
 #CE9178 string
 #D7BA7D tag
 #D4D4D4 meta.embedded, keyword.operator
+```
 
+```text
 oklch(0.75 0.115 195) #39c4c4 (DEEP)
+```
 
 ---
 
+```text
 oklch(75% 0.11666667 30) #ef9182 - BASE
 oklch(80% 0.1 60) #eeae7b - BASE
 oklch(90% 0.06666667 90) #efddac - BASE
@@ -320,19 +371,24 @@ oklch(85% 0.08333333 195) #89dfdf - BASE
 oklch(80% 0.1 255) #92c1fd - BASE
 oklch(80% 0.1 315) #d6aaea - BASE
 oklch(85% 0.08333333 360) #fcb7cb - BASE
+```
 
+```text
 oklch(0.9 0.07 0) #ffcbdc variables
 oklch(0.8 0.1 0) #f3a3bb
 oklch(0.7 0.13 0)
 oklch(0.6 0.16 0)
 oklch(0.5 0.19 0)
+```
 
+```text
 oklch(0.85 0.085 0) #fdb7cb
 oklch(0.75 0.115 30) #ee9182
 oklch(0.8 0.1 60) #eeae7b
 oklch(0.9 0.07 90) #f0dda9
 oklch(80% 0.1 135) #a2cd8b
 oklch(0.85 0.085 195) #88e0df
+```
 
 | HUE | COLOR     |
 | --- | --------- |
@@ -351,175 +407,226 @@ oklch(0.85 0.085 195) #88e0df
 | 345 |           |
 | 360 | SAME AS 0 |
 
+```text
 oklch(0.9 0.07 0) #ffcbdc variables
 oklch(0.8 0.1 0) #f3a3bb
 oklch(0.7 0.13 0)
 oklch(0.6 0.16 0)
 oklch(0.5 0.19 0)
+```
 
+```text
 oklch(0.9 0.07 30) #ffcdc3
 oklch(0.8 0.1 30) #f7a597
 oklch(0.7 0.13 30) #e47d6d
 oklch(0.6 0.16 30)
 oklch(0.5 0.19 30)
+```
 
+```text
 oklch(0.9 0.07 60)
 oklch(0.8 0.1 60) #eeae7b
 oklch(0.7 0.13 60)
 oklch(0.6 0.16 60)
 oklch(0.5 0.19 60)
+```
 
+```text
 oklch(0.9 0.07 90) #f0dda9
 oklch(0.8 0.1 90) #d7bb70
 oklch(0.7 0.13 90)
 oklch(0.6 0.16 90)
 oklch(0.5 0.19 90)
+```
 
+```text
 oklch(0.9 0.07 150)
 oklch(0.8 0.1 150) #8ed09c
 oklch(0.7 0.13 150)
 oklch(0.6 0.16 150)
 oklch(0.5 0.19 150)
+```
 
+```text
 oklch(0.9 0.07 225) #ace9ff
 oklch(0.8 0.1 225) #70ccee
 oklch(0.7 0.13 225) #12aedb
 oklch(0.6 0.16 225) #008fbc
 oklch(0.5 0.19 225) #0072b3
+```
 
+```text
 oklch(0.9 0.07 300)
 oklch(0.8 0.1 300)
 oklch(0.7 0.13 300)
 oklch(0.6 0.16 300)
 oklch(0.5 0.19 300)
+```
 
 ---
 
 <!-- BLUE -->
 
+```text
 oklch(0.9 0.07 255) #bfe1ff
 oklch(0.8 0.1 255)
 oklch(0.7 0.13 255)
 oklch(0.6 0.16 255)
 oklch(0.55 0.18 255) #006fd7 BG
 oklch(0.5 0.19 255)
+```
 
+```text
 oklch(0.9 0.07 250)
 oklch(0.8 0.1 250)
 oklch(0.7 0.13 250)
 oklch(0.6 0.16 250)
 oklch(0.5 0.19 250)
+```
 
+```text
 oklch(0.9 0.07 240)
 oklch(0.8 0.1 240)
 oklch(0.7 0.13 240)
 oklch(0.6 0.16 240)
 oklch(0.5 0.19 240)
+```
 
+```text
 oklch(0.9 0.07 225)
 oklch(0.8 0.1 225)
 oklch(0.7 0.13 225)
 oklch(0.6 0.16 225)
 oklch(0.5 0.19 225)
+```
 
 <!-- CYAN -->
 
+```text
 oklch(0.9 0.07 210)
 oklch(0.8 0.1 210)
 oklch(0.7 0.13 210)
 oklch(0.6 0.16 210)
 oklch(0.5 0.19 210)
+```
 
+```text
 oklch(0.9 0.07 195)
 oklch(0.8 0.1 195) #65d2d2
 oklch(0.7 0.13 195)
 oklch(0.6 0.16 195)
 oklch(0.5 0.19 195)
+```
 
+```text
 oklch(0.9 0.07 180)
 oklch(0.8 0.1 180) #6dd3c0
 oklch(0.7 0.13 180)
 oklch(0.6 0.16 180)
 oklch(0.5 0.19 180)
+```
 
 <!-- GREEN -->
 
+```text
 oklch(0.9 0.07 150)
 oklch(0.8 0.1 150) #8ed09c
 oklch(0.7 0.13 150)
 oklch(0.6 0.16 150)
 oklch(0.5 0.19 150)
+```
 
+```text
 oklch(0.9 0.07 135)
 oklch(0.8 0.1 135)
 oklch(0.7 0.13 135)
 oklch(0.6 0.16 135)
 oklch(0.5 0.19 135)
+```
 
+```text
 oklch(0.9 0.07 120)
 oklch(0.8 0.1 120)
 oklch(0.7 0.13 120)
 oklch(0.6 0.16 120)
 oklch(0.5 0.19 120)
+```
 
 <!-- ORANGE -->
 
+```text
 oklch(0.9 0.07 60)
 oklch(0.8 0.1 60) #eeae7b
 oklch(0.7 0.13 60)
 oklch(0.6 0.16 60)
 oklch(0.5 0.19 60)
+```
 
 <!-- PINK -->
 
+```text
 oklch(0.9 0.07 0) #ffcbdc
 oklch(0.8 0.1 0) #f3a3bb
 oklch(0.7 0.13 0)
 oklch(0.6 0.16 0)
 oklch(0.5 0.19 0)
+```
 
 <!-- PURPLE -->
 
+```text
 oklch(0.9 0.07 330)
 oklch(0.8 0.1 330)
 oklch(0.7 0.13 330)
 oklch(0.6 0.16 330)
 oklch(0.5 0.19 330)
+```
 
+```text
 oklch(0.9 0.07 315)
 oklch(0.8 0.1 315) #c7aff5
 oklch(0.7 0.13 315) #bd84d6
 oklch(0.6 0.16 315) #a35ec1
 oklch(0.5 0.19 315)
+```
 
+```text
 oklch(0.9 0.07 300)
 oklch(0.8 0.1 300)
 oklch(0.7 0.13 300)
 oklch(0.6 0.16 300)
 oklch(0.5 0.19 300)
+```
 
+```text
 oklch(0.9 0.07 270)
 oklch(0.8 0.1 270)
 oklch(0.7 0.13 270)
 oklch(0.6 0.16 270)
 oklch(0.5 0.19 270)
+```
 
 <!-- RED -->
 
+```text
 oklch(0.9 0.07 30) #ffcdc3
 oklch(0.8 0.1 30) #f7a597
 oklch(0.7 0.13 30) #e47d6d
 oklch(0.6 0.16 30)
 oklch(0.5 0.19 30)
+```
 
 <!-- YELLOW -->
 
+```text
 oklch(0.9 0.07 90) #f0dda9
 oklch(0.8 0.1 90) #d7bb70
 oklch(0.7 0.13 90)
 oklch(0.6 0.16 90)
 oklch(0.5 0.19 90)
+```
 
+```text
 oklch(0.8 0.1 0)
 oklch(0.8 0.1 30)
 oklch(0.8 0.1 60)
@@ -532,7 +639,9 @@ oklch(0.8 0.1 240)
 oklch(0.8 0.1 270)
 oklch(0.8 0.1 300)
 oklch(0.8 0.1 330)
+```
 
+```text
 0 - PINK
 30 - RED
 60 - ORANGE
@@ -541,6 +650,7 @@ oklch(0.8 0.1 330)
 195 - CYAN
 255 - BLUE
 315 - PURPLE
+```
 
 | HUE | COLOR |
 | --- | --------- | ----------------- |
@@ -558,7 +668,9 @@ oklch(0.8 0.1 330)
 | 330 | |
 | 360 | SAME AS 0 |
 
-## TABLE OF COLORS
+## Historical palettes
+
+### Table of colors
 
 | NAME   | FADE    | BASE    | DEEP    | BG      |
 | ------ | ------- | ------- | ------- | ------- |
@@ -571,11 +683,13 @@ oklch(0.8 0.1 330)
 | Red    | #d0a198 | #ef9182 | #db6656 | #b71a0c |
 | Yellow | #e6dec6 | #efddac | #d7bb70 | #bf9a23 |
 
-## COLORS V5.0 (For Theme version 1.0.6+)
+### COLORS V5.0 (For Theme version 1.0.6+)
 
+```text
 80% = 0.1
 50% = 0.2
 1% = 0.00333333 (.1+(0.1/30\*)
+```
 
 | HUE      | ADD   | JUMP    | HEX     | OKLCH                   |
 | -------- | ----- | ------- | ------- | ----------------------- |
@@ -656,6 +770,7 @@ oklch(0.8 0.1 330)
 
 ---
 
+```text
 oklch(80% 0.05 60) #d7b79e - FADE
 oklch(90% 0.03333334 90) #e6dec6 - FADE
 oklch(80% 0.05 135) #b0c5a5 - FADE
@@ -664,7 +779,9 @@ oklch(80% 0.05 255) #a9c0de - FADE
 oklch(80% 0.05 315) #cab5d4 - FADE
 oklch(85% 0.04166666 360) #e6c3cc - FADE
 oklch(75% 0.05833334 30) #d0a198 - FADE
+```
 
+```text
 oklch(80% 0.1 60) #eeae7b - BASE
 oklch(90% 0.06666667 90) #efddac - BASE
 oklch(80% 0.1 135) #a2cd8b - BASE
@@ -673,7 +790,9 @@ oklch(80% 0.1 255) #92c1fd - BASE
 oklch(80% 0.1 315) #d6aaea - BASE
 oklch(85% 0.08333333 360) #fcb7cb - BASE
 oklch(75% 0.11666667 30) #ef9182 - BASE
+```
 
+```text
 oklch(70% 0.13333333 60) #da883e - DEEP
 oklch(80% 0.1 90) #d7bb70 - DEEP
 oklch(70% 0.13333333 135) #79b158 - DEEP
@@ -682,7 +801,9 @@ oklch(70% 0.13333333 255) #62a1f0 - DEEP
 oklch(70% 0.13333333 315) #bd84d7 - DEEP
 oklch(75% 0.11666667 360) #ea8eab - DEEP
 oklch(65% 0.15 30) #db6656 - DEEP
+```
 
+```text
 oklch(55% 0.18333333 60) #a75c00 - BACKGROUND oklch(55.08% 0.129 59.94)
 oklch(70% 0.13333333 90) #bf9a23 - BACKGROUND oklch(70.11% 0.134 89.97)
 oklch(55% 0.18333333 135) #438500 - BACKGROUND oklch(55.08% 0.161 135.15)
@@ -691,11 +812,15 @@ oklch(55% 0.18333333 255) #006fd9 - BACKGROUND oklch(55.12% 0.183 255.24)
 oklch(55% 0.18333333 315) #9847b9 - BACKGROUND
 oklch(60% 0.16666667 360) #cb4c7c - BACKGROUND
 oklch(50% 0.19166666 30) #b71a0c - BACKGROUND
+```
 
+```text
 oklch(25% 0.0814 255) #002147 - DARK
+```
 
 ---
 
+```text
 oklch(95% 0.05 60) #ffe7ce oklch(94.09% 0.042 68.42)
 oklch(92.5% 0.05833333 60) #ffdec0 oklch(92.04% 0.053968694654558634 64.36297090528912)
 oklch(90% 0.06666667 60) #ffd4b2 oklch(89.83% 0.066 60.14)
@@ -712,7 +837,9 @@ oklch(60% 0.16666667 60)
 oklch(57.5% 0.175 60)
 oklch(55% 0.18333333 60) #a75c00 oklch(55.08% 0.129 59.94) - BACKGROUND
 oklch(50% 0.2 60)
+```
 
+```text
 oklch(95% 0.05 90) #fbeec9
 oklch(92.5% 0.05833333 90) #f5e5ba
 oklch(90% 0.06666667 90) #efddac - BASE
@@ -729,7 +856,9 @@ oklch(60% 0.16666667 90)
 oklch(57.5% 0.175 90)
 oklch(55% 0.18333333 90) #8b6e00 oklch(55% 0.1123965 90)
 oklch(50% 0.2 90)
+```
 
+```text
 oklch(95% 0.05 135) #e0f7d5
 oklch(92.5% 0.05833333 135) #d6f0c9
 oklch(90% 0.06666667 135) #cbe9bc
@@ -745,7 +874,9 @@ oklch(65% 0.15 135)
 oklch(60% 0.16666667 135)
 oklch(57.5% 0.175 135)
 oklch(55% 0.18333333 135) #438500- BACKGROUND oklch(55.08% 0.161 135.15)
+```
 
+```text
 oklch(95% 0.05 195) #c9faf9
 oklch(92.5% 0.05833333 195) #b9f3f2
 oklch(90% 0.06666667 195) #aaecec
@@ -761,7 +892,9 @@ oklch(65% 0.15 195)
 oklch(60% 0.16666667 195) #019393 - BACKGROUND oklch(60.06% 0.10253 194.77)
 oklch(57.5% 0.175 195)
 oklch(55% 0.18333333 195)
+```
 
+```text
 oklch(95% 0.05 255) #dbf1ff oklch(94.62% 0.029988453706112108 235.62656608106627)
 oklch(92.5% 0.05833333 255) #cde9ff oklch(92.05% 0.042 241.69)
 oklch(90% 0.06666667 255) #c1e1ff oklch(89.62% 0.05350791652524299 246.70621672384354)
@@ -778,7 +911,9 @@ oklch(60% 0.16666667 255) #2d80e1
 oklch(57.5% 0.175 255) #1b77dd
 oklch(55% 0.18333333 255) #006fd9 oklch(55.12% 0.183 255.24) - BACKGROUND
 oklch(50% 0.2 255) #005dd0 oklch(50.59% 0.19291471161374424 258.6639743419965)
+```
 
+```text
 oklch(95% 0.05 315) #fbe5ff oklch(94.72% 0.041664955894913806 321.03057285451575)
 oklch(92.5% 0.05833333 315) #f5dbff oklch(92.36% 0.055 316.64)
 oklch(90% 0.06666667 315) #efd1fd
@@ -795,7 +930,9 @@ oklch(60% 0.16666667 315)
 oklch(57.5% 0.175 315)
 oklch(55% 0.18333333 315) #9847b9 - BACKGROUND
 oklch(50% 0.2 315)
+```
 
+```text
 oklch(95% 0.05 360) #ffe1ed oklch(93.77% 0.036 351.69)
 oklch(92.5% 0.05833333 360) #ffd7e4 oklch(91.65% 0.04750216440579051 356.5485770172652)
 oklch(90% 0.06666667 360) #ffccdc oklch(89.41% 0.06098484796646368 357.69096264729876)
@@ -811,7 +948,9 @@ oklch(65% 0.15 360)
 oklch(60% 0.16666667 360) #cb4c7c - BACKGROUND
 oklch(57.5% 0.175 360)
 oklch(55% 0.18333333 360)
+```
 
+```text
 oklch(95% 0.05 30) #ffe3dc oklch(93.68% 0.032 34.31)
 oklch(92.5% 0.05833333 30) #ffd9d0 oklch(91.48% 0.044 33.52)
 oklch(90% 0.06666667 30) #ffcec4 oklch(89.13% 0.057 31.56)
@@ -829,18 +968,23 @@ oklch(60% 0.16666667 30)
 oklch(57.5% 0.175 30)
 oklch(55% 0.18333333 30)
 oklch(50% 0.19166666 30) #b71a0c - BACKGROUND
+```
 
-## COLORS V4.2 (for official v0.3.0)
+### COLORS V4.2 (for official v0.3.0)
 
+```text
 oklch(80% 0.05 255) #a9c0de for typehint syntax color.
 #81ade9
 oklch(56% 0.18 255) hsl(210.66 100% 45%) Max Chroma #0070e5 oklch(56.23% 0.19701290665903026 256.673360346712)
 oklch(80% 0.1 255) hsl(213.74 97% 78%)
 oklch(80% 0.05 255) hsl(213.87 45% 77%)
+```
 
+```text
 hsl(210, 100%, 50%) #007fff oklch(61.41% 0.211 256.22)
 hsl(210, 100%, 65%) #4da6ff oklch(71.05% 0.156 250.98)
 hsl(210, 100%, 80%) #99ccff oklch(82.8% 0.0897557603237911 248.9585519614153)
+```
 
 | GROUP 1 OKLCH         | v0.3.0 HEX | COLOR         | UPDATED |
 | --------------------- | ---------- | ------------- | ------- |
@@ -866,7 +1010,7 @@ hsl(210, 100%, 80%) #99ccff oklch(82.8% 0.0897557603237911 248.9585519614153)
 | oklch(80% 0.1308 307.5) | #d4a6ff    | BRIGHT PURPLE | YES     |
 | oklch(80% 0.124 360)    | #ff9bba    | BRIGHT PINK   | YES     |
 
-## COLORS V4.1 (for official v0.2.8)
+### COLORS V4.1 (for official v0.2.8)
 
 | GROUP 1 OKLCH         | v0.2.8 HEX | COLOR         |
 | --------------------- | ---------- | ------------- |
@@ -892,6 +1036,7 @@ hsl(210, 100%, 80%) #99ccff oklch(82.8% 0.0897557603237911 248.9585519614153)
 | oklch(80% 0.1359 310) | #d9a4ff    | BRIGHT PURPLE |
 | oklch(80% 0.1 360)    | #f3a3bb    | BRIGHT PINK   |
 
+```text
 15 -
 27.5 #ed8c81 oklch(74% 0.12 27.5)
 40 -
@@ -899,24 +1044,29 @@ hsl(210, 100%, 80%) #99ccff oklch(82.8% 0.0897557603237911 248.9585519614153)
 90 #f4e4b8 oklch(92% 0.06 90)
 115 -
 140 #9bce90 oklch(80% 0.1 140)
+```
 
+```text
 210 - CYAN #91e0ee oklch(86% 0.08 210) - NO CHANGE
 260 - BLUE #98bffe oklch(80% 0.1 260) - NO CHANGE
 310 - PURPLE #d2acee oklch(80% 0.1 310) - NO CHANGE
 360 - PINK #febccf oklch(86% 0.08 360) - NO CHANGE
+```
 
-## COLORS V4
+### COLORS V4
 
 > Note: The previous colors seem to be better, except cyan and green which are more balanced now. Maybe switch back to the previous colors after testing v4 for a while.
 
-### 25 POINT JUMPS FOR DEFAULT COLORS
+#### 25 POINT JUMPS FOR DEFAULT COLORS
 
+```text
 20 - RED #ed8b8b oklch(74% 0.12 20)
 45
 70 - ORANGE #e7b375 oklch(80% 0.1 70)
 95 - YELLOW #f1e5b8 oklch(92% 0.06 95)
 120
 145 - GREEN #95cf96 oklch(80% 0.1 145)
+```
 
 -
 - 210 - CYAN #91e0ee oklch(86% 0.08 210)
@@ -927,14 +1077,16 @@ hsl(210, 100%, 80%) #99ccff oklch(82.8% 0.0897557603237911 248.9585519614153)
   335
   360 - PINK #febccf oklch(86% 0.08 360)
 
-### BRIGHT COLORS AT MAX CHROMA
+#### BRIGHT COLORS AT MAX CHROMA
 
+```text
 20 - RED #ff7d80 oklch(74% 0.1587 20)
 45
 70 - ORANGE #ffa82a oklch(80% 0.1622 70)
 95 - YELLOW #ffe47d oklch(92% 0.1269 95)
 120
 145 - GREEN #00e541 oklch(80% 0.2516 145)
+```
 
 -
 - 210 - CYAN #52e7ff oklch(86% 0.127 210)
@@ -945,19 +1097,24 @@ hsl(210, 100%, 80%) #99ccff oklch(82.8% 0.0897557603237911 248.9585519614153)
   335
   360 - PINK #ffbbcf oklch(86% 0.081 360)
 
-## COLORS V3 UPDATES
+### COLORS V3 UPDATES
 
+```text
 #f4877f oklch(74% 0.1342 25) - minus 0.0180 from max chroma oklch(74% 0.1582 25) #ff7e77
 #91d283 oklch(80% 0.1255 140) - minus 0.1320 from max chroma
 #89c3ff Max chroma
+```
 
-## COLORS V3 DEEP UPDATES
+### COLORS V3 DEEP UPDATES
 
+```text
 #ff7e77 oklch(74% 0.1582 25) - MAX CHROMA
 #73da5b oklch(80% 0.1915 140) - minus 0.0660 chroma from max
+```
 
-## COLORS V3
+### COLORS V3
 
+```text
 #f18a79 oklch(74% 0.12893 30) - minus 0.0300 chroma from max - oklch(74% 0.15893 30) #ff7f6d
 #edb068 oklch(80% 0.1142 70) - minus 0.0480 chroma from max - oklch(80% 0.1622 70) #ffa82a
 #f6e3b3 oklch(92% 0.06615 90) - minus 0.0360 chroma from max - oklch(92% 0.10215 90) #ffe294
@@ -966,9 +1123,11 @@ hsl(210, 100%, 80%) #99ccff oklch(82.8% 0.0897557603237911 248.9585519614153)
 #8cc3fb oklch(80% 0.098898 250) - minus 0.0060 chroma from max - oklch(80% 0.10489 250) #89c3ff
 #cfabf9 oklch(80% 0.1143 305) - minus 0.0120 chroma from max - oklch(80% 0.1263 305) #d1a8ff
 #ffbbcf oklch(86% 0.081 360) - MAX CHROMA
+```
 
-## COLORS V3 DEEP
+### COLORS V3 DEEP
 
+```text
 #ff7f6d oklch(74% 0.15893 30) - MAX CHROMA
 #ffa82a oklch(80% 0.1622 70) - MAX CHROMA
 #ffe294 oklch(92% 0.10215 90 - MAX CHROMA
@@ -977,11 +1136,13 @@ hsl(210, 100%, 80%) #99ccff oklch(82.8% 0.0897557603237911 248.9585519614153)
 NO CHANGE - #0089ea oklch(62% 0.175 250) - MAX CHROMA + 18% LIGHTNESS DROP
 #c48cff oklch(74% 0.1685 305) - MAX CHROMA + 6% LIGHTNESS DROP
 #ff9bba oklch(80% 0.1245 0) - MAX CHROMA + 6% LIGHTNESS DROP
+```
 
 ---
 
-## COLORS V2
+### COLORS V2
 
+```text
 #f48587 oklch(74% 0.136 20)
 #ebb077 oklch(80% 0.1 65)
 #f5e3b4 oklch(92% 0.064 90)
@@ -990,9 +1151,11 @@ NO CHANGE - #0089ea oklch(62% 0.175 250) - MAX CHROMA + 18% LIGHTNESS DROP
 #8cc3fc oklch(80% 0.1 250)
 #cdaef2 oklch(80% 0.1 305)
 #ffbbcf oklch(86% 0.082 360)
+```
 
-## COLORS V2 DEEP
+### COLORS V2 DEEP
 
+```text
 #ef646b oklch(68% 0.172 20) - 06% JUMP
 #d7bb70 oklch(80% 0.1 90) - 12% JUMP
 #e59742 oklch(74% 0.136 65) - 06% JUMP
@@ -1001,11 +1164,13 @@ NO CHANGE - #0089ea oklch(62% 0.175 250) - MAX CHROMA + 18% LIGHTNESS DROP
 #0089ea oklch(62% 0.175 250) - 18% JUMP
 #bf94ef oklch(74% 0.136 305) - 06% JUMP
 #f3a3bb oklch(80% 0.1 360) - 06% JUMP
+```
 
 ---
 
-## NEW DEEP (6% JUMP)
+### NEW DEEP (6% JUMP)
 
+```text
 #ef646b oklch(68% 0.172 20)
 #e6cf93 oklch(86% 0.082 90)
 #e59742 oklch(74% 0.136 65)
@@ -1014,9 +1179,11 @@ NO CHANGE - #0089ea oklch(62% 0.175 250) - MAX CHROMA + 18% LIGHTNESS DROP
 #63b0fd oklch(74% 0.136 250)
 #bf94ef oklch(74% 0.136 305)
 #f3a3bb oklch(80% 0.1 360)
+```
 
-## NEW DEEP (12% JUMP)
+### NEW DEEP (12% JUMP)
 
+```text
 #e93b4f oklch(62% 0.208 20)
 #d7bb70 oklch(80% 0.1 90)
 #d78100 oklch(68% 0.172 65)
@@ -1025,11 +1192,13 @@ NO CHANGE - #0089ea oklch(62% 0.175 250) - MAX CHROMA + 18% LIGHTNESS DROP
 #2e9cfd oklch(68% 0.172 250)
 #b178ec oklch(68% 0.172 305)
 #ef84a7 oklch(74% 0.136 360)
+```
 
 ---
 
-## v0.0.2 COLORS
+### v0.0.2 COLORS
 
+```text
 #ff8386 oklch(75.01% 0.15091555989045963 19.850227040266272)
 #fae5ad oklch(92.57% 0.075 89.9)
 #f3b87f oklch(82.41% 0.1 64.71)
@@ -1038,7 +1207,9 @@ NO CHANGE - #0089ea oklch(62% 0.175 250) - MAX CHROMA + 18% LIGHTNESS DROP
 #84bbf4 oklch(77.57% 0.1 250.09)
 #d5b5fa oklch(82.43% 0.101 305.47)
 #f0b2c4 oklch(82.58% 0.075 359.78)
+```
 
+```text
 #f04c5a oklch(64.97% 0.2 20)
 #e5c25e oklch(82.49% 0.125 90.
 #e59028 oklch(72.54% 0.15 65.37)
@@ -1046,6 +1217,7 @@ NO CHANGE - #0089ea oklch(62% 0.175 250) - MAX CHROMA + 18% LIGHTNESS DROP
 #00bebe oklch(72.57% 0.12387442102619234 194.76894793196388)
 #439bef oklch(67.5% 0.15 250.19)
 #bc8cf1 oklch(72.52% 0.15 304.86)
+```
 
 <!-- # JUMP BY 4%...
 96%
@@ -1057,8 +1229,11 @@ NO CHANGE - #0089ea oklch(62% 0.175 250) - MAX CHROMA + 18% LIGHTNESS DROP
 72%
 68% -->
 
-# JUMP BY 6%... [chroma = .003 per % x 6 is 0.018 per jump up and .006 per % x 6 is 0.036 per jump down]
+## Lightness and chroma experiments
 
+JUMP BY 6%... [chroma = .003 per % x 6 is 0.018 per jump up and .006 per % x 6 is 0.036 per jump down]
+
+```text
 92% 0.064
 86% 0.082
 80% 0.1
@@ -1071,28 +1246,38 @@ NO CHANGE - #0089ea oklch(62% 0.175 250) - MAX CHROMA + 18% LIGHTNESS DROP
 38% 0.353
 32%
 26%
+```
 
-## 92% lightness
+### 92% lightness
 
+```text
 oklch(92% 0.1 90) #fee296
 oklch(92% 0.1 100) #f4e798
+```
 
+```text
 oklch(92% 0.08 20) #ffdad9 ... oklch(91.9% 0.041 19.77) max
 oklch(92% 0.08 65) #ffdebf ... oklch(92.02% 0.0549 65.28) max
 oklch(92% 0.08 90) #f9e3a7
 oklch(92% 0.08 100) #f1e7a9
+```
 
+```text
 oklch(92% 0.064 100) #eee6b5
 oklch(92% 0.064 90) #f5e3b4
+```
 
+```text
 oklch(92% 0.08 140) #c9f2c0
 oklch(92% 0.08 195) #a4f6f5
 oklch(92% 0.08 250) #d1e7ff ... oklch(91.92% 0.04 250) max
 oklch(92% 0.08 305) #ecddff ... oklch(91.99% 0.048 305.38) max
 oklch(92% 0.08 360) #ffd9e3 ... oklch(91.99% 0.044 0.34) max
+```
 
-## 86% lightness
+### 86% lightness
 
+```text
 oklch(86% 0.08 20) #ffbebd ... oklch(86.05% 0.075 19.74) max
 oklch(86% 0.08 65) #f6c79a
 oklch(86% 0.082 65) #f7c698
@@ -1106,9 +1291,11 @@ oklch(86% 0.08 250) #aed5ff ... oklch(85.94% 0.07185 250.559) max
 oklch(86% 0.082 305) #ddc4fd
 oklch(86% 0.08 360) #febccf
 oklch(86% 0.082 360) #ffbbcf ... oklch(86% 0.082 359.65) max
+```
 
-## 80% lightness
+### 80% lightness
 
+```text
 oklch(80% 0.1 20) #f8a4a3
 oklch(80% 0.1 65) #ebb077 #####
 oklch(80% 0.1 90) #d7bb70
@@ -1118,11 +1305,15 @@ oklch(80% 0.1 195) #65d2d2
 oklch(80% 0.1 250) #8cc3fc #####
 oklch(80% 0.1 305) #cdaef2 #####
 oklch(80% 0.1 360) #f3a3bb
+```
 
-## 74% lightness
+### 74% lightness
 
+```text
 oklch(74% 0.136 20) #f48587 #####
+```
 
+```text
 oklch(74% 0.14 20) #f68486
 oklch(74% 0.14 65) #e7963d
 oklch(74% 0.14 90) #cda629
@@ -1132,9 +1323,11 @@ oklch(74% 0.14 195) #00c3c3 ... oklch(73.99% 0.126 194.77) max
 oklch(74% 0.14 250) #60b0ff ... oklch(74% 0.139 249.973) max
 oklch(74% 0.14 305) #bf93f1
 oklch(74% 0.14 360) #f183a7
+```
 
-## 68% lightness
+### 68% lightness
 
+```text
 oklch(68% 0.15 20) #e66d71
 oklch(68% 0.15 65) #d6810c
 oklch(68% 0.15 90) #ba9300 ... oklch(68.04% 0.139 89.7) max
@@ -1145,11 +1338,13 @@ oklch(68% 0.15 195) #00aeae ... oklch(67.98% 0.116 194.77)
 oklch(68% 0.15 250) #449df0
 oklch(68% 0.15 305) #ae7ee2
 oklch(68% 0.15 360) #e06c94
+```
 
 ---
 
-## 87.5% lightness
+### 87.5% lightness
 
+```text
 oklch(87.5% 0.0875 20) #ffc5c4 ... oklch(87.48% 0.0666 19.65) max
 oklch(87.5% 0.0875 65) #ffcb99
 oklch(87.5% 0.0875 90) #ecd493
@@ -1158,9 +1353,11 @@ oklch(87.5% 0.0875 195) #8de8e8
 oklch(87.5% 0.0875 250) #b7daff ... oklch(87.54% 0.063 249.99) max
 oklch(87.5% 0.0875 305) #e1caff ... oklch(87.52% 0.0759 304.6) max
 oklch(87.5% 0.0875 360) #ffc3d4 ... oklch(87.56% 0.0717 359.96) max
+```
 
-## 82% lightness
+### 82% lightness
 
+```text
 oklch(82% 0.1 20) #feaaa9
 oklch(82% 0.1 65) #f1b77e
 oklch(82% 0.1 90) #ddc276
@@ -1170,9 +1367,11 @@ oklch(82% 0.1 195) #6cd9d8
 oklch(82% 0.1 250) #95c9ff ... oklch(81.94% 0.094 249.96) max
 oklch(82% 0.1 305) #d3b4f9
 oklch(82% 0.1 360) #faa9c1
+```
 
-## 76% lightness
+### 76% lightness
 
+```text
 oklch(76% 0.14 20) #fd8a8c
 oklch(76% 0.14 65) #ed9d44
 oklch(76% 0.14 90) #d4ac32
@@ -1182,8 +1381,9 @@ oklch(76% 0.14 195) #00caca ... oklch(75.96% 0.129 194.768) max
 oklch(76% 0.14 250) #6eb6ff ... oklch(75.9% 0.128 250.16) max
 oklch(76% 0.14 305) #c699f8
 oklch(76% 0.14 360) #f889ad
+```
 
-## NEW
+### NEW
 
 - Red: #ff8386 // oklch(75% 0.15 20) hsla(359, 100%, 76%, 1)
 - Orange: #f3b87f // oklch(82.5% 0.1 65) hsla(29, 83%, 73%, 1)
@@ -1214,44 +1414,67 @@ oklch(76% 0.14 360) #f889ad
 - Purple: #d5b5fa // oklch(82.5% 0.1 305)
 - Pink: #f0b2c4 // oklch(82.5% 0.075 360)
 
+```text
 hsla(345, 67%, 82%, 1) #f0b2c2 oklch(82.5% 0.075 2)
 hsla(0, 100%, 76%, 1) #ff8484 oklch(75% 0.15 21)
+```
 
+```text
 hsla(30, 82%, 72%, 1) #f2b97f oklch(82.5% 0.1 66)
 hsla(45, 84%, 83%, 1) #f8e5ad oklch(92.5% 0.075 92)
+```
 
+```text
 hsla(120, 42%, 73%, 1) #9dd79d oklch(82.5% 0.1 144.5)
 hsla(180, 47%, 69%, 1) #8ad5d5 oklch(82.5% 0.075 195)
 hsla(210, 82%, 73%, 1) #83bbf3 oklch(77.5% 0.1 249)
 hsla(270, 85%, 84%, 1) #d7b5f9 oklch(82.5% 0.1 307)
+```
 
+```text
 hsla(180, 67%, 82%, 1) #b2f0f0
 hsla(210, 100%, 76%, 1) #85c2ff
+```
 
+```text
 hsla(181, 83%, 82%, 1) #aaf6f7 oklch(92.5% 0.075 196)
+```
 
+```text
 hsla(180, 60%, 75%, 1) #9ae6e6 oklch(87.5% 0.075 196)
+```
 
+```text
 hsla(180, 59%, 70%, 1) #85e0e0 oklch(85% 0.0875 196)
+```
 
+```text
 hsla(180, 51%, 58%, 1) #5ccaca oklch(77.5% 0.1 195.5)
 hsla(190, 59%, 58%, 1) #56bfd4 oklch(75% 0.1 213)
 hsla(190, 70%, 65%, 1) #68cfe4 oklch(80% 0.1 213)
 hsla(190, 77%, 68%, 1) #70d7ec oklch(82.5% 0.1 213)
 hsla(180, 54%, 67%, 1) #7cd8d8 oklch(82.5% 0.0875 196)
+```
 
+```text
 135 #7df29a
 165 #7df2d5
 195 #7dd5f2
 225 #7d9af2
+```
 
+```text
 hsla(180, 59%, 64%, 1) #6edada oklch(82.5% 0.1 195)
 hsla(210, 81%, 79%, 1) #a0caf5 oklch(82.5% 0.075 249)
 hsla(210, 98%, 80%, 1) #98cbfe oklch(82.5% 0.09 249)
+```
 
+```text
 hsla(120, 37%, 74%, 1) #a3d5a3 oklch(82.5% 0.0875 144.75)
 hsla(180, 54%, 67%, 1) #7cd8d8 oklch(82.5% 0.0875 196
+```
 
+```text
 05 hsla(5, 82%, 74%, 1) #f38d84 oklch(75% 0.125 26)
 20
 35 hsla(35, 75%, 70%, 1) #ecbd7a oklch(82.5% 0.1 75)
@@ -1276,7 +1499,9 @@ hsla(180, 54%, 67%, 1) #7cd8d8 oklch(82.5% 0.0875 196
 320 hsla(320, 73%, 81%, 1) #f2acdb oklch(82.5% 0.1 339.5)
 335
 350 hsla(350, 69%, 82%, 1) #f1b2bd oklch(82.5% 0.075 7)
+```
 
+```text
 10
 25
 40
@@ -1301,7 +1526,9 @@ hsla(180, 54%, 67%, 1) #7cd8d8 oklch(82.5% 0.0875 196
 325
 340
 355
+```
 
+```text
 15
 30 hsla(30, 74%, 73%, 1) #edbb88 oklch(82.5% 0.0875 67)
 45 hsla(45, 54%, 68%, 1) #dac483 oklch(82.5% 0.0875 91.5)
@@ -1326,7 +1553,9 @@ hsla(180, 54%, 67%, 1) #7cd8d8 oklch(82.5% 0.0875 196
 330 hsla(330, 70%, 82%, 1) #f1afd0 oklch(82.5% 0.0875 347.5)
 345 hsla(345, 82%, 83%, 1) #f7aec0 oklch(82.5% 0.0875 2.75)
 360 hsla(0, 88%, 83%, 1) #faafaf oklch(82.5% 0.0875 19)
+```
 
+```text
 0 hsla(0, 75%, 80%, 1)
 45 hsla(45, 75%, 80%, 1)
 90 hsla(90, 75%, 80%, 1)
@@ -1335,11 +1564,15 @@ hsla(180, 54%, 67%, 1) #7cd8d8 oklch(82.5% 0.0875 196
 225 hsla(225, 75%, 80%, 1)
 270 hsla(270, 75%, 80%, 1)
 315 hsla(315, 75%, 80%, 1)
+```
 
+```text
 hsla(345, 100%, 88%, 1) #ffc3d2 oklch(87.5% 0.071 2.08)
+```
 
-# TERMINAL
+## Terminal palette
 
+```text
 0 Black
 1 Red
 2 Green
@@ -1348,9 +1581,11 @@ hsla(345, 100%, 88%, 1) #ffc3d2 oklch(87.5% 0.071 2.08)
 5 Magenta
 6 Cyan
 7 White
+```
 
 ---
 
+```text
 8 Black Bright
 9 Red Bright
 10 Green Bright
@@ -1359,6 +1594,7 @@ hsla(345, 100%, 88%, 1) #ffc3d2 oklch(87.5% 0.071 2.08)
 13 Magenta Bright
 14 Cyan Bright
 15 White Bright
+```
 
 ### 90%
 
@@ -1553,7 +1789,7 @@ hsla(345, 100%, 88%, 1) #ffc3d2 oklch(87.5% 0.071 2.08)
 - Purple: #cdaef2 //oklch(80% 0.1 305)
 - Pink: #e7aabc // oklch(80% 0.075 360)
 
-# NEW WORK
+## Further palette experiments
 
 BLUE
 oklch(80% 0.1 250)
@@ -1587,6 +1823,7 @@ YELLOW
 oklch(92% 0.064 90)
 oklch(80% 0.1 90)
 
+```text
 20 RED oklch(80% 0.1 20) #f8a4a3 oklch(74% 0.136 20) #f48587"#ee8a8b
 40
 60 ORANGE oklch(80% 0.1 60) #eeae7b
@@ -1604,6 +1841,7 @@ oklch(80% 0.1 90)
 300 PURPLE oklch(80% 0.1 300) #c7aff5
 320
 340 PINK oklch(80% 0.1 340) #eaa4d2 oklch(86% 0.082 340) #f6bce2 oklch(89% 0.078 340) #ffc7eb oklch(92% 0.055 340) #ffd7f0
+```
 
 MAX CHROMA
 74 80 86 92 98
@@ -1617,6 +1855,7 @@ MAX CHROMA
 300 #bb91ff #c9acff #d9c6ff #e9deff
 340 #ff68d5 #ff93dd #ffb7e6 #ffd7f0
 
+```text
 oklch(80% 0.115 20) #ff9f9f
 oklch(80% 0.141 60) #ffa658
 oklch(80% 0.166 100) #d7bf00 oklch(92% 0.168 100) #ffe64b
@@ -1626,7 +1865,9 @@ oklch(86% 0.101 220) #7fe1ff
 oklch(80% 0.1007 260) #98bfff
 oklch(80% 0.1187 300) #c9acff
 oklch(86% 0.102 340) #ffb7e6
+```
 
+```text
 0 PINK #ff9bba oklch(80% 0.124 0)
 30 RED #ffa191
 60 ORANGE #ffa658
@@ -1639,7 +1880,9 @@ oklch(86% 0.102 340) #ffb7e6
 270 #a4bbff
 300 PURPLE #c9acff
 330 #ff8cf6
+```
 
+```text
 #f00 30
 #0f0 143
 #00f 264
@@ -1647,7 +1890,9 @@ oklch(86% 0.102 340) #ffb7e6
 #f0f 328
 #0ff 195
 #ffa500 70
+```
 
+```text
 20
 65
 110
@@ -1656,7 +1901,9 @@ oklch(86% 0.102 340) #ffb7e6
 245
 290
 335
+```
 
+```text
 0
 45
 90
@@ -1666,7 +1913,9 @@ oklch(86% 0.102 340) #ffb7e6
 270
 315
 360
+```
 
+```text
 30 25
 55 30
 85 35
@@ -1676,7 +1925,9 @@ oklch(86% 0.102 340) #ffb7e6
 255 55
 300 60
 360
+```
 
+```text
 25 35
 60 40
 100 45
@@ -1685,3 +1936,5 @@ oklch(86% 0.102 340) #ffb7e6
 250 60
 310 65
 375
+
+```

@@ -21,3 +21,7 @@ View the [Changelog](https://github.com/jacobcassidy/vscode-cassidy-dark-theme/b
 ## Issues?
 
 If you come across any issues, please feel free to [report them here](https://github.com/jacobcassidy/vscode-cassidy-dark-theme/issues). You can also [create a pull request](https://github.com/jacobcassidy/vscode-cassidy-dark-theme/pulls) to add any improvements.
+
+## Development
+
+See the [development guide](https://github.com/jacobcassidy/vscode-cassidy-dark-theme/blob/main/docs/development/development-guide.md) for project structure, local previewing, validation, packaging, and releases.

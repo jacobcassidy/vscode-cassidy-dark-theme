@@ -6,19 +6,19 @@ Run the commands in this guide from the repository root unless stated otherwise.
 
 ## Project structure
 
-| Path                                                                                 | Purpose                                                                                                           |
-| ------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------- |
-| [`package.json`](../../package.json)                                                 | Extension identity, Marketplace metadata, version, theme contribution, development dependencies, and npm scripts. |
-| [`package-lock.json`](../../package-lock.json)                                       | Locked npm dependency tree for local development tools.                                                           |
-| [`themes/cassidy-dark-color-theme.json`](../../themes/cassidy-dark-color-theme.json) | The theme shipped to users.                                                                                       |
-| [`dev/themes/`](../../dev/themes/)                                                   | Experimental and historical themes available through the local development extension.                             |
-| [`docs/references/`](../references/)                                                 | Palette, opacity, semantic token, and workbench color references. These are reference material, not build inputs. |
-| [`previews/`](../../previews/)                                                       | Example source files for inspecting syntax highlighting, currently including PHP.                                 |
-| [`images/`](../../images/)                                                           | Extension icons and the README screenshot.                                                                        |
-| [`scripts/`](../../scripts/)                                                         | Local development setup, pipeline submission, changelog extraction, and GitHub release creation.                  |
-| [`azure-pipelines.yml`](../../azure-pipelines.yml)                                   | Manual packaging and publication pipeline.                                                                        |
-| [`.vscodeignore`](../../.vscodeignore)                                               | Exclusions from the published VSIX.                                                                               |
-| [`CHANGELOG.md`](../../CHANGELOG.md)                                                 | Versioned release notes, also used to populate GitHub releases.                                                   |
+| Path                                                                                  | Purpose                                                                                                           |
+| ------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
+| [`package.json`](../../package.json)                                                  | Extension identity, Marketplace metadata, version, theme contribution, development dependencies, and npm scripts. |
+| [`package-lock.json`](../../package-lock.json)                                        | Locked npm dependency tree for local development tools.                                                           |
+| [`themes/cassidy-dark-color-theme.json`](../../themes/cassidy-dark-color-theme.json)  | The theme shipped to users.                                                                                       |
+| [`dev/themes/`](../../dev/themes/)                                                    | Experimental and historical themes available through the local development extension.                             |
+| [`docs/references/`](../references/)                                                  | Palette, opacity, semantic token, and workbench color references. These are reference material, not build inputs. |
+| [`dev/previews/`](../../dev/previews/)                                                | Example source files for inspecting syntax highlighting, currently including PHP.                                 |
+| [`images/`](../../images/)                                                            | Extension icons and the README screenshot.                                                                        |
+| [`scripts/dev/`](../../scripts/dev/) and [`scripts/release/`](../../scripts/release/) | Local development setup, pipeline submission, changelog extraction, and GitHub release creation.                  |
+| [`azure-pipelines.yml`](../../azure-pipelines.yml)                                    | Manual packaging and publication pipeline.                                                                        |
+| [`.vscodeignore`](../../.vscodeignore)                                                | Exclusions from the published VSIX.                                                                               |
+| [`CHANGELOG.md`](../../CHANGELOG.md)                                                  | Versioned release notes, also used to populate GitHub releases.                                                   |
 
 The published extension ID is `jacobcassidy.cassidy-dark`, combining the manifest's `publisher` and `name`. Its theme picker label is **Cassidy Dark**, with `uiTheme: "vs-dark"`. The manifest declares VS Code compatibility as `^1.64.2`.
 
@@ -32,7 +32,7 @@ Although the theme filename ends in `.json`, it includes comments. Preserve this
 
 ## Local setup and preview
 
-Use VS Code, Git, and Node.js with npm. Node.js 24 is a suitable development baseline: the lockfile's Markdown tooling requires Node.js 22 or newer, and ESLint requires `^20.19.0 || ^22.13.0 || >=24`. The repository does not pin Node.js through a version file or a `package.json` Node engine constraint.
+Use VS Code, Git, and Node.js 24 with npm. `.nvmrc` records the Node.js major version, and Azure Pipelines explicitly selects the same major version. If you use nvm, run `nvm use` before installing dependencies.
 
 Install the locked development dependencies:
 
@@ -45,10 +45,10 @@ The repository uses ES modules (`"type": "module"`). Its npm dependencies suppor
 ### Create the local development extension
 
 ```bash
-npm run setup:dev
+npm run dev:setup
 ```
 
-[`scripts/setup-dev.js`](../../scripts/setup-dev.js) imports [`scripts/sync-dev.js`](../../scripts/sync-dev.js), which creates a separate extension directory at:
+[`scripts/dev/setup.js`](../../scripts/dev/setup.js) explicitly calls the `syncDev` function exported by [`scripts/dev/sync.js`](../../scripts/dev/sync.js), which creates a separate extension directory at:
 
 ```text
 ~/.vscode/extensions/jacobcassidy.cassidy-dark-dev/
@@ -63,15 +63,15 @@ The development manifest registers:
 
 Run **Developer: Reload Window** in VS Code, then open **Preferences: Color Theme** and select a Cassidy Dark Dev theme. The development identity allows it to coexist with the Marketplace extension.
 
-Edits to linked theme files reach the development extension directly. Theme entries include `_watch: true`; reload the VS Code window if an edit is not reflected. Open the files in `previews/` and representative files from other languages to inspect highlighting. **Developer: Inspect Editor Tokens and Scopes** helps identify which TextMate or semantic token rules apply.
+Edits to linked theme files reach the development extension directly. Theme entries include `_watch: true`; reload the VS Code window if an edit is not reflected. Open the files in `dev/previews/` and representative files from other languages to inspect highlighting. **Developer: Inspect Editor Tokens and Scopes** helps identify which TextMate or semantic token rules apply.
 
 After changing manifest metadata or adding or removing development theme files, regenerate the development manifest and reload VS Code:
 
 ```bash
-npm run sync:dev-pkgJSON
+npm run dev:sync
 ```
 
-Both development commands run the same sync logic; `setup:dev` additionally prints the reload reminder. There is no file-watching process that continually regenerates the manifest. The script always targets the standard `~/.vscode/extensions` location rather than discovering custom extension directories or alternate VS Code editions.
+Both development commands run the same sync logic; `dev:setup` additionally prints the reload reminder. Importing the sync module does not install or change an extension. The function accepts an alternate repository root and extension directory for isolated testing. There is no file-watching process that continually regenerates the manifest. The CLI defaults to the standard `~/.vscode/extensions` location; it does not discover custom extension directories or alternate VS Code editions.
 
 For safety, the sync script refuses to use a symlink for the development extension directory or its generated manifest. Existing asset links must point to this checkout. If the checkout moves, inspect and repair those development links before running setup again.
 
@@ -81,14 +81,19 @@ Make production changes in `themes/cassidy-dark-color-theme.json`. Files in `dev
 
 The editor settings in `.vscode/` recommend Prettier, ESLint, Markdown linting, and color inspection tools. Prettier formats on save, using two-space indentation and the repository configuration.
 
-| Command                    | Behavior                                         |
-| -------------------------- | ------------------------------------------------ |
-| `npm run check`            | Check Prettier formatting across the repository. |
-| `npm run format`           | Rewrite files using Prettier.                    |
-| `npm run lint:docs`        | Lint Markdown files.                             |
-| `npm run lint:docs:fix`    | Apply available Markdown lint fixes.             |
-| `npm run lint:scripts`     | Lint JavaScript with ESLint.                     |
-| `npm run lint:scripts:fix` | Apply available ESLint fixes.                    |
+| Command                    | Behavior                                                                                                         |
+| -------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| `npm run check`            | Run formatting, Markdown linting, JavaScript linting, theme validation, and tests.                               |
+| `npm run format:check`     | Check Prettier formatting across the repository.                                                                 |
+| `npm run format`           | Rewrite files using Prettier.                                                                                    |
+| `npm run lint:docs`        | Lint Markdown files, including curated palette references.                                                       |
+| `npm run lint:docs:fix`    | Apply available Markdown lint fixes.                                                                             |
+| `npm run lint:scripts`     | Lint JavaScript with ESLint using Node.js globals.                                                               |
+| `npm run lint:scripts:fix` | Apply available ESLint fixes.                                                                                    |
+| `npm run check:theme`      | Parse production and development theme JSONC, check basic structure, and verify manifest theme and icon files.   |
+| `npm test`                 | Run the Node.js tests for validation failures and development extension protections using temporary directories. |
+
+The existing `setup:dev`, `sync:dev-pkgJSON`, and `publish:azure` commands remain aliases for `dev:setup`, `dev:sync`, and `release:queue`, respectively.
 
 [`lefthook.yml`](../../lefthook.yml) defines a pre-commit hook that runs ESLint, Markdown linting, and Prettier in that order against matching staged files. Each command can fix files and stage the fixes. To explicitly install the configured hooks locally, run:
 
@@ -96,25 +101,30 @@ The editor settings in `.vscode/` recommend Prettier, ESLint, Markdown linting, 
 npx lefthook install
 ```
 
-There is no automated test suite or `npm test` script. Check visual changes in VS Code as well as running the formatting and lint commands. The publishing pipeline does not run these development checks.
+The tests cover repeatable development synchronization, source-manifest preservation, symlink protections, JSONC syntax and structure errors, and missing manifest assets. Theme validation checks basic structure rather than the entire VS Code theme schema. Check visual changes in VS Code as well as running `npm run check`; automated checks cannot establish how a theme looks. The publishing pipeline runs the same aggregate check before packaging.
 
 ## Building the extension
 
-The build is a packaging operation using the VS Code extension CLI, `@vscode/vsce`. There is no `npm run build` or `vscode:prepublish` script.
+The build is a packaging operation using the VS Code extension CLI, `@vscode/vsce`, installed as a development dependency by `npm ci`. There is no theme generation, `npm run build`, or `vscode:prepublish` script.
 
-For a local package, install the CLI, then package the current checkout:
+Validate and package the current checkout:
 
 ```bash
-npm install -g @vscode/vsce
-version=$(node -p "require('./package.json').version")
-vsce package --out "cassidy-dark-$version.vsix"
+npm run check
+npm run package
 ```
 
-This creates a local VSIX without publishing it. In VS Code, use **Extensions: Install from VSIX...** to install the archive and inspect the packaged theme.
+[`scripts/release/package.sh`](../../scripts/release/package.sh) reads the version from `package.json`, creates the destination directory, and invokes the local `vsce` executable. The default output is `dist/cassidy-dark-VERSION.vsix`. To choose another output file, pass its path after `--`:
 
-The manifest selects `themes/cassidy-dark-color-theme.json` as the only published theme. `.vscodeignore` excludes development themes, documentation, previews, scripts, editor settings, and the listed tooling configuration files. The package carries the production theme, manifest, and distributable assets such as the README, changelog, license, and images. Generated `*.vsix` archives are also ignored by Git.
+```bash
+npm run package -- /absolute/path/to/cassidy-dark-VERSION.vsix
+```
 
-The pipeline uses the same `vsce package` operation. It installs `@vscode/vsce` globally without pinning its version, uses the Node.js available on the hosted agent, and does not run `npm ci` or compile assets. Consequently, the lockfile governs local development tools but does not pin the pipeline's packaging toolchain.
+Relative output paths resolve from the repository root. Packaging does not publish or automatically run checks; the commands above and the pipeline run checks explicitly. In VS Code, use **Extensions: Install from VSIX...** to install the archive and inspect the packaged theme.
+
+The manifest selects `themes/cassidy-dark-color-theme.json` as the only published theme. `.vscodeignore` excludes development themes and previews, documentation, scripts, tests, editor settings, agent instructions, the Node.js version file, generated output, and the listed tooling configuration files. The package carries the production theme, manifest, and distributable assets such as the README, changelog, license, and images. `dist/` and generated `*.vsix` archives are ignored by Git.
+
+The pipeline uses the same `npm run package` entry point with its artifact staging destination. Local development and the pipeline both use `npm ci` and the CLI resolved in `package-lock.json`; neither requires a global `vsce` installation. The manifest's `allowScripts` entries permit the declared Lefthook, resolver, and VSIX signing helper installation scripts when using npm versions that enforce that setting.
 
 ## Release configuration
 
@@ -136,7 +146,7 @@ The pipeline and helper scripts refer to these resources:
 
 Marketplace publication uses `vsce publish --azure-credential` inside an `AzureCLI@3` task authenticated through `vscode_publishing_connection`. The task is labeled as using managed identity. That service connection and the corresponding identity's authorization to publish under `jacobcassidy` must already be configured outside this repository. The YAML references the connection; it does not create the identity or grant its permissions.
 
-GitHub publication uses the separate `GH_TOKEN` secret, passed to the relevant pipeline steps. The GitHub CLI (`gh`) must be available on the agent; the YAML checks its authentication but does not install it. The pipeline installs `vsce` itself.
+GitHub publication uses the separate `GH_TOKEN` secret, passed to the relevant pipeline steps. The GitHub CLI (`gh`) must be available on the agent; the YAML checks its authentication but does not install it. The pipeline installs its locked Node.js tools with `npm ci`.
 
 To submit a run from your computer, the Azure CLI must be installed, authenticated for this organization, and have the Azure DevOps extension available for `az pipelines run`. Your Azure DevOps account must be allowed to queue the pipeline. Local GitHub or Marketplace credentials are not used by the submission script; publication uses the pipeline's credentials.
 
@@ -151,24 +161,22 @@ To submit a run from your computer, the Azure CLI must be installed, authenticat
 
    ```bash
    npm run check
-   npm run lint:docs
-   npm run lint:scripts
-   bash scripts/changelog-notes.sh
+   bash scripts/release/changelog-notes.sh
    ```
 
 5. Commit the release changes and push them to `main` on the remote used by the Azure pipeline. Confirm the intended release commit is on that branch before starting publication.
 
-[`scripts/changelog-notes.sh`](../../scripts/changelog-notes.sh) reads the manifest version and extracts the body below the matching `## [VERSION]` heading, stopping at the next level-two heading. It fails if that section is missing or empty. Entries under `[Unreleased]` do not become release notes automatically.
+[`scripts/release/changelog-notes.sh`](../../scripts/release/changelog-notes.sh) reads the manifest version and extracts the body below the matching `## [VERSION]` heading, stopping at the next level-two heading. It fails if that section is missing or empty. Entries under `[Unreleased]` do not become release notes automatically.
 
 ### Start the pipeline
 
 From a local checkout on `main`, run:
 
 ```bash
-npm run publish:azure
+npm run release:queue
 ```
 
-[`scripts/publish-azure.sh`](../../scripts/publish-azure.sh) rejects any branch other than `main`, including detached HEAD, then submits:
+[`scripts/release/publish-azure.sh`](../../scripts/release/publish-azure.sh) rejects any branch other than `main`, including detached HEAD, then submits:
 
 ```bash
 az pipelines run \
@@ -185,17 +193,18 @@ The command queues the remote `main` branch and opens the run in the browser. It
 
 The pipeline performs these steps in order:
 
-1. **Checkout and preflight.** Check out the source, require `BUILD_SOURCEBRANCH` to equal `refs/heads/main`, require `GH_TOKEN`, validate the version's changelog notes, check GitHub authentication and repository access, and install `@vscode/vsce` globally. This preflight does not verify Marketplace publisher permissions.
-2. **Package once.** Read `package.json.version` and write `cassidy-dark-VERSION.vsix` into `BUILD_ARTIFACTSTAGINGDIRECTORY`. Save the path in the pipeline variable `ExtensionVsix`.
-3. **Preserve the VSIX.** Upload it as the Azure pipeline artifact `extension-vsix` before either publication step.
-4. **Publish to the VS Code Marketplace.** Authenticate through `vscode_publishing_connection` and run `vsce publish --azure-credential --packagePath "$EXTENSION_VSIX"`.
-5. **Publish the GitHub release.** Run `scripts/create-github-release.sh` with that same VSIX, using `GH_TOKEN`.
+1. **Checkout and preflight.** Check out the source, select Node.js 24, require `BUILD_SOURCEBRANCH` to equal `refs/heads/main`, require `GH_TOKEN`, validate the version's changelog notes, and check GitHub authentication and repository access. This preflight does not verify Marketplace publisher permissions.
+2. **Install and validate.** Run `npm ci` to install the locked development and packaging tools, then run `npm run check`. A failed check stops publication.
+3. **Package once.** Read `package.json.version` and call `npm run package` to write `cassidy-dark-VERSION.vsix` into `BUILD_ARTIFACTSTAGINGDIRECTORY`. Save the path in the pipeline variable `ExtensionVsix`.
+4. **Preserve the VSIX.** Upload it as the Azure pipeline artifact `extension-vsix` before either publication step.
+5. **Publish to the VS Code Marketplace.** Authenticate through `vscode_publishing_connection` and run the local CLI with `publish --azure-credential --packagePath "$EXTENSION_VSIX"`.
+6. **Publish the GitHub release.** Run `scripts/release/create-github-release.sh` with that same VSIX, using `GH_TOKEN`.
 
 Both destinations receive the same packaged file. Marketplace publication runs first; if it fails, the subsequent GitHub step does not run under the pipeline's default success conditions. If GitHub publication fails afterward, the Marketplace version can already be live.
 
 ### GitHub release behavior
 
-[`scripts/create-github-release.sh`](../../scripts/create-github-release.sh) derives the tag and release title as `vVERSION` from `package.json`, and supplies the matching changelog body as release notes. For a new release, it targets `BUILD_SOURCEVERSION` in Azure Pipelines, or the current `git rev-parse HEAD` when run locally. The GitHub CLI creates the tag if needed as part of release creation; no separate tag push is scripted.
+[`scripts/release/create-github-release.sh`](../../scripts/release/create-github-release.sh) derives the tag and release title as `vVERSION` from `package.json`, and supplies the matching changelog body as release notes. For a new release, it targets `BUILD_SOURCEVERSION` in Azure Pipelines, or the current `git rev-parse HEAD` when run locally. The GitHub CLI creates the tag if needed as part of release creation; no separate tag push is scripted.
 
 For an existing release, the helper checks the VSIX asset's filename. It uploads the file if that name is missing, or skips it if the name is already present. It does not compare file contents, replace existing assets, update existing release notes, or retarget an existing tag. The release helper itself has no branch guard; the normal submission script and pipeline enforce `main`.
 
@@ -213,7 +222,7 @@ If Marketplace publication succeeded and only GitHub publication failed:
 4. Run the GitHub helper with the absolute path to the downloaded VSIX:
 
    ```bash
-   bash scripts/create-github-release.sh /absolute/path/to/cassidy-dark-VERSION.vsix
+   npm run release:github -- /absolute/path/to/cassidy-dark-VERSION.vsix
    ```
 
 This runs only GitHub publication and can fill in a missing release or missing asset. It still validates the changelog and token even when an asset already exists. For an incorrect existing asset, release description, or tag target, review and correct that GitHub resource explicitly; the helper leaves it in place.

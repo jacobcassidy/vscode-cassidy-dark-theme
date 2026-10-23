@@ -4,8 +4,17 @@ All notable changes to this project are documented in this file.
 
 ## [Unreleased]
 
+### Added
+
+- Added shared local and pipeline packaging with a locked VS Code extension CLI and a Node.js 24 baseline.
+- Added JSONC theme and manifest asset validation, with tests for validation failures and development extension protections.
+
 ### Changed
 
+- Grouped development and release scripts by purpose, moved preview samples into `dev/previews`, and retained existing npm command aliases.
+- Made `npm run check` run formatting, Markdown linting, JavaScript linting, theme validation, and tests before pipeline packaging.
+- Curated the palette development reference and updated the development guide.
+- Removed installation metadata from the extension manifest and aligned the lockfile version.
 - Full refactor of workbench colors
 - Updated `terminal.ansiBrightBlack` to #929292 from #636363.
 - Updated semanticTokenColors namespace from purple-deep to purple-base color.

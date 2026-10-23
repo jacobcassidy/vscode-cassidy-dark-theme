@@ -4,5 +4,6 @@
 # IGNORE DEVELOPMENT FILES
 docs/development/TODO.md
 node_modules
+dist/
 .vsixmanifest
 *.vsix
