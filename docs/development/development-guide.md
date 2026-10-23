@@ -94,17 +94,18 @@ Make production changes in `themes/cassidy-dark-color-theme.json`. Files in `dev
 
 The editor settings in `.vscode/` recommend Prettier, ESLint, Markdown linting, and color inspection tools. Prettier formats on save, using two-space indentation and the repository configuration.
 
-| Command                    | Behavior                                                                                                         |
-| -------------------------- | ---------------------------------------------------------------------------------------------------------------- |
-| `npm run check`            | Run formatting, Markdown linting, JavaScript linting, theme validation, and tests.                               |
-| `npm run format:check`     | Check Prettier formatting across the repository.                                                                 |
-| `npm run format`           | Rewrite files using Prettier.                                                                                    |
-| `npm run lint:docs`        | Lint Markdown files, including curated palette references.                                                       |
-| `npm run lint:docs:fix`    | Apply available Markdown lint fixes.                                                                             |
-| `npm run lint:scripts`     | Lint JavaScript with ESLint using Node.js globals.                                                               |
-| `npm run lint:scripts:fix` | Apply available ESLint fixes.                                                                                    |
-| `npm run check:theme`      | Parse production and development theme JSONC, check basic structure, and verify manifest theme and icon files.   |
-| `npm test`                 | Run the Node.js tests for validation failures and development extension protections using temporary directories. |
+| Command                  | Behavior                                                                                                         |
+| ------------------------ | ---------------------------------------------------------------------------------------------------------------- |
+| `npm run check`          | Run formatting, Markdown linting, JavaScript linting, theme validation, and tests.                               |
+| `npm run check:prettier` | Check Prettier formatting across the repository.                                                                 |
+| `npm run format`         | Rewrite files using Prettier.                                                                                    |
+| `npm run lint`           | Run both Markdown and JavaScript lint checks.                                                                    |
+| `npm run lint:md`        | Lint Markdown files, including curated palette references.                                                       |
+| `npm run lint:md:fix`    | Apply available Markdown lint fixes.                                                                             |
+| `npm run lint:es`        | Lint JavaScript with ESLint using Node.js globals.                                                               |
+| `npm run lint:es:fix`    | Apply available ESLint fixes.                                                                                    |
+| `npm run check:theme`    | Parse production and development theme JSONC, check basic structure, and verify manifest theme and icon files.   |
+| `npm test`               | Run the Node.js tests for validation failures and development extension protections using temporary directories. |
 
 [`lefthook.yml`](../../lefthook.yml) defines a pre-commit hook that runs ESLint, Markdown linting, and Prettier in that order against matching staged files. Each command can fix files and stage the fixes. To explicitly install the configured hooks locally, run:
 

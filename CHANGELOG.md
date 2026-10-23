@@ -14,6 +14,7 @@ All notable changes to this project are documented in this file.
 ### Changed
 
 - Expanded the PHP grammar sample with PHPDoc, imports, attributes, enums, traits, literals, interpolation, operators, callables, control flow, generators, and embedded HTML while preserving its original property type probes.
+- Renamed formatting and lint commands, and added `npm run lint` to run Markdown and JavaScript lint checks.
 - Moved the development extension reload reminder into `dev:sync`, removed the redundant `dev:setup` command, and removed the legacy `setup:dev`, `sync:dev-pkgJSON`, and `publish:azure` aliases. Use `dev:sync` and `release:queue`.
 - Grouped development and release scripts by purpose and moved highlighting samples into `dev/samples`, including the renamed PHP fixture.
 - Made `npm run check` run formatting, Markdown linting, JavaScript linting, theme validation, and tests before pipeline packaging.
