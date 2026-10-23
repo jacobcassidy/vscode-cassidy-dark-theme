@@ -12,6 +12,7 @@ All notable changes to this project are documented in this file.
 
 ### Changed
 
+- Expanded the PHP grammar sample with PHPDoc, imports, attributes, enums, traits, literals, interpolation, operators, callables, control flow, generators, and embedded HTML while preserving its original property type probes.
 - Grouped development and release scripts by purpose, moved highlighting samples into `dev/samples` and renamed the PHP fixture to `php-grammar-sample.php`, and retained existing npm command aliases.
 - Made `npm run check` run formatting, Markdown linting, JavaScript linting, theme validation, and tests before pipeline packaging.
 - Curated the palette development reference and updated the development guide.
