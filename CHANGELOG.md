@@ -6,6 +6,7 @@ All notable changes to this project are documented in this file.
 
 ### Added
 
+- Added a TypeScript grammar sample covering advanced type operators, generics, declarations, decorators, resource management, and runtime syntax, with a samples-only compiler configuration.
 - Added JavaScript and Python grammar samples covering literals, imports, annotations, classes, control flow, generators, and asynchronous syntax.
 - Added shared local and pipeline packaging with a locked VS Code extension CLI and a Node.js 24 baseline.
 - Added JSONC theme and manifest asset validation, with tests for validation failures and development extension protections.
