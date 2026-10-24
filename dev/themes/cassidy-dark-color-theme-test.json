@@ -1,8 +1,9 @@
 {
   "$schema": "vscode://schemas/color-theme",
-  "name": "Cassidy Dark Dev (Test)",
+  "name": "Cassidy Dark",
   "type": "dark",
   "author": "Jacob Cassidy",
+  "version": "test",
   "semanticHighlighting": true,
   "colors": {
     "activityBar.activeBackground": "#292929", // [base] (match `sideBar.background`)
