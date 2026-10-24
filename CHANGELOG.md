@@ -6,6 +6,7 @@ All notable changes to this project are documented in this file.
 
 ### Added
 
+- Added a source-based workbench color audit covering missing stable and upcoming colors, deprecated IDs, and reference entries absent from current VS Code registrations.
 - Added a TypeScript grammar sample covering advanced type operators, generics, declarations, decorators, resource management, and runtime syntax, with a samples-only compiler configuration.
 - Added JavaScript and Python grammar samples covering literals, imports, annotations, classes, control flow, generators, and asynchronous syntax.
 - Added shared local and pipeline packaging with a locked VS Code extension CLI and a Node.js 24 baseline.
