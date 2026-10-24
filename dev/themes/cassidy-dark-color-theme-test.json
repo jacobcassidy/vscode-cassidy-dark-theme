@@ -354,7 +354,7 @@
     "terminal.ansiBrightBlue": "#62a1f0", // -color--blue-deep [overrides core #3b8eea]
     "terminal.ansiBrightCyan": "#35c5c5", // -color--cyan-deep [overrides core #29b8db]
     "terminal.ansiBrightGreen": "#79b158", // -color--green-deep [overrides core #23d18b]
-    "terminal.ansiBrightMagenta": "#bd84d7", // -color--pink-deep [overrides core #d670d6]
+    "terminal.ansiBrightMagenta": "#bd84d7", // -color--purple-deep [overrides core #d670d6]
     "terminal.ansiBrightRed": "#db6656", // -color--red-deep [overrides core red #f14c4c]
     "terminal.ansiBrightWhite": "#f8f8f8", // -color--white [overrides core #e5e5e5]
     "terminal.ansiBrightYellow": "#d7bb70", // -color--yellow-deep [overrides core #f5f543]
