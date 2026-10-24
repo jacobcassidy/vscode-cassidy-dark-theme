@@ -45,7 +45,7 @@ src/
         tokens/
           semantic.jsonc
           syntax.jsonc
-          workbench.jsonc
+          ui.jsonc
         metadata.jsonc
       v1.3/
         colors/
@@ -58,7 +58,7 @@ src/
         tokens/
           semantic.jsonc
           syntax.jsonc
-          workbench.jsonc
+          ui.jsonc
         metadata.jsonc
   production/
     themes/
@@ -73,7 +73,7 @@ src/
         tokens/
           semantic.jsonc
           syntax.jsonc
-          workbench.jsonc
+          ui.jsonc
         metadata.jsonc
       high-contrast/
         colors/
@@ -86,7 +86,7 @@ src/
         tokens/
           semantic.jsonc
           syntax.jsonc
-          workbench.jsonc
+          ui.jsonc
         metadata.jsonc
 tests/                           # Automated tests and test helpers
 themes/                          # Generated production themes shipped in VSIX
@@ -110,7 +110,7 @@ Every target uses the same six input paths relative to its theme directory:
 | ------------------------ | ------------------------------------------------------------------------------------------------------------------------------- |
 | `colors/palette.jsonc`   | Palette parameters: hue/lightness anchors, chroma settings, neutrals, and documented primitive overrides.                       |
 | `colors/variables.jsonc` | Named color variables, including aliases to palette primitives and other variables, optional alpha, and documentation metadata. |
-| `tokens/workbench.jsonc` | VS Code `colors` mappings for workbench and editor UI.                                                                          |
+| `tokens/ui.jsonc`        | VS Code `colors` mappings for workbench and editor UI.                                                                          |
 | `tokens/semantic.jsonc`  | VS Code `semanticHighlighting` and `semanticTokenColors` settings.                                                              |
 | `tokens/syntax.jsonc`    | VS Code TextMate `tokenColors` rules, preserving scope ordering and styles.                                                     |
 | `metadata.jsonc`         | Root theme properties currently held in `base.jsonc`, such as schema, name, type, and author.                                   |
@@ -192,11 +192,11 @@ Use the current checkout as the baseline; several tooling and snapshot moves fro
 | `palette/source/palette.jsonc`                  | `src/production/themes/default/colors/palette.jsonc`               |
 | `src/tokens.jsonc`                              | `src/production/themes/default/colors/variables.jsonc`             |
 | `src/theme/base.jsonc`                          | `src/production/themes/default/metadata.jsonc`                     |
-| `src/theme/colors.jsonc`                        | `src/production/themes/default/tokens/workbench.jsonc`             |
+| `src/theme/colors.jsonc`                        | `src/production/themes/default/tokens/ui.jsonc`                    |
 | `src/theme/semantic.jsonc`                      | `src/production/themes/default/tokens/semantic.jsonc`              |
 | `src/theme/syntax.jsonc`                        | `src/production/themes/default/tokens/syntax.jsonc`                |
 | `dev/experiments/<name>/base.jsonc`             | `src/local/themes/<name>/metadata.jsonc`                           |
-| `dev/experiments/<name>/colors.jsonc`           | `src/local/themes/<name>/tokens/workbench.jsonc`                   |
+| `dev/experiments/<name>/colors.jsonc`           | `src/local/themes/<name>/tokens/ui.jsonc`                          |
 | `dev/experiments/<name>/semantic.jsonc`         | `src/local/themes/<name>/tokens/semantic.jsonc`                    |
 | `dev/experiments/<name>/syntax.jsonc`           | `src/local/themes/<name>/tokens/syntax.jsonc`                      |
 | Optional `dev/experiments/<name>/palette.jsonc` | `src/local/themes/<name>/colors/palette.jsonc`                     |
@@ -234,7 +234,7 @@ Keep the existing release command names and pipeline publishing behavior. An aut
 
 ### 2. Migrate the default source and report layout
 
-- [ ] Move the six default inputs according to the migration mapping, including `tokens.jsonc` to `colors/variables.jsonc` and `colors.jsonc` to `tokens/workbench.jsonc`.
+- [ ] Move the six default inputs according to the migration mapping, including `tokens.jsonc` to `colors/variables.jsonc` and `colors.jsonc` to `tokens/ui.jsonc`.
 - [ ] Move and rename default reports and update generation notices, Markdown image references, and documentation links.
 - [ ] Update path constants, imports, formatter/linter discovery, tests, and build entry points affected by the layout.
 - [ ] Confirm the default rebuild preserves parsed theme data and palette measurements.
