@@ -1,4 +1,4 @@
-# Colors Other Themes Use
+# Colors Third-Party Themes Use
 
 ## [Default VSCode Dark Colors](https://github.com/microsoft/vscode/blob/94c9ea46838a9a619aeafb7e8afd1170c967bb55/extensions/theme-defaults/themes/dark_vs.json)
 
