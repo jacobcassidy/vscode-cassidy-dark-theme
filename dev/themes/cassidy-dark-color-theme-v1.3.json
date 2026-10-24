@@ -690,7 +690,7 @@
     "quickInputList.focusForeground": "#f0f",
     "quickInputList.focusHighlightForeground": "#f0f",
     "quickInputList.focusIconForeground": "#f0f",
-    "quickInputTitle.background": "#424242",
+    "quickInputTitle.background": "#f0f",
     "radio.activeBackground": "#f0f",
     "radio.activeBorder": "#f0f",
     "radio.activeForeground": "#f0f",
