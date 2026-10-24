@@ -622,7 +622,7 @@
         }
       }
     },
-    // The narrow marker strip beside the editor scrollbar.
+    // The marker strip behind the editor scrollbar.
     "editorOverviewRuler": {
       "addedForeground": {
         "color": "palette.green.400",
