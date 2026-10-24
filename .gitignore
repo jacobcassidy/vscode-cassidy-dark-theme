@@ -2,8 +2,8 @@
 .DS_Store
 
 # IGNORE DEVELOPMENT FILES
-docs/development/TODO.md
-node_modules
-dist/
-.vsixmanifest
 *.vsix
+.vsixmanifest
+TODO.md
+dist/
+node_modules
