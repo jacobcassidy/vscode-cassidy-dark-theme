@@ -5,7 +5,7 @@ import { join } from "node:path";
 import test from "node:test";
 import { parse } from "jsonc-parser";
 import { buildTheme, renderTemplate } from "../scripts/build-theme.js";
-import { fromHex, inGamut, maxChroma, toHex, withAlpha } from "../scripts/lib/colors.js";
+import { contrastRatio, fromHex, inGamut, maxChroma, toHex, withAlpha } from "../scripts/lib/colors.js";
 import { parseJsonc } from "../scripts/lib/jsonc.js";
 import { generatePalette, resolveTokens } from "../scripts/lib/palette.js";
 
@@ -80,6 +80,16 @@ test("yellow's selected anchor generates the agreed five tones", () => {
   assert.equal(palette.get("palette.yellow.300").target.l, 0.975);
   assert.equal(palette.get("palette.yellow.400").target.c, 0.075);
   assert.equal(palette.get("palette.yellow.400-muted").resolved.c, palette.get("palette.yellow.400").resolved.c / 2);
+});
+
+test("contrast uses exported sRGB luminance and requires opaque colors", () => {
+  assert.equal(contrastRatio("#fff", "#000"), 21);
+  assert.equal(contrastRatio("#f8f8f8", "#f8f8f8"), 1);
+  assert.equal(contrastRatio("#f8f8f8", "#1e70ce").toFixed(2), "4.64");
+  assert.equal(contrastRatio("#1e70ce", "#f8f8f8ff"), contrastRatio("#f8f8f8", "#1e70ce"));
+  assert.equal(contrastRatio("#f8f8f8", "#1e70ce80"), null);
+  assert.equal(contrastRatio("#fff8", "#000"), null);
+  assert.throws(() => contrastRatio("invalid", "#000"), /hex color/);
 });
 
 test("default chroma, zero anchors, gamut headroom, and override policy", () => {
@@ -293,6 +303,27 @@ test("failed validation leaves all previous outputs intact and palette-only mode
   assert.equal((await buildTheme({ root, paletteOnly: true })).changed.length, 0);
 });
 
+test("palette reports include 600 contrast from final hex and flag translucent overrides", async (t) => {
+  const root = await fixture(t);
+  await buildTheme({ root, paletteOnly: true });
+  const path = join(root, "docs/references/palettes/generated/palette.generated.md");
+  const markdown = await readFile(path, "utf8");
+  const section = markdown.split("## Tone 600 contrast")[1].split("## Full palette")[0];
+  assert.match(section, /Foreground: `#f8f8f8`/);
+  assert.match(section, /`palette.blue.600`\s*\|\s*`#1e70ce`\s*\|\s*4\.64:1/);
+  assert.match(section, /`palette.yellow.600`\s*\|\s*`#bd9a2c`\s*\|\s*2\.53:1/);
+  assert.doesNotMatch(section, /palette\.gray|palette\.blue\.500/);
+  const input = configuration();
+  input.overrides["palette.blue.600"] = { hex: "#000000", reason: "Check exported override contrast" };
+  await writeFile(join(root, "src/palette.jsonc"), JSON.stringify(input));
+  await buildTheme({ root, paletteOnly: true });
+  assert.match(await readFile(path, "utf8"), /`palette.blue.600`\s*\|\s*`#000000`\s*\|\s*19\.77:1/);
+  input.overrides["palette.blue.600"].hex = "#00000080";
+  await writeFile(join(root, "src/palette.jsonc"), JSON.stringify(input));
+  await buildTheme({ root, paletteOnly: true });
+  assert.match(await readFile(path, "utf8"), /`palette.blue.600`\s*\|\s*`#00000080`\s*\|\s*Needs backdrop/);
+});
+
 test("the authored palette keeps base syntax and colored control text readable", async () => {
   const config = parseJsonc(await readFile(new URL("../src/palette.jsonc", import.meta.url), "utf8"), "palette").value;
   const aliases = parseJsonc(await readFile(new URL("../src/tokens.jsonc", import.meta.url), "utf8"), "tokens").value;
@@ -300,21 +331,8 @@ test("the authored palette keeps base syntax and colored control text readable",
   const palette = generatePalette(config);
   const theme = parse(renderTemplate(source, resolveTokens(aliases, palette), palette));
 
-  function luminance(hex) {
-    return [1, 3, 5]
-      .map((offset) => Number.parseInt(hex.slice(offset, offset + 2), 16) / 255)
-      .map((value) => (value <= 0.04045 ? value / 12.92 : ((value + 0.055) / 1.055) ** 2.4))
-      .reduce((sum, value, index) => sum + value * [0.2126, 0.7152, 0.0722][index], 0);
-  }
-
-  function contrast(foreground, background) {
-    const [low, high] = [luminance(foreground), luminance(background)].sort((a, b) => a - b);
-
-    return (high + 0.05) / (low + 0.05);
-  }
-
   for (const name of Object.keys(config.families)) {
-    assert.ok(contrast(palette.get(`palette.${name}.400`).hex, theme.colors["editor.background"]) >= 4.5, name);
+    assert.ok(contrastRatio(palette.get(`palette.${name}.400`).hex, theme.colors["editor.background"]) >= 4.5, name);
   }
 
   for (const [background, foreground] of [
@@ -322,6 +340,6 @@ test("the authored palette keeps base syntax and colored control text readable",
     ["button.hoverBackground", "button.foreground"],
     ["statusBar.debuggingBackground", "statusBar.debuggingForeground"],
   ]) {
-    assert.ok(contrast(theme.colors[foreground], theme.colors[background]) >= 4.5, background);
+    assert.ok(contrastRatio(theme.colors[foreground], theme.colors[background]) >= 4.5, background);
   }
 });

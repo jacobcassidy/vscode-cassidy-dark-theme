@@ -6,6 +6,7 @@ All notable changes to this project are documented in this file.
 
 ### Added
 
+- Added generated contrast ratios for each chromatic `600` tone against foreground `#f8f8f8` in the Markdown palette report, calculated from exported sRGB hex values.
 - Added palette and theme generation from JSONC palette inputs, semantic tokens, and a comment-preserving theme template, with generated JSON/Markdown/SVG palette references and stale-output checks in validation and packaging.
 - Added tests for color conversions, gamut limits, base chroma anchors, aliases, alpha handling, template preservation, deterministic output, and failed builds.
 - Added a color system proposal based on the v1.3 palette, with shared OKLCH variant rules, semantic color roles, an sRGB export policy, and contrast checks.

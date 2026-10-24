@@ -78,6 +78,24 @@ export function withAlpha(hex, alpha) {
         .padStart(2, "0")}`;
 }
 
+// WCAG relative luminance and contrast: https://www.w3.org/TR/WCAG22/#dfn-relative-luminance
+export function contrastRatio(foreground, background) {
+  const colors = [foreground, background].map(normalizeHex);
+
+  if (colors.some((hex) => hex.length === 9 && !hex.endsWith("ff"))) return null;
+
+  const luminances = colors.map((hex) =>
+    [1, 3, 5]
+      .map((offset) => Number.parseInt(hex.slice(offset, offset + 2), 16) / 255)
+      .map((value) => (value <= 0.04045 ? value / 12.92 : ((value + 0.055) / 1.055) ** 2.4))
+      .reduce((sum, value, index) => sum + value * [0.2126, 0.7152, 0.0722][index], 0),
+  );
+
+  const [low, high] = luminances.sort((a, b) => a - b);
+
+  return (high + 0.05) / (low + 0.05);
+}
+
 export function toHex(color) {
   if (!inGamut(color)) throw new Error("Cannot encode an out-of-gamut color");
 
