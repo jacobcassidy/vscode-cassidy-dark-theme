@@ -201,13 +201,13 @@ function reports(palette) {
   const svg = [
     `<svg xmlns="http://www.w3.org/2000/svg" width="760" height="${height}" viewBox="0 0 760 ${height}" role="img" aria-labelledby="title description">`,
     '<title id="title">Cassidy Dark generated palette</title>',
-    '<desc id="description">Rows show each color family with tones 300, 400, 400-muted, 500, and 600, followed by neutral swatches. Every swatch includes its hex value.</desc>',
+    '<desc id="description">Rows show each color family with tones 300, 400, 500, 600, and 400-muted, followed by neutral swatches. Every swatch includes its hex value.</desc>',
     `<rect width="760" height="${height}" fill="#242424"/>`,
     '<g font-family="monospace" font-size="13" fill="#f8f8f8">',
     '<text x="20" y="28">Cassidy Dark · Generated palette</text>',
   ];
 
-  for (const [index, tone] of ["300", "400", "400-muted", "500", "600"].entries()) {
+  for (const [index, tone] of ["300", "400", "500", "600", "400-muted"].entries()) {
     svg.push(`<text x="${132 + index * 122}" y="55">${tone}</text>`);
   }
 
@@ -216,7 +216,7 @@ function reports(palette) {
 
     svg.push(`<text x="20" y="${y + 24}">${xml(name)}</text>`);
 
-    for (const [column, tone] of ["300", "400", "400-muted", "500", "600"].entries()) {
+    for (const [column, tone] of ["300", "400", "500", "600", "400-muted"].entries()) {
       const x = 132 + column * 122;
       const hex = colors.get(tone);
 
