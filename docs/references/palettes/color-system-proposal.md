@@ -247,14 +247,16 @@ An excerpt from `src/palette.jsonc` could look like this. Each family generates 
 
 Internally, this produces primitive IDs such as `palette.cyan.400` and `palette.gray.900`. The complete configuration would include every neutral required by the theme. Allow primitive overrides with either explicit OKLCH coordinates or an exact sRGB hex, plus a required reason. Exact hex overrides support a migration that preserves the released colors; OKLCH overrides still pass through the export policy.
 
-Group semantic IDs by role in `src/tokens.jsonc`. Each leaf has a `color` reference or a documented hex literal. Place color notes above the property they describe. Nested paths resolve to dotted IDs such as `diff.added.foreground`; dotted semantic selectors such as `function.defaultLibrary` stay together as keys under `semantic` so they can coexist with the base `function` token:
+Group semantic IDs by role in `src/tokens.jsonc`. Each leaf has a `color` reference or a documented hex literal. Use optional [`details` metadata](../scheme/token-details.md) after `color` and optional `alpha` for a short usage description and nonempty inheritance or override lists. Nested paths resolve to dotted IDs such as `diff.added.foreground`; dotted semantic selectors such as `function.defaultLibrary` stay together as keys under `semantic` so they can coexist with the base `function` token:
 
 ```jsonc
 {
   "ui": {
     "activityBar": {
-      // Background when the activity bar is focused.
-      "activeBackground": { "color": "palette.gray.875" },
+      "activeBackground": {
+        "color": "palette.gray.875",
+        "details": { "for": "Active activity bar item backgrounds." },
+      },
     },
   },
   "syntax": {

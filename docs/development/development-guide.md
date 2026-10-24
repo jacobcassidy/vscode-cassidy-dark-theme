@@ -95,12 +95,12 @@ The PHP sample retains its original property type regression probes. It also inc
 Make production changes in `src/`, then run `npm run build:theme`:
 
 - `src/palette.jsonc`: hue and lightness anchors, optional `baseChroma`, shared chroma settings, neutrals, and documented primitive overrides.
-- `src/tokens.jsonc`: nested color roles with comments above their properties. Each leaf has a `color` palette/token reference or a hex exception with a required `reason`; include absolute `alpha` only when it is below 1. Dotted semantic selectors such as `function.defaultLibrary` stay together as keys under `semantic`.
+- `src/tokens.jsonc`: nested color roles with optional [`details` metadata](../references/scheme/token-details.md) for usage, inheritance, and overrides after `color` and optional `alpha`. Each leaf has a `color` palette/token reference or a hex exception with a required `reason`; include absolute `alpha` only when it is below 1. Dotted semantic selectors such as `function.defaultLibrary` stay together as keys under `semantic`.
 - `src/cassidy-dark-color-theme.jsonc`: theme structure, ordered scopes, font styles, and whole-string references such as `{syntax.string}`.
 
 Run `npm run build:palette` when you only need the complete palette. It writes JSON measurements, Markdown tables, and an SVG swatch sheet to `docs/references/palettes/generated/` without needing the token map or template. `build:theme` writes those reports plus `themes/cassidy-dark-color-theme.json`. Commit source and generated changes together; avoid editing generated files directly. No watch process runs automatically.
 
-The builder rejects duplicate JSONC keys, invalid settings, missing references, alias cycles, and placeholders outside color positions. Comments and scope order survive generation. Validation and formatting finish before output replacement. `check:generated` compares every artifact in memory without changing files and fails on missing or stale output.
+The builder rejects duplicate JSONC keys, invalid settings, empty or malformed details, missing references, alias cycles, and placeholders outside color positions. Details are documentation only and are excluded from generated artifacts. Comments and scope order survive generation. Validation and formatting finish before output replacement. `check:generated` compares every artifact in memory without changing files and fails on missing or stale output.
 
 Files in `dev/themes/` remain independent experiments: no script promotes or merges them into production.
 

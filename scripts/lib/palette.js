@@ -9,6 +9,27 @@ function record(target, resolved, hex = toHex(resolved), reason) {
   return { target, resolved, hex, exported: fromHex(hex), ...(reason ? { reason } : {}) };
 }
 
+function validateDetails(details, id) {
+  const label = `token ${id}.details`;
+
+  fields(details, ["for", "inherits", "overridden-by", "overrides"], label);
+
+  if (!Object.keys(details).length) throw new Error(`${label}: omit empty details`);
+
+  for (const [key, value] of Object.entries(details)) {
+    if (key === "for") {
+      if (typeof value !== "string" || !value.trim()) throw new Error(`${label}.for: expected a nonempty string`);
+    } else if (
+      !Array.isArray(value) ||
+      !value.length ||
+      value.some((token) => typeof token !== "string" || !token.trim()) ||
+      new Set(value).size !== value.length
+    ) {
+      throw new Error(`${label}.${key}: expected a nonempty array of unique token names`);
+    }
+  }
+}
+
 export function generatePalette(config) {
   fields(config, ["chroma", "families", "neutrals", "overrides"], "palette");
   fields(config.chroma, ["strength", "gamutFraction"], "palette.chroma");
@@ -133,14 +154,16 @@ export function resolveTokens(definitions, palette) {
 
       object(value, `token ${id}`);
 
-      if (["color", "alpha", "reason"].some((field) => Object.hasOwn(value, field))) {
-        fields(value, ["color", "alpha", "reason"], `token ${id}`);
+      if (["color", "alpha", "details", "reason"].some((field) => Object.hasOwn(value, field))) {
+        fields(value, ["color", "alpha", "details", "reason"], `token ${id}`);
 
         if (parts.length < 2 || typeof value.color !== "string" || !value.color.trim()) {
           throw new Error(`token ${id}: color must be a hex color or token reference in a named group`);
         }
 
         if (tokens.has(id)) throw new Error(`duplicate semantic token ID ${id}`);
+
+        if (Object.hasOwn(value, "details")) validateDetails(value.details, id);
 
         tokens.set(id, value);
       } else {

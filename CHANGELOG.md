@@ -18,6 +18,7 @@ All notable changes to this project are documented in this file.
 
 ### Changed
 
+- Replaced token color comments with optional validated `details` metadata for usage, inheritance, and overrides, using VS Code source registrations and reviewed rendering fallbacks.
 - Nested the authored color tokens by role, using `color` and optional `alpha` fields, and moved color notes from the theme template above their token properties.
 - Applied the generated eight-family palette, including yellow L90/C0.075/H90, numbered tones and `400-muted`; linked TextMate and semantic colors through shared aliases and adjusted primary-button and debugging-status-bar text contrast independently.
 - Set the proposed yellow base to L90/C0.075/H90 and added optional per-family base chroma anchors with derived tone generation and calculated yellow candidates.

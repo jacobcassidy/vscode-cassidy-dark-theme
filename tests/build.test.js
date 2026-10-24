@@ -252,6 +252,56 @@ test("token groups reject invalid IDs, reserved palette IDs, and ambiguous flatt
   );
 });
 
+test("token details document upstream relationships without resolving them as color aliases", () => {
+  const palette = generatePalette(configuration());
+  const tokens = resolveTokens(
+    {
+      ui: {
+        button: {
+          hoverBackground: {
+            color: "palette.blue.400",
+            alpha: 0.5,
+            details: {
+              for: "Primary buttons on hover.",
+              inherits: ["button.background"],
+              "overridden-by": ["extension.buttonHoverBackground"],
+              overrides: ["button.background"],
+            },
+          },
+        },
+      },
+    },
+    palette,
+  );
+
+  assert.equal(tokens.get("ui.button.hoverBackground"), `${palette.get("palette.blue.400").hex}80`);
+});
+
+test("token details reject unknown fields, empty values, and malformed relationship lists", () => {
+  const palette = generatePalette(configuration());
+
+  for (const details of [
+    null,
+    [],
+    {},
+    { typo: "Unknown" },
+    { for: "" },
+    { for: "  " },
+    { for: [] },
+    { inherits: [] },
+    { inherits: "foreground" },
+    { inherits: [""] },
+    { inherits: [123] },
+    { "overridden-by": ["foreground", "foreground"] },
+    { overrides: [null] },
+  ]) {
+    assert.throws(
+      () => resolveTokens({ ui: { custom: { color: "palette.blue.400", details } } }, palette),
+      /token ui.custom.details/,
+    );
+  }
+});
+
 test("JSONC parsing rejects duplicate keys and reports file locations", () => {
   assert.throws(
     () => parseJsonc('{\n "nested": {"a": 1, "a": 2}}', "input.jsonc"),
@@ -352,6 +402,19 @@ test("failed validation leaves all previous outputs intact and palette-only mode
   await rm(join(root, "src/tokens.jsonc"));
   await rm(join(root, "src/cassidy-dark-color-theme.jsonc"));
   assert.equal((await buildTheme({ root, paletteOnly: true })).changed.length, 0);
+});
+
+test("editing token details leaves all generated artifacts unchanged", async (t) => {
+  const root = await fixture(t);
+
+  await buildTheme({ root });
+
+  const input = definitions();
+
+  input.surface.editor.details = { for: "Editor background.", "overridden-by": ["terminal.background"] };
+  await writeFile(join(root, "src/tokens.jsonc"), JSON.stringify(input));
+  assert.deepEqual((await buildTheme({ root, check: true })).changed, []);
+  assert.deepEqual((await buildTheme({ root })).changed, []);
 });
 
 test("palette reports include 600 contrast from final hex and flag translucent overrides", async (t) => {
