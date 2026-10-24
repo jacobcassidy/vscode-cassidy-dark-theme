@@ -4,6 +4,7 @@ dev
 dist
 docs
 scripts
+src
 tests
 
 # Files to ignore

@@ -1,6 +1,6 @@
 # Cassidy Dark color system proposal
 
-Status: proposed design rules for the next palette revision. The [v1.3 palette](v1.3-palette.md) supplies the starting colors; the shipped theme remains the source of truth for released behavior. This document proposes a build step but does not implement it or change theme colors.
+Status: the build described here is implemented. Authoring inputs live in `src/`; the shipped theme and palette references are generated. The initial migration preserves released colors through documented overrides before applying the new palette. The [development guide](../../development/development-guide.md) describes the available commands, and the [generated palette](generated/palette.generated.md) shows the current output.
 
 ## Recommendation
 
@@ -140,7 +140,7 @@ Give usage decisions their own names, then map those names to primitives. A prim
 | `diagnostic.warning.foreground` | `palette.orange.400`     | Keep warning text readable on dark UI surfaces                          |
 | `diff.added.foreground`         | `palette.green.400`      | Pair with a separate translucent diff background                        |
 
-These aliases describe a future source model. VS Code theme entries still receive resolved hex colors; there is no token resolver in this repository today. The proposed build below separates palette parameters, usage aliases, and theme mappings while making them one authoritative source set for the generated theme.
+The implemented build separates palette parameters, usage aliases, and theme mappings into one authoritative source set. VS Code receives resolved hex values; token resolution runs at build time.
 
 Do not automatically equate `500` with hover, `600` with selection, or a diagnostic foreground with its background. Define hover and pressed states per component, keep their hue stable, and check their text and boundary contrast. Prefer adjusting a semantic UI color over distorting every syntax color to fix a button.
 
@@ -186,13 +186,13 @@ These are palette candidate checks, not a report that these pairs all ship today
 
 Do not make comments globally equal to neutral 400 without checking their other surfaces: `#929292` on input `#383838` is only 3.77:1. Likewise, choose foregrounds individually for filled controls; some fills may need a darker background or a lighter neutral rather than a simple light/dark foreground switch.
 
-## Proposed theme build
+## Theme build
 
 Use a small Node.js script that resolves color variables during development and packaging. VS Code continues to load the generated theme at the path already declared in `package.json`. No runtime color resolver is needed.
 
 ### Source and output files
 
-These are proposed paths, not files or commands available today:
+The build uses these paths:
 
 | Path                                   | Purpose                                                                                                          |
 | -------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
@@ -201,6 +201,8 @@ These are proposed paths, not files or commands available today:
 | `src/cassidy-dark-color-theme.jsonc`   | Full theme template with named color references, comments, scope arrays, and font styles                         |
 | `scripts/build-theme.js`               | Parameter validation, palette generation, alias resolution, template substitution, and output comparison/writing |
 | `themes/cassidy-dark-color-theme.json` | Committed generated theme; edit the source files after migration                                                 |
+
+`npm run build:palette` generates `palette.generated.json`, `palette.generated.md`, and `palette.generated.svg` under `docs/references/palettes/generated/`. JSON includes requested, resolved, and exported OKLCH values, hex values, and override reasons. The Markdown report includes the swatch sheet. This command needs only `src/palette.jsonc`; `npm run build:theme` generates those same reports and the resolved theme together.
 
 The dependency flow is:
 
@@ -291,7 +293,7 @@ This is an illustrative excerpt. Migrate the complete existing theme, including 
 
 ### Build behavior
 
-Implement one render function shared by write mode and check mode:
+The builder shares rendering between write mode and check mode:
 
 1. Parse every JSONC input, allowing comments and trailing commas, and report syntax errors with its file and location. Reject duplicate keys, unknown configuration fields, non-finite numbers, invalid parameter ranges, and generated lightness outside 0–1. Validate chroma, optional `baseChroma`, and strength as nonnegative, gamut fraction in 0–1, and hue anchors in the range 0–360, excluding 360.
 2. Resolve each family's `baseChroma` or its fallback, generate tone targets relative to the base anchor, apply documented overrides, and convert OKLCH colors to hex using the export policy. Keep target and exported measurements available for a future generated palette reference.
@@ -305,10 +307,11 @@ Finish validation before replacing the output; use a temporary sibling file and 
 
 ### Commands and release integration
 
-Add these npm scripts when implementing the builder:
+The npm scripts expose the builder:
 
 ```json
 {
+  "build:palette": "node scripts/build-theme.js --palette-only",
   "build:theme": "node scripts/build-theme.js",
   "check:generated": "node scripts/build-theme.js --check"
 }
@@ -329,6 +332,8 @@ Separate build adoption from palette redesign. First copy the current theme to t
 After that migration passes, apply the proposed OKLCH palette as a separate reviewed change. This avoids making a palette redesign a prerequisite for variable-based authoring.
 
 Before adopting the builder, add focused tests for alias chains and cycles, missing references, alpha rounding and replacement, duplicate-key errors, invalid parameters, known OKLCH/sRGB conversions, and out-of-gamut chroma reduction. Cover omitted versus explicit `baseChroma` (including zero), the nonnegative target floor, yellow's selected base and derived tones, and halving resolved chroma for `400-muted`. Integration checks should cover all supported color positions, preservation of scope order and comments, deterministic output, read-only stale-output detection, and leaving the previous file intact after a failed build. The existing theme validator currently checks basic structure and asset paths; it does not replace these build-specific checks.
+
+These cases are covered in `tests/build.test.js`. Literal semantic exceptions may use `{ "hex": "#rrggbb", "reason": "..." }` instead of `ref`, with optional `alpha`; this keeps component adjustments separate from palette primitives. The builder also accepts three- and four-digit sRGB hex literals to preserve existing theme values during migration.
 
 ## Adoption sequence
 

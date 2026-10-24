@@ -63,10 +63,13 @@
     ]
   },
   "scripts": {
-    "check": "npm run check:prettier && npm run lint && npm run check:theme && npm test",
+    "build:palette": "node scripts/build-theme.js --palette-only",
+    "build:theme": "node scripts/build-theme.js",
+    "check:generated": "node scripts/build-theme.js --check",
+    "check": "npm run check:generated && npm run check:prettier && npm run lint && npm run check:theme && npm test",
     "check:prettier": "prettier . --check",
     "check:theme": "node scripts/check-theme.js",
-    "dev:sync": "node scripts/dev/sync.js",
+    "dev:sync": "npm run build:theme && node scripts/dev/sync.js",
     "format": "prettier . --write",
     "lint": "npm run lint:md && npm run lint:es",
     "lint:es": "eslint",

@@ -1,0 +1,1023 @@
+{
+  "$schema": "vscode://schemas/color-theme",
+  "name": "Cassidy Dark",
+  "type": "dark",
+  "author": "Jacob Cassidy",
+  "colors": {
+    "activityBar.activeBackground": "{ui.activityBar.activeBackground}", // [base] (match `sideBar.background`)
+    "activityBar.background": "{ui.activityBar.background}", // -color--oklch-32-gray [overrides core #3333333] (match sidebar header)
+    "activityBar.dropBorder": "{ui.activityBar.dropBorder}", // -color--white at 50% opacity [overrides `activityBar.foreground`]
+    "activityBar.foreground": "{ui.activityBar.foreground}", // -color--yellow-base [overrides core #ffffff]
+    "activityBar.inactiveForeground": "{ui.activityBar.inactiveForeground}", // -color--gray-medium-dark [overrides core #858585] (match comment)
+    "activityBarBadge.background": "{ui.activityBarBadge.background}", // -color--yellow-base [overrides core #007acc] (match comments)
+    "activityBarBadge.foreground": "{ui.activityBarBadge.foreground}", // -color--gray-black [overrides core #ffffff]
+    "badge.background": "{ui.badge.background}", // -color--gray-dark-fade [overrides core #4d4d4d] | example: problems panel in title
+    "badge.foreground": "{ui.badge.foreground}", // -color--gray-white [overrides core #ffffff]
+    "button.background": "{ui.button.background}", // -color--blue-bg [overrides core #0e639c]
+    "button.foreground": "{ui.button.foreground}", // -color--gray-white [overrides core #ffffff]
+    "button.hoverBackground": "{ui.button.hoverBackground}", // -color--blue-bg at 3% oklch lighter [overrides core #0586ff]
+    "button.secondaryBackground": "{ui.button.secondaryBackground}", // -color--gray-dark-fade [overrides core #3a3d41] | example: circle 'back to top' button on an extension page
+    "button.secondaryForeground": "{ui.button.secondaryForeground}", // -color--gray-white [overrides core #ffffff at opacity]
+    "button.secondaryHoverBackground": "{ui.button.secondaryHoverBackground}", // -color--oklch-gray-46 [overrides core #5c5c5c] (4 shades lighter than `button.secondaryBackground`)
+    "charts.green": "{ui.charts.green}", // -color--green-base [overrides core green #89d185] | example: Incoming/Outgoing branch dot in source control sidebar
+    "charts.orange": "{ui.charts.orange}", // -color--orange-base [overrides `minimap.findMatchHighlight`] | example: Incoming/Outgoing second dot in source control sidebar
+    "charts.purple": "{ui.charts.purple}", // -color--purple-base [overrides core #b180d7] | example: Incoming/Outgoing second dot in source control sidebar
+    "debugIcon.pauseForeground": "{ui.debugIcon.pauseForeground}", // -color--blue-base [overrides core #75beff]
+    "debugIcon.restartForeground": "{ui.debugIcon.restartForeground}", // -color--green-base [overrides core #89d185]
+    "debugIcon.startForeground": "{ui.debugIcon.startForeground}", // -color--green-base[overrides core #89d185]
+    "debugIcon.stopForeground": "{ui.debugIcon.stopForeground}", // -color--red-base [overrides core #f48771]
+    "debugToolBar.background": "{ui.debugToolBar.background}", // -color--gray-fade [overrides core #333333]
+    "diffEditor.diagonalFill": "{ui.diffEditor.diagonalFill}", // -color--gray-dark-fade [overrides core #464646]
+    "diffEditor.insertedLineBackground": "{ui.diffEditor.insertedLineBackground}", // -color--green-base at 10% opacity [overrides core green opacity]
+    "diffEditor.insertedTextBackground": "{ui.diffEditor.insertedTextBackground}", // -color--green-base at 20% opacity [overrides core green opacity]
+    "diffEditor.removedLineBackground": "{ui.diffEditor.removedLineBackground}", // -color--red-base at 10% opacity [overrides core red opacity]
+    "diffEditor.removedTextBackground": "{ui.diffEditor.removedTextBackground}", // -color--red-base at 20% opacity [overrides core red opacity]
+    "diffEditor.unchangedCodeBackground": "{ui.diffEditor.unchangedCodeBackground}", // -color--blue-base at 5% opacity [overrides core black with opacity] | example: previewing a file that is in the Incoming/Outgoing list in the source control sidebar
+    "diffEditor.unchangedRegionBackground": "{ui.diffEditor.unchangedRegionBackground}", // -color--blue-base at 5% opacity [overrides `sideBar.background`] | example: previewing a file that is in the Incoming/Outgoing list in the source control sidebar
+    "diffEditor.unchangedRegionForeground": "{ui.diffEditor.unchangedRegionForeground}", // -color--gray-medium [overrides `foreground`] (match `icon.foreground`) | example: previewing a file that is in the Incoming/Outgoing list in the source control sidebar
+    "diffEditor.unchangedRegionShadow": "{ui.diffEditor.unchangedRegionShadow}", // -color--black at 20% opacity [overrides core black with opacity] (match `widget.shadow`) | example: previewing a file that is in the Incoming/Outgoing list in the source control sidebar
+    "diffEditorGutter.insertedLineBackground": "{ui.diffEditorGutter.insertedLineBackground}", // -color--green-base at 10% opacity [base]
+    "diffEditorGutter.removedLineBackground": "{ui.diffEditorGutter.removedLineBackground}", // -color--red-base at 10% opacity [base]
+    "disabledForeground": "{ui.disabledForeground}", // -color--white at 20% opacity [overrides core white at opacity]
+    "dropdown.background": "{ui.dropdown.background}", // -color--gray-fade [overrides core #3c3c3c] (match `input.background`) | example: output panel tasks selection
+    "dropdown.border": "{ui.dropdown.border}", // -color--gray-dark-fade [base] (match `input.border`)
+    "dropdown.foreground": "{ui.dropdown.foreground}", // -color--gray-white [overrides core #efefef] (match `foreground`)
+    "dropdown.listBackground": "{ui.dropdown.listBackground}", // -color--oklch-32-gray (2 shades darker than dropdown.background) [overrides `dropdown.background`] | example: settings UI page dropdowns
+    "editor.background": "{ui.editor.background}", // -color--gray-fade-black [overrides core #1e1e1e]
+    "editor.findMatchBackground": "{ui.editor.findMatchBackground}", // -color--purple-bg at 90% opacity [overrides dimmed core blue #515c6a] | example: active search match
+    "editor.findMatchForeground": "{ui.editor.findMatchForeground}", // -color--purple-deep at 90% opacity | example: inactive search match
+    "editor.findMatchHighlightBackground": "{ui.editor.findMatchHighlightBackground}", // -color--purple-bg at 45% opacity [overrides core orange at opacity #653618] | example: inactive search match
+    "editor.findMatchHighlightForeground": "{ui.editor.findMatchHighlightForeground}", // -color--white at 90% opacity [overrides `editor.findMatchForeground`] | example: active search match
+    "editor.findRangeHighlightBackground": "{ui.editor.findRangeHighlightBackground}", // -color--white at 10% opacity [overrides core dimmed gray #2d2e30] | example: background when using finder widget with selection search only
+    "editor.foldBackground": "{ui.editor.foldBackground}", // -color--blue-base at 15% opacity [overrides dimmed `editor.selectionBackground`]
+    "editor.foldPlaceholderForeground": "{ui.editor.foldPlaceholderForeground}", // -color--gray-medium [overrides core #808080] | example: dots at end of line that has been folded // wait to see if the core is set by any other settings first
+    "editor.foreground": "{ui.editor.foreground}", // -color--gray-light [overrides core #bbbbbb] (match `foreground`) | example: extension page text, empty editor text
+    "editor.hoverHighlightBackground": "{ui.editor.hoverHighlightBackground}", // -color--white at 10% opacity [overrides core #252f39] | example: hover over a word in json object
+    "editor.lineHighlightBackground": "{ui.editor.lineHighlightBackground}", // -color--oklch-20-gray [base] (6 shades darker than editor bg)
+    "editor.lineHighlightBorder": "{ui.editor.lineHighlightBorder}", // -color--oklch-20-gray [overrides core #282828] (match editor.lineHighlightBackground)
+    "editor.rangeHighlightBackground": "{ui.editor.rangeHighlightBackground}", // -color--white at 10% opacity [overrides dimmed `editor.findRangeHighlightBackground`] (match `editor.findRangeHighlightBackground`) | example: current search match line
+    "editor.selectionBackground": "{ui.editor.selectionBackground}", // -color--blue-bg at 50% opacity [overrides core blue opacity #264f78]
+    "editor.wordHighlightBackground": "{ui.editor.wordHighlightBackground}", // -gray-medium-dark at 50% opacity [overrides core #483f4d] | example: click in word and all the matches are colored
+    "editor.wordHighlightStrongBackground": "{ui.editor.wordHighlightStrongBackground}", // -color--pink-base at 40% opacity [overrides core #063b58] | example: click on a class in a css file (Note: minimap uses `minimap.selectionOccurrenceHighlight` which is a different color)
+    "editorBracketMatch.border": "{ui.editorBracketMatch.border}", // -color--gray-dark [overrides core #888888]
+    "editorCodeLens.foreground": "{ui.editorCodeLens.foreground}", // -color--yellow-deep [overrides core #929292] | example: debug arrow and text in editor
+    "editorCursor.background": "{ui.editorCursor.background}", // -color--gray-fade [overrides core #555456] | example: text inside cursor block
+    "editorCursor.foreground": "{ui.editorCursor.foreground}", // --color--gray-medium [overrides core #aeafad] | example: cursor block and current line highlight in overviewRuler
+    "editorError.foreground": "{ui.editorError.foreground}", // -color--red-deep [overrides core red #ee4f47] | examples: squiggly underlines and panel error icon
+    "editorGhostText.foreground": "{ui.editorGhostText.foreground}", // -color--blue-deep | example: includes sidebar source control input placeholder text
+    "editorGroup.border": "{ui.editorGroup.border}", // -color--black at 50% opacity [overrides core #444444] | example: split editor border
+    "editorGroup.dropBackground": "{ui.editorGroup.dropBackground}", // -color--gray-medium at 50% opacity [overrides core gray at opacity]
+    "editorGroupHeader.tabsBackground": "{ui.editorGroupHeader.tabsBackground}", // -color--oklch-30-gray (2 shades lighter than sidebar bg) [overrides core #252526]
+    "editorGutter.addedBackground": "{ui.editorGutter.addedBackground}", // -color--green-base at 75% opacity [overrides core green #487e02] | example: scrollbar and number line bar diff
+    "editorGutter.commentRangeForeground": "{ui.editorGutter.commentRangeForeground}", // -color--gray-fade [overrides`list.inactiveSelectionBackground`] | example: next and plus buttons for git changes... foreground is controlled by `icon.foreground`
+    "editorGutter.deletedBackground": "{ui.editorGutter.deletedBackground}", // -color--red-base at 75% opacity [overrides core #f85149] | includes overviewRuler
+    "editorGutter.modifiedBackground": "{ui.editorGutter.modifiedBackground}", // -color--yellow-base at 75% opacity [overrides core #1b81a8]
+    "editorHint.foreground": "{ui.editorHint.foreground}", // -color--blue-base [overrides core #949494] | example: 3 dots underline
+    "editorIndentGuide.activeBackground1": "{ui.editorIndentGuide.activeBackground1}", // -color--gray-dark-fade [overrides `editorWhitespace.foreground`]
+    "editorInfo.foreground": "{ui.editorInfo.foreground}", // -color--blue-base [overrides core #3275c3] | example: info squiggly underlines and panel info icon
+    "editorLightBulb.foreground": "{ui.editorLightBulb.foreground}", // -color--yellow-deep [overrides core #ffcc00]
+    "editorLightBulbAi.foreground": "{ui.editorLightBulbAi.foreground}", // -color--yellow-deep [overrides core #ffcc00] | example: double star icon
+    "editorLightBulbAutoFix.foreground": "{ui.editorLightBulbAutoFix.foreground}", // -color--blue-base [overrides core #75beff] | example: quick fix icon when clicking in a misspelled JS variable declaration
+    "editorLineNumber.activeForeground": "{ui.editorLineNumber.activeForeground}", // -color--gray-light [override core gray #c6c6c6]
+    "editorLineNumber.foreground": "{ui.editorLineNumber.foreground}", // -color--gray-dark [override core #858585]
+    "editorLink.activeForeground": "{ui.editorLink.activeForeground}", // -color--yellow-base [overrides core #4e94ce] | example: activating link in comments
+    "editorOverviewRuler.addedForeground": "{ui.editorOverviewRuler.addedForeground}", // [overrides dimmed `editorGutter.addedBackground`]
+    "editorOverviewRuler.background": "{ui.editorOverviewRuler.background}", // -color--black at 10% opacity [overrides `editor.background`]
+    "editorOverviewRuler.border": "{ui.editorOverviewRuler.border}", // -color--black at 10% opacity [overrides core #323232] (match `editorOverviewRuler.background`)
+    "editorOverviewRuler.bracketMatchForeground": "{ui.editorOverviewRuler.bracketMatchForeground}", // -color--gray-dark at 75% opacity [overrides core #a0a0a0] (match `editorBracketMatch.border` with opacity)
+    "editorOverviewRuler.deletedForeground": "{ui.editorOverviewRuler.deletedForeground}", // -color--red-base at 75% opacity [overrides dimmed `editorGutter.deletedBackground`]
+    "editorOverviewRuler.errorForeground": "{ui.editorOverviewRuler.errorForeground}", // -color--red-deep at 75% opacity [overrides core #bd1717]
+    "editorOverviewRuler.findMatchForeground": "{ui.editorOverviewRuler.findMatchForeground}", // -color--purple-bg at 75% opacity [overrides core dimmed orange #77531c]
+    "editorOverviewRuler.infoForeground": "{ui.editorOverviewRuler.infoForeground}", // -color--blue-base at 75% opacity [overrides `editorInfo.foreground`]
+    "editorOverviewRuler.modifiedForeground": "{ui.editorOverviewRuler.modifiedForeground}", // -color--yellow-base at 75% opacity [overrides dimmed `editorGutter.modifiedBackground`]
+    "editorOverviewRuler.selectionHighlightForeground": "{ui.editorOverviewRuler.selectionHighlightForeground}", // -color--gray-medium-dark at 75% of 50% opacity = 37.5% (round to 38% opacity) [overrides core #86808a] | example: click in word and all the matches are colored (match `editor.wordHighlightBackground`)
+    "editorOverviewRuler.warningForeground": "{ui.editorOverviewRuler.warningForeground}", // -color--orange-base at 75% opacity [overrides `editorWarning.foreground`]
+    "editorOverviewRuler.wordHighlightForeground": "{ui.editorOverviewRuler.wordHighlightForeground}", // -color--gray-medium-dark at 75% of 50% opacity = 37.5% (round to 38% opacity) [overrides core #868686] (match `editorOverviewRuler.selectionHighlightForeground`) | example: click on a recurring property in a css file
+    "editorOverviewRuler.wordHighlightStrongForeground": "{ui.editorOverviewRuler.wordHighlightStrongForeground}", // -color--pink-base at 75% opacity[overrides core purple at opacity #a086a0] (match `editor.wordHighlightStrongBackground`) | example: click on a class in a css file... any defining element such as a JS function or variable definition
+    "editorRuler.foreground": "{ui.editorRuler.foreground}", // -color--orange-base at 10% opacity [overrides core #5a5a5a] | example: char width guideline
+    "editorStickyScroll.background": "{ui.editorStickyScroll.background}", // [overrides 'editor.background'] (2 shades lighter than 'editor.background')
+    "editorStickyScrollHover.background": "{ui.editorStickyScrollHover.background}", // [overrides core #2a2d2e] (match `editor.lineHighlightBackground`)
+    "editorUnicodeHighlight.background": "{ui.editorUnicodeHighlight.background}", // -color--orange-base at 25% opacity [base]
+    "editorUnicodeHighlight.border": "{ui.editorUnicodeHighlight.border}", // -color--orange-base at 50% opacity [overrides `editorWarning.foreground`]
+    "editorUnnecessaryCode.opacity": "#0009", // -color--black at 60% opacity [overrides core black opacity]
+    "editorWarning.foreground": "{ui.editorWarning.foreground}", // -color--orange-base [overrides core yellow #cca700] | example: warning squiggly underlines and panel warning icon
+    "editorWhitespace.foreground": "{ui.editorWhitespace.foreground}", // -color--gray-fade [overrides core #424342]
+    "editorWidget.background": "{ui.editorWidget.background}", // -color--oklch-32-gray [overrides core #252526] | example: finder widget or hover popup info
+    "editorWidget.border": "{ui.editorWidget.border}", // -color--white at 10% opacity [overrides core #454545] | example: editor hover word popup widget
+    "errorForeground": "{ui.errorForeground}", // -color--red-deep [overrides core #ee4f47] | example: no results found in editor finder widget
+    "extensionIcon.preReleaseForeground": "{ui.extensionIcon.preReleaseForeground}", // -color--green-bg at 90% opacity [override core #1d9271] | example: GitLens extension in sidebar list
+    "extensionIcon.sponsorForeground": "{ui.extensionIcon.sponsorForeground}", // -color--pink-bg at 90% opacity [overrides core #d758b3] | example: heart icon on Code Spell Checker extension page
+    "extensionIcon.starForeground": "{ui.extensionIcon.starForeground}", // -color--orange-deep at 90% opacity [overrides core #ff8e00] | example: extension star ratings
+    "focusBorder": "{ui.focusBorder}", // -color--blue-deep at 80% opacity [overrides core #0078d4] | example: active sidebar list item, active input border, active panel border
+    "foreground": "{ui.foreground}", // -color--gray-light [overrides core #cccccc] | examples: breadcrumbs, explorer sidebar, extension titles
+    "gitDecoration.addedResourceForeground": "{ui.gitDecoration.addedResourceForeground}", // -color--green-deep [overrides core green #72c890] | example: filename in tabs and sidebar for staged/committed file
+    "gitDecoration.deletedResourceForeground": "{ui.gitDecoration.deletedResourceForeground}", // -color--red-deep [overrides core red] | example: hover over source control sidebar incoming/outgoing list item that has a commit deletion or filename in tabs and sidebar for staged/committed file
+    "gitDecoration.ignoredResourceForeground": "{ui.gitDecoration.ignoredResourceForeground}", // -color--oklch-gray-62 [overrides core #828282] | example: filename in tabs and sidebar
+    "gitDecoration.modifiedResourceForeground": "{ui.gitDecoration.modifiedResourceForeground}", // -color--yellow-base [overrides core #e2c08d] | example: filename in tabs and sidebar of non-staged file
+    "gitDecoration.stageModifiedResourceForeground": "{ui.gitDecoration.stageModifiedResourceForeground}", // -color--yellow-deep [overrides core yellow #e2c08d] | example: filename in tabs and sidebar for staged file
+    "gitDecoration.untrackedResourceForeground": "{ui.gitDecoration.untrackedResourceForeground}", // -color--green-base [overrides core #508d65] | example: filename in tabs and sidebar of non-staged file
+    "icon.foreground": "{ui.icon.foreground}", // -color--gray-medium [overrides core #cccccc] | example: most UI icons in widgets (not selection button) (includes sidebar folder arrows)
+    "input.background": "{ui.input.background}", // -color--gray-fade [overrides core #3c3c3c]
+    "input.border": "{ui.input.border}", // -color--gray-dark-fade [base] | example: input and debug console border
+    "input.foreground": "{ui.input.foreground}", // -color--gray-white [overrides `foreground`]
+    "input.placeholderForeground": "{ui.input.placeholderForeground}", // -color--gray-medium-dark [overrides dimmed `foreground`] (match comments color)
+    "inputOption.activeBackground": "{ui.inputOption.activeBackground}", // -color--yellow-base at 25% opacity [overrides core orange at opacity #85551f] | example: editor finder widget selection only button
+    "inputOption.activeBorder": "{ui.inputOption.activeBorder}", // -color--yellow-base at 25% opacity [core overrides #007acc] | example: editor finder widget selection only button
+    "inputOption.activeForeground": "{ui.inputOption.activeForeground}", // -color--yellow-base [overrides core #ffffff] | example: editor finder widget selection only button
+    "inputOption.hoverBackground": "{ui.inputOption.hoverBackground}", // -color--yellow-base at 25% opacity [overrides core white at opacity] | example: sidebar global search exclude button
+    "keybindingLabel.background": "{ui.keybindingLabel.background}", // -color--gray-dark-fade [overrides core #343434]
+    "keybindingLabel.border": "{ui.keybindingLabel.border}", // [overrides core #3d3d3d] (2 shades lighter than `keybindingLabel.background`)
+    "keybindingLabel.bottomBorder": "{ui.keybindingLabel.bottomBorder}", // [overrides core #484848] (2 shades lighter than `keybindingLabel.border`)
+    "keybindingLabel.foreground": "{ui.keybindingLabel.foreground}", // -color--gray-light [overrides core #c8c8c8]
+    "keybindingTable.headerBackground": "{ui.keybindingTable.headerBackground}", // -color--gray-fade [overrides `tree.tableOddRowsBackground`]
+    "list.activeSelectionBackground": "{ui.list.activeSelectionBackground}", // -color--white at 20% opacity [overrides core #04395e] | example: commandCenter dropdown selection line
+    "list.activeSelectionForeground": "{ui.list.activeSelectionForeground}", // -color--gray-white [overrides core #ffffff] | example: sidebar active item when moving with keyboard
+    "list.activeSelectionIconForeground": "{ui.list.activeSelectionIconForeground}", // -color--gray-white [overrides core #ffffff at opacity]
+    "list.dropBackground": "{ui.list.dropBackground}", // -color--gray-medium at 25% opacity [overrides core blue at opacity] | example: drag and hover a folder in the explorer into another folder
+    "list.errorForeground": "{ui.list.errorForeground}", // -color--red-deep [overrides core #f88070] | example: editor tab title and sidebar filename
+    "list.focusAndSelectionOutline": "{ui.list.focusAndSelectionOutline}", // -color--white at 20% opacity [overrides `focusBorder`] (match `list.activeSelectionBackground`) | example: item clicked on in the explorer sidebar
+    "list.highlightForeground": "{ui.list.highlightForeground}", // -color--blue-base [overrides core #2aaaff] | example: editorSuggestionWidget typed char in all lines not overridden
+    "list.hoverBackground": "{ui.list.hoverBackground}", // -color--white at 10% opacity [overrides core #2a2d2e]
+    "list.hoverForeground": "{ui.list.hoverForeground}", // -color--gray-white [overrides `sideBar.foreground` || `quickInput.foreground`] | example: extensions sidebar list
+    "list.inactiveSelectionBackground": "{ui.list.inactiveSelectionBackground}", // -color--white at 5% opacity [overrides core #37373d]
+    "list.warningForeground": "{ui.list.warningForeground}", // -color--orange-base [overrides core #cca700] | example: includes tab foreground
+    "minimap.errorHighlight": "{ui.minimap.errorHighlight}", // -color--red-deep at 75% opacity [overrides core red #dc1d1d]
+    "minimap.findMatchHighlight": "{ui.minimap.findMatchHighlight}", // -color--purple-bg at 75% opacity [overrides core orange #d18616] | example: editor search widget matches
+    "minimap.foregroundOpacity": "{ui.minimap.foregroundOpacity}", // 50% opacity [base]
+    "minimap.infoHighlight": "{ui.minimap.infoHighlight}", // -color--blue-bg at 75% opacity [overrides `editorInfo.foreground`]
+    "minimap.selectionHighlight": "{ui.minimap.selectionHighlight}", // -color--blue-bg at 75% of 50% opacity = 37.5% (round to 38% opacity) [overrides core blue opacity #264f78] (match `editor.selectionBackground`)
+    "minimap.selectionOccurrenceHighlight": "{ui.minimap.selectionOccurrenceHighlight}", // -color--gray-medium-dark at 75% of 50% opacity = 37.5% (round to 38% opacity) [overrides core #676767] | example: click in word and all the matches are colored
+    "minimap.warningHighlight": "{ui.minimap.warningHighlight}", // -color--orange-base at 75% opacity [overrides `editorWarning.foreground`]
+    "multiDiffEditor.headerBackground": "{ui.multiDiffEditor.headerBackground}", // [override core #262626] | example: previewing a file that is in the Incoming/Outgoing list in the source control sidebar
+    "notebook.cellBorderColor": "{ui.notebook.cellBorderColor}", // -color--white at 10% opacity[override core white at opacity] | example: GitHub Copilot Suggestions page
+    "outputViewStickyScroll.background": "{ui.outputViewStickyScroll.background}", // -color--oklch-gray-32 [overrides `panel.background`] (2 shades lighter than `panel.background`)
+    "panel.background": "{ui.panel.background}", // -color--oklch-30-gray [overrides `editor.background`]
+    "panel.border": "{ui.panel.border}", // -color--oklch-30-gray [overrides core #444444] (match `panel.background`)
+    "panel.dropBorder": "{ui.panel.dropBorder}", // -color--white at 50% opacity [overrides `panelTitle.activeForeground`]
+    "panelSectionHeader.background": "{ui.panelSectionHeader.background}", // -color--oklch-gray-32 [overrides core white at opacity #3f3f3f] (2 shades lighter than `panel.background`) | example: drag output panel title into terminal panel
+    "panelStickyScroll.background": "{ui.panelStickyScroll.background}", // -color--oklch-gray-32 [overrides `panel.background`] (2 shades lighter than `panel.background`)
+    "panelTitle.activeBorder": "{ui.panelTitle.activeBorder}", // -color--oklch-30-gray [overrides core #e7e7e7] (match panel BG to hide border)
+    "panelTitle.activeForeground": "{ui.panelTitle.activeForeground}", // -color--yellow-base [overrides core #e7e7e7]
+    "panelTitle.inactiveForeground": "{ui.panelTitle.inactiveForeground}", // -color--gray-medium-dark [overrides core #9d9d9d] (match comments)
+    "peekView.border": "{ui.peekView.border}", // -color--blue-base at 25% opacity [overrides `editorInfo.foreground`] | example: clicking on modified line in gutter of a modified file
+    "peekViewTitle.background": "{ui.peekViewTitle.background}", // -color--oklch-gray-32 [overrides core #252526] | example: clicking on modified line in gutter of a modified file
+    "peekViewTitleDescription.foreground": "{ui.peekViewTitleDescription.foreground}", // -color--white at 50% opacity [overrides core white at opacity] | example: color in widget shown when clicking "View problem" (such as a spelling error with CSpell extension)
+    "peekViewTitleLabel.foreground": "{ui.peekViewTitleLabel.foreground}", // -color--gray-white [overrides core #ffffff] | example: title color in widget shown when clicking "View problem" (such as a spelling error with CSpell extension)
+    "pickerGroup.border": "{ui.pickerGroup.border}", // -color--gray-dark-fade [overrides core #3f3f46] (match `input.border`) | example: commandCenter other commands border
+    "pickerGroup.foreground": "{ui.pickerGroup.foreground}", // -color--gray-medium [overrides core #3794ff] | example: commandCenter other commands text title
+    "profileBadge.background": "{ui.profileBadge.background}", // -color--gray-dark-fade [overrides core #4d4d4d] (match `badge.background`)
+    "profileBadge.foreground": "{ui.profileBadge.foreground}", // -color--gray-white [overrides core #ffffff] (match `badge.border`)
+    "progressBar.background": "{ui.progressBar.background}", // -color--green-deep [overrides core #006abb]
+    "quickInputTitle.background": "{ui.quickInputTitle.background}", // [overrides core #484848] | example: popup when clicking on the "Open Repository" button in the source control sidebar or Copilot icon in the statusBar
+    "scrollbar.shadow": "{ui.scrollbar.shadow}", // -color--black at 40% opacity [overrides core #000] | example: editor tabs side scroll and breadcrumbs/editorStickyScroll
+    "scrollbarSlider.activeBackground": "{ui.scrollbarSlider.activeBackground}", // -color--gray-medium-dark at 70% opacity [overrides core gray opacity #505050] - example: when selecting and dragging scrollbar location
+    "scrollbarSlider.background": "{ui.scrollbarSlider.background}", // -color--gray-medium-dark at 30% opacity [overrides core gray opacity]- example: editor vertical scrollbar location
+    "scrollbarSlider.hoverBackground": "{ui.scrollbarSlider.hoverBackground}", //-color--gray-medium-dark at 50% opacity [overrides core gray opacity]
+    "selection.background": "{ui.selection.background}", // -color--blue-bg at 50% opacity [overrides core blue at opacity #5f83aa] (match `editor.selectionBackground`) | example: selecting text inside an editor popup widget
+    "settings.focusedRowBorder": "{ui.settings.focusedRowBorder}", // -color--white at 20% opacity [overrides `focusBorder`]
+    "settings.headerForeground": "{ui.settings.headerForeground}", // -color--gray-white [overrides core #ffffff]
+    "settings.modifiedItemIndicator": "{ui.settings.modifiedItemIndicator}", // -color--yellow-base [overrides core #0c7d9d] | example: vertical line color in Settings UI
+    "sideBar.background": "{ui.sideBar.background}", // -color--oklch-28-gray [overrides core #252526]
+    "sideBarSectionHeader.background": "{ui.sideBarSectionHeader.background}", // -color--oklch-gray-32 [overrides core #3b3b3b] (4 shades lighter than `sideBar.background`) | example: extension sidebar sections
+    "sideBarSectionHeader.foreground": "{ui.sideBarSectionHeader.foreground}", // -color--gray-medium [overrides `foreground`]
+    "sideBarStickyScroll.background": "{ui.sideBarStickyScroll.background}", // -color--oklch-gray-30 [overrides `sideBar.background`] (2 shades lighter than sideBar.background`)
+    "sideBarTitle.foreground": "{ui.sideBarTitle.foreground}", // -color--gray-medium [overrides `foreground`] (match `icon.foreground`) | example: EXPLORER TITLE
+    "simpleFindWidget.sashBorder": "{ui.simpleFindWidget.sashBorder}", // -color--white at 5% opacity [overrides core #454545] | example: terminal finder widget resize border
+    "statusBar.background": "{ui.statusBar.background}", // -color--gray-fade [override core #007acc] (match `titleBar.activeBackground`)
+    "statusBar.debuggingBackground": "{ui.statusBar.debuggingBackground}", // -color--orange-base [overrides core #cc6633]
+    "statusBar.debuggingForeground": "{ui.statusBar.debuggingForeground}", // -color--gray-black [overrides `statusBar.foreground`]
+    "statusBar.focusBorder": "{ui.statusBar.focusBorder}", // -color--gray-dark-fade [overrides `statusBar.foreground` || core #ffffff]
+    "statusBar.foreground": "{ui.statusBar.foreground}", // -color--gray-medium [overrides core #ffffff] (match `titleBar.activeForeground`)
+    "statusBar.noFolderBackground": "{ui.statusBar.noFolderBackground}", // -color--oklch-gray-24 [overrides `core #68217a`] (2 shades darker than `editor.background`)
+    "statusBar.noFolderForeground": "{ui.statusBar.noFolderForeground}", // -color--gray-medium-dark [overrides `statusBar.foreground`]
+    "statusBarItem.focusBorder": "{ui.statusBarItem.focusBorder}", // [override core #929292] | example: click on the Remote Host button in the statusbar and the exit the popup panel and the button will have a focus border in this color
+    "statusBarItem.hoverForeground": "{ui.statusBarItem.hoverForeground}", // -color--gray-white [overrides `statusBar.foreground`]
+    "statusBarItem.remoteBackground": "{ui.statusBarItem.remoteBackground}", // -color--white at 10% opacity [overrides `activityBarBadge.background` || core ##007acc] (4 shades lighter than `statusBar.background`) | example: Remote Host button in statusBar
+    "statusBarItem.remoteForeground": "{ui.statusBarItem.remoteForeground}", // [inherits `activityBarBadge.foreground` || core white at opacity] | example: Remote Host button in statusBar
+    "statusBarItem.remoteHoverBackground": "{ui.statusBarItem.remoteHoverBackground}", // [overrides `statusBarItem.hoverBackground` || `activityBarBadge.background`]
+    "statusBarItem.remoteHoverForeground": "{ui.statusBarItem.remoteHoverForeground}", // [overrides `statusBarItem.hoverForeground` || `statusBar.foreground`] | example: Remote Host button in statusBar
+    "symbolIcon.classForeground": "{ui.symbolIcon.classForeground}", // -color--orange-deep [overrides core #c98727] | example: Previewing a css file in Incoming/Outgoing source control sidebar
+    "symbolIcon.functionForeground": "{ui.symbolIcon.functionForeground}", // -color--purple-deep [overrides core purple #936cb0] | example: box icon
+    "symbolIcon.variableForeground": "{ui.symbolIcon.variableForeground}", // -color--blue-base [overrides core blue #72b8f6] | example: unknown prop in .prettierrc file
+    "tab.activeForeground": "{ui.tab.activeForeground}", // -color--gray-white [overrides core #ffffff]
+    "tab.border": "{ui.tab.border}", // -color--black at 25% opacity [overrides core #252526]
+    "tab.dragAndDropBorder": "{ui.tab.dragAndDropBorder}", // -color--white at 50% opacity [overrides `tab.activeForeground`]
+    "tab.hoverForeground": "{ui.tab.hoverForeground}", // -color--gray-white [overrides `tab.inactiveForeground`] | example: hover over inactive tab (match `tab.activeForeground`)`
+    "tab.inactiveBackground": "{ui.tab.inactiveBackground}", // [overrides core #2d2d2d] (match `editorGroupHeader.tabsBackground`)
+    "tab.inactiveForeground": "{ui.tab.inactiveForeground}", // -color--gray-medium [overrides dimmed `tab.activeForeground`] | example: non-active tabs, including the tab's icons
+    "tab.unfocusedActiveForeground": "{ui.tab.unfocusedActiveForeground}", // [overrides dimmed `tab.activeForeground`] | example: tabs in split editor
+    "tab.unfocusedHoverForeground": "{ui.tab.unfocusedHoverForeground}", // [overrides dimmed `tab.hoverForeground`] | example: hover over inactive tab in unfocused split editor (includes X) (match `tab.inactiveForeground`)
+    "tab.unfocusedInactiveForeground": "{ui.tab.unfocusedInactiveForeground}", // -color--gray-dark [overrides dimmed `tab.inactiveForeground`] | example: tabs in split editor
+    "terminal.ansiBlack": "{ui.terminal.ansiBlack}", // -color--gray-fade [overrides core #000000]
+    "terminal.ansiBlue": "{ui.terminal.ansiBlue}", // -color--blue-base [overrides core #2472c8]
+    "terminal.ansiBrightBlack": "{ui.terminal.ansiBrightBlack}", // -color--gray-dark [overrides core #666666]
+    "terminal.ansiBrightBlue": "{ui.terminal.ansiBrightBlue}", // -color--blue-deep [overrides core #3b8eea]
+    "terminal.ansiBrightCyan": "{ui.terminal.ansiBrightCyan}", // -color--cyan-deep [overrides core #29b8db]
+    "terminal.ansiBrightGreen": "{ui.terminal.ansiBrightGreen}", // -color--green-deep [overrides core #23d18b]
+    "terminal.ansiBrightMagenta": "{ui.terminal.ansiBrightMagenta}", // -color--purple-deep [overrides core #d670d6]
+    "terminal.ansiBrightRed": "{ui.terminal.ansiBrightRed}", // -color--red-deep [overrides core red #f14c4c]
+    "terminal.ansiBrightWhite": "{ui.terminal.ansiBrightWhite}", // -color--white [overrides core #e5e5e5]
+    "terminal.ansiBrightYellow": "{ui.terminal.ansiBrightYellow}", // -color--yellow-deep [overrides core #f5f543]
+    "terminal.ansiCyan": "{ui.terminal.ansiCyan}", // -color--cyan-base [overrides core #11a8cd]
+    "terminal.ansiGreen": "{ui.terminal.ansiGreen}", // -color--green-base [overrides core green #0dbc79]
+    "terminal.ansiMagenta": "{ui.terminal.ansiMagenta}", // -color--purple-base [overrides core #bc3fbc]
+    "terminal.ansiRed": "{ui.terminal.ansiRed}", // -color--red-base [overrides core #cd3131]
+    "terminal.ansiWhite": "{ui.terminal.ansiWhite}", // -color--gray-white [overrides core white #e5e5e5]
+    "terminal.ansiYellow": "{ui.terminal.ansiYellow}", // -color--yellow-base [overrides core yellow #e5e510]
+    "terminal.background": "{ui.terminal.background}", // -color--gray-fade-black [overrides `panel.background`] (match editor bg)
+    "terminal.foreground": "{ui.terminal.foreground}", // -color--gray-light [overrides core #cccccc] (includes cursor)
+    "terminalOverviewRuler.cursorForeground": "{ui.terminalOverviewRuler.cursorForeground}", // --color--gray-medium [overrides core #878787] (match `editorCursor.foreground`) | example: current line match when using terminal search widget
+    "textBlockQuote.background": "{ui.textBlockQuote.background}", // -color--gray-fade [overrides core #222222] | example: markdown > quote in preview mode
+    "textBlockQuote.border": "{ui.textBlockQuote.border}", // -color--gray-dark [overrides core #1c5982]
+    "textCodeBlock.background": "{ui.textCodeBlock.background}", // -color--gray-fade [overrides core black at opacity] | example: hover over settings json "workbench.startupEditor" or hover over source control sidebar incoming/outgoing list item that has a commit using a codeblock
+    "textLink.activeForeground": "{ui.textLink.activeForeground}", // -color--yellow-base [overrides core underlined #3794ff]
+    "textLink.foreground": "{ui.textLink.foreground}", // -color--blue-base [overrides core #3794ff] | example: Settings UI text link
+    "textPreformat.background": "{ui.textPreformat.background}", // -color--gray-fade [overrides core #353535]
+    "textPreformat.foreground": "{ui.textPreformat.foreground}", // -color--yellow-deep [overrides core #d7ba7d]
+    "titleBar.activeBackground": "{ui.titleBar.activeBackground}", // -color--gray-fade [override core ##3c3c3c] (match `statusBar.background`)
+    "titleBar.activeForeground": "{ui.titleBar.activeForeground}", // -color--gray-medium [overrides core #cccccc] | example: all text and icons in title bar (match `statusBar.foreground`)
+    "titleBar.inactiveBackground": "{ui.titleBar.inactiveBackground}", // -color--oklch-30-gray [overrides dimmed `titleBar.activeBackground`] (match `editorGroupHeader.tabsBackground`)
+    "titleBar.inactiveForeground": "{ui.titleBar.inactiveForeground}", // -color--gray-fade [overrides dimmed `titleBar.activeForeground`]
+    "toolbar.hoverBackground": "{ui.toolbar.hoverBackground}", // -color--gray-white at 10% opacity [overrides core white at opacity] | example: Settings UI gear icons
+    "tree.indentGuidesStroke": "{ui.tree.indentGuidesStroke}", // -color--gray-dark-fade [overrides core #585858] | example: sidebar explorer tree
+    "tree.tableColumnsBorder": "{ui.tree.tableColumnsBorder}", // -color--white at 10% opacity [overrides core white at opacity] | example: Keyboard Shortcuts page
+    "tree.tableOddRowsBackground": "{ui.tree.tableOddRowsBackground}", // -color--oklch-30 [overrides core #2b2b2b] (2 shades darker than `editor.background`) | example: Keyboard Shortcuts page
+    "walkthrough.stepTitle.foreground": "{ui.walkthrough.stepTitle.foreground}", // -color--gray-white [overrides core #ffffff] | example: clicking on a title on the welcome page takes you to the walkthrough page.
+    "welcomePage.progress.background": "{ui.welcomePage.progress.background}", // [overrides `input.background`] | example: inactive part of progress bar
+    "welcomePage.progress.foreground": "{ui.welcomePage.progress.foreground}", // -color--green-base [overrides `textLink.foreground`]
+    "widget.border": "{ui.widget.border}", // -color--white at 5% opacity [base]
+    "widget.shadow": "{ui.widget.shadow}" // -color--black at 20% opacity | non-editor widgets [overrides core black at opacity]
+  },
+  "semanticHighlighting": true,
+  "semanticTokenColors": {
+    "class": {
+      "foreground": "{semantic.class}" // -color--cyan-base
+    },
+    "function": {
+      "foreground": "{semantic.function}" // -color--cyan-base
+    },
+    "function.defaultLibrary": {
+      "foreground": "{semantic.function.defaultLibrary}" // -color--gray-white
+    },
+    "method": {
+      "foreground": "{semantic.method}" // -color--gray-white
+    },
+    "namespace": {
+      "foreground": "{semantic.namespace}" // -color--purple-base
+    },
+    "parameter": {
+      "foreground": "{semantic.parameter}" // -color--orange-base
+    },
+    "property": {
+      "foreground": "{semantic.property}" // -color--green-base
+    },
+    "variable": {
+      "foreground": "{semantic.variable}" // -color--pink-base
+    },
+    "variable.defaultLibrary": {
+      "foreground": "{semantic.variable.defaultLibrary}" // -color--gray-white-light-2
+    }
+  },
+  "tokenColors": [
+    //--------------------------------------------------------------------------
+    //--- FONT STYLES ---
+    //--------------------------------------------------------------------------
+    {
+      "name": "BOLD",
+      "scope": [
+        //*** MARKDOWN ***
+        "markup.bold.markdown"
+      ],
+      "settings": {
+        "fontStyle": "bold"
+      }
+    },
+    {
+      "name": "ITALIC",
+      "scope": [
+        //*** DEFAULT ***
+        "comment",
+        "invalid",
+        "variable.language.this",
+        //*** MARKDOWN ***
+        "entity.name.section.markdown",
+        "markup.italic.markdown",
+        //*** PHP ***
+        "keyword.operator.return-value.php",
+        "keyword.other.type.php",
+        "meta.function.php support.class.php",
+        //*** TYPESCRIPT ***
+        "keyword.operator.type.annotation.ts",
+        "support.type.primitive.ts"
+      ],
+      "settings": {
+        "fontStyle": "italic"
+      }
+    },
+    {
+      "name": "BOLD ITALIC",
+      "scope": [
+        //*** MARKDOWN ***
+        "markup.bold.markdown markup.italic.markdown"
+      ],
+      "settings": {
+        "fontStyle": "bold italic"
+      }
+    },
+    // {
+    //   "name": "NORMAL",
+    //   "scope": [],
+    //   "settings": {
+    //     "fontStyle": ""
+    //   }
+    // },
+    {
+      "name": "STRIKETHROUGH",
+      "scope": [
+        //*** MARKDOWN ***
+        "markup.strikethrough.markdown"
+      ],
+      "settings": {
+        "fontStyle": "strikethrough"
+      }
+    },
+
+    //--------------------------------------------------------------------------
+    //--- GRAY SHADES ---
+    //--------------------------------------------------------------------------
+    {
+      "name": "GRAY WHITE (OKLCH 98%)",
+      "scope": [
+        //*** DEFAULT ***
+        "meta.method-call entity.name.function",
+        "support.function",
+        //*** APACHE ***
+        "entity.helper.apacheconf", // Using Apache Conf extension for syntax grammar
+        //*** CSS ***
+        "entity.other.attribute-name.pseudo-class",
+        "entity.other.attribute-name.pseudo-element",
+        //*** HTML ***
+        "text.html",
+        "meta.element.structure.svg.text.html",
+        //*** JSX ***
+        "meta.jsx.children",
+        //*** XML ***
+        "text.xml"
+      ],
+      "settings": {
+        "foreground": "{syntax.support}"
+      }
+    },
+    // {
+    //   "name": "GRAY WHITE-LIGHT (OKLCH 90%)",
+    //   "scope": [],
+    //   "settings": { "foreground": "#dedede" }
+    // },
+    {
+      "name": "GRAY WHITE-LIGHT-LIGHT (OKLCH 86%)",
+      "scope": [
+        //*** JAVASCRIPT ***
+        "variable.other.object", // semantic token type for JS
+        //*** SHELL ***
+        "meta.scope"
+      ],
+      "settings": {
+        "foreground": "{syntax.defaultLibrary}"
+      }
+    },
+    {
+      "name": "GRAY LIGHT (OKLCH 82%)",
+      "scope": [
+        //*** DEFAULT ***
+        "meta.embedded.block", // Such as  ```shell text``` in markdown
+        "support.constant.property", // semantic token type for JS
+        "support.variable", // semantic token type for JS
+        //*** HTML ***
+        "entity.other.attribute-name"
+      ],
+      "settings": {
+        "foreground": "{syntax.text}"
+      }
+    },
+    // {
+    //   "name": "GRAY LIGHT-MEDIUM (OKLCH 74%)",
+    //   "scope": [],
+    //   "settings": {
+    //     "foreground": "#ababab"
+    //   }
+    // },
+    {
+      "name": "GRAY MEDIUM (OKLCH 66%) [PUNCTUATION]",
+      "scope": [
+        //*** DEFAULT ***
+        "entity.name",
+        "meta.at-rule.keyframes.body",
+        "meta.block",
+        "meta.brace",
+        "meta.embedded.line",
+        "punctuation",
+        //*** CSS ***
+        "meta.function.calc.css", // For nesting parentheses in calc function
+        "meta.property-list",
+        //*** MARKDOWN ***
+        "meta.separator.markdown",
+        "markup.strikethrough.markdown",
+        //*** PHP ***
+        "comment keyword", // example: @package in PHPdoc comment
+        "comment keyword.operator.nullable-type.php", // example: ?array in docblock type hint
+        "comment support.class", // example: `editor` in @return editor in PHPdoc comment
+        "keyword.other.phpdoc.php", // The PHPDoc block keywords
+        "keyword.operator.return-value.php", // For function return type colon
+        "meta.embedded.block.php", // For else colon when using alternative syntax
+        "meta.embedded.line.php", // For closing bracket } when opening a new PHP tag
+        "string.quoted.double.php punctuation.definition.variable.php", // for {} braces syntax used in string interpolation.
+        //*** RUBY ***
+        "meta.function.method.with-arguments.ruby storage.type", // For Ruby's parameter block `&` operator
+        //*** SHELL ***
+        "meta.expression.assignment.modified.shell", //example `/` in .zshrc: export PATH=/opt/homebrew/bin:$PATH
+        //*** XML ***
+        "meta.tag",
+        //*** ZSH ***
+        "meta.parameter-expansion"
+      ],
+      "settings": {
+        "foreground": "{syntax.punctuation}"
+      }
+    },
+    {
+      "name": "GRAY MEDIUM-DARK (OKLCH 58%) [COMMENTS]",
+      "scope": [
+        //*** DEFAULT ***
+        "comment",
+        "comment constant",
+        "comment entity.name.type",
+        "comment keyword",
+        "comment meta.tag.inline",
+        "comment punctuation",
+        "comment storage",
+        "comment storage.modifier",
+        "comment storage.type",
+        "comment support",
+        "comment variable",
+        "punctuation.definition.comment",
+        "source.embedded"
+      ],
+      "settings": {
+        "foreground": "{syntax.comment}"
+      }
+    },
+    {
+      "name": "GRAY DARK (OKLCH 50%)",
+      "scope": [
+        //*** DEFAULT ***
+        "invalid",
+        //*** MARKDOWN ***
+        "markup.underline.link"
+      ],
+      "settings": {
+        "foreground": "{syntax.invalid}"
+      }
+    },
+    // {
+    //   "name": "GRAY DARK-FADE (OKLCH 42%)",
+    //   "scope": [],
+    //   "settings": { "foreground": "#4d4d4d" }
+    // },
+    // {
+    //   "name": "GRAY FADE (OKLCH 34%)",
+    //   "scope": [],
+    //   "settings": { "foreground": "#525252" }
+    // },
+
+    //--------------------------------------------------------------------------
+    //--- COLOR CUSTOMIZATIONS ---
+    //--------------------------------------------------------------------------
+    {
+      "name": "BLUE BASE",
+      "scope": [
+        //*** DEFAULT ***
+        "storage.type",
+        //*** APACHE ***
+        "string.path.apacheconf",
+        //*** CSS ***
+        "meta.attribute.unrecognized.xmlns.html string",
+        "meta.attribute.unrecognized.xmlns:xlink.html string",
+        "meta.function.url string.quoted.double", //css such as content: url("");
+        "meta.function.url string.quoted.single", //css such as content: url('');
+        //*** HTML ***
+        "meta.attribute.href string",
+        "meta.attribute.src.html string",
+        "meta.attribute.srcset.html string",
+        //*** LOG ***
+        "log.date",
+        //*** MARKDOWN ***
+        "meta.link.reference",
+        "meta.link.reference constant",
+        "meta.link.reference string",
+        "string.other.link.title.markdown",
+        //*** SCSS ***
+        "variable.parameter.url" // SCSS `to` in background: linear-gradient(to ...); -- Red in CSS. Also for background:url(../../../../assets/images/icons/icon-phone-white.svg) without quotes.
+      ],
+      "settings": {
+        "foreground": "{syntax.storageType}" // -color--blue-base
+      }
+    },
+    // {
+    //   "name": "BLUE DEEP",
+    //   "scope": [],
+    //   "settings": { "foreground": "#62a1f0" }
+    // },
+    {
+      "name": "BLUE FADE",
+      "scope": [
+        //*** PHP - TYPEHINT ***
+        "keyword.other.type.php", // For parameter type hinting and other types
+        "meta.other.type.phpdoc.php",
+        "keyword.operator.nullable-type.php", // For nullable types using the question mark, such as ?callable
+        // "keyword.other.type.cassidydark.php", // class typehint
+        "meta.function.php storage.type.php", // ... : self
+        "meta.function.php support.class.php", // ... : DB
+        "meta.function.parameter.typehinted.php support", // ( \WP_Query $query )
+        "meta.other.type.phpdoc.php support.class", // @param \WP_Post
+        //*** TYPESCRIPT ***
+        "keyword.operator.type.annotation.ts",
+        "support.type.primitive.ts"
+      ],
+      "settings": {
+        "foreground": "{syntax.typeHint}"
+      }
+    },
+    {
+      "name": "BLUE 50 OPACITY",
+      "scope": [
+        //*** MARKDOWN ***
+        "markup.strikethrough.markdown string.other.link.title.markdown"
+      ],
+      "settings": {
+        "foreground": "{syntax.linkStrikethrough}"
+      }
+    },
+
+    {
+      "name": "CYAN BASE",
+      "scope": [
+        //*** DEFAULT ***
+        "entity.name.type", // such are class or trait name in PHP
+        "entity.name.function",
+        "keyword.other.special-method", // such as Ruby loop
+        "meta.attribute.style string",
+        "meta.property-name",
+        "meta.property-value support.function",
+        "support",
+        //*** APACHE ***
+        "entity.tag.apacheconf",
+        //*** CSS ***
+        "meta.at-rule support.function", // such as `calc` and `var`
+        "meta.property-value",
+        //*** INI ***
+        "keyword.other.definition",
+        //*** PHP ***
+        "support.function.basic_functions",
+        "entity.other.inherited-class.php", // extends class
+        "entity.other.alias.php", // use as
+        //*** PYTHON ***
+        "meta.function-call.generic.python",
+        //*** SHELL ***
+        "support.function.builtin.shell",
+        //*** YAML ***
+        "entity.name.tag.yaml"
+      ],
+      "settings": {
+        "foreground": "{syntax.function}"
+      }
+    },
+
+    {
+      "name": "GREEN BASE",
+      "scope": [
+        //*** DEFAULT ***
+        "entity.name.label", // property??
+        "entity.other.attribute-name.class",
+        "meta.attribute.class string",
+        "meta.object-literal",
+        "support.variable.property", // semantic token type
+        "variable.other.constant.property", // semantic token type
+        "variable.other.property",
+        "variable.other.object.property",
+        //*** APACHE ***
+        "entity.mime-type.apacheconf",
+        //*** MARKDOWN ***
+        "entity.name.section.markdown",
+        "markup.heading.markdown string.other.link.title.markdown",
+        "markup.heading.markdown meta.other.valid-ampersand.markdown",
+        "punctuation.definition.heading.markdown",
+        //*** PHP ***
+        "variable.other.property.php punctuation.definition.variable.php",
+        //*** RUBY ***
+        "constant.other.symbol.hashkey.ruby",
+        "constant.other.symbol.ruby",
+        //*** SHELL ***
+        "entity.name.command",
+        "entity.name.section.group-title", // example: [difftool "sourcetree"] in .gitconfig
+        //*** SCSS ***
+        "entity.other.attribute-name.parent-selector-suffix.css punctuation" // SCSS &__name
+      ],
+      "settings": {
+        "foreground": "{syntax.property}"
+      }
+    },
+
+    {
+      "name": "ORANGE BASE",
+      "scope": [
+        //*** DEFAULT ***
+        "entity.other.attribute-name.id",
+        "entity.other.attribute-name.id punctuation",
+        "meta.attribute.id string",
+        "variable.parameter",
+        //*** APACHE ***
+        "string.replacement.apacheconf",
+        //*** CSS ***
+        "entity.other.keyframe-offset",
+        "meta.at-rule.keyframes",
+        "support.constant.container-name.container.css", // For @container <container-name> (this token is from my CSS Nesting Syntax Highlighting extension)
+        "variable.parameter.misc.css", // such as `content: counter(count, decimal);`
+        //*** LOG ***
+        "log.warning",
+        //*** PHP ***
+        "meta.function.parameters.php variable",
+        "meta.function.parameters.php punctuation.definition.variable",
+        "punctuation.section.embedded.begin.php",
+        "punctuation.section.embedded.end.php",
+        //*** SCSS ***
+        "meta.at-rule.keyframes entity.name.function",
+        "entity.other.attribute-name.scss"
+      ],
+      "settings": {
+        "foreground": "{syntax.parameter}"
+      }
+    },
+
+    {
+      "name": "PINK BASE",
+      "scope": [
+        //*** DEFAULT ***
+        "punctuation.definition.variable",
+        "variable",
+        //*** PHP ***
+        "string.quoted.double.php variable.other.php punctuation.definition.variable.php", // for $ in string interpolation.
+        //*** PYTHON ***
+        "meta.function-call.arguments.python",
+        //*** SHELL ***
+        "variable.other.assignment.shell"
+      ],
+      "settings": {
+        "foreground": "{syntax.variable}"
+      }
+    },
+
+    {
+      "name": "PURPLE BASE",
+      "scope": [
+        //*** DEFAULT ***
+        "constant",
+        "keyword.other.unit",
+        //*** APACHE ***
+        "entity.status.apacheconf",
+        //*** CSS ***
+        "support.constant.boolean.container.css", // for @container <style-query> boolean property-value (this token is from my CSS Nesting Syntax Highlighting extension)
+        //*** HTML ***
+        "constant punctuation.definition.entity", // HTML symbol entity
+        "meta.attribute.async.html entity.other.attribute-name",
+        "meta.attribute.crossorigin entity.other.attribute-name",
+        "meta.attribute.defer.html entity.other.attribute-name",
+        //*** INI ***
+        "source.ini",
+        //*** JAVASCRIPT ***
+        "variable.other.constant.object.js",
+        //*** PHP ***
+        "entity.name.type.namespace.php", // namespace name
+        //*** REGEX ***
+        "meta.assertion.look-ahead.regexp",
+        "meta.assertion.negative-look-ahead.regexp",
+        "meta.group.regexp",
+        "meta.group.assertion.regexp",
+        "string.regexp",
+        "string.regexp constant",
+        "string.regexp keyword",
+        "string.regexp punctuation",
+        //*** SHELL ***
+        "constant.other.option", //example: -i in shell
+        "meta.arithmetic.shell", //example: $+functions[p10k]
+        "keyword.operator.logical.shell", //example: `-f` in if [ -f "$ray_php"]
+        "keyword.operator.expansion.shell", //example: ${tag//\%/%%}
+        //*** XML ***
+        "punctuation.definition.constant.xml"
+      ],
+      "settings": {
+        "foreground": "{syntax.constant}"
+      }
+    },
+    {
+      "name": "PURPLE DEEP",
+      "scope": [
+        //*** DEFAULT ***
+        "entity.other.attribute-name.namespace"
+      ],
+      "settings": {
+        "foreground": "{syntax.attributeNamespace}"
+      }
+    },
+
+    {
+      "name": "RED BASE",
+      "scope": [
+        //*** DEFAULT ***
+        "entity.name.tag",
+        "keyword",
+        "storage.modifier",
+        //*** LOG ***
+        "log.error",
+        //*** PHP ***
+        "entity.name.goto-label.php", // For 'else' using alternative colon syntax
+        //*** SHELL ***
+        "punctuation.separator.statement.and.shell" //example: &&
+      ],
+      "settings": {
+        "foreground": "{syntax.keyword}"
+      }
+    },
+    {
+      "name": "RED DEEP",
+      "scope": [
+        //*** DEFAULT ***
+      ],
+      "settings": {
+        // "foreground": "#db6656",
+      }
+    },
+
+    {
+      "name": "YELLOW BASE",
+      "scope": [
+        //*** DEFAULT ***
+        "string",
+        //*** CSS ***
+        "meta.attribute-selector entity.other.attribute-name",
+        //*** MARKDOWN ***
+        "string.other.link.description.markdown",
+        //*** PHP ***
+        "string.quoted.single.php", // Override for "meta.attribute.src.html string"
+        "string.quoted.double.php", // Override for "meta.attribute.src.html string"
+        //*** SCSS ***
+        "meta.attribute-selector.scss",
+        //*** XML ***
+        "meta.tag.sgml.doctype.xml"
+      ],
+      "settings": {
+        "foreground": "{syntax.string}"
+      }
+    },
+    {
+      "name": "YELLOW DEEP",
+      "scope": [
+        //*** MARKDOWN ***
+        "markup.inline.raw.string.markdown"
+      ],
+      "settings": {
+        "foreground": "{syntax.code}"
+      }
+    },
+
+    //--------------------------------------------------------------------------
+    // Better DockerFile Syntax - Extension
+    // https://marketplace.visualstudio.com/items?itemName=jeff-hykin.better-dockerfile-syntax
+    //--------------------------------------------------------------------------
+    {
+      "name": "[DOCKERFILE] - GRAY WHITE",
+      "scope": [
+        "source.dockerfile string"
+      ],
+      "settings": {
+        "foreground": "{syntax.support}"
+      }
+    },
+    {
+      "name": "[DOCKERFILE] - CYAN BASE",
+      "scope": [
+        "source.dockerfile keyword.other.special-method"
+      ],
+      "settings": {
+        "foreground": "{syntax.function}"
+      }
+    },
+    {
+      "name": "[DOCKERFILE] - GREEN BASE",
+      "scope": [
+        "source.dockerfile entity.name"
+      ],
+      "settings": {
+        "foreground": "{syntax.property}"
+      }
+    },
+    {
+      "name": "[DOCKERFILE] - ORANGE BASE",
+      "scope": [
+        "source.dockerfile constant.other.option"
+      ],
+      "settings": {
+        "foreground": "{syntax.parameter}"
+      }
+    },
+    {
+      "name": "[DOCKERFILE] - RED BASE",
+      "scope": [
+        "punctuation.separator.statement.and.shell.dockerfile"
+      ],
+      "settings": {
+        "foreground": "{syntax.keyword}"
+      }
+    },
+
+    //--------------------------------------------------------------------------
+    // Nginx.conf - (Syntax) Extension
+    // https://marketplace.visualstudio.com/items?itemName=shanoor.vscode-nginx
+    //--------------------------------------------------------------------------
+    {
+      "name": "[NGINX] - GRAY LIGHT (OKLCH 82%)",
+      "scope": [
+        "source.nginx"
+      ],
+      "settings": {
+        "foreground": "{syntax.text}"
+      }
+    },
+    {
+      "name": "GRAY MEDIUM (OKLCH 66%) [PUNCTUATION]",
+      "scope": [
+        "source.nginx constant.character"
+      ],
+      "settings": {
+        "foreground": "{syntax.punctuation}"
+      }
+    },
+
+    {
+      "name": "[NGINX] - BLUE BASE",
+      "scope": [
+        "source.nginx constant.language.module"
+      ],
+      "settings": {
+        "foreground": "{syntax.storageType}"
+      }
+    },
+    {
+      "name": "[NGINX] - CYAN BASE",
+      "scope": [
+        "source.nginx constant.language"
+      ],
+      "settings": {
+        "foreground": "{syntax.function}"
+      }
+    },
+    {
+      "name": "[NGINX] - RED BASE",
+      "scope": [
+        "source.nginx constant.language.directive.module.main"
+      ],
+      "settings": {
+        "foreground": "{syntax.keyword}"
+      }
+    },
+
+    //--------------------------------------------------------------------------
+    // Output Colorizer - Extension
+    // https://marketplace.visualstudio.com/items?itemName=IBM.output-colorizer
+    //--------------------------------------------------------------------------
+    {
+      "name": "GRAY WHITE (OKLCH 98%)",
+      "scope": [
+        "code.log support" // For "Output Colorizer" extension
+      ],
+      "settings": {
+        "foreground": "{syntax.support}"
+      }
+    },
+
+    {
+      "name": "RED BASE",
+      "scope": [
+        "code.log invalid"
+      ],
+      "settings": {
+        "foreground": "{syntax.keyword}"
+      }
+    },
+
+    //--------------------------------------------------------------------------
+    // Rainbow CSV - Extension
+    // https://marketplace.visualstudio.com/items?itemName=mechatroner.rainbow-csv
+    //--------------------------------------------------------------------------
+    {
+      "name": "NORMAL",
+      "scope": [
+        "comment.rainbow4",
+        "invalid.rainbow10"
+      ],
+      "settings": {
+        "fontStyle": ""
+      }
+    },
+    {
+      "name": "GRAY WHITE (OKLCH 98%)",
+      "scope": [
+        "markup.bold.rainbow9"
+      ],
+      "settings": {
+        "foreground": "{syntax.support}"
+      }
+    },
+    {
+      "name": "GRAY LIGHT (OKLCH 82%)",
+      "scope": [
+        "comment.rainbow4"
+      ],
+      "settings": {
+        "foreground": "{syntax.text}"
+      }
+    },
+
+    {
+      "name": "BLUE BASE",
+      "scope": [
+        "constant.numeric.rainbow7"
+      ],
+      "settings": {
+        "foreground": "{syntax.storageType}"
+      }
+    },
+    {
+      "name": "CYAN BASE",
+      "scope": [
+        "rainbow1"
+      ],
+      "settings": {
+        "foreground": "{syntax.function}"
+      }
+    },
+    {
+      "name": "GREEN BASE",
+      "scope": [
+        "string.rainbow5"
+      ],
+      "settings": {
+        "foreground": "{syntax.property}"
+      }
+    },
+    {
+      "name": "ORANGE BASE",
+      "scope": [
+        "variable.parameter.rainbow6"
+      ],
+      "settings": {
+        "foreground": "{syntax.parameter}"
+      }
+    },
+    {
+      "name": "PINK BASE",
+      "scope": [
+        "entity.name.type.rainbow8"
+      ],
+      "settings": {
+        "foreground": "{syntax.variable}"
+      }
+    },
+    {
+      "name": "PURPLE BASE",
+      "scope": [
+        "entity.name.function.rainbow3"
+      ],
+      "settings": {
+        "foreground": "{syntax.constant}"
+      }
+    },
+    {
+      "name": "RED BASE",
+      "scope": [
+        "invalid.rainbow10"
+      ],
+      "settings": {
+        "foreground": "{syntax.keyword}"
+      }
+    },
+    {
+      "name": "YELLOW BASE",
+      "scope": [
+        "keyword.rainbow2"
+      ],
+      "settings": {
+        "foreground": "{syntax.string}"
+      }
+    }
+  ]
+}

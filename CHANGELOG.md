@@ -6,6 +6,8 @@ All notable changes to this project are documented in this file.
 
 ### Added
 
+- Added palette and theme generation from JSONC palette inputs, semantic tokens, and a comment-preserving theme template, with generated JSON/Markdown/SVG palette references and stale-output checks in validation and packaging.
+- Added tests for color conversions, gamut limits, base chroma anchors, aliases, alpha handling, template preservation, deterministic output, and failed builds.
 - Added a color system proposal based on the v1.3 palette, with shared OKLCH variant rules, semantic color roles, an sRGB export policy, and contrast checks.
 - Added a source-based workbench color audit covering missing stable and upcoming colors, deprecated IDs, and reference entries absent from current VS Code registrations.
 - Added a TypeScript grammar sample covering advanced type operators, generics, declarations, decorators, resource management, and runtime syntax, with a samples-only compiler configuration.

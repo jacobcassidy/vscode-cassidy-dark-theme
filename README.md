@@ -27,3 +27,5 @@ If you come across any issues, please feel free to [report them here](https://gi
 See the [development guide](https://github.com/jacobcassidy/vscode-cassidy-dark-theme/blob/main/docs/development/development-guide.md) for project structure, local previewing, validation, packaging, and releases.
 
 See the [color system proposal](docs/references/palettes/color-system-proposal.md) for suggested palette rules, semantic color roles, and contrast checks based on the v1.3 palette.
+
+Edit hue, lightness, and optional `baseChroma` inputs in [`src/palette.jsonc`](src/palette.jsonc), then run `npm run build:palette` to generate the [full palette and swatches](docs/references/palettes/generated/palette.generated.md). Run `npm run build:theme` to also resolve semantic tokens and rebuild the shipped theme. `npm run check:generated` checks that committed outputs match the source files.
