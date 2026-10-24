@@ -19,7 +19,7 @@ The cleanup is primarily to formalize these relationships, use ordered tone numb
 
 ### Hue anchors and base colors
 
-Use the latest known lightness and hue values as the starting parameters, including blue at L75 and both yellow candidates. The hex values are the existing v1.3 base colors for comparison, not regenerated exports of the targets. Pink uses 0°, equivalent to the historical 360°. Base chroma here is the visual target before the gamut limit described below.
+Use the latest known lightness and hue values as the starting parameters, including blue at L75 and yellow at L90 with an explicit base chroma of 0.0750. The hex values are the existing v1.3 base colors for comparison, not regenerated exports of the targets. Pink uses 0°, equivalent to the historical 360°. Base chroma here is the visual target before the gamut limit described below.
 
 | Family | Hue  | Base lightness | Base chroma | Existing v1.3 base hex | Main syntax role            |
 | ------ | ---- | -------------- | ----------- | ---------------------- | --------------------------- |
@@ -30,34 +30,40 @@ Use the latest known lightness and hue values as the starting parameters, includ
 | Pink   | 0°   | 0.850          | 0.0750      | `#f8bacc`              | Variables                   |
 | Purple | 315° | 0.750          | 0.1250      | `#cc95e4`              | Constants                   |
 | Red    | 30°  | 0.750          | 0.1250      | `#f38e7e`              | Keywords                    |
-| Yellow | 90°  | 0.875          | 0.0625      | `#e6d5a7`              | Strings                     |
+| Yellow | 90°  | 0.900          | 0.0750      | `#e6d5a7`              | Strings                     |
 
-Yellow at L90 is an alternative with target chroma 0.0500. Keep L87.5 as the reference default until the two candidates are compared in syntax samples.
+Start yellow `400` at `oklch(90% 0.075 90)`, which exports to `#f1dda5`. The explicit chroma gives yellow a richer starting point than the default curve's 0.0500 at L90. Keep the historical v1.3 yellow in the comparison reference; L87.5 is no longer the starting default for this proposal.
 
 Keep the existing offset hue spacing: every anchor already sits on a 15° grid, including yellow at 90°. The hue anchors are explicit design choices, while the variant generation rules are shared across families.
 
 ### Choosing chroma from the anchors
 
-Lightness and hue determine which chroma values fit the output gamut, but they cannot determine the preferred visual intensity. Choose one global strength parameter, starting at 0.5 because it reproduces most of the current base colors, and use the gamut as a limit:
+Lightness and hue determine which chroma values fit the output gamut, but they cannot determine the preferred visual intensity. Choose one global strength parameter, starting at 0.5 because it reproduces most of the current base colors. Allow an optional `baseChroma` per family, then derive the family's tones relative to that anchor and use the gamut as a limit:
 
 ```text
 strength = 0.5
 gamutFraction = 0.9
 
-Ctarget(L) = strength × (1 − L)
+Lb = family.lightness
+Cb = family.baseChroma if provided, otherwise strength × (1 − Lb)
+
+Ctarget(L) = max(0, Cb + strength × (Lb − L))
 Cusable(L, H) = min(Ctarget(L), gamutFraction × CmaxSRGB(L, H))
 ```
+
+When `baseChroma` is omitted, this reduces to the original `strength × (1 − L)` target. When provided, it shifts the family's chroma curve while keeping the shared rate of change between tones. An explicit zero is valid and must not trigger the fallback. The zero floor prevents negative targets for lighter tones with low base chroma. `400-muted` remains a separate modifier: halve the resolved `400` chroma rather than applying the tone curve independently.
+
+An explicit `baseChroma` still passes through the gamut limit; it does not bypass it like a documented primitive override. The actual `400` chroma may therefore be below the requested anchor.
 
 `CmaxSRGB(L, H)` is the largest chroma whose linear sRGB channels all remain in 0–1 at the chosen lightness and hue. Find it with the chroma search in the export policy. The 90% fraction leaves some chroma headroom below that boundary; it is a proposed design setting, not a color science constant or a guarantee of balanced appearance. Setting it to 1 uses all available chroma up to the boundary.
 
 This keeps the visual target separate from the display limit. Do not choose chroma solely as a fixed fraction of the maximum: at these anchors, green's maximum is approximately 0.234 while pink's is approximately 0.089. A common gamut fraction alone would give green much more absolute chroma. Equal gamut fractions do not imply equal perceptual chroma.
 
-The following base candidates use strength 0.5 and gamut fraction 0.9. Measurements are calculated in sRGB; displayed chroma values are rounded, while hex values are generated from the unrounded values.
+The following base candidates use strength 0.5 and gamut fraction 0.9, with yellow's explicit base chroma of 0.0750. Measurements are calculated in sRGB; displayed chroma values are rounded, while hex values are generated from the unrounded values.
 
 | Family | L     | H    | Target C | Maximum sRGB C | Chosen C | Candidate hex |
 | ------ | ----- | ---- | -------- | -------------- | -------- | ------------- |
-| Yellow | 0.900 | 90°  | 0.0500   | 0.1282         | 0.0500   | `#ebddb9`     |
-| Yellow | 0.875 | 90°  | 0.0625   | 0.1613         | 0.0625   | `#e6d5a7`     |
+| Yellow | 0.900 | 90°  | 0.0750   | 0.1282         | 0.0750   | `#f1dda5`     |
 | Cyan   | 0.850 | 195° | 0.0750   | 0.1450         | 0.0750   | `#92dedd`     |
 | Pink   | 0.850 | 0°   | 0.0750   | 0.0886         | 0.0750   | `#f8bacc`     |
 | Green  | 0.800 | 135° | 0.1000   | 0.2336         | 0.1000   | `#a2cd8b`     |
@@ -66,7 +72,7 @@ The following base candidates use strength 0.5 and gamut fraction 0.9. Measureme
 | Purple | 0.750 | 315° | 0.1250   | 0.1897         | 0.1250   | `#cc95e4`     |
 | Red    | 0.750 | 30°  | 0.1250   | 0.1512         | 0.1250   | `#f38e7e`     |
 
-Only blue's base is limited by the proposed 90% setting. Its target of 0.125 already fits sRGB, so the reduction to approximately 0.1176 is an intentional design choice. Other variants may reach their limits independently. Smaller strength values produce quieter targets; larger values increase chroma until the gamut limit takes over for each color.
+Only blue's base is limited by the proposed 90% setting. Its target of 0.125 already fits sRGB, so the reduction to approximately 0.1176 is an intentional design choice. Other variants may reach their limits independently. Lower strength reduces the default base chroma and the change in target chroma between lightness levels. An explicit `baseChroma` stays fixed when strength changes, while its derived tones still use strength as their slope.
 
 Judge the bases together on the actual editor background before changing these settings. Keep per-family overrides available for specific visual problems, with a recorded reason. Chroma generation does not establish text contrast; keep the foreground/background checks described below.
 
@@ -98,7 +104,17 @@ For example, orange's targets before the gamut limit become:
 | `palette.orange.500`       | `oklch(70% 0.15 60)`  |
 | `palette.orange.600`       | `oklch(60% 0.20 60)`  |
 
-Some targets exceed sRGB; the chroma limit and export policy resolve that consistently. The lightness ceiling of 0.975 prevents the L90 yellow candidate from producing pure white at L100. Yellow `300` is still nearly white, so reserve it for an actual need. Keep unused tones available as reference without assigning each one a theme role.
+Yellow's explicit anchor produces the following starting palette. The `300` and `600` chroma values are reduced by the gamut limit; `400-muted` is half the resolved base chroma.
+
+| Tone        | Lightness | Target chroma | Final chroma | Candidate hex |
+| ----------- | --------- | ------------- | ------------ | ------------- |
+| `300`       | 0.975     | 0.0375        | 0.0285       | `#fef6e2`     |
+| `400`       | 0.900     | 0.0750        | 0.0750       | `#f1dda5`     |
+| `400-muted` | 0.900     | 0.0375        | 0.0375       | `#e8ddc3`     |
+| `500`       | 0.800     | 0.1250        | 0.1250       | `#ddba56`     |
+| `600`       | 0.700     | 0.1750        | 0.1287       | `#bd9a2c`     |
+
+Some targets exceed sRGB; the chroma limit and export policy resolve that consistently. The lightness ceiling of 0.975 prevents the L90 yellow base from producing pure white at L100. Yellow `300` is still nearly white, so reserve it for an actual need. Keep unused tones available as reference without assigning each one a theme role.
 
 OKLCH provides separate lightness, chroma, and hue coordinates, which makes these relationships practical to author. Equal lightness does not by itself guarantee equal contrast on a background. See [CSS Color 4: Oklab and OKLCH](https://www.w3.org/TR/css-color-4/#ok-lab).
 
@@ -180,7 +196,7 @@ These are proposed paths, not files or commands available today:
 
 | Path                                   | Purpose                                                                                                          |
 | -------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
-| `src/palette.jsonc`                    | Authored hue/lightness parameters, neutrals, and documented primitive overrides                                  |
+| `src/palette.jsonc`                    | Authored hue/lightness parameters, optional base chroma, neutrals, and documented primitive overrides            |
 | `src/tokens.jsonc`                     | Semantic aliases and explicit alpha values for overlays                                                          |
 | `src/cassidy-dark-color-theme.jsonc`   | Full theme template with named color references, comments, scope arrays, and font styles                         |
 | `scripts/build-theme.js`               | Parameter validation, palette generation, alias resolution, template substitution, and output comparison/writing |
@@ -198,7 +214,7 @@ Keep development and historical themes in `dev/themes/` independent. Do not infe
 
 ### Color variables and template references
 
-An excerpt from `src/palette.jsonc` could look like this. Each family generates tones `300`, `400`, `500`, and `600`, plus `400-muted`, using the shared chroma settings. Neutral lightness values use the 0–1 scale, zero chroma, and a conventional hue of zero.
+An excerpt from `src/palette.jsonc` could look like this. Each family generates tones `300`, `400`, `500`, and `600`, plus `400-muted`, using the shared chroma settings and its optional `baseChroma` anchor. This example includes all eight families and a subset of the neutrals. Neutral lightness values use the 0–1 scale, zero chroma, and a conventional hue of zero.
 
 ```jsonc
 {
@@ -210,7 +226,11 @@ An excerpt from `src/palette.jsonc` could look like this. Each family generates 
     "blue": { "hue": 255, "lightness": 0.75 },
     "cyan": { "hue": 195, "lightness": 0.85 },
     "green": { "hue": 135, "lightness": 0.8 },
-    "yellow": { "hue": 90, "lightness": 0.875 },
+    "orange": { "hue": 60, "lightness": 0.8 },
+    "pink": { "hue": 0, "lightness": 0.85 },
+    "purple": { "hue": 315, "lightness": 0.75 },
+    "red": { "hue": 30, "lightness": 0.75 },
+    "yellow": { "hue": 90, "lightness": 0.9, "baseChroma": 0.075 },
   },
   "neutrals": {
     "900": 0.26,
@@ -221,7 +241,7 @@ An excerpt from `src/palette.jsonc` could look like this. Each family generates 
 }
 ```
 
-Internally, this produces primitive IDs such as `palette.cyan.400` and `palette.gray.900`. The complete configuration would include all eight families and every neutral required by the theme. Allow primitive overrides with either explicit OKLCH coordinates or an exact sRGB hex, plus a required reason. Exact hex overrides support a migration that preserves the released colors; OKLCH overrides still pass through the export policy.
+Internally, this produces primitive IDs such as `palette.cyan.400` and `palette.gray.900`. The complete configuration would include every neutral required by the theme. Allow primitive overrides with either explicit OKLCH coordinates or an exact sRGB hex, plus a required reason. Exact hex overrides support a migration that preserves the released colors; OKLCH overrides still pass through the export policy.
 
 Use a flat map of semantic IDs in `src/tokens.jsonc`. Dots are part of each ID, and references are looked up by their complete name:
 
@@ -273,8 +293,8 @@ This is an illustrative excerpt. Migrate the complete existing theme, including 
 
 Implement one render function shared by write mode and check mode:
 
-1. Parse every JSONC input, allowing comments and trailing commas, and report syntax errors with its file and location. Reject duplicate keys, unknown configuration fields, non-finite numbers, invalid parameter ranges, and generated lightness outside 0–1. Validate chroma and strength as nonnegative, gamut fraction in 0–1, and hue anchors in the range 0–360, excluding 360.
-2. Generate palette targets, apply documented overrides, and convert OKLCH colors to hex using the export policy. Keep target and exported measurements available for a future generated palette reference.
+1. Parse every JSONC input, allowing comments and trailing commas, and report syntax errors with its file and location. Reject duplicate keys, unknown configuration fields, non-finite numbers, invalid parameter ranges, and generated lightness outside 0–1. Validate chroma, optional `baseChroma`, and strength as nonnegative, gamut fraction in 0–1, and hue anchors in the range 0–360, excluding 360.
+2. Resolve each family's `baseChroma` or its fallback, generate tone targets relative to the base anchor, apply documented overrides, and convert OKLCH colors to hex using the export policy. Keep target and exported measurements available for a future generated palette reference.
 3. Resolve aliases recursively with memoization. Reject unknown references and cycles, reporting the full reference chain. Validate unused aliases too, so dormant errors cannot accumulate.
 4. Resolve references only in supported template color positions. Validate literal and resolved colors, and fail on unresolved placeholders in active values. Disabled examples inside comments remain comments.
 5. Preserve template comments and ordering with the existing [`jsonc-parser`](https://github.com/microsoft/node-jsonc-parser) dependency. Its syntax tree provides offsets for replacing string values, and its edit APIs can apply those changes without serializing the document from scratch. Add a stable generated-file header directing edits to `src/`.
@@ -308,7 +328,7 @@ Separate build adoption from palette redesign. First copy the current theme to t
 
 After that migration passes, apply the proposed OKLCH palette as a separate reviewed change. This avoids making a palette redesign a prerequisite for variable-based authoring.
 
-Before adopting the builder, add focused tests for alias chains and cycles, missing references, alpha rounding and replacement, duplicate-key errors, invalid parameters, known OKLCH/sRGB conversions, and out-of-gamut chroma reduction. Integration checks should cover all supported color positions, preservation of scope order and comments, deterministic output, read-only stale-output detection, and leaving the previous file intact after a failed build. The existing theme validator currently checks basic structure and asset paths; it does not replace these build-specific checks.
+Before adopting the builder, add focused tests for alias chains and cycles, missing references, alpha rounding and replacement, duplicate-key errors, invalid parameters, known OKLCH/sRGB conversions, and out-of-gamut chroma reduction. Cover omitted versus explicit `baseChroma` (including zero), the nonnegative target floor, yellow's selected base and derived tones, and halving resolved chroma for `400-muted`. Integration checks should cover all supported color positions, preservation of scope order and comments, deterministic output, read-only stale-output detection, and leaving the previous file intact after a failed build. The existing theme validator currently checks basic structure and asset paths; it does not replace these build-specific checks.
 
 ## Adoption sequence
 

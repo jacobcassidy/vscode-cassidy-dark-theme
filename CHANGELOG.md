@@ -15,6 +15,7 @@ All notable changes to this project are documented in this file.
 
 ### Changed
 
+- Set the proposed yellow base to L90/C0.075/H90 and added optional per-family base chroma anchors with derived tone generation and calculated yellow candidates.
 - Adopted numbered tones `300`, `400`, `500`, and `600`, with `400-muted` as the base color's chroma modifier, throughout the color system proposal.
 - Refined the proposed color system with the latest base anchors, shared chroma strength, a per-variant sRGB gamut limit, calculated base candidates, and a lightness ceiling for yellow variants.
 - Expanded the color system proposal with a theme build design covering palette variables, semantic aliases, JSONC template references, generated-output checks, and migration steps.
