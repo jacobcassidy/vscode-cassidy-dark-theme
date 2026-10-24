@@ -15,6 +15,7 @@ All notable changes to this project are documented in this file.
 
 ### Changed
 
+- Refined the proposed color system with the latest base anchors, shared chroma strength, a per-variant sRGB gamut limit, calculated base candidates, and a lightness ceiling for yellow variants.
 - Expanded the color system proposal with a theme build design covering palette variables, semantic aliases, JSONC template references, generated-output checks, and migration steps.
 - Renamed release commands to `package:vsix`, `release:publish` for the pipeline that publishes to the Marketplace and GitHub, and `release:github-recover` for GitHub-only recovery.
 - Expanded the PHP grammar sample with PHPDoc, imports, attributes, enums, traits, literals, interpolation, operators, callables, control flow, generators, and embedded HTML while preserving its original property type probes.

@@ -19,11 +19,11 @@ The cleanup is primarily to formalize these relationships, replace ambiguous var
 
 ### Hue anchors and base colors
 
-Use these authored targets as the starting parameters. The hex values are the existing v1.3 base colors for comparison, not regenerated exports of the targets. Pink uses 0°, equivalent to the historical 360°.
+Use the latest known lightness and hue values as the starting parameters, including blue at L75 and both yellow candidates. The hex values are the existing v1.3 base colors for comparison, not regenerated exports of the targets. Pink uses 0°, equivalent to the historical 360°. Base chroma here is the visual target before the gamut limit described below.
 
 | Family | Hue  | Base lightness | Base chroma | Existing v1.3 base hex | Main syntax role            |
 | ------ | ---- | -------------- | ----------- | ---------------------- | --------------------------- |
-| Blue   | 255° | 0.768          | 0.1160      | `#80b7fc`              | Storage types               |
+| Blue   | 255° | 0.750          | 0.1250      | `#80b7fc`              | Storage types               |
 | Cyan   | 195° | 0.850          | 0.0750      | `#92dedd`              | Functions, classes, objects |
 | Green  | 135° | 0.800          | 0.1000      | `#a2cd8b`              | Properties                  |
 | Orange | 60°  | 0.800          | 0.1000      | `#eeae7b`              | Parameters                  |
@@ -32,27 +32,59 @@ Use these authored targets as the starting parameters. The hex values are the ex
 | Red    | 30°  | 0.750          | 0.1250      | `#f38e7e`              | Keywords                    |
 | Yellow | 90°  | 0.875          | 0.0625      | `#e6d5a7`              | Strings                     |
 
-Blue's calibrated lightness comes from the current experiments. Keep it explicit rather than hiding it inside a special conversion rule. Keep the existing offset hue spacing: every anchor already sits on a 15° grid, including yellow at 90°. The hue anchors are explicit design choices, while the variant generation rules are shared across families.
+Yellow at L90 is an alternative with target chroma 0.0500. Keep L87.5 as the reference default until the two candidates are compared in syntax samples.
+
+Keep the existing offset hue spacing: every anchor already sits on a 15° grid, including yellow at 90°. The hue anchors are explicit design choices, while the variant generation rules are shared across families.
+
+### Choosing chroma from the anchors
+
+Lightness and hue determine which chroma values fit the output gamut, but they cannot determine the preferred visual intensity. Choose one global strength parameter, starting at 0.5 because it reproduces most of the current base colors, and use the gamut as a limit:
+
+```text
+strength = 0.5
+gamutFraction = 0.9
+
+Ctarget(L) = strength × (1 − L)
+Cusable(L, H) = min(Ctarget(L), gamutFraction × CmaxSRGB(L, H))
+```
+
+`CmaxSRGB(L, H)` is the largest chroma whose linear sRGB channels all remain in 0–1 at the chosen lightness and hue. Find it with the chroma search in the export policy. The 90% fraction leaves some chroma headroom below that boundary; it is a proposed design setting, not a color science constant or a guarantee of balanced appearance. Setting it to 1 uses all available chroma up to the boundary.
+
+This keeps the visual target separate from the display limit. Do not choose chroma solely as a fixed fraction of the maximum: at these anchors, green's maximum is approximately 0.234 while pink's is approximately 0.089. A common gamut fraction alone would give green much more absolute chroma. Equal gamut fractions do not imply equal perceptual chroma.
+
+The following base candidates use strength 0.5 and gamut fraction 0.9. Measurements are calculated in sRGB; displayed chroma values are rounded, while hex values are generated from the unrounded values.
+
+| Family | L     | H    | Target C | Maximum sRGB C | Chosen C | Candidate hex |
+| ------ | ----- | ---- | -------- | -------------- | -------- | ------------- |
+| Yellow | 0.900 | 90°  | 0.0500   | 0.1282         | 0.0500   | `#ebddb9`     |
+| Yellow | 0.875 | 90°  | 0.0625   | 0.1613         | 0.0625   | `#e6d5a7`     |
+| Cyan   | 0.850 | 195° | 0.0750   | 0.1450         | 0.0750   | `#92dedd`     |
+| Pink   | 0.850 | 0°   | 0.0750   | 0.0886         | 0.0750   | `#f8bacc`     |
+| Green  | 0.800 | 135° | 0.1000   | 0.2336         | 0.1000   | `#a2cd8b`     |
+| Orange | 0.800 | 60°  | 0.1000   | 0.1403         | 0.1000   | `#eeae7b`     |
+| Blue   | 0.750 | 255° | 0.1250   | 0.1306         | 0.1176   | `#7ab1f7`     |
+| Purple | 0.750 | 315° | 0.1250   | 0.1897         | 0.1250   | `#cc95e4`     |
+| Red    | 0.750 | 30°  | 0.1250   | 0.1512         | 0.1250   | `#f38e7e`     |
+
+Only blue's base is limited by the proposed 90% setting. Its target of 0.125 already fits sRGB, so the reduction to approximately 0.1176 is an intentional design choice. Other variants may reach their limits independently. Smaller strength values produce quieter targets; larger values increase chroma until the gamut limit takes over for each color.
+
+Judge the bases together on the actual editor background before changing these settings. Keep per-family overrides available for specific visual problems, with a recorded reason. Chroma generation does not establish text contrast; keep the foreground/background checks described below.
 
 ### Five named variants
 
 Use `palette.<family>.<variant>` for primitives. Retire the numeric chromatic labels when adopting the system: v1.3's 200 is approximately as light as 400, while 300 is lighter than both. These labels currently encode roles rather than an ordered lightness scale.
 
-Let `Lb` be the family's base lightness. Apply the following rule to every family:
+Let `Lb` be the family's base lightness. Recalculate `Cusable` at each variant's lightness and the family's fixed hue. For muted, halve the resolved base chroma so the relationship survives a gamut limit.
 
-```text
-Ctarget(L) = 0.5 × (1 − L)
-```
+| Variant  | Target lightness        | Chroma rule            | v1.3 label | Intended purpose                                                    |
+| -------- | ----------------------- | ---------------------- | ---------- | ------------------------------------------------------------------- |
+| `light`  | `min(Lb + 0.10, 0.975)` | `Cusable(L, H)`        | 300        | Light emphasis or foreground on a sufficiently dark colored surface |
+| `muted`  | `Lb`                    | `0.5 × Cusable(Lb, H)` | 200        | Lower chroma syntax, such as blue type hints                        |
+| `base`   | `Lb`                    | `Cusable(L, H)`        | 400        | Normal syntax and colored foregrounds                               |
+| `strong` | `Lb − 0.10`             | `Cusable(L, H)`        | 500        | Deeper accents and candidate diagnostic colors                      |
+| `solid`  | `Lb − 0.20`             | `Cusable(L, H)`        | 600        | Candidate opaque fills; validate the foreground separately          |
 
-| Variant  | Target lightness | Target chroma      | v1.3 label | Intended purpose                                                    |
-| -------- | ---------------- | ------------------ | ---------- | ------------------------------------------------------------------- |
-| `light`  | `Lb + 0.10`      | `Ctarget(L)`       | 300        | Light emphasis or foreground on a sufficiently dark colored surface |
-| `muted`  | `Lb`             | `0.5 × Ctarget(L)` | 200        | Lower chroma syntax, such as blue type hints                        |
-| `base`   | `Lb`             | `Ctarget(L)`       | 400        | Normal syntax and colored foregrounds                               |
-| `strong` | `Lb − 0.10`      | `Ctarget(L)`       | 500        | Deeper accents and candidate diagnostic colors                      |
-| `solid`  | `Lb − 0.20`      | `Ctarget(L)`       | 600        | Candidate opaque fills; validate the foreground separately          |
-
-This is a Cassidy Dark design rule inferred from the current experiments, not a color science requirement. The chroma target increases by 0.05 for every 0.10 reduction in lightness. Muted keeps the authored base lightness and halves its chroma, creating a quieter variant without lowering its lightness target.
+This is a Cassidy Dark design rule inferred from the current experiments, not a color science requirement. At strength 0.5, the chroma target increases by 0.05 for every 0.10 reduction in lightness. Actual chroma may stop increasing or decrease when a variant reaches its gamut limit. Muted keeps the authored base lightness and halves its resolved chroma, creating a quieter variant without lowering its lightness target.
 
 For example, orange becomes:
 
@@ -64,7 +96,7 @@ For example, orange becomes:
 | `strong` | `oklch(70% 0.15 60)`  |
 | `solid`  | `oklch(60% 0.20 60)`  |
 
-Some targets exceed sRGB; the export policy below resolves that consistently. Keep unused variants available as reference without assigning each one a theme role. Yellow light is nearly white by design, so reserve it for an actual need.
+Some targets exceed sRGB; the chroma limit and export policy resolve that consistently. The lightness ceiling of 0.975 prevents the L90 yellow candidate from producing pure white at L100. Yellow light is still nearly white, so reserve it for an actual need. Keep unused variants available as reference without assigning each one a theme role.
 
 OKLCH provides separate lightness, chroma, and hue coordinates, which makes these relationships practical to author. Equal lightness does not by itself guarantee equal contrast on a background. See [CSS Color 4: Oklab and OKLCH](https://www.w3.org/TR/css-color-4/#ok-lab).
 
@@ -103,7 +135,7 @@ Author in OKLCH and export sRGB hex for this theme. Keep both the authored targe
 For this system, use a deterministic chroma-reduction policy:
 
 1. Convert the target to linear sRGB and check whether all channels are in the range 0–1.
-2. If it is outside sRGB, hold lightness and hue fixed and binary-search chroma between zero and the target for the largest in-gamut value. Use a fixed chroma tolerance, such as 0.000001.
+2. For generated colors, find `CmaxSRGB` at fixed lightness and hue by expanding an upper chroma bound until it is outside sRGB, then binary-searching between zero and that bound. Use a fixed chroma tolerance, such as 0.000001. Choose `Cusable` using the strength and gamut-fraction settings; halve it for muted. For explicit OKLCH overrides, preserve their intended chroma if it fits sRGB, otherwise reduce it at fixed lightness and hue to the gamut boundary. Overrides deliberately bypass the automatic headroom rule; document why. Exact hex overrides are already sRGB.
 3. Encode sRGB and round once to 8-bit hex. Allow only numerical cleanup of negligible channel overshoot; do not use independent channel clipping as the gamut mapping method.
 4. Convert the final hex back to OKLCH for the exported-value column. Record any semantic overrides and rerun contrast checks on the rounded hex.
 
@@ -164,12 +196,16 @@ Keep development and historical themes in `dev/themes/` independent. Do not infe
 
 ### Color variables and template references
 
-An excerpt from `src/palette.jsonc` could look like this. Each family generates the five variants defined above, using the same chroma rule. Neutral lightness values use the 0–1 scale, zero chroma, and a conventional hue of zero.
+An excerpt from `src/palette.jsonc` could look like this. Each family generates the five variants defined above, using the shared chroma settings. Neutral lightness values use the 0–1 scale, zero chroma, and a conventional hue of zero.
 
 ```jsonc
 {
+  "chroma": {
+    "strength": 0.5,
+    "gamutFraction": 0.9,
+  },
   "families": {
-    "blue": { "hue": 255, "lightness": 0.768 },
+    "blue": { "hue": 255, "lightness": 0.75 },
     "cyan": { "hue": 195, "lightness": 0.85 },
     "green": { "hue": 135, "lightness": 0.8 },
     "yellow": { "hue": 90, "lightness": 0.875 },
@@ -234,7 +270,7 @@ This is an illustrative excerpt. Migrate the complete existing theme, including 
 
 Implement one render function shared by write mode and check mode:
 
-1. Parse every JSONC input, allowing comments and trailing commas, and report syntax errors with its file and location. Reject duplicate keys, unknown configuration fields, non-finite numbers, invalid parameter ranges, and generated lightness outside 0–1. Validate chroma as nonnegative and hue anchors in the range 0–360, excluding 360.
+1. Parse every JSONC input, allowing comments and trailing commas, and report syntax errors with its file and location. Reject duplicate keys, unknown configuration fields, non-finite numbers, invalid parameter ranges, and generated lightness outside 0–1. Validate chroma and strength as nonnegative, gamut fraction in 0–1, and hue anchors in the range 0–360, excluding 360.
 2. Generate palette targets, apply documented overrides, and convert OKLCH colors to hex using the export policy. Keep target and exported measurements available for a future generated palette reference.
 3. Resolve aliases recursively with memoization. Reject unknown references and cycles, reporting the full reference chain. Validate unused aliases too, so dormant errors cannot accumulate.
 4. Resolve references only in supported template color positions. Validate literal and resolved colors, and fail on unresolved placeholders in active values. Disabled examples inside comments remain comments.
