@@ -2,9 +2,13 @@
 
 `src/tokens.jsonc` keeps color documentation in an optional `details` object after `color` and optional `alpha`. The builder validates this metadata and leaves it out of the generated theme and palette reports. Editing details alone does not change generated files.
 
+Comments above every level 1 and level 2 property describe where that group appears or when its colors are used. Per-token usage and relationship data stays in `details`.
+
 ```jsonc
 {
+  // Workbench controls and surfaces outside the syntax-colored text of a file.
   "ui": {
+    // The bar of view icons beside the sidebar, such as Explorer and Search.
     "activityBar": {
       "dropBorder": {
         "color": "palette.gray.white",

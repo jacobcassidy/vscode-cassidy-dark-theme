@@ -18,6 +18,7 @@ All notable changes to this project are documented in this file.
 
 ### Changed
 
+- Added comments above every level 1 and level 2 token property describing its UI location or when its colors are used.
 - Kept fallback relationships only in token `details.inherits`, reserved `overrides` for independently verified UI state precedence, and removed the redundant reverse relationship field.
 - Replaced token color comments with optional validated `details` metadata for usage, inheritance, and overrides, using VS Code source registrations and reviewed rendering fallbacks.
 - Nested the authored color tokens by role, using `color` and optional `alpha` fields, and moved color notes from the theme template above their token properties.

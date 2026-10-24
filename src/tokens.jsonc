@@ -1,5 +1,7 @@
 {
+  // Workbench controls and surfaces outside the syntax-colored text of a file.
   "ui": {
+    // The bar of view icons beside the sidebar, such as Explorer, Search, and Source Control.
     "activityBar": {
       "activeBackground": {
         "color": "palette.gray.875",
@@ -39,6 +41,7 @@
         }
       }
     },
+    // Notification and count badges on activity bar icons.
     "activityBarBadge": {
       "background": {
         "color": "palette.yellow.400",
@@ -53,6 +56,7 @@
         }
       }
     },
+    // Small count labels, such as Problems totals and search result counts.
     "badge": {
       "background": {
         "color": "palette.gray.700",
@@ -67,6 +71,7 @@
         }
       }
     },
+    // Primary and secondary buttons in dialogs, settings, and other workbench views.
     "button": {
       "background": {
         "color": "#1c6bc4",
@@ -118,6 +123,7 @@
         }
       }
     },
+    // Chart accents, including colored markers in source control graphs.
     "charts": {
       "green": {
         "color": "palette.green.400",
@@ -138,6 +144,7 @@
         }
       }
     },
+    // Start, pause, restart, and stop icons in debugging controls.
     "debugIcon": {
       "pauseForeground": {
         "color": "palette.blue.400",
@@ -164,6 +171,7 @@
         }
       }
     },
+    // The toolbar shown during a debugging session.
     "debugToolBar": {
       "background": {
         "color": "palette.gray.800",
@@ -172,6 +180,7 @@
         }
       }
     },
+    // Changed text, lines, and collapsed unchanged regions in file comparisons.
     "diffEditor": {
       "diagonalFill": {
         "color": "palette.gray.700",
@@ -241,6 +250,7 @@
         }
       }
     },
+    // The line-number margins beside added and removed lines in file comparisons.
     "diffEditorGutter": {
       "insertedLineBackground": {
         "color": "diff.added.foreground",
@@ -257,6 +267,7 @@
         }
       }
     },
+    // Text and icons when a workbench control is disabled.
     "disabledForeground": {
       "color": "palette.gray.white",
       "alpha": 0.2,
@@ -264,6 +275,7 @@
         "for": "Disabled workbench text and icons."
       }
     },
+    // Select controls and their open menus, such as the Output channel selector.
     "dropdown": {
       "background": {
         "color": "palette.gray.800",
@@ -296,6 +308,7 @@
         }
       }
     },
+    // The main text editor, including selections, search matches, folds, and line highlights.
     "editor": {
       "background": {
         "color": "surface.editor",
@@ -408,6 +421,7 @@
         }
       }
     },
+    // Matching bracket outlines when the cursor is beside a bracket.
     "editorBracketMatch": {
       "border": {
         "color": "palette.gray.600",
@@ -416,6 +430,7 @@
         }
       }
     },
+    // Inline actions above code, such as references and run or debug links.
     "editorCodeLens": {
       "foreground": {
         "color": "palette.yellow.500",
@@ -424,6 +439,7 @@
         }
       }
     },
+    // The text cursor and characters covered by a block cursor.
     "editorCursor": {
       "background": {
         "color": "palette.gray.800",
@@ -438,6 +454,7 @@
         }
       }
     },
+    // Error squiggles beneath code in the editor.
     "editorError": {
       "foreground": {
         "color": "diagnostic.error.foreground",
@@ -446,6 +463,7 @@
         }
       }
     },
+    // Inline suggestion text shown before accepting a completion.
     "editorGhostText": {
       "foreground": {
         "color": "palette.blue.500",
@@ -454,6 +472,7 @@
         }
       }
     },
+    // Containers for open editors, including split boundaries and drag targets.
     "editorGroup": {
       "border": {
         "color": "palette.gray.black",
@@ -470,6 +489,7 @@
         }
       }
     },
+    // The header behind the tabs of an editor group.
     "editorGroupHeader": {
       "tabsBackground": {
         "color": "palette.gray.850",
@@ -478,6 +498,7 @@
         }
       }
     },
+    // The margin beside code containing change markers and comment range indicators.
     "editorGutter": {
       "addedBackground": {
         "color": "palette.green.400",
@@ -514,6 +535,7 @@
         }
       }
     },
+    // Subtle hint markers beneath code in the editor.
     "editorHint": {
       "foreground": {
         "color": "palette.blue.400",
@@ -522,6 +544,7 @@
         }
       }
     },
+    // Vertical guides showing indentation levels in the editor.
     "editorIndentGuide": {
       "activeBackground1": {
         "color": "palette.gray.700",
@@ -533,6 +556,7 @@
         }
       }
     },
+    // Informational diagnostic squiggles beneath code.
     "editorInfo": {
       "foreground": {
         "color": "palette.blue.400",
@@ -541,6 +565,7 @@
         }
       }
     },
+    // The lightbulb shown when code actions are available.
     "editorLightBulb": {
       "foreground": {
         "color": "palette.yellow.500",
@@ -549,6 +574,7 @@
         }
       }
     },
+    // The lightbulb for AI-assisted code actions.
     "editorLightBulbAi": {
       "foreground": {
         "color": "palette.yellow.500",
@@ -560,6 +586,7 @@
         }
       }
     },
+    // The lightbulb shown when an automatic code fix is available.
     "editorLightBulbAutoFix": {
       "foreground": {
         "color": "palette.blue.400",
@@ -568,6 +595,7 @@
         }
       }
     },
+    // Line numbers and the current line number beside the editor text.
     "editorLineNumber": {
       "activeForeground": {
         "color": "palette.gray.200",
@@ -585,6 +613,7 @@
         }
       }
     },
+    // Links in editor text when they are activated or hovered.
     "editorLink": {
       "activeForeground": {
         "color": "palette.yellow.400",
@@ -593,6 +622,7 @@
         }
       }
     },
+    // The narrow marker strip beside the editor scrollbar.
     "editorOverviewRuler": {
       "addedForeground": {
         "color": "palette.green.400",
@@ -701,6 +731,7 @@
         }
       }
     },
+    // Vertical column guides at configured ruler positions in the editor.
     "editorRuler": {
       "foreground": {
         "color": "palette.orange.400",
@@ -710,6 +741,7 @@
         }
       }
     },
+    // Pinned enclosing code lines at the top of the editor while scrolling.
     "editorStickyScroll": {
       "background": {
         "color": "palette.gray.875",
@@ -721,6 +753,7 @@
         }
       }
     },
+    // Pinned code lines at the top of the editor when hovered.
     "editorStickyScrollHover": {
       "background": {
         "color": "palette.gray.975",
@@ -729,6 +762,7 @@
         }
       }
     },
+    // Highlights around Unicode characters flagged for inspection.
     "editorUnicodeHighlight": {
       "background": {
         "color": "palette.orange.400",
@@ -751,6 +785,7 @@
         }
       }
     },
+    // Warning squiggles beneath code in the editor.
     "editorWarning": {
       "foreground": {
         "color": "diagnostic.warning.foreground",
@@ -759,6 +794,7 @@
         }
       }
     },
+    // Visible spaces, tabs, and other whitespace markers in the editor.
     "editorWhitespace": {
       "foreground": {
         "color": "palette.gray.800",
@@ -767,6 +803,7 @@
         }
       }
     },
+    // Widgets over editor text, such as Find and Replace.
     "editorWidget": {
       "background": {
         "color": "palette.gray.825",
@@ -785,12 +822,14 @@
         }
       }
     },
+    // Error messages across the workbench unless a component supplies its own color.
     "errorForeground": {
       "color": "diagnostic.error.foreground",
       "details": {
         "for": "Default error message text."
       }
     },
+    // Rating, sponsor, and pre-release icons in extension views.
     "extensionIcon": {
       "preReleaseForeground": {
         "color": "palette.green.600",
@@ -814,6 +853,7 @@
         }
       }
     },
+    // Keyboard focus outlines unless a control supplies its own border.
     "focusBorder": {
       "color": "palette.blue.500",
       "alpha": 0.8,
@@ -821,12 +861,14 @@
         "for": "Default keyboard focus borders."
       }
     },
+    // Default workbench text unless a component supplies its own foreground.
     "foreground": {
       "color": "palette.gray.200",
       "details": {
         "for": "Default workbench text."
       }
     },
+    // File names and resource labels decorated by their Git status.
     "gitDecoration": {
       "addedResourceForeground": {
         "color": "palette.green.500",
@@ -865,6 +907,7 @@
         }
       }
     },
+    // Default workbench icons unless a component supplies its own color.
     "icon": {
       "foreground": {
         "color": "palette.gray.400",
@@ -873,6 +916,7 @@
         }
       }
     },
+    // Text input fields, including their text, borders, and placeholders.
     "input": {
       "background": {
         "color": "palette.gray.800",
@@ -905,6 +949,7 @@
         }
       }
     },
+    // Option toggles inside input fields, such as Find search options.
     "inputOption": {
       "activeBackground": {
         "color": "palette.yellow.400",
@@ -937,6 +982,7 @@
         }
       }
     },
+    // Keycap labels showing shortcuts in menus, pickers, and settings.
     "keybindingLabel": {
       "background": {
         "color": "palette.gray.700",
@@ -963,6 +1009,7 @@
         }
       }
     },
+    // The table of commands and shortcuts in the Keyboard Shortcuts editor.
     "keybindingTable": {
       "headerBackground": {
         "color": "palette.gray.800",
@@ -974,6 +1021,7 @@
         }
       }
     },
+    // Rows in workbench lists and trees, including hover and selection states.
     "list": {
       "activeSelectionBackground": {
         "color": "palette.gray.white",
@@ -1047,6 +1095,7 @@
         }
       }
     },
+    // The miniature code preview and its search, selection, and diagnostic markers.
     "minimap": {
       "errorHighlight": {
         "color": "palette.red.500",
@@ -1113,6 +1162,7 @@
         }
       }
     },
+    // File headers in views that compare changes across multiple files.
     "multiDiffEditor": {
       "headerBackground": {
         "color": "palette.gray.800",
@@ -1121,6 +1171,7 @@
         }
       }
     },
+    // Cell boundaries in notebook editors.
     "notebook": {
       "cellBorderColor": {
         "color": "palette.gray.white",
@@ -1133,6 +1184,7 @@
         }
       }
     },
+    // Pinned lines at the top of the Output view while scrolling.
     "outputViewStickyScroll": {
       "background": {
         "color": "palette.gray.825",
@@ -1144,6 +1196,7 @@
         }
       }
     },
+    // The area containing views such as Terminal, Output, and Problems.
     "panel": {
       "background": {
         "color": "palette.gray.850",
@@ -1171,6 +1224,7 @@
         }
       }
     },
+    // Headers of sections nested inside panel views.
     "panelSectionHeader": {
       "background": {
         "color": "palette.gray.825",
@@ -1179,6 +1233,7 @@
         }
       }
     },
+    // Pinned headers in panel views while scrolling.
     "panelStickyScroll": {
       "background": {
         "color": "palette.gray.825",
@@ -1190,6 +1245,7 @@
         }
       }
     },
+    // Panel view titles, such as Terminal and Problems, and their active indicators.
     "panelTitle": {
       "activeBorder": {
         "color": "palette.gray.850",
@@ -1216,6 +1272,7 @@
         }
       }
     },
+    // Borders and arrows around inline peek views, such as Peek Definition.
     "peekView": {
       "border": {
         "color": "palette.blue.400",
@@ -1228,6 +1285,7 @@
         }
       }
     },
+    // The title bar at the top of an inline peek view.
     "peekViewTitle": {
       "background": {
         "color": "palette.gray.825",
@@ -1236,6 +1294,7 @@
         }
       }
     },
+    // Secondary text, such as file paths, in a peek view title.
     "peekViewTitleDescription": {
       "foreground": {
         "color": "palette.gray.white",
@@ -1245,6 +1304,7 @@
         }
       }
     },
+    // The primary title text in an inline peek view.
     "peekViewTitleLabel": {
       "foreground": {
         "color": "palette.gray.000",
@@ -1253,6 +1313,7 @@
         }
       }
     },
+    // Section labels and separators in quick pickers such as the Command Palette.
     "pickerGroup": {
       "border": {
         "color": "palette.gray.700",
@@ -1267,6 +1328,7 @@
         }
       }
     },
+    // The profile badge over the Manage gear icon in the activity bar.
     "profileBadge": {
       "background": {
         "color": "palette.gray.700",
@@ -1281,6 +1343,7 @@
         }
       }
     },
+    // Progress indicators shown while workbench operations are running.
     "progressBar": {
       "background": {
         "color": "palette.green.500",
@@ -1289,6 +1352,7 @@
         }
       }
     },
+    // The title area of quick input widgets such as the Command Palette.
     "quickInputTitle": {
       "background": {
         "color": "palette.gray.750",
@@ -1297,6 +1361,7 @@
         }
       }
     },
+    // Shadows indicating that a scrollable view has content out of sight.
     "scrollbar": {
       "shadow": {
         "color": "palette.gray.black",
@@ -1306,6 +1371,7 @@
         }
       }
     },
+    // Scrollbar thumbs in normal, hover, and pressed states.
     "scrollbarSlider": {
       "activeBackground": {
         "color": "palette.gray.500",
@@ -1329,6 +1395,7 @@
         }
       }
     },
+    // Text selections in workbench controls, outside the editor and terminal.
     "selection": {
       "background": {
         "color": "palette.blue.600",
@@ -1338,6 +1405,7 @@
         }
       }
     },
+    // Section headings, focused rows, and modified indicators in the Settings editor.
     "settings": {
       "focusedRowBorder": {
         "color": "palette.gray.white",
@@ -1362,6 +1430,7 @@
         }
       }
     },
+    // The area holding views such as Explorer, Search, and Source Control.
     "sideBar": {
       "background": {
         "color": "palette.gray.875",
@@ -1370,6 +1439,7 @@
         }
       }
     },
+    // Collapsible section headers within sidebar views.
     "sideBarSectionHeader": {
       "background": {
         "color": "palette.gray.825",
@@ -1387,6 +1457,7 @@
         }
       }
     },
+    // Pinned headers at the top of sidebar views while scrolling.
     "sideBarStickyScroll": {
       "background": {
         "color": "palette.gray.850",
@@ -1398,6 +1469,7 @@
         }
       }
     },
+    // The title at the top of the sidebar, such as Explorer.
     "sideBarTitle": {
       "foreground": {
         "color": "palette.gray.400",
@@ -1409,6 +1481,7 @@
         }
       }
     },
+    // The resizable Find widget used by views such as the terminal.
     "simpleFindWidget": {
       "sashBorder": {
         "color": "palette.gray.white",
@@ -1418,6 +1491,7 @@
         }
       }
     },
+    // The bottom status bar in workspace, empty-window, and debugging states.
     "statusBar": {
       "background": {
         "color": "palette.gray.800",
@@ -1485,6 +1559,7 @@
         }
       }
     },
+    // Individual status bar entries, including the remote connection indicator.
     "statusBarItem": {
       "focusBorder": {
         "color": "palette.yellow.400",
@@ -1542,6 +1617,7 @@
         }
       }
     },
+    // Symbol icons in outlines, breadcrumbs, and completion suggestions.
     "symbolIcon": {
       "classForeground": {
         "color": "palette.orange.500",
@@ -1562,6 +1638,7 @@
         }
       }
     },
+    // Open editor tabs in active, inactive, unfocused, and hover states.
     "tab": {
       "activeForeground": {
         "color": "palette.gray.000",
@@ -1635,6 +1712,7 @@
         }
       }
     },
+    // Integrated terminal text, backgrounds, and ANSI colors.
     "terminal": {
       "ansiBlack": {
         "color": "palette.gray.800",
@@ -1750,6 +1828,7 @@
         }
       }
     },
+    // The marker strip beside the integrated terminal scrollbar.
     "terminalOverviewRuler": {
       "cursorForeground": {
         "color": "palette.gray.400",
@@ -1758,6 +1837,7 @@
         }
       }
     },
+    // Block quotes in rendered text, such as Markdown previews.
     "textBlockQuote": {
       "background": {
         "color": "palette.gray.800",
@@ -1772,6 +1852,7 @@
         }
       }
     },
+    // Fenced or multiline code blocks in rendered text.
     "textCodeBlock": {
       "background": {
         "color": "palette.gray.white",
@@ -1781,6 +1862,7 @@
         }
       }
     },
+    // Clickable links in rendered text, settings, and other workbench content.
     "textLink": {
       "activeForeground": {
         "color": "palette.yellow.400",
@@ -1795,6 +1877,7 @@
         }
       }
     },
+    // Preformatted text segments, such as inline code in rendered content.
     "textPreformat": {
       "background": {
         "color": "palette.gray.800",
@@ -1809,6 +1892,7 @@
         }
       }
     },
+    // The window title bar in active and inactive windows.
     "titleBar": {
       "activeBackground": {
         "color": "palette.gray.800",
@@ -1841,6 +1925,7 @@
         }
       }
     },
+    // Action toolbars when their buttons are hovered.
     "toolbar": {
       "hoverBackground": {
         "color": "palette.gray.white",
@@ -1850,6 +1935,7 @@
         }
       }
     },
+    // Indentation guides and table row or column separators in tree views.
     "tree": {
       "indentGuidesStroke": {
         "color": "palette.gray.700",
@@ -1874,6 +1960,7 @@
         }
       }
     },
+    // Step headings in guided walkthrough pages.
     "walkthrough": {
       "stepTitle": {
         "foreground": {
@@ -1884,6 +1971,7 @@
         }
       }
     },
+    // Progress indicators on the Welcome and Getting Started pages.
     "welcomePage": {
       "progress": {
         "background": {
@@ -1906,6 +1994,7 @@
         }
       }
     },
+    // Shared borders and shadows for widgets such as Find and Replace.
     "widget": {
       "border": {
         "color": "palette.gray.white",
@@ -1923,7 +2012,9 @@
       }
     }
   },
+  // Editor symbols colored using semantic information from language services.
   "semantic": {
+    // Class names in editor code when semantic highlighting is available.
     "class": {
       "color": "syntax.function",
       "details": {
@@ -1934,6 +2025,7 @@
         ]
       }
     },
+    // Function names in editor code when semantic highlighting is available.
     "function": {
       "color": "syntax.function",
       "details": {
@@ -1944,6 +2036,7 @@
         ]
       }
     },
+    // Built-in function names identified by the language service.
     "function.defaultLibrary": {
       "color": "syntax.support",
       "details": {
@@ -1954,6 +2047,7 @@
         ]
       }
     },
+    // Member function names identified by the language service.
     "method": {
       "color": "syntax.support",
       "details": {
@@ -1964,6 +2058,7 @@
         ]
       }
     },
+    // Namespace names identified by the language service.
     "namespace": {
       "color": "syntax.constant",
       "details": {
@@ -1973,6 +2068,7 @@
         ]
       }
     },
+    // Function and method parameters identified by the language service.
     "parameter": {
       "color": "syntax.parameter",
       "details": {
@@ -1982,6 +2078,7 @@
         ]
       }
     },
+    // Object and member property names identified by the language service.
     "property": {
       "color": "syntax.property",
       "details": {
@@ -1991,6 +2088,7 @@
         ]
       }
     },
+    // Variable names in editor code when semantic highlighting is available.
     "variable": {
       "color": "syntax.variable",
       "details": {
@@ -2001,6 +2099,7 @@
         ]
       }
     },
+    // Built-in variable and library object names identified by the language service.
     "variable.defaultLibrary": {
       "color": "syntax.defaultLibrary",
       "details": {
@@ -2013,55 +2112,65 @@
       }
     }
   },
+  // Editor text colored by TextMate grammar scopes, including code and markup.
   "syntax": {
+    // Built-in functions, HTML text, and support names.
     "support": {
       "color": "palette.gray.000",
       "details": {
         "for": "Built-in functions, HTML text, and support names."
       }
     },
+    // Library objects and shell scope names.
     "defaultLibrary": {
       "color": "palette.gray.150",
       "details": {
         "for": "Library objects and shell scope names."
       }
     },
+    // Embedded text and attribute names.
     "text": {
       "color": "palette.gray.200",
       "details": {
         "for": "Embedded text and attribute names."
       }
     },
+    // Punctuation, brackets, and generic names.
     "punctuation": {
       "color": "palette.gray.400",
       "details": {
         "for": "Punctuation, brackets, and generic names."
       }
     },
+    // Comments and comment punctuation.
     "comment": {
       "color": "palette.gray.500",
       "details": {
         "for": "Comments and comment punctuation."
       }
     },
+    // Invalid code and Markdown link underlines.
     "invalid": {
       "color": "palette.gray.600",
       "details": {
         "for": "Invalid code and Markdown link underlines."
       }
     },
+    // Type keywords, paths, and linked text.
     "storageType": {
       "color": "palette.blue.400",
       "details": {
         "for": "Type keywords, paths, and linked text."
       }
     },
+    // PHP type hints and TypeScript type operators.
     "typeHint": {
       "color": "palette.blue.400-muted",
       "details": {
         "for": "PHP type hints and TypeScript type operators."
       }
     },
+    // Links inside struck-through Markdown text.
     "linkStrikethrough": {
       "color": "palette.blue.400",
       "alpha": 0.5019607843137255,
@@ -2069,54 +2178,63 @@
         "for": "Links inside struck-through Markdown text."
       }
     },
+    // Function and type names.
     "function": {
       "color": "palette.cyan.400",
       "details": {
         "for": "Function and type names."
       }
     },
+    // Properties, labels, and CSS classes.
     "property": {
       "color": "palette.green.400",
       "details": {
         "for": "Properties, labels, and CSS classes."
       }
     },
+    // Parameters, CSS IDs, and keyframe offsets.
     "parameter": {
       "color": "palette.orange.400",
       "details": {
         "for": "Parameters, CSS IDs, and keyframe offsets."
       }
     },
+    // Variables and variable sigils.
     "variable": {
       "color": "palette.pink.400",
       "details": {
         "for": "Variables and variable sigils."
       }
     },
+    // Constants, units, and regular expressions.
     "constant": {
       "color": "palette.purple.400",
       "details": {
         "for": "Constants, units, and regular expressions."
       }
     },
+    // Attribute namespace prefixes.
     "attributeNamespace": {
       "color": "palette.purple.500",
       "details": {
         "for": "Attribute namespace prefixes."
       }
     },
+    // Keywords, tags, and storage modifiers.
     "keyword": {
       "color": "palette.red.400",
       "details": {
         "for": "Keywords, tags, and storage modifiers."
       }
     },
+    // Strings and selected Markdown text.
     "string": {
       "color": "palette.yellow.400",
       "details": {
         "for": "Strings and selected Markdown text."
       }
     },
+    // Inline Markdown code.
     "code": {
       "color": "palette.yellow.500",
       "details": {
@@ -2124,7 +2242,9 @@
       }
     }
   },
+  // Shared background roles for editor surfaces.
   "surface": {
+    // The shared background role available to editor surfaces.
     "editor": {
       "color": "palette.gray.900",
       "details": {
@@ -2132,7 +2252,9 @@
       }
     }
   },
+  // Shared foreground roles for text across the theme.
   "text": {
+    // The shared foreground role available to ordinary text.
     "default": {
       "color": "palette.gray.200",
       "details": {
@@ -2140,7 +2262,9 @@
       }
     }
   },
+  // Shared color roles for error and warning diagnostics.
   "diagnostic": {
+    // Shared error colors for diagnostic underlines and indicators.
     "error": {
       "foreground": {
         "color": "palette.red.500",
@@ -2149,6 +2273,7 @@
         }
       }
     },
+    // Shared warning colors for diagnostic underlines and indicators.
     "warning": {
       "foreground": {
         "color": "palette.orange.400",
@@ -2158,7 +2283,9 @@
       }
     }
   },
+  // Shared color roles for added and removed content in change views.
   "diff": {
+    // Shared colors for inserted lines and other added content.
     "added": {
       "foreground": {
         "color": "palette.green.400",
@@ -2167,6 +2294,7 @@
         }
       }
     },
+    // Shared colors for deleted lines and other removed content.
     "removed": {
       "foreground": {
         "color": "palette.red.400",
