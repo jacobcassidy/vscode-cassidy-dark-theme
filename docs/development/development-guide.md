@@ -95,7 +95,7 @@ The PHP sample retains its original property type regression probes. It also inc
 Make production changes in `src/`, then run `npm run build:theme`:
 
 - `src/palette.jsonc`: hue and lightness anchors, optional `baseChroma`, shared chroma settings, neutrals, and documented primitive overrides.
-- `src/tokens.jsonc`: semantic aliases, optional absolute `alpha`, and component-specific hex exceptions with required reasons.
+- `src/tokens.jsonc`: nested color roles with comments above their properties. Each leaf has a `color` palette/token reference or a hex exception with a required `reason`; include absolute `alpha` only when it is below 1. Dotted semantic selectors such as `function.defaultLibrary` stay together as keys under `semantic`.
 - `src/cassidy-dark-color-theme.jsonc`: theme structure, ordered scopes, font styles, and whole-string references such as `{syntax.string}`.
 
 Run `npm run build:palette` when you only need the complete palette. It writes JSON measurements, Markdown tables, and an SVG swatch sheet to `docs/references/palettes/generated/` without needing the token map or template. `build:theme` writes those reports plus `themes/cassidy-dark-color-theme.json`. Commit source and generated changes together; avoid editing generated files directly. No watch process runs automatically.

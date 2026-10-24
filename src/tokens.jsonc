@@ -1,911 +1,1357 @@
 {
-  "ui.activityBar.activeBackground": {
-    "ref": "palette.gray.875"
-  },
-  "ui.activityBar.background": {
-    "ref": "palette.gray.825"
-  },
-  "ui.activityBar.dropBorder": {
-    "ref": "palette.gray.white",
-    "alpha": 0.5019607843137255
-  },
-  "ui.activityBar.foreground": {
-    "ref": "palette.yellow.400"
-  },
-  "ui.activityBar.inactiveForeground": {
-    "ref": "palette.gray.500"
-  },
-  "ui.activityBarBadge.background": {
-    "ref": "palette.yellow.400"
-  },
-  "ui.activityBarBadge.foreground": {
-    "ref": "palette.gray.1000"
-  },
-  "ui.badge.background": {
-    "ref": "palette.gray.700"
-  },
-  "ui.badge.foreground": {
-    "ref": "palette.gray.000"
-  },
-  "ui.button.background": {
-    "hex": "#1c6bc4",
-    "reason": "Primary button fill uses L53/H255 with gamut headroom, allowing its lighter blue 600 hover state to retain at least 4.5:1 contrast with the button text."
-  },
-  "ui.button.foreground": {
-    "ref": "palette.gray.000"
-  },
-  "ui.button.hoverBackground": {
-    "ref": "palette.blue.600"
-  },
-  "ui.button.secondaryBackground": {
-    "ref": "palette.gray.700"
-  },
-  "ui.button.secondaryForeground": {
-    "ref": "palette.gray.000"
-  },
-  "ui.button.secondaryHoverBackground": {
-    "ref": "palette.gray.650"
-  },
-  "ui.charts.green": {
-    "ref": "palette.green.400"
-  },
-  "ui.charts.orange": {
-    "ref": "palette.orange.400"
-  },
-  "ui.charts.purple": {
-    "ref": "palette.purple.400"
-  },
-  "ui.debugIcon.pauseForeground": {
-    "ref": "palette.blue.400"
-  },
-  "ui.debugIcon.restartForeground": {
-    "ref": "palette.green.400"
-  },
-  "ui.debugIcon.startForeground": {
-    "ref": "palette.green.400"
-  },
-  "ui.debugIcon.stopForeground": {
-    "ref": "palette.red.400"
-  },
-  "ui.debugToolBar.background": {
-    "ref": "palette.gray.800"
-  },
-  "ui.diffEditor.diagonalFill": {
-    "ref": "palette.gray.700"
-  },
-  "ui.diffEditor.insertedLineBackground": {
-    "ref": "diff.added.foreground",
-    "alpha": 0.10196078431372549
-  },
-  "ui.diffEditor.insertedTextBackground": {
-    "ref": "diff.added.foreground",
-    "alpha": 0.2
-  },
-  "ui.diffEditor.removedLineBackground": {
-    "ref": "diff.removed.foreground",
-    "alpha": 0.10196078431372549
-  },
-  "ui.diffEditor.removedTextBackground": {
-    "ref": "diff.removed.foreground",
-    "alpha": 0.2
-  },
-  "ui.diffEditor.unchangedCodeBackground": {
-    "ref": "palette.blue.400",
-    "alpha": 0.050980392156862744
-  },
-  "ui.diffEditor.unchangedRegionBackground": {
-    "ref": "palette.blue.400",
-    "alpha": 0.050980392156862744
-  },
-  "ui.diffEditor.unchangedRegionForeground": {
-    "ref": "palette.gray.400"
-  },
-  "ui.diffEditor.unchangedRegionShadow": {
-    "ref": "palette.gray.black",
-    "alpha": 0.2
-  },
-  "ui.diffEditorGutter.insertedLineBackground": {
-    "ref": "diff.added.foreground",
-    "alpha": 0.10196078431372549
-  },
-  "ui.diffEditorGutter.removedLineBackground": {
-    "ref": "diff.removed.foreground",
-    "alpha": 0.10196078431372549
-  },
-  "ui.disabledForeground": {
-    "ref": "palette.gray.white",
-    "alpha": 0.2
-  },
-  "ui.dropdown.background": {
-    "ref": "palette.gray.800"
-  },
-  "ui.dropdown.border": {
-    "ref": "palette.gray.700"
-  },
-  "ui.dropdown.foreground": {
-    "ref": "palette.gray.200"
-  },
-  "ui.dropdown.listBackground": {
-    "ref": "palette.gray.825"
-  },
-  "ui.editor.background": {
-    "ref": "surface.editor"
-  },
-  "ui.editor.findMatchBackground": {
-    "ref": "palette.purple.600",
-    "alpha": 0.9019607843137255
-  },
-  "ui.editor.findMatchForeground": {
-    "ref": "palette.purple.500",
-    "alpha": 0.9019607843137255
-  },
-  "ui.editor.findMatchHighlightBackground": {
-    "ref": "palette.purple.600",
-    "alpha": 0.45098039215686275
-  },
-  "ui.editor.findMatchHighlightForeground": {
-    "ref": "palette.gray.white",
-    "alpha": 0.9019607843137255
-  },
-  "ui.editor.findRangeHighlightBackground": {
-    "ref": "palette.gray.white",
-    "alpha": 0.10196078431372549
-  },
-  "ui.editor.foldBackground": {
-    "ref": "palette.blue.400",
-    "alpha": 0.14901960784313725
-  },
-  "ui.editor.foldPlaceholderForeground": {
-    "ref": "palette.gray.400"
-  },
-  "ui.editor.foreground": {
-    "ref": "text.default"
-  },
-  "ui.editor.hoverHighlightBackground": {
-    "ref": "palette.gray.white",
-    "alpha": 0.10196078431372549
-  },
-  "ui.editor.lineHighlightBackground": {
-    "ref": "palette.gray.975"
-  },
-  "ui.editor.lineHighlightBorder": {
-    "ref": "palette.gray.975"
-  },
-  "ui.editor.rangeHighlightBackground": {
-    "ref": "palette.gray.white",
-    "alpha": 0.10196078431372549
-  },
-  "ui.editor.selectionBackground": {
-    "ref": "palette.blue.600",
-    "alpha": 0.5019607843137255
-  },
-  "ui.editor.wordHighlightBackground": {
-    "ref": "palette.gray.500",
-    "alpha": 0.5019607843137255
-  },
-  "ui.editor.wordHighlightStrongBackground": {
-    "ref": "palette.pink.400",
-    "alpha": 0.4
-  },
-  "ui.editorBracketMatch.border": {
-    "ref": "palette.gray.600"
-  },
-  "ui.editorCodeLens.foreground": {
-    "ref": "palette.yellow.500"
-  },
-  "ui.editorCursor.background": {
-    "ref": "palette.gray.800"
-  },
-  "ui.editorCursor.foreground": {
-    "ref": "palette.gray.400"
-  },
-  "ui.editorError.foreground": {
-    "ref": "diagnostic.error.foreground"
-  },
-  "ui.editorGhostText.foreground": {
-    "ref": "palette.blue.500"
-  },
-  "ui.editorGroup.border": {
-    "ref": "palette.gray.black",
-    "alpha": 0.5019607843137255
-  },
-  "ui.editorGroup.dropBackground": {
-    "ref": "palette.gray.400",
-    "alpha": 0.5019607843137255
-  },
-  "ui.editorGroupHeader.tabsBackground": {
-    "ref": "palette.gray.850"
-  },
-  "ui.editorGutter.addedBackground": {
-    "ref": "palette.green.400",
-    "alpha": 0.7490196078431373
-  },
-  "ui.editorGutter.commentRangeForeground": {
-    "ref": "palette.gray.800"
-  },
-  "ui.editorGutter.deletedBackground": {
-    "ref": "palette.red.400",
-    "alpha": 0.7490196078431373
-  },
-  "ui.editorGutter.modifiedBackground": {
-    "ref": "palette.yellow.400",
-    "alpha": 0.7490196078431373
-  },
-  "ui.editorHint.foreground": {
-    "ref": "palette.blue.400"
-  },
-  "ui.editorIndentGuide.activeBackground1": {
-    "ref": "palette.gray.700"
-  },
-  "ui.editorInfo.foreground": {
-    "ref": "palette.blue.400"
-  },
-  "ui.editorLightBulb.foreground": {
-    "ref": "palette.yellow.500"
-  },
-  "ui.editorLightBulbAi.foreground": {
-    "ref": "palette.yellow.500"
-  },
-  "ui.editorLightBulbAutoFix.foreground": {
-    "ref": "palette.blue.400"
-  },
-  "ui.editorLineNumber.activeForeground": {
-    "ref": "palette.gray.200"
-  },
-  "ui.editorLineNumber.foreground": {
-    "ref": "palette.gray.600"
-  },
-  "ui.editorLink.activeForeground": {
-    "ref": "palette.yellow.400"
-  },
-  "ui.editorOverviewRuler.addedForeground": {
-    "ref": "palette.green.400",
-    "alpha": 0.7490196078431373
-  },
-  "ui.editorOverviewRuler.background": {
-    "ref": "palette.gray.black",
-    "alpha": 0.10196078431372549
-  },
-  "ui.editorOverviewRuler.border": {
-    "ref": "palette.gray.black",
-    "alpha": 0.10196078431372549
-  },
-  "ui.editorOverviewRuler.bracketMatchForeground": {
-    "ref": "palette.gray.600",
-    "alpha": 0.7490196078431373
-  },
-  "ui.editorOverviewRuler.deletedForeground": {
-    "ref": "palette.red.400",
-    "alpha": 0.7490196078431373
-  },
-  "ui.editorOverviewRuler.errorForeground": {
-    "ref": "palette.red.500",
-    "alpha": 0.7490196078431373
-  },
-  "ui.editorOverviewRuler.findMatchForeground": {
-    "ref": "palette.purple.600",
-    "alpha": 0.7490196078431373
-  },
-  "ui.editorOverviewRuler.infoForeground": {
-    "ref": "palette.blue.400",
-    "alpha": 0.7490196078431373
-  },
-  "ui.editorOverviewRuler.modifiedForeground": {
-    "ref": "palette.yellow.400",
-    "alpha": 0.7490196078431373
-  },
-  "ui.editorOverviewRuler.selectionHighlightForeground": {
-    "ref": "palette.gray.500",
-    "alpha": 0.3803921568627451
-  },
-  "ui.editorOverviewRuler.warningForeground": {
-    "ref": "palette.orange.400",
-    "alpha": 0.7490196078431373
-  },
-  "ui.editorOverviewRuler.wordHighlightForeground": {
-    "ref": "palette.gray.500",
-    "alpha": 0.3803921568627451
-  },
-  "ui.editorOverviewRuler.wordHighlightStrongForeground": {
-    "ref": "palette.pink.400",
-    "alpha": 0.7490196078431373
-  },
-  "ui.editorRuler.foreground": {
-    "ref": "palette.orange.400",
-    "alpha": 0.10196078431372549
-  },
-  "ui.editorStickyScroll.background": {
-    "ref": "palette.gray.875"
-  },
-  "ui.editorStickyScrollHover.background": {
-    "ref": "palette.gray.975"
-  },
-  "ui.editorUnicodeHighlight.background": {
-    "ref": "palette.orange.400",
-    "alpha": 0.25098039215686274
-  },
-  "ui.editorUnicodeHighlight.border": {
-    "ref": "palette.orange.400",
-    "alpha": 0.5019607843137255
-  },
-  "ui.editorWarning.foreground": {
-    "ref": "diagnostic.warning.foreground"
-  },
-  "ui.editorWhitespace.foreground": {
-    "ref": "palette.gray.800"
-  },
-  "ui.editorWidget.background": {
-    "ref": "palette.gray.825"
-  },
-  "ui.editorWidget.border": {
-    "ref": "palette.gray.white",
-    "alpha": 0.10196078431372549
-  },
-  "ui.errorForeground": {
-    "ref": "diagnostic.error.foreground"
-  },
-  "ui.extensionIcon.preReleaseForeground": {
-    "ref": "palette.green.600",
-    "alpha": 0.9019607843137255
-  },
-  "ui.extensionIcon.sponsorForeground": {
-    "ref": "palette.pink.600",
-    "alpha": 0.9019607843137255
-  },
-  "ui.extensionIcon.starForeground": {
-    "ref": "palette.orange.500",
-    "alpha": 0.9019607843137255
-  },
-  "ui.focusBorder": {
-    "ref": "palette.blue.500",
-    "alpha": 0.8
-  },
-  "ui.foreground": {
-    "ref": "palette.gray.200"
-  },
-  "ui.gitDecoration.addedResourceForeground": {
-    "ref": "palette.green.500"
-  },
-  "ui.gitDecoration.deletedResourceForeground": {
-    "ref": "palette.red.500"
-  },
-  "ui.gitDecoration.ignoredResourceForeground": {
-    "ref": "palette.gray.450"
-  },
-  "ui.gitDecoration.modifiedResourceForeground": {
-    "ref": "palette.yellow.400"
-  },
-  "ui.gitDecoration.stageModifiedResourceForeground": {
-    "ref": "palette.yellow.500"
-  },
-  "ui.gitDecoration.untrackedResourceForeground": {
-    "ref": "palette.green.400"
-  },
-  "ui.icon.foreground": {
-    "ref": "palette.gray.400"
-  },
-  "ui.input.background": {
-    "ref": "palette.gray.800"
-  },
-  "ui.input.border": {
-    "ref": "palette.gray.700"
-  },
-  "ui.input.foreground": {
-    "ref": "palette.gray.000"
-  },
-  "ui.input.placeholderForeground": {
-    "ref": "palette.gray.500"
-  },
-  "ui.inputOption.activeBackground": {
-    "ref": "palette.yellow.400",
-    "alpha": 0.25098039215686274
-  },
-  "ui.inputOption.activeBorder": {
-    "ref": "palette.yellow.400",
-    "alpha": 0.25098039215686274
-  },
-  "ui.inputOption.activeForeground": {
-    "ref": "palette.yellow.400"
-  },
-  "ui.inputOption.hoverBackground": {
-    "ref": "palette.yellow.400",
-    "alpha": 0.25098039215686274
-  },
-  "ui.keybindingLabel.background": {
-    "ref": "palette.gray.700"
-  },
-  "ui.keybindingLabel.border": {
-    "ref": "palette.gray.675"
-  },
-  "ui.keybindingLabel.bottomBorder": {
-    "ref": "palette.gray.650"
-  },
-  "ui.keybindingLabel.foreground": {
-    "ref": "palette.gray.200"
-  },
-  "ui.keybindingTable.headerBackground": {
-    "ref": "palette.gray.800"
-  },
-  "ui.list.activeSelectionBackground": {
-    "ref": "palette.gray.white",
-    "alpha": 0.2
-  },
-  "ui.list.activeSelectionForeground": {
-    "ref": "palette.gray.000"
-  },
-  "ui.list.activeSelectionIconForeground": {
-    "ref": "palette.gray.000"
-  },
-  "ui.list.dropBackground": {
-    "ref": "palette.gray.400",
-    "alpha": 0.25098039215686274
-  },
-  "ui.list.errorForeground": {
-    "ref": "palette.red.500"
-  },
-  "ui.list.focusAndSelectionOutline": {
-    "ref": "palette.gray.white",
-    "alpha": 0.2
-  },
-  "ui.list.highlightForeground": {
-    "ref": "palette.blue.400"
-  },
-  "ui.list.hoverBackground": {
-    "ref": "palette.gray.white",
-    "alpha": 0.10196078431372549
-  },
-  "ui.list.hoverForeground": {
-    "ref": "palette.gray.000"
-  },
-  "ui.list.inactiveSelectionBackground": {
-    "ref": "palette.gray.white",
-    "alpha": 0.050980392156862744
-  },
-  "ui.list.warningForeground": {
-    "ref": "palette.orange.400"
-  },
-  "ui.minimap.errorHighlight": {
-    "ref": "palette.red.500",
-    "alpha": 0.7490196078431373
-  },
-  "ui.minimap.findMatchHighlight": {
-    "ref": "palette.purple.600",
-    "alpha": 0.7490196078431373
-  },
-  "ui.minimap.foregroundOpacity": {
-    "ref": "palette.gray.black",
-    "alpha": 0.5019607843137255
-  },
-  "ui.minimap.infoHighlight": {
-    "ref": "palette.blue.400",
-    "alpha": 0.7490196078431373
-  },
-  "ui.minimap.selectionHighlight": {
-    "ref": "palette.blue.600",
-    "alpha": 0.3803921568627451
-  },
-  "ui.minimap.selectionOccurrenceHighlight": {
-    "ref": "palette.gray.500",
-    "alpha": 0.3803921568627451
-  },
-  "ui.minimap.warningHighlight": {
-    "ref": "palette.orange.400",
-    "alpha": 0.7490196078431373
-  },
-  "ui.multiDiffEditor.headerBackground": {
-    "ref": "palette.gray.800"
-  },
-  "ui.notebook.cellBorderColor": {
-    "ref": "palette.gray.white",
-    "alpha": 0.10196078431372549
-  },
-  "ui.outputViewStickyScroll.background": {
-    "ref": "palette.gray.825"
-  },
-  "ui.panel.background": {
-    "ref": "palette.gray.850"
-  },
-  "ui.panel.border": {
-    "ref": "palette.gray.850"
-  },
-  "ui.panel.dropBorder": {
-    "ref": "palette.gray.white",
-    "alpha": 0.5019607843137255
-  },
-  "ui.panelSectionHeader.background": {
-    "ref": "palette.gray.825"
-  },
-  "ui.panelStickyScroll.background": {
-    "ref": "palette.gray.825"
-  },
-  "ui.panelTitle.activeBorder": {
-    "ref": "palette.gray.850"
-  },
-  "ui.panelTitle.activeForeground": {
-    "ref": "palette.yellow.400"
-  },
-  "ui.panelTitle.inactiveForeground": {
-    "ref": "palette.gray.500"
-  },
-  "ui.peekView.border": {
-    "ref": "palette.blue.400",
-    "alpha": 0.25098039215686274
-  },
-  "ui.peekViewTitle.background": {
-    "ref": "palette.gray.825"
-  },
-  "ui.peekViewTitleDescription.foreground": {
-    "ref": "palette.gray.white",
-    "alpha": 0.5019607843137255
-  },
-  "ui.peekViewTitleLabel.foreground": {
-    "ref": "palette.gray.000"
-  },
-  "ui.pickerGroup.border": {
-    "ref": "palette.gray.700"
-  },
-  "ui.pickerGroup.foreground": {
-    "ref": "palette.gray.400"
-  },
-  "ui.profileBadge.background": {
-    "ref": "palette.gray.700"
-  },
-  "ui.profileBadge.foreground": {
-    "ref": "palette.gray.000"
-  },
-  "ui.progressBar.background": {
-    "ref": "palette.green.500"
-  },
-  "ui.quickInputTitle.background": {
-    "ref": "palette.gray.750"
-  },
-  "ui.scrollbar.shadow": {
-    "ref": "palette.gray.black",
-    "alpha": 0.4
-  },
-  "ui.scrollbarSlider.activeBackground": {
-    "ref": "palette.gray.500",
-    "alpha": 0.7019607843137254
-  },
-  "ui.scrollbarSlider.background": {
-    "ref": "palette.gray.500",
-    "alpha": 0.30196078431372547
-  },
-  "ui.scrollbarSlider.hoverBackground": {
-    "ref": "palette.gray.500",
-    "alpha": 0.5019607843137255
-  },
-  "ui.selection.background": {
-    "ref": "palette.blue.600",
-    "alpha": 0.5019607843137255
-  },
-  "ui.settings.focusedRowBorder": {
-    "ref": "palette.gray.white",
-    "alpha": 0.2
-  },
-  "ui.settings.headerForeground": {
-    "ref": "palette.gray.000"
-  },
-  "ui.settings.modifiedItemIndicator": {
-    "ref": "palette.yellow.400"
-  },
-  "ui.sideBar.background": {
-    "ref": "palette.gray.875"
-  },
-  "ui.sideBarSectionHeader.background": {
-    "ref": "palette.gray.825"
-  },
-  "ui.sideBarSectionHeader.foreground": {
-    "ref": "palette.gray.400"
-  },
-  "ui.sideBarStickyScroll.background": {
-    "ref": "palette.gray.850"
-  },
-  "ui.sideBarTitle.foreground": {
-    "ref": "palette.gray.400"
-  },
-  "ui.simpleFindWidget.sashBorder": {
-    "ref": "palette.gray.white",
-    "alpha": 0.050980392156862744
-  },
-  "ui.statusBar.background": {
-    "ref": "palette.gray.800"
-  },
-  "ui.statusBar.debuggingBackground": {
-    "ref": "palette.orange.600"
-  },
-  "ui.statusBar.debuggingForeground": {
-    "ref": "palette.gray.1000"
-  },
-  "ui.statusBar.focusBorder": {
-    "ref": "palette.gray.700"
-  },
-  "ui.statusBar.foreground": {
-    "ref": "palette.gray.400"
-  },
-  "ui.statusBar.noFolderBackground": {
-    "ref": "palette.gray.925"
-  },
-  "ui.statusBar.noFolderForeground": {
-    "ref": "palette.gray.500"
-  },
-  "ui.statusBarItem.focusBorder": {
-    "ref": "palette.yellow.400"
-  },
-  "ui.statusBarItem.hoverForeground": {
-    "ref": "palette.gray.000"
-  },
-  "ui.statusBarItem.remoteBackground": {
-    "ref": "palette.gray.white",
-    "alpha": 0.10196078431372549
-  },
-  "ui.statusBarItem.remoteForeground": {
-    "ref": "palette.gray.000"
-  },
-  "ui.statusBarItem.remoteHoverBackground": {
-    "ref": "palette.yellow.400"
-  },
-  "ui.statusBarItem.remoteHoverForeground": {
-    "ref": "palette.gray.1000"
-  },
-  "ui.symbolIcon.classForeground": {
-    "ref": "palette.orange.500"
-  },
-  "ui.symbolIcon.functionForeground": {
-    "ref": "palette.purple.500"
-  },
-  "ui.symbolIcon.variableForeground": {
-    "ref": "palette.blue.500"
-  },
-  "ui.tab.activeForeground": {
-    "ref": "palette.gray.000"
-  },
-  "ui.tab.border": {
-    "ref": "palette.gray.black",
-    "alpha": 0.25098039215686274
-  },
-  "ui.tab.dragAndDropBorder": {
-    "ref": "palette.gray.white",
-    "alpha": 0.5019607843137255
-  },
-  "ui.tab.hoverForeground": {
-    "ref": "palette.gray.000"
-  },
-  "ui.tab.inactiveBackground": {
-    "ref": "palette.gray.850"
-  },
-  "ui.tab.inactiveForeground": {
-    "ref": "palette.gray.400"
-  },
-  "ui.tab.unfocusedActiveForeground": {
-    "ref": "palette.gray.400"
-  },
-  "ui.tab.unfocusedHoverForeground": {
-    "ref": "palette.gray.400"
-  },
-  "ui.tab.unfocusedInactiveForeground": {
-    "ref": "palette.gray.600"
-  },
-  "ui.terminal.ansiBlack": {
-    "ref": "palette.gray.800"
-  },
-  "ui.terminal.ansiBlue": {
-    "ref": "palette.blue.400"
-  },
-  "ui.terminal.ansiBrightBlack": {
-    "ref": "palette.gray.600"
-  },
-  "ui.terminal.ansiBrightBlue": {
-    "ref": "palette.blue.500"
-  },
-  "ui.terminal.ansiBrightCyan": {
-    "ref": "palette.cyan.500"
-  },
-  "ui.terminal.ansiBrightGreen": {
-    "ref": "palette.green.500"
-  },
-  "ui.terminal.ansiBrightMagenta": {
-    "ref": "palette.purple.500"
-  },
-  "ui.terminal.ansiBrightRed": {
-    "ref": "palette.red.500"
-  },
-  "ui.terminal.ansiBrightWhite": {
-    "ref": "palette.gray.white"
-  },
-  "ui.terminal.ansiBrightYellow": {
-    "ref": "palette.yellow.500"
-  },
-  "ui.terminal.ansiCyan": {
-    "ref": "palette.cyan.400"
-  },
-  "ui.terminal.ansiGreen": {
-    "ref": "palette.green.400"
-  },
-  "ui.terminal.ansiMagenta": {
-    "ref": "palette.purple.400"
-  },
-  "ui.terminal.ansiRed": {
-    "ref": "palette.red.400"
-  },
-  "ui.terminal.ansiWhite": {
-    "ref": "palette.gray.000"
-  },
-  "ui.terminal.ansiYellow": {
-    "ref": "palette.yellow.400"
-  },
-  "ui.terminal.background": {
-    "ref": "palette.gray.900"
-  },
-  "ui.terminal.foreground": {
-    "ref": "palette.gray.200"
-  },
-  "ui.terminalOverviewRuler.cursorForeground": {
-    "ref": "palette.gray.400"
-  },
-  "ui.textBlockQuote.background": {
-    "ref": "palette.gray.800"
-  },
-  "ui.textBlockQuote.border": {
-    "ref": "palette.gray.600"
-  },
-  "ui.textCodeBlock.background": {
-    "ref": "palette.gray.white",
-    "alpha": 0.14901960784313725
-  },
-  "ui.textLink.activeForeground": {
-    "ref": "palette.yellow.400"
-  },
-  "ui.textLink.foreground": {
-    "ref": "palette.blue.400"
-  },
-  "ui.textPreformat.background": {
-    "ref": "palette.gray.800"
-  },
-  "ui.textPreformat.foreground": {
-    "ref": "palette.yellow.500"
-  },
-  "ui.titleBar.activeBackground": {
-    "ref": "palette.gray.800"
-  },
-  "ui.titleBar.activeForeground": {
-    "ref": "palette.gray.400"
-  },
-  "ui.titleBar.inactiveBackground": {
-    "ref": "palette.gray.850"
-  },
-  "ui.titleBar.inactiveForeground": {
-    "ref": "palette.gray.600"
-  },
-  "ui.toolbar.hoverBackground": {
-    "ref": "palette.gray.white",
-    "alpha": 0.10196078431372549
-  },
-  "ui.tree.indentGuidesStroke": {
-    "ref": "palette.gray.700"
-  },
-  "ui.tree.tableColumnsBorder": {
-    "ref": "palette.gray.white",
-    "alpha": 0.10196078431372549
-  },
-  "ui.tree.tableOddRowsBackground": {
-    "ref": "palette.gray.850"
-  },
-  "ui.walkthrough.stepTitle.foreground": {
-    "ref": "palette.gray.000"
-  },
-  "ui.welcomePage.progress.background": {
-    "ref": "palette.gray.825"
-  },
-  "ui.welcomePage.progress.foreground": {
-    "ref": "palette.green.400"
-  },
-  "ui.widget.border": {
-    "ref": "palette.gray.white",
-    "alpha": 0.050980392156862744
-  },
-  "ui.widget.shadow": {
-    "ref": "palette.gray.black",
-    "alpha": 0.2
-  },
-  "semantic.class": {
-    "ref": "syntax.function"
-  },
-  "semantic.function": {
-    "ref": "syntax.function"
-  },
-  "semantic.function.defaultLibrary": {
-    "ref": "syntax.support"
-  },
-  "semantic.method": {
-    "ref": "syntax.support"
-  },
-  "semantic.namespace": {
-    "ref": "syntax.constant"
-  },
-  "semantic.parameter": {
-    "ref": "syntax.parameter"
-  },
-  "semantic.property": {
-    "ref": "syntax.property"
-  },
-  "semantic.variable": {
-    "ref": "syntax.variable"
-  },
-  "semantic.variable.defaultLibrary": {
-    "ref": "syntax.defaultLibrary"
-  },
-  "syntax.support": {
-    "ref": "palette.gray.000"
-  },
-  "syntax.defaultLibrary": {
-    "ref": "palette.gray.150"
-  },
-  "syntax.text": {
-    "ref": "palette.gray.200"
-  },
-  "syntax.punctuation": {
-    "ref": "palette.gray.400"
-  },
-  "syntax.comment": {
-    "ref": "palette.gray.500"
-  },
-  "syntax.invalid": {
-    "ref": "palette.gray.600"
-  },
-  "syntax.storageType": {
-    "ref": "palette.blue.400"
-  },
-  "syntax.typeHint": {
-    "ref": "palette.blue.400-muted"
-  },
-  "syntax.linkStrikethrough": {
-    "ref": "palette.blue.400",
-    "alpha": 0.5019607843137255
-  },
-  "syntax.function": {
-    "ref": "palette.cyan.400"
-  },
-  "syntax.property": {
-    "ref": "palette.green.400"
-  },
-  "syntax.parameter": {
-    "ref": "palette.orange.400"
-  },
-  "syntax.variable": {
-    "ref": "palette.pink.400"
-  },
-  "syntax.constant": {
-    "ref": "palette.purple.400"
-  },
-  "syntax.attributeNamespace": {
-    "ref": "palette.purple.500"
-  },
-  "syntax.keyword": {
-    "ref": "palette.red.400"
-  },
-  "syntax.string": {
-    "ref": "palette.yellow.400"
-  },
-  "syntax.code": {
-    "ref": "palette.yellow.500"
-  },
-  "surface.editor": {
-    "ref": "palette.gray.900"
-  },
-  "text.default": {
-    "ref": "palette.gray.200"
-  },
-  "diagnostic.error.foreground": {
-    "ref": "palette.red.500"
-  },
-  "diagnostic.warning.foreground": {
-    "ref": "palette.orange.400"
-  },
-  "diff.added.foreground": {
-    "ref": "palette.green.400"
-  },
-  "diff.removed.foreground": {
-    "ref": "palette.red.400"
+  "ui": {
+    "activityBar": {
+      // [base] (match `sideBar.background`)
+      "activeBackground": {
+        "color": "palette.gray.875"
+      },
+      // -color--oklch-32-gray [overrides core #3333333] (match sidebar header)
+      "background": {
+        "color": "palette.gray.825"
+      },
+      // -color--white at 50% opacity [overrides `activityBar.foreground`]
+      "dropBorder": {
+        "color": "palette.gray.white",
+        "alpha": 0.5019607843137255
+      },
+      // palette.yellow.400 [overrides core #ffffff]
+      "foreground": {
+        "color": "palette.yellow.400"
+      },
+      // -color--gray-medium-dark [overrides core #858585] (match comment)
+      "inactiveForeground": {
+        "color": "palette.gray.500"
+      }
+    },
+    "activityBarBadge": {
+      // palette.yellow.400 [overrides core #007acc] (match comments)
+      "background": {
+        "color": "palette.yellow.400"
+      },
+      // -color--gray-black [overrides core #ffffff]
+      "foreground": {
+        "color": "palette.gray.1000"
+      }
+    },
+    "badge": {
+      // -color--gray-dark-fade [overrides core #4d4d4d] | example: problems panel in title
+      "background": {
+        "color": "palette.gray.700"
+      },
+      // -color--gray-white [overrides core #ffffff]
+      "foreground": {
+        "color": "palette.gray.000"
+      }
+    },
+    "button": {
+      // Semantic fill at L53; see the documented token exception
+      "background": {
+        "color": "#1c6bc4",
+        "reason": "Primary button fill uses L53/H255 with gamut headroom, allowing its lighter blue 600 hover state to retain at least 4.5:1 contrast with the button text."
+      },
+      // -color--gray-white [overrides core #ffffff]
+      "foreground": {
+        "color": "palette.gray.000"
+      },
+      // palette.blue.600 at L55; lighter than the semantic button fill
+      "hoverBackground": {
+        "color": "palette.blue.600"
+      },
+      // -color--gray-dark-fade [overrides core #3a3d41] | example: circle 'back to top' button on an extension page
+      "secondaryBackground": {
+        "color": "palette.gray.700"
+      },
+      // -color--gray-white [overrides core #ffffff at opacity]
+      "secondaryForeground": {
+        "color": "palette.gray.000"
+      },
+      // -color--oklch-gray-46 [overrides core #5c5c5c] (4 shades lighter than `button.secondaryBackground`)
+      "secondaryHoverBackground": {
+        "color": "palette.gray.650"
+      }
+    },
+    "charts": {
+      // palette.green.400 [overrides core green #89d185] | example: Incoming/Outgoing branch dot in source control sidebar
+      "green": {
+        "color": "palette.green.400"
+      },
+      // palette.orange.400 [overrides `minimap.findMatchHighlight`] | example: Incoming/Outgoing second dot in source control sidebar
+      "orange": {
+        "color": "palette.orange.400"
+      },
+      // palette.purple.400 [overrides core #b180d7] | example: Incoming/Outgoing second dot in source control sidebar
+      "purple": {
+        "color": "palette.purple.400"
+      }
+    },
+    "debugIcon": {
+      // palette.blue.400 [overrides core #75beff]
+      "pauseForeground": {
+        "color": "palette.blue.400"
+      },
+      // palette.green.400 [overrides core #89d185]
+      "restartForeground": {
+        "color": "palette.green.400"
+      },
+      // palette.green.400[overrides core #89d185]
+      "startForeground": {
+        "color": "palette.green.400"
+      },
+      // palette.red.400 [overrides core #f48771]
+      "stopForeground": {
+        "color": "palette.red.400"
+      }
+    },
+    "debugToolBar": {
+      // -color--gray-fade [overrides core #333333]
+      "background": {
+        "color": "palette.gray.800"
+      }
+    },
+    "diffEditor": {
+      // -color--gray-dark-fade [overrides core #464646]
+      "diagonalFill": {
+        "color": "palette.gray.700"
+      },
+      // palette.green.400 at 10% opacity [overrides core green opacity]
+      "insertedLineBackground": {
+        "color": "diff.added.foreground",
+        "alpha": 0.10196078431372549
+      },
+      // palette.green.400 at 20% opacity [overrides core green opacity]
+      "insertedTextBackground": {
+        "color": "diff.added.foreground",
+        "alpha": 0.2
+      },
+      // palette.red.400 at 10% opacity [overrides core red opacity]
+      "removedLineBackground": {
+        "color": "diff.removed.foreground",
+        "alpha": 0.10196078431372549
+      },
+      // palette.red.400 at 20% opacity [overrides core red opacity]
+      "removedTextBackground": {
+        "color": "diff.removed.foreground",
+        "alpha": 0.2
+      },
+      // palette.blue.400 at 5% opacity [overrides core black with opacity] | example: previewing a file that is in the Incoming/Outgoing list in the source control sidebar
+      "unchangedCodeBackground": {
+        "color": "palette.blue.400",
+        "alpha": 0.050980392156862744
+      },
+      // palette.blue.400 at 5% opacity [overrides `sideBar.background`] | example: previewing a file that is in the Incoming/Outgoing list in the source control sidebar
+      "unchangedRegionBackground": {
+        "color": "palette.blue.400",
+        "alpha": 0.050980392156862744
+      },
+      // -color--gray-medium [overrides `foreground`] (match `icon.foreground`) | example: previewing a file that is in the Incoming/Outgoing list in the source control sidebar
+      "unchangedRegionForeground": {
+        "color": "palette.gray.400"
+      },
+      // -color--black at 20% opacity [overrides core black with opacity] (match `widget.shadow`) | example: previewing a file that is in the Incoming/Outgoing list in the source control sidebar
+      "unchangedRegionShadow": {
+        "color": "palette.gray.black",
+        "alpha": 0.2
+      }
+    },
+    "diffEditorGutter": {
+      // palette.green.400 at 10% opacity [base]
+      "insertedLineBackground": {
+        "color": "diff.added.foreground",
+        "alpha": 0.10196078431372549
+      },
+      // palette.red.400 at 10% opacity [base]
+      "removedLineBackground": {
+        "color": "diff.removed.foreground",
+        "alpha": 0.10196078431372549
+      }
+    },
+    // -color--white at 20% opacity [overrides core white at opacity]
+    "disabledForeground": {
+      "color": "palette.gray.white",
+      "alpha": 0.2
+    },
+    "dropdown": {
+      // -color--gray-fade [overrides core #3c3c3c] (match `input.background`) | example: output panel tasks selection
+      "background": {
+        "color": "palette.gray.800"
+      },
+      // -color--gray-dark-fade [base] (match `input.border`)
+      "border": {
+        "color": "palette.gray.700"
+      },
+      // -color--gray-white [overrides core #efefef] (match `foreground`)
+      "foreground": {
+        "color": "palette.gray.200"
+      },
+      // -color--oklch-32-gray (2 shades darker than dropdown.background) [overrides `dropdown.background`] | example: settings UI page dropdowns
+      "listBackground": {
+        "color": "palette.gray.825"
+      }
+    },
+    "editor": {
+      // -color--gray-fade-black [overrides core #1e1e1e]
+      "background": {
+        "color": "surface.editor"
+      },
+      // palette.purple.600 at 90% opacity [overrides dimmed core blue #515c6a] | example: active search match
+      "findMatchBackground": {
+        "color": "palette.purple.600",
+        "alpha": 0.9019607843137255
+      },
+      // palette.purple.500 at 90% opacity | example: inactive search match
+      "findMatchForeground": {
+        "color": "palette.purple.500",
+        "alpha": 0.9019607843137255
+      },
+      // palette.purple.600 at 45% opacity [overrides core orange at opacity #653618] | example: inactive search match
+      "findMatchHighlightBackground": {
+        "color": "palette.purple.600",
+        "alpha": 0.45098039215686275
+      },
+      // -color--white at 90% opacity [overrides `editor.findMatchForeground`] | example: active search match
+      "findMatchHighlightForeground": {
+        "color": "palette.gray.white",
+        "alpha": 0.9019607843137255
+      },
+      // -color--white at 10% opacity [overrides core dimmed gray #2d2e30] | example: background when using finder widget with selection search only
+      "findRangeHighlightBackground": {
+        "color": "palette.gray.white",
+        "alpha": 0.10196078431372549
+      },
+      // palette.blue.400 at 15% opacity [overrides dimmed `editor.selectionBackground`]
+      "foldBackground": {
+        "color": "palette.blue.400",
+        "alpha": 0.14901960784313725
+      },
+      // -color--gray-medium [overrides core #808080] | example: dots at end of line that has been folded // wait to see if the core is set by any other settings first
+      "foldPlaceholderForeground": {
+        "color": "palette.gray.400"
+      },
+      // -color--gray-light [overrides core #bbbbbb] (match `foreground`) | example: extension page text, empty editor text
+      "foreground": {
+        "color": "text.default"
+      },
+      // -color--white at 10% opacity [overrides core #252f39] | example: hover over a word in json object
+      "hoverHighlightBackground": {
+        "color": "palette.gray.white",
+        "alpha": 0.10196078431372549
+      },
+      // -color--oklch-20-gray [base] (6 shades darker than editor bg)
+      "lineHighlightBackground": {
+        "color": "palette.gray.975"
+      },
+      // -color--oklch-20-gray [overrides core #282828] (match editor.lineHighlightBackground)
+      "lineHighlightBorder": {
+        "color": "palette.gray.975"
+      },
+      // -color--white at 10% opacity [overrides dimmed `editor.findRangeHighlightBackground`] (match `editor.findRangeHighlightBackground`) | example: current search match line
+      "rangeHighlightBackground": {
+        "color": "palette.gray.white",
+        "alpha": 0.10196078431372549
+      },
+      // palette.blue.600 at 50% opacity [overrides core blue opacity #264f78]
+      "selectionBackground": {
+        "color": "palette.blue.600",
+        "alpha": 0.5019607843137255
+      },
+      // -gray-medium-dark at 50% opacity [overrides core #483f4d] | example: click in word and all the matches are colored
+      "wordHighlightBackground": {
+        "color": "palette.gray.500",
+        "alpha": 0.5019607843137255
+      },
+      // palette.pink.400 at 40% opacity [overrides core #063b58] | example: click on a class in a css file (Note: minimap uses `minimap.selectionOccurrenceHighlight` which is a different color)
+      "wordHighlightStrongBackground": {
+        "color": "palette.pink.400",
+        "alpha": 0.4
+      }
+    },
+    "editorBracketMatch": {
+      // -color--gray-dark [overrides core #888888]
+      "border": {
+        "color": "palette.gray.600"
+      }
+    },
+    "editorCodeLens": {
+      // palette.yellow.500 [overrides core #929292] | example: debug arrow and text in editor
+      "foreground": {
+        "color": "palette.yellow.500"
+      }
+    },
+    "editorCursor": {
+      // -color--gray-fade [overrides core #555456] | example: text inside cursor block
+      "background": {
+        "color": "palette.gray.800"
+      },
+      // --color--gray-medium [overrides core #aeafad] | example: cursor block and current line highlight in overviewRuler
+      "foreground": {
+        "color": "palette.gray.400"
+      }
+    },
+    "editorError": {
+      // palette.red.500 [overrides core red #ee4f47] | examples: squiggly underlines and panel error icon
+      "foreground": {
+        "color": "diagnostic.error.foreground"
+      }
+    },
+    "editorGhostText": {
+      // palette.blue.500 | example: includes sidebar source control input placeholder text
+      "foreground": {
+        "color": "palette.blue.500"
+      }
+    },
+    "editorGroup": {
+      // -color--black at 50% opacity [overrides core #444444] | example: split editor border
+      "border": {
+        "color": "palette.gray.black",
+        "alpha": 0.5019607843137255
+      },
+      // -color--gray-medium at 50% opacity [overrides core gray at opacity]
+      "dropBackground": {
+        "color": "palette.gray.400",
+        "alpha": 0.5019607843137255
+      }
+    },
+    "editorGroupHeader": {
+      // -color--oklch-30-gray (2 shades lighter than sidebar bg) [overrides core #252526]
+      "tabsBackground": {
+        "color": "palette.gray.850"
+      }
+    },
+    "editorGutter": {
+      // palette.green.400 at 75% opacity [overrides core green #487e02] | example: scrollbar and number line bar diff
+      "addedBackground": {
+        "color": "palette.green.400",
+        "alpha": 0.7490196078431373
+      },
+      // -color--gray-fade [overrides`list.inactiveSelectionBackground`] | example: next and plus buttons for git changes... foreground is controlled by `icon.foreground`
+      "commentRangeForeground": {
+        "color": "palette.gray.800"
+      },
+      // palette.red.400 at 75% opacity [overrides core #f85149] | includes overviewRuler
+      "deletedBackground": {
+        "color": "palette.red.400",
+        "alpha": 0.7490196078431373
+      },
+      // palette.yellow.400 at 75% opacity [overrides core #1b81a8]
+      "modifiedBackground": {
+        "color": "palette.yellow.400",
+        "alpha": 0.7490196078431373
+      }
+    },
+    "editorHint": {
+      // palette.blue.400 [overrides core #949494] | example: 3 dots underline
+      "foreground": {
+        "color": "palette.blue.400"
+      }
+    },
+    "editorIndentGuide": {
+      // -color--gray-dark-fade [overrides `editorWhitespace.foreground`]
+      "activeBackground1": {
+        "color": "palette.gray.700"
+      }
+    },
+    "editorInfo": {
+      // palette.blue.400 [overrides core #3275c3] | example: info squiggly underlines and panel info icon
+      "foreground": {
+        "color": "palette.blue.400"
+      }
+    },
+    "editorLightBulb": {
+      // palette.yellow.500 [overrides core #ffcc00]
+      "foreground": {
+        "color": "palette.yellow.500"
+      }
+    },
+    "editorLightBulbAi": {
+      // palette.yellow.500 [overrides core #ffcc00] | example: double star icon
+      "foreground": {
+        "color": "palette.yellow.500"
+      }
+    },
+    "editorLightBulbAutoFix": {
+      // palette.blue.400 [overrides core #75beff] | example: quick fix icon when clicking in a misspelled JS variable declaration
+      "foreground": {
+        "color": "palette.blue.400"
+      }
+    },
+    "editorLineNumber": {
+      // -color--gray-light [override core gray #c6c6c6]
+      "activeForeground": {
+        "color": "palette.gray.200"
+      },
+      // -color--gray-dark [override core #858585]
+      "foreground": {
+        "color": "palette.gray.600"
+      }
+    },
+    "editorLink": {
+      // palette.yellow.400 [overrides core #4e94ce] | example: activating link in comments
+      "activeForeground": {
+        "color": "palette.yellow.400"
+      }
+    },
+    "editorOverviewRuler": {
+      // [overrides dimmed `editorGutter.addedBackground`]
+      "addedForeground": {
+        "color": "palette.green.400",
+        "alpha": 0.7490196078431373
+      },
+      // -color--black at 10% opacity [overrides `editor.background`]
+      "background": {
+        "color": "palette.gray.black",
+        "alpha": 0.10196078431372549
+      },
+      // -color--black at 10% opacity [overrides core #323232] (match `editorOverviewRuler.background`)
+      "border": {
+        "color": "palette.gray.black",
+        "alpha": 0.10196078431372549
+      },
+      // -color--gray-dark at 75% opacity [overrides core #a0a0a0] (match `editorBracketMatch.border` with opacity)
+      "bracketMatchForeground": {
+        "color": "palette.gray.600",
+        "alpha": 0.7490196078431373
+      },
+      // palette.red.400 at 75% opacity [overrides dimmed `editorGutter.deletedBackground`]
+      "deletedForeground": {
+        "color": "palette.red.400",
+        "alpha": 0.7490196078431373
+      },
+      // palette.red.500 at 75% opacity [overrides core #bd1717]
+      "errorForeground": {
+        "color": "palette.red.500",
+        "alpha": 0.7490196078431373
+      },
+      // palette.purple.600 at 75% opacity [overrides core dimmed orange #77531c]
+      "findMatchForeground": {
+        "color": "palette.purple.600",
+        "alpha": 0.7490196078431373
+      },
+      // palette.blue.400 at 75% opacity [overrides `editorInfo.foreground`]
+      "infoForeground": {
+        "color": "palette.blue.400",
+        "alpha": 0.7490196078431373
+      },
+      // palette.yellow.400 at 75% opacity [overrides dimmed `editorGutter.modifiedBackground`]
+      "modifiedForeground": {
+        "color": "palette.yellow.400",
+        "alpha": 0.7490196078431373
+      },
+      // -color--gray-medium-dark at 75% of 50% opacity = 37.5% (round to 38% opacity) [overrides core #86808a] | example: click in word and all the matches are colored (match `editor.wordHighlightBackground`)
+      "selectionHighlightForeground": {
+        "color": "palette.gray.500",
+        "alpha": 0.3803921568627451
+      },
+      // palette.orange.400 at 75% opacity [overrides `editorWarning.foreground`]
+      "warningForeground": {
+        "color": "palette.orange.400",
+        "alpha": 0.7490196078431373
+      },
+      // -color--gray-medium-dark at 75% of 50% opacity = 37.5% (round to 38% opacity) [overrides core #868686] (match `editorOverviewRuler.selectionHighlightForeground`) | example: click on a recurring property in a css file
+      "wordHighlightForeground": {
+        "color": "palette.gray.500",
+        "alpha": 0.3803921568627451
+      },
+      // palette.pink.400 at 75% opacity[overrides core purple at opacity #a086a0] (match `editor.wordHighlightStrongBackground`) | example: click on a class in a css file... any defining element such as a JS function or variable definition
+      "wordHighlightStrongForeground": {
+        "color": "palette.pink.400",
+        "alpha": 0.7490196078431373
+      }
+    },
+    "editorRuler": {
+      // palette.orange.400 at 10% opacity [overrides core #5a5a5a] | example: char width guideline
+      "foreground": {
+        "color": "palette.orange.400",
+        "alpha": 0.10196078431372549
+      }
+    },
+    "editorStickyScroll": {
+      // [overrides 'editor.background'] (2 shades lighter than 'editor.background')
+      "background": {
+        "color": "palette.gray.875"
+      }
+    },
+    "editorStickyScrollHover": {
+      // [overrides core #2a2d2e] (match `editor.lineHighlightBackground`)
+      "background": {
+        "color": "palette.gray.975"
+      }
+    },
+    "editorUnicodeHighlight": {
+      // palette.orange.400 at 25% opacity [base]
+      "background": {
+        "color": "palette.orange.400",
+        "alpha": 0.25098039215686274
+      },
+      // palette.orange.400 at 50% opacity [overrides `editorWarning.foreground`]
+      "border": {
+        "color": "palette.orange.400",
+        "alpha": 0.5019607843137255
+      }
+    },
+    "editorWarning": {
+      // palette.orange.400 [overrides core yellow #cca700] | example: warning squiggly underlines and panel warning icon
+      "foreground": {
+        "color": "diagnostic.warning.foreground"
+      }
+    },
+    "editorWhitespace": {
+      // -color--gray-fade [overrides core #424342]
+      "foreground": {
+        "color": "palette.gray.800"
+      }
+    },
+    "editorWidget": {
+      // -color--oklch-32-gray [overrides core #252526] | example: finder widget or hover popup info
+      "background": {
+        "color": "palette.gray.825"
+      },
+      // -color--white at 10% opacity [overrides core #454545] | example: editor hover word popup widget
+      "border": {
+        "color": "palette.gray.white",
+        "alpha": 0.10196078431372549
+      }
+    },
+    // palette.red.500 [overrides core #ee4f47] | example: no results found in editor finder widget
+    "errorForeground": {
+      "color": "diagnostic.error.foreground"
+    },
+    "extensionIcon": {
+      // palette.green.600 at 90% opacity [override core #1d9271] | example: GitLens extension in sidebar list
+      "preReleaseForeground": {
+        "color": "palette.green.600",
+        "alpha": 0.9019607843137255
+      },
+      // palette.pink.600 at 90% opacity [overrides core #d758b3] | example: heart icon on Code Spell Checker extension page
+      "sponsorForeground": {
+        "color": "palette.pink.600",
+        "alpha": 0.9019607843137255
+      },
+      // palette.orange.500 at 90% opacity [overrides core #ff8e00] | example: extension star ratings
+      "starForeground": {
+        "color": "palette.orange.500",
+        "alpha": 0.9019607843137255
+      }
+    },
+    // palette.blue.500 at 80% opacity [overrides core #0078d4] | example: active sidebar list item, active input border, active panel border
+    "focusBorder": {
+      "color": "palette.blue.500",
+      "alpha": 0.8
+    },
+    // -color--gray-light [overrides core #cccccc] | examples: breadcrumbs, explorer sidebar, extension titles
+    "foreground": {
+      "color": "palette.gray.200"
+    },
+    "gitDecoration": {
+      // palette.green.500 [overrides core green #72c890] | example: filename in tabs and sidebar for staged/committed file
+      "addedResourceForeground": {
+        "color": "palette.green.500"
+      },
+      // palette.red.500 [overrides core red] | example: hover over source control sidebar incoming/outgoing list item that has a commit deletion or filename in tabs and sidebar for staged/committed file
+      "deletedResourceForeground": {
+        "color": "palette.red.500"
+      },
+      // -color--oklch-gray-62 [overrides core #828282] | example: filename in tabs and sidebar
+      "ignoredResourceForeground": {
+        "color": "palette.gray.450"
+      },
+      // palette.yellow.400 [overrides core #e2c08d] | example: filename in tabs and sidebar of non-staged file
+      "modifiedResourceForeground": {
+        "color": "palette.yellow.400"
+      },
+      // palette.yellow.500 [overrides core yellow #e2c08d] | example: filename in tabs and sidebar for staged file
+      "stageModifiedResourceForeground": {
+        "color": "palette.yellow.500"
+      },
+      // palette.green.400 [overrides core #508d65] | example: filename in tabs and sidebar of non-staged file
+      "untrackedResourceForeground": {
+        "color": "palette.green.400"
+      }
+    },
+    "icon": {
+      // -color--gray-medium [overrides core #cccccc] | example: most UI icons in widgets (not selection button) (includes sidebar folder arrows)
+      "foreground": {
+        "color": "palette.gray.400"
+      }
+    },
+    "input": {
+      // -color--gray-fade [overrides core #3c3c3c]
+      "background": {
+        "color": "palette.gray.800"
+      },
+      // -color--gray-dark-fade [base] | example: input and debug console border
+      "border": {
+        "color": "palette.gray.700"
+      },
+      // -color--gray-white [overrides `foreground`]
+      "foreground": {
+        "color": "palette.gray.000"
+      },
+      // -color--gray-medium-dark [overrides dimmed `foreground`] (match comments color)
+      "placeholderForeground": {
+        "color": "palette.gray.500"
+      }
+    },
+    "inputOption": {
+      // palette.yellow.400 at 25% opacity [overrides core orange at opacity #85551f] | example: editor finder widget selection only button
+      "activeBackground": {
+        "color": "palette.yellow.400",
+        "alpha": 0.25098039215686274
+      },
+      // palette.yellow.400 at 25% opacity [core overrides #007acc] | example: editor finder widget selection only button
+      "activeBorder": {
+        "color": "palette.yellow.400",
+        "alpha": 0.25098039215686274
+      },
+      // palette.yellow.400 [overrides core #ffffff] | example: editor finder widget selection only button
+      "activeForeground": {
+        "color": "palette.yellow.400"
+      },
+      // palette.yellow.400 at 25% opacity [overrides core white at opacity] | example: sidebar global search exclude button
+      "hoverBackground": {
+        "color": "palette.yellow.400",
+        "alpha": 0.25098039215686274
+      }
+    },
+    "keybindingLabel": {
+      // -color--gray-dark-fade [overrides core #343434]
+      "background": {
+        "color": "palette.gray.700"
+      },
+      // [overrides core #3d3d3d] (2 shades lighter than `keybindingLabel.background`)
+      "border": {
+        "color": "palette.gray.675"
+      },
+      // [overrides core #484848] (2 shades lighter than `keybindingLabel.border`)
+      "bottomBorder": {
+        "color": "palette.gray.650"
+      },
+      // -color--gray-light [overrides core #c8c8c8]
+      "foreground": {
+        "color": "palette.gray.200"
+      }
+    },
+    "keybindingTable": {
+      // -color--gray-fade [overrides `tree.tableOddRowsBackground`]
+      "headerBackground": {
+        "color": "palette.gray.800"
+      }
+    },
+    "list": {
+      // -color--white at 20% opacity [overrides core #04395e] | example: commandCenter dropdown selection line
+      "activeSelectionBackground": {
+        "color": "palette.gray.white",
+        "alpha": 0.2
+      },
+      // -color--gray-white [overrides core #ffffff] | example: sidebar active item when moving with keyboard
+      "activeSelectionForeground": {
+        "color": "palette.gray.000"
+      },
+      // -color--gray-white [overrides core #ffffff at opacity]
+      "activeSelectionIconForeground": {
+        "color": "palette.gray.000"
+      },
+      // -color--gray-medium at 25% opacity [overrides core blue at opacity] | example: drag and hover a folder in the explorer into another folder
+      "dropBackground": {
+        "color": "palette.gray.400",
+        "alpha": 0.25098039215686274
+      },
+      // palette.red.500 [overrides core #f88070] | example: editor tab title and sidebar filename
+      "errorForeground": {
+        "color": "palette.red.500"
+      },
+      // -color--white at 20% opacity [overrides `focusBorder`] (match `list.activeSelectionBackground`) | example: item clicked on in the explorer sidebar
+      "focusAndSelectionOutline": {
+        "color": "palette.gray.white",
+        "alpha": 0.2
+      },
+      // palette.blue.400 [overrides core #2aaaff] | example: editorSuggestionWidget typed char in all lines not overridden
+      "highlightForeground": {
+        "color": "palette.blue.400"
+      },
+      // -color--white at 10% opacity [overrides core #2a2d2e]
+      "hoverBackground": {
+        "color": "palette.gray.white",
+        "alpha": 0.10196078431372549
+      },
+      // -color--gray-white [overrides `sideBar.foreground` || `quickInput.foreground`] | example: extensions sidebar list
+      "hoverForeground": {
+        "color": "palette.gray.000"
+      },
+      // -color--white at 5% opacity [overrides core #37373d]
+      "inactiveSelectionBackground": {
+        "color": "palette.gray.white",
+        "alpha": 0.050980392156862744
+      },
+      // palette.orange.400 [overrides core #cca700] | example: includes tab foreground
+      "warningForeground": {
+        "color": "palette.orange.400"
+      }
+    },
+    "minimap": {
+      // palette.red.500 at 75% opacity [overrides core red #dc1d1d]
+      "errorHighlight": {
+        "color": "palette.red.500",
+        "alpha": 0.7490196078431373
+      },
+      // palette.purple.600 at 75% opacity [overrides core orange #d18616] | example: editor search widget matches
+      "findMatchHighlight": {
+        "color": "palette.purple.600",
+        "alpha": 0.7490196078431373
+      },
+      // 50% opacity [base]
+      "foregroundOpacity": {
+        "color": "palette.gray.black",
+        "alpha": 0.5019607843137255
+      },
+      // palette.blue.600 at 75% opacity [overrides `editorInfo.foreground`]
+      "infoHighlight": {
+        "color": "palette.blue.400",
+        "alpha": 0.7490196078431373
+      },
+      // palette.blue.600 at 75% of 50% opacity = 37.5% (round to 38% opacity) [overrides core blue opacity #264f78] (match `editor.selectionBackground`)
+      "selectionHighlight": {
+        "color": "palette.blue.600",
+        "alpha": 0.3803921568627451
+      },
+      // -color--gray-medium-dark at 75% of 50% opacity = 37.5% (round to 38% opacity) [overrides core #676767] | example: click in word and all the matches are colored
+      "selectionOccurrenceHighlight": {
+        "color": "palette.gray.500",
+        "alpha": 0.3803921568627451
+      },
+      // palette.orange.400 at 75% opacity [overrides `editorWarning.foreground`]
+      "warningHighlight": {
+        "color": "palette.orange.400",
+        "alpha": 0.7490196078431373
+      }
+    },
+    "multiDiffEditor": {
+      // [override core #262626] | example: previewing a file that is in the Incoming/Outgoing list in the source control sidebar
+      "headerBackground": {
+        "color": "palette.gray.800"
+      }
+    },
+    "notebook": {
+      // -color--white at 10% opacity[override core white at opacity] | example: GitHub Copilot Suggestions page
+      "cellBorderColor": {
+        "color": "palette.gray.white",
+        "alpha": 0.10196078431372549
+      }
+    },
+    "outputViewStickyScroll": {
+      // -color--oklch-gray-32 [overrides `panel.background`] (2 shades lighter than `panel.background`)
+      "background": {
+        "color": "palette.gray.825"
+      }
+    },
+    "panel": {
+      // -color--oklch-30-gray [overrides `editor.background`]
+      "background": {
+        "color": "palette.gray.850"
+      },
+      // -color--oklch-30-gray [overrides core #444444] (match `panel.background`)
+      "border": {
+        "color": "palette.gray.850"
+      },
+      // -color--white at 50% opacity [overrides `panelTitle.activeForeground`]
+      "dropBorder": {
+        "color": "palette.gray.white",
+        "alpha": 0.5019607843137255
+      }
+    },
+    "panelSectionHeader": {
+      // -color--oklch-gray-32 [overrides core white at opacity #3f3f3f] (2 shades lighter than `panel.background`) | example: drag output panel title into terminal panel
+      "background": {
+        "color": "palette.gray.825"
+      }
+    },
+    "panelStickyScroll": {
+      // -color--oklch-gray-32 [overrides `panel.background`] (2 shades lighter than `panel.background`)
+      "background": {
+        "color": "palette.gray.825"
+      }
+    },
+    "panelTitle": {
+      // -color--oklch-30-gray [overrides core #e7e7e7] (match panel BG to hide border)
+      "activeBorder": {
+        "color": "palette.gray.850"
+      },
+      // palette.yellow.400 [overrides core #e7e7e7]
+      "activeForeground": {
+        "color": "palette.yellow.400"
+      },
+      // -color--gray-medium-dark [overrides core #9d9d9d] (match comments)
+      "inactiveForeground": {
+        "color": "palette.gray.500"
+      }
+    },
+    "peekView": {
+      // palette.blue.400 at 25% opacity [overrides `editorInfo.foreground`] | example: clicking on modified line in gutter of a modified file
+      "border": {
+        "color": "palette.blue.400",
+        "alpha": 0.25098039215686274
+      }
+    },
+    "peekViewTitle": {
+      // -color--oklch-gray-32 [overrides core #252526] | example: clicking on modified line in gutter of a modified file
+      "background": {
+        "color": "palette.gray.825"
+      }
+    },
+    "peekViewTitleDescription": {
+      // -color--white at 50% opacity [overrides core white at opacity] | example: color in widget shown when clicking "View problem" (such as a spelling error with CSpell extension)
+      "foreground": {
+        "color": "palette.gray.white",
+        "alpha": 0.5019607843137255
+      }
+    },
+    "peekViewTitleLabel": {
+      // -color--gray-white [overrides core #ffffff] | example: title color in widget shown when clicking "View problem" (such as a spelling error with CSpell extension)
+      "foreground": {
+        "color": "palette.gray.000"
+      }
+    },
+    "pickerGroup": {
+      // -color--gray-dark-fade [overrides core #3f3f46] (match `input.border`) | example: commandCenter other commands border
+      "border": {
+        "color": "palette.gray.700"
+      },
+      // -color--gray-medium [overrides core #3794ff] | example: commandCenter other commands text title
+      "foreground": {
+        "color": "palette.gray.400"
+      }
+    },
+    "profileBadge": {
+      // -color--gray-dark-fade [overrides core #4d4d4d] (match `badge.background`)
+      "background": {
+        "color": "palette.gray.700"
+      },
+      // -color--gray-white [overrides core #ffffff] (match `badge.border`)
+      "foreground": {
+        "color": "palette.gray.000"
+      }
+    },
+    "progressBar": {
+      // palette.green.500 [overrides core #006abb]
+      "background": {
+        "color": "palette.green.500"
+      }
+    },
+    "quickInputTitle": {
+      // [overrides core #484848] | example: popup when clicking on the "Open Repository" button in the source control sidebar or Copilot icon in the statusBar
+      "background": {
+        "color": "palette.gray.750"
+      }
+    },
+    "scrollbar": {
+      // -color--black at 40% opacity [overrides core #000] | example: editor tabs side scroll and breadcrumbs/editorStickyScroll
+      "shadow": {
+        "color": "palette.gray.black",
+        "alpha": 0.4
+      }
+    },
+    "scrollbarSlider": {
+      // -color--gray-medium-dark at 70% opacity [overrides core gray opacity #505050] - example: when selecting and dragging scrollbar location
+      "activeBackground": {
+        "color": "palette.gray.500",
+        "alpha": 0.7019607843137254
+      },
+      // -color--gray-medium-dark at 30% opacity [overrides core gray opacity]- example: editor vertical scrollbar location
+      "background": {
+        "color": "palette.gray.500",
+        "alpha": 0.30196078431372547
+      },
+      // -color--gray-medium-dark at 50% opacity [overrides core gray opacity]
+      "hoverBackground": {
+        "color": "palette.gray.500",
+        "alpha": 0.5019607843137255
+      }
+    },
+    "selection": {
+      // palette.blue.600 at 50% opacity [overrides core blue at opacity #5f83aa] (match `editor.selectionBackground`) | example: selecting text inside an editor popup widget
+      "background": {
+        "color": "palette.blue.600",
+        "alpha": 0.5019607843137255
+      }
+    },
+    "settings": {
+      // -color--white at 20% opacity [overrides `focusBorder`]
+      "focusedRowBorder": {
+        "color": "palette.gray.white",
+        "alpha": 0.2
+      },
+      // -color--gray-white [overrides core #ffffff]
+      "headerForeground": {
+        "color": "palette.gray.000"
+      },
+      // palette.yellow.400 [overrides core #0c7d9d] | example: vertical line color in Settings UI
+      "modifiedItemIndicator": {
+        "color": "palette.yellow.400"
+      }
+    },
+    "sideBar": {
+      // -color--oklch-28-gray [overrides core #252526]
+      "background": {
+        "color": "palette.gray.875"
+      }
+    },
+    "sideBarSectionHeader": {
+      // -color--oklch-gray-32 [overrides core #3b3b3b] (4 shades lighter than `sideBar.background`) | example: extension sidebar sections
+      "background": {
+        "color": "palette.gray.825"
+      },
+      // -color--gray-medium [overrides `foreground`]
+      "foreground": {
+        "color": "palette.gray.400"
+      }
+    },
+    "sideBarStickyScroll": {
+      // -color--oklch-gray-30 [overrides `sideBar.background`] (2 shades lighter than sideBar.background`)
+      "background": {
+        "color": "palette.gray.850"
+      }
+    },
+    "sideBarTitle": {
+      // -color--gray-medium [overrides `foreground`] (match `icon.foreground`) | example: EXPLORER TITLE
+      "foreground": {
+        "color": "palette.gray.400"
+      }
+    },
+    "simpleFindWidget": {
+      // -color--white at 5% opacity [overrides core #454545] | example: terminal finder widget resize border
+      "sashBorder": {
+        "color": "palette.gray.white",
+        "alpha": 0.050980392156862744
+      }
+    },
+    "statusBar": {
+      // -color--gray-fade [override core #007acc] (match `titleBar.activeBackground`)
+      "background": {
+        "color": "palette.gray.800"
+      },
+      // palette.orange.600 [overrides core #cc6633]
+      "debuggingBackground": {
+        "color": "palette.orange.600"
+      },
+      // -color--gray-black [overrides `statusBar.foreground`]
+      "debuggingForeground": {
+        "color": "palette.gray.1000"
+      },
+      // -color--gray-dark-fade [overrides `statusBar.foreground` || core #ffffff]
+      "focusBorder": {
+        "color": "palette.gray.700"
+      },
+      // -color--gray-medium [overrides core #ffffff] (match `titleBar.activeForeground`)
+      "foreground": {
+        "color": "palette.gray.400"
+      },
+      // -color--oklch-gray-24 [overrides `core #68217a`] (2 shades darker than `editor.background`)
+      "noFolderBackground": {
+        "color": "palette.gray.925"
+      },
+      // -color--gray-medium-dark [overrides `statusBar.foreground`]
+      "noFolderForeground": {
+        "color": "palette.gray.500"
+      }
+    },
+    "statusBarItem": {
+      // [override core #929292] | example: click on the Remote Host button in the statusbar and the exit the popup panel and the button will have a focus border in this color
+      "focusBorder": {
+        "color": "palette.yellow.400"
+      },
+      // -color--gray-white [overrides `statusBar.foreground`]
+      "hoverForeground": {
+        "color": "palette.gray.000"
+      },
+      // -color--white at 10% opacity [overrides `activityBarBadge.background` || core ##007acc] (4 shades lighter than `statusBar.background`) | example: Remote Host button in statusBar
+      "remoteBackground": {
+        "color": "palette.gray.white",
+        "alpha": 0.10196078431372549
+      },
+      // [inherits `activityBarBadge.foreground` || core white at opacity] | example: Remote Host button in statusBar
+      "remoteForeground": {
+        "color": "palette.gray.000"
+      },
+      // [overrides `statusBarItem.hoverBackground` || `activityBarBadge.background`]
+      "remoteHoverBackground": {
+        "color": "palette.yellow.400"
+      },
+      // [overrides `statusBarItem.hoverForeground` || `statusBar.foreground`] | example: Remote Host button in statusBar
+      "remoteHoverForeground": {
+        "color": "palette.gray.1000"
+      }
+    },
+    "symbolIcon": {
+      // palette.orange.500 [overrides core #c98727] | example: Previewing a css file in Incoming/Outgoing source control sidebar
+      "classForeground": {
+        "color": "palette.orange.500"
+      },
+      // palette.purple.500 [overrides core purple #936cb0] | example: box icon
+      "functionForeground": {
+        "color": "palette.purple.500"
+      },
+      // palette.blue.400 [overrides core blue #72b8f6] | example: unknown prop in .prettierrc file
+      "variableForeground": {
+        "color": "palette.blue.500"
+      }
+    },
+    "tab": {
+      // -color--gray-white [overrides core #ffffff]
+      "activeForeground": {
+        "color": "palette.gray.000"
+      },
+      // -color--black at 25% opacity [overrides core #252526]
+      "border": {
+        "color": "palette.gray.black",
+        "alpha": 0.25098039215686274
+      },
+      // -color--white at 50% opacity [overrides `tab.activeForeground`]
+      "dragAndDropBorder": {
+        "color": "palette.gray.white",
+        "alpha": 0.5019607843137255
+      },
+      // -color--gray-white [overrides `tab.inactiveForeground`] | example: hover over inactive tab (match `tab.activeForeground`)`
+      "hoverForeground": {
+        "color": "palette.gray.000"
+      },
+      // [overrides core #2d2d2d] (match `editorGroupHeader.tabsBackground`)
+      "inactiveBackground": {
+        "color": "palette.gray.850"
+      },
+      // -color--gray-medium [overrides dimmed `tab.activeForeground`] | example: non-active tabs, including the tab's icons
+      "inactiveForeground": {
+        "color": "palette.gray.400"
+      },
+      // [overrides dimmed `tab.activeForeground`] | example: tabs in split editor
+      "unfocusedActiveForeground": {
+        "color": "palette.gray.400"
+      },
+      // [overrides dimmed `tab.hoverForeground`] | example: hover over inactive tab in unfocused split editor (includes X) (match `tab.inactiveForeground`)
+      "unfocusedHoverForeground": {
+        "color": "palette.gray.400"
+      },
+      // -color--gray-dark [overrides dimmed `tab.inactiveForeground`] | example: tabs in split editor
+      "unfocusedInactiveForeground": {
+        "color": "palette.gray.600"
+      }
+    },
+    "terminal": {
+      // -color--gray-fade [overrides core #000000]
+      "ansiBlack": {
+        "color": "palette.gray.800"
+      },
+      // palette.blue.400 [overrides core #2472c8]
+      "ansiBlue": {
+        "color": "palette.blue.400"
+      },
+      // -color--gray-dark [overrides core #666666]
+      "ansiBrightBlack": {
+        "color": "palette.gray.600"
+      },
+      // palette.blue.500 [overrides core #3b8eea]
+      "ansiBrightBlue": {
+        "color": "palette.blue.500"
+      },
+      // palette.cyan.500 [overrides core #29b8db]
+      "ansiBrightCyan": {
+        "color": "palette.cyan.500"
+      },
+      // palette.green.500 [overrides core #23d18b]
+      "ansiBrightGreen": {
+        "color": "palette.green.500"
+      },
+      // palette.purple.500 [overrides core #d670d6]
+      "ansiBrightMagenta": {
+        "color": "palette.purple.500"
+      },
+      // palette.red.500 [overrides core red #f14c4c]
+      "ansiBrightRed": {
+        "color": "palette.red.500"
+      },
+      // -color--white [overrides core #e5e5e5]
+      "ansiBrightWhite": {
+        "color": "palette.gray.white"
+      },
+      // palette.yellow.500 [overrides core #f5f543]
+      "ansiBrightYellow": {
+        "color": "palette.yellow.500"
+      },
+      // palette.cyan.400 [overrides core #11a8cd]
+      "ansiCyan": {
+        "color": "palette.cyan.400"
+      },
+      // palette.green.400 [overrides core green #0dbc79]
+      "ansiGreen": {
+        "color": "palette.green.400"
+      },
+      // palette.purple.400 [overrides core #bc3fbc]
+      "ansiMagenta": {
+        "color": "palette.purple.400"
+      },
+      // palette.red.400 [overrides core #cd3131]
+      "ansiRed": {
+        "color": "palette.red.400"
+      },
+      // -color--gray-white [overrides core white #e5e5e5]
+      "ansiWhite": {
+        "color": "palette.gray.000"
+      },
+      // palette.yellow.400 [overrides core yellow #e5e510]
+      "ansiYellow": {
+        "color": "palette.yellow.400"
+      },
+      // -color--gray-fade-black [overrides `panel.background`] (match editor bg)
+      "background": {
+        "color": "palette.gray.900"
+      },
+      // -color--gray-light [overrides core #cccccc] (includes cursor)
+      "foreground": {
+        "color": "palette.gray.200"
+      }
+    },
+    "terminalOverviewRuler": {
+      // --color--gray-medium [overrides core #878787] (match `editorCursor.foreground`) | example: current line match when using terminal search widget
+      "cursorForeground": {
+        "color": "palette.gray.400"
+      }
+    },
+    "textBlockQuote": {
+      // -color--gray-fade [overrides core #222222] | example: markdown > quote in preview mode
+      "background": {
+        "color": "palette.gray.800"
+      },
+      // -color--gray-dark [overrides core #1c5982]
+      "border": {
+        "color": "palette.gray.600"
+      }
+    },
+    "textCodeBlock": {
+      // -color--gray-fade [overrides core black at opacity] | example: hover over settings json "workbench.startupEditor" or hover over source control sidebar incoming/outgoing list item that has a commit using a codeblock
+      "background": {
+        "color": "palette.gray.white",
+        "alpha": 0.14901960784313725
+      }
+    },
+    "textLink": {
+      // palette.yellow.400 [overrides core underlined #3794ff]
+      "activeForeground": {
+        "color": "palette.yellow.400"
+      },
+      // palette.blue.400 [overrides core #3794ff] | example: Settings UI text link
+      "foreground": {
+        "color": "palette.blue.400"
+      }
+    },
+    "textPreformat": {
+      // -color--gray-fade [overrides core #353535]
+      "background": {
+        "color": "palette.gray.800"
+      },
+      // palette.yellow.500 [overrides core #d7ba7d]
+      "foreground": {
+        "color": "palette.yellow.500"
+      }
+    },
+    "titleBar": {
+      // -color--gray-fade [override core ##3c3c3c] (match `statusBar.background`)
+      "activeBackground": {
+        "color": "palette.gray.800"
+      },
+      // -color--gray-medium [overrides core #cccccc] | example: all text and icons in title bar (match `statusBar.foreground`)
+      "activeForeground": {
+        "color": "palette.gray.400"
+      },
+      // -color--oklch-30-gray [overrides dimmed `titleBar.activeBackground`] (match `editorGroupHeader.tabsBackground`)
+      "inactiveBackground": {
+        "color": "palette.gray.850"
+      },
+      // -color--gray-fade [overrides dimmed `titleBar.activeForeground`]
+      "inactiveForeground": {
+        "color": "palette.gray.600"
+      }
+    },
+    "toolbar": {
+      // -color--gray-white at 10% opacity [overrides core white at opacity] | example: Settings UI gear icons
+      "hoverBackground": {
+        "color": "palette.gray.white",
+        "alpha": 0.10196078431372549
+      }
+    },
+    "tree": {
+      // -color--gray-dark-fade [overrides core #585858] | example: sidebar explorer tree
+      "indentGuidesStroke": {
+        "color": "palette.gray.700"
+      },
+      // -color--white at 10% opacity [overrides core white at opacity] | example: Keyboard Shortcuts page
+      "tableColumnsBorder": {
+        "color": "palette.gray.white",
+        "alpha": 0.10196078431372549
+      },
+      // -color--oklch-30 [overrides core #2b2b2b] (2 shades darker than `editor.background`) | example: Keyboard Shortcuts page
+      "tableOddRowsBackground": {
+        "color": "palette.gray.850"
+      }
+    },
+    "walkthrough": {
+      "stepTitle": {
+        // -color--gray-white [overrides core #ffffff] | example: clicking on a title on the welcome page takes you to the walkthrough page.
+        "foreground": {
+          "color": "palette.gray.000"
+        }
+      }
+    },
+    "welcomePage": {
+      "progress": {
+        // [overrides `input.background`] | example: inactive part of progress bar
+        "background": {
+          "color": "palette.gray.825"
+        },
+        // palette.green.400 [overrides `textLink.foreground`]
+        "foreground": {
+          "color": "palette.green.400"
+        }
+      }
+    },
+    "widget": {
+      // -color--white at 5% opacity [base]
+      "border": {
+        "color": "palette.gray.white",
+        "alpha": 0.050980392156862744
+      },
+      // -color--black at 20% opacity | non-editor widgets [overrides core black at opacity]
+      "shadow": {
+        "color": "palette.gray.black",
+        "alpha": 0.2
+      }
+    }
+  },
+  "semantic": {
+    // palette.cyan.400
+    "class": {
+      "color": "syntax.function"
+    },
+    // palette.cyan.400
+    "function": {
+      "color": "syntax.function"
+    },
+    // -color--gray-white
+    "function.defaultLibrary": {
+      "color": "syntax.support"
+    },
+    // -color--gray-white
+    "method": {
+      "color": "syntax.support"
+    },
+    // palette.purple.400
+    "namespace": {
+      "color": "syntax.constant"
+    },
+    // palette.orange.400
+    "parameter": {
+      "color": "syntax.parameter"
+    },
+    // palette.green.400
+    "property": {
+      "color": "syntax.property"
+    },
+    // palette.pink.400
+    "variable": {
+      "color": "syntax.variable"
+    },
+    // -color--gray-white-light-2
+    "variable.defaultLibrary": {
+      "color": "syntax.defaultLibrary"
+    }
+  },
+  "syntax": {
+    "support": {
+      "color": "palette.gray.000"
+    },
+    "defaultLibrary": {
+      "color": "palette.gray.150"
+    },
+    "text": {
+      "color": "palette.gray.200"
+    },
+    "punctuation": {
+      "color": "palette.gray.400"
+    },
+    "comment": {
+      "color": "palette.gray.500"
+    },
+    "invalid": {
+      "color": "palette.gray.600"
+    },
+    // palette.blue.400
+    "storageType": {
+      "color": "palette.blue.400"
+    },
+    "typeHint": {
+      "color": "palette.blue.400-muted"
+    },
+    "linkStrikethrough": {
+      "color": "palette.blue.400",
+      "alpha": 0.5019607843137255
+    },
+    "function": {
+      "color": "palette.cyan.400"
+    },
+    "property": {
+      "color": "palette.green.400"
+    },
+    "parameter": {
+      "color": "palette.orange.400"
+    },
+    "variable": {
+      "color": "palette.pink.400"
+    },
+    "constant": {
+      "color": "palette.purple.400"
+    },
+    "attributeNamespace": {
+      "color": "palette.purple.500"
+    },
+    "keyword": {
+      "color": "palette.red.400"
+    },
+    "string": {
+      "color": "palette.yellow.400"
+    },
+    "code": {
+      "color": "palette.yellow.500"
+    }
+  },
+  "surface": {
+    "editor": {
+      "color": "palette.gray.900"
+    }
+  },
+  "text": {
+    "default": {
+      "color": "palette.gray.200"
+    }
+  },
+  "diagnostic": {
+    "error": {
+      "foreground": {
+        "color": "palette.red.500"
+      }
+    },
+    "warning": {
+      "foreground": {
+        "color": "palette.orange.400"
+      }
+    }
+  },
+  "diff": {
+    "added": {
+      "foreground": {
+        "color": "palette.green.400"
+      }
+    },
+    "removed": {
+      "foreground": {
+        "color": "palette.red.400"
+      }
+    }
   }
 }

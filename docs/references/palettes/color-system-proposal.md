@@ -247,19 +247,33 @@ An excerpt from `src/palette.jsonc` could look like this. Each family generates 
 
 Internally, this produces primitive IDs such as `palette.cyan.400` and `palette.gray.900`. The complete configuration would include every neutral required by the theme. Allow primitive overrides with either explicit OKLCH coordinates or an exact sRGB hex, plus a required reason. Exact hex overrides support a migration that preserves the released colors; OKLCH overrides still pass through the export policy.
 
-Use a flat map of semantic IDs in `src/tokens.jsonc`. Dots are part of each ID, and references are looked up by their complete name:
+Group semantic IDs by role in `src/tokens.jsonc`. Each leaf has a `color` reference or a documented hex literal. Place color notes above the property they describe. Nested paths resolve to dotted IDs such as `diff.added.foreground`; dotted semantic selectors such as `function.defaultLibrary` stay together as keys under `semantic` so they can coexist with the base `function` token:
 
 ```jsonc
 {
-  "surface.editor": { "ref": "palette.gray.900" },
-  "text.default": { "ref": "palette.gray.200" },
-  "syntax.typeHint": { "ref": "palette.blue.400-muted" },
-  "syntax.function": { "ref": "palette.cyan.400" },
-  "syntax.property": { "ref": "palette.green.400" },
-  "diff.added.foreground": { "ref": "palette.green.400" },
-  "diff.added.background": { "ref": "diff.added.foreground", "alpha": 0.1 },
+  "ui": {
+    "activityBar": {
+      // Background when the activity bar is focused.
+      "activeBackground": { "color": "palette.gray.875" },
+    },
+  },
+  "syntax": {
+    "function": { "color": "palette.cyan.400" },
+  },
+  "semantic": {
+    "function": { "color": "syntax.function" },
+    "function.defaultLibrary": { "color": "palette.gray.000" },
+  },
+  "diff": {
+    "added": {
+      "foreground": { "color": "palette.green.400" },
+      "background": { "color": "diff.added.foreground", "alpha": 0.1 },
+    },
+  },
 }
 ```
+
+Include `alpha` only when it differs from 1. Omit it for ordinary opaque colors; without an `alpha` field, an alias keeps the referenced color's opacity.
 
 Define `alpha` as an absolute opacity in the range 0–1, applied after resolving the referenced color. Emit lowercase `#rrggbb` for opaque colors and `#rrggbbaa` otherwise, with the alpha byte rounded from `255 × alpha`. For example, 0.1 produces `1a`. A new alpha replaces an inherited alpha; it does not multiply it. Preserve RGB channels without flattening the overlay onto a background.
 
@@ -335,7 +349,7 @@ After that migration passes, apply the proposed OKLCH palette as a separate revi
 
 Before adopting the builder, add focused tests for alias chains and cycles, missing references, alpha rounding and replacement, duplicate-key errors, invalid parameters, known OKLCH/sRGB conversions, and out-of-gamut chroma reduction. Cover omitted versus explicit `baseChroma` (including zero), the nonnegative target floor, yellow's selected base and derived tones, and halving resolved chroma for `400-muted`. Integration checks should cover all supported color positions, preservation of scope order and comments, deterministic output, read-only stale-output detection, and leaving the previous file intact after a failed build. The existing theme validator currently checks basic structure and asset paths; it does not replace these build-specific checks.
 
-These cases are covered in `tests/build.test.js`. Literal semantic exceptions may use `{ "hex": "#rrggbb", "reason": "..." }` instead of `ref`, with optional `alpha`; this keeps component adjustments separate from palette primitives. The builder also accepts three- and four-digit sRGB hex literals to preserve existing theme values during migration.
+These cases are covered in `tests/build.test.js`. Literal semantic exceptions use `{ "color": "#rrggbb", "reason": "..." }`, with optional `alpha` below 1; this keeps component adjustments separate from palette primitives. The builder also accepts three- and four-digit sRGB hex literals to preserve existing theme values during migration.
 
 ## Adoption sequence
 

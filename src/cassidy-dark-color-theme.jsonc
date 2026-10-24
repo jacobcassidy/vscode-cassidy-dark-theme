@@ -4,278 +4,278 @@
   "type": "dark",
   "author": "Jacob Cassidy",
   "colors": {
-    "activityBar.activeBackground": "{ui.activityBar.activeBackground}", // [base] (match `sideBar.background`)
-    "activityBar.background": "{ui.activityBar.background}", // -color--oklch-32-gray [overrides core #3333333] (match sidebar header)
-    "activityBar.dropBorder": "{ui.activityBar.dropBorder}", // -color--white at 50% opacity [overrides `activityBar.foreground`]
-    "activityBar.foreground": "{ui.activityBar.foreground}", // palette.yellow.400 [overrides core #ffffff]
-    "activityBar.inactiveForeground": "{ui.activityBar.inactiveForeground}", // -color--gray-medium-dark [overrides core #858585] (match comment)
-    "activityBarBadge.background": "{ui.activityBarBadge.background}", // palette.yellow.400 [overrides core #007acc] (match comments)
-    "activityBarBadge.foreground": "{ui.activityBarBadge.foreground}", // -color--gray-black [overrides core #ffffff]
-    "badge.background": "{ui.badge.background}", // -color--gray-dark-fade [overrides core #4d4d4d] | example: problems panel in title
-    "badge.foreground": "{ui.badge.foreground}", // -color--gray-white [overrides core #ffffff]
-    "button.background": "{ui.button.background}", // Semantic fill at L53; see the documented token exception
-    "button.foreground": "{ui.button.foreground}", // -color--gray-white [overrides core #ffffff]
-    "button.hoverBackground": "{ui.button.hoverBackground}", // palette.blue.600 at L55; lighter than the semantic button fill
-    "button.secondaryBackground": "{ui.button.secondaryBackground}", // -color--gray-dark-fade [overrides core #3a3d41] | example: circle 'back to top' button on an extension page
-    "button.secondaryForeground": "{ui.button.secondaryForeground}", // -color--gray-white [overrides core #ffffff at opacity]
-    "button.secondaryHoverBackground": "{ui.button.secondaryHoverBackground}", // -color--oklch-gray-46 [overrides core #5c5c5c] (4 shades lighter than `button.secondaryBackground`)
-    "charts.green": "{ui.charts.green}", // palette.green.400 [overrides core green #89d185] | example: Incoming/Outgoing branch dot in source control sidebar
-    "charts.orange": "{ui.charts.orange}", // palette.orange.400 [overrides `minimap.findMatchHighlight`] | example: Incoming/Outgoing second dot in source control sidebar
-    "charts.purple": "{ui.charts.purple}", // palette.purple.400 [overrides core #b180d7] | example: Incoming/Outgoing second dot in source control sidebar
-    "debugIcon.pauseForeground": "{ui.debugIcon.pauseForeground}", // palette.blue.400 [overrides core #75beff]
-    "debugIcon.restartForeground": "{ui.debugIcon.restartForeground}", // palette.green.400 [overrides core #89d185]
-    "debugIcon.startForeground": "{ui.debugIcon.startForeground}", // palette.green.400[overrides core #89d185]
-    "debugIcon.stopForeground": "{ui.debugIcon.stopForeground}", // palette.red.400 [overrides core #f48771]
-    "debugToolBar.background": "{ui.debugToolBar.background}", // -color--gray-fade [overrides core #333333]
-    "diffEditor.diagonalFill": "{ui.diffEditor.diagonalFill}", // -color--gray-dark-fade [overrides core #464646]
-    "diffEditor.insertedLineBackground": "{ui.diffEditor.insertedLineBackground}", // palette.green.400 at 10% opacity [overrides core green opacity]
-    "diffEditor.insertedTextBackground": "{ui.diffEditor.insertedTextBackground}", // palette.green.400 at 20% opacity [overrides core green opacity]
-    "diffEditor.removedLineBackground": "{ui.diffEditor.removedLineBackground}", // palette.red.400 at 10% opacity [overrides core red opacity]
-    "diffEditor.removedTextBackground": "{ui.diffEditor.removedTextBackground}", // palette.red.400 at 20% opacity [overrides core red opacity]
-    "diffEditor.unchangedCodeBackground": "{ui.diffEditor.unchangedCodeBackground}", // palette.blue.400 at 5% opacity [overrides core black with opacity] | example: previewing a file that is in the Incoming/Outgoing list in the source control sidebar
-    "diffEditor.unchangedRegionBackground": "{ui.diffEditor.unchangedRegionBackground}", // palette.blue.400 at 5% opacity [overrides `sideBar.background`] | example: previewing a file that is in the Incoming/Outgoing list in the source control sidebar
-    "diffEditor.unchangedRegionForeground": "{ui.diffEditor.unchangedRegionForeground}", // -color--gray-medium [overrides `foreground`] (match `icon.foreground`) | example: previewing a file that is in the Incoming/Outgoing list in the source control sidebar
-    "diffEditor.unchangedRegionShadow": "{ui.diffEditor.unchangedRegionShadow}", // -color--black at 20% opacity [overrides core black with opacity] (match `widget.shadow`) | example: previewing a file that is in the Incoming/Outgoing list in the source control sidebar
-    "diffEditorGutter.insertedLineBackground": "{ui.diffEditorGutter.insertedLineBackground}", // palette.green.400 at 10% opacity [base]
-    "diffEditorGutter.removedLineBackground": "{ui.diffEditorGutter.removedLineBackground}", // palette.red.400 at 10% opacity [base]
-    "disabledForeground": "{ui.disabledForeground}", // -color--white at 20% opacity [overrides core white at opacity]
-    "dropdown.background": "{ui.dropdown.background}", // -color--gray-fade [overrides core #3c3c3c] (match `input.background`) | example: output panel tasks selection
-    "dropdown.border": "{ui.dropdown.border}", // -color--gray-dark-fade [base] (match `input.border`)
-    "dropdown.foreground": "{ui.dropdown.foreground}", // -color--gray-white [overrides core #efefef] (match `foreground`)
-    "dropdown.listBackground": "{ui.dropdown.listBackground}", // -color--oklch-32-gray (2 shades darker than dropdown.background) [overrides `dropdown.background`] | example: settings UI page dropdowns
-    "editor.background": "{ui.editor.background}", // -color--gray-fade-black [overrides core #1e1e1e]
-    "editor.findMatchBackground": "{ui.editor.findMatchBackground}", // palette.purple.600 at 90% opacity [overrides dimmed core blue #515c6a] | example: active search match
-    "editor.findMatchForeground": "{ui.editor.findMatchForeground}", // palette.purple.500 at 90% opacity | example: inactive search match
-    "editor.findMatchHighlightBackground": "{ui.editor.findMatchHighlightBackground}", // palette.purple.600 at 45% opacity [overrides core orange at opacity #653618] | example: inactive search match
-    "editor.findMatchHighlightForeground": "{ui.editor.findMatchHighlightForeground}", // -color--white at 90% opacity [overrides `editor.findMatchForeground`] | example: active search match
-    "editor.findRangeHighlightBackground": "{ui.editor.findRangeHighlightBackground}", // -color--white at 10% opacity [overrides core dimmed gray #2d2e30] | example: background when using finder widget with selection search only
-    "editor.foldBackground": "{ui.editor.foldBackground}", // palette.blue.400 at 15% opacity [overrides dimmed `editor.selectionBackground`]
-    "editor.foldPlaceholderForeground": "{ui.editor.foldPlaceholderForeground}", // -color--gray-medium [overrides core #808080] | example: dots at end of line that has been folded // wait to see if the core is set by any other settings first
-    "editor.foreground": "{ui.editor.foreground}", // -color--gray-light [overrides core #bbbbbb] (match `foreground`) | example: extension page text, empty editor text
-    "editor.hoverHighlightBackground": "{ui.editor.hoverHighlightBackground}", // -color--white at 10% opacity [overrides core #252f39] | example: hover over a word in json object
-    "editor.lineHighlightBackground": "{ui.editor.lineHighlightBackground}", // -color--oklch-20-gray [base] (6 shades darker than editor bg)
-    "editor.lineHighlightBorder": "{ui.editor.lineHighlightBorder}", // -color--oklch-20-gray [overrides core #282828] (match editor.lineHighlightBackground)
-    "editor.rangeHighlightBackground": "{ui.editor.rangeHighlightBackground}", // -color--white at 10% opacity [overrides dimmed `editor.findRangeHighlightBackground`] (match `editor.findRangeHighlightBackground`) | example: current search match line
-    "editor.selectionBackground": "{ui.editor.selectionBackground}", // palette.blue.600 at 50% opacity [overrides core blue opacity #264f78]
-    "editor.wordHighlightBackground": "{ui.editor.wordHighlightBackground}", // -gray-medium-dark at 50% opacity [overrides core #483f4d] | example: click in word and all the matches are colored
-    "editor.wordHighlightStrongBackground": "{ui.editor.wordHighlightStrongBackground}", // palette.pink.400 at 40% opacity [overrides core #063b58] | example: click on a class in a css file (Note: minimap uses `minimap.selectionOccurrenceHighlight` which is a different color)
-    "editorBracketMatch.border": "{ui.editorBracketMatch.border}", // -color--gray-dark [overrides core #888888]
-    "editorCodeLens.foreground": "{ui.editorCodeLens.foreground}", // palette.yellow.500 [overrides core #929292] | example: debug arrow and text in editor
-    "editorCursor.background": "{ui.editorCursor.background}", // -color--gray-fade [overrides core #555456] | example: text inside cursor block
-    "editorCursor.foreground": "{ui.editorCursor.foreground}", // --color--gray-medium [overrides core #aeafad] | example: cursor block and current line highlight in overviewRuler
-    "editorError.foreground": "{ui.editorError.foreground}", // palette.red.500 [overrides core red #ee4f47] | examples: squiggly underlines and panel error icon
-    "editorGhostText.foreground": "{ui.editorGhostText.foreground}", // palette.blue.500 | example: includes sidebar source control input placeholder text
-    "editorGroup.border": "{ui.editorGroup.border}", // -color--black at 50% opacity [overrides core #444444] | example: split editor border
-    "editorGroup.dropBackground": "{ui.editorGroup.dropBackground}", // -color--gray-medium at 50% opacity [overrides core gray at opacity]
-    "editorGroupHeader.tabsBackground": "{ui.editorGroupHeader.tabsBackground}", // -color--oklch-30-gray (2 shades lighter than sidebar bg) [overrides core #252526]
-    "editorGutter.addedBackground": "{ui.editorGutter.addedBackground}", // palette.green.400 at 75% opacity [overrides core green #487e02] | example: scrollbar and number line bar diff
-    "editorGutter.commentRangeForeground": "{ui.editorGutter.commentRangeForeground}", // -color--gray-fade [overrides`list.inactiveSelectionBackground`] | example: next and plus buttons for git changes... foreground is controlled by `icon.foreground`
-    "editorGutter.deletedBackground": "{ui.editorGutter.deletedBackground}", // palette.red.400 at 75% opacity [overrides core #f85149] | includes overviewRuler
-    "editorGutter.modifiedBackground": "{ui.editorGutter.modifiedBackground}", // palette.yellow.400 at 75% opacity [overrides core #1b81a8]
-    "editorHint.foreground": "{ui.editorHint.foreground}", // palette.blue.400 [overrides core #949494] | example: 3 dots underline
-    "editorIndentGuide.activeBackground1": "{ui.editorIndentGuide.activeBackground1}", // -color--gray-dark-fade [overrides `editorWhitespace.foreground`]
-    "editorInfo.foreground": "{ui.editorInfo.foreground}", // palette.blue.400 [overrides core #3275c3] | example: info squiggly underlines and panel info icon
-    "editorLightBulb.foreground": "{ui.editorLightBulb.foreground}", // palette.yellow.500 [overrides core #ffcc00]
-    "editorLightBulbAi.foreground": "{ui.editorLightBulbAi.foreground}", // palette.yellow.500 [overrides core #ffcc00] | example: double star icon
-    "editorLightBulbAutoFix.foreground": "{ui.editorLightBulbAutoFix.foreground}", // palette.blue.400 [overrides core #75beff] | example: quick fix icon when clicking in a misspelled JS variable declaration
-    "editorLineNumber.activeForeground": "{ui.editorLineNumber.activeForeground}", // -color--gray-light [override core gray #c6c6c6]
-    "editorLineNumber.foreground": "{ui.editorLineNumber.foreground}", // -color--gray-dark [override core #858585]
-    "editorLink.activeForeground": "{ui.editorLink.activeForeground}", // palette.yellow.400 [overrides core #4e94ce] | example: activating link in comments
-    "editorOverviewRuler.addedForeground": "{ui.editorOverviewRuler.addedForeground}", // [overrides dimmed `editorGutter.addedBackground`]
-    "editorOverviewRuler.background": "{ui.editorOverviewRuler.background}", // -color--black at 10% opacity [overrides `editor.background`]
-    "editorOverviewRuler.border": "{ui.editorOverviewRuler.border}", // -color--black at 10% opacity [overrides core #323232] (match `editorOverviewRuler.background`)
-    "editorOverviewRuler.bracketMatchForeground": "{ui.editorOverviewRuler.bracketMatchForeground}", // -color--gray-dark at 75% opacity [overrides core #a0a0a0] (match `editorBracketMatch.border` with opacity)
-    "editorOverviewRuler.deletedForeground": "{ui.editorOverviewRuler.deletedForeground}", // palette.red.400 at 75% opacity [overrides dimmed `editorGutter.deletedBackground`]
-    "editorOverviewRuler.errorForeground": "{ui.editorOverviewRuler.errorForeground}", // palette.red.500 at 75% opacity [overrides core #bd1717]
-    "editorOverviewRuler.findMatchForeground": "{ui.editorOverviewRuler.findMatchForeground}", // palette.purple.600 at 75% opacity [overrides core dimmed orange #77531c]
-    "editorOverviewRuler.infoForeground": "{ui.editorOverviewRuler.infoForeground}", // palette.blue.400 at 75% opacity [overrides `editorInfo.foreground`]
-    "editorOverviewRuler.modifiedForeground": "{ui.editorOverviewRuler.modifiedForeground}", // palette.yellow.400 at 75% opacity [overrides dimmed `editorGutter.modifiedBackground`]
-    "editorOverviewRuler.selectionHighlightForeground": "{ui.editorOverviewRuler.selectionHighlightForeground}", // -color--gray-medium-dark at 75% of 50% opacity = 37.5% (round to 38% opacity) [overrides core #86808a] | example: click in word and all the matches are colored (match `editor.wordHighlightBackground`)
-    "editorOverviewRuler.warningForeground": "{ui.editorOverviewRuler.warningForeground}", // palette.orange.400 at 75% opacity [overrides `editorWarning.foreground`]
-    "editorOverviewRuler.wordHighlightForeground": "{ui.editorOverviewRuler.wordHighlightForeground}", // -color--gray-medium-dark at 75% of 50% opacity = 37.5% (round to 38% opacity) [overrides core #868686] (match `editorOverviewRuler.selectionHighlightForeground`) | example: click on a recurring property in a css file
-    "editorOverviewRuler.wordHighlightStrongForeground": "{ui.editorOverviewRuler.wordHighlightStrongForeground}", // palette.pink.400 at 75% opacity[overrides core purple at opacity #a086a0] (match `editor.wordHighlightStrongBackground`) | example: click on a class in a css file... any defining element such as a JS function or variable definition
-    "editorRuler.foreground": "{ui.editorRuler.foreground}", // palette.orange.400 at 10% opacity [overrides core #5a5a5a] | example: char width guideline
-    "editorStickyScroll.background": "{ui.editorStickyScroll.background}", // [overrides 'editor.background'] (2 shades lighter than 'editor.background')
-    "editorStickyScrollHover.background": "{ui.editorStickyScrollHover.background}", // [overrides core #2a2d2e] (match `editor.lineHighlightBackground`)
-    "editorUnicodeHighlight.background": "{ui.editorUnicodeHighlight.background}", // palette.orange.400 at 25% opacity [base]
-    "editorUnicodeHighlight.border": "{ui.editorUnicodeHighlight.border}", // palette.orange.400 at 50% opacity [overrides `editorWarning.foreground`]
+    "activityBar.activeBackground": "{ui.activityBar.activeBackground}",
+    "activityBar.background": "{ui.activityBar.background}",
+    "activityBar.dropBorder": "{ui.activityBar.dropBorder}",
+    "activityBar.foreground": "{ui.activityBar.foreground}",
+    "activityBar.inactiveForeground": "{ui.activityBar.inactiveForeground}",
+    "activityBarBadge.background": "{ui.activityBarBadge.background}",
+    "activityBarBadge.foreground": "{ui.activityBarBadge.foreground}",
+    "badge.background": "{ui.badge.background}",
+    "badge.foreground": "{ui.badge.foreground}",
+    "button.background": "{ui.button.background}",
+    "button.foreground": "{ui.button.foreground}",
+    "button.hoverBackground": "{ui.button.hoverBackground}",
+    "button.secondaryBackground": "{ui.button.secondaryBackground}",
+    "button.secondaryForeground": "{ui.button.secondaryForeground}",
+    "button.secondaryHoverBackground": "{ui.button.secondaryHoverBackground}",
+    "charts.green": "{ui.charts.green}",
+    "charts.orange": "{ui.charts.orange}",
+    "charts.purple": "{ui.charts.purple}",
+    "debugIcon.pauseForeground": "{ui.debugIcon.pauseForeground}",
+    "debugIcon.restartForeground": "{ui.debugIcon.restartForeground}",
+    "debugIcon.startForeground": "{ui.debugIcon.startForeground}",
+    "debugIcon.stopForeground": "{ui.debugIcon.stopForeground}",
+    "debugToolBar.background": "{ui.debugToolBar.background}",
+    "diffEditor.diagonalFill": "{ui.diffEditor.diagonalFill}",
+    "diffEditor.insertedLineBackground": "{ui.diffEditor.insertedLineBackground}",
+    "diffEditor.insertedTextBackground": "{ui.diffEditor.insertedTextBackground}",
+    "diffEditor.removedLineBackground": "{ui.diffEditor.removedLineBackground}",
+    "diffEditor.removedTextBackground": "{ui.diffEditor.removedTextBackground}",
+    "diffEditor.unchangedCodeBackground": "{ui.diffEditor.unchangedCodeBackground}",
+    "diffEditor.unchangedRegionBackground": "{ui.diffEditor.unchangedRegionBackground}",
+    "diffEditor.unchangedRegionForeground": "{ui.diffEditor.unchangedRegionForeground}",
+    "diffEditor.unchangedRegionShadow": "{ui.diffEditor.unchangedRegionShadow}",
+    "diffEditorGutter.insertedLineBackground": "{ui.diffEditorGutter.insertedLineBackground}",
+    "diffEditorGutter.removedLineBackground": "{ui.diffEditorGutter.removedLineBackground}",
+    "disabledForeground": "{ui.disabledForeground}",
+    "dropdown.background": "{ui.dropdown.background}",
+    "dropdown.border": "{ui.dropdown.border}",
+    "dropdown.foreground": "{ui.dropdown.foreground}",
+    "dropdown.listBackground": "{ui.dropdown.listBackground}",
+    "editor.background": "{ui.editor.background}",
+    "editor.findMatchBackground": "{ui.editor.findMatchBackground}",
+    "editor.findMatchForeground": "{ui.editor.findMatchForeground}",
+    "editor.findMatchHighlightBackground": "{ui.editor.findMatchHighlightBackground}",
+    "editor.findMatchHighlightForeground": "{ui.editor.findMatchHighlightForeground}",
+    "editor.findRangeHighlightBackground": "{ui.editor.findRangeHighlightBackground}",
+    "editor.foldBackground": "{ui.editor.foldBackground}",
+    "editor.foldPlaceholderForeground": "{ui.editor.foldPlaceholderForeground}",
+    "editor.foreground": "{ui.editor.foreground}",
+    "editor.hoverHighlightBackground": "{ui.editor.hoverHighlightBackground}",
+    "editor.lineHighlightBackground": "{ui.editor.lineHighlightBackground}",
+    "editor.lineHighlightBorder": "{ui.editor.lineHighlightBorder}",
+    "editor.rangeHighlightBackground": "{ui.editor.rangeHighlightBackground}",
+    "editor.selectionBackground": "{ui.editor.selectionBackground}",
+    "editor.wordHighlightBackground": "{ui.editor.wordHighlightBackground}",
+    "editor.wordHighlightStrongBackground": "{ui.editor.wordHighlightStrongBackground}",
+    "editorBracketMatch.border": "{ui.editorBracketMatch.border}",
+    "editorCodeLens.foreground": "{ui.editorCodeLens.foreground}",
+    "editorCursor.background": "{ui.editorCursor.background}",
+    "editorCursor.foreground": "{ui.editorCursor.foreground}",
+    "editorError.foreground": "{ui.editorError.foreground}",
+    "editorGhostText.foreground": "{ui.editorGhostText.foreground}",
+    "editorGroup.border": "{ui.editorGroup.border}",
+    "editorGroup.dropBackground": "{ui.editorGroup.dropBackground}",
+    "editorGroupHeader.tabsBackground": "{ui.editorGroupHeader.tabsBackground}",
+    "editorGutter.addedBackground": "{ui.editorGutter.addedBackground}",
+    "editorGutter.commentRangeForeground": "{ui.editorGutter.commentRangeForeground}",
+    "editorGutter.deletedBackground": "{ui.editorGutter.deletedBackground}",
+    "editorGutter.modifiedBackground": "{ui.editorGutter.modifiedBackground}",
+    "editorHint.foreground": "{ui.editorHint.foreground}",
+    "editorIndentGuide.activeBackground1": "{ui.editorIndentGuide.activeBackground1}",
+    "editorInfo.foreground": "{ui.editorInfo.foreground}",
+    "editorLightBulb.foreground": "{ui.editorLightBulb.foreground}",
+    "editorLightBulbAi.foreground": "{ui.editorLightBulbAi.foreground}",
+    "editorLightBulbAutoFix.foreground": "{ui.editorLightBulbAutoFix.foreground}",
+    "editorLineNumber.activeForeground": "{ui.editorLineNumber.activeForeground}",
+    "editorLineNumber.foreground": "{ui.editorLineNumber.foreground}",
+    "editorLink.activeForeground": "{ui.editorLink.activeForeground}",
+    "editorOverviewRuler.addedForeground": "{ui.editorOverviewRuler.addedForeground}",
+    "editorOverviewRuler.background": "{ui.editorOverviewRuler.background}",
+    "editorOverviewRuler.border": "{ui.editorOverviewRuler.border}",
+    "editorOverviewRuler.bracketMatchForeground": "{ui.editorOverviewRuler.bracketMatchForeground}",
+    "editorOverviewRuler.deletedForeground": "{ui.editorOverviewRuler.deletedForeground}",
+    "editorOverviewRuler.errorForeground": "{ui.editorOverviewRuler.errorForeground}",
+    "editorOverviewRuler.findMatchForeground": "{ui.editorOverviewRuler.findMatchForeground}",
+    "editorOverviewRuler.infoForeground": "{ui.editorOverviewRuler.infoForeground}",
+    "editorOverviewRuler.modifiedForeground": "{ui.editorOverviewRuler.modifiedForeground}",
+    "editorOverviewRuler.selectionHighlightForeground": "{ui.editorOverviewRuler.selectionHighlightForeground}",
+    "editorOverviewRuler.warningForeground": "{ui.editorOverviewRuler.warningForeground}",
+    "editorOverviewRuler.wordHighlightForeground": "{ui.editorOverviewRuler.wordHighlightForeground}",
+    "editorOverviewRuler.wordHighlightStrongForeground": "{ui.editorOverviewRuler.wordHighlightStrongForeground}",
+    "editorRuler.foreground": "{ui.editorRuler.foreground}",
+    "editorStickyScroll.background": "{ui.editorStickyScroll.background}",
+    "editorStickyScrollHover.background": "{ui.editorStickyScrollHover.background}",
+    "editorUnicodeHighlight.background": "{ui.editorUnicodeHighlight.background}",
+    "editorUnicodeHighlight.border": "{ui.editorUnicodeHighlight.border}",
     "editorUnnecessaryCode.opacity": "#0009", // -color--black at 60% opacity [overrides core black opacity]
-    "editorWarning.foreground": "{ui.editorWarning.foreground}", // palette.orange.400 [overrides core yellow #cca700] | example: warning squiggly underlines and panel warning icon
-    "editorWhitespace.foreground": "{ui.editorWhitespace.foreground}", // -color--gray-fade [overrides core #424342]
-    "editorWidget.background": "{ui.editorWidget.background}", // -color--oklch-32-gray [overrides core #252526] | example: finder widget or hover popup info
-    "editorWidget.border": "{ui.editorWidget.border}", // -color--white at 10% opacity [overrides core #454545] | example: editor hover word popup widget
-    "errorForeground": "{ui.errorForeground}", // palette.red.500 [overrides core #ee4f47] | example: no results found in editor finder widget
-    "extensionIcon.preReleaseForeground": "{ui.extensionIcon.preReleaseForeground}", // palette.green.600 at 90% opacity [override core #1d9271] | example: GitLens extension in sidebar list
-    "extensionIcon.sponsorForeground": "{ui.extensionIcon.sponsorForeground}", // palette.pink.600 at 90% opacity [overrides core #d758b3] | example: heart icon on Code Spell Checker extension page
-    "extensionIcon.starForeground": "{ui.extensionIcon.starForeground}", // palette.orange.500 at 90% opacity [overrides core #ff8e00] | example: extension star ratings
-    "focusBorder": "{ui.focusBorder}", // palette.blue.500 at 80% opacity [overrides core #0078d4] | example: active sidebar list item, active input border, active panel border
-    "foreground": "{ui.foreground}", // -color--gray-light [overrides core #cccccc] | examples: breadcrumbs, explorer sidebar, extension titles
-    "gitDecoration.addedResourceForeground": "{ui.gitDecoration.addedResourceForeground}", // palette.green.500 [overrides core green #72c890] | example: filename in tabs and sidebar for staged/committed file
-    "gitDecoration.deletedResourceForeground": "{ui.gitDecoration.deletedResourceForeground}", // palette.red.500 [overrides core red] | example: hover over source control sidebar incoming/outgoing list item that has a commit deletion or filename in tabs and sidebar for staged/committed file
-    "gitDecoration.ignoredResourceForeground": "{ui.gitDecoration.ignoredResourceForeground}", // -color--oklch-gray-62 [overrides core #828282] | example: filename in tabs and sidebar
-    "gitDecoration.modifiedResourceForeground": "{ui.gitDecoration.modifiedResourceForeground}", // palette.yellow.400 [overrides core #e2c08d] | example: filename in tabs and sidebar of non-staged file
-    "gitDecoration.stageModifiedResourceForeground": "{ui.gitDecoration.stageModifiedResourceForeground}", // palette.yellow.500 [overrides core yellow #e2c08d] | example: filename in tabs and sidebar for staged file
-    "gitDecoration.untrackedResourceForeground": "{ui.gitDecoration.untrackedResourceForeground}", // palette.green.400 [overrides core #508d65] | example: filename in tabs and sidebar of non-staged file
-    "icon.foreground": "{ui.icon.foreground}", // -color--gray-medium [overrides core #cccccc] | example: most UI icons in widgets (not selection button) (includes sidebar folder arrows)
-    "input.background": "{ui.input.background}", // -color--gray-fade [overrides core #3c3c3c]
-    "input.border": "{ui.input.border}", // -color--gray-dark-fade [base] | example: input and debug console border
-    "input.foreground": "{ui.input.foreground}", // -color--gray-white [overrides `foreground`]
-    "input.placeholderForeground": "{ui.input.placeholderForeground}", // -color--gray-medium-dark [overrides dimmed `foreground`] (match comments color)
-    "inputOption.activeBackground": "{ui.inputOption.activeBackground}", // palette.yellow.400 at 25% opacity [overrides core orange at opacity #85551f] | example: editor finder widget selection only button
-    "inputOption.activeBorder": "{ui.inputOption.activeBorder}", // palette.yellow.400 at 25% opacity [core overrides #007acc] | example: editor finder widget selection only button
-    "inputOption.activeForeground": "{ui.inputOption.activeForeground}", // palette.yellow.400 [overrides core #ffffff] | example: editor finder widget selection only button
-    "inputOption.hoverBackground": "{ui.inputOption.hoverBackground}", // palette.yellow.400 at 25% opacity [overrides core white at opacity] | example: sidebar global search exclude button
-    "keybindingLabel.background": "{ui.keybindingLabel.background}", // -color--gray-dark-fade [overrides core #343434]
-    "keybindingLabel.border": "{ui.keybindingLabel.border}", // [overrides core #3d3d3d] (2 shades lighter than `keybindingLabel.background`)
-    "keybindingLabel.bottomBorder": "{ui.keybindingLabel.bottomBorder}", // [overrides core #484848] (2 shades lighter than `keybindingLabel.border`)
-    "keybindingLabel.foreground": "{ui.keybindingLabel.foreground}", // -color--gray-light [overrides core #c8c8c8]
-    "keybindingTable.headerBackground": "{ui.keybindingTable.headerBackground}", // -color--gray-fade [overrides `tree.tableOddRowsBackground`]
-    "list.activeSelectionBackground": "{ui.list.activeSelectionBackground}", // -color--white at 20% opacity [overrides core #04395e] | example: commandCenter dropdown selection line
-    "list.activeSelectionForeground": "{ui.list.activeSelectionForeground}", // -color--gray-white [overrides core #ffffff] | example: sidebar active item when moving with keyboard
-    "list.activeSelectionIconForeground": "{ui.list.activeSelectionIconForeground}", // -color--gray-white [overrides core #ffffff at opacity]
-    "list.dropBackground": "{ui.list.dropBackground}", // -color--gray-medium at 25% opacity [overrides core blue at opacity] | example: drag and hover a folder in the explorer into another folder
-    "list.errorForeground": "{ui.list.errorForeground}", // palette.red.500 [overrides core #f88070] | example: editor tab title and sidebar filename
-    "list.focusAndSelectionOutline": "{ui.list.focusAndSelectionOutline}", // -color--white at 20% opacity [overrides `focusBorder`] (match `list.activeSelectionBackground`) | example: item clicked on in the explorer sidebar
-    "list.highlightForeground": "{ui.list.highlightForeground}", // palette.blue.400 [overrides core #2aaaff] | example: editorSuggestionWidget typed char in all lines not overridden
-    "list.hoverBackground": "{ui.list.hoverBackground}", // -color--white at 10% opacity [overrides core #2a2d2e]
-    "list.hoverForeground": "{ui.list.hoverForeground}", // -color--gray-white [overrides `sideBar.foreground` || `quickInput.foreground`] | example: extensions sidebar list
-    "list.inactiveSelectionBackground": "{ui.list.inactiveSelectionBackground}", // -color--white at 5% opacity [overrides core #37373d]
-    "list.warningForeground": "{ui.list.warningForeground}", // palette.orange.400 [overrides core #cca700] | example: includes tab foreground
-    "minimap.errorHighlight": "{ui.minimap.errorHighlight}", // palette.red.500 at 75% opacity [overrides core red #dc1d1d]
-    "minimap.findMatchHighlight": "{ui.minimap.findMatchHighlight}", // palette.purple.600 at 75% opacity [overrides core orange #d18616] | example: editor search widget matches
-    "minimap.foregroundOpacity": "{ui.minimap.foregroundOpacity}", // 50% opacity [base]
-    "minimap.infoHighlight": "{ui.minimap.infoHighlight}", // palette.blue.600 at 75% opacity [overrides `editorInfo.foreground`]
-    "minimap.selectionHighlight": "{ui.minimap.selectionHighlight}", // palette.blue.600 at 75% of 50% opacity = 37.5% (round to 38% opacity) [overrides core blue opacity #264f78] (match `editor.selectionBackground`)
-    "minimap.selectionOccurrenceHighlight": "{ui.minimap.selectionOccurrenceHighlight}", // -color--gray-medium-dark at 75% of 50% opacity = 37.5% (round to 38% opacity) [overrides core #676767] | example: click in word and all the matches are colored
-    "minimap.warningHighlight": "{ui.minimap.warningHighlight}", // palette.orange.400 at 75% opacity [overrides `editorWarning.foreground`]
-    "multiDiffEditor.headerBackground": "{ui.multiDiffEditor.headerBackground}", // [override core #262626] | example: previewing a file that is in the Incoming/Outgoing list in the source control sidebar
-    "notebook.cellBorderColor": "{ui.notebook.cellBorderColor}", // -color--white at 10% opacity[override core white at opacity] | example: GitHub Copilot Suggestions page
-    "outputViewStickyScroll.background": "{ui.outputViewStickyScroll.background}", // -color--oklch-gray-32 [overrides `panel.background`] (2 shades lighter than `panel.background`)
-    "panel.background": "{ui.panel.background}", // -color--oklch-30-gray [overrides `editor.background`]
-    "panel.border": "{ui.panel.border}", // -color--oklch-30-gray [overrides core #444444] (match `panel.background`)
-    "panel.dropBorder": "{ui.panel.dropBorder}", // -color--white at 50% opacity [overrides `panelTitle.activeForeground`]
-    "panelSectionHeader.background": "{ui.panelSectionHeader.background}", // -color--oklch-gray-32 [overrides core white at opacity #3f3f3f] (2 shades lighter than `panel.background`) | example: drag output panel title into terminal panel
-    "panelStickyScroll.background": "{ui.panelStickyScroll.background}", // -color--oklch-gray-32 [overrides `panel.background`] (2 shades lighter than `panel.background`)
-    "panelTitle.activeBorder": "{ui.panelTitle.activeBorder}", // -color--oklch-30-gray [overrides core #e7e7e7] (match panel BG to hide border)
-    "panelTitle.activeForeground": "{ui.panelTitle.activeForeground}", // palette.yellow.400 [overrides core #e7e7e7]
-    "panelTitle.inactiveForeground": "{ui.panelTitle.inactiveForeground}", // -color--gray-medium-dark [overrides core #9d9d9d] (match comments)
-    "peekView.border": "{ui.peekView.border}", // palette.blue.400 at 25% opacity [overrides `editorInfo.foreground`] | example: clicking on modified line in gutter of a modified file
-    "peekViewTitle.background": "{ui.peekViewTitle.background}", // -color--oklch-gray-32 [overrides core #252526] | example: clicking on modified line in gutter of a modified file
-    "peekViewTitleDescription.foreground": "{ui.peekViewTitleDescription.foreground}", // -color--white at 50% opacity [overrides core white at opacity] | example: color in widget shown when clicking "View problem" (such as a spelling error with CSpell extension)
-    "peekViewTitleLabel.foreground": "{ui.peekViewTitleLabel.foreground}", // -color--gray-white [overrides core #ffffff] | example: title color in widget shown when clicking "View problem" (such as a spelling error with CSpell extension)
-    "pickerGroup.border": "{ui.pickerGroup.border}", // -color--gray-dark-fade [overrides core #3f3f46] (match `input.border`) | example: commandCenter other commands border
-    "pickerGroup.foreground": "{ui.pickerGroup.foreground}", // -color--gray-medium [overrides core #3794ff] | example: commandCenter other commands text title
-    "profileBadge.background": "{ui.profileBadge.background}", // -color--gray-dark-fade [overrides core #4d4d4d] (match `badge.background`)
-    "profileBadge.foreground": "{ui.profileBadge.foreground}", // -color--gray-white [overrides core #ffffff] (match `badge.border`)
-    "progressBar.background": "{ui.progressBar.background}", // palette.green.500 [overrides core #006abb]
-    "quickInputTitle.background": "{ui.quickInputTitle.background}", // [overrides core #484848] | example: popup when clicking on the "Open Repository" button in the source control sidebar or Copilot icon in the statusBar
-    "scrollbar.shadow": "{ui.scrollbar.shadow}", // -color--black at 40% opacity [overrides core #000] | example: editor tabs side scroll and breadcrumbs/editorStickyScroll
-    "scrollbarSlider.activeBackground": "{ui.scrollbarSlider.activeBackground}", // -color--gray-medium-dark at 70% opacity [overrides core gray opacity #505050] - example: when selecting and dragging scrollbar location
-    "scrollbarSlider.background": "{ui.scrollbarSlider.background}", // -color--gray-medium-dark at 30% opacity [overrides core gray opacity]- example: editor vertical scrollbar location
-    "scrollbarSlider.hoverBackground": "{ui.scrollbarSlider.hoverBackground}", //-color--gray-medium-dark at 50% opacity [overrides core gray opacity]
-    "selection.background": "{ui.selection.background}", // palette.blue.600 at 50% opacity [overrides core blue at opacity #5f83aa] (match `editor.selectionBackground`) | example: selecting text inside an editor popup widget
-    "settings.focusedRowBorder": "{ui.settings.focusedRowBorder}", // -color--white at 20% opacity [overrides `focusBorder`]
-    "settings.headerForeground": "{ui.settings.headerForeground}", // -color--gray-white [overrides core #ffffff]
-    "settings.modifiedItemIndicator": "{ui.settings.modifiedItemIndicator}", // palette.yellow.400 [overrides core #0c7d9d] | example: vertical line color in Settings UI
-    "sideBar.background": "{ui.sideBar.background}", // -color--oklch-28-gray [overrides core #252526]
-    "sideBarSectionHeader.background": "{ui.sideBarSectionHeader.background}", // -color--oklch-gray-32 [overrides core #3b3b3b] (4 shades lighter than `sideBar.background`) | example: extension sidebar sections
-    "sideBarSectionHeader.foreground": "{ui.sideBarSectionHeader.foreground}", // -color--gray-medium [overrides `foreground`]
-    "sideBarStickyScroll.background": "{ui.sideBarStickyScroll.background}", // -color--oklch-gray-30 [overrides `sideBar.background`] (2 shades lighter than sideBar.background`)
-    "sideBarTitle.foreground": "{ui.sideBarTitle.foreground}", // -color--gray-medium [overrides `foreground`] (match `icon.foreground`) | example: EXPLORER TITLE
-    "simpleFindWidget.sashBorder": "{ui.simpleFindWidget.sashBorder}", // -color--white at 5% opacity [overrides core #454545] | example: terminal finder widget resize border
-    "statusBar.background": "{ui.statusBar.background}", // -color--gray-fade [override core #007acc] (match `titleBar.activeBackground`)
-    "statusBar.debuggingBackground": "{ui.statusBar.debuggingBackground}", // palette.orange.600 [overrides core #cc6633]
-    "statusBar.debuggingForeground": "{ui.statusBar.debuggingForeground}", // -color--gray-black [overrides `statusBar.foreground`]
-    "statusBar.focusBorder": "{ui.statusBar.focusBorder}", // -color--gray-dark-fade [overrides `statusBar.foreground` || core #ffffff]
-    "statusBar.foreground": "{ui.statusBar.foreground}", // -color--gray-medium [overrides core #ffffff] (match `titleBar.activeForeground`)
-    "statusBar.noFolderBackground": "{ui.statusBar.noFolderBackground}", // -color--oklch-gray-24 [overrides `core #68217a`] (2 shades darker than `editor.background`)
-    "statusBar.noFolderForeground": "{ui.statusBar.noFolderForeground}", // -color--gray-medium-dark [overrides `statusBar.foreground`]
-    "statusBarItem.focusBorder": "{ui.statusBarItem.focusBorder}", // [override core #929292] | example: click on the Remote Host button in the statusbar and the exit the popup panel and the button will have a focus border in this color
-    "statusBarItem.hoverForeground": "{ui.statusBarItem.hoverForeground}", // -color--gray-white [overrides `statusBar.foreground`]
-    "statusBarItem.remoteBackground": "{ui.statusBarItem.remoteBackground}", // -color--white at 10% opacity [overrides `activityBarBadge.background` || core ##007acc] (4 shades lighter than `statusBar.background`) | example: Remote Host button in statusBar
-    "statusBarItem.remoteForeground": "{ui.statusBarItem.remoteForeground}", // [inherits `activityBarBadge.foreground` || core white at opacity] | example: Remote Host button in statusBar
-    "statusBarItem.remoteHoverBackground": "{ui.statusBarItem.remoteHoverBackground}", // [overrides `statusBarItem.hoverBackground` || `activityBarBadge.background`]
-    "statusBarItem.remoteHoverForeground": "{ui.statusBarItem.remoteHoverForeground}", // [overrides `statusBarItem.hoverForeground` || `statusBar.foreground`] | example: Remote Host button in statusBar
-    "symbolIcon.classForeground": "{ui.symbolIcon.classForeground}", // palette.orange.500 [overrides core #c98727] | example: Previewing a css file in Incoming/Outgoing source control sidebar
-    "symbolIcon.functionForeground": "{ui.symbolIcon.functionForeground}", // palette.purple.500 [overrides core purple #936cb0] | example: box icon
-    "symbolIcon.variableForeground": "{ui.symbolIcon.variableForeground}", // palette.blue.400 [overrides core blue #72b8f6] | example: unknown prop in .prettierrc file
-    "tab.activeForeground": "{ui.tab.activeForeground}", // -color--gray-white [overrides core #ffffff]
-    "tab.border": "{ui.tab.border}", // -color--black at 25% opacity [overrides core #252526]
-    "tab.dragAndDropBorder": "{ui.tab.dragAndDropBorder}", // -color--white at 50% opacity [overrides `tab.activeForeground`]
-    "tab.hoverForeground": "{ui.tab.hoverForeground}", // -color--gray-white [overrides `tab.inactiveForeground`] | example: hover over inactive tab (match `tab.activeForeground`)`
-    "tab.inactiveBackground": "{ui.tab.inactiveBackground}", // [overrides core #2d2d2d] (match `editorGroupHeader.tabsBackground`)
-    "tab.inactiveForeground": "{ui.tab.inactiveForeground}", // -color--gray-medium [overrides dimmed `tab.activeForeground`] | example: non-active tabs, including the tab's icons
-    "tab.unfocusedActiveForeground": "{ui.tab.unfocusedActiveForeground}", // [overrides dimmed `tab.activeForeground`] | example: tabs in split editor
-    "tab.unfocusedHoverForeground": "{ui.tab.unfocusedHoverForeground}", // [overrides dimmed `tab.hoverForeground`] | example: hover over inactive tab in unfocused split editor (includes X) (match `tab.inactiveForeground`)
-    "tab.unfocusedInactiveForeground": "{ui.tab.unfocusedInactiveForeground}", // -color--gray-dark [overrides dimmed `tab.inactiveForeground`] | example: tabs in split editor
-    "terminal.ansiBlack": "{ui.terminal.ansiBlack}", // -color--gray-fade [overrides core #000000]
-    "terminal.ansiBlue": "{ui.terminal.ansiBlue}", // palette.blue.400 [overrides core #2472c8]
-    "terminal.ansiBrightBlack": "{ui.terminal.ansiBrightBlack}", // -color--gray-dark [overrides core #666666]
-    "terminal.ansiBrightBlue": "{ui.terminal.ansiBrightBlue}", // palette.blue.500 [overrides core #3b8eea]
-    "terminal.ansiBrightCyan": "{ui.terminal.ansiBrightCyan}", // palette.cyan.500 [overrides core #29b8db]
-    "terminal.ansiBrightGreen": "{ui.terminal.ansiBrightGreen}", // palette.green.500 [overrides core #23d18b]
-    "terminal.ansiBrightMagenta": "{ui.terminal.ansiBrightMagenta}", // palette.purple.500 [overrides core #d670d6]
-    "terminal.ansiBrightRed": "{ui.terminal.ansiBrightRed}", // palette.red.500 [overrides core red #f14c4c]
-    "terminal.ansiBrightWhite": "{ui.terminal.ansiBrightWhite}", // -color--white [overrides core #e5e5e5]
-    "terminal.ansiBrightYellow": "{ui.terminal.ansiBrightYellow}", // palette.yellow.500 [overrides core #f5f543]
-    "terminal.ansiCyan": "{ui.terminal.ansiCyan}", // palette.cyan.400 [overrides core #11a8cd]
-    "terminal.ansiGreen": "{ui.terminal.ansiGreen}", // palette.green.400 [overrides core green #0dbc79]
-    "terminal.ansiMagenta": "{ui.terminal.ansiMagenta}", // palette.purple.400 [overrides core #bc3fbc]
-    "terminal.ansiRed": "{ui.terminal.ansiRed}", // palette.red.400 [overrides core #cd3131]
-    "terminal.ansiWhite": "{ui.terminal.ansiWhite}", // -color--gray-white [overrides core white #e5e5e5]
-    "terminal.ansiYellow": "{ui.terminal.ansiYellow}", // palette.yellow.400 [overrides core yellow #e5e510]
-    "terminal.background": "{ui.terminal.background}", // -color--gray-fade-black [overrides `panel.background`] (match editor bg)
-    "terminal.foreground": "{ui.terminal.foreground}", // -color--gray-light [overrides core #cccccc] (includes cursor)
-    "terminalOverviewRuler.cursorForeground": "{ui.terminalOverviewRuler.cursorForeground}", // --color--gray-medium [overrides core #878787] (match `editorCursor.foreground`) | example: current line match when using terminal search widget
-    "textBlockQuote.background": "{ui.textBlockQuote.background}", // -color--gray-fade [overrides core #222222] | example: markdown > quote in preview mode
-    "textBlockQuote.border": "{ui.textBlockQuote.border}", // -color--gray-dark [overrides core #1c5982]
-    "textCodeBlock.background": "{ui.textCodeBlock.background}", // -color--gray-fade [overrides core black at opacity] | example: hover over settings json "workbench.startupEditor" or hover over source control sidebar incoming/outgoing list item that has a commit using a codeblock
-    "textLink.activeForeground": "{ui.textLink.activeForeground}", // palette.yellow.400 [overrides core underlined #3794ff]
-    "textLink.foreground": "{ui.textLink.foreground}", // palette.blue.400 [overrides core #3794ff] | example: Settings UI text link
-    "textPreformat.background": "{ui.textPreformat.background}", // -color--gray-fade [overrides core #353535]
-    "textPreformat.foreground": "{ui.textPreformat.foreground}", // palette.yellow.500 [overrides core #d7ba7d]
-    "titleBar.activeBackground": "{ui.titleBar.activeBackground}", // -color--gray-fade [override core ##3c3c3c] (match `statusBar.background`)
-    "titleBar.activeForeground": "{ui.titleBar.activeForeground}", // -color--gray-medium [overrides core #cccccc] | example: all text and icons in title bar (match `statusBar.foreground`)
-    "titleBar.inactiveBackground": "{ui.titleBar.inactiveBackground}", // -color--oklch-30-gray [overrides dimmed `titleBar.activeBackground`] (match `editorGroupHeader.tabsBackground`)
-    "titleBar.inactiveForeground": "{ui.titleBar.inactiveForeground}", // -color--gray-fade [overrides dimmed `titleBar.activeForeground`]
-    "toolbar.hoverBackground": "{ui.toolbar.hoverBackground}", // -color--gray-white at 10% opacity [overrides core white at opacity] | example: Settings UI gear icons
-    "tree.indentGuidesStroke": "{ui.tree.indentGuidesStroke}", // -color--gray-dark-fade [overrides core #585858] | example: sidebar explorer tree
-    "tree.tableColumnsBorder": "{ui.tree.tableColumnsBorder}", // -color--white at 10% opacity [overrides core white at opacity] | example: Keyboard Shortcuts page
-    "tree.tableOddRowsBackground": "{ui.tree.tableOddRowsBackground}", // -color--oklch-30 [overrides core #2b2b2b] (2 shades darker than `editor.background`) | example: Keyboard Shortcuts page
-    "walkthrough.stepTitle.foreground": "{ui.walkthrough.stepTitle.foreground}", // -color--gray-white [overrides core #ffffff] | example: clicking on a title on the welcome page takes you to the walkthrough page.
-    "welcomePage.progress.background": "{ui.welcomePage.progress.background}", // [overrides `input.background`] | example: inactive part of progress bar
-    "welcomePage.progress.foreground": "{ui.welcomePage.progress.foreground}", // palette.green.400 [overrides `textLink.foreground`]
-    "widget.border": "{ui.widget.border}", // -color--white at 5% opacity [base]
-    "widget.shadow": "{ui.widget.shadow}" // -color--black at 20% opacity | non-editor widgets [overrides core black at opacity]
+    "editorWarning.foreground": "{ui.editorWarning.foreground}",
+    "editorWhitespace.foreground": "{ui.editorWhitespace.foreground}",
+    "editorWidget.background": "{ui.editorWidget.background}",
+    "editorWidget.border": "{ui.editorWidget.border}",
+    "errorForeground": "{ui.errorForeground}",
+    "extensionIcon.preReleaseForeground": "{ui.extensionIcon.preReleaseForeground}",
+    "extensionIcon.sponsorForeground": "{ui.extensionIcon.sponsorForeground}",
+    "extensionIcon.starForeground": "{ui.extensionIcon.starForeground}",
+    "focusBorder": "{ui.focusBorder}",
+    "foreground": "{ui.foreground}",
+    "gitDecoration.addedResourceForeground": "{ui.gitDecoration.addedResourceForeground}",
+    "gitDecoration.deletedResourceForeground": "{ui.gitDecoration.deletedResourceForeground}",
+    "gitDecoration.ignoredResourceForeground": "{ui.gitDecoration.ignoredResourceForeground}",
+    "gitDecoration.modifiedResourceForeground": "{ui.gitDecoration.modifiedResourceForeground}",
+    "gitDecoration.stageModifiedResourceForeground": "{ui.gitDecoration.stageModifiedResourceForeground}",
+    "gitDecoration.untrackedResourceForeground": "{ui.gitDecoration.untrackedResourceForeground}",
+    "icon.foreground": "{ui.icon.foreground}",
+    "input.background": "{ui.input.background}",
+    "input.border": "{ui.input.border}",
+    "input.foreground": "{ui.input.foreground}",
+    "input.placeholderForeground": "{ui.input.placeholderForeground}",
+    "inputOption.activeBackground": "{ui.inputOption.activeBackground}",
+    "inputOption.activeBorder": "{ui.inputOption.activeBorder}",
+    "inputOption.activeForeground": "{ui.inputOption.activeForeground}",
+    "inputOption.hoverBackground": "{ui.inputOption.hoverBackground}",
+    "keybindingLabel.background": "{ui.keybindingLabel.background}",
+    "keybindingLabel.border": "{ui.keybindingLabel.border}",
+    "keybindingLabel.bottomBorder": "{ui.keybindingLabel.bottomBorder}",
+    "keybindingLabel.foreground": "{ui.keybindingLabel.foreground}",
+    "keybindingTable.headerBackground": "{ui.keybindingTable.headerBackground}",
+    "list.activeSelectionBackground": "{ui.list.activeSelectionBackground}",
+    "list.activeSelectionForeground": "{ui.list.activeSelectionForeground}",
+    "list.activeSelectionIconForeground": "{ui.list.activeSelectionIconForeground}",
+    "list.dropBackground": "{ui.list.dropBackground}",
+    "list.errorForeground": "{ui.list.errorForeground}",
+    "list.focusAndSelectionOutline": "{ui.list.focusAndSelectionOutline}",
+    "list.highlightForeground": "{ui.list.highlightForeground}",
+    "list.hoverBackground": "{ui.list.hoverBackground}",
+    "list.hoverForeground": "{ui.list.hoverForeground}",
+    "list.inactiveSelectionBackground": "{ui.list.inactiveSelectionBackground}",
+    "list.warningForeground": "{ui.list.warningForeground}",
+    "minimap.errorHighlight": "{ui.minimap.errorHighlight}",
+    "minimap.findMatchHighlight": "{ui.minimap.findMatchHighlight}",
+    "minimap.foregroundOpacity": "{ui.minimap.foregroundOpacity}",
+    "minimap.infoHighlight": "{ui.minimap.infoHighlight}",
+    "minimap.selectionHighlight": "{ui.minimap.selectionHighlight}",
+    "minimap.selectionOccurrenceHighlight": "{ui.minimap.selectionOccurrenceHighlight}",
+    "minimap.warningHighlight": "{ui.minimap.warningHighlight}",
+    "multiDiffEditor.headerBackground": "{ui.multiDiffEditor.headerBackground}",
+    "notebook.cellBorderColor": "{ui.notebook.cellBorderColor}",
+    "outputViewStickyScroll.background": "{ui.outputViewStickyScroll.background}",
+    "panel.background": "{ui.panel.background}",
+    "panel.border": "{ui.panel.border}",
+    "panel.dropBorder": "{ui.panel.dropBorder}",
+    "panelSectionHeader.background": "{ui.panelSectionHeader.background}",
+    "panelStickyScroll.background": "{ui.panelStickyScroll.background}",
+    "panelTitle.activeBorder": "{ui.panelTitle.activeBorder}",
+    "panelTitle.activeForeground": "{ui.panelTitle.activeForeground}",
+    "panelTitle.inactiveForeground": "{ui.panelTitle.inactiveForeground}",
+    "peekView.border": "{ui.peekView.border}",
+    "peekViewTitle.background": "{ui.peekViewTitle.background}",
+    "peekViewTitleDescription.foreground": "{ui.peekViewTitleDescription.foreground}",
+    "peekViewTitleLabel.foreground": "{ui.peekViewTitleLabel.foreground}",
+    "pickerGroup.border": "{ui.pickerGroup.border}",
+    "pickerGroup.foreground": "{ui.pickerGroup.foreground}",
+    "profileBadge.background": "{ui.profileBadge.background}",
+    "profileBadge.foreground": "{ui.profileBadge.foreground}",
+    "progressBar.background": "{ui.progressBar.background}",
+    "quickInputTitle.background": "{ui.quickInputTitle.background}",
+    "scrollbar.shadow": "{ui.scrollbar.shadow}",
+    "scrollbarSlider.activeBackground": "{ui.scrollbarSlider.activeBackground}",
+    "scrollbarSlider.background": "{ui.scrollbarSlider.background}",
+    "scrollbarSlider.hoverBackground": "{ui.scrollbarSlider.hoverBackground}",
+    "selection.background": "{ui.selection.background}",
+    "settings.focusedRowBorder": "{ui.settings.focusedRowBorder}",
+    "settings.headerForeground": "{ui.settings.headerForeground}",
+    "settings.modifiedItemIndicator": "{ui.settings.modifiedItemIndicator}",
+    "sideBar.background": "{ui.sideBar.background}",
+    "sideBarSectionHeader.background": "{ui.sideBarSectionHeader.background}",
+    "sideBarSectionHeader.foreground": "{ui.sideBarSectionHeader.foreground}",
+    "sideBarStickyScroll.background": "{ui.sideBarStickyScroll.background}",
+    "sideBarTitle.foreground": "{ui.sideBarTitle.foreground}",
+    "simpleFindWidget.sashBorder": "{ui.simpleFindWidget.sashBorder}",
+    "statusBar.background": "{ui.statusBar.background}",
+    "statusBar.debuggingBackground": "{ui.statusBar.debuggingBackground}",
+    "statusBar.debuggingForeground": "{ui.statusBar.debuggingForeground}",
+    "statusBar.focusBorder": "{ui.statusBar.focusBorder}",
+    "statusBar.foreground": "{ui.statusBar.foreground}",
+    "statusBar.noFolderBackground": "{ui.statusBar.noFolderBackground}",
+    "statusBar.noFolderForeground": "{ui.statusBar.noFolderForeground}",
+    "statusBarItem.focusBorder": "{ui.statusBarItem.focusBorder}",
+    "statusBarItem.hoverForeground": "{ui.statusBarItem.hoverForeground}",
+    "statusBarItem.remoteBackground": "{ui.statusBarItem.remoteBackground}",
+    "statusBarItem.remoteForeground": "{ui.statusBarItem.remoteForeground}",
+    "statusBarItem.remoteHoverBackground": "{ui.statusBarItem.remoteHoverBackground}",
+    "statusBarItem.remoteHoverForeground": "{ui.statusBarItem.remoteHoverForeground}",
+    "symbolIcon.classForeground": "{ui.symbolIcon.classForeground}",
+    "symbolIcon.functionForeground": "{ui.symbolIcon.functionForeground}",
+    "symbolIcon.variableForeground": "{ui.symbolIcon.variableForeground}",
+    "tab.activeForeground": "{ui.tab.activeForeground}",
+    "tab.border": "{ui.tab.border}",
+    "tab.dragAndDropBorder": "{ui.tab.dragAndDropBorder}",
+    "tab.hoverForeground": "{ui.tab.hoverForeground}",
+    "tab.inactiveBackground": "{ui.tab.inactiveBackground}",
+    "tab.inactiveForeground": "{ui.tab.inactiveForeground}",
+    "tab.unfocusedActiveForeground": "{ui.tab.unfocusedActiveForeground}",
+    "tab.unfocusedHoverForeground": "{ui.tab.unfocusedHoverForeground}",
+    "tab.unfocusedInactiveForeground": "{ui.tab.unfocusedInactiveForeground}",
+    "terminal.ansiBlack": "{ui.terminal.ansiBlack}",
+    "terminal.ansiBlue": "{ui.terminal.ansiBlue}",
+    "terminal.ansiBrightBlack": "{ui.terminal.ansiBrightBlack}",
+    "terminal.ansiBrightBlue": "{ui.terminal.ansiBrightBlue}",
+    "terminal.ansiBrightCyan": "{ui.terminal.ansiBrightCyan}",
+    "terminal.ansiBrightGreen": "{ui.terminal.ansiBrightGreen}",
+    "terminal.ansiBrightMagenta": "{ui.terminal.ansiBrightMagenta}",
+    "terminal.ansiBrightRed": "{ui.terminal.ansiBrightRed}",
+    "terminal.ansiBrightWhite": "{ui.terminal.ansiBrightWhite}",
+    "terminal.ansiBrightYellow": "{ui.terminal.ansiBrightYellow}",
+    "terminal.ansiCyan": "{ui.terminal.ansiCyan}",
+    "terminal.ansiGreen": "{ui.terminal.ansiGreen}",
+    "terminal.ansiMagenta": "{ui.terminal.ansiMagenta}",
+    "terminal.ansiRed": "{ui.terminal.ansiRed}",
+    "terminal.ansiWhite": "{ui.terminal.ansiWhite}",
+    "terminal.ansiYellow": "{ui.terminal.ansiYellow}",
+    "terminal.background": "{ui.terminal.background}",
+    "terminal.foreground": "{ui.terminal.foreground}",
+    "terminalOverviewRuler.cursorForeground": "{ui.terminalOverviewRuler.cursorForeground}",
+    "textBlockQuote.background": "{ui.textBlockQuote.background}",
+    "textBlockQuote.border": "{ui.textBlockQuote.border}",
+    "textCodeBlock.background": "{ui.textCodeBlock.background}",
+    "textLink.activeForeground": "{ui.textLink.activeForeground}",
+    "textLink.foreground": "{ui.textLink.foreground}",
+    "textPreformat.background": "{ui.textPreformat.background}",
+    "textPreformat.foreground": "{ui.textPreformat.foreground}",
+    "titleBar.activeBackground": "{ui.titleBar.activeBackground}",
+    "titleBar.activeForeground": "{ui.titleBar.activeForeground}",
+    "titleBar.inactiveBackground": "{ui.titleBar.inactiveBackground}",
+    "titleBar.inactiveForeground": "{ui.titleBar.inactiveForeground}",
+    "toolbar.hoverBackground": "{ui.toolbar.hoverBackground}",
+    "tree.indentGuidesStroke": "{ui.tree.indentGuidesStroke}",
+    "tree.tableColumnsBorder": "{ui.tree.tableColumnsBorder}",
+    "tree.tableOddRowsBackground": "{ui.tree.tableOddRowsBackground}",
+    "walkthrough.stepTitle.foreground": "{ui.walkthrough.stepTitle.foreground}",
+    "welcomePage.progress.background": "{ui.welcomePage.progress.background}",
+    "welcomePage.progress.foreground": "{ui.welcomePage.progress.foreground}",
+    "widget.border": "{ui.widget.border}",
+    "widget.shadow": "{ui.widget.shadow}"
   },
   "semanticHighlighting": true,
   "semanticTokenColors": {
     "class": {
-      "foreground": "{semantic.class}" // palette.cyan.400
+      "foreground": "{semantic.class}"
     },
     "function": {
-      "foreground": "{semantic.function}" // palette.cyan.400
+      "foreground": "{semantic.function}"
     },
     "function.defaultLibrary": {
-      "foreground": "{semantic.function.defaultLibrary}" // -color--gray-white
+      "foreground": "{semantic.function.defaultLibrary}"
     },
     "method": {
-      "foreground": "{semantic.method}" // -color--gray-white
+      "foreground": "{semantic.method}"
     },
     "namespace": {
-      "foreground": "{semantic.namespace}" // palette.purple.400
+      "foreground": "{semantic.namespace}"
     },
     "parameter": {
-      "foreground": "{semantic.parameter}" // palette.orange.400
+      "foreground": "{semantic.parameter}"
     },
     "property": {
-      "foreground": "{semantic.property}" // palette.green.400
+      "foreground": "{semantic.property}"
     },
     "variable": {
-      "foreground": "{semantic.variable}" // palette.pink.400
+      "foreground": "{semantic.variable}"
     },
     "variable.defaultLibrary": {
-      "foreground": "{semantic.variable.defaultLibrary}" // -color--gray-white-light-2
+      "foreground": "{semantic.variable.defaultLibrary}"
     }
   },
   "tokenColors": [
@@ -519,7 +519,7 @@
         "variable.parameter.url" // SCSS `to` in background: linear-gradient(to ...); -- Red in CSS. Also for background:url(../../../../assets/images/icons/icon-phone-white.svg) without quotes.
       ],
       "settings": {
-        "foreground": "{syntax.storageType}" // palette.blue.400
+        "foreground": "{syntax.storageType}"
       }
     },
     // {

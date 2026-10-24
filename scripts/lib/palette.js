@@ -117,7 +117,39 @@ export function generatePalette(config) {
 export function resolveTokens(definitions, palette) {
   object(definitions, "tokens");
 
+  const tokens = new Map();
   const resolved = new Map();
+
+  function collect(group, path = []) {
+    object(group, `token group ${path.join(".") || "tokens"}`);
+
+    for (const [key, value] of Object.entries(group)) {
+      const parts = [...path, key];
+      const id = parts.join(".");
+
+      if (!/^[a-z][a-z0-9-]*(?:\.[a-z0-9-]+)*$/i.test(key) || parts[0] === "palette" || id.startsWith("palette.")) {
+        throw new Error(`invalid semantic token ID ${id}`);
+      }
+
+      object(value, `token ${id}`);
+
+      if (["color", "alpha", "reason"].some((field) => Object.hasOwn(value, field))) {
+        fields(value, ["color", "alpha", "reason"], `token ${id}`);
+
+        if (parts.length < 2 || typeof value.color !== "string" || !value.color.trim()) {
+          throw new Error(`token ${id}: color must be a hex color or token reference in a named group`);
+        }
+
+        if (tokens.has(id)) throw new Error(`duplicate semantic token ID ${id}`);
+
+        tokens.set(id, value);
+      } else {
+        collect(value, parts);
+      }
+    }
+  }
+
+  collect(definitions);
 
   function resolve(id, chain = []) {
     if (chain.includes(id)) throw new Error(`Token cycle: ${[...chain, id].join(" → ")}`);
@@ -126,30 +158,21 @@ export function resolveTokens(definitions, palette) {
 
     if (palette.has(id)) return palette.get(id).hex;
 
-    if (!Object.hasOwn(definitions, id)) throw new Error(`Unknown reference: ${[...chain, id].join(" → ")}`);
+    if (!tokens.has(id)) throw new Error(`Unknown reference: ${[...chain, id].join(" → ")}`);
 
-    const definition = definitions[id];
-
-    fields(definition, ["ref", "hex", "alpha", "reason"], `token ${id}`);
-
-    if (Object.hasOwn(definition, "ref") === Object.hasOwn(definition, "hex")) {
-      throw new Error(`token ${id}: provide exactly one of ref or hex`);
-    }
-
+    const definition = tokens.get(id);
     let hex;
 
-    if (Object.hasOwn(definition, "ref")) {
-      if (typeof definition.ref !== "string") throw new Error(`token ${id}: ref must be a string`);
-
-      hex = resolve(definition.ref, [...chain, id]);
+    if (!definition.color.startsWith("#")) {
+      hex = resolve(definition.color, [...chain, id]);
     } else {
-      validateHex(definition.hex, id);
+      validateHex(definition.color, id);
 
       if (typeof definition.reason !== "string" || !definition.reason.trim()) {
         throw new Error(`token ${id}: literal hex requires a reason`);
       }
 
-      hex = normalizeHex(definition.hex);
+      hex = normalizeHex(definition.color);
     }
 
     if (Object.hasOwn(definition, "alpha")) {
@@ -161,11 +184,7 @@ export function resolveTokens(definitions, palette) {
     return hex;
   }
 
-  for (const id of Object.keys(definitions)) {
-    if (!/^[a-z][a-z0-9-]*(?:\.[a-z0-9-]+)+$/i.test(id) || id.startsWith("palette.")) {
-      throw new Error(`invalid semantic token ID ${id}`);
-    }
-
+  for (const id of tokens.keys()) {
     resolve(id);
   }
 

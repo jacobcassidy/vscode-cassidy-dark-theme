@@ -34,7 +34,10 @@ const template = `{
 }`;
 
 function definitions() {
-  return { "surface.editor": { ref: "palette.gray.900" }, "syntax.string": { ref: "palette.yellow.400" } };
+  return {
+    surface: { editor: { color: "palette.gray.900", alpha: 1 } },
+    syntax: { string: { color: "palette.yellow.400", alpha: 1 } },
+  };
 }
 
 async function fixture(t) {
@@ -159,17 +162,25 @@ test("invalid palette parameters and unknown overrides fail", () => {
   }
 });
 
-test("token aliases resolve chains and replace inherited alpha", () => {
+test("nested tokens resolve forward aliases, dotted selectors, and absolute alpha", () => {
   const palette = generatePalette(configuration());
 
   const tokens = resolveTokens(
     {
-      "syntax.string": { ref: "palette.yellow.400" },
-      "overlay.first": { ref: "syntax.string", alpha: 0.1 },
-      "overlay.second": { ref: "overlay.first", alpha: 0.2 },
-      "overlay.opaque": { ref: "overlay.second", alpha: 1 },
-      "overlay.empty": { ref: "overlay.second", alpha: 0 },
-      "ui.custom": { hex: "#abc", reason: "A component-specific exception" },
+      overlay: {
+        first: { color: "syntax.string", alpha: 0.1 },
+        second: { color: "overlay.first", alpha: 0.2 },
+        opaque: { color: "overlay.second", alpha: 1 },
+        empty: { color: "overlay.second", alpha: 0 },
+        inherited: { color: "overlay.second" },
+      },
+      syntax: { string: { color: "palette.yellow.400", alpha: 1 } },
+      ui: { activityBar: { activeBackground: { color: "palette.gray.900", alpha: 1 } } },
+      semantic: {
+        function: { color: "syntax.string" },
+        "function.defaultLibrary": { color: "ui.activityBar.activeBackground" },
+      },
+      diff: { added: { foreground: { color: "#abc", reason: "A component-specific exception" } } },
     },
     palette,
   );
@@ -178,7 +189,11 @@ test("token aliases resolve chains and replace inherited alpha", () => {
   assert.equal(tokens.get("overlay.second"), "#f1dda533");
   assert.equal(tokens.get("overlay.opaque"), "#f1dda5");
   assert.equal(tokens.get("overlay.empty"), "#f1dda500");
-  assert.equal(tokens.get("ui.custom"), "#aabbcc");
+  assert.equal(tokens.get("overlay.inherited"), "#f1dda533");
+  assert.equal(tokens.get("ui.activityBar.activeBackground"), "#242424");
+  assert.equal(tokens.get("semantic.function"), "#f1dda5");
+  assert.equal(tokens.get("semantic.function.defaultLibrary"), "#242424");
+  assert.equal(tokens.get("diff.added.foreground"), "#aabbcc");
   assert.equal(withAlpha("#0009", 0.5), "#00000080");
   assert.throws(() => withAlpha("#123456", NaN), /finite number/);
 });
@@ -187,18 +202,54 @@ test("unknown references, cycles, invalid alpha, and undocumented literal tokens
   const palette = generatePalette(configuration());
 
   assert.throws(
-    () => resolveTokens({ "unused.alias": { ref: "missing.token" } }, palette),
+    () => resolveTokens({ unused: { alias: { color: "missing.token" } } }, palette),
     /unused.alias → missing.token/,
   );
 
   assert.throws(
-    () => resolveTokens({ "a.one": { ref: "b.two" }, "b.two": { ref: "a.one" } }, palette),
+    () => resolveTokens({ a: { one: { color: "b.two" } }, b: { two: { color: "a.one" } } }, palette),
     /a.one → b.two → a.one/,
   );
 
-  assert.throws(() => resolveTokens({ "a.one": { ref: "palette.yellow.400", alpha: 2 } }, palette), /finite number/);
-  assert.throws(() => resolveTokens({ "a.one": { hex: "#123456" } }, palette), /reason/);
-  assert.throws(() => resolveTokens({ "a.one": { ref: "palette.yellow.400", typo: true } }, palette), /unknown field/);
+  assert.throws(
+    () => resolveTokens({ a: { one: { color: "palette.yellow.400", alpha: 2 } } }, palette),
+    /finite number/,
+  );
+  assert.throws(() => resolveTokens({ a: { one: { color: "#123456" } } }, palette), /reason/);
+  assert.throws(
+    () => resolveTokens({ a: { one: { color: "palette.yellow.400", typo: true } } }, palette),
+    /unknown field/,
+  );
+
+  for (const color of ["", null, 123]) {
+    assert.throws(() => resolveTokens({ a: { one: { color } } }, palette), /color must be/);
+  }
+
+  assert.throws(() => resolveTokens({ a: { one: { alpha: 1 } } }, palette), /color must be/);
+  assert.throws(() => resolveTokens({ a: { one: { color: "#xyz", reason: "Invalid" } } }, palette), /hex color/);
+  assert.throws(() => resolveTokens({ a: { one: "palette.yellow.400" } }, palette), /expected an object/);
+});
+
+test("token groups reject invalid IDs, reserved palette IDs, and ambiguous flattened paths", () => {
+  const palette = generatePalette(configuration());
+
+  for (const input of [
+    { "bad key": { one: { color: "palette.yellow.400" } } },
+    { a: { "bad key": { color: "palette.yellow.400" } } },
+    { palette: { one: { color: "palette.yellow.400" } } },
+    { "palette.one": { color: "palette.yellow.400" } },
+  ]) {
+    assert.throws(() => resolveTokens(input, palette), /invalid semantic token ID/);
+  }
+
+  assert.throws(
+    () =>
+      resolveTokens(
+        { a: { nested: { one: { color: "palette.yellow.400" } }, "nested.one": { color: "palette.blue.400" } } },
+        palette,
+      ),
+    /duplicate semantic token ID a.nested.one/,
+  );
 });
 
 test("JSONC parsing rejects duplicate keys and reports file locations", () => {
@@ -290,7 +341,7 @@ test("failed validation leaves all previous outputs intact and palette-only mode
     initial.changed.map(async (path) => [path, await readFile(join(root, path), "utf8")]),
   );
 
-  await writeFile(join(root, "src/tokens.jsonc"), '{"unused.alias":{"ref":"missing.color"}}');
+  await writeFile(join(root, "src/tokens.jsonc"), '{"unused":{"alias":{"color":"missing.color"}}}');
   await assert.rejects(buildTheme({ root }), /Unknown reference/);
 
   for (const [path, text] of snapshots) {
