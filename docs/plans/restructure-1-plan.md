@@ -12,7 +12,11 @@ Make production inputs, shipped assets, development experiments, historical snap
 src/                              # Editable production inputs
   palette.jsonc
   tokens.jsonc
-  cassidy-dark-color-theme.jsonc
+  theme/
+    base.jsonc
+    colors.jsonc
+    semantic.jsonc
+    syntax.jsonc
 
 themes/                           # Generated production theme
   cassidy-dark-color-theme.json
@@ -24,7 +28,10 @@ dev/
     <name>/
       palette.jsonc               # Optional palette overrides
       tokens.jsonc                # Optional token overrides
-      theme.jsonc                 # Optional replacement theme template
+      base.jsonc                  # Optional root theme properties
+      colors.jsonc                # Optional workbench color section
+      semantic.jsonc              # Optional semantic highlighting section
+      syntax.jsonc                # Optional TextMate token rules
   themes/                         # Generated experimental themes
   snapshots/                      # Historical themes preserved unchanged
   generated/
@@ -99,7 +106,7 @@ Add named development targets under `dev/experiments/<name>/`. Discover targets 
 
 - An optional `palette.jsonc` overrides supplied palette settings. Merge nested configuration objects by key; replace scalar values and arrays. Validate the complete merged configuration using the existing palette rules.
 - An optional `tokens.jsonc` overrides supplied token paths. Merge grouping objects; each override leaf must include `color` and replaces that token leaf in full. This lets an experiment omit an inherited `alpha`, `details`, or literal-color `reason` without accidentally retaining it. Validate the complete merged token map.
-- An optional `theme.jsonc` replaces the production template in full. This supports experiments with additional workbench colors or different scope rules while retaining the existing reference renderer.
+- Optional `base.jsonc`, `colors.jsonc`, `semantic.jsonc`, and `syntax.jsonc` files override matching production theme sections. Missing files reuse their production counterparts.
 - Missing files reuse their production counterparts. Do not introduce a deletion syntax in this first restructuring.
 
 Write the resolved theme to `dev/themes/cassidy-dark-color-theme-<name>.json` and that target's palette reports to `dev/generated/palette/<name>/`. Experimental builds must leave production outputs and production palette reports untouched.

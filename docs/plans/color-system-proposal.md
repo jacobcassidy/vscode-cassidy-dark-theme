@@ -200,7 +200,10 @@ The build uses these paths:
 | -------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
 | `src/palette.jsonc`                    | Authored hue/lightness parameters, optional base chroma, neutrals, and documented primitive overrides            |
 | `src/tokens.jsonc`                     | Semantic aliases and explicit alpha values for overlays                                                          |
-| `src/cassidy-dark-color-theme.jsonc`   | Full theme template with named color references, comments, scope arrays, and font styles                         |
+| `src/theme/base.jsonc`                 | Theme root properties such as schema, name, type, and author                                                     |
+| `src/theme/colors.jsonc`               | Workbench and editor UI color mappings                                                                           |
+| `src/theme/semantic.jsonc`             | Semantic highlighting settings and semantic token color mappings                                                 |
+| `src/theme/syntax.jsonc`               | Ordered TextMate scope rules, comments, and font styles                                                          |
 | `scripts/build/build-theme.js`         | Parameter validation, palette generation, alias resolution, template substitution, and output comparison/writing |
 | `themes/cassidy-dark-color-theme.json` | Committed generated theme; edit the source files after migration                                                 |
 

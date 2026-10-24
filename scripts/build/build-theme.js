@@ -1,7 +1,7 @@
 import { readFile, readdir, mkdir, mkdtemp, rename, rm, writeFile } from "node:fs/promises";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
-import { applyEdits } from "jsonc-parser";
+import { applyEdits, parseTree } from "jsonc-parser";
 // Prettier's generated entry point hides its default export from the import resolver.
 // eslint-disable-next-line import-x/default
 import prettier from "prettier";
@@ -12,6 +12,59 @@ import { contrastRatio, validateHex } from "../lib/colors.js";
 const defaultRoot = fileURLToPath(new URL("../../", import.meta.url));
 const outputTheme = "themes/cassidy-dark-color-theme.json";
 const reportDirectory = "dev/generated/palette";
+const themeParts = ["base", "colors", "semantic", "syntax"];
+const themeSections = new Set(["colors", "semanticHighlighting", "semanticTokenColors", "tokenColors"]);
+
+function templateProperties(source, label) {
+  const tree = parseTree(source, [], { allowTrailingComma: true });
+
+  if (tree?.type !== "object") throw new Error(`${label} must contain a JSONC object`);
+
+  return (tree.children ?? []).map((property) => {
+    const [key] = property.children;
+
+    return { key: key.value, source: source.slice(property.offset, property.offset + property.length) };
+  });
+}
+
+export function assembleThemeTemplate(parts, labels = []) {
+  const properties = [];
+  const seen = new Set();
+
+  for (const [index, source] of parts.entries()) {
+    const label = labels[index] ?? `theme part ${themeParts[index] ?? index + 1}`;
+
+    for (const property of templateProperties(source, label)) {
+      if (seen.has(property.key)) throw new Error(`${label}: duplicate top-level theme property ${property.key}`);
+
+      if (index === 0 && themeSections.has(property.key)) {
+        throw new Error(`${label}: theme section ${property.key} belongs in its section file`);
+      }
+
+      seen.add(property.key);
+      properties.push(`  ${property.source}`);
+    }
+  }
+
+  return `{\n${properties.join(",\n")}\n}`;
+}
+
+async function readThemeTemplate(root, directory, optional = false) {
+  const parts = [];
+  const labels = [];
+
+  for (const name of themeParts) {
+    const path = directory ? `${directory}/${name}.jsonc` : `src/theme/${name}.jsonc`;
+    const source = await readOptional(join(root, path));
+
+    if (!source && !optional) throw new Error(`Missing required theme input: ${path}`);
+
+    parts.push(source ?? (await readFile(join(root, `src/theme/${name}.jsonc`), "utf8")));
+    labels.push(source ? path : `src/theme/${name}.jsonc`);
+  }
+
+  return assembleThemeTemplate(parts, labels);
+}
 
 function validateTheme(theme) {
   object(theme, "theme");
@@ -72,13 +125,7 @@ function colorPosition(path) {
   );
 }
 
-export function renderTemplate(
-  source,
-  tokens,
-  palette,
-  label = "src/cassidy-dark-color-theme.jsonc",
-  notice = "npm run build:theme",
-) {
+export function renderTemplate(source, tokens, palette, label = "src/theme", notice = "npm run build:theme") {
   const { value, tree } = parseJsonc(source, label);
 
   validateTheme(value);
@@ -281,7 +328,7 @@ export async function buildTheme({ root = defaultRoot, check = false, paletteOnl
   if (!paletteOnly) {
     const input = parseJsonc(await readFile(join(root, "src/tokens.jsonc"), "utf8"), "src/tokens.jsonc").value;
     const tokens = resolveTokens(input, palette);
-    const template = await readFile(join(root, "src/cassidy-dark-color-theme.jsonc"), "utf8");
+    const template = await readThemeTemplate(root);
 
     output.set(outputTheme, renderTemplate(template, tokens, palette));
   }
@@ -408,7 +455,7 @@ export async function buildDev({ root = defaultRoot, check = false } = {}) {
       throw new Error(`Invalid experiment name: ${name}`);
     }
     const inputDirectory = `dev/experiments/${name}`;
-    const paths = ["palette.jsonc", "tokens.jsonc", "theme.jsonc"];
+    const paths = ["palette.jsonc", "tokens.jsonc", ...themeParts.map((part) => `${part}.jsonc`)];
     const sources = new Map();
 
     for (const path of paths) sources.set(path, await readOptional(join(root, inputDirectory, path)));
@@ -424,12 +471,11 @@ export async function buildDev({ root = defaultRoot, check = false } = {}) {
       : tokenBase;
     const palette = generatePalette(paletteInput);
     const tokens = resolveTokens(tokenInput, palette);
-    const template =
-      sources.get("theme.jsonc") ?? (await readFile(join(root, "src/cassidy-dark-color-theme.jsonc"), "utf8"));
+    const template = await readThemeTemplate(root, inputDirectory, true);
     const output = reports(palette, `dev/generated/palette/${name}`, "npm run build:dev");
     output.set(
       `dev/themes/cassidy-dark-color-theme-${name}.json`,
-      renderTemplate(template, tokens, palette, `${inputDirectory}/theme.jsonc`, "npm run build:dev"),
+      renderTemplate(template, tokens, palette, inputDirectory, "npm run build:dev"),
     );
     const changed = await stageOutputs(root, output, check, "npm run build:dev");
     for (const path of output.keys()) expected.add(path);

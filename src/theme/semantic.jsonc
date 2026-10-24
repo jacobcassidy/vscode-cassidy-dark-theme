@@ -1,0 +1,32 @@
+{
+  "semanticHighlighting": true,
+  "semanticTokenColors": {
+    "class": {
+      "foreground": "{semantic.class}"
+    },
+    "function": {
+      "foreground": "{semantic.function}"
+    },
+    "function.defaultLibrary": {
+      "foreground": "{semantic.function.defaultLibrary}"
+    },
+    "method": {
+      "foreground": "{semantic.method}"
+    },
+    "namespace": {
+      "foreground": "{semantic.namespace}"
+    },
+    "parameter": {
+      "foreground": "{semantic.parameter}"
+    },
+    "property": {
+      "foreground": "{semantic.property}"
+    },
+    "variable": {
+      "foreground": "{semantic.variable}"
+    },
+    "variable.defaultLibrary": {
+      "foreground": "{semantic.variable.defaultLibrary}"
+    }
+  }
+}

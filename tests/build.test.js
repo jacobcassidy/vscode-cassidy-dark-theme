@@ -2,9 +2,10 @@ import assert from "node:assert/strict";
 import { mkdir, mkdtemp, readFile, readdir, rm, stat, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
+import { fileURLToPath } from "node:url";
 import test from "node:test";
-import { parse } from "jsonc-parser";
-import { buildDev, buildTheme, renderTemplate } from "../scripts/build/build-theme.js";
+import { parse, parseTree } from "jsonc-parser";
+import { assembleThemeTemplate, buildDev, buildTheme, renderTemplate } from "../scripts/build/build-theme.js";
 import { contrastRatio, fromHex, inGamut, maxChroma, toHex, withAlpha } from "../scripts/lib/colors.js";
 import { parseJsonc } from "../scripts/lib/jsonc.js";
 import { generatePalette, resolveTokens } from "../scripts/lib/palette.js";
@@ -19,9 +20,11 @@ function configuration() {
 }
 
 const template = `{
-  // Keep comments, including disabled {missing.reference} examples.
   "name": "Fixture",
-  "colors": { "editor.background": "{surface.editor}", "editor.foreground": "{syntax.string}" },
+  "colors": {
+    // Keep comments, including disabled {missing.reference} examples.
+    "editor.background": "{surface.editor}", "editor.foreground": "{syntax.string}"
+  },
   "semanticHighlighting": true,
   "semanticTokenColors": {
     "variable": "{syntax.string}",
@@ -32,6 +35,40 @@ const template = `{
     "settings": { "foreground": "{syntax.string}", "background": "{surface.editor}", "fontStyle": "bold italic" }
   }]
 }`;
+
+const themePartNames = ["base", "colors", "semantic", "syntax"];
+const themePartGroups = {
+  base: ["$schema", "name", "type", "author"],
+  colors: ["colors"],
+  semantic: ["semanticHighlighting", "semanticTokenColors"],
+  syntax: ["tokenColors"],
+};
+
+async function writeThemeParts(directory, source) {
+  const tree = parseTree(source);
+  const properties = new Map(
+    (tree.children ?? []).map((property) => {
+      const [key] = property.children;
+
+      return [key.value, source.slice(property.offset, property.offset + property.length)];
+    }),
+  );
+
+  await mkdir(directory, { recursive: true });
+
+  for (const name of themePartNames) {
+    const part = themePartGroups[name].map((key) => properties.get(key)).filter(Boolean);
+
+    await writeFile(join(directory, `${name}.jsonc`), `{\n${part.join(",\n")}\n}\n`);
+  }
+}
+
+async function readThemeParts(directory) {
+  const path = directory instanceof URL ? fileURLToPath(directory) : directory;
+  const parts = await Promise.all(themePartNames.map((name) => readFile(join(path, `${name}.jsonc`), "utf8")));
+
+  return assembleThemeTemplate(parts);
+}
 
 function definitions() {
   return {
@@ -47,7 +84,7 @@ async function fixture(t) {
   await mkdir(join(root, "src"));
   await writeFile(join(root, "src/palette.jsonc"), JSON.stringify(configuration()));
   await writeFile(join(root, "src/tokens.jsonc"), JSON.stringify(definitions()));
-  await writeFile(join(root, "src/cassidy-dark-color-theme.jsonc"), template);
+  await writeThemeParts(join(root, "src/theme"), template);
 
   return root;
 }
@@ -400,7 +437,7 @@ test("failed validation leaves all previous outputs intact and palette-only mode
 
   assert.deepEqual(await readdir(join(root, "themes")), ["cassidy-dark-color-theme.json"]);
   await rm(join(root, "src/tokens.jsonc"));
-  await rm(join(root, "src/cassidy-dark-color-theme.jsonc"));
+  await rm(join(root, "src/theme"), { recursive: true });
   assert.equal((await buildTheme({ root, paletteOnly: true })).changed.length, 0);
 });
 
@@ -441,7 +478,7 @@ test("palette reports include 600 contrast from final hex and flag translucent o
 test("the authored palette keeps base syntax and colored control text readable", async () => {
   const config = parseJsonc(await readFile(new URL("../src/palette.jsonc", import.meta.url), "utf8"), "palette").value;
   const aliases = parseJsonc(await readFile(new URL("../src/tokens.jsonc", import.meta.url), "utf8"), "tokens").value;
-  const source = await readFile(new URL("../src/cassidy-dark-color-theme.jsonc", import.meta.url), "utf8");
+  const source = await readThemeParts(new URL("../src/theme", import.meta.url));
   const palette = generatePalette(config);
   const theme = parse(renderTemplate(source, resolveTokens(aliases, palette), palette));
 
@@ -461,7 +498,7 @@ test("the authored palette keeps base syntax and colored control text readable",
 test("development targets merge palette settings, replace token leaves, and isolate outputs", async (t) => {
   const root = await fixture(t);
   const experiment = join(root, "dev/experiments/sample");
-  const productionTheme = join(root, "src/cassidy-dark-color-theme.jsonc");
+  const productionTheme = join(root, "src/theme");
 
   await mkdir(experiment, { recursive: true });
   await writeFile(join(experiment, "palette.jsonc"), '{"families":{"yellow":{"hue":95}}}');
@@ -469,15 +506,27 @@ test("development targets merge palette settings, replace token leaves, and isol
     join(experiment, "tokens.jsonc"),
     '{"syntax":{"string":{"color":"#abcdef","reason":"Test exception"}}}',
   );
+  await writeFile(join(experiment, "colors.jsonc"), '{"colors":{"editor.background":"#010203"}}');
+  await writeFile(join(experiment, "base.jsonc"), '{"author":"Sample"}');
+  await writeFile(
+    join(experiment, "syntax.jsonc"),
+    '{"tokenColors":[{"scope":"test.syntax","settings":{"foreground":"{syntax.string}"}}]}',
+  );
 
   const result = await buildDev({ root });
 
   assert.equal(result[0].name, "sample");
   assert.equal(result[0].palette.get("palette.yellow.400").target.h, 95);
   assert.equal(result[0].changed.length, 4);
-  assert.match(await readFile(join(root, "dev/themes/cassidy-dark-color-theme-sample.json"), "utf8"), /#abcdef/);
+  const experimentTheme = await readFile(join(root, "dev/themes/cassidy-dark-color-theme-sample.json"), "utf8");
+
+  assert.match(experimentTheme, /#abcdef/);
+  assert.equal(parse(experimentTheme).colors["editor.background"], "#010203");
+  assert.equal(parse(experimentTheme).author, "Sample");
+  assert.equal(parse(experimentTheme).semanticTokenColors.variable, "#abcdef");
+  assert.deepEqual(parse(experimentTheme).tokenColors[0].scope, "test.syntax");
   await assert.rejects(readFile(join(root, "themes/cassidy-dark-color-theme.json")), { code: "ENOENT" });
-  await assert.equal(await readFile(productionTheme, "utf8"), template);
+  assert.equal(await readThemeParts(productionTheme), template);
   assert.deepEqual(
     (await buildDev({ root, check: true })).map(({ changed }) => changed),
     [[]],

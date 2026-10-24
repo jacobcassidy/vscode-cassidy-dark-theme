@@ -11,7 +11,7 @@ Run the commands in this guide from the repository root unless stated otherwise.
 | [`package.json`](../../package.json)                                                  | Extension identity, Marketplace metadata, version, theme contribution, development dependencies, and npm scripts. |
 | [`package-lock.json`](../../package-lock.json)                                        | Locked npm dependency tree for local development tools.                                                           |
 | [`themes/cassidy-dark-color-theme.json`](../../themes/cassidy-dark-color-theme.json)  | The committed generated theme shipped to users; edit its inputs in `src/`.                                        |
-| [`src/`](../../src/)                                                                  | Palette inputs, semantic tokens, and the JSONC theme template.                                                    |
+| [`src/`](../../src/)                                                                  | Palette and token inputs, plus the split JSONC theme template in `src/theme/`.                                    |
 | [`scripts/build/build-theme.js`](../../scripts/build/build-theme.js)                  | Palette generation, token resolution, reports, and generated-output verification.                                 |
 | [`dev/experiments/`](../../dev/experiments/)                                          | Editable named experimental inputs.                                                                               |
 | [`dev/themes/`](../../dev/themes/)                                                    | Generated experimental previews.                                                                                  |
@@ -98,13 +98,16 @@ Make production changes in `src/`, then run `npm run build:theme`:
 
 - `src/palette.jsonc`: hue and lightness anchors, optional `baseChroma`, shared chroma settings, neutrals, and documented primitive overrides.
 - `src/tokens.jsonc`: nested color roles with optional [`details` metadata](../references/scheme/token-details.md) for usage, inheritance, and overrides after `color` and optional `alpha`. Each leaf has a `color` palette/token reference or a hex exception with a required `reason`; include absolute `alpha` only when it is below 1. Dotted semantic selectors such as `function.defaultLibrary` stay together as keys under `semantic`.
-- `src/cassidy-dark-color-theme.jsonc`: theme structure, ordered scopes, font styles, and whole-string references such as `{syntax.string}`.
+- `src/theme/base.jsonc`: root theme properties such as `$schema`, `name`, `type`, and `author`.
+- `src/theme/colors.jsonc`: workbench and editor UI colors.
+- `src/theme/semantic.jsonc`: semantic highlighting settings and semantic token colors.
+- `src/theme/syntax.jsonc`: ordered TextMate scope rules, font styles, and references such as `{syntax.string}`.
 
 Run `npm run build:palette` when you only need the production palette reports. It writes JSON measurements, Markdown tables, and an SVG swatch sheet to `dev/generated/palette/` without needing the token map or template. `build:theme` writes those reports plus `themes/cassidy-dark-color-theme.json`. `build:dev` builds named inputs under `dev/experiments/` into previews and palette reports. Commit source and generated changes together; avoid editing generated files directly. No watch process runs automatically.
 
 The builder rejects duplicate JSONC keys, invalid settings, empty or malformed details, missing references, alias cycles, and placeholders outside color positions. Details are documentation only and are excluded from generated artifacts. Comments and scope order survive generation. Validation and formatting finish before output replacement. `check:generated` compares every artifact in memory without changing files and fails on missing or stale output.
 
-Files in `dev/experiments/` are independent inputs: no script promotes or merges them into production. Historical comparisons live in `dev/snapshots/` and are never regenerated.
+Files in `dev/experiments/` are independent inputs: optional `base.jsonc`, `colors.jsonc`, `semantic.jsonc`, and `syntax.jsonc` files override the matching production theme sections. Missing theme files inherit their production counterparts. No script promotes or merges experiments into production. Historical comparisons live in `dev/snapshots/` and are never regenerated.
 
 The editor settings in `.vscode/` recommend Prettier, ESLint, Markdown linting, and color inspection tools. Prettier formats on save, using two-space indentation and the repository configuration.
 
