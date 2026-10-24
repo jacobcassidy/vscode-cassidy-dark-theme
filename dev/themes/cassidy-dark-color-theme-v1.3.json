@@ -991,6 +991,16 @@
     "window.activeBorder": "#f0f", // unneeded [base]
     "window.inactiveBorder": "#f0f", // unneeded [base]
 
+    // Not in scheme, but in source code according to AI:
+    "agentsMobileDiff.addedForeground": "#00f",
+    "agentsMobileDiff.deletedForeground": "#00f",
+    "agentsMobileDiff.modifiedForeground": "#00f",
+    "editorOverviewRuler.agentFeedbackForeground": "#00f",
+    "agentsWindowGraphic.orange": "#00f",
+    "chat.fusionBadgeForeground": "#00f",
+    "chat.fusionBadgeGradientEnd": "#00f",
+    "chat.fusionBadgeGradientStart": "#00f",
+
     //** NOT ALLOWED **//
     "editorWatermark.foreground": "#00f", // [inherits `editor.foreground`] | example: text on empty vscode window
     "gitblame.inlineMessage": "#00f",
