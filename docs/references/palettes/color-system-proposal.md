@@ -1,6 +1,6 @@
 # Cassidy Dark color system proposal
 
-Status: proposed design rules for the next palette revision. The [v1.3 palette](v1.3-palette.md) supplies the starting colors; the shipped theme remains the source of truth for released behavior. This proposal does not change theme colors or introduce a build step.
+Status: proposed design rules for the next palette revision. The [v1.3 palette](v1.3-palette.md) supplies the starting colors; the shipped theme remains the source of truth for released behavior. This document proposes a build step but does not implement it or change theme colors.
 
 ## Recommendation
 
@@ -32,7 +32,7 @@ Use these authored targets as the starting parameters. The hex values are the ex
 | Red    | 30°  | 0.750          | 0.1250      | `#f38e7e`              | Keywords                    |
 | Yellow | 90°  | 0.875          | 0.0625      | `#e6d5a7`              | Strings                     |
 
-Blue's calibrated lightness comes from the current experiments. Keep it explicit rather than hiding it inside a special conversion rule. Hue anchors need not be evenly spaced around the color wheel.
+Blue's calibrated lightness comes from the current experiments. Keep it explicit rather than hiding it inside a special conversion rule. Keep the existing offset hue spacing: every anchor already sits on a 15° grid, including yellow at 90°. The hue anchors are explicit design choices, while the variant generation rules are shared across families.
 
 ### Five named variants
 
@@ -90,7 +90,7 @@ Give usage decisions their own names, then map those names to primitives. A prim
 | `diagnostic.warning.foreground` | `palette.orange.base` | Keep warning text readable on dark UI surfaces                          |
 | `diff.added.foreground`         | `palette.green.base`  | Pair with a separate translucent diff background                        |
 
-These aliases describe a future source model. VS Code theme entries still receive resolved hex colors; there is no token resolver in this repository today. If automation is added later, store parameters and aliases in one machine-readable source and generate both reference tables and theme values from it.
+These aliases describe a future source model. VS Code theme entries still receive resolved hex colors; there is no token resolver in this repository today. The proposed build below separates palette parameters, usage aliases, and theme mappings while making them one authoritative source set for the generated theme.
 
 Do not automatically equate `strong` with hover, `solid` with selection, or a diagnostic foreground with its background. Define hover and pressed states per component, keep their hue stable, and check their text and boundary contrast. Prefer adjusting a semantic UI color over distorting every syntax color to fix a button.
 
@@ -136,6 +136,141 @@ These are palette candidate checks, not a report that these pairs all ship today
 
 Do not make comments globally equal to neutral 400 without checking their other surfaces: `#929292` on input `#383838` is only 3.77:1. Likewise, choose foregrounds individually for filled controls; some fills may need a darker background or a lighter neutral rather than a simple light/dark foreground switch.
 
+## Proposed theme build
+
+Use a small Node.js script that resolves color variables during development and packaging. VS Code continues to load the generated theme at the path already declared in `package.json`. No runtime color resolver is needed.
+
+### Source and output files
+
+These are proposed paths, not files or commands available today:
+
+| Path                                   | Purpose                                                                                                          |
+| -------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| `src/palette.jsonc`                    | Authored hue/lightness parameters, neutrals, and documented primitive overrides                                  |
+| `src/tokens.jsonc`                     | Semantic aliases and explicit alpha values for overlays                                                          |
+| `src/cassidy-dark-color-theme.jsonc`   | Full theme template with named color references, comments, scope arrays, and font styles                         |
+| `scripts/build-theme.js`               | Parameter validation, palette generation, alias resolution, template substitution, and output comparison/writing |
+| `themes/cassidy-dark-color-theme.json` | Committed generated theme; edit the source files after migration                                                 |
+
+The dependency flow is:
+
+```text
+palette parameters → gamut-mapped primitives → semantic aliases
+                                                       ↓
+theme template ───────────────────────────────────→ resolved theme
+```
+
+Keep development and historical themes in `dev/themes/` independent. Do not infer mappings by globally replacing matching hex strings: two uses of the same hex can have different semantic roles.
+
+### Color variables and template references
+
+An excerpt from `src/palette.jsonc` could look like this. Each family generates the five variants defined above, using the same chroma rule. Neutral lightness values use the 0–1 scale, zero chroma, and a conventional hue of zero.
+
+```jsonc
+{
+  "families": {
+    "blue": { "hue": 255, "lightness": 0.768 },
+    "cyan": { "hue": 195, "lightness": 0.85 },
+    "green": { "hue": 135, "lightness": 0.8 },
+    "yellow": { "hue": 90, "lightness": 0.875 },
+  },
+  "neutrals": {
+    "900": 0.26,
+    "200": 0.82,
+    "000": 0.98,
+  },
+  "overrides": {},
+}
+```
+
+Internally, this produces primitive IDs such as `palette.cyan.base` and `palette.gray.900`. The complete configuration would include all eight families and every neutral required by the theme. Allow primitive overrides with either explicit OKLCH coordinates or an exact sRGB hex, plus a required reason. Exact hex overrides support a migration that preserves the released colors; OKLCH overrides still pass through the export policy.
+
+Use a flat map of semantic IDs in `src/tokens.jsonc`. Dots are part of each ID, and references are looked up by their complete name:
+
+```jsonc
+{
+  "surface.editor": { "ref": "palette.gray.900" },
+  "text.default": { "ref": "palette.gray.200" },
+  "syntax.function": { "ref": "palette.cyan.base" },
+  "syntax.property": { "ref": "palette.green.base" },
+  "diff.added.foreground": { "ref": "palette.green.base" },
+  "diff.added.background": { "ref": "diff.added.foreground", "alpha": 0.1 },
+}
+```
+
+Define `alpha` as an absolute opacity in the range 0–1, applied after resolving the referenced color. Emit lowercase `#rrggbb` for opaque colors and `#rrggbbaa` otherwise, with the alpha byte rounded from `255 × alpha`. For example, 0.1 produces `1a`. A new alpha replaces an inherited alpha; it does not multiply it. Preserve RGB channels without flattening the overlay onto a background.
+
+The theme template uses whole-string references of the form `{token.id}` in color-value positions:
+
+```jsonc
+{
+  "name": "Cassidy Dark",
+  "type": "dark",
+  "colors": {
+    "editor.background": "{surface.editor}",
+    "editor.foreground": "{text.default}",
+    "diffEditor.insertedLineBackground": "{diff.added.background}",
+  },
+  "semanticHighlighting": true,
+  "semanticTokenColors": {
+    "function": "{syntax.function}",
+    "property": { "foreground": "{syntax.property}" },
+  },
+  "tokenColors": [
+    {
+      "name": "Functions",
+      "scope": ["entity.name.function"],
+      "settings": {
+        "foreground": "{syntax.function}",
+      },
+    },
+  ],
+}
+```
+
+This is an illustrative excerpt. Migrate the complete existing theme, including its author, schema, metadata, comments, and ordered scope rules. Support workbench color values, semantic token shorthand strings and object foregrounds, and TextMate settings foreground/background values. Preserve font styles and other non-color fields. Reject variable references outside supported color positions. Literal hex values may be retained during migration, then moved into named tokens as their roles are reviewed.
+
+### Build behavior
+
+Implement one render function shared by write mode and check mode:
+
+1. Parse every JSONC input, allowing comments and trailing commas, and report syntax errors with its file and location. Reject duplicate keys, unknown configuration fields, non-finite numbers, invalid parameter ranges, and generated lightness outside 0–1. Validate chroma as nonnegative and hue anchors in the range 0–360, excluding 360.
+2. Generate palette targets, apply documented overrides, and convert OKLCH colors to hex using the export policy. Keep target and exported measurements available for a future generated palette reference.
+3. Resolve aliases recursively with memoization. Reject unknown references and cycles, reporting the full reference chain. Validate unused aliases too, so dormant errors cannot accumulate.
+4. Resolve references only in supported template color positions. Validate literal and resolved colors, and fail on unresolved placeholders in active values. Disabled examples inside comments remain comments.
+5. Preserve template comments and ordering with the existing [`jsonc-parser`](https://github.com/microsoft/node-jsonc-parser) dependency. Its syntax tree provides offsets for replacing string values, and its edit APIs can apply those changes without serializing the document from scratch. Add a stable generated-file header directing edits to `src/`.
+6. Format the result using the installed [Prettier API](https://prettier.io/docs/api), explicitly loading the repository configuration and applying the output file's overrides with `parser: "jsonc"`. Reparse the rendered result and validate its theme structure before writing. Keep output deterministic: no timestamps, host paths, or reordered scope arrays.
+7. In normal mode, write only when the generated bytes differ. In `--check` mode, render in memory, compare against the committed output, and exit nonzero on missing or stale output with instructions to run `npm run build:theme`. Check mode must not rewrite files.
+
+Finish validation before replacing the output; use a temporary sibling file and rename it after successful rendering. A failed build must leave the previous theme intact.
+
+### Commands and release integration
+
+Add these npm scripts when implementing the builder:
+
+```json
+{
+  "build:theme": "node scripts/build-theme.js",
+  "check:generated": "node scripts/build-theme.js --check"
+}
+```
+
+Integrate them with the existing workflow:
+
+- Put `npm run check:generated` first in `npm run check`, followed by the existing formatting, linting, theme validation, and tests. CI should report stale committed output before any command can overwrite it.
+- Run `npm run build:theme` before the current `dev:sync` script so the linked development extension loads the latest generated theme. Rebuild after editing palette inputs; a watch command can be added later if needed.
+- Put `npm run check:generated` before VSIX creation in `scripts/release/package.sh`. The Azure pipeline already runs `npm run check`, so it inherits the same check. A standalone local packaging command must also refuse stale output.
+- Add `src/` to `.vscodeignore`; the existing exclusions already omit scripts and development dependencies. Package the resolved theme, and keep the manifest's theme path unchanged.
+- Commit the source edits and generated output together. Update the development guide to identify `src/` as the authoring source and `themes/` as generated output. README and release notes should explain the new build command.
+
+### Migration and verification
+
+Separate build adoption from palette redesign. First copy the current theme to the template and replace colors with references based on their intended roles. Use exact hex overrides where needed to reproduce every current color, including eight-digit alpha values. Compare parsed themes for deep equality so metadata, scope order, font styles, and color assignments remain identical; review comments separately because a parsed comparison cannot check them.
+
+After that migration passes, apply the proposed OKLCH palette as a separate reviewed change. This avoids making a palette redesign a prerequisite for variable-based authoring.
+
+Before adopting the builder, add focused tests for alias chains and cycles, missing references, alpha rounding and replacement, duplicate-key errors, invalid parameters, known OKLCH/sRGB conversions, and out-of-gamut chroma reduction. Integration checks should cover all supported color positions, preservation of scope order and comments, deterministic output, read-only stale-output detection, and leaving the previous file intact after a failed build. The existing theme validator currently checks basic structure and asset paths; it does not replace these build-specific checks.
+
 ## Adoption sequence
 
 1. Agree on the hue anchors, base lightness values, variant names, and export policy before changing hex values.
@@ -143,4 +278,4 @@ Do not make comments globally equal to neutral 400 without checking their other 
 3. Map syntax and workbench roles independently. Document each exception with the affected semantic token and its contrast reason.
 4. Preview the existing grammar samples with semantic highlighting on and off, then inspect comments, links, buttons, diagnostics, terminal ANSI colors, and text under selection, search, and diff overlays.
 5. Check actual foreground/background pairs and review with color vision deficiency simulations. Keep icons, underlines, and labels where color communicates state.
-6. Promote the reviewed values into the shipped theme and update release notes. Add a generator only if maintaining the mappings manually becomes error-prone.
+6. If adopting variable-based authoring, implement the proposed build and verify a migration that preserves current colors first. Then apply the reviewed palette through the source files, commit the generated theme, and update release notes.
