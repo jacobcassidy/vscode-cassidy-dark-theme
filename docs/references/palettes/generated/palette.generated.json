@@ -25,17 +25,34 @@
         "h": 255
       },
       "resolved": {
-        "l": 0.800108,
-        "c": 0.099246,
-        "h": 254.854598
+        "l": 0.75,
+        "c": 0.117552,
+        "h": 255
       },
-      "hex": "#92c1fd",
+      "hex": "#7ab1f7",
       "exported": {
-        "l": 0.800108,
-        "c": 0.099246,
-        "h": 254.854598
+        "l": 0.750391,
+        "c": 0.117117,
+        "h": 254.94113
+      }
+    },
+    "palette.blue.400-muted": {
+      "target": {
+        "l": 0.75,
+        "c": 0.058776,
+        "h": 255
       },
-      "reason": "Preserve the released color while migrating authoring to generated tokens."
+      "resolved": {
+        "l": 0.75,
+        "c": 0.058776,
+        "h": 255
+      },
+      "hex": "#95b0d3",
+      "exported": {
+        "l": 0.749065,
+        "c": 0.058865,
+        "h": 255.047605
+      }
     },
     "palette.blue.500": {
       "target": {
@@ -44,17 +61,16 @@
         "h": 255
       },
       "resolved": {
-        "l": 0.700806,
-        "c": 0.133777,
-        "h": 254.877006
+        "l": 0.65,
+        "c": 0.170986,
+        "h": 255
       },
-      "hex": "#62a1f0",
+      "hex": "#3b8ff4",
       "exported": {
-        "l": 0.700806,
-        "c": 0.133777,
-        "h": 254.877006
-      },
-      "reason": "Preserve the released color while migrating authoring to generated tokens."
+        "l": 0.649285,
+        "c": 0.171092,
+        "h": 255.100661
+      }
     },
     "palette.blue.600": {
       "target": {
@@ -63,36 +79,16 @@
         "h": 255
       },
       "resolved": {
-        "l": 0.55123,
-        "c": 0.183052,
-        "h": 255.238342
-      },
-      "hex": "#006fd9",
-      "exported": {
-        "l": 0.55123,
-        "c": 0.183052,
-        "h": 255.238342
-      },
-      "reason": "Preserve the released color while migrating authoring to generated tokens."
-    },
-    "palette.blue.400-muted": {
-      "target": {
-        "l": 0.75,
-        "c": 0.049623,
+        "l": 0.55,
+        "c": 0.163004,
         "h": 255
       },
-      "resolved": {
-        "l": 0.80043,
-        "c": 0.049561,
-        "h": 255.14344
-      },
-      "hex": "#a9c0de",
+      "hex": "#1e70ce",
       "exported": {
-        "l": 0.80043,
-        "c": 0.049561,
-        "h": 255.14344
-      },
-      "reason": "Preserve the released color while migrating authoring to generated tokens."
+        "l": 0.549398,
+        "c": 0.164043,
+        "h": 255.314993
+      }
     },
     "palette.cyan.300": {
       "target": {
@@ -119,17 +115,34 @@
         "h": 195
       },
       "resolved": {
-        "l": 0.849411,
-        "c": 0.083359,
-        "h": 195.695992
+        "l": 0.85,
+        "c": 0.075,
+        "h": 195
       },
-      "hex": "#89dfdf",
+      "hex": "#92dedd",
       "exported": {
-        "l": 0.849411,
-        "c": 0.083359,
-        "h": 195.695992
+        "l": 0.850986,
+        "c": 0.075136,
+        "h": 194.774868
+      }
+    },
+    "palette.cyan.400-muted": {
+      "target": {
+        "l": 0.85,
+        "c": 0.0375,
+        "h": 195
       },
-      "reason": "Preserve the released color while migrating authoring to generated tokens."
+      "resolved": {
+        "l": 0.85,
+        "c": 0.0375,
+        "h": 195
+      },
+      "hex": "#b2d6d5",
+      "exported": {
+        "l": 0.849827,
+        "c": 0.038025,
+        "h": 194.380633
+      }
     },
     "palette.cyan.500": {
       "target": {
@@ -138,17 +151,16 @@
         "h": 195
       },
       "resolved": {
-        "l": 0.7511,
-        "c": 0.116728,
-        "h": 194.954964
+        "l": 0.75,
+        "c": 0.115179,
+        "h": 195
       },
-      "hex": "#35c5c5",
+      "hex": "#38c4c4",
       "exported": {
-        "l": 0.7511,
-        "c": 0.116728,
-        "h": 194.954964
-      },
-      "reason": "Preserve the released color while migrating authoring to generated tokens."
+        "l": 0.748928,
+        "c": 0.115021,
+        "h": 194.97754
+      }
     },
     "palette.cyan.600": {
       "target": {
@@ -166,24 +178,6 @@
         "l": 0.650327,
         "c": 0.099729,
         "h": 194.980367
-      }
-    },
-    "palette.cyan.400-muted": {
-      "target": {
-        "l": 0.85,
-        "c": 0.04168,
-        "h": 195
-      },
-      "resolved": {
-        "l": 0.85,
-        "c": 0.04168,
-        "h": 195
-      },
-      "hex": "#afd7d6",
-      "exported": {
-        "l": 0.850308,
-        "c": 0.041999,
-        "h": 194.506978
       }
     },
     "palette.green.300": {
@@ -211,17 +205,34 @@
         "h": 135
       },
       "resolved": {
-        "l": 0.801087,
-        "c": 0.100648,
-        "h": 135.069907
+        "l": 0.8,
+        "c": 0.1,
+        "h": 135
       },
       "hex": "#a2cd8b",
       "exported": {
         "l": 0.801087,
         "c": 0.100648,
         "h": 135.069907
+      }
+    },
+    "palette.green.400-muted": {
+      "target": {
+        "l": 0.8,
+        "c": 0.05,
+        "h": 135
       },
-      "reason": "Preserve the released color while migrating authoring to generated tokens."
+      "resolved": {
+        "l": 0.8,
+        "c": 0.05,
+        "h": 135
+      },
+      "hex": "#b0c5a5",
+      "exported": {
+        "l": 0.798799,
+        "c": 0.049749,
+        "h": 134.79648
+      }
     },
     "palette.green.500": {
       "target": {
@@ -230,17 +241,16 @@
         "h": 135
       },
       "resolved": {
-        "l": 0.700935,
-        "c": 0.134261,
-        "h": 135.060993
+        "l": 0.7,
+        "c": 0.15,
+        "h": 135
       },
-      "hex": "#79b158",
+      "hex": "#74b24c",
       "exported": {
-        "l": 0.700935,
-        "c": 0.134261,
-        "h": 135.060993
-      },
-      "reason": "Preserve the released color while migrating authoring to generated tokens."
+        "l": 0.698913,
+        "c": 0.149642,
+        "h": 134.796844
+      }
     },
     "palette.green.600": {
       "target": {
@@ -249,34 +259,15 @@
         "h": 135
       },
       "resolved": {
-        "l": 0.55084,
-        "c": 0.161305,
-        "h": 135.147826
-      },
-      "hex": "#438500",
-      "exported": {
-        "l": 0.55084,
-        "c": 0.161305,
-        "h": 135.147826
-      },
-      "reason": "Preserve the released color while migrating authoring to generated tokens."
-    },
-    "palette.green.400-muted": {
-      "target": {
-        "l": 0.8,
-        "c": 0.050324,
+        "l": 0.6,
+        "c": 0.157713,
         "h": 135
       },
-      "resolved": {
-        "l": 0.8,
-        "c": 0.050324,
-        "h": 135
-      },
-      "hex": "#b0c6a5",
+      "hex": "#539423",
       "exported": {
-        "l": 0.800962,
-        "c": 0.051433,
-        "h": 135.160071
+        "l": 0.600547,
+        "c": 0.157886,
+        "h": 135.130499
       }
     },
     "palette.orange.300": {
@@ -304,17 +295,34 @@
         "h": 60
       },
       "resolved": {
-        "l": 0.799602,
-        "c": 0.100349,
-        "h": 59.234273
+        "l": 0.8,
+        "c": 0.1,
+        "h": 60
       },
       "hex": "#eeae7b",
       "exported": {
         "l": 0.799602,
         "c": 0.100349,
         "h": 59.234273
+      }
+    },
+    "palette.orange.400-muted": {
+      "target": {
+        "l": 0.8,
+        "c": 0.05,
+        "h": 60
       },
-      "reason": "Preserve the released color while migrating authoring to generated tokens."
+      "resolved": {
+        "l": 0.8,
+        "c": 0.05,
+        "h": 60
+      },
+      "hex": "#d7b79e",
+      "exported": {
+        "l": 0.800756,
+        "c": 0.05037,
+        "h": 59.981903
+      }
     },
     "palette.orange.500": {
       "target": {
@@ -323,17 +331,16 @@
         "h": 60
       },
       "resolved": {
-        "l": 0.699406,
-        "c": 0.133418,
-        "h": 59.63135
+        "l": 0.7,
+        "c": 0.147743,
+        "h": 60
       },
-      "hex": "#da883e",
+      "hex": "#e0852b",
       "exported": {
-        "l": 0.699406,
-        "c": 0.133418,
-        "h": 59.63135
-      },
-      "reason": "Preserve the released color while migrating authoring to generated tokens."
+        "l": 0.700171,
+        "c": 0.148215,
+        "h": 59.907675
+      }
     },
     "palette.orange.600": {
       "target": {
@@ -342,34 +349,15 @@
         "h": 60
       },
       "resolved": {
-        "l": 0.550841,
-        "c": 0.129253,
-        "h": 59.941965
-      },
-      "hex": "#a75c00",
-      "exported": {
-        "l": 0.550841,
-        "c": 0.129253,
-        "h": 59.941965
-      },
-      "reason": "Preserve the released color while migrating authoring to generated tokens."
-    },
-    "palette.orange.400-muted": {
-      "target": {
-        "l": 0.8,
-        "c": 0.050174,
+        "l": 0.6,
+        "c": 0.126637,
         "h": 60
       },
-      "resolved": {
-        "l": 0.8,
-        "c": 0.050174,
-        "h": 60
-      },
-      "hex": "#d7b79e",
+      "hex": "#b66b21",
       "exported": {
-        "l": 0.800756,
-        "c": 0.05037,
-        "h": 59.981903
+        "l": 0.599355,
+        "c": 0.126894,
+        "h": 59.851777
       }
     },
     "palette.pink.300": {
@@ -397,17 +385,34 @@
         "h": 0
       },
       "resolved": {
-        "l": 0.848835,
-        "c": 0.083504,
-        "h": 0.002261
+        "l": 0.85,
+        "c": 0.075,
+        "h": 0
       },
-      "hex": "#fcb7cb",
+      "hex": "#f8bacc",
       "exported": {
-        "l": 0.848835,
-        "c": 0.083504,
-        "h": 0.002261
+        "l": 0.85037,
+        "c": 0.074859,
+        "h": 359.692954
+      }
+    },
+    "palette.pink.400-muted": {
+      "target": {
+        "l": 0.85,
+        "c": 0.0375,
+        "h": 0
       },
-      "reason": "Preserve the released color while migrating authoring to generated tokens."
+      "resolved": {
+        "l": 0.85,
+        "c": 0.0375,
+        "h": 0
+      },
+      "hex": "#e4c4cd",
+      "exported": {
+        "l": 0.850081,
+        "c": 0.038046,
+        "h": 359.09675
+      }
     },
     "palette.pink.500": {
       "target": {
@@ -434,34 +439,15 @@
         "h": 0
       },
       "resolved": {
-        "l": 0.599849,
-        "c": 0.166695,
-        "h": 0.015948
-      },
-      "hex": "#cb4c7c",
-      "exported": {
-        "l": 0.599849,
-        "c": 0.166695,
-        "h": 0.015948
-      },
-      "reason": "Preserve the released color while migrating authoring to generated tokens."
-    },
-    "palette.pink.400-muted": {
-      "target": {
-        "l": 0.85,
-        "c": 0.041752,
+        "l": 0.65,
+        "c": 0.175,
         "h": 0
       },
-      "resolved": {
-        "l": 0.85,
-        "c": 0.041752,
-        "h": 0
-      },
-      "hex": "#e6c3cc",
+      "hex": "#e0588b",
       "exported": {
-        "l": 0.849705,
-        "c": 0.041366,
-        "h": 0.744895
+        "l": 0.650244,
+        "c": 0.175595,
+        "h": 359.899197
       }
     },
     "palette.purple.300": {
@@ -489,17 +475,34 @@
         "h": 315
       },
       "resolved": {
-        "l": 0.799032,
-        "c": 0.100165,
-        "h": 315.05928
+        "l": 0.75,
+        "c": 0.125,
+        "h": 315
       },
-      "hex": "#d6aaea",
+      "hex": "#cc95e4",
       "exported": {
-        "l": 0.799032,
-        "c": 0.100165,
-        "h": 315.05928
+        "l": 0.750158,
+        "c": 0.124857,
+        "h": 315.234209
+      }
+    },
+    "palette.purple.400-muted": {
+      "target": {
+        "l": 0.75,
+        "c": 0.0625,
+        "h": 315
       },
-      "reason": "Preserve the released color while migrating authoring to generated tokens."
+      "resolved": {
+        "l": 0.75,
+        "c": 0.0625,
+        "h": 315
+      },
+      "hex": "#bda2ca",
+      "exported": {
+        "l": 0.749068,
+        "c": 0.063743,
+        "h": 314.741826
+      }
     },
     "palette.purple.500": {
       "target": {
@@ -508,17 +511,16 @@
         "h": 315
       },
       "resolved": {
-        "l": 0.700322,
-        "c": 0.132232,
-        "h": 314.721979
+        "l": 0.65,
+        "c": 0.175,
+        "h": 315
       },
-      "hex": "#bd84d7",
+      "hex": "#b669d7",
       "exported": {
-        "l": 0.700322,
-        "c": 0.132232,
-        "h": 314.721979
-      },
-      "reason": "Preserve the released color while migrating authoring to generated tokens."
+        "l": 0.650025,
+        "c": 0.17421,
+        "h": 314.849839
+      }
     },
     "palette.purple.600": {
       "target": {
@@ -527,34 +529,15 @@
         "h": 315
       },
       "resolved": {
-        "l": 0.54994,
-        "c": 0.182508,
-        "h": 314.866826
-      },
-      "hex": "#9847b9",
-      "exported": {
-        "l": 0.54994,
-        "c": 0.182508,
-        "h": 314.866826
-      },
-      "reason": "Preserve the released color while migrating authoring to generated tokens."
-    },
-    "palette.purple.400-muted": {
-      "target": {
-        "l": 0.75,
-        "c": 0.050082,
+        "l": 0.55,
+        "c": 0.225,
         "h": 315
       },
-      "resolved": {
-        "l": 0.75,
-        "c": 0.050082,
-        "h": 315
-      },
-      "hex": "#baa5c4",
+      "hex": "#a034c9",
       "exported": {
-        "l": 0.750015,
-        "c": 0.04952,
-        "h": 314.922535
+        "l": 0.550053,
+        "c": 0.224713,
+        "h": 314.726105
       }
     },
     "palette.red.300": {
@@ -582,17 +565,34 @@
         "h": 30
       },
       "resolved": {
-        "l": 0.750986,
-        "c": 0.116861,
-        "h": 29.799621
+        "l": 0.75,
+        "c": 0.125,
+        "h": 30
       },
-      "hex": "#ef9182",
+      "hex": "#f38e7e",
       "exported": {
-        "l": 0.750986,
-        "c": 0.116861,
-        "h": 29.799621
+        "l": 0.750132,
+        "c": 0.125724,
+        "h": 29.89322
+      }
+    },
+    "palette.red.400-muted": {
+      "target": {
+        "l": 0.75,
+        "c": 0.0625,
+        "h": 30
       },
-      "reason": "Preserve the released color while migrating authoring to generated tokens."
+      "resolved": {
+        "l": 0.75,
+        "c": 0.0625,
+        "h": 30
+      },
+      "hex": "#d3a097",
+      "exported": {
+        "l": 0.750943,
+        "c": 0.062501,
+        "h": 29.996639
+      }
     },
     "palette.red.500": {
       "target": {
@@ -601,17 +601,16 @@
         "h": 30
       },
       "resolved": {
-        "l": 0.648928,
-        "c": 0.150086,
-        "h": 29.671898
+        "l": 0.65,
+        "c": 0.175,
+        "h": 30
       },
-      "hex": "#db6656",
+      "hex": "#e65c4a",
       "exported": {
-        "l": 0.648928,
-        "c": 0.150086,
-        "h": 29.671898
-      },
-      "reason": "Preserve the released color while migrating authoring to generated tokens."
+        "l": 0.649783,
+        "c": 0.175163,
+        "h": 29.989987
+      }
     },
     "palette.red.600": {
       "target": {
@@ -629,24 +628,6 @@
         "l": 0.550639,
         "c": 0.198654,
         "h": 29.978841
-      }
-    },
-    "palette.red.400-muted": {
-      "target": {
-        "l": 0.75,
-        "c": 0.058431,
-        "h": 30
-      },
-      "resolved": {
-        "l": 0.75,
-        "c": 0.058431,
-        "h": 30
-      },
-      "hex": "#d0a198",
-      "exported": {
-        "l": 0.750002,
-        "c": 0.057687,
-        "h": 30.871732
       }
     },
     "palette.yellow.300": {
@@ -674,17 +655,34 @@
         "h": 90
       },
       "resolved": {
-        "l": 0.900252,
-        "c": 0.066629,
-        "h": 90.260365
+        "l": 0.9,
+        "c": 0.075,
+        "h": 90
       },
-      "hex": "#efddac",
+      "hex": "#f1dda5",
       "exported": {
-        "l": 0.900252,
-        "c": 0.066629,
-        "h": 90.260365
+        "l": 0.900574,
+        "c": 0.075372,
+        "h": 90.710819
+      }
+    },
+    "palette.yellow.400-muted": {
+      "target": {
+        "l": 0.9,
+        "c": 0.0375,
+        "h": 90
       },
-      "reason": "Preserve the released color while migrating authoring to generated tokens."
+      "resolved": {
+        "l": 0.9,
+        "c": 0.0375,
+        "h": 90
+      },
+      "hex": "#e8ddc3",
+      "exported": {
+        "l": 0.899507,
+        "c": 0.036616,
+        "h": 87.79796
+      }
     },
     "palette.yellow.500": {
       "target": {
@@ -693,17 +691,16 @@
         "h": 90
       },
       "resolved": {
-        "l": 0.799969,
-        "c": 0.099836,
-        "h": 89.604448
+        "l": 0.8,
+        "c": 0.125,
+        "h": 90
       },
-      "hex": "#d7bb70",
+      "hex": "#ddba56",
       "exported": {
-        "l": 0.799969,
-        "c": 0.099836,
-        "h": 89.604448
-      },
-      "reason": "Preserve the released color while migrating authoring to generated tokens."
+        "l": 0.800326,
+        "c": 0.12499,
+        "h": 90.015603
+      }
     },
     "palette.yellow.600": {
       "target": {
@@ -723,22 +720,22 @@
         "h": 90.242632
       }
     },
-    "palette.yellow.400-muted": {
+    "palette.gray.000": {
       "target": {
-        "l": 0.9,
-        "c": 0.033315,
-        "h": 90
+        "l": 0.98,
+        "c": 0,
+        "h": 0
       },
       "resolved": {
-        "l": 0.9,
-        "c": 0.033315,
-        "h": 90
+        "l": 0.98,
+        "c": 0,
+        "h": 0
       },
-      "hex": "#e6dec6",
+      "hex": "#f8f8f8",
       "exported": {
-        "l": 0.900591,
-        "c": 0.033135,
-        "h": 91.684669
+        "l": 0.979129,
+        "c": 0,
+        "h": 0
       }
     },
     "palette.gray.100": {
@@ -1133,24 +1130,6 @@
       "hex": "#ffffff",
       "exported": {
         "l": 1,
-        "c": 0,
-        "h": 0
-      }
-    },
-    "palette.gray.000": {
-      "target": {
-        "l": 0.98,
-        "c": 0,
-        "h": 0
-      },
-      "resolved": {
-        "l": 0.98,
-        "c": 0,
-        "h": 0
-      },
-      "hex": "#f8f8f8",
-      "exported": {
-        "l": 0.979129,
         "c": 0,
         "h": 0
       }

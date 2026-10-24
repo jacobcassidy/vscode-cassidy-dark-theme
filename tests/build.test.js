@@ -151,6 +151,7 @@ test("invalid palette parameters and unknown overrides fail", () => {
 
 test("token aliases resolve chains and replace inherited alpha", () => {
   const palette = generatePalette(configuration());
+
   const tokens = resolveTokens(
     {
       "syntax.string": { ref: "palette.yellow.400" },
@@ -179,10 +180,12 @@ test("unknown references, cycles, invalid alpha, and undocumented literal tokens
     () => resolveTokens({ "unused.alias": { ref: "missing.token" } }, palette),
     /unused.alias → missing.token/,
   );
+
   assert.throws(
     () => resolveTokens({ "a.one": { ref: "b.two" }, "b.two": { ref: "a.one" } }, palette),
     /a.one → b.two → a.one/,
   );
+
   assert.throws(() => resolveTokens({ "a.one": { ref: "palette.yellow.400", alpha: 2 } }, palette), /finite number/);
   assert.throws(() => resolveTokens({ "a.one": { hex: "#123456" } }, palette), /reason/);
   assert.throws(() => resolveTokens({ "a.one": { ref: "palette.yellow.400", typo: true } }, palette), /unknown field/);
@@ -193,6 +196,7 @@ test("JSONC parsing rejects duplicate keys and reports file locations", () => {
     () => parseJsonc('{\n "nested": {"a": 1, "a": 2}}', "input.jsonc"),
     /input.jsonc:2:\d+: duplicate key a/,
   );
+
   assert.throws(() => parseJsonc('{"a":}', "input.jsonc"), /input.jsonc:1:/);
   assert.equal(parseJsonc('{ // Comment\n"a": 1,}', "input.jsonc").value.a, 1);
 });
@@ -211,6 +215,7 @@ test("template replacement covers all color positions and preserves comments and
     background: "#242424",
     fontStyle: "bold italic",
   });
+
   assert.match(output, /Keep comments, including disabled \{missing.reference\} examples/);
   assert.match(output, /^\/\/ Generated/);
   assert.throws(
@@ -222,6 +227,7 @@ test("template replacement covers all color positions and preserves comments and
       ),
     /outside a color position/,
   );
+
   assert.throws(
     () =>
       renderTemplate(
@@ -231,6 +237,7 @@ test("template replacement covers all color positions and preserves comments and
       ),
     /unknown template reference/,
   );
+
   assert.throws(
     () => renderTemplate(template.replace('"tokenColors": [', '"tokenColors": null, "other": ['), new Map(), palette),
     /must be an array/,
@@ -284,4 +291,37 @@ test("failed validation leaves all previous outputs intact and palette-only mode
   await rm(join(root, "src/tokens.jsonc"));
   await rm(join(root, "src/cassidy-dark-color-theme.jsonc"));
   assert.equal((await buildTheme({ root, paletteOnly: true })).changed.length, 0);
+});
+
+test("the authored palette keeps base syntax and colored control text readable", async () => {
+  const config = parseJsonc(await readFile(new URL("../src/palette.jsonc", import.meta.url), "utf8"), "palette").value;
+  const aliases = parseJsonc(await readFile(new URL("../src/tokens.jsonc", import.meta.url), "utf8"), "tokens").value;
+  const source = await readFile(new URL("../src/cassidy-dark-color-theme.jsonc", import.meta.url), "utf8");
+  const palette = generatePalette(config);
+  const theme = parse(renderTemplate(source, resolveTokens(aliases, palette), palette));
+
+  function luminance(hex) {
+    return [1, 3, 5]
+      .map((offset) => Number.parseInt(hex.slice(offset, offset + 2), 16) / 255)
+      .map((value) => (value <= 0.04045 ? value / 12.92 : ((value + 0.055) / 1.055) ** 2.4))
+      .reduce((sum, value, index) => sum + value * [0.2126, 0.7152, 0.0722][index], 0);
+  }
+
+  function contrast(foreground, background) {
+    const [low, high] = [luminance(foreground), luminance(background)].sort((a, b) => a - b);
+
+    return (high + 0.05) / (low + 0.05);
+  }
+
+  for (const name of Object.keys(config.families)) {
+    assert.ok(contrast(palette.get(`palette.${name}.400`).hex, theme.colors["editor.background"]) >= 4.5, name);
+  }
+
+  for (const [background, foreground] of [
+    ["button.background", "button.foreground"],
+    ["button.hoverBackground", "button.foreground"],
+    ["statusBar.debuggingBackground", "statusBar.debuggingForeground"],
+  ]) {
+    assert.ok(contrast(theme.colors[foreground], theme.colors[background]) >= 4.5, background);
+  }
 });

@@ -1,6 +1,6 @@
 # Cassidy Dark color system proposal
 
-Status: the build described here is implemented. Authoring inputs live in `src/`; the shipped theme and palette references are generated. The initial migration preserves released colors through documented overrides before applying the new palette. The [development guide](../../development/development-guide.md) describes the available commands, and the [generated palette](generated/palette.generated.md) shows the current output.
+Status: the build and palette described here are implemented. Authoring inputs live in `src/`; the shipped theme and palette references are generated. The initial migration verified that every parsed theme value and original comment was preserved before the new palette was applied in a separate change. The [development guide](../../development/development-guide.md) describes the available commands, and the [generated palette](generated/palette.generated.md) shows the current output.
 
 ## Recommendation
 
@@ -59,7 +59,7 @@ An explicit `baseChroma` still passes through the gamut limit; it does not bypas
 
 This keeps the visual target separate from the display limit. Do not choose chroma solely as a fixed fraction of the maximum: at these anchors, green's maximum is approximately 0.234 while pink's is approximately 0.089. A common gamut fraction alone would give green much more absolute chroma. Equal gamut fractions do not imply equal perceptual chroma.
 
-The following base candidates use strength 0.5 and gamut fraction 0.9, with yellow's explicit base chroma of 0.0750. Measurements are calculated in sRGB; displayed chroma values are rounded, while hex values are generated from the unrounded values.
+The implemented starting palette uses strength 0.5 and gamut fraction 0.9, with yellow's explicit base chroma of 0.0750. Measurements are calculated in sRGB; displayed chroma values are rounded, while hex values are generated from the unrounded values.
 
 | Family | L     | H    | Target C | Maximum sRGB C | Chosen C | Candidate hex |
 | ------ | ----- | ---- | -------- | -------------- | -------- | ------------- |
@@ -122,27 +122,29 @@ OKLCH provides separate lightness, chroma, and hue coordinates, which makes thes
 
 Give usage decisions their own names, then map those names to primitives. A primitive may serve multiple roles without making those roles equivalent.
 
-| Proposed semantic token         | Starting reference       | Decision                                                                |
-| ------------------------------- | ------------------------ | ----------------------------------------------------------------------- |
-| `syntax.typeHint`               | `palette.blue.400-muted` | Keep type hints quieter through chroma                                  |
-| `syntax.storageType`            | `palette.blue.400`       | Preserve the current blue syntax identity                               |
-| `syntax.function`               | `palette.cyan.400`       | Preserve the current function identity                                  |
-| `syntax.property`               | `palette.green.400`      | Preserve the current property identity                                  |
-| `syntax.parameter`              | `palette.orange.400`     | Preserve the current parameter identity                                 |
-| `syntax.variable`               | `palette.pink.400`       | Preserve the current variable identity                                  |
-| `syntax.constant`               | `palette.purple.400`     | Preserve the current constant identity                                  |
-| `syntax.keyword`                | `palette.red.400`        | Preserve the current keyword identity                                   |
-| `syntax.string`                 | `palette.yellow.400`     | Preserve the current string identity                                    |
-| `ui.link.foreground`            | `palette.blue.500`       | Verify on every surface where links appear                              |
-| `ui.action.primary.background`  | `palette.blue.600`       | Starting candidate; adjust the semantic fill if its text fails contrast |
-| `ui.action.primary.foreground`  | A neutral foreground     | Select together with the action background                              |
-| `diagnostic.error.foreground`   | `palette.red.500`        | Validate independently from red syntax and error fills                  |
-| `diagnostic.warning.foreground` | `palette.orange.400`     | Keep warning text readable on dark UI surfaces                          |
-| `diff.added.foreground`         | `palette.green.400`      | Pair with a separate translucent diff background                        |
+| Semantic token                  | Current reference        | Decision                                                    |
+| ------------------------------- | ------------------------ | ----------------------------------------------------------- |
+| `syntax.typeHint`               | `palette.blue.400-muted` | Keep type hints quieter through chroma                      |
+| `syntax.storageType`            | `palette.blue.400`       | Preserve the current blue syntax identity                   |
+| `syntax.function`               | `palette.cyan.400`       | Preserve the current function identity                      |
+| `syntax.property`               | `palette.green.400`      | Preserve the current property identity                      |
+| `syntax.parameter`              | `palette.orange.400`     | Preserve the current parameter identity                     |
+| `syntax.variable`               | `palette.pink.400`       | Preserve the current variable identity                      |
+| `syntax.constant`               | `palette.purple.400`     | Preserve the current constant identity                      |
+| `syntax.keyword`                | `palette.red.400`        | Preserve the current keyword identity                       |
+| `syntax.string`                 | `palette.yellow.400`     | Preserve the current string identity                        |
+| `ui.textLink.foreground`        | `palette.blue.400`       | Keep links readable across editor and input surfaces        |
+| `ui.button.background`          | Documented L53/H255 hex  | Keep normal and hover button text above the contrast target |
+| `ui.button.foreground`          | `palette.gray.000`       | Select together with the action background                  |
+| `diagnostic.error.foreground`   | `palette.red.500`        | Validate independently from red syntax and error fills      |
+| `diagnostic.warning.foreground` | `palette.orange.400`     | Keep warning text readable on dark UI surfaces              |
+| `diff.added.foreground`         | `palette.green.400`      | Pair with a separate translucent diff background            |
 
 The implemented build separates palette parameters, usage aliases, and theme mappings into one authoritative source set. VS Code receives resolved hex values; token resolution runs at build time.
 
 Do not automatically equate `500` with hover, `600` with selection, or a diagnostic foreground with its background. Define hover and pressed states per component, keep their hue stable, and check their text and boundary contrast. Prefer adjusting a semantic UI color over distorting every syntax color to fix a button.
+
+The primary button uses a documented semantic fill at L53/H255 with the same 90% gamut headroom, while hover uses blue `600` at L55. Both retain at least 4.5:1 contrast with `#f8f8f8` text. The debugging status bar uses orange `600` with neutral `1000` text rather than orange text on an orange fill. Existing neutral text roles otherwise retain their previous mappings; the historical comment and muted-UI contrast limitations below still need visual review.
 
 Treat terminal normal and bright colors as a separate semantic mapping. The references often map `ansiBright*` to a darker, more chromatic variant; explicitly review that choice for legibility rather than deriving it from the word Bright.
 

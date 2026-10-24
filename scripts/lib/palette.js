@@ -78,22 +78,29 @@ export function generatePalette(config) {
     for (const [tone, l] of [
       ["300", Math.min(family.lightness + 0.1, 0.975)],
       ["400", family.lightness],
+      ["400-muted", family.lightness],
       ["500", family.lightness - 0.1],
       ["600", family.lightness - 0.2],
     ]) {
-      add(`palette.${name}.${tone}`, {
-        l,
-        c: Math.max(0, base + config.chroma.strength * (family.lightness - l)),
-        h: family.hue,
-      });
+      const c =
+        tone === "400-muted"
+          ? colors.get(`palette.${name}.400`).resolved.c / 2
+          : Math.max(0, base + config.chroma.strength * (family.lightness - l));
+
+      add(`palette.${name}.${tone}`, { l, c, h: family.hue }, tone === "400-muted" ? 1 : config.chroma.gamutFraction);
     }
-
-    const baseColor = colors.get(`palette.${name}.400`).resolved;
-
-    add(`palette.${name}.400-muted`, { l: family.lightness, c: baseColor.c / 2, h: family.hue }, 1);
   }
 
-  for (const [tone, l] of Object.entries(config.neutrals)) {
+  const neutrals = Object.entries(config.neutrals).sort(([a], [b]) => {
+    const left = Number(a);
+    const right = Number(b);
+    if (Number.isFinite(left) && Number.isFinite(right)) return left - right;
+    if (Number.isFinite(left)) return -1;
+    if (Number.isFinite(right)) return 1;
+    return a < b ? -1 : a > b ? 1 : 0;
+  });
+
+  for (const [tone, l] of neutrals) {
     if (!/^[a-z0-9-]+$/i.test(tone)) throw new Error(`invalid neutral ID ${tone}`);
 
     number(l, 0, 1, `neutral ${tone}`);

@@ -17,6 +17,7 @@ All notable changes to this project are documented in this file.
 
 ### Changed
 
+- Applied the generated eight-family palette, including yellow L90/C0.075/H90, numbered tones and `400-muted`; linked TextMate and semantic colors through shared aliases and adjusted primary-button and debugging-status-bar text contrast independently.
 - Set the proposed yellow base to L90/C0.075/H90 and added optional per-family base chroma anchors with derived tone generation and calculated yellow candidates.
 - Adopted numbered tones `300`, `400`, `500`, and `600`, with `400-muted` as the base color's chroma modifier, throughout the color system proposal.
 - Refined the proposed color system with the latest base anchors, shared chroma strength, a per-variant sRGB gamut limit, calculated base candidates, and a lightness ceiling for yellow variants.

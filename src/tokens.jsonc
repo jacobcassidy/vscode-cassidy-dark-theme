@@ -28,14 +28,14 @@
     "ref": "palette.gray.000"
   },
   "ui.button.background": {
-    "ref": "palette.blue.600"
+    "hex": "#1c6bc4",
+    "reason": "Primary button fill uses L53/H255 with gamut headroom, allowing its lighter blue 600 hover state to retain at least 4.5:1 contrast with the button text."
   },
   "ui.button.foreground": {
     "ref": "palette.gray.000"
   },
   "ui.button.hoverBackground": {
-    "hex": "#1578e3",
-    "reason": "Preserve the existing primary button hover state independently of syntax palette tones."
+    "ref": "palette.blue.600"
   },
   "ui.button.secondaryBackground": {
     "ref": "palette.gray.700"
@@ -615,7 +615,7 @@
     "ref": "palette.orange.600"
   },
   "ui.statusBar.debuggingForeground": {
-    "ref": "palette.orange.400"
+    "ref": "palette.gray.1000"
   },
   "ui.statusBar.focusBorder": {
     "ref": "palette.gray.700"
@@ -809,31 +809,31 @@
     "alpha": 0.2
   },
   "semantic.class": {
-    "ref": "palette.cyan.400"
+    "ref": "syntax.function"
   },
   "semantic.function": {
-    "ref": "palette.cyan.400"
+    "ref": "syntax.function"
   },
   "semantic.function.defaultLibrary": {
-    "ref": "palette.gray.000"
+    "ref": "syntax.support"
   },
   "semantic.method": {
-    "ref": "palette.gray.000"
+    "ref": "syntax.support"
   },
   "semantic.namespace": {
-    "ref": "palette.purple.400"
+    "ref": "syntax.constant"
   },
   "semantic.parameter": {
-    "ref": "palette.orange.400"
+    "ref": "syntax.parameter"
   },
   "semantic.property": {
-    "ref": "palette.green.400"
+    "ref": "syntax.property"
   },
   "semantic.variable": {
-    "ref": "palette.pink.400"
+    "ref": "syntax.variable"
   },
   "semantic.variable.defaultLibrary": {
-    "ref": "palette.gray.150"
+    "ref": "syntax.defaultLibrary"
   },
   "syntax.support": {
     "ref": "palette.gray.000"

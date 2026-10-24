@@ -11,74 +11,74 @@
 <text x="620" y="55">600</text>
 <text x="20" y="94">blue</text>
 <rect x="132" y="70" width="108" height="38" rx="3" fill="#b0d1fa"/><text x="132" y="127">#b0d1fa</text>
-<rect x="254" y="70" width="108" height="38" rx="3" fill="#92c1fd"/><text x="254" y="127">#92c1fd</text>
-<rect x="376" y="70" width="108" height="38" rx="3" fill="#a9c0de"/><text x="376" y="127">#a9c0de</text>
-<rect x="498" y="70" width="108" height="38" rx="3" fill="#62a1f0"/><text x="498" y="127">#62a1f0</text>
-<rect x="620" y="70" width="108" height="38" rx="3" fill="#006fd9"/><text x="620" y="127">#006fd9</text>
+<rect x="254" y="70" width="108" height="38" rx="3" fill="#7ab1f7"/><text x="254" y="127">#7ab1f7</text>
+<rect x="376" y="70" width="108" height="38" rx="3" fill="#95b0d3"/><text x="376" y="127">#95b0d3</text>
+<rect x="498" y="70" width="108" height="38" rx="3" fill="#3b8ff4"/><text x="498" y="127">#3b8ff4</text>
+<rect x="620" y="70" width="108" height="38" rx="3" fill="#1e70ce"/><text x="620" y="127">#1e70ce</text>
 <text x="20" y="170">cyan</text>
 <rect x="132" y="146" width="108" height="38" rx="3" fill="#dcf4f4"/><text x="132" y="203">#dcf4f4</text>
-<rect x="254" y="146" width="108" height="38" rx="3" fill="#89dfdf"/><text x="254" y="203">#89dfdf</text>
-<rect x="376" y="146" width="108" height="38" rx="3" fill="#afd7d6"/><text x="376" y="203">#afd7d6</text>
-<rect x="498" y="146" width="108" height="38" rx="3" fill="#35c5c5"/><text x="498" y="203">#35c5c5</text>
+<rect x="254" y="146" width="108" height="38" rx="3" fill="#92dedd"/><text x="254" y="203">#92dedd</text>
+<rect x="376" y="146" width="108" height="38" rx="3" fill="#b2d6d5"/><text x="376" y="203">#b2d6d5</text>
+<rect x="498" y="146" width="108" height="38" rx="3" fill="#38c4c4"/><text x="498" y="203">#38c4c4</text>
 <rect x="620" y="146" width="108" height="38" rx="3" fill="#2da2a2"/><text x="620" y="203">#2da2a2</text>
 <text x="20" y="246">green</text>
 <rect x="132" y="222" width="108" height="38" rx="3" fill="#d0e6c5"/><text x="132" y="279">#d0e6c5</text>
 <rect x="254" y="222" width="108" height="38" rx="3" fill="#a2cd8b"/><text x="254" y="279">#a2cd8b</text>
-<rect x="376" y="222" width="108" height="38" rx="3" fill="#b0c6a5"/><text x="376" y="279">#b0c6a5</text>
-<rect x="498" y="222" width="108" height="38" rx="3" fill="#79b158"/><text x="498" y="279">#79b158</text>
-<rect x="620" y="222" width="108" height="38" rx="3" fill="#438500"/><text x="620" y="279">#438500</text>
+<rect x="376" y="222" width="108" height="38" rx="3" fill="#b0c5a5"/><text x="376" y="279">#b0c5a5</text>
+<rect x="498" y="222" width="108" height="38" rx="3" fill="#74b24c"/><text x="498" y="279">#74b24c</text>
+<rect x="620" y="222" width="108" height="38" rx="3" fill="#539423"/><text x="620" y="279">#539423</text>
 <text x="20" y="322">orange</text>
 <rect x="132" y="298" width="108" height="38" rx="3" fill="#f8d7be"/><text x="132" y="355">#f8d7be</text>
 <rect x="254" y="298" width="108" height="38" rx="3" fill="#eeae7b"/><text x="254" y="355">#eeae7b</text>
 <rect x="376" y="298" width="108" height="38" rx="3" fill="#d7b79e"/><text x="376" y="355">#d7b79e</text>
-<rect x="498" y="298" width="108" height="38" rx="3" fill="#da883e"/><text x="498" y="355">#da883e</text>
-<rect x="620" y="298" width="108" height="38" rx="3" fill="#a75c00"/><text x="620" y="355">#a75c00</text>
+<rect x="498" y="298" width="108" height="38" rx="3" fill="#e0852b"/><text x="498" y="355">#e0852b</text>
+<rect x="620" y="298" width="108" height="38" rx="3" fill="#b66b21"/><text x="620" y="355">#b66b21</text>
 <text x="20" y="398">pink</text>
 <rect x="132" y="374" width="108" height="38" rx="3" fill="#fde8ee"/><text x="132" y="431">#fde8ee</text>
-<rect x="254" y="374" width="108" height="38" rx="3" fill="#fcb7cb"/><text x="254" y="431">#fcb7cb</text>
-<rect x="376" y="374" width="108" height="38" rx="3" fill="#e6c3cc"/><text x="376" y="431">#e6c3cc</text>
+<rect x="254" y="374" width="108" height="38" rx="3" fill="#f8bacc"/><text x="254" y="431">#f8bacc</text>
+<rect x="376" y="374" width="108" height="38" rx="3" fill="#e4c4cd"/><text x="376" y="431">#e4c4cd</text>
 <rect x="498" y="374" width="108" height="38" rx="3" fill="#ee8bab"/><text x="498" y="431">#ee8bab</text>
-<rect x="620" y="374" width="108" height="38" rx="3" fill="#cb4c7c"/><text x="620" y="431">#cb4c7c</text>
+<rect x="620" y="374" width="108" height="38" rx="3" fill="#e0588b"/><text x="620" y="431">#e0588b</text>
 <text x="20" y="474">purple</text>
 <rect x="132" y="450" width="108" height="38" rx="3" fill="#e1c0f0"/><text x="132" y="507">#e1c0f0</text>
-<rect x="254" y="450" width="108" height="38" rx="3" fill="#d6aaea"/><text x="254" y="507">#d6aaea</text>
-<rect x="376" y="450" width="108" height="38" rx="3" fill="#baa5c4"/><text x="376" y="507">#baa5c4</text>
-<rect x="498" y="450" width="108" height="38" rx="3" fill="#bd84d7"/><text x="498" y="507">#bd84d7</text>
-<rect x="620" y="450" width="108" height="38" rx="3" fill="#9847b9"/><text x="620" y="507">#9847b9</text>
+<rect x="254" y="450" width="108" height="38" rx="3" fill="#cc95e4"/><text x="254" y="507">#cc95e4</text>
+<rect x="376" y="450" width="108" height="38" rx="3" fill="#bda2ca"/><text x="376" y="507">#bda2ca</text>
+<rect x="498" y="450" width="108" height="38" rx="3" fill="#b669d7"/><text x="498" y="507">#b669d7</text>
+<rect x="620" y="450" width="108" height="38" rx="3" fill="#a034c9"/><text x="620" y="507">#a034c9</text>
 <text x="20" y="550">red</text>
 <rect x="132" y="526" width="108" height="38" rx="3" fill="#fabcb1"/><text x="132" y="583">#fabcb1</text>
-<rect x="254" y="526" width="108" height="38" rx="3" fill="#ef9182"/><text x="254" y="583">#ef9182</text>
-<rect x="376" y="526" width="108" height="38" rx="3" fill="#d0a198"/><text x="376" y="583">#d0a198</text>
-<rect x="498" y="526" width="108" height="38" rx="3" fill="#db6656"/><text x="498" y="583">#db6656</text>
+<rect x="254" y="526" width="108" height="38" rx="3" fill="#f38e7e"/><text x="254" y="583">#f38e7e</text>
+<rect x="376" y="526" width="108" height="38" rx="3" fill="#d3a097"/><text x="376" y="583">#d3a097</text>
+<rect x="498" y="526" width="108" height="38" rx="3" fill="#e65c4a"/><text x="498" y="583">#e65c4a</text>
 <rect x="620" y="526" width="108" height="38" rx="3" fill="#cc2b1c"/><text x="620" y="583">#cc2b1c</text>
 <text x="20" y="626">yellow</text>
 <rect x="132" y="602" width="108" height="38" rx="3" fill="#fef6e2"/><text x="132" y="659">#fef6e2</text>
-<rect x="254" y="602" width="108" height="38" rx="3" fill="#efddac"/><text x="254" y="659">#efddac</text>
-<rect x="376" y="602" width="108" height="38" rx="3" fill="#e6dec6"/><text x="376" y="659">#e6dec6</text>
-<rect x="498" y="602" width="108" height="38" rx="3" fill="#d7bb70"/><text x="498" y="659">#d7bb70</text>
+<rect x="254" y="602" width="108" height="38" rx="3" fill="#f1dda5"/><text x="254" y="659">#f1dda5</text>
+<rect x="376" y="602" width="108" height="38" rx="3" fill="#e8ddc3"/><text x="376" y="659">#e8ddc3</text>
+<rect x="498" y="602" width="108" height="38" rx="3" fill="#ddba56"/><text x="498" y="659">#ddba56</text>
 <rect x="620" y="602" width="108" height="38" rx="3" fill="#bd9a2c"/><text x="620" y="659">#bd9a2c</text>
 <text x="20" y="694">Neutrals</text>
-<rect x="20" y="710" width="132" height="32" rx="3" fill="#dedede"/><text x="20" y="759">100 #dedede</text>
-<rect x="166" y="710" width="132" height="32" rx="3" fill="#d1d1d1"/><text x="166" y="759">150 #d1d1d1</text>
-<rect x="312" y="710" width="132" height="32" rx="3" fill="#c4c4c4"/><text x="312" y="759">200 #c4c4c4</text>
-<rect x="458" y="710" width="132" height="32" rx="3" fill="#ababab"/><text x="458" y="759">300 #ababab</text>
-<rect x="604" y="710" width="132" height="32" rx="3" fill="#929292"/><text x="604" y="759">400 #929292</text>
-<rect x="20" y="786" width="132" height="32" rx="3" fill="#868686"/><text x="20" y="835">450 #868686</text>
-<rect x="166" y="786" width="132" height="32" rx="3" fill="#7a7a7a"/><text x="166" y="835">500 #7a7a7a</text>
-<rect x="312" y="786" width="132" height="32" rx="3" fill="#636363"/><text x="312" y="835">600 #636363</text>
-<rect x="458" y="786" width="132" height="32" rx="3" fill="#585858"/><text x="458" y="835">650 #585858</text>
-<rect x="604" y="786" width="132" height="32" rx="3" fill="#525252"/><text x="604" y="835">675 #525252</text>
-<rect x="20" y="862" width="132" height="32" rx="3" fill="#4d4d4d"/><text x="20" y="911">700 #4d4d4d</text>
-<rect x="166" y="862" width="132" height="32" rx="3" fill="#424242"/><text x="166" y="911">750 #424242</text>
-<rect x="312" y="862" width="132" height="32" rx="3" fill="#383838"/><text x="312" y="911">800 #383838</text>
-<rect x="458" y="862" width="132" height="32" rx="3" fill="#333333"/><text x="458" y="911">825 #333333</text>
-<rect x="604" y="862" width="132" height="32" rx="3" fill="#2e2e2e"/><text x="604" y="911">850 #2e2e2e</text>
-<rect x="20" y="938" width="132" height="32" rx="3" fill="#292929"/><text x="20" y="987">875 #292929</text>
-<rect x="166" y="938" width="132" height="32" rx="3" fill="#242424"/><text x="166" y="987">900 #242424</text>
-<rect x="312" y="938" width="132" height="32" rx="3" fill="#1f1f1f"/><text x="312" y="987">925 #1f1f1f</text>
-<rect x="458" y="938" width="132" height="32" rx="3" fill="#161616"/><text x="458" y="987">975 #161616</text>
-<rect x="604" y="938" width="132" height="32" rx="3" fill="#121212"/><text x="604" y="987">1000 #121212</text>
-<rect x="20" y="1014" width="132" height="32" rx="3" fill="#000000"/><text x="20" y="1063">black #000000</text>
-<rect x="166" y="1014" width="132" height="32" rx="3" fill="#ffffff"/><text x="166" y="1063">white #ffffff</text>
-<rect x="312" y="1014" width="132" height="32" rx="3" fill="#f8f8f8"/><text x="312" y="1063">000 #f8f8f8</text>
+<rect x="20" y="710" width="132" height="32" rx="3" fill="#f8f8f8"/><text x="20" y="759">000 #f8f8f8</text>
+<rect x="166" y="710" width="132" height="32" rx="3" fill="#dedede"/><text x="166" y="759">100 #dedede</text>
+<rect x="312" y="710" width="132" height="32" rx="3" fill="#d1d1d1"/><text x="312" y="759">150 #d1d1d1</text>
+<rect x="458" y="710" width="132" height="32" rx="3" fill="#c4c4c4"/><text x="458" y="759">200 #c4c4c4</text>
+<rect x="604" y="710" width="132" height="32" rx="3" fill="#ababab"/><text x="604" y="759">300 #ababab</text>
+<rect x="20" y="786" width="132" height="32" rx="3" fill="#929292"/><text x="20" y="835">400 #929292</text>
+<rect x="166" y="786" width="132" height="32" rx="3" fill="#868686"/><text x="166" y="835">450 #868686</text>
+<rect x="312" y="786" width="132" height="32" rx="3" fill="#7a7a7a"/><text x="312" y="835">500 #7a7a7a</text>
+<rect x="458" y="786" width="132" height="32" rx="3" fill="#636363"/><text x="458" y="835">600 #636363</text>
+<rect x="604" y="786" width="132" height="32" rx="3" fill="#585858"/><text x="604" y="835">650 #585858</text>
+<rect x="20" y="862" width="132" height="32" rx="3" fill="#525252"/><text x="20" y="911">675 #525252</text>
+<rect x="166" y="862" width="132" height="32" rx="3" fill="#4d4d4d"/><text x="166" y="911">700 #4d4d4d</text>
+<rect x="312" y="862" width="132" height="32" rx="3" fill="#424242"/><text x="312" y="911">750 #424242</text>
+<rect x="458" y="862" width="132" height="32" rx="3" fill="#383838"/><text x="458" y="911">800 #383838</text>
+<rect x="604" y="862" width="132" height="32" rx="3" fill="#333333"/><text x="604" y="911">825 #333333</text>
+<rect x="20" y="938" width="132" height="32" rx="3" fill="#2e2e2e"/><text x="20" y="987">850 #2e2e2e</text>
+<rect x="166" y="938" width="132" height="32" rx="3" fill="#292929"/><text x="166" y="987">875 #292929</text>
+<rect x="312" y="938" width="132" height="32" rx="3" fill="#242424"/><text x="312" y="987">900 #242424</text>
+<rect x="458" y="938" width="132" height="32" rx="3" fill="#1f1f1f"/><text x="458" y="987">925 #1f1f1f</text>
+<rect x="604" y="938" width="132" height="32" rx="3" fill="#161616"/><text x="604" y="987">975 #161616</text>
+<rect x="20" y="1014" width="132" height="32" rx="3" fill="#121212"/><text x="20" y="1063">1000 #121212</text>
+<rect x="166" y="1014" width="132" height="32" rx="3" fill="#000000"/><text x="166" y="1063">black #000000</text>
+<rect x="312" y="1014" width="132" height="32" rx="3" fill="#ffffff"/><text x="312" y="1063">white #ffffff</text>
 </g></svg>
