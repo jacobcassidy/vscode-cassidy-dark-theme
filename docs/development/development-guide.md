@@ -185,7 +185,7 @@ To submit a run from your computer, the Azure CLI must be installed, authenticat
 From a local checkout on `main`, run:
 
 ```bash
-npm run release:queue-azure-pipeline
+npm run release:publish
 ```
 
 [`scripts/release/publish-azure.sh`](../../scripts/release/publish-azure.sh) rejects any branch other than `main`, including detached HEAD, then submits:
@@ -200,6 +200,8 @@ az pipelines run \
 ```
 
 The command queues the remote `main` branch and opens the run in the browser. It does not commit, push, upload local changes, increment the version, or create a local Git tag. You can also manually queue the Azure pipeline against `main`; its own branch check still applies.
+
+The queued pipeline publishes the VSIX to both the VS Code Marketplace and GitHub. The Marketplace step runs first, followed by GitHub release creation.
 
 ### Pipeline execution
 
@@ -234,7 +236,7 @@ If Marketplace publication succeeded and only GitHub publication failed:
 4. Run the GitHub helper with the absolute path to the downloaded VSIX:
 
    ```bash
-   npm run release:github-release -- /absolute/path/to/cassidy-dark-VERSION.vsix
+   npm run release:github-recover -- /absolute/path/to/cassidy-dark-VERSION.vsix
    ```
 
 This runs only GitHub publication and can fill in a missing release or missing asset. It still validates the changelog and token even when an asset already exists. For an incorrect existing asset, release description, or tag target, review and correct that GitHub resource explicitly; the helper leaves it in place.
