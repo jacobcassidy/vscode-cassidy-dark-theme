@@ -20,6 +20,7 @@ All notable changes to this project are documented in this file.
 ### Changed
 
 - Moved generated palette reports to `dev/generated/palette/`, grouped build scripts under `scripts/build/`, and separated editable experiments, generated previews, and historical snapshots.
+- Grouped the production palette source, curated palette references, and generated palette reports under `palette/`.
 - Added comments above every level 1 and level 2 token property describing its UI location or when its colors are used.
 - Kept fallback relationships only in token `details.inherits`, reserved `overrides` for independently verified UI state precedence, and removed the redundant reverse relationship field.
 - Replaced token color comments with optional validated `details` metadata for usage, inheritance, and overrides, using VS Code source registrations and reviewed rendering fallbacks.

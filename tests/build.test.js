@@ -82,7 +82,8 @@ async function fixture(t) {
 
   t.after(() => rm(root, { recursive: true, force: true }));
   await mkdir(join(root, "src"));
-  await writeFile(join(root, "src/palette.jsonc"), JSON.stringify(configuration()));
+  await mkdir(join(root, "palette/source"), { recursive: true });
+  await writeFile(join(root, "palette/source/palette.jsonc"), JSON.stringify(configuration()));
   await writeFile(join(root, "src/tokens.jsonc"), JSON.stringify(definitions()));
   await writeThemeParts(join(root, "src/theme"), template);
 
@@ -396,7 +397,7 @@ test("build is deterministic, checks every artifact without writing, and updates
   const root = await fixture(t);
 
   await assert.rejects(buildTheme({ root, check: true }), /missing or stale/);
-  assert.deepEqual(await readdir(root), ["src"]);
+  assert.deepEqual(await readdir(root), ["palette", "src"]);
 
   const first = await buildTheme({ root });
 
@@ -410,14 +411,14 @@ test("build is deterministic, checks every artifact without writing, and updates
   await buildTheme({ root, check: true });
   assert.equal((await stat(themePath)).mtimeMs, before.mtimeMs);
 
-  const reportPath = join(root, "dev/generated/palette/palette.json");
+  const reportPath = join(root, "palette/reports/production/palette.json");
   const report = JSON.parse(await readFile(reportPath, "utf8"));
 
   assert.equal(report.primitives["palette.yellow.400"].hex, "#f1dda5");
   await writeFile(reportPath, "stale");
   await assert.rejects(buildTheme({ root, check: true }), /palette.json/);
   assert.equal(await readFile(reportPath, "utf8"), "stale");
-  assert.deepEqual((await buildTheme({ root })).changed, ["dev/generated/palette/palette.json"]);
+  assert.deepEqual((await buildTheme({ root })).changed, ["palette/reports/production/palette.json"]);
   assert.equal(await readFile(themePath, "utf8"), output);
 });
 
@@ -457,7 +458,7 @@ test("editing token details leaves all generated artifacts unchanged", async (t)
 test("palette reports include 600 contrast from final hex and flag translucent overrides", async (t) => {
   const root = await fixture(t);
   await buildTheme({ root, paletteOnly: true });
-  const path = join(root, "dev/generated/palette/palette.md");
+  const path = join(root, "palette/reports/production/palette.md");
   const markdown = await readFile(path, "utf8");
   const section = markdown.split("## Tone 600 contrast")[1].split("## Full palette")[0];
   assert.match(section, /Foreground: `#f8f8f8`/);
@@ -466,17 +467,20 @@ test("palette reports include 600 contrast from final hex and flag translucent o
   assert.doesNotMatch(section, /palette\.gray|palette\.blue\.500/);
   const input = configuration();
   input.overrides["palette.blue.600"] = { hex: "#000000", reason: "Check exported override contrast" };
-  await writeFile(join(root, "src/palette.jsonc"), JSON.stringify(input));
+  await writeFile(join(root, "palette/source/palette.jsonc"), JSON.stringify(input));
   await buildTheme({ root, paletteOnly: true });
   assert.match(await readFile(path, "utf8"), /`palette.blue.600`\s*\|\s*`#000000`\s*\|\s*19\.77:1/);
   input.overrides["palette.blue.600"].hex = "#00000080";
-  await writeFile(join(root, "src/palette.jsonc"), JSON.stringify(input));
+  await writeFile(join(root, "palette/source/palette.jsonc"), JSON.stringify(input));
   await buildTheme({ root, paletteOnly: true });
   assert.match(await readFile(path, "utf8"), /`palette.blue.600`\s*\|\s*`#00000080`\s*\|\s*Needs backdrop/);
 });
 
 test("the authored palette keeps base syntax and colored control text readable", async () => {
-  const config = parseJsonc(await readFile(new URL("../src/palette.jsonc", import.meta.url), "utf8"), "palette").value;
+  const config = parseJsonc(
+    await readFile(new URL("../palette/source/palette.jsonc", import.meta.url), "utf8"),
+    "palette",
+  ).value;
   const aliases = parseJsonc(await readFile(new URL("../src/tokens.jsonc", import.meta.url), "utf8"), "tokens").value;
   const source = await readThemeParts(new URL("../src/theme", import.meta.url));
   const palette = generatePalette(config);

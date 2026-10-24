@@ -11,7 +11,9 @@ import { contrastRatio, validateHex } from "../lib/colors.js";
 
 const defaultRoot = fileURLToPath(new URL("../../", import.meta.url));
 const outputTheme = "themes/cassidy-dark-color-theme.json";
-const reportDirectory = "dev/generated/palette";
+const reportDirectory = "palette/reports/production";
+const experimentReportDirectory = "palette/reports/experiments";
+const paletteInputPath = "palette/source/palette.jsonc";
 const themeParts = ["base", "colors", "semantic", "syntax"];
 const themeSections = new Set(["colors", "semanticHighlighting", "semanticTokenColors", "tokenColors"]);
 
@@ -321,7 +323,7 @@ async function formatted(root, path, source) {
 }
 
 export async function buildTheme({ root = defaultRoot, check = false, paletteOnly = false } = {}) {
-  const paletteInput = parseJsonc(await readFile(join(root, "src/palette.jsonc"), "utf8"), "src/palette.jsonc").value;
+  const paletteInput = parseJsonc(await readFile(join(root, paletteInputPath), "utf8"), paletteInputPath).value;
   const palette = generatePalette(paletteInput);
   const output = reports(palette);
 
@@ -461,7 +463,7 @@ export async function buildDev({ root = defaultRoot, check = false } = {}) {
     for (const path of paths) sources.set(path, await readOptional(join(root, inputDirectory, path)));
     if (![...sources.values()].some(Boolean)) throw new Error(`Experiment ${name} has no recognized input files`);
 
-    const paletteBase = parseJsonc(await readFile(join(root, "src/palette.jsonc"), "utf8"), "src/palette.jsonc").value;
+    const paletteBase = parseJsonc(await readFile(join(root, paletteInputPath), "utf8"), paletteInputPath).value;
     const tokenBase = parseJsonc(await readFile(join(root, "src/tokens.jsonc"), "utf8"), "src/tokens.jsonc").value;
     const paletteInput = sources.get("palette.jsonc")
       ? mergeObjects(paletteBase, parseJsonc(sources.get("palette.jsonc"), `${inputDirectory}/palette.jsonc`).value)
@@ -472,7 +474,7 @@ export async function buildDev({ root = defaultRoot, check = false } = {}) {
     const palette = generatePalette(paletteInput);
     const tokens = resolveTokens(tokenInput, palette);
     const template = await readThemeTemplate(root, inputDirectory, true);
-    const output = reports(palette, `dev/generated/palette/${name}`, "npm run build:dev");
+    const output = reports(palette, `${experimentReportDirectory}/${name}`, "npm run build:dev");
     output.set(
       `dev/themes/cassidy-dark-color-theme-${name}.json`,
       renderTemplate(template, tokens, palette, inputDirectory, "npm run build:dev"),
@@ -485,7 +487,7 @@ export async function buildDev({ root = defaultRoot, check = false } = {}) {
   const actual = [];
   for (const [directory, recursive] of [
     ["dev/themes", false],
-    ["dev/generated/palette", true],
+    [experimentReportDirectory, true],
   ]) {
     const entries = await readdir(join(root, directory), { withFileTypes: true });
 

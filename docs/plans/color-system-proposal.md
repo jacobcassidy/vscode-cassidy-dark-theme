@@ -1,6 +1,6 @@
 # Cassidy Dark color system proposal
 
-Status: the build and palette described here are implemented. Authoring inputs live in `src/`; the shipped theme and palette references are generated. The initial migration verified that every parsed theme value and original comment was preserved before the new palette was applied in a separate change. The [development guide](../../development/development-guide.md) describes the available commands, and the [generated palette](../../dev/generated/palette/palette.md) shows the current output.
+Status: the build and palette described here are implemented. Authoring inputs live in `src/`; the shipped theme and palette references are generated. The initial migration verified that every parsed theme value and original comment was preserved before the new palette was applied in a separate change. The [development guide](../../development/development-guide.md) describes the available commands, and the [generated palette](../../palette/reports/production/palette.md) shows the current output.
 
 ## Recommendation
 
@@ -198,7 +198,7 @@ The build uses these paths:
 
 | Path                                   | Purpose                                                                                                          |
 | -------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
-| `src/palette.jsonc`                    | Authored hue/lightness parameters, optional base chroma, neutrals, and documented primitive overrides            |
+| `palette/source/palette.jsonc`         | Authored hue/lightness parameters, optional base chroma, neutrals, and documented primitive overrides            |
 | `src/tokens.jsonc`                     | Semantic aliases and explicit alpha values for overlays                                                          |
 | `src/theme/base.jsonc`                 | Theme root properties such as schema, name, type, and author                                                     |
 | `src/theme/colors.jsonc`               | Workbench and editor UI color mappings                                                                           |
@@ -207,7 +207,7 @@ The build uses these paths:
 | `scripts/build/build-theme.js`         | Parameter validation, palette generation, alias resolution, template substitution, and output comparison/writing |
 | `themes/cassidy-dark-color-theme.json` | Committed generated theme; edit the source files after migration                                                 |
 
-`npm run build:palette` generates `palette.json`, `palette.md`, and `palette.svg` under `dev/generated/palette/`. JSON includes requested, resolved, and exported OKLCH values, hex values, and override reasons. The Markdown report includes the swatch sheet. This command needs only `src/palette.jsonc`; `npm run build:theme` generates those same reports and the resolved theme together.
+`npm run build:palette` generates `palette.json`, `palette.md`, and `palette.svg` under `palette/reports/production/`. JSON includes requested, resolved, and exported OKLCH values, hex values, and override reasons. The Markdown report includes the swatch sheet. This command needs only `palette/source/palette.jsonc`; `npm run build:theme` generates those same reports and the resolved theme together.
 
 The dependency flow is:
 
@@ -221,7 +221,7 @@ Keep development and historical themes in `dev/themes/` independent. Do not infe
 
 ### Color variables and template references
 
-An excerpt from `src/palette.jsonc` could look like this. Each family generates tones `300`, `400`, `500`, and `600`, plus `400-muted`, using the shared chroma settings and its optional `baseChroma` anchor. This example includes all eight families and a subset of the neutrals. Neutral lightness values use the 0–1 scale, zero chroma, and a conventional hue of zero.
+An excerpt from `palette/source/palette.jsonc` could look like this. Each family generates tones `300`, `400`, `500`, and `600`, plus `400-muted`, using the shared chroma settings and its optional `baseChroma` anchor. This example includes all eight families and a subset of the neutrals. Neutral lightness values use the 0–1 scale, zero chroma, and a conventional hue of zero.
 
 ```jsonc
 {
