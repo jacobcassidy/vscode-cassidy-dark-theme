@@ -2,13 +2,13 @@
 
 This reference preserves palette experiments, historical color values, and terminal comparisons. Experimental and historical values are reference material; the shipped theme remains the source of truth for current colors.
 
-- [Current palette experiments](#current-palette-experiments)
+- [Last palette experiments](#last-palette-experiments)
 - [Historical palettes](#historical-palettes)
 - [Lightness and chroma experiments](#lightness-and-chroma-experiments)
 - [Terminal palette](#terminal-palette)
 - [Further palette experiments](#further-palette-experiments)
 
-## Current palette experiments
+## Last palette experiments
 
 | OKLCH                  | LEVEL      | HEX     |
 | ---------------------- | ---------- | ------- |
