@@ -12,7 +12,7 @@ function record(target, resolved, hex = toHex(resolved), reason) {
 function validateDetails(details, id) {
   const label = `token ${id}.details`;
 
-  fields(details, ["for", "inherits", "overridden-by", "overrides"], label);
+  fields(details, ["for", "inherits", "overrides"], label);
 
   if (!Object.keys(details).length) throw new Error(`${label}: omit empty details`);
 

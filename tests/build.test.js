@@ -257,15 +257,14 @@ test("token details document upstream relationships without resolving them as co
   const tokens = resolveTokens(
     {
       ui: {
-        button: {
-          hoverBackground: {
+        statusBar: {
+          noFolderForeground: {
             color: "palette.blue.400",
             alpha: 0.5,
             details: {
-              for: "Primary buttons on hover.",
-              inherits: ["button.background"],
-              "overridden-by": ["extension.buttonHoverBackground"],
-              overrides: ["button.background"],
+              for: "Status bar text in an empty window.",
+              inherits: ["statusBar.foreground"],
+              overrides: ["statusBar.foreground"],
             },
           },
         },
@@ -274,7 +273,7 @@ test("token details document upstream relationships without resolving them as co
     palette,
   );
 
-  assert.equal(tokens.get("ui.button.hoverBackground"), `${palette.get("palette.blue.400").hex}80`);
+  assert.equal(tokens.get("ui.statusBar.noFolderForeground"), `${palette.get("palette.blue.400").hex}80`);
 });
 
 test("token details reject unknown fields, empty values, and malformed relationship lists", () => {
@@ -292,7 +291,8 @@ test("token details reject unknown fields, empty values, and malformed relations
     { inherits: "foreground" },
     { inherits: [""] },
     { inherits: [123] },
-    { "overridden-by": ["foreground", "foreground"] },
+    { overrides: ["foreground", "foreground"] },
+    { "overridden-by": ["statusBar.debuggingForeground"] },
     { overrides: [null] },
   ]) {
     assert.throws(
@@ -411,7 +411,7 @@ test("editing token details leaves all generated artifacts unchanged", async (t)
 
   const input = definitions();
 
-  input.surface.editor.details = { for: "Editor background.", "overridden-by": ["terminal.background"] };
+  input.surface.editor.details = { for: "Editor background." };
   await writeFile(join(root, "src/tokens.jsonc"), JSON.stringify(input));
   assert.deepEqual((await buildTheme({ root, check: true })).changed, []);
   assert.deepEqual((await buildTheme({ root })).changed, []);

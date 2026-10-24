@@ -18,6 +18,7 @@ All notable changes to this project are documented in this file.
 
 ### Changed
 
+- Kept fallback relationships only in token `details.inherits`, reserved `overrides` for independently verified UI state precedence, and removed the redundant reverse relationship field.
 - Replaced token color comments with optional validated `details` metadata for usage, inheritance, and overrides, using VS Code source registrations and reviewed rendering fallbacks.
 - Nested the authored color tokens by role, using `color` and optional `alpha` fields, and moved color notes from the theme template above their token properties.
 - Applied the generated eight-family palette, including yellow L90/C0.075/H90, numbered tones and `400-muted`; linked TextMate and semantic colors through shared aliases and adjusted primary-button and debugging-status-bar text contrast independently.

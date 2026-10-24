@@ -10,10 +10,7 @@
       "background": {
         "color": "palette.gray.825",
         "details": {
-          "for": "Activity bar backgrounds.",
-          "overridden-by": [
-            "modernActivityBar.background"
-          ]
+          "for": "Activity bar backgrounds."
         }
       },
       "dropBorder": {
@@ -23,21 +20,13 @@
           "for": "Activity bar drag and drop indicators.",
           "inherits": [
             "activityBar.foreground"
-          ],
-          "overrides": [
-            "activityBar.foreground"
           ]
         }
       },
       "foreground": {
         "color": "palette.yellow.400",
         "details": {
-          "for": "Active activity bar icons.",
-          "overridden-by": [
-            "activityBar.activeBorder",
-            "activityBar.dropBorder",
-            "activityBar.inactiveForeground"
-          ]
+          "for": "Active activity bar icons."
         }
       },
       "inactiveForeground": {
@@ -45,9 +34,6 @@
         "details": {
           "for": "Inactive activity bar icons.",
           "inherits": [
-            "activityBar.foreground"
-          ],
-          "overrides": [
             "activityBar.foreground"
           ]
         }
@@ -57,27 +43,13 @@
       "background": {
         "color": "palette.yellow.400",
         "details": {
-          "for": "Activity bar notification badge backgrounds.",
-          "overridden-by": [
-            "agentsBadge.background",
-            "agentsUnreadBadge.background",
-            "extensionBadge.remoteBackground",
-            "panelTitleBadge.background",
-            "statusBarItem.remoteBackground"
-          ]
+          "for": "Activity bar notification badge backgrounds."
         }
       },
       "foreground": {
         "color": "palette.gray.1000",
         "details": {
-          "for": "Activity bar notification badge text.",
-          "overridden-by": [
-            "agentsBadge.foreground",
-            "agentsUnreadBadge.foreground",
-            "extensionBadge.remoteForeground",
-            "panelTitleBadge.foreground",
-            "statusBarItem.remoteForeground"
-          ]
+          "for": "Activity bar notification badge text."
         }
       }
     },
@@ -85,21 +57,13 @@
       "background": {
         "color": "palette.gray.700",
         "details": {
-          "for": "Count badge backgrounds, such as Problems totals.",
-          "overridden-by": [
-            "editorInlayHint.background",
-            "scmGraph.historyItemHoverDefaultLabelBackground",
-            "testing.coverCountBadgeBackground"
-          ]
+          "for": "Count badge backgrounds, such as Problems totals."
         }
       },
       "foreground": {
         "color": "palette.gray.000",
         "details": {
-          "for": "Count badge text.",
-          "overridden-by": [
-            "testing.coverCountBadgeForeground"
-          ]
+          "for": "Count badge text."
         }
       }
     },
@@ -107,32 +71,14 @@
       "background": {
         "color": "#1c6bc4",
         "details": {
-          "for": "Primary button backgrounds.",
-          "overridden-by": [
-            "agentsGradient.tintColor",
-            "agentsUpdateButton.downloadedBackground",
-            "agentsUpdateButton.downloadingBackground",
-            "button.hoverBackground",
-            "chat.inputWorkingBorderColor1",
-            "chat.inputWorkingBorderColor2",
-            "chat.inputWorkingBorderColor3",
-            "extensionButton.prominentBackground",
-            "inlineEdit.gutterIndicator.primaryBorder",
-            "inlineEdit.gutterIndicator.successfulBorder"
-          ]
+          "for": "Primary button backgrounds."
         },
         "reason": "Primary button fill uses L53/H255 with gamut headroom, allowing its lighter blue 600 hover state to retain at least 4.5:1 contrast with the button text."
       },
       "foreground": {
         "color": "palette.gray.000",
         "details": {
-          "for": "Primary button text.",
-          "overridden-by": [
-            "button.separator",
-            "extensionButton.prominentForeground",
-            "inlineEdit.gutterIndicator.primaryForeground",
-            "inlineEdit.gutterIndicator.successfulForeground"
-          ]
+          "for": "Primary button text."
         }
       },
       "hoverBackground": {
@@ -140,12 +86,6 @@
         "details": {
           "for": "Primary button backgrounds on hover.",
           "inherits": [
-            "button.background"
-          ],
-          "overridden-by": [
-            "extensionButton.prominentHoverBackground"
-          ],
-          "overrides": [
             "button.background"
           ]
         }
@@ -156,12 +96,6 @@
           "for": "Secondary button backgrounds.",
           "inherits": [
             "list.hoverBackground"
-          ],
-          "overridden-by": [
-            "extensionButton.background"
-          ],
-          "overrides": [
-            "list.hoverBackground"
           ]
         }
       },
@@ -170,12 +104,6 @@
         "details": {
           "for": "Secondary button text.",
           "inherits": [
-            "foreground"
-          ],
-          "overridden-by": [
-            "extensionButton.foreground"
-          ],
-          "overrides": [
             "foreground"
           ]
         }
@@ -186,12 +114,6 @@
           "for": "Secondary button backgrounds on hover.",
           "inherits": [
             "list.hoverBackground"
-          ],
-          "overridden-by": [
-            "extensionButton.hoverBackground"
-          ],
-          "overrides": [
-            "list.hoverBackground"
           ]
         }
       }
@@ -200,11 +122,7 @@
       "green": {
         "color": "palette.green.400",
         "details": {
-          "for": "Green chart markers, including source control graphs.",
-          "overridden-by": [
-            "chat.sessionStateIndicator.unvisitedBorder",
-            "markdownAlert.tip.foreground"
-          ]
+          "for": "Green chart markers, including source control graphs."
         }
       },
       "orange": {
@@ -216,11 +134,7 @@
       "purple": {
         "color": "palette.purple.400",
         "details": {
-          "for": "Purple chart markers, including source control graphs.",
-          "overridden-by": [
-            "markdownAlert.important.foreground",
-            "scmGraph.historyItemRemoteRefColor"
-          ]
+          "for": "Purple chart markers, including source control graphs."
         }
       }
     },
@@ -240,11 +154,7 @@
       "startForeground": {
         "color": "palette.green.400",
         "details": {
-          "for": "Debug toolbar icon for start debugging.",
-          "overridden-by": [
-            "notebookEditorOverviewRuler.runningCellForeground",
-            "notebookStatusSuccessIcon.foreground"
-          ]
+          "for": "Debug toolbar icon for start debugging."
         }
       },
       "stopForeground": {
@@ -273,28 +183,14 @@
         "color": "diff.added.foreground",
         "alpha": 0.10196078431372549,
         "details": {
-          "for": "Background color for lines that got inserted.",
-          "overridden-by": [
-            "inlineEdit.modifiedChangedLineBackground"
-          ]
+          "for": "Background color for lines that got inserted."
         }
       },
       "insertedTextBackground": {
         "color": "diff.added.foreground",
         "alpha": 0.2,
         "details": {
-          "for": "Background color for text that got inserted.",
-          "overridden-by": [
-            "editorMinimap.inlineChatInserted",
-            "editorOverviewRuler.inlineChatInserted",
-            "inlineChatDiff.inserted",
-            "inlineEdit.modifiedBackground",
-            "inlineEdit.modifiedBorder",
-            "inlineEdit.modifiedChangedTextBackground",
-            "testing.coveredBackground",
-            "testing.coveredGutterBackground",
-            "testing.coveredMinimapBackground"
-          ]
+          "for": "Background color for text that got inserted."
         }
       },
       "removedLineBackground": {
@@ -308,19 +204,7 @@
         "color": "diff.removed.foreground",
         "alpha": 0.2,
         "details": {
-          "for": "Background color for text that got removed.",
-          "overridden-by": [
-            "editorOverviewRuler.inlineChatRemoved",
-            "inlineChatDiff.removed",
-            "inlineEdit.originalBackground",
-            "inlineEdit.originalBorder",
-            "inlineEdit.originalChangedLineBackground",
-            "inlineEdit.originalChangedTextBackground",
-            "testing.uncoveredBackground",
-            "testing.uncoveredBranchBackground",
-            "testing.uncoveredGutterBackground",
-            "testing.uncoveredMinimapBackground"
-          ]
+          "for": "Background color for text that got removed."
         }
       },
       "unchangedCodeBackground": {
@@ -337,9 +221,6 @@
           "for": "The background color of unchanged blocks in the diff editor.",
           "inherits": [
             "sideBar.background"
-          ],
-          "overrides": [
-            "sideBar.background"
           ]
         }
       },
@@ -348,9 +229,6 @@
         "details": {
           "for": "The foreground color of unchanged blocks in the diff editor.",
           "inherits": [
-            "foreground"
-          ],
-          "overrides": [
             "foreground"
           ]
         }
@@ -383,24 +261,14 @@
       "color": "palette.gray.white",
       "alpha": 0.2,
       "details": {
-        "for": "Disabled workbench text and icons.",
-        "overridden-by": [
-          "commentsView.resolvedIcon"
-        ]
+        "for": "Disabled workbench text and icons."
       }
     },
     "dropdown": {
       "background": {
         "color": "palette.gray.800",
         "details": {
-          "for": "Dropdown background.",
-          "overridden-by": [
-            "checkbox.background",
-            "dropdown.border",
-            "dropdown.listBackground",
-            "menu.background",
-            "settings.dropdownBackground"
-          ]
+          "for": "Dropdown background."
         }
       },
       "border": {
@@ -409,25 +277,13 @@
           "for": "Dropdown border.",
           "inherits": [
             "dropdown.background"
-          ],
-          "overridden-by": [
-            "checkbox.border",
-            "settings.dropdownBorder"
-          ],
-          "overrides": [
-            "dropdown.background"
           ]
         }
       },
       "foreground": {
         "color": "palette.gray.200",
         "details": {
-          "for": "Dropdown foreground.",
-          "overridden-by": [
-            "checkbox.foreground",
-            "menu.foreground",
-            "settings.dropdownForeground"
-          ]
+          "for": "Dropdown foreground."
         }
       },
       "listBackground": {
@@ -435,9 +291,6 @@
         "details": {
           "for": "Dropdown list background.",
           "inherits": [
-            "dropdown.background"
-          ],
-          "overrides": [
             "dropdown.background"
           ]
         }
@@ -447,42 +300,14 @@
       "background": {
         "color": "surface.editor",
         "details": {
-          "for": "Editor backgrounds.",
-          "overridden-by": [
-            "agents.background",
-            "agentsDetail.background",
-            "breadcrumb.background",
-            "chat.requestBackground",
-            "editor.selectionHighlightBackground",
-            "editorGroupHeader.noTabsBackground",
-            "editorGutter.background",
-            "editorGutter.commentRangeForeground",
-            "editorGutter.itemBackground",
-            "editorMarkerNavigation.background",
-            "editorPane.background",
-            "editorStickyScroll.background",
-            "editorStickyScrollGutter.background",
-            "minimap.chatEditHighlight",
-            "modernEditorTab.activeActionBackground",
-            "modernEditorTab.activeHoverActionBackground",
-            "modernEditorTab.hoverActionBackground",
-            "modernEditorTab.selectedActionBackground",
-            "multiDiffEditor.background",
-            "panel.background",
-            "tab.activeBackground",
-            "terminal.background",
-            "testing.uncoveredBranchBackground"
-          ]
+          "for": "Editor backgrounds."
         }
       },
       "findMatchBackground": {
         "color": "palette.purple.600",
         "alpha": 0.9019607843137255,
         "details": {
-          "for": "Current search match backgrounds.",
-          "overridden-by": [
-            "terminal.findMatchBackground"
-          ]
+          "for": "Current search match backgrounds."
         }
       },
       "findMatchForeground": {
@@ -496,15 +321,7 @@
         "color": "palette.purple.600",
         "alpha": 0.45098039215686275,
         "details": {
-          "for": "Other search match backgrounds.",
-          "overridden-by": [
-            "chat.findMatchHighlightBackground",
-            "editor.symbolHighlightBackground",
-            "list.filterMatchBackground",
-            "minimap.findMatchHighlight",
-            "searchEditor.findMatchBackground",
-            "terminal.findMatchHighlightBackground"
-          ]
+          "for": "Other search match backgrounds."
         }
       },
       "findMatchHighlightForeground": {
@@ -528,9 +345,6 @@
           "for": "Background color behind folded ranges.",
           "inherits": [
             "editor.selectionBackground"
-          ],
-          "overrides": [
-            "editor.selectionBackground"
           ]
         }
       },
@@ -543,32 +357,20 @@
       "foreground": {
         "color": "text.default",
         "details": {
-          "for": "Default editor text.",
-          "overridden-by": [
-            "editorGutter.commentGlyphForeground",
-            "editorGutter.itemGlyphForeground",
-            "editorSuggestWidget.foreground",
-            "testing.message.info.decorationForeground"
-          ]
+          "for": "Default editor text."
         }
       },
       "hoverHighlightBackground": {
         "color": "palette.gray.white",
         "alpha": 0.10196078431372549,
         "details": {
-          "for": "Highlight below the word for which a hover is shown.",
-          "overridden-by": [
-            "terminal.hoverHighlightBackground"
-          ]
+          "for": "Highlight below the word for which a hover is shown."
         }
       },
       "lineHighlightBackground": {
         "color": "palette.gray.975",
         "details": {
-          "for": "Background color for the highlight of line at the cursor position.",
-          "overridden-by": [
-            "editor.inactiveLineHighlightBackground"
-          ]
+          "for": "Background color for the highlight of line at the cursor position."
         }
       },
       "lineHighlightBorder": {
@@ -588,26 +390,14 @@
         "color": "palette.blue.600",
         "alpha": 0.5019607843137255,
         "details": {
-          "for": "Color of the editor selection.",
-          "overridden-by": [
-            "chat.requestBubbleBackground",
-            "chat.requestBubbleHoverBackground",
-            "editor.foldBackground",
-            "editor.inactiveSelectionBackground",
-            "editor.selectionHighlightBackground",
-            "minimap.selectionHighlight",
-            "terminal.selectionBackground"
-          ]
+          "for": "Color of the editor selection."
         }
       },
       "wordHighlightBackground": {
         "color": "palette.gray.500",
         "alpha": 0.5019607843137255,
         "details": {
-          "for": "Background color of a symbol during read-access, like reading a variable.",
-          "overridden-by": [
-            "editor.wordHighlightTextBackground"
-          ]
+          "for": "Background color of a symbol during read-access, like reading a variable."
         }
       },
       "wordHighlightStrongBackground": {
@@ -638,21 +428,13 @@
       "background": {
         "color": "palette.gray.800",
         "details": {
-          "for": "The background color of the editor cursor.",
-          "overridden-by": [
-            "editorMultiCursor.primary.background",
-            "editorMultiCursor.secondary.background"
-          ]
+          "for": "The background color of the editor cursor."
         }
       },
       "foreground": {
         "color": "palette.gray.400",
         "details": {
-          "for": "Color of the editor cursor.",
-          "overridden-by": [
-            "editorMultiCursor.primary.foreground",
-            "editorMultiCursor.secondary.foreground"
-          ]
+          "for": "Color of the editor cursor."
         }
       }
     },
@@ -660,17 +442,7 @@
       "foreground": {
         "color": "diagnostic.error.foreground",
         "details": {
-          "for": "Foreground color of error squigglies in the editor.",
-          "overridden-by": [
-            "charts.red",
-            "editorGutter.deletedBackground",
-            "editorMarkerNavigationError.background",
-            "markdownAlert.caution.foreground",
-            "notificationsErrorIcon.foreground",
-            "problemsErrorIcon.foreground",
-            "testing.peekBorder",
-            "testing.peekHeaderBackground"
-          ]
+          "for": "Foreground color of error squigglies in the editor."
         }
       }
     },
@@ -678,10 +450,7 @@
       "foreground": {
         "color": "palette.blue.500",
         "details": {
-          "for": "Inline suggestion text.",
-          "overridden-by": [
-            "editor.placeholder.foreground"
-          ]
+          "for": "Inline suggestion text."
         }
       }
     },
@@ -690,23 +459,14 @@
         "color": "palette.gray.black",
         "alpha": 0.5019607843137255,
         "details": {
-          "for": "Color to separate multiple editor groups from each other.",
-          "overridden-by": [
-            "sideBySideEditor.horizontalBorder",
-            "sideBySideEditor.verticalBorder"
-          ]
+          "for": "Color to separate multiple editor groups from each other."
         }
       },
       "dropBackground": {
         "color": "palette.gray.400",
         "alpha": 0.5019607843137255,
         "details": {
-          "for": "Background color when dragging editors around.",
-          "overridden-by": [
-            "panelSection.dropBackground",
-            "sideBar.dropBackground",
-            "terminal.dropBackground"
-          ]
+          "for": "Background color when dragging editors around."
         }
       }
     },
@@ -714,10 +474,7 @@
       "tabsBackground": {
         "color": "palette.gray.850",
         "details": {
-          "for": "Background color of the editor group title header when tabs are enabled.",
-          "overridden-by": [
-            "editorGroupHeader.connectedTabsBackground"
-          ]
+          "for": "Background color of the editor group title header when tabs are enabled."
         }
       }
     },
@@ -726,12 +483,7 @@
         "color": "palette.green.400",
         "alpha": 0.7490196078431373,
         "details": {
-          "for": "Editor gutter background color for lines that are added.",
-          "overridden-by": [
-            "editorGutter.addedSecondaryBackground",
-            "editorOverviewRuler.addedForeground",
-            "minimapGutter.addedBackground"
-          ]
+          "for": "Editor gutter background color for lines that are added."
         }
       },
       "commentRangeForeground": {
@@ -741,13 +493,6 @@
           "inherits": [
             "list.inactiveSelectionBackground",
             "editor.background"
-          ],
-          "overridden-by": [
-            "editorOverviewRuler.commentForeground"
-          ],
-          "overrides": [
-            "editor.background",
-            "list.inactiveSelectionBackground"
           ]
         }
       },
@@ -758,14 +503,6 @@
           "for": "Editor gutter background color for lines that are deleted.",
           "inherits": [
             "editorError.foreground"
-          ],
-          "overridden-by": [
-            "editorGutter.deletedSecondaryBackground",
-            "editorOverviewRuler.deletedForeground",
-            "minimapGutter.deletedBackground"
-          ],
-          "overrides": [
-            "editorError.foreground"
           ]
         }
       },
@@ -773,12 +510,7 @@
         "color": "palette.yellow.400",
         "alpha": 0.7490196078431373,
         "details": {
-          "for": "Editor gutter background color for lines that are modified.",
-          "overridden-by": [
-            "editorGutter.modifiedSecondaryBackground",
-            "editorOverviewRuler.modifiedForeground",
-            "minimapGutter.modifiedBackground"
-          ]
+          "for": "Editor gutter background color for lines that are modified."
         }
       }
     },
@@ -797,9 +529,6 @@
           "for": "Color of the active editor indentation guides (1).",
           "inherits": [
             "editorIndentGuide.activeBackground"
-          ],
-          "overrides": [
-            "editorIndentGuide.activeBackground"
           ]
         }
       }
@@ -808,21 +537,7 @@
       "foreground": {
         "color": "palette.blue.400",
         "details": {
-          "for": "Foreground color of info squigglies in the editor.",
-          "overridden-by": [
-            "banner.iconForeground",
-            "charts.blue",
-            "debugConsole.infoForeground",
-            "editorMarkerNavigationInfo.background",
-            "editorOverviewRuler.infoForeground",
-            "markdownAlert.note.foreground",
-            "minimap.infoHighlight",
-            "notificationsInfoIcon.foreground",
-            "peekView.border",
-            "problemsInfoIcon.foreground",
-            "testing.messagePeekBorder",
-            "testing.messagePeekHeaderBackground"
-          ]
+          "for": "Foreground color of info squigglies in the editor."
         }
       }
     },
@@ -830,10 +545,7 @@
       "foreground": {
         "color": "palette.yellow.500",
         "details": {
-          "for": "The color used for the lightbulb actions icon.",
-          "overridden-by": [
-            "editorLightBulbAi.foreground"
-          ]
+          "for": "The color used for the lightbulb actions icon."
         }
       }
     },
@@ -843,9 +555,6 @@
         "details": {
           "for": "The color used for the lightbulb AI icon.",
           "inherits": [
-            "editorLightBulb.foreground"
-          ],
-          "overrides": [
             "editorLightBulb.foreground"
           ]
         }
@@ -865,9 +574,6 @@
         "details": {
           "for": "Color of editor active line number.",
           "inherits": [
-            "editorActiveLineNumber.foreground"
-          ],
-          "overrides": [
             "editorActiveLineNumber.foreground"
           ]
         }
@@ -895,9 +601,6 @@
           "for": "Overview ruler marker color for added content.",
           "inherits": [
             "editorGutter.addedBackground"
-          ],
-          "overrides": [
-            "editorGutter.addedBackground"
           ]
         }
       },
@@ -912,10 +615,7 @@
         "color": "palette.gray.black",
         "alpha": 0.10196078431372549,
         "details": {
-          "for": "Color of the overview ruler border.",
-          "overridden-by": [
-            "terminalOverviewRuler.border"
-          ]
+          "for": "Color of the overview ruler border."
         }
       },
       "bracketMatchForeground": {
@@ -932,9 +632,6 @@
           "for": "Overview ruler marker color for deleted content.",
           "inherits": [
             "editorGutter.deletedBackground"
-          ],
-          "overrides": [
-            "editorGutter.deletedBackground"
           ]
         }
       },
@@ -949,10 +646,7 @@
         "color": "palette.purple.600",
         "alpha": 0.7490196078431373,
         "details": {
-          "for": "Overview ruler marker color for find matches.",
-          "overridden-by": [
-            "terminalOverviewRuler.findMatchForeground"
-          ]
+          "for": "Overview ruler marker color for find matches."
         }
       },
       "infoForeground": {
@@ -961,12 +655,6 @@
         "details": {
           "for": "Overview ruler marker color for infos.",
           "inherits": [
-            "editorInfo.foreground"
-          ],
-          "overridden-by": [
-            "editorOverviewRuler.agentFeedbackForeground"
-          ],
-          "overrides": [
             "editorInfo.foreground"
           ]
         }
@@ -978,9 +666,6 @@
           "for": "Overview ruler marker color for modified content.",
           "inherits": [
             "editorGutter.modifiedBackground"
-          ],
-          "overrides": [
-            "editorGutter.modifiedBackground"
           ]
         }
       },
@@ -988,10 +673,7 @@
         "color": "palette.gray.500",
         "alpha": 0.3803921568627451,
         "details": {
-          "for": "Overview ruler marker color for selection highlights.",
-          "overridden-by": [
-            "editorOverviewRuler.wordHighlightTextForeground"
-          ]
+          "for": "Overview ruler marker color for selection highlights."
         }
       },
       "warningForeground": {
@@ -1000,9 +682,6 @@
         "details": {
           "for": "Overview ruler marker color for warnings.",
           "inherits": [
-            "editorWarning.foreground"
-          ],
-          "overrides": [
             "editorWarning.foreground"
           ]
         }
@@ -1038,9 +717,6 @@
           "for": "Background color of sticky scroll in the editor.",
           "inherits": [
             "editor.background"
-          ],
-          "overrides": [
-            "editor.background"
           ]
         }
       }
@@ -1061,9 +737,6 @@
           "for": "Background color used to highlight unicode characters.",
           "inherits": [
             "editorWarning.background"
-          ],
-          "overrides": [
-            "editorWarning.background"
           ]
         }
       },
@@ -1074,9 +747,6 @@
           "for": "Border color used to highlight unicode characters.",
           "inherits": [
             "editorWarning.foreground"
-          ],
-          "overrides": [
-            "editorWarning.foreground"
           ]
         }
       }
@@ -1085,19 +755,7 @@
       "foreground": {
         "color": "diagnostic.warning.foreground",
         "details": {
-          "for": "Foreground color of warning squigglies in the editor.",
-          "overridden-by": [
-            "charts.yellow",
-            "debugConsole.warningForeground",
-            "editorMarkerNavigationWarning.background",
-            "editorOverviewRuler.warningForeground",
-            "editorUnicodeHighlight.border",
-            "markdownAlert.warning.foreground",
-            "minimap.warningHighlight",
-            "notificationsWarningIcon.foreground",
-            "problemsWarningIcon.foreground",
-            "statusBarItem.warningBackground"
-          ]
+          "for": "Foreground color of warning squigglies in the editor."
         }
       }
     },
@@ -1105,12 +763,7 @@
       "foreground": {
         "color": "palette.gray.800",
         "details": {
-          "for": "Color of whitespace characters in the editor.",
-          "overridden-by": [
-            "editorIndentGuide.activeBackground",
-            "editorIndentGuide.background",
-            "editorWordWrapIndicator.foreground"
-          ]
+          "for": "Color of whitespace characters in the editor."
         }
       }
     },
@@ -1118,22 +771,7 @@
       "background": {
         "color": "palette.gray.825",
         "details": {
-          "for": "Background color of editor widgets, such as find/replace.",
-          "overridden-by": [
-            "agentFeedbackEditorWidget.background",
-            "breadcrumbPicker.background",
-            "checkbox.selectBackground",
-            "editorActionList.background",
-            "editorGroup.dropIntoPromptBackground",
-            "editorHoverWidget.background",
-            "editorSuggestWidget.background",
-            "inlineChat.background",
-            "listFilterWidget.background",
-            "notifications.background",
-            "quickInput.background",
-            "welcomePage.tileBackground",
-            "welcomePage.tileHoverBackground"
-          ]
+          "for": "Background color of editor widgets, such as find/replace."
         }
       },
       "border": {
@@ -1143,17 +781,6 @@
           "for": "Border color of editor widgets.",
           "inherits": [
             "editorWidget.foreground"
-          ],
-          "overridden-by": [
-            "agentFeedbackInputWidget.border",
-            "editorHoverWidget.border",
-            "editorSuggestWidget.border",
-            "inlineChat.border",
-            "inlineChatInput.border",
-            "settings.dropdownListBorder"
-          ],
-          "overrides": [
-            "editorWidget.foreground"
           ]
         }
       }
@@ -1161,13 +788,7 @@
     "errorForeground": {
       "color": "diagnostic.error.foreground",
       "details": {
-        "for": "Default error message text.",
-        "overridden-by": [
-          "chat.sessionStateIndicator.needsInputBorder",
-          "debugConsole.errorForeground",
-          "notebookStatusErrorIcon.foreground",
-          "statusBarItem.errorBackground"
-        ]
+        "for": "Default error message text."
       }
     },
     "extensionIcon": {
@@ -1197,82 +818,13 @@
       "color": "palette.blue.500",
       "alpha": 0.8,
       "details": {
-        "for": "Default keyboard focus borders.",
-        "overridden-by": [
-          "agentsChatInput.focusBorder",
-          "chat.voiceGlowBaseColor",
-          "inlineChatInput.focusBorder",
-          "inputOption.activeBackground",
-          "list.focusOutline",
-          "notebook.cellInsertionIndicator",
-          "notebook.focusedCellBorder",
-          "notebook.focusedEditorBorder",
-          "sash.hoverBorder",
-          "settings.focusedRowBorder",
-          "tab.selectedBorderTop"
-        ]
+        "for": "Default keyboard focus borders."
       }
     },
     "foreground": {
       "color": "palette.gray.200",
       "details": {
-        "for": "Default workbench text.",
-        "overridden-by": [
-          "agentFeedbackEditorWidget.border",
-          "agentSessionReadIndicator.foreground",
-          "agentSessionSelectedUnfocusedBadge.border",
-          "agentsPanel.border",
-          "breadcrumb.activeSelectionForeground",
-          "breadcrumb.focusForeground",
-          "breadcrumb.foreground",
-          "button.secondaryBorder",
-          "button.secondaryForeground",
-          "charts.foreground",
-          "charts.lines",
-          "chat.avatarForeground",
-          "chat.statusBackground",
-          "debugConsole.sourceForeground",
-          "debugConsoleInputIcon.foreground",
-          "debugView.exceptionLabelForeground",
-          "debugView.stateLabelForeground",
-          "descriptionForeground",
-          "diffEditor.unchangedRegionForeground",
-          "editorWidget.foreground",
-          "input.foreground",
-          "input.placeholderForeground",
-          "menu.separatorBackground",
-          "modernSash.gripForeground",
-          "modernTab.activeForeground",
-          "modernTab.hoverForeground",
-          "notebookStatusRunningIcon.foreground",
-          "scmGraph.historyItemHoverDefaultLabelForeground",
-          "search.resultsInfoForeground",
-          "surface.border",
-          "symbolIcon.arrayForeground",
-          "symbolIcon.booleanForeground",
-          "symbolIcon.colorForeground",
-          "symbolIcon.constantForeground",
-          "symbolIcon.fileForeground",
-          "symbolIcon.folderForeground",
-          "symbolIcon.keyForeground",
-          "symbolIcon.keywordForeground",
-          "symbolIcon.moduleForeground",
-          "symbolIcon.namespaceForeground",
-          "symbolIcon.nullForeground",
-          "symbolIcon.numberForeground",
-          "symbolIcon.objectForeground",
-          "symbolIcon.operatorForeground",
-          "symbolIcon.packageForeground",
-          "symbolIcon.propertyForeground",
-          "symbolIcon.referenceForeground",
-          "symbolIcon.snippetForeground",
-          "symbolIcon.stringForeground",
-          "symbolIcon.structForeground",
-          "symbolIcon.textForeground",
-          "symbolIcon.typeParameterForeground",
-          "symbolIcon.unitForeground",
-          "tree.tableOddRowsBackground"
-        ]
+        "for": "Default workbench text."
       }
     },
     "gitDecoration": {
@@ -1317,12 +869,7 @@
       "foreground": {
         "color": "palette.gray.400",
         "details": {
-          "for": "The default color for icons in the workbench.",
-          "overridden-by": [
-            "checkbox.selectBorder",
-            "editorGutter.foldingControlForeground",
-            "list.dropBetweenBackground"
-          ]
+          "for": "The default color for icons in the workbench."
         }
       }
     },
@@ -1330,27 +877,13 @@
       "background": {
         "color": "palette.gray.800",
         "details": {
-          "for": "Input box background.",
-          "overridden-by": [
-            "agentsChatInput.background",
-            "inlineChatInput.background",
-            "settings.numberInputBackground",
-            "settings.textInputBackground",
-            "welcomePage.progress.background"
-          ]
+          "for": "Input box background."
         }
       },
       "border": {
         "color": "palette.gray.700",
         "details": {
-          "for": "Input box border.",
-          "overridden-by": [
-            "agentsChatInput.border",
-            "panelInput.border",
-            "searchEditor.textInputBorder",
-            "settings.numberInputBorder",
-            "settings.textInputBorder"
-          ]
+          "for": "Input box border."
         }
       },
       "foreground": {
@@ -1358,14 +891,6 @@
         "details": {
           "for": "Input box foreground.",
           "inherits": [
-            "foreground"
-          ],
-          "overridden-by": [
-            "agentsChatInput.foreground",
-            "settings.numberInputForeground",
-            "settings.textInputForeground"
-          ],
-          "overrides": [
             "foreground"
           ]
         }
@@ -1375,13 +900,6 @@
         "details": {
           "for": "Input placeholder text.",
           "inherits": [
-            "foreground"
-          ],
-          "overridden-by": [
-            "agentsChatInput.placeholderForeground",
-            "inlineChatInput.placeholderForeground"
-          ],
-          "overrides": [
             "foreground"
           ]
         }
@@ -1395,13 +913,6 @@
           "for": "Background hover color of options in input fields.",
           "inherits": [
             "focusBorder"
-          ],
-          "overridden-by": [
-            "actionBar.toggledBackground",
-            "radio.activeBackground"
-          ],
-          "overrides": [
-            "focusBorder"
           ]
         }
       },
@@ -1409,29 +920,20 @@
         "color": "palette.yellow.400",
         "alpha": 0.25098039215686274,
         "details": {
-          "for": "Border color of activated options in input fields.",
-          "overridden-by": [
-            "radio.activeBorder"
-          ]
+          "for": "Border color of activated options in input fields."
         }
       },
       "activeForeground": {
         "color": "palette.yellow.400",
         "details": {
-          "for": "Foreground color of activated options in input fields.",
-          "overridden-by": [
-            "radio.activeForeground"
-          ]
+          "for": "Foreground color of activated options in input fields."
         }
       },
       "hoverBackground": {
         "color": "palette.yellow.400",
         "alpha": 0.25098039215686274,
         "details": {
-          "for": "Background color of activated options in input fields.",
-          "overridden-by": [
-            "radio.inactiveHoverBackground"
-          ]
+          "for": "Background color of activated options in input fields."
         }
       }
     },
@@ -1468,9 +970,6 @@
           "for": "'Background color for the keyboard shortcuts table header.'.",
           "inherits": [
             "tree.tableOddRowsBackground"
-          ],
-          "overrides": [
-            "tree.tableOddRowsBackground"
           ]
         }
       }
@@ -1480,35 +979,19 @@
         "color": "palette.gray.white",
         "alpha": 0.2,
         "details": {
-          "for": "List/Tree background color for the selected item when the list/tree is active.",
-          "overridden-by": [
-            "banner.background",
-            "editorActionList.focusBackground",
-            "menu.selectionBackground",
-            "quickInputList.focusBackground"
-          ]
+          "for": "List/Tree background color for the selected item when the list/tree is active."
         }
       },
       "activeSelectionForeground": {
         "color": "palette.gray.000",
         "details": {
-          "for": "List/Tree foreground color for the selected item when the list/tree is active.",
-          "overridden-by": [
-            "agentSessionSelectedBadge.border",
-            "banner.foreground",
-            "editorActionList.focusForeground",
-            "menu.selectionForeground",
-            "quickInputList.focusForeground"
-          ]
+          "for": "List/Tree foreground color for the selected item when the list/tree is active."
         }
       },
       "activeSelectionIconForeground": {
         "color": "palette.gray.000",
         "details": {
-          "for": "List/Tree icon foreground color for the selected item when the list/tree is active.",
-          "overridden-by": [
-            "quickInputList.focusIconForeground"
-          ]
+          "for": "List/Tree icon foreground color for the selected item when the list/tree is active."
         }
       },
       "dropBackground": {
@@ -1521,11 +1004,7 @@
       "errorForeground": {
         "color": "palette.red.500",
         "details": {
-          "for": "Foreground color of list items containing errors.",
-          "overridden-by": [
-            "testing.iconErrored",
-            "testing.iconFailed"
-          ]
+          "for": "Foreground color of list items containing errors."
         }
       },
       "focusAndSelectionOutline": {
@@ -1538,60 +1017,33 @@
       "highlightForeground": {
         "color": "palette.blue.400",
         "details": {
-          "for": "List/Tree foreground color of the match highlights when searching inside the list/tree.",
-          "overridden-by": [
-            "editorHoverWidget.highlightForeground",
-            "editorSuggestWidget.highlightForeground",
-            "list.focusHighlightForeground"
-          ]
+          "for": "List/Tree foreground color of the match highlights when searching inside the list/tree."
         }
       },
       "hoverBackground": {
         "color": "palette.gray.white",
         "alpha": 0.10196078431372549,
         "details": {
-          "for": "List/Tree background when hovering over items using the mouse.",
-          "overridden-by": [
-            "button.secondaryBackground",
-            "button.secondaryHoverBackground",
-            "modernTab.hoverBackground",
-            "settings.focusedRowBackground",
-            "settings.rowHoverBackground"
-          ]
+          "for": "List/Tree background when hovering over items using the mouse."
         }
       },
       "hoverForeground": {
         "color": "palette.gray.000",
         "details": {
-          "for": "List/Tree foreground when hovering over items using the mouse.",
-          "overridden-by": [
-            "modernTab.hoverForeground"
-          ]
+          "for": "List/Tree foreground when hovering over items using the mouse."
         }
       },
       "inactiveSelectionBackground": {
         "color": "palette.gray.white",
         "alpha": 0.050980392156862744,
         "details": {
-          "for": "List/Tree background color for the selected item when the list/tree is inactive.",
-          "overridden-by": [
-            "editorGutter.commentRangeForeground",
-            "editorGutter.itemBackground",
-            "modernTab.activeBackground",
-            "notebook.cellBorderColor",
-            "notebook.selectedCellBackground",
-            "tab.selectedBackground",
-            "terminalCommandGuide.foreground"
-          ]
+          "for": "List/Tree background color for the selected item when the list/tree is inactive."
         }
       },
       "warningForeground": {
         "color": "palette.orange.400",
         "details": {
-          "for": "Foreground color of list items containing warnings.",
-          "overridden-by": [
-            "testing.iconQueued"
-          ]
+          "for": "Foreground color of list items containing warnings."
         }
       }
     },
@@ -1610,9 +1062,6 @@
           "for": "Minimap marker color for find matches.",
           "inherits": [
             "editor.findMatchHighlightBackground"
-          ],
-          "overrides": [
-            "editor.findMatchHighlightBackground"
           ]
         }
       },
@@ -1630,9 +1079,6 @@
           "for": "Minimap marker color for infos.",
           "inherits": [
             "editorInfo.foreground"
-          ],
-          "overrides": [
-            "editorInfo.foreground"
           ]
         }
       },
@@ -1642,9 +1088,6 @@
         "details": {
           "for": "Minimap marker color for the editor selection.",
           "inherits": [
-            "editor.selectionBackground"
-          ],
-          "overrides": [
             "editor.selectionBackground"
           ]
         }
@@ -1656,9 +1099,6 @@
           "for": "Minimap marker color for repeating editor selections.",
           "inherits": [
             "editor.selectionHighlightBackground"
-          ],
-          "overrides": [
-            "editor.selectionHighlightBackground"
           ]
         }
       },
@@ -1668,9 +1108,6 @@
         "details": {
           "for": "Minimap marker color for warnings.",
           "inherits": [
-            "editorWarning.foreground"
-          ],
-          "overrides": [
             "editorWarning.foreground"
           ]
         }
@@ -1692,13 +1129,6 @@
           "for": "The border color for notebook cells.",
           "inherits": [
             "list.inactiveSelectionBackground"
-          ],
-          "overridden-by": [
-            "notebook.inactiveFocusedCellBorder",
-            "notebook.selectedCellBorder"
-          ],
-          "overrides": [
-            "list.inactiveSelectionBackground"
           ]
         }
       }
@@ -1709,9 +1139,6 @@
         "details": {
           "for": "Output view sticky scroll background color.",
           "inherits": [
-            "outputView.background"
-          ],
-          "overrides": [
             "outputView.background"
           ]
         }
@@ -1724,28 +1151,13 @@
           "for": "Panel background color.",
           "inherits": [
             "editor.background"
-          ],
-          "overridden-by": [
-            "panelStickyScroll.background",
-            "scmGraph.historyItemHoverLabelForeground",
-            "terminal.background"
-          ],
-          "overrides": [
-            "editor.background"
           ]
         }
       },
       "border": {
         "color": "palette.gray.850",
         "details": {
-          "for": "Panel border color to separate the panel from the editor.",
-          "overridden-by": [
-            "panelSection.border",
-            "profiles.sashBorder",
-            "settings.headerBorder",
-            "settings.sashBorder",
-            "terminal.border"
-          ]
+          "for": "Panel border color to separate the panel from the editor."
         }
       },
       "dropBorder": {
@@ -1754,9 +1166,6 @@
         "details": {
           "for": "Drag and drop feedback color for the panel titles.",
           "inherits": [
-            "panelTitle.activeForeground"
-          ],
-          "overrides": [
             "panelTitle.activeForeground"
           ]
         }
@@ -1777,9 +1186,6 @@
           "for": "Background color of sticky scroll in the panel.",
           "inherits": [
             "panel.background"
-          ],
-          "overrides": [
-            "panel.background"
           ]
         }
       }
@@ -1791,21 +1197,13 @@
           "for": "Border color for the active panel title.",
           "inherits": [
             "panelTitle.activeForeground"
-          ],
-          "overrides": [
-            "panelTitle.activeForeground"
           ]
         }
       },
       "activeForeground": {
         "color": "palette.yellow.400",
         "details": {
-          "for": "Title color for the active panel.",
-          "overridden-by": [
-            "panel.dropBorder",
-            "panelTitle.activeBorder",
-            "panelTitle.inactiveForeground"
-          ]
+          "for": "Title color for the active panel."
         }
       },
       "inactiveForeground": {
@@ -1813,9 +1211,6 @@
         "details": {
           "for": "Title color for the inactive panel.",
           "inherits": [
-            "panelTitle.activeForeground"
-          ],
-          "overrides": [
             "panelTitle.activeForeground"
           ]
         }
@@ -1829,9 +1224,6 @@
           "for": "Color of the peek view borders and arrow.",
           "inherits": [
             "editorInfo.foreground"
-          ],
-          "overrides": [
-            "editorInfo.foreground"
           ]
         }
       }
@@ -1840,10 +1232,7 @@
       "background": {
         "color": "palette.gray.825",
         "details": {
-          "for": "Background color of the peek view title area.",
-          "overridden-by": [
-            "editorCommentsWidget.replyInputBackground"
-          ]
+          "for": "Background color of the peek view title area."
         }
       }
     },
@@ -1913,12 +1302,7 @@
         "color": "palette.gray.black",
         "alpha": 0.4,
         "details": {
-          "for": "Scrollbar shadow to indicate that the view is scrolled.",
-          "overridden-by": [
-            "editorStickyScroll.shadow",
-            "panelStickyScroll.shadow",
-            "sideBarStickyScroll.shadow"
-          ]
+          "for": "Scrollbar shadow to indicate that the view is scrolled."
         }
       }
     },
@@ -1927,33 +1311,21 @@
         "color": "palette.gray.500",
         "alpha": 0.7019607843137254,
         "details": {
-          "for": "Scrollbar slider background color when clicked on.",
-          "overridden-by": [
-            "minimapSlider.activeBackground",
-            "notebookScrollbarSlider.activeBackground"
-          ]
+          "for": "Scrollbar slider background color when clicked on."
         }
       },
       "background": {
         "color": "palette.gray.500",
         "alpha": 0.30196078431372547,
         "details": {
-          "for": "Scrollbar slider background color.",
-          "overridden-by": [
-            "minimapSlider.background",
-            "notebookScrollbarSlider.background"
-          ]
+          "for": "Scrollbar slider background color."
         }
       },
       "hoverBackground": {
         "color": "palette.gray.500",
         "alpha": 0.5019607843137255,
         "details": {
-          "for": "Scrollbar slider background color when hovering.",
-          "overridden-by": [
-            "minimapSlider.hoverBackground",
-            "notebookScrollbarSlider.hoverBackground"
-          ]
+          "for": "Scrollbar slider background color when hovering."
         }
       }
     },
@@ -1974,19 +1346,13 @@
           "for": "The color of the row's top and bottom border when the row is focused.",
           "inherits": [
             "focusBorder"
-          ],
-          "overrides": [
-            "focusBorder"
           ]
         }
       },
       "headerForeground": {
         "color": "palette.gray.000",
         "details": {
-          "for": "The foreground color for a section header or active title.",
-          "overridden-by": [
-            "settings.settingsHeaderHoverForeground"
-          ]
+          "for": "The foreground color for a section header or active title."
         }
       },
       "modifiedItemIndicator": {
@@ -2000,16 +1366,7 @@
       "background": {
         "color": "palette.gray.875",
         "details": {
-          "for": "Side bar background color.",
-          "overridden-by": [
-            "agentsPanel.background",
-            "diffEditor.unchangedRegionBackground",
-            "notebook.cellEditorBackground",
-            "sideBarStickyScroll.background",
-            "sideBarTitle.background",
-            "surface.background",
-            "terminal.background"
-          ]
+          "for": "Side bar background color."
         }
       }
     },
@@ -2026,9 +1383,6 @@
           "for": "Side bar section header foreground color.",
           "inherits": [
             "sideBar.foreground"
-          ],
-          "overrides": [
-            "sideBar.foreground"
           ]
         }
       }
@@ -2040,9 +1394,6 @@
           "for": "Background color of sticky scroll in the side bar.",
           "inherits": [
             "sideBar.background"
-          ],
-          "overrides": [
-            "sideBar.background"
           ]
         }
       }
@@ -2053,9 +1404,6 @@
         "details": {
           "for": "Sidebar titles, such as Explorer.",
           "inherits": [
-            "sideBar.foreground"
-          ],
-          "overrides": [
             "sideBar.foreground"
           ]
         }
@@ -2074,21 +1422,13 @@
       "background": {
         "color": "palette.gray.800",
         "details": {
-          "for": "Status bar background color when a workspace or folder is opened.",
-          "overridden-by": [
-            "statusBar.debuggingBackground",
-            "statusBar.inactiveBackground",
-            "statusBar.noFolderBackground"
-          ]
+          "for": "Status bar background color when a workspace or folder is opened."
         }
       },
       "debuggingBackground": {
         "color": "palette.orange.600",
         "details": {
           "for": "Status bar background color when a program is being debugged.",
-          "overridden-by": [
-            "commandCenter.debuggingBackground"
-          ],
           "overrides": [
             "statusBar.background",
             "statusBar.noFolderBackground"
@@ -2114,33 +1454,19 @@
           "for": "Status bar border color when focused on keyboard navigation.",
           "inherits": [
             "statusBar.foreground"
-          ],
-          "overrides": [
-            "statusBar.foreground"
           ]
         }
       },
       "foreground": {
         "color": "palette.gray.400",
         "details": {
-          "for": "Status bar foreground color when a workspace or folder is opened.",
-          "overridden-by": [
-            "statusBar.debuggingForeground",
-            "statusBar.focusBorder",
-            "statusBar.noFolderForeground",
-            "statusBarItem.focusBorder",
-            "statusBarItem.hoverForeground",
-            "statusBarItem.prominentForeground"
-          ]
+          "for": "Status bar foreground color when a workspace or folder is opened."
         }
       },
       "noFolderBackground": {
         "color": "palette.gray.925",
         "details": {
           "for": "Status bar background color when no folder is opened.",
-          "overridden-by": [
-            "statusBar.debuggingBackground"
-          ],
           "overrides": [
             "statusBar.background"
           ]
@@ -2152,9 +1478,6 @@
           "for": "Status bar foreground color when no folder is opened.",
           "inherits": [
             "statusBar.foreground"
-          ],
-          "overridden-by": [
-            "statusBar.debuggingForeground"
           ],
           "overrides": [
             "statusBar.foreground"
@@ -2169,9 +1492,6 @@
           "for": "Status bar item border color when focused on keyboard navigation.",
           "inherits": [
             "statusBar.foreground"
-          ],
-          "overrides": [
-            "statusBar.foreground"
           ]
         }
       },
@@ -2180,16 +1500,6 @@
         "details": {
           "for": "Status bar item foreground color when hovering.",
           "inherits": [
-            "statusBar.foreground"
-          ],
-          "overridden-by": [
-            "statusBarItem.errorHoverForeground",
-            "statusBarItem.offlineHoverForeground",
-            "statusBarItem.prominentHoverForeground",
-            "statusBarItem.remoteHoverForeground",
-            "statusBarItem.warningHoverForeground"
-          ],
-          "overrides": [
             "statusBar.foreground"
           ]
         }
@@ -2201,12 +1511,6 @@
           "for": "Background color for the remote indicator on the status bar.",
           "inherits": [
             "activityBarBadge.background"
-          ],
-          "overridden-by": [
-            "ports.iconRunningProcessForeground"
-          ],
-          "overrides": [
-            "activityBarBadge.background"
           ]
         }
       },
@@ -2215,12 +1519,6 @@
         "details": {
           "for": "Foreground color for the remote indicator on the status bar.",
           "inherits": [
-            "activityBarBadge.foreground"
-          ],
-          "overridden-by": [
-            "statusBarItem.offlineForeground"
-          ],
-          "overrides": [
             "activityBarBadge.foreground"
           ]
         }
@@ -2231,9 +1529,6 @@
           "for": "Background color for the remote indicator on the status bar when hovering.",
           "inherits": [
             "statusBarItem.hoverBackground"
-          ],
-          "overrides": [
-            "statusBarItem.hoverBackground"
           ]
         }
       },
@@ -2242,9 +1537,6 @@
         "details": {
           "for": "Foreground color for the remote indicator on the status bar when hovering.",
           "inherits": [
-            "statusBarItem.hoverForeground"
-          ],
-          "overrides": [
             "statusBarItem.hoverForeground"
           ]
         }
@@ -2266,10 +1558,7 @@
       "variableForeground": {
         "color": "palette.blue.500",
         "details": {
-          "for": "Variable icons in outlines, breadcrumbs, and suggestions.",
-          "overridden-by": [
-            "terminalSymbolIcon.argumentForeground"
-          ]
+          "for": "Variable icons in outlines, breadcrumbs, and suggestions."
         }
       }
     },
@@ -2277,24 +1566,14 @@
       "activeForeground": {
         "color": "palette.gray.000",
         "details": {
-          "for": "Active tab foreground color in an active group.",
-          "overridden-by": [
-            "tab.dragAndDropBorder",
-            "tab.inactiveForeground",
-            "tab.selectedForeground",
-            "tab.unfocusedActiveForeground"
-          ]
+          "for": "Active tab foreground color in an active group."
         }
       },
       "border": {
         "color": "palette.gray.black",
         "alpha": 0.25098039215686274,
         "details": {
-          "for": "Border around tabs.",
-          "overridden-by": [
-            "browser.border",
-            "tab.divider"
-          ]
+          "for": "Border around tabs."
         }
       },
       "dragAndDropBorder": {
@@ -2304,29 +1583,19 @@
           "for": "Border between tabs to indicate that a tab can be inserted between two tabs.",
           "inherits": [
             "tab.activeForeground"
-          ],
-          "overrides": [
-            "tab.activeForeground"
           ]
         }
       },
       "hoverForeground": {
         "color": "palette.gray.000",
         "details": {
-          "for": "Tab foreground color when hovering.",
-          "overridden-by": [
-            "tab.unfocusedHoverForeground"
-          ]
+          "for": "Tab foreground color when hovering."
         }
       },
       "inactiveBackground": {
         "color": "palette.gray.850",
         "details": {
-          "for": "Inactive tab background color in an active group.",
-          "overridden-by": [
-            "inlineEdit.gutterIndicator.background",
-            "tab.unfocusedInactiveBackground"
-          ]
+          "for": "Inactive tab background color in an active group."
         }
       },
       "inactiveForeground": {
@@ -2334,12 +1603,6 @@
         "details": {
           "for": "Inactive tab foreground color in an active group.",
           "inherits": [
-            "tab.activeForeground"
-          ],
-          "overridden-by": [
-            "tab.unfocusedInactiveForeground"
-          ],
-          "overrides": [
             "tab.activeForeground"
           ]
         }
@@ -2350,9 +1613,6 @@
           "for": "Active tab foreground color in an unfocused group.",
           "inherits": [
             "tab.activeForeground"
-          ],
-          "overrides": [
-            "tab.activeForeground"
           ]
         }
       },
@@ -2362,9 +1622,6 @@
           "for": "Tab foreground color in an unfocused group when hovering.",
           "inherits": [
             "tab.hoverForeground"
-          ],
-          "overrides": [
-            "tab.hoverForeground"
           ]
         }
       },
@@ -2373,9 +1630,6 @@
         "details": {
           "for": "Inactive tab foreground color in an unfocused group.",
           "inherits": [
-            "tab.inactiveForeground"
-          ],
-          "overrides": [
             "tab.inactiveForeground"
           ]
         }
@@ -2486,11 +1740,6 @@
             "editor.background",
             "panel.background",
             "sideBar.background"
-          ],
-          "overrides": [
-            "editor.background",
-            "panel.background",
-            "sideBar.background"
           ]
         }
       },
@@ -2542,12 +1791,7 @@
       "foreground": {
         "color": "palette.blue.400",
         "details": {
-          "for": "Foreground color for links in text.",
-          "overridden-by": [
-            "extensionIcon.verifiedForeground",
-            "notificationLink.foreground",
-            "welcomePage.progress.foreground"
-          ]
+          "for": "Foreground color for links in text."
         }
       }
     },
@@ -2569,24 +1813,13 @@
       "activeBackground": {
         "color": "palette.gray.800",
         "details": {
-          "for": "Title bar background when the window is active.",
-          "overridden-by": [
-            "modernUI.shellBackground",
-            "titleBar.inactiveBackground"
-          ]
+          "for": "Title bar background when the window is active."
         }
       },
       "activeForeground": {
         "color": "palette.gray.400",
         "details": {
-          "for": "Title bar foreground when the window is active.",
-          "overridden-by": [
-            "commandCenter.activeBorder",
-            "commandCenter.border",
-            "commandCenter.foreground",
-            "menubar.selectionForeground",
-            "titleBar.inactiveForeground"
-          ]
+          "for": "Title bar foreground when the window is active."
         }
       },
       "inactiveBackground": {
@@ -2594,12 +1827,6 @@
         "details": {
           "for": "Title bar background when the window is inactive.",
           "inherits": [
-            "titleBar.activeBackground"
-          ],
-          "overridden-by": [
-            "modernUI.inactiveShellBackground"
-          ],
-          "overrides": [
             "titleBar.activeBackground"
           ]
         }
@@ -2610,13 +1837,6 @@
           "for": "Title bar foreground when the window is inactive.",
           "inherits": [
             "titleBar.activeForeground"
-          ],
-          "overridden-by": [
-            "commandCenter.inactiveBorder",
-            "commandCenter.inactiveForeground"
-          ],
-          "overrides": [
-            "titleBar.activeForeground"
           ]
         }
       }
@@ -2626,12 +1846,7 @@
         "color": "palette.gray.white",
         "alpha": 0.10196078431372549,
         "details": {
-          "for": "Toolbar background when hovering over actions using the mouse.",
-          "overridden-by": [
-            "agentsNewSessionButton.hoverBackground",
-            "menubar.selectionBackground",
-            "toolbar.activeBackground"
-          ]
+          "for": "Toolbar background when hovering over actions using the mouse."
         }
       }
     },
@@ -2639,11 +1854,7 @@
       "indentGuidesStroke": {
         "color": "palette.gray.700",
         "details": {
-          "for": "Tree stroke color for the indentation guides.",
-          "overridden-by": [
-            "tab.lastPinnedBorder",
-            "tree.inactiveIndentGuidesStroke"
-          ]
+          "for": "Tree stroke color for the indentation guides."
         }
       },
       "tableColumnsBorder": {
@@ -2658,13 +1869,6 @@
         "details": {
           "for": "Background color for odd table rows.",
           "inherits": [
-            "foreground"
-          ],
-          "overridden-by": [
-            "keybindingTable.headerBackground",
-            "keybindingTable.rowsBackground"
-          ],
-          "overrides": [
             "foreground"
           ]
         }
@@ -2688,9 +1892,6 @@
             "for": "Welcome page progress tracks.",
             "inherits": [
               "input.background"
-            ],
-            "overrides": [
-              "input.background"
             ]
           }
         },
@@ -2699,9 +1900,6 @@
           "details": {
             "for": "Welcome page progress fills.",
             "inherits": [
-              "textLink.foreground"
-            ],
-            "overrides": [
               "textLink.foreground"
             ]
           }
@@ -2713,22 +1911,14 @@
         "color": "palette.gray.white",
         "alpha": 0.050980392156862744,
         "details": {
-          "for": "Border color of widgets such as find/replace inside the editor.",
-          "overridden-by": [
-            "notificationCenter.border",
-            "notificationToast.border"
-          ]
+          "for": "Border color of widgets such as find/replace inside the editor."
         }
       },
       "shadow": {
         "color": "palette.gray.black",
         "alpha": 0.2,
         "details": {
-          "for": "Shadow color of widgets such as find/replace inside the editor.",
-          "overridden-by": [
-            "inlineChat.shadow",
-            "listFilterWidget.shadow"
-          ]
+          "for": "Shadow color of widgets such as find/replace inside the editor."
         }
       }
     }
@@ -2741,10 +1931,6 @@
         "inherits": [
           "scope:entity.name.type.class",
           "scope:support.class"
-        ],
-        "overrides": [
-          "scope:entity.name.type.class",
-          "scope:support.class"
         ]
       }
     },
@@ -2753,13 +1939,6 @@
       "details": {
         "for": "Semantic function symbols.",
         "inherits": [
-          "scope:entity.name.function",
-          "scope:support.function"
-        ],
-        "overridden-by": [
-          "semantic.function.defaultLibrary"
-        ],
-        "overrides": [
           "scope:entity.name.function",
           "scope:support.function"
         ]
@@ -2772,10 +1951,6 @@
         "inherits": [
           "semantic.function",
           "scope:support.function"
-        ],
-        "overrides": [
-          "semantic.function",
-          "scope:support.function"
         ]
       }
     },
@@ -2784,10 +1959,6 @@
       "details": {
         "for": "Semantic method symbols.",
         "inherits": [
-          "scope:entity.name.function.member",
-          "scope:support.function"
-        ],
-        "overrides": [
           "scope:entity.name.function.member",
           "scope:support.function"
         ]
@@ -2799,9 +1970,6 @@
         "for": "Semantic namespace symbols.",
         "inherits": [
           "scope:entity.name.namespace"
-        ],
-        "overrides": [
-          "scope:entity.name.namespace"
         ]
       }
     },
@@ -2811,9 +1979,6 @@
         "for": "Semantic parameter symbols.",
         "inherits": [
           "scope:variable.parameter"
-        ],
-        "overrides": [
-          "scope:variable.parameter"
         ]
       }
     },
@@ -2822,9 +1987,6 @@
       "details": {
         "for": "Semantic property symbols.",
         "inherits": [
-          "scope:variable.other.property"
-        ],
-        "overrides": [
           "scope:variable.other.property"
         ]
       }
@@ -2836,13 +1998,6 @@
         "inherits": [
           "scope:variable.other.readwrite",
           "scope:entity.name.variable"
-        ],
-        "overridden-by": [
-          "semantic.variable.defaultLibrary"
-        ],
-        "overrides": [
-          "scope:variable.other.readwrite",
-          "scope:entity.name.variable"
         ]
       }
     },
@@ -2851,11 +2006,6 @@
       "details": {
         "for": "Semantic built-in variable symbols.",
         "inherits": [
-          "semantic.variable",
-          "scope:support.variable",
-          "scope:support.other.variable"
-        ],
-        "overrides": [
           "semantic.variable",
           "scope:support.variable",
           "scope:support.other.variable"

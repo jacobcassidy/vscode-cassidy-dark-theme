@@ -12,7 +12,6 @@
         "details": {
           "for": "Activity bar drag and drop indicators.",
           "inherits": ["activityBar.foreground"],
-          "overrides": ["activityBar.foreground"],
         },
       },
     },
@@ -22,18 +21,21 @@
 
 ## Fields
 
-| Field           | Value                         | Meaning                                                                                                                        |
-| --------------- | ----------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
-| `for`           | Brief string                  | Where the token is used.                                                                                                       |
-| `inherits`      | Array of token or scope names | Sources used when this token has no explicit color, including transformed defaults and conditional consumer fallbacks.         |
-| `overridden-by` | Array of token or scope names | Known more specific tokens that can replace this token's inherited contribution, or take precedence for a particular UI state. |
-| `overrides`     | Array of token or scope names | Fallback contributions or less specific state colors replaced by explicitly setting this token for its own use.                |
+| Field       | Value                         | Meaning                                                                                                                |
+| ----------- | ----------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
+| `for`       | Brief string                  | Where the token is used.                                                                                               |
+| `inherits`  | Array of token or scope names | Sources used when this token has no explicit color, including transformed defaults and conditional consumer fallbacks. |
+| `overrides` | Array of token names          | Colors this token takes precedence over in its UI state.                                                               |
 
 Omit empty fields and omit `details` entirely when there is nothing to document. Relationship arrays contain unique, nonempty names. Keep `alpha` only when it differs from 1. Literal color exceptions still require their separate `reason` field.
 
 Workbench relationships use VS Code color IDs, such as `activityBar.foreground`, without the authoring-only `ui.` prefix. Semantic selectors use `semantic.function`, for example; `scope:support.function` identifies a TextMate fallback probe. These are documentation names, so they can reference colors and selectors that this theme does not explicitly set. Only `color` controls the actual Cassidy Dark palette/token alias.
 
-For example, `activityBar.dropBorder` defaults to `activityBar.foreground`. Setting `dropBorder` replaces that default for the drag indicator; it does not change the foreground of the activity bar icons. Therefore the drag token lists the foreground in both `inherits` and `overrides`, and the foreground lists the drag token in `overridden-by`. Relationships describe direct links; transitive dependents are not repeated.
+For example, `activityBar.dropBorder` defaults to `activityBar.foreground`, so it lists the foreground only in `inherits`. This fallback does not create an `overrides` entry. Relationships describe direct links; transitive dependents are not repeated.
+
+State precedence is separate: `statusBar.debuggingBackground` takes precedence over `statusBar.background` and `statusBar.noFolderBackground` while debugging colors are enabled. Those links belong in `overrides`. Omitting the debugging background from the theme uses VS Code's literal debugging default, so it has no `inherits` list.
+
+A pair can appear in both lists when it independently has both relationships. For example, `statusBar.debuggingForeground` inherits `statusBar.foreground` when omitted, and its debugging state also takes precedence over the normal foreground. The current override lists cover the status bar's debugging and empty-window backgrounds and foregrounds. Search `inherits` and `overrides` for a token ID to find its incoming relationships.
 
 ## Source review
 
@@ -43,8 +45,8 @@ There is a way to obtain exact registration data: VS Code's internal [`getColorR
 
 1. Inspect `registerColor(id, defaults, description)` calls in production TypeScript and color contributions in bundled extension manifests. Resolve imported constants and re-exports to their registered IDs.
 2. Select the `dark` default for this dark theme. Record direct token references, including inputs to `transparent`, `lighten`, `darken`, `opaque`, `lessProminent`, and `oneOf`. A literal hex, literal `Color`, or `null` contributes no inherited token. These transformations and alternatives are not encoded by the relationship name alone.
-3. Reverse those references to identify more specific tokens that can replace an inherited contribution on their own surfaces. Include registered dependents even when Cassidy Dark does not set them.
-4. Inspect consumers for fallbacks and state precedence absent from registrations. Check semantic selector matching and TextMate probes separately.
+3. Inspect consumers for fallbacks absent from registrations and add those links only to `inherits`. Check semantic selector matching and TextMate probes separately; scope probes and base-selector fallbacks also belong in `inherits`.
+4. Inspect state selection in consumers to populate `overrides` on authored tokens. Registration dependencies alone do not establish state precedence.
 
 The relationship lists are a reviewed snapshot, not a complete runtime precedence model. Conditions such as terminal location, hover, focus, debugging, application surface, and extension contributions can affect which source is used. User color customizations also take precedence over theme colors in [`ColorThemeData.getColor`](https://github.com/microsoft/vscode/blob/1.143.1/src/vs/workbench/services/themes/common/colorThemeData.ts#L152); this setting is documented here rather than repeated as though it were a color token in every list. Normal theme builds do not fetch VS Code source or refresh these details.
 
