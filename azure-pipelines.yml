@@ -41,7 +41,7 @@ steps:
       set -euo pipefail
       version=$(node -p "require('./package.json').version")
       vsix="$BUILD_ARTIFACTSTAGINGDIRECTORY/cassidy-dark-$version.vsix"
-      npm run package -- "$vsix"
+      npm run package:vsix -- "$vsix"
       echo "##vso[task.setvariable variable=ExtensionVsix]$vsix"
     displayName: "Package extension"
     workingDirectory: "$(Build.SourcesDirectory)"

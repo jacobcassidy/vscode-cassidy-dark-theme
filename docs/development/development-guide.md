@@ -123,20 +123,20 @@ Validate and package the current checkout:
 
 ```bash
 npm run check
-npm run package
+npm run package:vsix
 ```
 
 [`scripts/release/package.sh`](../../scripts/release/package.sh) reads the version from `package.json`, creates the destination directory, and invokes the local `vsce` executable. The default output is `dist/cassidy-dark-VERSION.vsix`. To choose another output file, pass its path after `--`:
 
 ```bash
-npm run package -- /absolute/path/to/cassidy-dark-VERSION.vsix
+npm run package:vsix -- /absolute/path/to/cassidy-dark-VERSION.vsix
 ```
 
 Relative output paths resolve from the repository root. Packaging does not publish or automatically run checks; the commands above and the pipeline run checks explicitly. In VS Code, use **Extensions: Install from VSIX...** to install the archive and inspect the packaged theme.
 
 The manifest selects `themes/cassidy-dark-color-theme.json` as the only published theme. `.vscodeignore` excludes development themes and samples, documentation, scripts, tests, editor settings, agent instructions, the Node.js version file, generated output, and the listed tooling configuration files. The package carries the production theme, manifest, and distributable assets such as the README, changelog, license, and images. `dist/` and generated `*.vsix` archives are ignored by Git.
 
-The pipeline uses the same `npm run package` entry point with its artifact staging destination. Local development and the pipeline both use `npm ci` and the CLI resolved in `package-lock.json`; neither requires a global `vsce` installation. The manifest's `allowScripts` entries permit the declared Lefthook, resolver, and VSIX signing helper installation scripts when using npm versions that enforce that setting.
+The pipeline uses the same `npm run package:vsix` entry point with its artifact staging destination. Local development and the pipeline both use `npm ci` and the CLI resolved in `package-lock.json`; neither requires a global `vsce` installation. The manifest's `allowScripts` entries permit the declared Lefthook, resolver, and VSIX signing helper installation scripts when using npm versions that enforce that setting.
 
 ## Release configuration
 
@@ -185,7 +185,7 @@ To submit a run from your computer, the Azure CLI must be installed, authenticat
 From a local checkout on `main`, run:
 
 ```bash
-npm run release:queue
+npm run release:queue-azure-pipeline
 ```
 
 [`scripts/release/publish-azure.sh`](../../scripts/release/publish-azure.sh) rejects any branch other than `main`, including detached HEAD, then submits:
@@ -207,7 +207,7 @@ The pipeline performs these steps in order:
 
 1. **Checkout and preflight.** Check out the source, select Node.js 24, require `BUILD_SOURCEBRANCH` to equal `refs/heads/main`, require `GH_TOKEN`, validate the version's changelog notes, and check GitHub authentication and repository access. This preflight does not verify Marketplace publisher permissions.
 2. **Install and validate.** Run `npm ci` to install the locked development and packaging tools, then run `npm run check`. A failed check stops publication.
-3. **Package once.** Read `package.json.version` and call `npm run package` to write `cassidy-dark-VERSION.vsix` into `BUILD_ARTIFACTSTAGINGDIRECTORY`. Save the path in the pipeline variable `ExtensionVsix`.
+3. **Package once.** Read `package.json.version` and call `npm run package:vsix` to write `cassidy-dark-VERSION.vsix` into `BUILD_ARTIFACTSTAGINGDIRECTORY`. Save the path in the pipeline variable `ExtensionVsix`.
 4. **Preserve the VSIX.** Upload it as the Azure pipeline artifact `extension-vsix` before either publication step.
 5. **Publish to the VS Code Marketplace.** Authenticate through `vscode_publishing_connection` and run the local CLI with `publish --azure-credential --packagePath "$EXTENSION_VSIX"`.
 6. **Publish the GitHub release.** Run `scripts/release/create-github-release.sh` with that same VSIX, using `GH_TOKEN`.
@@ -234,7 +234,7 @@ If Marketplace publication succeeded and only GitHub publication failed:
 4. Run the GitHub helper with the absolute path to the downloaded VSIX:
 
    ```bash
-   npm run release:github -- /absolute/path/to/cassidy-dark-VERSION.vsix
+   npm run release:github-release -- /absolute/path/to/cassidy-dark-VERSION.vsix
    ```
 
 This runs only GitHub publication and can fill in a missing release or missing asset. It still validates the changelog and token even when an asset already exists. For an incorrect existing asset, release description, or tag target, review and correct that GitHub resource explicitly; the helper leaves it in place.

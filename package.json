@@ -73,9 +73,9 @@
     "lint:es:fix": "eslint --fix",
     "lint:md": "markdownlint-cli2 \"**/*.md\"",
     "lint:md:fix": "markdownlint-cli2 \"**/*.md\" --fix",
-    "package": "bash scripts/release/package.sh",
-    "release:github": "bash scripts/release/create-github-release.sh",
-    "release:queue": "bash scripts/release/publish-azure.sh",
+    "package:vsix": "bash scripts/release/package.sh",
+    "release:github-release": "bash scripts/release/create-github-release.sh",
+    "release:queue-azure-pipeline": "bash scripts/release/publish-azure.sh",
     "test": "node --test"
   }
 }
