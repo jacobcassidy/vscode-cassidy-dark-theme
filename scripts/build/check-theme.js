@@ -40,7 +40,7 @@ async function requireFile(root, path) {
   }
 }
 
-export async function checkThemes(root = fileURLToPath(new URL("../", import.meta.url))) {
+export async function checkThemes(root = fileURLToPath(new URL("../../", import.meta.url))) {
   const manifest = JSON.parse(await readFile(join(root, "package.json"), "utf8"));
   const themes = manifest.contributes?.themes;
 
@@ -62,6 +62,14 @@ export async function checkThemes(root = fileURLToPath(new URL("../", import.met
   for (const entry of devThemes) {
     if (entry.isFile() && entry.name.endsWith(".json")) {
       paths.add(`dev/themes/${entry.name}`);
+    }
+  }
+
+  for (const directory of ["dev/snapshots"]) {
+    const snapshots = await readdir(join(root, directory), { withFileTypes: true });
+
+    for (const entry of snapshots) {
+      if (entry.isFile() && entry.name.endsWith(".json")) paths.add(`${directory}/${entry.name}`);
     }
   }
 

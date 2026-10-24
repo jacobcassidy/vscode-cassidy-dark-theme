@@ -4,7 +4,7 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 import test from "node:test";
 import { parse } from "jsonc-parser";
-import { buildTheme, renderTemplate } from "../scripts/build-theme.js";
+import { buildDev, buildTheme, renderTemplate } from "../scripts/build/build-theme.js";
 import { contrastRatio, fromHex, inGamut, maxChroma, toHex, withAlpha } from "../scripts/lib/colors.js";
 import { parseJsonc } from "../scripts/lib/jsonc.js";
 import { generatePalette, resolveTokens } from "../scripts/lib/palette.js";
@@ -373,14 +373,14 @@ test("build is deterministic, checks every artifact without writing, and updates
   await buildTheme({ root, check: true });
   assert.equal((await stat(themePath)).mtimeMs, before.mtimeMs);
 
-  const reportPath = join(root, "docs/references/palettes/generated/palette.generated.json");
+  const reportPath = join(root, "dev/generated/palette/palette.json");
   const report = JSON.parse(await readFile(reportPath, "utf8"));
 
   assert.equal(report.primitives["palette.yellow.400"].hex, "#f1dda5");
   await writeFile(reportPath, "stale");
-  await assert.rejects(buildTheme({ root, check: true }), /palette.generated.json/);
+  await assert.rejects(buildTheme({ root, check: true }), /palette.json/);
   assert.equal(await readFile(reportPath, "utf8"), "stale");
-  assert.deepEqual((await buildTheme({ root })).changed, ["docs/references/palettes/generated/palette.generated.json"]);
+  assert.deepEqual((await buildTheme({ root })).changed, ["dev/generated/palette/palette.json"]);
   assert.equal(await readFile(themePath, "utf8"), output);
 });
 
@@ -420,7 +420,7 @@ test("editing token details leaves all generated artifacts unchanged", async (t)
 test("palette reports include 600 contrast from final hex and flag translucent overrides", async (t) => {
   const root = await fixture(t);
   await buildTheme({ root, paletteOnly: true });
-  const path = join(root, "docs/references/palettes/generated/palette.generated.md");
+  const path = join(root, "dev/generated/palette/palette.md");
   const markdown = await readFile(path, "utf8");
   const section = markdown.split("## Tone 600 contrast")[1].split("## Full palette")[0];
   assert.match(section, /Foreground: `#f8f8f8`/);
@@ -456,4 +456,30 @@ test("the authored palette keeps base syntax and colored control text readable",
   ]) {
     assert.ok(contrastRatio(theme.colors[foreground], theme.colors[background]) >= 4.5, background);
   }
+});
+
+test("development targets merge palette settings, replace token leaves, and isolate outputs", async (t) => {
+  const root = await fixture(t);
+  const experiment = join(root, "dev/experiments/sample");
+  const productionTheme = join(root, "src/cassidy-dark-color-theme.jsonc");
+
+  await mkdir(experiment, { recursive: true });
+  await writeFile(join(experiment, "palette.jsonc"), '{"families":{"yellow":{"hue":95}}}');
+  await writeFile(
+    join(experiment, "tokens.jsonc"),
+    '{"syntax":{"string":{"color":"#abcdef","reason":"Test exception"}}}',
+  );
+
+  const result = await buildDev({ root });
+
+  assert.equal(result[0].name, "sample");
+  assert.equal(result[0].palette.get("palette.yellow.400").target.h, 95);
+  assert.equal(result[0].changed.length, 4);
+  assert.match(await readFile(join(root, "dev/themes/cassidy-dark-color-theme-sample.json"), "utf8"), /#abcdef/);
+  await assert.rejects(readFile(join(root, "themes/cassidy-dark-color-theme.json")), { code: "ENOENT" });
+  await assert.equal(await readFile(productionTheme, "utf8"), template);
+  assert.deepEqual(
+    (await buildDev({ root, check: true })).map(({ changed }) => changed),
+    [[]],
+  );
 });

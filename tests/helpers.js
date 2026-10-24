@@ -22,7 +22,7 @@ export async function createProject(t) {
     __metadata: { id: "installed-extension" },
   };
 
-  for (const path of ["themes", "dev/themes", "images"]) {
+  for (const path of ["themes", "dev/themes", "dev/snapshots", "images"]) {
     await mkdir(join(root, path), { recursive: true });
   }
 

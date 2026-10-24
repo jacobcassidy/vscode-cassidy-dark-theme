@@ -1,6 +1,6 @@
 # Cassidy Dark color system proposal
 
-Status: the build and palette described here are implemented. Authoring inputs live in `src/`; the shipped theme and palette references are generated. The initial migration verified that every parsed theme value and original comment was preserved before the new palette was applied in a separate change. The [development guide](../../development/development-guide.md) describes the available commands, and the [generated palette](generated/palette.generated.md) shows the current output.
+Status: the build and palette described here are implemented. Authoring inputs live in `src/`; the shipped theme and palette references are generated. The initial migration verified that every parsed theme value and original comment was preserved before the new palette was applied in a separate change. The [development guide](../../development/development-guide.md) describes the available commands, and the [generated palette](../../dev/generated/palette/palette.md) shows the current output.
 
 ## Recommendation
 
@@ -201,10 +201,10 @@ The build uses these paths:
 | `src/palette.jsonc`                    | Authored hue/lightness parameters, optional base chroma, neutrals, and documented primitive overrides            |
 | `src/tokens.jsonc`                     | Semantic aliases and explicit alpha values for overlays                                                          |
 | `src/cassidy-dark-color-theme.jsonc`   | Full theme template with named color references, comments, scope arrays, and font styles                         |
-| `scripts/build-theme.js`               | Parameter validation, palette generation, alias resolution, template substitution, and output comparison/writing |
+| `scripts/build/build-theme.js`         | Parameter validation, palette generation, alias resolution, template substitution, and output comparison/writing |
 | `themes/cassidy-dark-color-theme.json` | Committed generated theme; edit the source files after migration                                                 |
 
-`npm run build:palette` generates `palette.generated.json`, `palette.generated.md`, and `palette.generated.svg` under `docs/references/palettes/generated/`. JSON includes requested, resolved, and exported OKLCH values, hex values, and override reasons. The Markdown report includes the swatch sheet. This command needs only `src/palette.jsonc`; `npm run build:theme` generates those same reports and the resolved theme together.
+`npm run build:palette` generates `palette.json`, `palette.md`, and `palette.svg` under `dev/generated/palette/`. JSON includes requested, resolved, and exported OKLCH values, hex values, and override reasons. The Markdown report includes the swatch sheet. This command needs only `src/palette.jsonc`; `npm run build:theme` generates those same reports and the resolved theme together.
 
 The dependency flow is:
 
@@ -329,9 +329,9 @@ The npm scripts expose the builder:
 
 ```json
 {
-  "build:palette": "node scripts/build-theme.js --palette-only",
-  "build:theme": "node scripts/build-theme.js",
-  "check:generated": "node scripts/build-theme.js --check"
+  "build:palette": "node scripts/build/build-theme.js --palette-only",
+  "build:theme": "node scripts/build/build-theme.js",
+  "check:generated": "node scripts/build/build-theme.js --check"
 }
 ```
 

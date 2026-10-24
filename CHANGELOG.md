@@ -6,6 +6,7 @@ All notable changes to this project are documented in this file.
 
 ### Added
 
+- Added named development experiments with reusable palette/token builds, isolated generated previews and reports, historical snapshot discovery, and a `build:dev` command.
 - Added generated contrast ratios for each chromatic `600` tone against foreground `#f8f8f8` in the Markdown palette report, calculated from exported sRGB hex values.
 - Added palette and theme generation from JSONC palette inputs, semantic tokens, and a comment-preserving theme template, with generated JSON/Markdown/SVG palette references and stale-output checks in validation and packaging.
 - Added tests for color conversions, gamut limits, base chroma anchors, aliases, alpha handling, template preservation, deterministic output, and failed builds.
@@ -18,6 +19,7 @@ All notable changes to this project are documented in this file.
 
 ### Changed
 
+- Moved generated palette reports to `dev/generated/palette/`, grouped build scripts under `scripts/build/`, and separated editable experiments, generated previews, and historical snapshots.
 - Added comments above every level 1 and level 2 token property describing its UI location or when its colors are used.
 - Kept fallback relationships only in token `details.inherits`, reserved `overrides` for independently verified UI state precedence, and removed the redundant reverse relationship field.
 - Replaced token color comments with optional validated `details` metadata for usage, inheritance, and overrides, using VS Code source registrations and reviewed rendering fallbacks.

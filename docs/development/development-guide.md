@@ -6,21 +6,23 @@ Run the commands in this guide from the repository root unless stated otherwise.
 
 ## Project structure
 
-| Path                                                                                  | Purpose                                                                                                                      |
-| ------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
-| [`package.json`](../../package.json)                                                  | Extension identity, Marketplace metadata, version, theme contribution, development dependencies, and npm scripts.            |
-| [`package-lock.json`](../../package-lock.json)                                        | Locked npm dependency tree for local development tools.                                                                      |
-| [`themes/cassidy-dark-color-theme.json`](../../themes/cassidy-dark-color-theme.json)  | The committed generated theme shipped to users; edit its inputs in `src/`.                                                   |
-| [`src/`](../../src/)                                                                  | Palette inputs, semantic tokens, and the JSONC theme template.                                                               |
-| [`scripts/build-theme.js`](../../scripts/build-theme.js)                              | Palette generation, token resolution, reports, and generated-output verification.                                            |
-| [`dev/themes/`](../../dev/themes/)                                                    | Experimental and historical themes available through the local development extension.                                        |
-| [`docs/references/`](../references/)                                                  | Palette, opacity, semantic token, and workbench references, including generated palette reports. These are not build inputs. |
-| [`dev/samples/`](../../dev/samples/)                                                  | Example source files for inspecting syntax highlighting, including JavaScript, TypeScript, Python, and PHP.                  |
-| [`images/`](../../images/)                                                            | Extension icons and the README screenshot.                                                                                   |
-| [`scripts/dev/`](../../scripts/dev/) and [`scripts/release/`](../../scripts/release/) | Local development setup, pipeline submission, changelog extraction, and GitHub release creation.                             |
-| [`azure-pipelines.yml`](../../azure-pipelines.yml)                                    | Manual packaging and publication pipeline.                                                                                   |
-| [`.vscodeignore`](../../.vscodeignore)                                                | Exclusions from the published VSIX.                                                                                          |
-| [`CHANGELOG.md`](../../CHANGELOG.md)                                                  | Versioned release notes, also used to populate GitHub releases.                                                              |
+| Path                                                                                  | Purpose                                                                                                           |
+| ------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
+| [`package.json`](../../package.json)                                                  | Extension identity, Marketplace metadata, version, theme contribution, development dependencies, and npm scripts. |
+| [`package-lock.json`](../../package-lock.json)                                        | Locked npm dependency tree for local development tools.                                                           |
+| [`themes/cassidy-dark-color-theme.json`](../../themes/cassidy-dark-color-theme.json)  | The committed generated theme shipped to users; edit its inputs in `src/`.                                        |
+| [`src/`](../../src/)                                                                  | Palette inputs, semantic tokens, and the JSONC theme template.                                                    |
+| [`scripts/build/build-theme.js`](../../scripts/build/build-theme.js)                  | Palette generation, token resolution, reports, and generated-output verification.                                 |
+| [`dev/experiments/`](../../dev/experiments/)                                          | Editable named experimental inputs.                                                                               |
+| [`dev/themes/`](../../dev/themes/)                                                    | Generated experimental previews.                                                                                  |
+| [`dev/snapshots/`](../../dev/snapshots/)                                              | Historical comparison themes.                                                                                     |
+| [`docs/references/`](../references/)                                                  | Curated palette, opacity, semantic token, and workbench references. These are not build inputs.                   |
+| [`dev/samples/`](../../dev/samples/)                                                  | Example source files for inspecting syntax highlighting, including JavaScript, TypeScript, Python, and PHP.       |
+| [`images/`](../../images/)                                                            | Extension icons and the README screenshot.                                                                        |
+| [`scripts/dev/`](../../scripts/dev/) and [`scripts/release/`](../../scripts/release/) | Local development setup, pipeline submission, changelog extraction, and GitHub release creation.                  |
+| [`azure-pipelines.yml`](../../azure-pipelines.yml)                                    | Manual packaging and publication pipeline.                                                                        |
+| [`.vscodeignore`](../../.vscodeignore)                                                | Exclusions from the published VSIX.                                                                               |
+| [`CHANGELOG.md`](../../CHANGELOG.md)                                                  | Versioned release notes, also used to populate GitHub releases.                                                   |
 
 The published extension ID is `jacobcassidy.cassidy-dark`, combining the manifest's `publisher` and `name`. Its theme picker label is **Cassidy Dark**, with `uiTheme: "vs-dark"`. The manifest declares VS Code compatibility as `^1.64.2`.
 
@@ -98,11 +100,11 @@ Make production changes in `src/`, then run `npm run build:theme`:
 - `src/tokens.jsonc`: nested color roles with optional [`details` metadata](../references/scheme/token-details.md) for usage, inheritance, and overrides after `color` and optional `alpha`. Each leaf has a `color` palette/token reference or a hex exception with a required `reason`; include absolute `alpha` only when it is below 1. Dotted semantic selectors such as `function.defaultLibrary` stay together as keys under `semantic`.
 - `src/cassidy-dark-color-theme.jsonc`: theme structure, ordered scopes, font styles, and whole-string references such as `{syntax.string}`.
 
-Run `npm run build:palette` when you only need the complete palette. It writes JSON measurements, Markdown tables, and an SVG swatch sheet to `docs/references/palettes/generated/` without needing the token map or template. `build:theme` writes those reports plus `themes/cassidy-dark-color-theme.json`. Commit source and generated changes together; avoid editing generated files directly. No watch process runs automatically.
+Run `npm run build:palette` when you only need the production palette reports. It writes JSON measurements, Markdown tables, and an SVG swatch sheet to `dev/generated/palette/` without needing the token map or template. `build:theme` writes those reports plus `themes/cassidy-dark-color-theme.json`. `build:dev` builds named inputs under `dev/experiments/` into previews and palette reports. Commit source and generated changes together; avoid editing generated files directly. No watch process runs automatically.
 
 The builder rejects duplicate JSONC keys, invalid settings, empty or malformed details, missing references, alias cycles, and placeholders outside color positions. Details are documentation only and are excluded from generated artifacts. Comments and scope order survive generation. Validation and formatting finish before output replacement. `check:generated` compares every artifact in memory without changing files and fails on missing or stale output.
 
-Files in `dev/themes/` remain independent experiments: no script promotes or merges them into production.
+Files in `dev/experiments/` are independent inputs: no script promotes or merges them into production. Historical comparisons live in `dev/snapshots/` and are never regenerated.
 
 The editor settings in `.vscode/` recommend Prettier, ESLint, Markdown linting, and color inspection tools. Prettier formats on save, using two-space indentation and the repository configuration.
 

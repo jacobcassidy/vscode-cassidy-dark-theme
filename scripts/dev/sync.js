@@ -15,7 +15,7 @@ export async function syncDev({
   // Do not inherit the published extension identity.
   delete manifest.__metadata;
 
-  const devThemes = (await readdir(join(root, "dev/themes"), { withFileTypes: true }))
+  const generatedThemes = (await readdir(join(root, "dev/themes"), { withFileTypes: true }))
     .filter((entry) => entry.isFile() && entry.name.endsWith(".json"))
     .map((entry) => entry.name)
     .sort();
@@ -27,7 +27,7 @@ export async function syncDev({
       label: `${theme.label} Dev`,
       _watch: true,
     })),
-    ...devThemes.map((file) => {
+    ...generatedThemes.map((file) => {
       const name = file
         .replace(/\.json$/, "")
         .replace(/^cassidy-dark-color-theme-/, "")
@@ -42,6 +42,14 @@ export async function syncDev({
         _watch: true,
       };
     }),
+    ...(await readdir(join(root, "dev/snapshots"), { withFileTypes: true }))
+      .filter((entry) => entry.isFile() && entry.name.endsWith(".json"))
+      .map((entry) => ({
+        label: `Cassidy Dark Snapshot (${entry.name.replace(/^cassidy-dark-color-theme-/, "").replace(/\.json$/, "")})`,
+        uiTheme: "vs-dark",
+        path: `./dev/snapshots/${entry.name}`,
+        _watch: true,
+      })),
   ];
 
   // Keep the generated manifest separate from the source checkout.
