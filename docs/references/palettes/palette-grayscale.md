@@ -16,7 +16,7 @@
 | oklch(89% 0 0)  | #dbdbdb |                |                                                                                           |
 | oklch(88% 0 0)  | #d7d7d7 | --             |                                                                                           |
 | oklch(87% 0 0)  | #d4d4d4 |                |                                                                                           |
-| oklch(86% 0 0)  | #d1d1d1 | ----           |                                                                                           |
+| oklch(86% 0 0)  | #d1d1d1 | ---- 150       |                                                                                           |
 | oklch(85% 0 0)  | #cecece |                |                                                                                           |
 | oklch(84% 0 0)  | #cacaca | --             |                                                                                           |
 | oklch(83% 0 0)  | #c7c7c7 |                |                                                                                           |
