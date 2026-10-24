@@ -25,3 +25,5 @@ If you come across any issues, please feel free to [report them here](https://gi
 ## Development
 
 See the [development guide](https://github.com/jacobcassidy/vscode-cassidy-dark-theme/blob/main/docs/development/development-guide.md) for project structure, local previewing, validation, packaging, and releases.
+
+See the [color system proposal](docs/references/palettes/color-system-proposal.md) for suggested palette rules, semantic color roles, and contrast checks based on the v1.3 palette.
