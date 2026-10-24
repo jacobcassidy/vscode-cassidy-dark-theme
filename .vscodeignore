@@ -1,20 +1,19 @@
 # Directories to ignore
-.dev-assets
 .vscode
 dev
-docs
 dist
-tests
+docs
 scripts
+tests
 
 # Files to ignore
-AGENTS.md
-.nvmrc
 .editorconfig
 .gitignore
 .markdownlint-cli2.jsonc
+.nvmrc
 .prettierignore
 .shellcheckrc
+AGENTS.md
 azure-pipelines.yml
 eslint.config.js
 lefthook.yml
