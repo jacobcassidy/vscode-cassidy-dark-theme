@@ -257,7 +257,7 @@ npm run check
 npm run package:vsix
 ```
 
-[`scripts/release/package.sh`](../../../scripts/release/package.sh) checks that all generated artifacts are current, reads the version from `package.json`, creates the destination directory, and invokes the local `vsce` executable. The default output is `dist/cassidy-dark-VERSION.vsix`. To choose another output file, pass its path after `--`:
+[`scripts/release/package-vsix.sh`](../../../scripts/release/package-vsix.sh) checks that all generated artifacts are current, reads the version from `package.json`, creates the destination directory, and invokes the local `vsce` executable. The default output is `dist/cassidy-dark-VERSION.vsix`. To choose another output file, pass its path after `--`:
 
 ```bash
 npm run package:vsix -- /absolute/path/to/cassidy-dark-VERSION.vsix
@@ -304,12 +304,12 @@ To submit a run from your computer, the Azure CLI must be installed, authenticat
 
    ```bash
    npm run check
-   bash scripts/release/changelog-notes.sh
+   bash scripts/release/publish/get-changelog-notes.sh
    ```
 
 5. Commit the release changes and push them to `main` on the remote used by the Azure pipeline. Confirm the intended release commit is on that branch before starting publication.
 
-[`scripts/release/changelog-notes.sh`](../../../scripts/release/changelog-notes.sh) reads the manifest version and extracts the body below the matching `## [VERSION]` heading, stopping at the next level-two heading. It fails if that section is missing or empty. Entries under `[Unreleased]` do not become release notes automatically.
+[`scripts/release/publish/get-changelog-notes.sh`](../../../scripts/release/publish/get-changelog-notes.sh) reads the manifest version and extracts the body below the matching `## [VERSION]` heading, stopping at the next level-two heading. It fails if that section is missing or empty. Entries under `[Unreleased]` do not become release notes automatically.
 
 ### Start the pipeline
 
@@ -319,7 +319,7 @@ From a local checkout on `main`, run:
 npm run release:publish
 ```
 
-[`scripts/release/publish-azure.sh`](../../../scripts/release/publish-azure.sh) rejects any branch other than `main`, including detached HEAD, then submits:
+[`scripts/release/publish/run-azure-pipeline.sh`](../../../scripts/release/publish/run-azure-pipeline.sh) rejects any branch other than `main`, including detached HEAD, then submits:
 
 ```bash
 az pipelines run \
@@ -343,13 +343,13 @@ The pipeline performs these steps in order:
 3. **Package once.** Read `package.json.version` and call `npm run package:vsix` to write `cassidy-dark-VERSION.vsix` into `BUILD_ARTIFACTSTAGINGDIRECTORY`. Save the path in the pipeline variable `ExtensionVsix`.
 4. **Preserve the VSIX.** Upload it as the Azure pipeline artifact `extension-vsix` before either publication step.
 5. **Publish to the VS Code Marketplace.** Authenticate through `vscode_publishing_connection` and run the local CLI with `publish --azure-credential --packagePath "$EXTENSION_VSIX"`.
-6. **Publish the GitHub release.** Run `scripts/release/create-github-release.sh` with that same VSIX, using `GH_TOKEN`.
+6. **Publish the GitHub release.** Run `scripts/release/publish/create-github-release.sh` with that same VSIX, using `GH_TOKEN`.
 
 Both destinations receive the same packaged file. Marketplace publication runs first; if it fails, the subsequent GitHub step does not run under the pipeline's default success conditions. If GitHub publication fails afterward, the Marketplace version can already be live.
 
 ### GitHub release behavior
 
-[`scripts/release/create-github-release.sh`](../../../scripts/release/create-github-release.sh) derives the tag and release title as `vVERSION` from `package.json`, and supplies the matching changelog body as release notes. For a new release, it targets `BUILD_SOURCEVERSION` in Azure Pipelines, or the current `git rev-parse HEAD` when run locally. The GitHub CLI creates the tag if needed as part of release creation; no separate tag push is scripted.
+[`scripts/release/publish/create-github-release.sh`](../../../scripts/release/publish/create-github-release.sh) derives the tag and release title as `vVERSION` from `package.json`, and supplies the matching changelog body as release notes. For a new release, it targets `BUILD_SOURCEVERSION` in Azure Pipelines, or the current `git rev-parse HEAD` when run locally. The GitHub CLI creates the tag if needed as part of release creation; no separate tag push is scripted.
 
 For an existing release, the helper checks the VSIX asset's filename. It uploads the file if that name is missing, or skips it if the name is already present. It does not compare file contents, replace existing assets, update existing release notes, or retarget an existing tag. The release helper itself has no branch guard; the normal submission script and pipeline enforce `main`.
 

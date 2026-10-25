@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-cd "$(dirname "$0")/../.."
+cd "$(dirname "$0")/../../.."
 : "${GH_TOKEN:?Set GH_TOKEN to a GitHub token with repository Contents write access.}"
-vsix=${1:?Usage: bash scripts/release/create-github-release.sh /absolute/path/to/extension.vsix}
+vsix=${1:?Usage: bash scripts/release/publish/create-github-release.sh /absolute/path/to/extension.vsix}
 if [[ ! -f "$vsix" ]]; then
   echo "VSIX file not found: $vsix" >&2
   exit 1
@@ -17,7 +17,7 @@ asset=$(basename "$vsix")
 
 notes_file=$(mktemp)
 trap 'rm -f "$notes_file"' EXIT
-bash scripts/release/changelog-notes.sh > "$notes_file"
+bash scripts/release/publish/get-changelog-notes.sh > "$notes_file"
 
 # Query the repository first so authentication errors fail before release creation.
 gh api "repos/$repo" --silent

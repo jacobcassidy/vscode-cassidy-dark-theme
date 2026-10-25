@@ -78,9 +78,9 @@
     "lint:es:fix": "eslint --fix",
     "lint:md": "markdownlint-cli2 \"**/*.md\"",
     "lint:md:fix": "markdownlint-cli2 \"**/*.md\" --fix",
-    "package:vsix": "bash scripts/release/package.sh",
-    "release:github-recover": "bash scripts/release/create-github-release.sh",
-    "release:publish": "bash scripts/release/publish-azure.sh",
+    "package:vsix": "bash scripts/release/package-vsix.sh",
+    "release:github-recover": "bash scripts/release/publish/create-github-release.sh",
+    "release:publish": "bash scripts/release/publish/run-azure-pipeline.sh",
     "test": "node --test \"tests/*.test.js\"",
     "watch": "node scripts/themes/watch-theme.js"
   }

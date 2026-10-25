@@ -22,7 +22,7 @@ steps:
         echo "Set the secret GH_TOKEN pipeline variable with repository Contents write access."
         exit 1
       fi
-      bash scripts/release/changelog-notes.sh > /dev/null
+      bash scripts/release/publish/get-changelog-notes.sh > /dev/null
       gh auth status
       gh api repos/jacobcassidy/vscode-cassidy-dark-theme --silent
     displayName: "Check publishing configuration"
@@ -65,7 +65,7 @@ steps:
     env:
       EXTENSION_VSIX: $(ExtensionVsix)
 
-  - script: bash scripts/release/create-github-release.sh "$EXTENSION_VSIX"
+  - script: bash scripts/release/publish/create-github-release.sh "$EXTENSION_VSIX"
     displayName: "Create GitHub release and attach VSIX"
     workingDirectory: "$(Build.SourcesDirectory)"
     env:
