@@ -140,9 +140,9 @@ export function watchThemes(
         ),
       );
 
-      logger.log();
-
       for (const path of changedFiles) logger.log(styled(`        - ${path}`, styles.dim));
+
+      logger.log();
 
       if (themeRegistrations(previous) !== themeRegistrations(current)) {
         logger.log(
