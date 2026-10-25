@@ -176,6 +176,22 @@ npx lefthook install
 
 The tests cover palette math, variable aliases and alpha, file-level fallback and replacement, independent palettes, required default inputs, target collisions, output isolation, validation before writes, stale artifacts, comment/scope preservation, production registrations, repeatable preview synchronization, source-manifest preservation during preview sync, symlink protections, and malformed theme inputs. Theme validation checks basic structure rather than the entire VS Code theme schema. Check visual changes in VS Code as well as running `npm run check`; automated checks cannot establish how a theme looks. The publishing pipeline runs the same aggregate check before packaging.
 
+### Test organization
+
+| File                             | Responsibility                                                                                                         |
+| -------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
+| `tests/colors.test.js`           | Color conversions, hex export, luminance, and contrast.                                                                |
+| `tests/palette.test.js`          | Palette anchors, tone generation, gamut limits, overrides, and parameter validation.                                   |
+| `tests/variables.test.js`        | Variable aliases, dotted names, opacity, literal reasons, and details metadata.                                        |
+| `tests/theme-build.test.js`      | JSONC parsing, template rendering, authored theme contrast, reports, fallback, registrations, and build output checks. |
+| `tests/theme-validation.test.js` | Generated theme structure, manifest assets, registrations, and matching theme types.                                   |
+| `tests/local-extension.test.js`  | Local preview extension synchronization, theme picker entries, and symlink protections.                                |
+| `tests/test-projects.js`         | Reusable sample inputs and temporary project setup, output snapshots, and cleanup.                                     |
+
+`createBuildProject` returns a temporary source project's root directory. `createPreviewProject` returns the project and extension destination paths, sample manifest, and generated theme text for validation and preview tests. Both project builders register cleanup with the test context.
+
+`npm test` selects only `tests/*.test.js`, so `test-projects.js` is imported as a helper rather than discovered as a test file. To run one suite, use a command such as `node --test tests/variables.test.js`.
+
 ## Building the extension
 
 Generate the theme with `npm run build:prod`, then package it using the VS Code extension CLI, `@vscode/vsce`, installed by `npm ci`. There is no extension compilation step or `vscode:prepublish` script.

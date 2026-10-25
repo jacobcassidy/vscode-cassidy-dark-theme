@@ -3,23 +3,23 @@ import { writeFile } from "node:fs/promises";
 import { join } from "node:path";
 import test from "node:test";
 import { checkThemes } from "../scripts/themes/check-theme.js";
-import { createProject } from "./helpers.js";
+import { createPreviewProject } from "./test-projects.js";
 
 test("theme validation accepts JSONC in both production and development themes", async (t) => {
-  const { root } = await createProject(t);
+  const { root } = await createPreviewProject(t);
 
   assert.equal(await checkThemes(root), 2);
 });
 
 test("theme validation rejects malformed development JSONC", async (t) => {
-  const { root } = await createProject(t);
+  const { root } = await createPreviewProject(t);
 
   await writeFile(join(root, "dev/themes/cassidy-dark-color-theme-test.json"), '{ "colors": ');
   await assert.rejects(checkThemes(root), /invalid JSONC/);
 });
 
 test("theme validation rejects an invalid production theme structure", async (t) => {
-  const { root } = await createProject(t);
+  const { root } = await createPreviewProject(t);
 
   await writeFile(join(root, "themes/theme.json"), '{ "colors": [], "tokenColors": {} }');
   await assert.rejects(checkThemes(root), /expected a theme object/);
@@ -27,7 +27,7 @@ test("theme validation rejects an invalid production theme structure", async (t)
 
 for (const asset of ["icon", "theme"]) {
   test(`theme validation rejects a missing manifest ${asset}`, async (t) => {
-    const { root, manifest } = await createProject(t);
+    const { root, manifest } = await createPreviewProject(t);
 
     if (asset === "icon") {
       manifest.icon = "images/missing.png";
@@ -41,7 +41,7 @@ for (const asset of ["icon", "theme"]) {
 }
 
 test("theme validation rejects registrations whose UI type differs from their theme metadata", async (t) => {
-  const { root, manifest } = await createProject(t);
+  const { root, manifest } = await createPreviewProject(t);
 
   manifest.contributes.themes[0].uiTheme = "hc-black";
   await writeFile(join(root, "package.json"), JSON.stringify(manifest));
@@ -49,7 +49,7 @@ test("theme validation rejects registrations whose UI type differs from their th
 });
 
 test("theme validation rejects duplicate labels and unregistered production files", async (t) => {
-  const { root, manifest, theme } = await createProject(t);
+  const { root, manifest, theme } = await createPreviewProject(t);
 
   manifest.contributes.themes.push({ ...manifest.contributes.themes[0] });
   await writeFile(join(root, "package.json"), JSON.stringify(manifest));
@@ -61,7 +61,7 @@ test("theme validation rejects duplicate labels and unregistered production file
 });
 
 test("theme validation keeps local themes out of production registrations", async (t) => {
-  const { root, manifest } = await createProject(t);
+  const { root, manifest } = await createPreviewProject(t);
 
   manifest.contributes.themes[0].path = "dev/themes/cassidy-dark-color-theme-test.json";
   await writeFile(join(root, "package.json"), JSON.stringify(manifest));

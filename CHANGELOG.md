@@ -20,6 +20,7 @@ All notable changes to this project are documented in this file.
 
 ### Changed
 
+- Split tests by color, palette, variable, build, validation, and local extension responsibilities; moved reusable temporary project setup into `test-projects.js` and limited test discovery to `*.test.js` files.
 - Renamed `build:theme` to `build:prod`, updated production build notices and documentation, and made `dev:sync` use the combined build.
 - Updated development tooling dependencies and the lockfile, including the version-specific Lefthook install approval.
 - Renamed `scripts/shared/` to `scripts/lib/` and updated script and test imports.

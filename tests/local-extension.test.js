@@ -3,10 +3,10 @@ import { mkdir, readFile, realpath, symlink, writeFile } from "node:fs/promises"
 import { join } from "node:path";
 import test from "node:test";
 import { syncDev } from "../scripts/local-extension/sync.js";
-import { createProject } from "./helpers.js";
+import { createPreviewProject } from "./test-projects.js";
 
 test("development sync is repeatable and refreshes themes without modifying the source manifest", async (t) => {
-  const project = await createProject(t);
+  const project = await createPreviewProject(t);
   const source = await readFile(join(project.root, "package.json"), "utf8");
   const target = await syncDev(project);
 
@@ -40,14 +40,14 @@ test("development sync is repeatable and refreshes themes without modifying the 
 });
 
 test("development sync refuses a linked extension directory", async (t) => {
-  const project = await createProject(t);
+  const project = await createPreviewProject(t);
 
   await symlink(project.root, project.extensionDirectory, "dir");
   await assert.rejects(syncDev(project), /folder must be a regular directory/);
 });
 
 test("development sync refuses a linked manifest without overwriting its target", async (t) => {
-  const project = await createProject(t);
+  const project = await createPreviewProject(t);
   const source = await readFile(join(project.root, "package.json"), "utf8");
 
   await mkdir(project.extensionDirectory);
@@ -58,7 +58,7 @@ test("development sync refuses a linked manifest without overwriting its target"
 
 for (const kind of ["directory", "wrong symlink"]) {
   test(`development sync refuses an asset occupied by a ${kind}`, async (t) => {
-    const project = await createProject(t);
+    const project = await createPreviewProject(t);
     const link = join(project.extensionDirectory, "themes");
 
     await mkdir(project.extensionDirectory);
@@ -74,7 +74,7 @@ for (const kind of ["directory", "wrong symlink"]) {
 }
 
 test("preview sync includes all production themes, derives local theme types, and labels sorted snapshots", async (t) => {
-  const project = await createProject(t);
+  const project = await createPreviewProject(t);
   const manifest = project.manifest;
 
   manifest.contributes.themes.push({ label: "Alternate", uiTheme: "hc-black", path: "themes/alternate.json" });

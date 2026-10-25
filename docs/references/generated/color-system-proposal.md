@@ -354,7 +354,7 @@ After that migration passes, apply the proposed OKLCH palette as a separate revi
 
 Before adopting the builder, add focused tests for alias chains and cycles, missing references, alpha rounding and replacement, duplicate-key errors, invalid parameters, known OKLCH/sRGB conversions, and out-of-gamut chroma reduction. Cover omitted versus explicit `baseChroma` (including zero), the nonnegative target floor, yellow's selected base and derived tones, and halving resolved chroma for `400-muted`. Integration checks should cover all supported color positions, preservation of scope order and comments, deterministic output, read-only stale-output detection, and leaving the previous file intact after a failed build. The existing theme validator currently checks basic structure and asset paths; it does not replace these build-specific checks.
 
-These cases are covered in `tests/build.test.js`. Literal semantic exceptions use `{ "color": "#rrggbb", "reason": "..." }`, with optional `alpha` below 1; this keeps component adjustments separate from palette primitives. The builder also accepts three- and four-digit sRGB hex literals to preserve existing theme values during migration.
+These cases are covered in `tests/colors.test.js`, `tests/palette.test.js`, `tests/variables.test.js`, and `tests/theme-build.test.js`. Literal semantic exceptions use `{ "color": "#rrggbb", "reason": "..." }`, with optional `alpha` below 1; this keeps component adjustments separate from palette primitives. The builder also accepts three- and four-digit sRGB hex literals to preserve existing theme values during migration.
 
 ## Adoption sequence
 
