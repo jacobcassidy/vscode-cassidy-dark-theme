@@ -5,7 +5,6 @@ dist
 docs
 scripts
 src
-palette
 tests
 
 # Files to ignore

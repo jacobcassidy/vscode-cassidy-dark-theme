@@ -1,6 +1,6 @@
 # Cassidy Dark color system proposal
 
-Status: the build and palette described here are implemented. Authoring inputs live in `src/`; the shipped theme and palette references are generated. The initial migration verified that every parsed theme value and original comment was preserved before the new palette was applied in a separate change. The [development guide](../../development/development-guide.md) describes the available commands, and the [generated palette](../../palette/reports/production/palette.md) shows the current output.
+Status: the build and palette described here are implemented. The file paths and command examples below record the original design; [restructuring plan 1b](restructure-1b-plan.md) and the development guide describe the current layout. Authoring inputs live in `src/`; the shipped theme and palette references are generated. The initial migration verified that every parsed theme value and original comment was preserved before the new palette was applied in a separate change. The [development guide](../references/development-guide.md) describes the available commands, and the [generated palette](../palettes/generated-reports/default/palette.md) shows the current output.
 
 ## Recommendation
 
@@ -250,7 +250,7 @@ An excerpt from `palette/source/palette.jsonc` could look like this. Each family
 
 Internally, this produces primitive IDs such as `palette.cyan.400` and `palette.gray.900`. The complete configuration would include every neutral required by the theme. Allow primitive overrides with either explicit OKLCH coordinates or an exact sRGB hex, plus a required reason. Exact hex overrides support a migration that preserves the released colors; OKLCH overrides still pass through the export policy.
 
-Group semantic IDs by role in `src/tokens.jsonc`. Each leaf has a `color` reference or a documented hex literal. Use optional [`details` metadata](../scheme/token-details.md) after `color` and optional `alpha` for a short usage description and nonempty inheritance or override lists. Nested paths resolve to dotted IDs such as `diff.added.foreground`; dotted semantic selectors such as `function.defaultLibrary` stay together as keys under `semantic` so they can coexist with the base `function` token:
+Group semantic IDs by role in `src/tokens.jsonc`. Each leaf has a `color` reference or a documented hex literal. Use optional [`details` metadata](../references/token-details.md) after `color` and optional `alpha` for a short usage description and nonempty inheritance or override lists. Nested paths resolve to dotted IDs such as `diff.added.foreground`; dotted semantic selectors such as `function.defaultLibrary` stay together as keys under `semantic` so they can coexist with the base `function` token:
 
 ```jsonc
 {

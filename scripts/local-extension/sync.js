@@ -1,7 +1,9 @@
-import { readFile, writeFile, mkdir, lstat, readdir, realpath, symlink } from "node:fs/promises";
+import { readFile, writeFile, mkdir, lstat, realpath, symlink } from "node:fs/promises";
 import { homedir } from "node:os";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
+import { parseJsonc } from "../shared/jsonc.js";
+import { listFiles, themeUiType } from "../shared/theme-targets.js";
 
 export async function syncDev({
   root = fileURLToPath(new URL("../../", import.meta.url)),
@@ -15,42 +17,61 @@ export async function syncDev({
   // Do not inherit the published extension identity.
   delete manifest.__metadata;
 
-  const generatedThemes = (await readdir(join(root, "dev/themes"), { withFileTypes: true }))
-    .filter((entry) => entry.isFile() && entry.name.endsWith(".json"))
-    .map((entry) => entry.name)
-    .sort();
+  const generatedThemes = (await listFiles(join(root, "dev/themes"))).filter((file) => file.endsWith(".json"));
 
   manifest.contributes ??= {};
   manifest.contributes.themes = [
-    ...(manifest.contributes.themes ?? []).map((theme) => ({
-      ...theme,
-      label: `${theme.label} Dev`,
-      _watch: true,
-    })),
-    ...generatedThemes.map((file) => {
-      const name = file
-        .replace(/\.json$/, "")
-        .replace(/^cassidy-dark-color-theme-/, "")
-        .split("-")
-        .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-        .join(" ");
+    ...(await Promise.all(
+      (manifest.contributes.themes ?? []).map(async (theme) => {
+        const metadata = parseJsonc(await readFile(join(root, theme.path), "utf8"), theme.path).value;
 
-      return {
-        label: `Cassidy Dark Dev (${name})`,
-        uiTheme: "vs-dark",
-        path: `./dev/themes/${file}`,
-        _watch: true,
-      };
-    }),
-    ...(await readdir(join(root, "dev/snapshots"), { withFileTypes: true }))
-      .filter((entry) => entry.isFile() && entry.name.endsWith(".json"))
-      .map((entry) => ({
-        label: `Cassidy Dark Snapshot (${entry.name.replace(/^cassidy-dark-color-theme-/, "").replace(/\.json$/, "")})`,
-        uiTheme: "vs-dark",
-        path: `./dev/snapshots/${entry.name}`,
-        _watch: true,
-      })),
+        if (theme.uiTheme !== themeUiType(metadata, theme.path)) {
+          throw new Error(`${theme.path}: manifest uiTheme does not match theme type ${metadata.type}`);
+        }
+
+        return { ...theme, label: `${theme.label} Dev`, _watch: true };
+      }),
+    )),
+    ...(await Promise.all(
+      generatedThemes.map(async (file) => {
+        const name = file
+          .replace(/\.json$/, "")
+          .replace(/^cassidy-dark-color-theme-/, "")
+          .split("-")
+          .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+          .join(" ");
+
+        const path = `dev/themes/${file}`;
+        const metadata = parseJsonc(await readFile(join(root, path), "utf8"), path).value;
+
+        return {
+          label: `${metadata.name} Dev (${name})`,
+          uiTheme: themeUiType(metadata, path),
+          path: `./dev/themes/${file}`,
+          _watch: true,
+        };
+      }),
+    )),
+    ...(await Promise.all(
+      (await listFiles(join(root, "dev/snapshots")))
+        .filter((file) => file.endsWith(".json"))
+        .map(async (file) => {
+          const path = `dev/snapshots/${file}`;
+          const metadata = parseJsonc(await readFile(join(root, path), "utf8"), path).value;
+
+          return {
+            label: `Cassidy Dark Snapshot (${file.replace(/^cassidy-dark-color-theme-/, "").replace(/\.json$/, "")})`,
+            uiTheme: themeUiType(metadata, path),
+            path: `./${path}`,
+            _watch: true,
+          };
+        }),
+    )),
   ];
+
+  const labels = manifest.contributes.themes.map((theme) => theme.label);
+
+  if (new Set(labels).size !== labels.length) throw new Error("Preview theme labels must be unique");
 
   // Keep the generated manifest separate from the source checkout.
   const extensionInfo = await statIfPresent(extensionDirectory);
@@ -92,6 +113,7 @@ async function statIfPresent(path) {
     return await lstat(path);
   } catch (error) {
     if (error.code !== "ENOENT") throw error;
+
     return null;
   }
 }

@@ -1,4 +1,10 @@
 {
+  "generated": {
+    "target": "local/v1.3",
+    "source": "src/production/themes/default/colors/palette.jsonc",
+    "fallback": true,
+    "rebuild": "npm run build:dev"
+  },
   "primitives": {
     "palette.blue.300": {
       "target": {

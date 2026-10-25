@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import { mkdir, readFile, realpath, symlink, writeFile } from "node:fs/promises";
 import { join } from "node:path";
 import test from "node:test";
-import { syncDev } from "../scripts/dev/sync.js";
+import { syncDev } from "../scripts/local-extension/sync.js";
 import { createProject } from "./helpers.js";
 
 test("development sync is repeatable and refreshes themes without modifying the source manifest", async (t) => {
@@ -72,3 +72,42 @@ for (const kind of ["directory", "wrong symlink"]) {
     await assert.rejects(syncDev(project), /Expected a symlink/);
   });
 }
+
+test("preview sync includes all production themes, derives local theme types, and labels sorted snapshots", async (t) => {
+  const project = await createProject(t);
+  const manifest = project.manifest;
+
+  manifest.contributes.themes.push({ label: "Alternate", uiTheme: "hc-black", path: "themes/alternate.json" });
+  await writeFile(
+    join(project.root, "themes/alternate.json"),
+    '{"name":"Alternate","type":"hc","colors":{},"tokenColors":[]}',
+  );
+  await writeFile(join(project.root, "package.json"), JSON.stringify(manifest));
+  await writeFile(
+    join(project.root, "dev/themes/cassidy-dark-color-theme-test.json"),
+    '{"name":"Cassidy Dark","type":"light","colors":{},"tokenColors":[]}',
+  );
+
+  for (const name of ["z-old", "a-old"]) {
+    await writeFile(join(project.root, `dev/snapshots/${name}.json`), project.theme);
+  }
+
+  const source = await readFile(join(project.root, "package.json"), "utf8");
+  const target = await syncDev(project);
+  const preview = JSON.parse(await readFile(target, "utf8"));
+  const first = await readFile(target, "utf8");
+
+  await syncDev(project);
+  assert.equal(await readFile(target, "utf8"), first);
+  assert.deepEqual(
+    preview.contributes.themes.map(({ label, uiTheme }) => [label, uiTheme]),
+    [
+      ["Cassidy Dark Dev", "vs-dark"],
+      ["Alternate Dev", "hc-black"],
+      ["Cassidy Dark Dev (Test)", "vs"],
+      ["Cassidy Dark Snapshot (a-old)", "vs-dark"],
+      ["Cassidy Dark Snapshot (z-old)", "vs-dark"],
+    ],
+  );
+  assert.equal(await readFile(join(project.root, "package.json"), "utf8"), source);
+});

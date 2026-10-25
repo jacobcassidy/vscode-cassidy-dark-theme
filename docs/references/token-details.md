@@ -1,8 +1,8 @@
-# Token details
+# Color variable details
 
-`src/tokens.jsonc` keeps color documentation in an optional `details` object after `color` and optional `alpha`. The builder validates this metadata and leaves it out of the generated theme and palette reports. Editing details alone does not change generated files.
+`colors/variables.jsonc` in each theme source directory keeps color documentation in an optional `details` object after `color` and optional `alpha`. The builder validates this metadata and leaves it out of the generated theme and palette reports. Editing details alone does not change generated files.
 
-Comments above every level 1 and level 2 property describe where that group appears or when its colors are used. Per-token usage and relationship data stays in `details`.
+Comments above every level 1 and level 2 property describe where that group appears or when its colors are used. Per-variable usage and relationship data stays in `details`.
 
 ```jsonc
 {
@@ -22,6 +22,37 @@ Comments above every level 1 and level 2 property describe where that group appe
   },
 }
 ```
+
+## Variable references
+
+A variable's name comes from its nested path in `colors/variables.jsonc`. `color` can reference a generated palette primitive or another variable:
+
+```jsonc
+{
+  "diagnostic": {
+    "error": {
+      "foreground": { "color": "palette.red.500" },
+    },
+  },
+  "ui": {
+    "errorForeground": { "color": "diagnostic.error.foreground" },
+  },
+}
+```
+
+Here, `ui.errorForeground` reads `diagnostic.error.foreground`, which reads the generated primitive `palette.red.500`. A mapping in `tokens/ui.jsonc` can use either variable:
+
+```jsonc
+{
+  "colors": {
+    "errorForeground": "{ui.errorForeground}",
+  },
+}
+```
+
+The build resolves this chain into the final hex color. Unknown references and cycles fail, including in unused variables. An alias keeps its referenced opacity unless it supplies `alpha`, which replaces that opacity rather than multiplying it. Literal hex colors require a separate `reason` field.
+
+The production default defines all six source inputs under `src/production/themes/default/`. Other production and local themes may omit files to inherit those default files; supplied files replace them in full. File fallback is separate from both variable alias resolution and the upstream relationships documented below. See the [development guide](development-guide.md#adding-production-or-local-themes) for the complete rules.
 
 ## Fields
 

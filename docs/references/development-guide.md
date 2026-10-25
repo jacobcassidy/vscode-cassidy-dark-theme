@@ -1,29 +1,35 @@
 # Development guide
 
-Cassidy Dark is a declarative Visual Studio Code color theme. VS Code loads a generated JSON-with-comments theme file. A Node.js build resolves palette inputs and semantic aliases into that file; there is no extension runtime or bundler. The release build packages the generated theme and extension metadata into a `.vsix` archive.
+Cassidy Dark is a declarative Visual Studio Code color theme. VS Code loads a generated JSON-with-comments theme file. A Node.js build resolves palette inputs and named color variables into that file; there is no extension runtime or bundler. The release build packages the generated theme and extension metadata into a `.vsix` archive.
 
 Run the commands in this guide from the repository root unless stated otherwise.
 
 ## Project structure
 
-| Path                                                                                  | Purpose                                                                                                           |
-| ------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
-| [`package.json`](../../package.json)                                                  | Extension identity, Marketplace metadata, version, theme contribution, development dependencies, and npm scripts. |
-| [`package-lock.json`](../../package-lock.json)                                        | Locked npm dependency tree for local development tools.                                                           |
-| [`themes/cassidy-dark-color-theme.json`](../../themes/cassidy-dark-color-theme.json)  | The committed generated theme shipped to users; edit its inputs in `src/`.                                        |
-| [`src/`](../../src/)                                                                  | Token inputs and the split JSONC theme template in `src/theme/`.                                                  |
-| [`palette/`](../../palette/)                                                          | Production palette source, maintained palette documentation, and generated production and experiment reports.     |
-| [`scripts/build/build-theme.js`](../../scripts/build/build-theme.js)                  | Palette generation, token resolution, reports, and generated-output verification.                                 |
-| [`dev/experiments/`](../../dev/experiments/)                                          | Editable named experimental inputs.                                                                               |
-| [`dev/themes/`](../../dev/themes/)                                                    | Generated experimental previews.                                                                                  |
-| [`dev/snapshots/`](../../dev/snapshots/)                                              | Historical comparison themes.                                                                                     |
-| [`docs/development/`](./)                                                             | Maintained development guides and references.                                                                     |
-| [`dev/samples/`](../../dev/samples/)                                                  | Example source files for inspecting syntax highlighting, including JavaScript, TypeScript, Python, and PHP.       |
-| [`images/`](../../images/)                                                            | Extension icons and the README screenshot.                                                                        |
-| [`scripts/dev/`](../../scripts/dev/) and [`scripts/release/`](../../scripts/release/) | Local development setup, pipeline submission, changelog extraction, and GitHub release creation.                  |
-| [`azure-pipelines.yml`](../../azure-pipelines.yml)                                    | Manual packaging and publication pipeline.                                                                        |
-| [`.vscodeignore`](../../.vscodeignore)                                                | Exclusions from the published VSIX.                                                                               |
-| [`CHANGELOG.md`](../../CHANGELOG.md)                                                  | Versioned release notes, also used to populate GitHub releases.                                                   |
+| Path                                                                     | Purpose                                                                                                 |
+| ------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------- |
+| [`package.json`](../../package.json)                                     | Production extension manifest, dependencies, commands, and generated production theme registrations.    |
+| [`package-lock.json`](../../package-lock.json)                           | Locked development dependencies.                                                                        |
+| [`src/production/themes/default/`](../../src/production/themes/default/) | The six required default input files.                                                                   |
+| [`src/production/themes/`](../../src/production/themes/)                 | Production targets; additional named themes can omit input files to inherit the default.                |
+| [`src/local/themes/`](../../src/local/themes/)                           | Local targets, including `test` and `v1.3`, with the same input layout and default fallback.            |
+| [`themes/`](../../themes/)                                               | Committed generated production themes shipped in the VSIX.                                              |
+| [`dev/themes/`](../../dev/themes/)                                       | Committed generated local previews.                                                                     |
+| [`dev/snapshots/`](../../dev/snapshots/)                                 | Historical comparison themes, excluded from regeneration.                                               |
+| [`docs/palettes/generated-reports/`](../palettes/generated-reports/)     | Generated JSON, Markdown, and SVG palette reports grouped by theme directory name.                      |
+| [`docs/palettes/archive/`](../palettes/archive/)                         | Preserved palette documentation and previous versions.                                                  |
+| [`docs/references/`](./)                                                 | Development guides and reference material.                                                              |
+| [`docs/plans/`](../plans/)                                               | Implementation plans, including the completed [restructuring plan 1b](../plans/restructure-1b-plan.md). |
+| [`scripts/themes/`](../../scripts/themes/)                               | Builds and checks production and local palettes/themes.                                                 |
+| [`scripts/local-extension/`](../../scripts/local-extension/)             | Creates and refreshes the local preview extension's manifest and asset links.                           |
+| [`scripts/shared/`](../../scripts/shared/)                               | Shared color calculations, palette and variable resolution, JSONC parsing, and target discovery.        |
+| [`scripts/release/`](../../scripts/release/)                             | VSIX packaging, release notes, pipeline submission, and GitHub publishing.                              |
+| [`tests/`](../../tests/)                                                 | Automated tests and isolated fixtures.                                                                  |
+| [`dev/samples/`](../../dev/samples/)                                     | JavaScript, TypeScript, Python, and PHP files for inspecting syntax highlighting.                       |
+| [`images/`](../../images/)                                               | Extension icons and the README screenshot.                                                              |
+| [`azure-pipelines.yml`](../../azure-pipelines.yml)                       | Manual packaging and publication pipeline.                                                              |
+| [`.vscodeignore`](../../.vscodeignore)                                   | VSIX exclusions.                                                                                        |
+| [`CHANGELOG.md`](../../CHANGELOG.md)                                     | Versioned release notes used for GitHub releases.                                                       |
 
 The published extension ID is `jacobcassidy.cassidy-dark`, combining the manifest's `publisher` and `name`. Its theme picker label is **Cassidy Dark**, with `uiTheme: "vs-dark"`. The manifest declares VS Code compatibility as `^1.64.2`.
 
@@ -53,7 +59,7 @@ The repository uses ES modules (`"type": "module"`). Its npm dependencies suppor
 npm run dev:sync
 ```
 
-This command first runs `build:theme`. Then [`scripts/dev/sync.js`](../../scripts/dev/sync.js) creates or refreshes a separate extension directory at:
+This command runs `build:theme` for production targets and `build:dev` for local targets. Then [`scripts/local-extension/sync.js`](../../scripts/local-extension/sync.js) creates or refreshes a separate extension directory at:
 
 ```text
 ~/.vscode/extensions/jacobcassidy.cassidy-dark-dev/
@@ -63,12 +69,15 @@ The script writes a generated `package.json` there with the name `cassidy-dark-d
 
 The development manifest registers:
 
-- The production theme as **Cassidy Dark Dev**.
-- Every `.json` file directly inside `dev/themes/`, with labels derived from filenames, such as **Cassidy Dark Dev (Test)** and **Cassidy Dark Dev (V1.2.0 Official)**.
+- Every production theme, including the default as **Cassidy Dark Dev**. Additional production labels include their target names.
+- Every generated local theme, such as **Cassidy Dark Dev (Test)** and **Cassidy Dark Dev (V1.3)**.
+- Every historical comparison with a **Cassidy Dark Snapshot (...)** label.
+
+Theme types are read from generated metadata and mapped to the matching VS Code `uiTheme`. The synchronization script reads production files to register them but writes only the separate local extension manifest and asset links. It does not build themes or edit production inputs.
 
 Run **Developer: Reload Window** in VS Code, then open **Preferences: Color Theme** and select a Cassidy Dark Dev theme. The development identity allows it to coexist with the Marketplace extension.
 
-Rebuild after changing palette, token, or template inputs. The generated theme is linked directly into the development extension. Theme entries include `_watch: true`; reload the VS Code window if an edit is not reflected. Open the files in `dev/samples/` and representative files from other languages to inspect highlighting. **Developer: Inspect Editor Tokens and Scopes** helps identify which TextMate or semantic token rules apply.
+Rebuild after changing palette, variable, metadata, or token mapping inputs. The generated theme is linked directly into the development extension. Theme entries include `_watch: true`; reload the VS Code window if an edit is not reflected. Open the files in `dev/samples/` and representative files from other languages to inspect highlighting. **Developer: Inspect Editor Tokens and Scopes** helps identify which TextMate or semantic token rules apply.
 
 After changing manifest metadata or adding or removing development theme files, run `npm run dev:sync` again to refresh the development manifest and reload VS Code.
 
@@ -93,30 +102,60 @@ The TypeScript sample imports the sibling JavaScript fixture for module and usag
 
 The PHP sample retains its original property type regression probes. It also includes a labeled legacy backtick command-string example for grammar coverage; PHP 8.5 reports that syntax as deprecated during `php -l`. The sample is intended for source inspection, and linting does not execute its examples.
 
-### Editing and checks
+### Editing theme inputs
 
-Make production changes in `src/`, then run `npm run build:theme`:
+The production default lives under `src/production/themes/default/` and requires these six files:
 
-- `palette/source/palette.jsonc`: hue and lightness anchors, optional `baseChroma`, shared chroma settings, neutrals, and documented primitive overrides.
-- `src/tokens.jsonc`: nested color roles with optional [`details` metadata](../references/scheme/token-details.md) for usage, inheritance, and overrides after `color` and optional `alpha`. Each leaf has a `color` palette/token reference or a hex exception with a required `reason`; include absolute `alpha` only when it is below 1. Dotted semantic selectors such as `function.defaultLibrary` stay together as keys under `semantic`.
-- `src/theme/base.jsonc`: root theme properties such as `$schema`, `name`, `type`, and `author`.
-- `src/theme/colors.jsonc`: workbench and editor UI colors.
-- `src/theme/semantic.jsonc`: semantic highlighting settings and semantic token colors.
-- `src/theme/syntax.jsonc`: ordered TextMate scope rules, font styles, and references such as `{syntax.string}`.
+| Relative input path      | Purpose                                                                                                                                                       |
+| ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `colors/palette.jsonc`   | Hue/lightness anchors, optional `baseChroma`, shared chroma settings, neutrals, and documented primitive overrides.                                           |
+| `colors/variables.jsonc` | Named color variables with `color`, optional `alpha` below 1, and optional [`details` metadata](token-details.md). Literal hex exceptions require a `reason`. |
+| `metadata.jsonc`         | Root properties such as `$schema`, `name`, `type`, and `author`.                                                                                              |
+| `tokens/ui.jsonc`        | VS Code `colors` mappings for workbench and editor UI.                                                                                                        |
+| `tokens/semantic.jsonc`  | `semanticHighlighting` and `semanticTokenColors` mappings.                                                                                                    |
+| `tokens/syntax.jsonc`    | Ordered TextMate `tokenColors` scope rules, styles, and color references.                                                                                     |
 
-Run `npm run build:palette` when you only need the production palette reports. It writes JSON measurements, Markdown tables, and an SVG swatch sheet to `palette/reports/production/` without needing the token map or template. `build:theme` writes those reports plus `themes/cassidy-dark-color-theme.json`. `build:dev` builds named inputs under `dev/experiments/` into previews and palette reports. Commit source and generated changes together; avoid editing generated files directly. No watch process runs automatically.
+Variables resolve by their nested paths. A `color` of `palette.yellow.400` selects a primitive generated from `colors/palette.jsonc`. A `color` of `diagnostic.error.foreground` selects the variable at `diagnostic.error.foreground` in the effective `colors/variables.jsonc`, recursively resolving its own `color`. Token mapping files use whole-string references such as `{diagnostic.error.foreground}` to insert the resolved hex value. See [color variable details](token-details.md#variable-references) for an example of the complete chain.
 
-The builder rejects duplicate JSONC keys, invalid settings, empty or malformed details, missing references, alias cycles, and placeholders outside color positions. Details are documentation only and are excluded from generated artifacts. Comments and scope order survive generation. Validation and formatting finish before output replacement. `check:generated` compares every artifact in memory without changing files and fails on missing or stale output.
+`details.inherits` documents upstream VS Code behavior; it does not control variable resolution or theme file fallback. Dotted semantic selectors such as `function.defaultLibrary` stay together as keys under `semantic` in the variable file.
 
-Files in `dev/experiments/` are independent inputs: optional `base.jsonc`, `colors.jsonc`, `semantic.jsonc`, and `syntax.jsonc` files override the matching production theme sections. Missing theme files inherit their production counterparts. No script promotes or merges experiments into production. Historical comparisons live in `dev/snapshots/` and are never regenerated.
+### Adding production or local themes
+
+Add a directory under `src/production/themes/<name>/` for a shipped theme, or `src/local/themes/<name>/` for a local preview. Theme directory names must be lowercase, begin with a letter, and use only letters, digits, periods, and hyphens. Consecutive periods and trailing periods are rejected. Names must be unique across both source groups because they share the report destination.
+
+Each of the six files is optional outside the production default. An omitted file uses the file at the same relative path in the default directory. A supplied file replaces that entire file; individual missing keys are not merged or inherited. Empty or invalid supplied files fail validation. Missing or invalid default inputs also fail, even when building local themes. There is no inheritance chain through other named themes.
+
+For example, to try a different yellow palette locally:
+
+1. Create `src/local/themes/yellow-test/colors/`.
+2. Copy the complete default `colors/palette.jsonc` into it and change the yellow parameters.
+3. Omit `colors/variables.jsonc`, `metadata.jsonc`, and the `tokens/` files to inherit the default versions.
+4. Run `npm run build:dev` to generate `dev/themes/cassidy-dark-color-theme-yellow-test.json` and `docs/palettes/generated-reports/yellow-test/palette.{json,md,svg}`.
+5. Run `npm run dev:sync` and select **Cassidy Dark Dev (Yellow Test)** in VS Code.
+
+The inherited variable and token mapping files resolve against the local palette. If you supply a variable file instead, include every variable required by the selected mappings and other variables. Copy the complete default file as a starting point. Changes to a default file affect every target inheriting it.
+
+An existing empty target directory can inherit every file. To track that theme in Git, include a complete `metadata.jsonc` with its name and type. Metadata is also replaced as a whole file. Supported types are `dark`, `light`, `hc`, and `hcLight`, mapped to `vs-dark`, `vs`, `hc-black`, and `hc-light`. Production labels use the resolved metadata name and add the target name for non-default targets. Only the existing default production theme is included by this restructuring; no example high-contrast theme is created.
+
+### Building and checking outputs
+
+`npm run build:palette` builds reports for all production targets without requiring variables, metadata, token mappings, or the manifest. `npm run build:theme` generates all production themes and reports and synchronizes `package.json` theme contributions while preserving unrelated fields. `npm run build:dev` builds all local themes and their reports without changing production outputs or the source manifest.
+
+Reports always live under `docs/palettes/generated-reports/<theme name>/` as `palette.json`, `palette.md`, and `palette.svg`. JSON records measurements and source provenance; Markdown embeds the sibling swatch sheet. A target inheriting the default palette still gets its own reports. Reports and archived documents are never used to discover source themes. Historical themes under `dev/snapshots/` and documentation under `docs/palettes/archive/` are excluded from regeneration.
+
+The builder rejects duplicate JSONC keys, invalid settings, malformed details, missing references, alias cycles, and placeholders outside color positions. Details remain documentation only. Comments inside mapping sections and scope order survive generation. All selected targets are validated and formatted before any destination is replaced. Builds write only changed files. Commit source and generated changes together; no automatic watch process runs.
+
+`check:generated` renders production and local outputs in memory and compares them with committed files, including production manifest entries. It never writes files. Missing, stale, or obsolete outputs fail with diagnostics. After deliberately removing or renaming a target, explicitly remove its obsolete generated theme and report files; the builder does not delete them automatically. Keep archives and snapshots intact.
 
 The editor settings in `.vscode/` recommend Prettier, ESLint, Markdown linting, and color inspection tools. Prettier formats on save, using two-space indentation and the repository configuration.
 
 | Command                   | Behavior                                                                                                         |
 | ------------------------- | ---------------------------------------------------------------------------------------------------------------- |
 | `npm run check`           | Check generated output, formatting, Markdown and JavaScript linting, theme validation, and tests.                |
-| `npm run build:palette`   | Generate palette JSON, Markdown, and SVG reports from palette inputs.                                            |
-| `npm run build:theme`     | Generate palette reports and resolve the production theme.                                                       |
+| `npm run build:palette`   | Generate palette reports for all production themes without variables or mappings.                                |
+| `npm run build:theme`     | Generate production themes/reports and synchronize production manifest entries.                                  |
+| `npm run build:dev`       | Generate local themes and their palette reports.                                                                 |
+| `npm run dev:sync`        | Build both groups and refresh the local preview extension.                                                       |
 | `npm run check:generated` | Fail on stale or missing generated artifacts without rewriting files.                                            |
 | `npm run check:prettier`  | Check Prettier formatting across the repository.                                                                 |
 | `npm run format`          | Rewrite files using Prettier.                                                                                    |
@@ -134,7 +173,7 @@ The editor settings in `.vscode/` recommend Prettier, ESLint, Markdown linting, 
 npx lefthook install
 ```
 
-The tests cover palette math, chroma anchors, gamut reduction, token aliases and alpha, comment and scope preservation, read-only output checks, failed builds, repeatable development synchronization, source-manifest preservation, symlink protections, JSONC syntax and structure errors, and missing manifest assets. Theme validation checks basic structure rather than the entire VS Code theme schema. Check visual changes in VS Code as well as running `npm run check`; automated checks cannot establish how a theme looks. The publishing pipeline runs the same aggregate check before packaging.
+The tests cover palette math, variable aliases and alpha, file-level fallback and replacement, independent palettes, required default inputs, target collisions, output isolation, validation before writes, stale artifacts, comment/scope preservation, production registrations, repeatable preview synchronization, source-manifest preservation during preview sync, symlink protections, and malformed theme inputs. Theme validation checks basic structure rather than the entire VS Code theme schema. Check visual changes in VS Code as well as running `npm run check`; automated checks cannot establish how a theme looks. The publishing pipeline runs the same aggregate check before packaging.
 
 ## Building the extension
 
@@ -144,6 +183,7 @@ Validate and package the current checkout:
 
 ```bash
 npm run build:theme
+npm run build:dev
 npm run check
 npm run package:vsix
 ```
@@ -156,7 +196,7 @@ npm run package:vsix -- /absolute/path/to/cassidy-dark-VERSION.vsix
 
 Relative output paths resolve from the repository root. Packaging does not publish. It checks generated output; run the aggregate `npm run check` for the remaining validation. Stale output is rejected rather than silently rebuilt during packaging. In VS Code, use **Extensions: Install from VSIX...** to install the archive and inspect the packaged theme.
 
-The manifest selects `themes/cassidy-dark-color-theme.json` as the only published theme. `.vscodeignore` excludes the `src/` authoring files, development themes and samples, documentation, scripts, tests, editor settings, agent instructions, the Node.js version file, generated output, and the listed tooling configuration files. The package carries the production theme, manifest, and distributable assets such as the README, changelog, license, and images. `dist/` and generated `*.vsix` archives are ignored by Git.
+The manifest registers all production themes from `themes/`; the current checkout ships only `themes/cassidy-dark-color-theme.json`. `.vscodeignore` excludes the `src/` authoring files, development themes and samples, documentation, scripts, tests, editor settings, agent instructions, the Node.js version file, palette reports, local packages, and the listed tooling configuration files. The package carries the production theme, manifest, and distributable assets such as the README, changelog, license, and images. `dist/` and generated `*.vsix` archives are ignored by Git.
 
 The pipeline uses the same `npm run package:vsix` entry point with its artifact staging destination. Local development and the pipeline both use `npm ci` and the CLI resolved in `package-lock.json`; neither requires a global `vsce` installation. The manifest's `allowScripts` entries permit the declared Lefthook, resolver, and VSIX signing helper installation scripts when using npm versions that enforce that setting.
 

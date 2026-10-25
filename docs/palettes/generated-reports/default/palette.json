@@ -1,4 +1,10 @@
 {
+  "generated": {
+    "target": "production/default",
+    "source": "src/production/themes/default/colors/palette.jsonc",
+    "fallback": false,
+    "rebuild": "npm run build:palette"
+  },
   "primitives": {
     "palette.blue.300": {
       "target": {

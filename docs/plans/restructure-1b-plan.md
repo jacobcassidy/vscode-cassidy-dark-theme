@@ -1,6 +1,6 @@
 # Project restructuring plan 1b
 
-Status: Proposed. This document revises [restructuring plan 1](restructure-1-plan.md). The palette document archive move recorded below is complete; the theme source and report restructuring remains proposed.
+Status: Implemented. This document revises [restructuring plan 1](restructure-1-plan.md) and records the completed source, report, and tooling migration. See the verification record below for completed checks and the deferred interactive preview.
 
 ## Objective
 
@@ -23,10 +23,6 @@ docs/
       *.md                       # Preserved palette notes and previous versions
     generated-reports/
       default/
-        palette.json
-        palette.md
-        palette.svg
-      high-contrast/
         palette.json
         palette.md
         palette.svg
@@ -73,15 +69,6 @@ src/
   production/
     themes/
       default/
-        colors/
-          palette.jsonc
-          variables.jsonc
-        tokens/
-          semantic.jsonc
-          syntax.jsonc
-          ui.jsonc
-        metadata.jsonc
-      high-contrast/
         colors/
           palette.jsonc
           variables.jsonc
@@ -139,13 +126,13 @@ For every other production or local theme, resolve each input independently:
 2. Otherwise use the file at the same relative path under `src/production/themes/default/`.
 3. Validate the selected file and the complete resolved target before writing outputs.
 
-A supplied file replaces the corresponding default file in full. Do not merge individual properties, variable groups, leaves, or arrays with the default. Missing keys inside a supplied file do not trigger fallback. An empty or malformed supplied file must fail normal validation rather than silently selecting the default. There is no fallback through another local theme or through `high-contrast`.
+A supplied file replaces the corresponding default file in full. Do not merge individual properties, variable groups, leaves, or arrays with the default. Missing keys inside a supplied file do not trigger fallback. An empty or malformed supplied file must fail normal validation rather than silently selecting the default. There is no fallback through another local or non-default production theme.
 
 For example, `src/local/themes/test/colors/palette.jsonc` can define a complete independent palette while omitting `colors/variables.jsonc` and all three `tokens/` files. The inherited variables and mappings then resolve against the test palette. Conversely, a supplied `colors/variables.jsonc` must define every variable referenced by the selected mappings and other variables. Unknown references and alias cycles fail the build.
 
 An existing target directory may inherit all six files. Do not require an override merely to create an inherited theme; distinguish discovered target directories from their optional contents. If a fully inherited target needs to be tracked by Git, add an explicit `metadata.jsonc` identifying that theme. Missing local target roots can mean no local themes; a missing production default is an error.
 
-Changing a default file can change targets that inherit it. Building a target with an inherited palette still generates its own reports under `docs/palettes/generated-reports/<theme name>/`. The theme name is the source directory name, such as `default`, `high-contrast`, `test`, or `v1.3`. Reports are never selected as fallback inputs or used to discover targets. Missing generated reports are rebuilt, and check mode reports them as missing.
+Changing a default file can change targets that inherit it. Building a target with an inherited palette still generates its own reports under `docs/palettes/generated-reports/<theme name>/`. The theme name is the source directory name, such as `default`, `test`, or `v1.3`. Reports are never selected as fallback inputs or used to discover targets. Missing generated reports are rebuilt, and check mode reports them as missing.
 
 This replaces the original plan's partial palette and variable override merging with file-level fallback. Independent palettes are complete source files, not patches against the default palette.
 
@@ -171,18 +158,17 @@ The `generated-reports/` directory and generated-file notices identify palette r
 
 Discover direct theme directories under `src/production/themes/` and `src/local/themes/` in deterministic order, with the production default required. Validate directory names before deriving paths and reject unsafe names and duplicate output identities. Require theme directory names to be unique across both source groups because they share the report destination `docs/palettes/generated-reports/<theme name>/`. Reject collisions before writing any outputs. Use the source group and directory name as the stable target identity, independently of inherited display metadata.
 
-| Source target                          | Generated theme                                      |
-| -------------------------------------- | ---------------------------------------------------- |
-| `src/production/themes/default/`       | `themes/cassidy-dark-color-theme.json`               |
-| `src/production/themes/high-contrast/` | `themes/cassidy-dark-color-theme-high-contrast.json` |
-| `src/local/themes/test/`               | `dev/themes/cassidy-dark-color-theme-test.json`      |
-| `src/local/themes/v1.3/`               | `dev/themes/cassidy-dark-color-theme-v1.3.json`      |
+| Source target                    | Generated theme                                 |
+| -------------------------------- | ----------------------------------------------- |
+| `src/production/themes/default/` | `themes/cassidy-dark-color-theme.json`          |
+| `src/local/themes/test/`         | `dev/themes/cassidy-dark-color-theme-test.json` |
+| `src/local/themes/v1.3/`         | `dev/themes/cassidy-dark-color-theme-v1.3.json` |
 
 Additional production and local targets follow the corresponding named output pattern. Preserve the existing default output path and production picker label. Derive distinct picker labels for other targets from target identity and resolved metadata, including when metadata is inherited. Validate consistency between theme type and manifest `uiTheme` for each registered theme.
 
 Register all production outputs in the production extension manifest. The development manifest includes every production theme, every local theme, and clearly labeled historical snapshots. Keep local and snapshot entries out of the production manifest. Make manifest synchronization deterministic and preserve unrelated manifest fields.
 
-Include `high-contrast` as a production target in the new structure. Initially it can inherit default inputs and have explicit identifying metadata; inheritance alone does not establish a completed high-contrast color design. Any deliberate accessibility or color changes require separate review from the migration's preservation checks.
+Migrate only the existing default production theme. Support additional named production targets when their source directories are deliberately added; do not create example production variants as part of this restructuring.
 
 ### Shared generation
 
@@ -224,7 +210,7 @@ Existing palette Markdown has been moved from `docs/palettes/*.md` to `docs/pale
 
 ## Command responsibilities
 
-| Command                   | Planned behavior                                                                                                                                                        |
+| Command                   | Behavior                                                                                                                                                                |
 | ------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `npm run build:palette`   | Generate `docs/palettes/generated-reports/<theme name>/palette.*` for every production theme from its effective palette, without requiring variables or theme mappings. |
 | `npm run build:theme`     | Build all production themes and their palette reports; synchronize production theme contributions in the manifest.                                                      |
@@ -241,58 +227,67 @@ Keep the existing release command names and pipeline publishing behavior. An aut
 
 ### 1. Record the baseline
 
-- [ ] Record parsed default and local theme data, palette measurements, output filenames, and picker labels.
-- [ ] Record snapshot filenames and bytes and inspect current VSIX contents.
-- [ ] Inventory optional experiment palette/variable overrides and any inherited values that must be materialized.
-- [ ] Review current manifest synchronization, validation, source references, and development extension symlink protections.
+- [x] Record parsed default and local theme data, palette measurements, output filenames, and picker labels.
+- [x] Record snapshot filenames and bytes and inspect current VSIX contents.
+- [x] Inventory optional experiment palette/variable overrides and any inherited values that must be materialized.
+- [x] Review current manifest synchronization, validation, source references, and development extension symlink protections.
 
 ### 2. Migrate the default source and report layout
 
-- [ ] Move the six default inputs according to the migration mapping, including `tokens.jsonc` to `colors/variables.jsonc` and `colors.jsonc` to `tokens/ui.jsonc`.
-- [ ] Move default reports to `docs/palettes/generated-reports/default/palette.*` and update generation notices and documentation links; keep the Markdown image reference as `palette.svg`.
-- [ ] Rename `scripts/build/` to `scripts/themes/`, `scripts/dev/` to `scripts/local-extension/`, and `scripts/lib/` to `scripts/shared/`.
-- [ ] Update npm script paths, relative imports, repository-root resolution, test imports, release/pipeline references, and documentation links for the script directory moves.
-- [ ] Update path constants, imports, formatter/linter discovery, tests, and build entry points affected by the layout.
-- [ ] Confirm the default rebuild preserves parsed theme data and palette measurements.
+- [x] Move the six default inputs according to the migration mapping, including `tokens.jsonc` to `colors/variables.jsonc` and `colors.jsonc` to `tokens/ui.jsonc`.
+- [x] Move default reports to `docs/palettes/generated-reports/default/palette.*` and update generation notices and documentation links; keep the Markdown image reference as `palette.svg`.
+- [x] Rename `scripts/build/` to `scripts/themes/`, `scripts/dev/` to `scripts/local-extension/`, and `scripts/lib/` to `scripts/shared/`.
+- [x] Update npm script paths, relative imports, repository-root resolution, test imports, release/pipeline references, and documentation links for the script directory moves.
+- [x] Update path constants, imports, formatter/linter discovery, tests, and build entry points affected by the layout.
+- [x] Confirm the default rebuild preserves parsed theme data and palette measurements.
 
 ### 3. Add shared target resolution and local sources
 
-- [ ] Discover production and local targets deterministically and implement independent fallback for each of the six files.
-- [ ] Require every default input and validate provided files without merging them or silently falling back after an error.
-- [ ] Move `test` and `v1.3` inputs into `src/local/themes/`, materializing any existing partial palette or variable overrides.
-- [ ] Generate each target's reports under `docs/palettes/generated-reports/<theme name>/palette.*`, reject theme-name collisions across production and local sources, and preserve existing local theme output paths and parsed theme behavior.
-- [ ] Validate all selected targets before writing, preserve read-only checks, and detect obsolete outputs.
+- [x] Discover production and local targets deterministically and implement independent fallback for each of the six files.
+- [x] Require every default input and validate provided files without merging them or silently falling back after an error.
+- [x] Move `test` and `v1.3` inputs into `src/local/themes/`, materializing any existing partial palette or variable overrides.
+- [x] Generate each target's reports under `docs/palettes/generated-reports/<theme name>/palette.*`, reject theme-name collisions across production and local sources, and preserve existing local theme output paths and parsed theme behavior.
+- [x] Validate all selected targets before writing, preserve read-only checks, and detect obsolete outputs.
 
 ### 4. Support multiple production themes and previews
 
-- [ ] Add the `high-contrast` production target and identifying metadata; explicitly document any initially inherited appearance.
-- [ ] Register all production themes and validate their labels, paths, and theme types without changing unrelated manifest fields.
-- [ ] Refresh the development manifest with production, local, and historical entries using distinct labels.
-- [ ] Preserve the separate development extension identity, linked checkout assets, repeatable synchronization, and symlink protections.
-- [ ] Keep `dev/` limited to samples, snapshots, and generated local themes, and exclude snapshots from rebuilding.
+- [x] Register all production themes and validate their labels, paths, and theme types without changing unrelated manifest fields.
+- [x] Refresh the development manifest with production, local, and historical entries using distinct labels.
+- [x] Preserve the separate development extension identity, linked checkout assets, repeatable synchronization, and symlink protections.
+- [x] Keep `dev/` limited to samples, snapshots, and generated local themes, and exclude snapshots from rebuilding.
 
 ### 5. Update documentation and packaging
 
-- [ ] Update the development guide, variable schema/reference documentation, README, command descriptions, project structure tables, and changelog.
-- [ ] Document palette primitives, variable aliases, template references, full-file replacement, and effects of changing inherited defaults with examples.
+- [x] Update the development guide, variable schema/reference documentation, README, command descriptions, project structure tables, and changelog.
+- [x] Document palette primitives, variable aliases, template references, full-file replacement, and effects of changing inherited defaults with examples.
 - [x] Move the existing palette documents into `docs/palettes/archive/` and retain their historical content.
-- [ ] Consolidate generated palette reports into `docs/palettes/generated-reports/<theme name>/`, keep other active documentation in `docs/plans/`, `docs/references/`, and `docs/TODO.md`, and remove obsolete source/report paths.
-- [ ] Keep `.vscode/`, `src/`, `dev/`, `docs/`, `scripts/`, and `tests/` excluded from the VSIX, and keep `dist/` ignored by Git.
-- [ ] Package every production output and exclude local themes, snapshots, and all palette reports.
+- [x] Consolidate generated palette reports into `docs/palettes/generated-reports/<theme name>/`, keep other active documentation in `docs/plans/`, `docs/references/`, and `docs/TODO.md`, and remove obsolete source/report paths.
+- [x] Keep `.vscode/`, `src/`, `dev/`, `docs/`, `scripts/`, and `tests/` excluded from the VSIX, and keep `dist/` ignored by Git.
+- [x] Package every production output and exclude local themes, snapshots, and all palette reports.
 
 ### 6. Verify completion
 
-- [ ] Update existing tests for moved paths and add focused coverage for missing default files, file-level fallback, supplied-file replacement, malformed inputs, unresolved variables, alias cycles, and inherited palette changes.
-- [ ] Cover independent palettes, local/production output isolation, optional metadata, fully inherited targets, target naming and shared report-path collisions, manifest registrations, stale outputs, preservation of archived documents during generation, and no output changes after validation failure.
-- [ ] Confirm palette-only builds do not require variables or token mappings.
-- [ ] Check development manifest synchronization in a temporary extension directory before refreshing the real local extension.
-- [ ] Run `npm run check` and confirm a second build makes no changes.
-- [ ] Build a validation VSIX under `dist/` and inspect its theme registrations and packaged contents.
-- [ ] Preview the default, another production target, a local target, and a historical snapshot using the grammar samples; compare migrated themes with their recorded baselines.
-- [ ] Commit completed implementation stages with their source, generated outputs, and documentation together.
+- [x] Update existing tests for moved paths and add focused coverage for missing default files, file-level fallback, supplied-file replacement, malformed inputs, unresolved variables, alias cycles, and inherited palette changes.
+- [x] Cover independent palettes, local/production output isolation, optional metadata, fully inherited targets, target naming and shared report-path collisions, manifest registrations, stale outputs, preservation of archived documents during generation, and no output changes after validation failure.
+- [x] Confirm palette-only builds do not require variables or token mappings.
+- [x] Check development manifest synchronization in a temporary extension directory before refreshing the real local extension.
+- [x] Run `npm run check` and confirm a second build makes no changes.
+- [x] Build a validation VSIX under `dist/` and inspect its theme registrations and packaged contents.
+- [ ] Complete interactive visual inspection of the default, a local target, and a historical snapshot using grammar samples. This inspection was deferred; parsed theme comparisons and preserved snapshot bytes were verified independently.
+- [x] Commit completed implementation stages with their source, generated outputs, and documentation together.
 
 ## Completion criteria
 
 The restructuring is complete when every theme uses the shared six-file layout, omitted non-default inputs fall back to the default by file, and production and local targets can supply independent complete palettes and variable maps. All generated reports live under `docs/palettes/generated-reports/<theme name>/palette.*`, preserved palette documents live under `docs/palettes/archive/`, production themes ship from `themes/`, local previews remain under `dev/themes/`, and snapshots retain their original bytes.
 
-Builds and checks must reproduce every committed output and manifest registration, report invalid references and stale artifacts without writes in check mode, and preserve existing default and local appearances through the migration. Designing new palettes or establishing a finished high-contrast appearance is separate from moving and resolving the inputs.
+Builds and checks must reproduce every committed output and manifest registration, report invalid references and stale artifacts without writes in check mode, and preserve existing default and local appearances through the migration. Designing new palettes or establishing new production variants is separate from moving and resolving the inputs.
+
+## Verification record
+
+- `npm run check` passed, including generated-output checks, formatting, Markdown and JavaScript linting, validation of five themes, and all 58 tests.
+- Preserved the parsed default, `test`, and `v1.3` themes, all existing palette primitive measurements, snapshot filenames and bytes, and archived palette documents against a baseline recorded before migration.
+- Included only the existing default production theme. The earlier high-contrast directory was an illustration and was not retained as an actual target.
+- Verified repeatable builds with zero changed outputs and read-only generated-output checks. Automated coverage includes complete-file fallback/replacement, independent palettes, default input validation, report-name collisions, production registrations, stale outputs, and output preservation after validation errors.
+- Verified repeatable local extension synchronization in a temporary extension directory without changing the source manifest, then refreshed the real local preview extension. Its manifest registers the default, both local themes, and both snapshots. The user manually reloaded VS Code.
+- Built and inspected `dist/cassidy-dark-1.2.1.vsix`: only the default production theme and distributable assets are packaged; source files, local themes, snapshots, reports, and development tooling are excluded.
+- Interactive visual inspection was not completed. Existing parsed theme values and historical snapshot bytes remain unchanged; the grammar samples remain available for manual inspection.

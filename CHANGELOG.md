@@ -19,6 +19,9 @@ All notable changes to this project are documented in this file.
 
 ### Changed
 
+- Implemented restructuring plan 1b: grouped production and local theme inputs under `src/`, renamed color variables and UI mappings, added whole-file fallback to the production default, and moved generated palette reports to `docs/palettes/generated-reports/<theme name>/`.
+- Renamed script groups to `themes/`, `local-extension/`, and `shared/`; added production theme registration, shared report-name collision checks, and validation of every selected target before writing outputs.
+
 - Archived palette reference documents under `docs/palettes/archive/`.
 - Moved generated palette reports to `dev/generated/palette/`, grouped build scripts under `scripts/build/`, and separated editable experiments, generated previews, and historical snapshots.
 - Grouped the production palette source, curated palette references, and generated palette reports under `palette/`.

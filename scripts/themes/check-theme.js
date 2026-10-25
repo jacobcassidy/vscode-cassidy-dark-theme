@@ -1,20 +1,20 @@
-import { readFile, readdir, stat } from "node:fs/promises";
+import { readFile, stat } from "node:fs/promises";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
-import { parse, printParseErrorCode } from "jsonc-parser";
+import { parseJsonc } from "../shared/jsonc.js";
+import { listFiles, themeUiType } from "../shared/theme-targets.js";
 
 function isObject(value) {
   return value !== null && typeof value === "object" && !Array.isArray(value);
 }
 
 async function readTheme(path) {
-  const errors = [];
-  const theme = parse(await readFile(path, "utf8"), errors, { allowTrailingComma: true });
+  let theme;
 
-  if (errors.length) {
-    const details = errors.map((error) => `${printParseErrorCode(error.error)} at offset ${error.offset}`).join(", ");
-
-    throw new Error(`${path}: invalid JSONC (${details})`);
+  try {
+    theme = parseJsonc(await readFile(path, "utf8"), path).value;
+  } catch (error) {
+    throw new Error(`${path}: invalid JSONC (${error.message})`, { cause: error });
   }
 
   if (!isObject(theme) || !isObject(theme.colors) || !Array.isArray(theme.tokenColors)) {
@@ -28,6 +28,10 @@ async function readTheme(path) {
   if (theme.semanticHighlighting !== undefined && typeof theme.semanticHighlighting !== "boolean") {
     throw new Error(`${path}: semanticHighlighting must be a boolean`);
   }
+
+  themeUiType(theme, path);
+
+  return theme;
 }
 
 async function requireFile(root, path) {
@@ -51,25 +55,40 @@ export async function checkThemes(root = fileURLToPath(new URL("../../", import.
   await requireFile(root, manifest.icon);
 
   const paths = new Set();
+  const labels = new Set();
 
   for (const theme of themes) {
+    if (typeof theme.label !== "string" || !theme.label.trim() || labels.has(theme.label)) {
+      throw new Error("Production theme labels must be nonempty and unique");
+    }
+
+    labels.add(theme.label);
     await requireFile(root, theme.path);
-    paths.add(theme.path);
+
+    const path = theme.path.replace(/^\.\//, "");
+
+    if (!path.startsWith("themes/") || path.split("/").includes("..") || paths.has(path)) {
+      throw new Error(`Invalid or duplicate production theme path: ${theme.path}`);
+    }
+
+    const metadata = await readTheme(join(root, path));
+
+    if (theme.uiTheme !== themeUiType(metadata, path)) {
+      throw new Error(`${theme.path}: manifest uiTheme does not match theme type ${metadata.type}`);
+    }
+
+    paths.add(path);
   }
 
-  const devThemes = await readdir(join(root, "dev/themes"), { withFileTypes: true });
-
-  for (const entry of devThemes) {
-    if (entry.isFile() && entry.name.endsWith(".json")) {
-      paths.add(`dev/themes/${entry.name}`);
+  for (const file of await listFiles(join(root, "themes"))) {
+    if (file.endsWith(".json") && !paths.has(`themes/${file}`)) {
+      throw new Error(`Unregistered production theme: themes/${file}`);
     }
   }
 
-  for (const directory of ["dev/snapshots"]) {
-    const snapshots = await readdir(join(root, directory), { withFileTypes: true });
-
-    for (const entry of snapshots) {
-      if (entry.isFile() && entry.name.endsWith(".json")) paths.add(`${directory}/${entry.name}`);
+  for (const directory of ["dev/themes", "dev/snapshots"]) {
+    for (const file of await listFiles(join(root, directory))) {
+      if (file.endsWith(".json")) paths.add(`${directory}/${file}`);
     }
   }
 

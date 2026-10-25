@@ -26,7 +26,8 @@ export async function createProject(t) {
     await mkdir(join(root, path), { recursive: true });
   }
 
-  const theme = '{ // Theme files allow comments and trailing commas.\n"colors": {}, "tokenColors": [], }';
+  const theme =
+    '{ // Theme files allow comments and trailing commas.\n"name": "Cassidy Dark", "type": "dark", "colors": {}, "tokenColors": [], }';
 
   await writeFile(join(root, "package.json"), JSON.stringify(manifest));
   await writeFile(join(root, "themes/theme.json"), theme);

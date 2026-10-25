@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import { writeFile } from "node:fs/promises";
 import { join } from "node:path";
 import test from "node:test";
-import { checkThemes } from "../scripts/build/check-theme.js";
+import { checkThemes } from "../scripts/themes/check-theme.js";
 import { createProject } from "./helpers.js";
 
 test("theme validation accepts JSONC in both production and development themes", async (t) => {
@@ -39,3 +39,31 @@ for (const asset of ["icon", "theme"]) {
     await assert.rejects(checkThemes(root), /ENOENT/);
   });
 }
+
+test("theme validation rejects registrations whose UI type differs from their theme metadata", async (t) => {
+  const { root, manifest } = await createProject(t);
+
+  manifest.contributes.themes[0].uiTheme = "hc-black";
+  await writeFile(join(root, "package.json"), JSON.stringify(manifest));
+  await assert.rejects(checkThemes(root), /uiTheme does not match theme type dark/);
+});
+
+test("theme validation rejects duplicate labels and unregistered production files", async (t) => {
+  const { root, manifest, theme } = await createProject(t);
+
+  manifest.contributes.themes.push({ ...manifest.contributes.themes[0] });
+  await writeFile(join(root, "package.json"), JSON.stringify(manifest));
+  await assert.rejects(checkThemes(root), /labels must be nonempty and unique/);
+  manifest.contributes.themes.pop();
+  await writeFile(join(root, "package.json"), JSON.stringify(manifest));
+  await writeFile(join(root, "themes/extra.json"), theme);
+  await assert.rejects(checkThemes(root), /Unregistered production theme/);
+});
+
+test("theme validation keeps local themes out of production registrations", async (t) => {
+  const { root, manifest } = await createProject(t);
+
+  manifest.contributes.themes[0].path = "dev/themes/cassidy-dark-color-theme-test.json";
+  await writeFile(join(root, "package.json"), JSON.stringify(manifest));
+  await assert.rejects(checkThemes(root), /Invalid or duplicate production theme path/);
+});
