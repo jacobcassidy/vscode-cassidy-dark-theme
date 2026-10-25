@@ -6,6 +6,23 @@
 - Match the existing commit message style and formatting; use a plain, sentence-case imperative subject without adding prefixes or changing the format.
 - When relevant, document completed tasks or features in `CHANGELOG.md` and/or `README.md`.
 
+## JavaScript documentation
+
+- Apply these requirements to every authored `.js` file, including scripts, configuration, tests, and grammar samples.
+- Begin each file with a JSDoc header containing a descriptive title and an `@file` description on the immediately following line. Preserve a required shebang before the header.
+
+  ```js
+  /**
+   * Theme build pipeline.
+   * @file Assemble theme inputs, resolve colors, and generate theme artifacts.
+   */
+  ```
+
+- Add JSDoc immediately before named declarations: functions, classes, constructors, methods, getters/setters, class fields, named function expressions and arrow-function bindings, and callable object properties. Include nested helpers and assigned callable members.
+- Document every callable parameter with `@param`, including optional/defaulted parameters, rest parameters, and the properties used by destructured options. Describe return values and thrown errors when they clarify the contract; use accurate types where useful without guessing complex shapes.
+- Give standalone `const`, `let`, and `var` declarations brief JSDoc descriptions, including local and destructured bindings. A short purpose statement is sufficient for variables; one block may cover a grouped declaration. Do not insert JSDoc inside loop headers or parameter lists, or duplicate declaration docs on import/export forwarding statements or anonymous inline callbacks.
+- Preserve useful existing JSDoc, type annotations, and syntax-probe examples. Keep formatter/linter directives adjacent to the code they govern, placing declaration JSDoc before those directives when necessary.
+
 ## Code Spacing Rules
 
 - Put a blank line before each JSDoc block, except at the start of a file.

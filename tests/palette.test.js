@@ -1,3 +1,8 @@
+/**
+ * Palette generation tests.
+ * @file Verify generated tones, chroma anchors, gamut bounds, overrides, and invalid palette inputs.
+ */
+
 import assert from "node:assert/strict";
 import test from "node:test";
 import { inGamut, maxChroma } from "../scripts/lib/color-math.js";
@@ -5,6 +10,7 @@ import { generatePalette } from "../scripts/lib/palette-generation.js";
 import { createPaletteConfig } from "./test-projects.js";
 
 test("yellow's selected anchor generates the agreed five tones", () => {
+  /** Generated palette shared by this test’s color and variable assertions. */
   const palette = generatePalette(createPaletteConfig());
 
   for (const [tone, expected] of Object.entries({
@@ -23,8 +29,13 @@ test("yellow's selected anchor generates the agreed five tones", () => {
 });
 
 test("default chroma, zero anchors, gamut headroom, and override policy", () => {
+  /** Authored fixture configuration mutated for the current validation scenario. */
   const input = createPaletteConfig();
+
+  /** Generated palette shared by this test’s color and variable assertions. */
   const palette = generatePalette(input);
+
+  /** Generated base blue primitive used to inspect chroma and gamut behavior. */
   const blue = palette.get("palette.blue.400");
 
   assert.equal(blue.target.c, 0.125);
@@ -37,12 +48,14 @@ test("default chroma, zero anchors, gamut headroom, and override policy", () => 
 
   input.families.yellow.baseChroma = 0;
 
+  /** Palette generated with a zero chroma anchor. */
   const zero = generatePalette(input);
 
   assert.equal(zero.get("palette.yellow.400").target.c, 0);
   assert.equal(zero.get("palette.yellow.300").target.c, 0);
   input.overrides["palette.blue.400"] = { oklch: { l: 0.75, c: 1, h: 255 }, reason: "Test gamut boundary" };
 
+  /** Primitive generated from an explicit palette override. */
   const overridden = generatePalette(input).get("palette.blue.400");
 
   assert.ok(inGamut(overridden.resolved));
@@ -82,6 +95,7 @@ test("invalid palette parameters and unknown overrides fail", () => {
       value.overrides["palette.yellow.400"] = { hex: "#123456", oklch: { l: 0.9, c: 0.1, h: 90 }, reason: "Ambiguous" };
     },
   ]) {
+    /** Authored fixture configuration mutated for the current validation scenario. */
     const input = createPaletteConfig();
 
     mutate(input);

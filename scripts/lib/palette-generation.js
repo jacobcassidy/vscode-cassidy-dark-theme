@@ -1,14 +1,39 @@
+/**
+ * Palette generation.
+ * @file Validate palette inputs and generate gamut-limited color families, neutrals, and overrides.
+ */
+
 import { fields, number, object } from "./jsonc-validation.js";
 import { fromHex, maxChroma, normalizeHex, toHex, validateHex, validateOklch } from "./color-math.js";
 
+/**
+ * Require a palette identifier composed of letters, digits, and hyphens.
+ *
+ * @param value - Palette family identifier to validate.
+ * @param label - Human-readable context included in validation diagnostics.
+ */
 function identifier(value, label) {
   if (!/^[a-z][a-z0-9-]*$/i.test(value)) throw new Error(`${label}: invalid identifier ${value}`);
 }
 
+/**
+ * Record requested, resolved, and exported colors with an optional override explanation.
+ *
+ * @param target - Requested OKLCH color before gamut limiting or overrides.
+ * @param resolved - Color after gamut limiting or an authored override.
+ * @param [hex] - Short or full hexadecimal sRGB color.
+ * @param reason - Explanation attached to a deliberate color override.
+ */
 function record(target, resolved, hex = toHex(resolved), reason) {
   return { target, resolved, hex, exported: fromHex(hex), ...(reason ? { reason } : {}) };
 }
 
+/**
+ * Generate chromatic tones and neutrals while enforcing gamut limits and override rules.
+ *
+ * @param config - Authored palette configuration to validate and expand.
+ * @returns Palette records indexed by primitive identifier.
+ */
 export function generatePalette(config) {
   fields(config, ["chroma", "families", "neutrals", "overrides"], "palette");
   fields(config.chroma, ["strength", "gamutFraction"], "palette.chroma");
@@ -18,13 +43,26 @@ export function generatePalette(config) {
   object(config.neutrals, "palette.neutrals");
   object(config.overrides ?? {}, "palette.overrides");
 
+  /** Generated primitive records indexed by palette identifier. */
   const colors = new Map();
+
+  /** Authored exceptions to normal tone generation. */
   const overrides = config.overrides ?? {};
 
+  /**
+   * Add one gamut-limited palette primitive, applying its documented override when present.
+   *
+   * @param id - Dotted palette or color variable identifier.
+   * @param target - Requested OKLCH color before gamut limiting or overrides.
+   * @param [fraction] - Fraction of maximum sRGB chroma allowed for this primitive.
+   */
   function add(id, target, fraction = config.chroma.gamutFraction) {
     validateOklch(target, id);
 
+    /** Optional exception for the primitive currently being added. */
     const override = overrides[id];
+
+    /** Requested color with chroma limited to the allowed gamut fraction. */
     const resolved = { ...target, c: Math.min(target.c, fraction * maxChroma(target.l, target.h)) };
 
     if (!override) {
@@ -46,12 +84,14 @@ export function generatePalette(config) {
     if (Object.hasOwn(override, "hex")) {
       validateHex(override.hex, id);
 
+      /** Normalized literal hex supplied by a documented override. */
       const hex = normalizeHex(override.hex);
 
       colors.set(id, record(target, fromHex(hex), hex, override.reason));
     } else {
       validateOklch(override.oklch, id);
 
+      /** OKLCH override limited to the full sRGB gamut. */
       const color = { ...override.oklch, c: Math.min(override.oklch.c, maxChroma(override.oklch.l, override.oklch.h)) };
 
       colors.set(id, record(override.oklch, color, toHex(color), override.reason));
@@ -73,6 +113,7 @@ export function generatePalette(config) {
       number(family.baseChroma, 0, Number.MAX_VALUE, `${name}.baseChroma`);
     }
 
+    /** Family base chroma, either explicitly anchored or derived from lightness. */
     const base = family.baseChroma ?? config.chroma.strength * (1 - family.lightness);
 
     for (const [tone, l] of [
@@ -82,6 +123,7 @@ export function generatePalette(config) {
       ["500", family.lightness - 0.1],
       ["600", family.lightness - 0.2],
     ]) {
+      /** Requested tone chroma before gamut limiting. */
       const c =
         tone === "400-muted"
           ? colors.get(`palette.${name}.400`).resolved.c / 2
@@ -91,8 +133,12 @@ export function generatePalette(config) {
     }
   }
 
+  /** Neutral entries ordered numerically before nonnumeric names. */
   const neutrals = Object.entries(config.neutrals).sort(([a], [b]) => {
+    /** Numeric interpretation of the first neutral tone key. */
     const left = Number(a);
+
+    /** Numeric interpretation of the second neutral tone key. */
     const right = Number(b);
     if (Number.isFinite(left) && Number.isFinite(right)) return left - right;
     if (Number.isFinite(left)) return -1;

@@ -1,3 +1,8 @@
+/**
+ * Color mathematics tests.
+ * @file Verify reference color conversions, neutral endpoints, luminance contrast, and alpha restrictions.
+ */
+
 import assert from "node:assert/strict";
 import test from "node:test";
 import { contrastRatio, fromHex, toHex } from "../scripts/lib/color-math.js";
@@ -8,6 +13,7 @@ test("known sRGB/OKLCH conversions and neutral endpoints", () => {
   assert.equal(toHex({ l: 1, c: 0, h: 0 }), "#ffffff");
   assert.equal(fromHex("#808080").c, 0);
 
+  /** OKLCH representation of the reference red used by conversion assertions. */
   const red = fromHex("#ff0000");
 
   assert.ok(Math.abs(red.l - 0.627955) < 0.000001);

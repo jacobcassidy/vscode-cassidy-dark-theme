@@ -1,12 +1,17 @@
 /**
  * Prettier configuration.
+ * @file Configure formatting, multiline arrays, and JSON-specific layout overrides.
  *
  * @author CassidyDC <info@cassidydc.com>
  * @see https://prettier.io/docs/configuration
- * @type {import("prettier").Config}
  * @version 1.0.0
  */
 
+/**
+ * Shared formatter settings and JSON-specific overrides.
+ *
+ * @type {import("prettier").Config}
+ */
 const config = {
   printWidth: 120,
   plugins: ["prettier-plugin-multiline-arrays"], // Keeps arrays formatted as is by default

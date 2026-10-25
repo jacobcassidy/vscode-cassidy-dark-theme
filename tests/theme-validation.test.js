@@ -1,3 +1,8 @@
+/**
+ * Theme validation tests.
+ * @file Verify JSONC theme validation, manifest assets, registration consistency, and development-theme exclusions.
+ */
+
 import assert from "node:assert/strict";
 import { writeFile } from "node:fs/promises";
 import { join } from "node:path";
@@ -6,12 +11,14 @@ import { checkThemes } from "../scripts/themes/check.js";
 import { createPreviewProject } from "./test-projects.js";
 
 test("theme validation accepts JSONC in both prod and dev themes", async (t) => {
+  /** Temporary source project root for this test scenario. */
   const { root } = await createPreviewProject(t);
 
   assert.equal(await checkThemes(root), 2);
 });
 
 test("theme validation rejects malformed dev JSONC", async (t) => {
+  /** Temporary source project root for this test scenario. */
   const { root } = await createPreviewProject(t);
 
   await writeFile(join(root, "dev/themes/cassidy-dark-color-theme-test.json"), '{ "colors": ');
@@ -19,6 +26,7 @@ test("theme validation rejects malformed dev JSONC", async (t) => {
 });
 
 test("theme validation rejects an invalid prod theme structure", async (t) => {
+  /** Temporary source project root for this test scenario. */
   const { root } = await createPreviewProject(t);
 
   await writeFile(join(root, "themes/theme.json"), '{ "colors": [], "tokenColors": {} }');
@@ -27,6 +35,7 @@ test("theme validation rejects an invalid prod theme structure", async (t) => {
 
 for (const asset of ["icon", "theme"]) {
   test(`theme validation rejects a missing manifest ${asset}`, async (t) => {
+    /** Fixture paths and source values used by the validation scenario. */
     const { root, manifest } = await createPreviewProject(t);
 
     if (asset === "icon") {
@@ -41,6 +50,7 @@ for (const asset of ["icon", "theme"]) {
 }
 
 test("theme validation rejects registrations whose UI type differs from their theme metadata", async (t) => {
+  /** Fixture paths and source values used by the validation scenario. */
   const { root, manifest } = await createPreviewProject(t);
 
   manifest.contributes.themes[0].uiTheme = "hc-black";
@@ -49,6 +59,7 @@ test("theme validation rejects registrations whose UI type differs from their th
 });
 
 test("theme validation rejects duplicate labels and unregistered prod files", async (t) => {
+  /** Fixture paths and source values used by the validation scenario. */
   const { root, manifest, theme } = await createPreviewProject(t);
 
   manifest.contributes.themes.push({ ...manifest.contributes.themes[0] });
@@ -61,6 +72,7 @@ test("theme validation rejects duplicate labels and unregistered prod files", as
 });
 
 test("theme validation keeps dev themes out of prod registrations", async (t) => {
+  /** Fixture paths and source values used by the validation scenario. */
   const { root, manifest } = await createPreviewProject(t);
 
   manifest.contributes.themes[0].path = "dev/themes/cassidy-dark-color-theme-test.json";

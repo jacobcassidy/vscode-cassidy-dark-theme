@@ -1,14 +1,30 @@
+/**
+ * Theme validation.
+ * @file Validate generated theme structures, manifest registrations, and required asset paths.
+ */
+
 import { readFile, stat } from "node:fs/promises";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { parseJsonc } from "../lib/jsonc-validation.js";
 import { listFiles, themeUiType } from "../lib/theme-source-inputs.js";
 
+/**
+ * Check for a non-null, non-array object.
+ *
+ * @param value - Candidate parsed JSON value to inspect.
+ */
 function isObject(value) {
   return value !== null && typeof value === "object" && !Array.isArray(value);
 }
 
+/**
+ * Parse a theme file and validate its metadata, workbench colors, and token sections.
+ *
+ * @param path - Path to the file, directory, or configuration value being processed.
+ */
 async function readTheme(path) {
+  /** Parsed theme being checked for required sections and metadata. */
   let theme;
 
   try {
@@ -34,6 +50,12 @@ async function readTheme(path) {
   return theme;
 }
 
+/**
+ * Require a nonempty manifest asset path that resolves to a regular file.
+ *
+ * @param root - Repository or isolated project root directory.
+ * @param path - Path to the file, directory, or configuration value being processed.
+ */
 async function requireFile(root, path) {
   if (typeof path !== "string" || !path) {
     throw new Error("Manifest theme and icon paths must be nonempty strings");
@@ -44,8 +66,17 @@ async function requireFile(root, path) {
   }
 }
 
+/**
+ * Validate registered prod themes, development previews, snapshots, and manifest asset paths.
+ *
+ * @param [root] - Repository or isolated project root directory.
+ * @returns Number of distinct theme paths validated.
+ */
 export async function checkThemes(root = fileURLToPath(new URL("../../", import.meta.url))) {
+  /** Production extension manifest whose assets and theme entries are validated. */
   const manifest = JSON.parse(await readFile(join(root, "package.json"), "utf8"));
+
+  /** Production theme registrations declared by the manifest. */
   const themes = manifest.contributes?.themes;
 
   if (!Array.isArray(themes) || !themes.length) {
@@ -54,7 +85,10 @@ export async function checkThemes(root = fileURLToPath(new URL("../../", import.
 
   await requireFile(root, manifest.icon);
 
+  /** Distinct registered and development theme paths to validate. */
   const paths = new Set();
+
+  /** Production picker labels already checked for uniqueness. */
   const labels = new Set();
 
   for (const theme of themes) {
@@ -65,12 +99,14 @@ export async function checkThemes(root = fileURLToPath(new URL("../../", import.
     labels.add(theme.label);
     await requireFile(root, theme.path);
 
+    /** Normalized production theme path without a leading relative prefix. */
     const path = theme.path.replace(/^\.\//, "");
 
     if (!path.startsWith("themes/") || path.split("/").includes("..") || paths.has(path)) {
       throw new Error(`Invalid or duplicate prod theme path: ${theme.path}`);
     }
 
+    /** Validated theme metadata used to check the manifest’s UI type. */
     const metadata = await readTheme(join(root, path));
 
     if (theme.uiTheme !== themeUiType(metadata, path)) {

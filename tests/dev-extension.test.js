@@ -1,3 +1,8 @@
+/**
+ * Development extension tests.
+ * @file Verify repeatable preview synchronization, asset links, registrations, and source-file protections.
+ */
+
 import assert from "node:assert/strict";
 import { mkdir, readFile, realpath, symlink, writeFile } from "node:fs/promises";
 import { join } from "node:path";
@@ -6,12 +11,18 @@ import { syncDevExtension } from "../scripts/dev-extension/sync.js";
 import { createPreviewProject } from "./test-projects.js";
 
 test("dev extension sync is repeatable and refreshes themes without modifying the source manifest", async (t) => {
+  /** Isolated preview/source fixture with cleanup registered by the test. */
   const project = await createPreviewProject(t);
+
+  /** Original source text or assembled theme template used by the assertion. */
   const source = await readFile(join(project.root, "package.json"), "utf8");
+
+  /** Destination manifest or source target path used by this scenario. */
   const target = await syncDevExtension(project);
 
   await syncDevExtension(project);
 
+  /** Manifest fixture parsed before mutation or synchronization. */
   const manifest = JSON.parse(await readFile(target, "utf8"));
 
   assert.equal(manifest.name, "cassidy-dark-dev");
@@ -32,6 +43,7 @@ test("dev extension sync is repeatable and refreshes themes without modifying th
   await writeFile(join(project.root, "dev/themes/cassidy-dark-color-theme-new.json"), project.theme);
   await syncDevExtension(project);
 
+  /** Preview manifest reloaded after synchronization. */
   const refreshed = JSON.parse(await readFile(target, "utf8"));
 
   assert.equal(refreshed.contributes.themes.length, 3);
@@ -40,6 +52,7 @@ test("dev extension sync is repeatable and refreshes themes without modifying th
 });
 
 test("dev extension sync refuses a linked extension directory", async (t) => {
+  /** Isolated preview/source fixture with cleanup registered by the test. */
   const project = await createPreviewProject(t);
 
   await symlink(project.root, project.extensionDirectory, "dir");
@@ -47,7 +60,10 @@ test("dev extension sync refuses a linked extension directory", async (t) => {
 });
 
 test("dev extension sync refuses a linked manifest without overwriting its target", async (t) => {
+  /** Isolated preview/source fixture with cleanup registered by the test. */
   const project = await createPreviewProject(t);
+
+  /** Original source text or assembled theme template used by the assertion. */
   const source = await readFile(join(project.root, "package.json"), "utf8");
 
   await mkdir(project.extensionDirectory);
@@ -58,7 +74,10 @@ test("dev extension sync refuses a linked manifest without overwriting its targe
 
 for (const kind of ["directory", "wrong symlink"]) {
   test(`dev extension sync refuses an asset occupied by a ${kind}`, async (t) => {
+    /** Isolated preview/source fixture with cleanup registered by the test. */
     const project = await createPreviewProject(t);
+
+    /** Preview asset-link path inspected by the symlink protection test. */
     const link = join(project.extensionDirectory, "themes");
 
     await mkdir(project.extensionDirectory);
@@ -74,7 +93,10 @@ for (const kind of ["directory", "wrong symlink"]) {
 }
 
 test("dev extension sync includes all prod themes, derives dev theme types, and labels sorted snapshots", async (t) => {
+  /** Isolated preview/source fixture with cleanup registered by the test. */
   const project = await createPreviewProject(t);
+
+  /** Manifest fixture parsed before mutation or synchronization. */
   const manifest = project.manifest;
 
   manifest.contributes.themes.push({ label: "Alternate", uiTheme: "hc-black", path: "themes/alternate.json" });
@@ -92,9 +114,16 @@ test("dev extension sync includes all prod themes, derives dev theme types, and 
     await writeFile(join(project.root, `dev/snapshots/${name}.json`), project.theme);
   }
 
+  /** Original source text or assembled theme template used by the assertion. */
   const source = await readFile(join(project.root, "package.json"), "utf8");
+
+  /** Destination manifest or source target path used by this scenario. */
   const target = await syncDevExtension(project);
+
+  /** Generated preview manifest inspected for registration metadata. */
   const preview = JSON.parse(await readFile(target, "utf8"));
+
+  /** Initial build or manifest result retained for repeatability checks. */
   const first = await readFile(target, "utf8");
 
   await syncDevExtension(project);

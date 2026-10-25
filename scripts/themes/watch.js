@@ -1,3 +1,8 @@
+/**
+ * Theme source watcher.
+ * @file Watch source changes and serialize debounced theme builds and development extension synchronization.
+ */
+
 import { watch as watchDirectory } from "node:fs";
 import { readFile } from "node:fs/promises";
 import { homedir } from "node:os";
@@ -7,6 +12,11 @@ import { buildDevThemes, buildProdThemes } from "./build.js";
 import { syncDevExtension } from "../dev-extension/sync.js";
 import { readOptional } from "../lib/theme-source-inputs.js";
 
+/**
+ * Extract a stable registration snapshot, returning undefined for absent or invalid manifests.
+ *
+ * @param source - Preview manifest JSON text, or undefined when no previous manifest exists.
+ */
 function themeRegistrations(source) {
   try {
     return JSON.stringify(JSON.parse(source).contributes?.themes);
@@ -15,19 +25,36 @@ function themeRegistrations(source) {
   }
 }
 
+/**
+ * Accept events in prod/dev source trees, including unknown filenames that require a rebuild.
+ *
+ * @param filename - Source path reported by the native watcher, when available.
+ */
 function isThemeSource(filename) {
   if (!filename) return true;
 
+  /** Watcher event path normalized to forward slashes. */
   const path = filename.toString().replaceAll("\\", "/");
 
   return ["prod", "dev"].some((group) => {
+    /** Theme-source directory inside the current prod or dev group. */
     const directory = `${group}/themes`;
 
     return path === group || path === directory || path.startsWith(`${directory}/`);
   });
 }
 
-/** Watch theme sources and serialize builds; operations can be replaced in isolated scheduler tests. */
+/**
+ * Watch theme sources and serialize builds; operations can be replaced in isolated scheduler tests.
+ *
+ * @param [options] - Options passed to this operation.
+ * @param [options.root] - Repository or fixture root; defaults to this checkout.
+ * @param [options.extensionDirectory] - Separate preview extension directory; defaults to the local VS Code extension path.
+ * @param [options.debounceMs] - Delay used to coalesce source-save bursts before rebuilding.
+ * @param [options.logger] - Logger receiving build progress, errors, and reload reminders.
+ * @param [operations] - Optional watcher/build/sync replacements used by scheduler tests.
+ * @returns Startup and shutdown promises plus a graceful close function.
+ */
 export function watchThemes(
   {
     root = fileURLToPath(new URL("../../", import.meta.url)),
@@ -37,27 +64,54 @@ export function watchThemes(
   } = {},
   operations = {},
 ) {
+  /** Native watcher and build/sync operations, including test replacements. */
   const services = { watch: watchDirectory, buildProdThemes, buildDevThemes, syncDevExtension, ...operations };
+
+  /** Whether a source event has requested another build pass. */
   let pending = true;
+
+  /** Pending debounce timeout, cleared when a save burst settles. */
   let timer;
+
+  /** Promise for the currently active serialized build pass. */
   let running;
+
+  /** Whether graceful shutdown has begun. */
   let stopping = false;
+
+  /** Native watcher error returned when shutdown completes. */
   let failure;
+
+  /** Resolver used to complete the shutdown promise. */
   let resolveClosed;
+
+  /** Promise settled after watcher closure and any active build. */
   const closed = new Promise((resolve) => {
     resolveClosed = resolve;
   });
 
+  /** Run one prod/dev build and preview sync, reporting failures without stopping future retries. */
   async function build() {
     pending = false;
     logger.log("[watch] Building prod and dev themes...");
 
     try {
+      /** Production build summary for this watcher cycle. */
       const prod = await services.buildProdThemes({ root });
+
+      /** Development target summaries for this watcher cycle. */
       const dev = await services.buildDevThemes({ root });
+
+      /** Preview manifest contents before synchronization. */
       const previous = await readOptional(join(extensionDirectory, "package.json"));
+
+      /** Generated preview manifest path returned by synchronization. */
       const manifestPath = await services.syncDevExtension({ root, extensionDirectory });
+
+      /** Preview manifest contents after synchronization. */
       const current = await readFile(manifestPath, "utf8");
+
+      /** Total generated files changed across both build groups. */
       const changed = prod.changed.length + dev.reduce((sum, target) => sum + target.changed.length, 0);
 
       logger.log(
@@ -72,6 +126,7 @@ export function watchThemes(
     }
   }
 
+  /** Start pending work only when no build is running and shutdown has not begun. */
   function startBuild() {
     if (stopping || running || !pending) return;
 
@@ -82,6 +137,7 @@ export function watchThemes(
     });
   }
 
+  /** Native recursive source watcher used by the build scheduler. */
   const watcher = services.watch(join(root, "src"), { recursive: true }, (_event, filename) => {
     if (stopping || !isThemeSource(filename)) return;
 
@@ -93,6 +149,7 @@ export function watchThemes(
     }, debounceMs);
   });
 
+  /** Stop watching, cancel pending work, and resolve shutdown after any active build completes. */
   function close() {
     if (!stopping) {
       stopping = true;
@@ -119,7 +176,10 @@ export function watchThemes(
 
 if (import.meta.main) {
   try {
+    /** Watcher lifecycle handle used by the command-line entry point. */
     const controller = watchThemes();
+
+    /** Request graceful watcher shutdown when a process termination signal arrives. */
     const stop = () => void controller.close();
 
     process.on("SIGINT", stop);

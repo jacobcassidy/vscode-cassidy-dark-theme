@@ -1,3 +1,8 @@
+/**
+ * Color variable tests.
+ * @file Verify nested references, alpha handling, metadata, invalid identifiers, and alias-cycle detection.
+ */
+
 import assert from "node:assert/strict";
 import test from "node:test";
 import { withAlpha } from "../scripts/lib/color-math.js";
@@ -6,8 +11,10 @@ import { resolveTokens } from "../scripts/lib/color-variable-resolution.js";
 import { createPaletteConfig } from "./test-projects.js";
 
 test("nested tokens resolve forward aliases, dotted selectors, and absolute alpha", () => {
+  /** Generated palette shared by this test’s color and variable assertions. */
   const palette = generatePalette(createPaletteConfig());
 
+  /** Resolved named color variables inspected by the current assertion. */
   const tokens = resolveTokens(
     {
       overlay: {
@@ -42,6 +49,7 @@ test("nested tokens resolve forward aliases, dotted selectors, and absolute alph
 });
 
 test("unknown references, cycles, invalid alpha, and undocumented literal tokens fail", () => {
+  /** Generated palette shared by this test’s color and variable assertions. */
   const palette = generatePalette(createPaletteConfig());
 
   assert.throws(
@@ -74,6 +82,7 @@ test("unknown references, cycles, invalid alpha, and undocumented literal tokens
 });
 
 test("token groups reject invalid IDs, reserved palette IDs, and ambiguous flattened paths", () => {
+  /** Generated palette shared by this test’s color and variable assertions. */
   const palette = generatePalette(createPaletteConfig());
 
   for (const input of [
@@ -96,7 +105,10 @@ test("token groups reject invalid IDs, reserved palette IDs, and ambiguous flatt
 });
 
 test("token details document upstream relationships without resolving them as color aliases", () => {
+  /** Generated palette shared by this test’s color and variable assertions. */
   const palette = generatePalette(createPaletteConfig());
+
+  /** Resolved named color variables inspected by the current assertion. */
   const tokens = resolveTokens(
     {
       ui: {
@@ -120,6 +132,7 @@ test("token details document upstream relationships without resolving them as co
 });
 
 test("token details reject unknown fields, empty values, and malformed relationship lists", () => {
+  /** Generated palette shared by this test’s color and variable assertions. */
   const palette = generatePalette(createPaletteConfig());
 
   for (const details of [

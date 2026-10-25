@@ -1,3 +1,8 @@
+/**
+ * Theme watcher tests.
+ * @file Verify native source watching, debouncing, queued builds, recovery, and graceful shutdown.
+ */
+
 import assert from "node:assert/strict";
 import { EventEmitter } from "node:events";
 import { mkdir, readFile, realpath, rename, rm, writeFile } from "node:fs/promises";
@@ -9,7 +14,13 @@ import { syncDevExtension } from "../scripts/dev-extension/sync.js";
 import { watchThemes } from "../scripts/themes/watch.js";
 import { createBuildProject, createPreviewProject } from "./test-projects.js";
 
+/**
+ * Poll an asynchronous condition until it succeeds or the watcher test deadline expires.
+ *
+ * @param predicate - Asynchronous condition that must become true before the deadline.
+ */
 async function waitFor(predicate) {
+  /** Latest allowed time for the asynchronous watcher condition to succeed. */
   const deadline = Date.now() + 5000;
 
   while (!(await predicate())) {
@@ -18,21 +29,53 @@ async function waitFor(predicate) {
   }
 }
 
+/** Capture watcher messages and expose build and reload-reminder counters. */
 function captureLogs() {
+  /** Captured normal watcher messages. */
   const logs = [];
+
+  /** Captured watcher error messages. */
   const errors = [];
 
   return {
     logs,
     errors,
-    logger: { log: (message) => logs.push(message), error: (message) => errors.push(message) },
+    logger: {
+      /**
+       * Capture a normal watcher message for later assertions.
+       *
+       * @param message - Diagnostic or log message to record.
+       */
+      log: (message) => logs.push(message),
+
+      /**
+       * Capture a watcher error message for later assertions.
+       *
+       * @param message - Diagnostic or log message to record.
+       */
+      error: (message) => errors.push(message),
+    },
+
+    /** Count completed-build messages in the captured watcher log. */
     builds: () => logs.filter((message) => message.startsWith("[watch] Built ")).length,
+
+    /** Count registration-change messages that request a VS Code reload. */
     reminders: () => logs.filter((message) => message.includes("registrations changed")).length,
   };
 }
 
+/**
+ * Create a source fixture with a native watcher and register its shutdown with the test.
+ *
+ * @param t - Node.js test context used to register fixture cleanup.
+ * @param [options] - Options passed to this operation.
+ * @param [options.dev] - Whether to include a development source target in the test fixture.
+ */
 async function createWatchProject(t, { dev = true } = {}) {
+  /** Temporary theme-source project root. */
   const root = await createBuildProject(t);
+
+  /** Isolated preview extension destination for native watcher tests. */
   const extensionDirectory = join(root, "extension");
 
   for (const directory of ["images", "dev/snapshots"]) await mkdir(join(root, directory), { recursive: true });
@@ -42,7 +85,10 @@ async function createWatchProject(t, { dev = true } = {}) {
     await writeFile(join(root, "src/dev/themes/sample/metadata.jsonc"), '{"name":"Dev Fixture","type":"dark"}');
   }
 
+  /** Captured messages and counters for the current watcher. */
   const output = captureLogs();
+
+  /** Watcher lifecycle handle registered for test cleanup. */
   const controller = watchThemes({ root, extensionDirectory, debounceMs: 25, logger: output.logger });
 
   t.after(() => controller.close());
@@ -53,7 +99,10 @@ async function createWatchProject(t, { dev = true } = {}) {
 }
 
 test("watch builds both groups on startup and syncs linked dev theme registrations", async (t) => {
+  /** Temporary source/preview fixture used by this watcher scenario. */
   const project = await createWatchProject(t);
+
+  /** Preview manifest contents used for registration or preservation assertions. */
   const manifest = JSON.parse(await readFile(join(project.extensionDirectory, "package.json"), "utf8"));
 
   assert.ok(project.builds() >= 1);
@@ -71,10 +120,14 @@ test("watch builds both groups on startup and syncs linked dev theme registratio
 });
 
 test("watch rebuilds prod and inherited dev colors and follows repeated replacement saves", async (t) => {
+  /** Temporary source/preview fixture used by this watcher scenario. */
   const project = await createWatchProject(t);
+
+  /** Production UI input rewritten to simulate replacement saves. */
   const input = join(project.root, "src/prod/themes/default/tokens/ui.jsonc");
 
   for (const color of ["#123456", "#abcdef"]) {
+    /** Build count recorded before or during a simulated source change. */
     const count = project.builds();
 
     await writeFile(`${input}.tmp`, JSON.stringify({ colors: { "editor.background": color } }));
@@ -92,8 +145,13 @@ test("watch rebuilds prod and inherited dev colors and follows repeated replacem
 });
 
 test("watch rebuilds dev overrides, refreshes metadata registrations, and preserves prod output", async (t) => {
+  /** Temporary source/preview fixture used by this watcher scenario. */
   const project = await createWatchProject(t);
+
+  /** Production theme source retained for comparison after dev-only edits. */
   const prod = await readFile(join(project.root, "themes/cassidy-dark-color-theme.json"), "utf8");
+
+  /** Build count recorded before or during a simulated source change. */
   const count = project.builds();
 
   await mkdir(join(project.root, "src/dev/themes/sample/tokens"));
@@ -104,7 +162,10 @@ test("watch rebuilds dev overrides, refreshes metadata registrations, and preser
   await writeFile(join(project.root, "src/dev/themes/sample/metadata.jsonc"), '{"name":"Renamed","type":"light"}');
   await waitFor(() => project.builds() > count);
 
+  /** Parsed development output inspected after a source change. */
   const dev = parse(await readFile(join(project.root, "dev/themes/cassidy-dark-color-theme-sample.json"), "utf8"));
+
+  /** Preview manifest contents used for registration or preservation assertions. */
   const manifest = JSON.parse(await readFile(join(project.extensionDirectory, "package.json"), "utf8"));
 
   assert.equal(dev.colors["editor.background"], "#010203");
@@ -117,12 +178,16 @@ test("watch rebuilds dev overrides, refreshes metadata registrations, and preser
 });
 
 test("watch discovers a dev source tree created after startup", async (t) => {
+  /** Temporary source/preview fixture used by this watcher scenario. */
   const project = await createWatchProject(t, { dev: false });
+
+  /** Build count recorded before or during a simulated source change. */
   const count = project.builds();
 
   await mkdir(join(project.root, "src/dev/themes/new"), { recursive: true });
   await waitFor(() => project.builds() > count);
 
+  /** Generated palette report inspected for target provenance. */
   const report = JSON.parse(await readFile(join(project.root, "docs/palettes/generated-reports/new/palette.json")));
 
   assert.equal(report.generated.target, "dev/new");
@@ -132,13 +197,28 @@ test("watch discovers a dev source tree created after startup", async (t) => {
 });
 
 test("watch preserves outputs after invalid source and recovers on the next save", async (t) => {
+  /** Temporary source/preview fixture used by this watcher scenario. */
   const project = await createWatchProject(t);
+
+  /** Metadata input path changed to exercise watcher recovery or registration updates. */
   const source = join(project.root, "src/prod/themes/default/metadata.jsonc");
+
+  /** Original valid metadata restored after the invalid-source scenario. */
   const valid = await readFile(source, "utf8");
+
+  /** Generated production theme path used by the recovery assertion. */
   const themePath = join(project.root, "themes/cassidy-dark-color-theme.json");
+
+  /** Generated production theme contents preserved during an invalid build. */
   const theme = await readFile(themePath, "utf8");
+
+  /** Preview manifest path checked during failure and recovery. */
   const manifestPath = join(project.extensionDirectory, "package.json");
+
+  /** Preview manifest contents used for registration or preservation assertions. */
   const manifest = await readFile(manifestPath, "utf8");
+
+  /** Build count recorded before or during a simulated source change. */
   const count = project.builds();
 
   await writeFile(source, '{"name":');
@@ -152,11 +232,13 @@ test("watch preserves outputs after invalid source and recovers on the next save
 });
 
 test("watch ignores generated output changes and unrelated source directories", async (t) => {
+  /** Temporary source/preview fixture used by this watcher scenario. */
   const project = await createWatchProject(t);
 
   // Native recursive watching can report existing directories during startup discovery.
   await delay(150);
 
+  /** Build count recorded before or during a simulated source change. */
   const count = project.builds();
 
   await writeFile(join(project.root, "dev/themes/cassidy-dark-color-theme-sample.json"), "// Edited output\n");
@@ -170,9 +252,16 @@ test("watch ignores generated output changes and unrelated source directories", 
 });
 
 test("watch keeps stale-output safeguards when a dev target is removed", async (t) => {
+  /** Temporary source/preview fixture used by this watcher scenario. */
   const project = await createWatchProject(t);
+
+  /** Build count recorded before or during a simulated source change. */
   const count = project.builds();
+
+  /** Generated development theme path retained during target-removal checks. */
   const devThemePath = join(project.root, "dev/themes/cassidy-dark-color-theme-sample.json");
+
+  /** Development output contents expected to survive stale-target rejection. */
   const devTheme = await readFile(devThemePath, "utf8");
 
   await rm(join(project.root, "src/dev/themes/sample"), { recursive: true });
@@ -182,11 +271,13 @@ test("watch keeps stale-output safeguards when a dev target is removed", async (
   await rm(devThemePath);
   await rm(join(project.root, "docs/palettes/generated-reports/sample"), { recursive: true });
 
+  /** Metadata input path changed to exercise watcher recovery or registration updates. */
   const source = join(project.root, "src/prod/themes/default/metadata.jsonc");
 
   await writeFile(source, await readFile(source, "utf8"));
   await waitFor(() => project.builds() > count);
 
+  /** Preview manifest contents used for registration or preservation assertions. */
   const manifest = JSON.parse(await readFile(join(project.extensionDirectory, "package.json"), "utf8"));
 
   assert.equal(manifest.contributes.themes.length, 1);
@@ -194,33 +285,79 @@ test("watch keeps stale-output safeguards when a dev target is removed", async (
   await project.controller.close();
 });
 
+/**
+ * Create a controllable watcher with stubbed build services for scheduler assertions.
+ *
+ * @param t - Node.js test context used to register fixture cleanup.
+ * @param project - Temporary project paths and fixture metadata.
+ * @param [overrides] - Service replacements for the current scheduler scenario.
+ */
 function createScheduler(t, project, overrides = {}) {
+  /** Event emitter standing in for the native source watcher. */
   const events = new EventEmitter();
+
+  /** Recorded build/sync service invocation order. */
   const calls = [];
+
+  /** Captured messages and counters for the current watcher. */
   const output = captureLogs();
+
+  /** Captured native-watcher callback used to inject file events. */
   let notify;
+
+  /** Whether the stubbed native watcher has received close. */
   let didClose = false;
+
+  /** Watcher lifecycle handle registered for test cleanup. */
   const controller = watchThemes(
     { ...project, debounceMs: 20, logger: output.logger },
     {
+      /**
+       * Capture the watcher callback and return an event emitter with controllable shutdown.
+       *
+       * @param _path - Unused watched-directory argument in the test double.
+       * @param _options - Unused native-watcher options in the test double.
+       * @param listener - Native file-event callback captured for simulated source changes.
+       */
       watch: (_path, _options, listener) => {
         notify = listener;
+
+        /** Mark the stubbed native watcher closed when scheduler cleanup runs. */
         events.close = () => {
           didClose = true;
         };
 
         return events;
       },
+
+      /**
+       * Record or control the production build phase for the current scheduler scenario.
+       *
+       * @returns Build summary containing changed paths, the default palette, and per-target results.
+       */
       buildProdThemes: async () => {
         calls.push("prod");
 
         return { changed: [], targets: [{}] };
       },
+
+      /**
+       * Record or control the development build phase for the current scheduler scenario.
+       *
+       * @returns Per-target palettes and changed output paths.
+       */
       buildDevThemes: async () => {
         calls.push("dev");
 
         return [{ changed: [] }];
       },
+
+      /**
+       * Record or control preview synchronization for the current scheduler scenario.
+       *
+       * @param options - Options passed to this operation.
+       * @returns Path to the generated development extension manifest.
+       */
       syncDevExtension: async (options) => {
         calls.push("sync");
 
@@ -232,11 +369,23 @@ function createScheduler(t, project, overrides = {}) {
 
   t.after(() => controller.close());
 
-  return { controller, events, calls, notify, didClose: () => didClose, ...output };
+  return {
+    controller,
+    events,
+    calls,
+    notify,
+
+    /** Report whether the stubbed native watcher has been closed. */
+    didClose: () => didClose,
+    ...output,
+  };
 }
 
 test("watch debounces burst saves and ignores paths outside both source trees", async (t) => {
+  /** Temporary source/preview fixture used by this watcher scenario. */
   const project = await createPreviewProject(t);
+
+  /** Controllable watcher and captured service calls for scheduler assertions. */
   const scheduler = createScheduler(t, project);
 
   await scheduler.controller.ready;
@@ -255,14 +404,27 @@ test("watch debounces burst saves and ignores paths outside both source trees", 
 });
 
 test("watch queues edits during a build without overlapping passes", async (t) => {
+  /** Temporary source/preview fixture used by this watcher scenario. */
   const project = await createPreviewProject(t);
+
+  /** Deferred signal marking entry into a deliberately paused build. */
   const entered = Promise.withResolvers();
+
+  /** Deferred signal used to release a deliberately paused build. */
   const release = Promise.withResolvers();
+
+  /** Build count recorded before or during a simulated source change. */
   let count = 0;
 
   t.after(() => release.resolve());
 
+  /** Controllable watcher and captured service calls for scheduler assertions. */
   const scheduler = createScheduler(t, project, {
+    /**
+     * Record or control the production build phase for the current scheduler scenario.
+     *
+     * @returns Build summary containing changed paths, the default palette, and per-target results.
+     */
     buildProdThemes: async () => {
       count++;
 
@@ -289,7 +451,10 @@ test("watch queues edits during a build without overlapping passes", async (t) =
 });
 
 test("watch retries when a native event has no filename and accepts Windows path separators", async (t) => {
+  /** Temporary source/preview fixture used by this watcher scenario. */
   const project = await createPreviewProject(t);
+
+  /** Controllable watcher and captured service calls for scheduler assertions. */
   const scheduler = createScheduler(t, project);
 
   await scheduler.controller.ready;
@@ -302,10 +467,22 @@ test("watch retries when a native event has no filename and accepts Windows path
 
 for (const stage of ["prod", "dev", "sync"]) {
   test(`watch stops a failed ${stage} cycle and retries on the next source event`, async (t) => {
+    /** Temporary source/preview fixture used by this watcher scenario. */
     const project = await createPreviewProject(t);
+
+    /** Recorded build/sync service invocation order. */
     const calls = [];
+
+    /** Whether the injected service should fail before the recovery save. */
     let failing = true;
+
+    /** Controllable watcher and captured service calls for scheduler assertions. */
     const scheduler = createScheduler(t, project, {
+      /**
+       * Record or control the production build phase for the current scheduler scenario.
+       *
+       * @returns Build summary containing changed paths, the default palette, and per-target results.
+       */
       buildProdThemes: async () => {
         calls.push("prod");
 
@@ -313,6 +490,12 @@ for (const stage of ["prod", "dev", "sync"]) {
 
         return { changed: [], targets: [{}] };
       },
+
+      /**
+       * Record or control the development build phase for the current scheduler scenario.
+       *
+       * @returns Per-target palettes and changed output paths.
+       */
       buildDevThemes: async () => {
         calls.push("dev");
 
@@ -320,6 +503,13 @@ for (const stage of ["prod", "dev", "sync"]) {
 
         return [];
       },
+
+      /**
+       * Record or control preview synchronization for the current scheduler scenario.
+       *
+       * @param options - Options passed to this operation.
+       * @returns Path to the generated development extension manifest.
+       */
       syncDevExtension: async (options) => {
         calls.push("sync");
 
@@ -341,12 +531,21 @@ for (const stage of ["prod", "dev", "sync"]) {
 }
 
 test("watch shutdown cancels pending rebuilds and waits for an active build", async (t) => {
+  /** Temporary source/preview fixture used by this watcher scenario. */
   const project = await createPreviewProject(t);
+
+  /** Deferred signal used to release a deliberately paused build. */
   const release = Promise.withResolvers();
 
   t.after(() => release.resolve());
 
+  /** Controllable watcher and captured service calls for scheduler assertions. */
   const scheduler = createScheduler(t, project, {
+    /**
+     * Record or control the production build phase for the current scheduler scenario.
+     *
+     * @returns Build summary containing changed paths, the default palette, and per-target results.
+     */
     buildProdThemes: async () => {
       await release.promise;
 
@@ -356,7 +555,10 @@ test("watch shutdown cancels pending rebuilds and waits for an active build", as
 
   scheduler.notify("change", "prod/themes/default/metadata.jsonc");
 
+  /** Whether the controller’s graceful shutdown has completed. */
   let closed = false;
+
+  /** Shutdown promise observed while a build is still active. */
   const closing = scheduler.controller.close().then(() => {
     closed = true;
   });
@@ -374,11 +576,15 @@ test("watch shutdown cancels pending rebuilds and waits for an active build", as
 });
 
 test("watch reports native watcher failures and closes cleanly", async (t) => {
+  /** Temporary source/preview fixture used by this watcher scenario. */
   const project = await createPreviewProject(t);
+
+  /** Controllable watcher and captured service calls for scheduler assertions. */
   const scheduler = createScheduler(t, project);
 
   await scheduler.controller.ready;
 
+  /** Synthetic native watcher failure used to verify error shutdown. */
   const error = new Error("Native watcher unavailable");
 
   scheduler.events.emit("error", error);

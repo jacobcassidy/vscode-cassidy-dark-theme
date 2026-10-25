@@ -25,6 +25,7 @@ All notable changes to this project are documented in this file.
 
 ### Changed
 
+- Added descriptive file headers and declaration JSDoc throughout the JavaScript scripts, configuration, tests, and grammar sample, with parameter documentation and ongoing requirements in `AGENTS.md`.
 - Shortened the theme script filenames to `scripts/themes/build.js`, `check.js`, and `watch.js`, updating commands, imports, usage text, and documentation.
 - Renamed shared modules to `color-math.js`, `jsonc-validation.js`, and `theme-source-inputs.js`; split `palette.js` into `palette-generation.js` and `color-variable-resolution.js`, updating script and test imports.
 - Grouped release publishing scripts under `scripts/release/publish/` and renamed release scripts to clarify their roles.
