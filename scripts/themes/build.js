@@ -30,6 +30,7 @@ const defaultRoot = fileURLToPath(new URL("../../", import.meta.url));
 
 /** ANSI styles used to distinguish build status messages in terminal output. */
 const styles = {
+  yellow: "\u001b[33m",
   green: "\u001b[32m",
   red: "\u001b[31m",
   dim: "\u001b[2m",
@@ -781,7 +782,7 @@ if (import.meta.main) {
     if (flags.includes("--dev")) {
       const check = flags.includes("--check");
 
-      console.log(`${check ? "Checking" : "Building"} dev themes...`);
+      console.log(`${check ? "Checking" : styled("Building", styles.yellow)} dev themes...`);
 
       /** Development target summaries returned to the command-line entry point. */
       const targets = await buildDevThemes({ check });
@@ -801,7 +802,9 @@ if (import.meta.main) {
       const paletteOnly = flags.includes("--palette-only");
       const check = flags.includes("--check");
 
-      console.log(`${check ? "Checking" : "Building"} ${paletteOnly ? "palette reports" : "prod themes"}...`);
+      console.log(
+        `${check ? "Checking" : styled("Building", styles.yellow)} ${paletteOnly ? "palette reports" : "prod themes"}...`,
+      );
 
       /** Completed build summary for the selected command or target group. */
       const result = await buildProdThemes({
