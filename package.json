@@ -81,6 +81,7 @@
     "package:vsix": "bash scripts/release/package.sh",
     "release:github-recover": "bash scripts/release/create-github-release.sh",
     "release:publish": "bash scripts/release/publish-azure.sh",
-    "test": "node --test \"tests/*.test.js\""
+    "test": "node --test \"tests/*.test.js\"",
+    "watch": "node scripts/themes/watch-theme.js"
   }
 }

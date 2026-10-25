@@ -6,6 +6,8 @@ All notable changes to this project are documented in this file.
 
 ### Added
 
+- Added `npm run watch` to rebuild prod and dev themes and sync the dev preview extension on source changes, with debounced saves, queued builds, error recovery, and graceful shutdown.
+
 - Added Go and Rust grammar samples covering generics, literals, declarations, control flow, Go concurrency and iterators, and Rust lifetimes, traits, macros, patterns, and async syntax.
 - Added HTML, Markdown, CSS, SCSS, JSON, YAML, TOML, log, NEON, Ruby, and XML grammar samples covering varied literals, punctuation, declarations, nesting, embedded languages, and language-specific syntax.
 - Added `npm run build` to build production and local themes together.
