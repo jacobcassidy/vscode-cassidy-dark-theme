@@ -14,7 +14,6 @@ import { readOptional } from "../lib/theme-source-inputs.js";
 
 /** ANSI styles used to distinguish watcher status messages in terminal output. */
 const styles = {
-  blue: "\u001b[34m",
   yellow: "\u001b[33m",
   green: "\u001b[32m",
   orange: "\u001b[38;5;208m",
@@ -109,7 +108,7 @@ export function watchThemes(
   /** Run one prod/dev build and preview sync, reporting failures without stopping future retries. */
   async function build() {
     pending = false;
-    logger.log(styled("[watch] Building prod and dev themes...", styles.yellow));
+    logger.log("[watch] Building prod and dev themes...");
 
     try {
       /** Production build summary for this watcher cycle. */
@@ -195,7 +194,7 @@ export function watchThemes(
     void close();
   });
 
-  logger.log(styled("[watch] Watching src/themes/prod/ and src/themes/dev/. Press Ctrl+C to stop.", styles.blue));
+  logger.log(styled("[watch] Watching src/themes/prod/ and src/themes/dev/. Press Ctrl+C to stop.", styles.yellow));
   startBuild();
 
   return { ready: running, close, closed };
