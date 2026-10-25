@@ -782,7 +782,7 @@ if (import.meta.main) {
     if (flags.includes("--dev")) {
       const check = flags.includes("--check");
 
-      console.log(`${check ? "Checking" : styled("Building", styles.yellow)} dev themes...`);
+      console.log(styled(`${check ? "Checking" : "Building"} dev themes...`, styles.yellow));
 
       /** Development target summaries returned to the command-line entry point. */
       const targets = await buildDevThemes({ check });
@@ -803,7 +803,10 @@ if (import.meta.main) {
       const check = flags.includes("--check");
 
       console.log(
-        `${check ? "Checking" : styled("Building", styles.yellow)} ${paletteOnly ? "palette reports" : "prod themes"}...`,
+        styled(
+          `${check ? "Checking" : "Building"} ${paletteOnly ? "palette reports" : "prod themes"}...`,
+          styles.yellow,
+        ),
       );
 
       /** Completed build summary for the selected command or target group. */
