@@ -140,7 +140,7 @@ export function watchThemes(
         ),
       );
 
-      for (const path of changedFiles) logger.log(styled(`        - ${path}`, styles.dim));
+      for (const path of changedFiles) logger.log(`- ${path}`);
 
       logger.log();
 
