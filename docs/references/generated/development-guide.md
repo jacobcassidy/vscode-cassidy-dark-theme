@@ -101,7 +101,7 @@ For safety, the sync script refuses to use a symlink for the dev extension direc
 npm run watch
 ```
 
-[`scripts/themes/watch-theme.js`](../../../scripts/themes/watch-theme.js) builds prod themes, builds dev themes, and syncs the dev extension on startup. It then watches `src/prod/themes/` and `src/dev/themes/` recursively and repeats those steps when you save source changes. You do not need to run `dev:sync` first. Prod defaults are watched because dev themes inherit omitted input files. Creating a dev source tree after startup is supported.
+[`scripts/themes/watch.js`](../../../scripts/themes/watch.js) builds prod themes, builds dev themes, and syncs the dev extension on startup. It then watches `src/prod/themes/` and `src/dev/themes/` recursively and repeats those steps when you save source changes. You do not need to run `dev:sync` first. Prod defaults are watched because dev themes inherit omitted input files. Creating a dev source tree after startup is supported.
 
 After the initial setup, run **Developer: Reload Window** and select a **Cassidy Dark Dev** theme. Saving source inputs rebuilds the generated JSON; the extension's `_watch: true` entries tell VS Code to reload the selected theme's colors. The command prints another reload reminder when theme registrations change, such as after adding a theme or changing its metadata name or type. Reload VS Code to pick up those registration changes.
 

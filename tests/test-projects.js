@@ -3,7 +3,7 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { parseTree } from "jsonc-parser";
-import { assembleThemeTemplate } from "../scripts/themes/build-theme.js";
+import { assembleThemeTemplate } from "../scripts/themes/build.js";
 
 export function createPaletteConfig() {
   return {

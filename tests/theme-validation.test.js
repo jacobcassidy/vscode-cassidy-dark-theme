@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import { writeFile } from "node:fs/promises";
 import { join } from "node:path";
 import test from "node:test";
-import { checkThemes } from "../scripts/themes/check-theme.js";
+import { checkThemes } from "../scripts/themes/check.js";
 import { createPreviewProject } from "./test-projects.js";
 
 test("theme validation accepts JSONC in both prod and dev themes", async (t) => {

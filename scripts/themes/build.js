@@ -513,7 +513,7 @@ if (import.meta.main) {
       flags.some((flag) => !["--check", "--palette-only", "--dev"].includes(flag)) ||
       (flags.includes("--dev") && flags.includes("--palette-only"))
     ) {
-      throw new Error("Usage: node scripts/themes/build-theme.js [--check] [--palette-only | --dev]");
+      throw new Error("Usage: node scripts/themes/build.js [--check] [--palette-only | --dev]");
     }
 
     if (flags.includes("--dev")) {

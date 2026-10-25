@@ -3,7 +3,7 @@ import { readFile } from "node:fs/promises";
 import { homedir } from "node:os";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
-import { buildDevThemes, buildProdThemes } from "./build-theme.js";
+import { buildDevThemes, buildProdThemes } from "./build.js";
 import { syncDevExtension } from "../dev-extension/sync.js";
 import { readOptional } from "../lib/theme-source-inputs.js";
 

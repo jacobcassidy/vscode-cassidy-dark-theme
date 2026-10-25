@@ -6,7 +6,7 @@ import { setTimeout as delay } from "node:timers/promises";
 import test from "node:test";
 import { parse } from "jsonc-parser";
 import { syncDevExtension } from "../scripts/dev-extension/sync.js";
-import { watchThemes } from "../scripts/themes/watch-theme.js";
+import { watchThemes } from "../scripts/themes/watch.js";
 import { createBuildProject, createPreviewProject } from "./test-projects.js";
 
 async function waitFor(predicate) {

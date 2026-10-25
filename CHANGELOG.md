@@ -25,6 +25,7 @@ All notable changes to this project are documented in this file.
 
 ### Changed
 
+- Shortened the theme script filenames to `scripts/themes/build.js`, `check.js`, and `watch.js`, updating commands, imports, usage text, and documentation.
 - Renamed shared modules to `color-math.js`, `jsonc-validation.js`, and `theme-source-inputs.js`; split `palette.js` into `palette-generation.js` and `color-variable-resolution.js`, updating script and test imports.
 - Grouped release publishing scripts under `scripts/release/publish/` and renamed release scripts to clarify their roles.
 - Renamed `dev/samples/` to `dev/grammar-samples/`, shortened sample filenames to language names, and updated imports, documentation, and the samples-only TypeScript configuration.

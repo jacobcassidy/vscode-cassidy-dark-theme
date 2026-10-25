@@ -3,7 +3,7 @@ import { mkdir, readFile, readdir, rm, stat, writeFile } from "node:fs/promises"
 import { join } from "node:path";
 import test from "node:test";
 import { parse } from "jsonc-parser";
-import { buildDevThemes, buildProdThemes, renderTemplate } from "../scripts/themes/build-theme.js";
+import { buildDevThemes, buildProdThemes, renderTemplate } from "../scripts/themes/build.js";
 import { contrastRatio } from "../scripts/lib/color-math.js";
 import { parseJsonc } from "../scripts/lib/jsonc-validation.js";
 import { generatePalette } from "../scripts/lib/palette-generation.js";

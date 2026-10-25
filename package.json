@@ -64,13 +64,13 @@
   },
   "scripts": {
     "build": "npm run build:prod && npm run build:dev",
-    "build:dev": "node scripts/themes/build-theme.js --dev",
-    "build:palette": "node scripts/themes/build-theme.js --palette-only",
-    "build:prod": "node scripts/themes/build-theme.js",
+    "build:dev": "node scripts/themes/build.js --dev",
+    "build:palette": "node scripts/themes/build.js --palette-only",
+    "build:prod": "node scripts/themes/build.js",
     "check": "npm run check:generated && npm run check:prettier && npm run lint && npm run check:theme && npm test",
-    "check:generated": "node scripts/themes/build-theme.js --check && node scripts/themes/build-theme.js --dev --check",
+    "check:generated": "node scripts/themes/build.js --check && node scripts/themes/build.js --dev --check",
     "check:prettier": "prettier . --check",
-    "check:theme": "node scripts/themes/check-theme.js",
+    "check:theme": "node scripts/themes/check.js",
     "dev:sync": "npm run build && node scripts/dev-extension/sync.js",
     "format": "prettier . --write",
     "lint": "npm run lint:md && npm run lint:es",
@@ -82,6 +82,6 @@
     "release:github-recover": "bash scripts/release/publish/create-github-release.sh",
     "release:publish": "bash scripts/release/publish/run-azure-pipeline.sh",
     "test": "node --test \"tests/*.test.js\"",
-    "watch": "node scripts/themes/watch-theme.js"
+    "watch": "node scripts/themes/watch.js"
   }
 }
