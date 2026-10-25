@@ -1,4 +1,4 @@
-import { fields, number } from "./jsonc.js";
+import { fields, number } from "./jsonc-validation.js";
 
 // OKLab/sRGB matrices: https://www.w3.org/TR/css-color-4/#color-conversion-code
 export function linearRgb({ l: L, c: C, h: H }) {

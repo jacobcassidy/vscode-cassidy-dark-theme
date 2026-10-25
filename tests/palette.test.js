@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { inGamut, maxChroma } from "../scripts/lib/colors.js";
-import { generatePalette } from "../scripts/lib/palette.js";
+import { inGamut, maxChroma } from "../scripts/lib/color-math.js";
+import { generatePalette } from "../scripts/lib/palette-generation.js";
 import { createPaletteConfig } from "./test-projects.js";
 
 test("yellow's selected anchor generates the agreed five tones", () => {

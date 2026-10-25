@@ -1,6 +1,6 @@
 import { readFile, readdir } from "node:fs/promises";
 import { join } from "node:path";
-import { fields, object, parseJsonc } from "./jsonc.js";
+import { fields, object, parseJsonc } from "./jsonc-validation.js";
 
 export const defaultThemeDirectory = "src/prod/themes/default";
 

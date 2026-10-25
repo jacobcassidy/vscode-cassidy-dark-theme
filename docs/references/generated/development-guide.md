@@ -31,6 +31,16 @@ Run the commands in this guide from the repository root unless stated otherwise.
 | [`.vscodeignore`](../../../.vscodeignore)                               | VSIX exclusions.                                                                                                   |
 | [`CHANGELOG.md`](../../../CHANGELOG.md)                                 | Versioned release notes used for GitHub releases.                                                                  |
 
+Shared modules in `scripts/lib/` are named for their responsibilities:
+
+| Module                                                                              | Purpose                                                                                                             |
+| ----------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| [`color-math.js`](../../../scripts/lib/color-math.js)                               | Color conversion and validation, gamut limits, hex normalization, alpha handling, and contrast calculations.        |
+| [`jsonc-validation.js`](../../../scripts/lib/jsonc-validation.js)                   | JSONC parsing, duplicate-key detection, and object, field, and number validation.                                   |
+| [`palette-generation.js`](../../../scripts/lib/palette-generation.js)               | Palette input validation, tone generation, gamut limiting, and documented overrides.                                |
+| [`color-variable-resolution.js`](../../../scripts/lib/color-variable-resolution.js) | Named color variable collection, metadata validation, reference resolution, cycle detection, and alpha application. |
+| [`theme-source-inputs.js`](../../../scripts/lib/theme-source-inputs.js)             | Theme discovery, filesystem reads, default input fallback, section validation, and theme registration metadata.     |
+
 The published extension ID is `jacobcassidy.cassidy-dark`, combining the manifest's `publisher` and `name`. Its theme picker label is **Cassidy Dark**, with `uiTheme: "vs-dark"`. The manifest declares VS Code compatibility as `^1.64.2`.
 
 The shipped theme has three main sections:

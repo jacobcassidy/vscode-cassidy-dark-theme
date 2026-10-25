@@ -1,7 +1,8 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { withAlpha } from "../scripts/lib/colors.js";
-import { generatePalette, resolveTokens } from "../scripts/lib/palette.js";
+import { withAlpha } from "../scripts/lib/color-math.js";
+import { generatePalette } from "../scripts/lib/palette-generation.js";
+import { resolveTokens } from "../scripts/lib/color-variable-resolution.js";
 import { createPaletteConfig } from "./test-projects.js";
 
 test("nested tokens resolve forward aliases, dotted selectors, and absolute alpha", () => {

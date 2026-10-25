@@ -4,9 +4,10 @@ import { join } from "node:path";
 import test from "node:test";
 import { parse } from "jsonc-parser";
 import { buildDevThemes, buildProdThemes, renderTemplate } from "../scripts/themes/build-theme.js";
-import { contrastRatio } from "../scripts/lib/colors.js";
-import { parseJsonc } from "../scripts/lib/jsonc.js";
-import { generatePalette, resolveTokens } from "../scripts/lib/palette.js";
+import { contrastRatio } from "../scripts/lib/color-math.js";
+import { parseJsonc } from "../scripts/lib/jsonc-validation.js";
+import { generatePalette } from "../scripts/lib/palette-generation.js";
+import { resolveTokens } from "../scripts/lib/color-variable-resolution.js";
 import {
   createBuildProject,
   createPaletteConfig,

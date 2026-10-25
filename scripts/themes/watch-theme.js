@@ -5,7 +5,7 @@ import { join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { buildDevThemes, buildProdThemes } from "./build-theme.js";
 import { syncDevExtension } from "../dev-extension/sync.js";
-import { readOptional } from "../lib/theme-targets.js";
+import { readOptional } from "../lib/theme-source-inputs.js";
 
 function themeRegistrations(source) {
   try {

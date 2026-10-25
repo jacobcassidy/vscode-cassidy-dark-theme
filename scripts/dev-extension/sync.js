@@ -2,8 +2,8 @@ import { readFile, writeFile, mkdir, lstat, realpath, symlink } from "node:fs/pr
 import { homedir } from "node:os";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
-import { parseJsonc } from "../lib/jsonc.js";
-import { listFiles, themeUiType } from "../lib/theme-targets.js";
+import { parseJsonc } from "../lib/jsonc-validation.js";
+import { listFiles, themeUiType } from "../lib/theme-source-inputs.js";
 
 export async function syncDevExtension({
   root = fileURLToPath(new URL("../../", import.meta.url)),

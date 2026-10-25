@@ -25,6 +25,7 @@ All notable changes to this project are documented in this file.
 
 ### Changed
 
+- Renamed shared modules to `color-math.js`, `jsonc-validation.js`, and `theme-source-inputs.js`; split `palette.js` into `palette-generation.js` and `color-variable-resolution.js`, updating script and test imports.
 - Grouped release publishing scripts under `scripts/release/publish/` and renamed release scripts to clarify their roles.
 - Renamed `dev/samples/` to `dev/grammar-samples/`, shortened sample filenames to language names, and updated imports, documentation, and the samples-only TypeScript configuration.
 - Standardized theme naming on prod/dev, moved authoring sources to `src/prod/` and `src/dev/`, renamed dev extension scripts and tests, and clarified build and sync function names.
