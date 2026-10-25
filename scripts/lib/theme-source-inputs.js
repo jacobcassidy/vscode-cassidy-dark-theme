@@ -8,7 +8,7 @@ import { join } from "node:path";
 import { fields, object, parseJsonc } from "./jsonc-validation.js";
 
 /** Required default source directory used for whole-file input fallback. */
-export const defaultThemeDirectory = "src/prod/themes/default";
+export const defaultThemeDirectory = "src/themes/prod/default";
 
 /** Metadata and token-section paths in template assembly order. */
 export const themeInputPaths = ["metadata.jsonc", "tokens/ui.jsonc", "tokens/semantic.jsonc", "tokens/syntax.jsonc"];
@@ -94,7 +94,7 @@ export async function discoverTargets(root) {
 
   for (const group of ["prod", "dev"]) {
     /** Source group directory searched for theme targets. */
-    const directory = `src/${group}/themes`;
+    const directory = `src/themes/${group}`;
 
     for (const name of await listDirectories(join(root, directory), group === "dev")) {
       if (!/^[a-z][a-z0-9.-]*$/.test(name) || name.includes("..") || name.endsWith(".")) {
@@ -102,7 +102,7 @@ export async function discoverTargets(root) {
       }
 
       if (names.has(name)) {
-        throw new Error(`Duplicate theme name ${name}: prod and dev themes share palette report paths`);
+        throw new Error(`Duplicate theme name ${name}: prod and dev theme names must be globally unique`);
       }
 
       names.add(name);
@@ -110,7 +110,7 @@ export async function discoverTargets(root) {
         group,
         name,
         directory: `${directory}/${name}`,
-        reportDirectory: `docs/palettes/generated-reports/${name}`,
+        reportDirectory: `docs/palettes/generated-reports/${group}/${name}`,
         output: `${group === "prod" ? "themes" : "dev/themes"}/cassidy-dark-color-theme${group === "prod" && name === "default" ? "" : `-${name}`}.json`,
       });
     }

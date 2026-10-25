@@ -586,8 +586,18 @@ async function staleOutputs(root, targets, group, paletteOnly) {
   /** Report directory names owned by the unselected target group. */
   const otherNames = new Set(targets.filter((target) => target.group !== group).map((target) => target.name));
 
+  for (const sourceGroup of ["prod", "dev"]) {
+    for (const name of await listDirectories(join(root, reportsRoot, sourceGroup), true)) {
+      if (sourceGroup !== group && otherNames.has(name)) continue;
+
+      for (const file of await listFiles(join(root, reportsRoot, sourceGroup, name))) {
+        if (/^palette\.(json|md|svg)$/.test(file)) actual.push(`${reportsRoot}/${sourceGroup}/${name}/${file}`);
+      }
+    }
+  }
+
   for (const name of await listDirectories(join(root, reportsRoot), true)) {
-    if (otherNames.has(name)) continue;
+    if (["prod", "dev"].includes(name)) continue;
 
     for (const file of await listFiles(join(root, reportsRoot, name))) {
       if (/^palette\.(json|md|svg)$/.test(file)) actual.push(`${reportsRoot}/${name}/${file}`);

@@ -81,8 +81,8 @@ async function createWatchProject(t, { dev = true } = {}) {
   for (const directory of ["images", "dev/snapshots"]) await mkdir(join(root, directory), { recursive: true });
 
   if (dev) {
-    await mkdir(join(root, "src/dev/themes/sample"), { recursive: true });
-    await writeFile(join(root, "src/dev/themes/sample/metadata.jsonc"), '{"name":"Dev Fixture","type":"dark"}');
+    await mkdir(join(root, "src/themes/dev/sample"), { recursive: true });
+    await writeFile(join(root, "src/themes/dev/sample/metadata.jsonc"), '{"name":"Dev Fixture","type":"dark"}');
   }
 
   /** Captured messages and counters for the current watcher. */
@@ -124,7 +124,7 @@ test("watch rebuilds prod and inherited dev colors and follows repeated replacem
   const project = await createWatchProject(t);
 
   /** Production UI input rewritten to simulate replacement saves. */
-  const input = join(project.root, "src/prod/themes/default/tokens/ui.jsonc");
+  const input = join(project.root, "src/themes/prod/default/tokens/ui.jsonc");
 
   for (const color of ["#123456", "#abcdef"]) {
     /** Build count recorded before or during a simulated source change. */
@@ -154,12 +154,12 @@ test("watch rebuilds dev overrides, refreshes metadata registrations, and preser
   /** Build count recorded before or during a simulated source change. */
   const count = project.builds();
 
-  await mkdir(join(project.root, "src/dev/themes/sample/tokens"));
+  await mkdir(join(project.root, "src/themes/dev/sample/tokens"));
   await writeFile(
-    join(project.root, "src/dev/themes/sample/tokens/ui.jsonc"),
+    join(project.root, "src/themes/dev/sample/tokens/ui.jsonc"),
     '{"colors":{"editor.background":"#010203"}}',
   );
-  await writeFile(join(project.root, "src/dev/themes/sample/metadata.jsonc"), '{"name":"Renamed","type":"light"}');
+  await writeFile(join(project.root, "src/themes/dev/sample/metadata.jsonc"), '{"name":"Renamed","type":"light"}');
   await waitFor(() => project.builds() > count);
 
   /** Parsed development output inspected after a source change. */
@@ -184,11 +184,11 @@ test("watch discovers a dev source tree created after startup", async (t) => {
   /** Build count recorded before or during a simulated source change. */
   const count = project.builds();
 
-  await mkdir(join(project.root, "src/dev/themes/new"), { recursive: true });
+  await mkdir(join(project.root, "src/themes/dev/new"), { recursive: true });
   await waitFor(() => project.builds() > count);
 
   /** Generated palette report inspected for target provenance. */
-  const report = JSON.parse(await readFile(join(project.root, "docs/palettes/generated-reports/new/palette.json")));
+  const report = JSON.parse(await readFile(join(project.root, "docs/palettes/generated-reports/dev/new/palette.json")));
 
   assert.equal(report.generated.target, "dev/new");
   assert.equal(report.generated.fallback, true);
@@ -201,7 +201,7 @@ test("watch preserves outputs after invalid source and recovers on the next save
   const project = await createWatchProject(t);
 
   /** Metadata input path changed to exercise watcher recovery or registration updates. */
-  const source = join(project.root, "src/prod/themes/default/metadata.jsonc");
+  const source = join(project.root, "src/themes/prod/default/metadata.jsonc");
 
   /** Original valid metadata restored after the invalid-source scenario. */
   const valid = await readFile(source, "utf8");
@@ -242,7 +242,7 @@ test("watch ignores generated output changes and unrelated source directories", 
   const count = project.builds();
 
   await writeFile(join(project.root, "dev/themes/cassidy-dark-color-theme-sample.json"), "// Edited output\n");
-  await writeFile(join(project.root, "docs/palettes/generated-reports/sample/palette.md"), "Edited report\n");
+  await writeFile(join(project.root, "docs/palettes/generated-reports/dev/sample/palette.md"), "Edited report\n");
   await mkdir(join(project.root, "src/unrelated"));
   await writeFile(join(project.root, "src/unrelated/input.jsonc"), "{}");
   await delay(150);
@@ -264,15 +264,15 @@ test("watch keeps stale-output safeguards when a dev target is removed", async (
   /** Development output contents expected to survive stale-target rejection. */
   const devTheme = await readFile(devThemePath, "utf8");
 
-  await rm(join(project.root, "src/dev/themes/sample"), { recursive: true });
+  await rm(join(project.root, "src/themes/dev/sample"), { recursive: true });
   await waitFor(() => project.errors.length > 0);
   assert.match(project.errors[0], /Stale generated outputs/);
   assert.equal(await readFile(devThemePath, "utf8"), devTheme);
   await rm(devThemePath);
-  await rm(join(project.root, "docs/palettes/generated-reports/sample"), { recursive: true });
+  await rm(join(project.root, "docs/palettes/generated-reports/dev/sample"), { recursive: true });
 
   /** Metadata input path changed to exercise watcher recovery or registration updates. */
-  const source = join(project.root, "src/prod/themes/default/metadata.jsonc");
+  const source = join(project.root, "src/themes/prod/default/metadata.jsonc");
 
   await writeFile(source, await readFile(source, "utf8"));
   await waitFor(() => project.builds() > count);
@@ -391,11 +391,11 @@ test("watch debounces burst saves and ignores paths outside both source trees", 
   await scheduler.controller.ready;
   scheduler.notify("change", "unrelated/input.jsonc");
   scheduler.notify("change", "../dev/themes/generated.json");
-  scheduler.notify("change", "../docs/palettes/generated-reports/test/palette.json");
+  scheduler.notify("change", "../docs/palettes/generated-reports/dev/test/palette.json");
   await delay(60);
   assert.equal(scheduler.builds(), 1);
 
-  for (let index = 0; index < 10; index++) scheduler.notify("change", "dev/themes/test/tokens/ui.jsonc");
+  for (let index = 0; index < 10; index++) scheduler.notify("change", "themes/dev/test/tokens/ui.jsonc");
 
   await waitFor(() => scheduler.builds() === 2);
   await delay(60);
@@ -438,9 +438,9 @@ test("watch queues edits during a build without overlapping passes", async (t) =
   });
 
   await scheduler.controller.ready;
-  scheduler.notify("change", "prod/themes/default/tokens/ui.jsonc");
+  scheduler.notify("change", "themes/prod/default/tokens/ui.jsonc");
   await entered.promise;
-  scheduler.notify("change", "dev/themes/test/metadata.jsonc");
+  scheduler.notify("change", "themes/dev/test/metadata.jsonc");
   await delay(60);
   assert.equal(count, 2);
   assert.equal(scheduler.builds(), 1);
@@ -460,7 +460,7 @@ test("watch retries when a native event has no filename and accepts Windows path
   await scheduler.controller.ready;
   scheduler.notify("rename", undefined);
   await waitFor(() => scheduler.builds() === 2);
-  scheduler.notify("change", "dev\\themes\\test\\metadata.jsonc");
+  scheduler.notify("change", "themes\\dev\\test\\metadata.jsonc");
   await waitFor(() => scheduler.builds() === 3);
   await scheduler.controller.close();
 });
@@ -523,7 +523,7 @@ for (const stage of ["prod", "dev", "sync"]) {
     assert.equal(scheduler.errors.length, 1);
     assert.deepEqual(calls, ["prod", "dev", "sync"].slice(0, ["prod", "dev", "sync"].indexOf(stage) + 1));
     failing = false;
-    scheduler.notify("change", "prod/themes/default/metadata.jsonc");
+    scheduler.notify("change", "themes/prod/default/metadata.jsonc");
     await waitFor(() => scheduler.builds() === 1);
     assert.deepEqual(calls.slice(-3), ["prod", "dev", "sync"]);
     await scheduler.controller.close();
@@ -553,7 +553,7 @@ test("watch shutdown cancels pending rebuilds and waits for an active build", as
     },
   });
 
-  scheduler.notify("change", "prod/themes/default/metadata.jsonc");
+  scheduler.notify("change", "themes/prod/default/metadata.jsonc");
 
   /** Whether the controller’s graceful shutdown has completed. */
   let closed = false;
@@ -569,7 +569,7 @@ test("watch shutdown cancels pending rebuilds and waits for an active build", as
   release.resolve();
   await closing;
   assert.equal(scheduler.builds(), 1);
-  scheduler.notify("change", "prod/themes/default/metadata.jsonc");
+  scheduler.notify("change", "themes/prod/default/metadata.jsonc");
   await delay(60);
   assert.equal(scheduler.builds(), 1);
   await scheduler.controller.close();

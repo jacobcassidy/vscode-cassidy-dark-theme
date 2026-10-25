@@ -38,9 +38,9 @@ function isThemeSource(filename) {
 
   return ["prod", "dev"].some((group) => {
     /** Theme-source directory inside the current prod or dev group. */
-    const directory = `${group}/themes`;
+    const directory = `themes/${group}`;
 
-    return path === group || path === directory || path.startsWith(`${directory}/`);
+    return path === "themes" || path === directory || path.startsWith(`${directory}/`);
   });
 }
 
@@ -168,7 +168,7 @@ export function watchThemes(
     void close();
   });
 
-  logger.log("[watch] Watching src/prod/themes/ and src/dev/themes/. Press Ctrl+C to stop.");
+  logger.log("[watch] Watching src/themes/prod/ and src/themes/dev/. Press Ctrl+C to stop.");
   startBuild();
 
   return { ready: running, close, closed };

@@ -1,7 +1,7 @@
 {
   "generated": {
     "target": "dev/test",
-    "source": "src/prod/themes/default/colors/palette.jsonc",
+    "source": "src/themes/prod/default/colors/palette.jsonc",
     "fallback": true,
     "rebuild": "npm run build:dev"
   },

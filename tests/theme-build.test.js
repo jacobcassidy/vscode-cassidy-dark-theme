@@ -108,7 +108,7 @@ test("prod theme build is deterministic, checks every artifact without writing, 
   assert.equal((await stat(themePath)).mtimeMs, before.mtimeMs);
 
   /** Generated palette JSON report path used by the assertion. */
-  const reportPath = join(root, "docs/palettes/generated-reports/default/palette.json");
+  const reportPath = join(root, "docs/palettes/generated-reports/prod/default/palette.json");
 
   /** Parsed palette measurements and source provenance. */
   const report = JSON.parse(await readFile(reportPath, "utf8"));
@@ -117,7 +117,9 @@ test("prod theme build is deterministic, checks every artifact without writing, 
   await writeFile(reportPath, "stale");
   await assert.rejects(buildProdThemes({ root, check: true }), /palette.json/);
   assert.equal(await readFile(reportPath, "utf8"), "stale");
-  assert.deepEqual((await buildProdThemes({ root })).changed, ["docs/palettes/generated-reports/default/palette.json"]);
+  assert.deepEqual((await buildProdThemes({ root })).changed, [
+    "docs/palettes/generated-reports/prod/default/palette.json",
+  ]);
   assert.equal(await readFile(themePath, "utf8"), output);
 });
 
@@ -134,7 +136,7 @@ test("failed prod validation leaves all previous outputs intact and palette-only
   );
 
   await writeFile(
-    join(root, "src/prod/themes/default/colors/variables.jsonc"),
+    join(root, "src/themes/prod/default/colors/variables.jsonc"),
     '{"unused":{"alias":{"color":"missing.color"}}}',
   );
   await assert.rejects(buildProdThemes({ root }), /Unknown reference/);
@@ -144,9 +146,9 @@ test("failed prod validation leaves all previous outputs intact and palette-only
   }
 
   assert.deepEqual(await readdir(join(root, "themes")), ["cassidy-dark-color-theme.json"]);
-  await rm(join(root, "src/prod/themes/default/colors/variables.jsonc"));
-  await rm(join(root, "src/prod/themes/default/tokens"), { recursive: true });
-  await rm(join(root, "src/prod/themes/default/metadata.jsonc"));
+  await rm(join(root, "src/themes/prod/default/colors/variables.jsonc"));
+  await rm(join(root, "src/themes/prod/default/tokens"), { recursive: true });
+  await rm(join(root, "src/themes/prod/default/metadata.jsonc"));
   assert.equal((await buildProdThemes({ root, paletteOnly: true })).changed.length, 0);
 });
 
@@ -160,7 +162,7 @@ test("editing prod token details leaves all generated artifacts unchanged", asyn
   const input = createVariables();
 
   input.surface.editor.details = { for: "Editor background." };
-  await writeFile(join(root, "src/prod/themes/default/colors/variables.jsonc"), JSON.stringify(input));
+  await writeFile(join(root, "src/themes/prod/default/colors/variables.jsonc"), JSON.stringify(input));
   assert.deepEqual((await buildProdThemes({ root, check: true })).changed, []);
   assert.deepEqual((await buildProdThemes({ root })).changed, []);
 });
@@ -171,7 +173,7 @@ test("prod palette reports include 600 contrast from final hex and flag transluc
   await buildProdThemes({ root, paletteOnly: true });
 
   /** Generated palette Markdown report path. */
-  const path = join(root, "docs/palettes/generated-reports/default/palette.md");
+  const path = join(root, "docs/palettes/generated-reports/prod/default/palette.md");
 
   /** Generated palette report text used to inspect its contrast section. */
   const markdown = await readFile(path, "utf8");
@@ -186,11 +188,11 @@ test("prod palette reports include 600 contrast from final hex and flag transluc
   /** Authored fixture configuration mutated for the current validation scenario. */
   const input = createPaletteConfig();
   input.overrides["palette.blue.600"] = { hex: "#000000", reason: "Check exported override contrast" };
-  await writeFile(join(root, "src/prod/themes/default/colors/palette.jsonc"), JSON.stringify(input));
+  await writeFile(join(root, "src/themes/prod/default/colors/palette.jsonc"), JSON.stringify(input));
   await buildProdThemes({ root, paletteOnly: true });
   assert.match(await readFile(path, "utf8"), /`palette.blue.600`\s*\|\s*`#000000`\s*\|\s*19\.77:1/);
   input.overrides["palette.blue.600"].hex = "#00000080";
-  await writeFile(join(root, "src/prod/themes/default/colors/palette.jsonc"), JSON.stringify(input));
+  await writeFile(join(root, "src/themes/prod/default/colors/palette.jsonc"), JSON.stringify(input));
   await buildProdThemes({ root, paletteOnly: true });
   assert.match(await readFile(path, "utf8"), /`palette.blue.600`\s*\|\s*`#00000080`\s*\|\s*Needs backdrop/);
 });
@@ -198,18 +200,18 @@ test("prod palette reports include 600 contrast from final hex and flag transluc
 test("the authored palette keeps base syntax and colored control text readable", async () => {
   /** Palette configuration parsed from authored inputs or created for this scenario. */
   const config = parseJsonc(
-    await readFile(new URL("../src/prod/themes/default/colors/palette.jsonc", import.meta.url), "utf8"),
+    await readFile(new URL("../src/themes/prod/default/colors/palette.jsonc", import.meta.url), "utf8"),
     "palette",
   ).value;
 
   /** Authored named color variables parsed for readability assertions. */
   const aliases = parseJsonc(
-    await readFile(new URL("../src/prod/themes/default/colors/variables.jsonc", import.meta.url), "utf8"),
+    await readFile(new URL("../src/themes/prod/default/colors/variables.jsonc", import.meta.url), "utf8"),
     "tokens",
   ).value;
 
   /** Original source text or assembled theme template used by the assertion. */
-  const source = await readThemeParts(new URL("../src/prod/themes/default", import.meta.url));
+  const source = await readThemeParts(new URL("../src/themes/prod/default", import.meta.url));
 
   /** Generated palette shared by this test’s color and variable assertions. */
   const palette = generatePalette(config);
@@ -235,10 +237,10 @@ test("dev targets use independent complete palettes and variables and isolate ou
   const root = await createBuildProject(t);
 
   /** Development target source directory prepared by this test. */
-  const devThemeDirectory = join(root, "src/dev/themes/sample");
+  const devThemeDirectory = join(root, "src/themes/dev/sample");
 
   /** Default production source directory supplying inherited inputs. */
-  const prodThemeDirectory = join(root, "src/prod/themes/default");
+  const prodThemeDirectory = join(root, "src/themes/prod/default");
 
   /** Authored fixture configuration mutated for the current validation scenario. */
   const input = createPaletteConfig();
@@ -291,8 +293,8 @@ for (const relative of [
     /** Temporary source project root for this test scenario. */
     const root = await createBuildProject(t);
 
-    await mkdir(join(root, "src/dev/themes/inherited"), { recursive: true });
-    await rm(join(root, "src/prod/themes/default", relative));
+    await mkdir(join(root, "src/themes/dev/inherited"), { recursive: true });
+    await rm(join(root, "src/themes/prod/default", relative));
     await assert.rejects(buildDevThemes({ root }), /missing required theme input/);
     assert.deepEqual(await readdir(root), ["package.json", "src"]);
   });
@@ -303,7 +305,7 @@ test("fully inherited dev targets produce their own reports and follow changed d
   const root = await createBuildProject(t);
 
   /** Development target source directory prepared by this test. */
-  const devThemeDirectory = join(root, "src/dev/themes/inherited");
+  const devThemeDirectory = join(root, "src/themes/dev/inherited");
 
   await mkdir(devThemeDirectory, { recursive: true });
   await buildProdThemes({ root });
@@ -315,14 +317,14 @@ test("fully inherited dev targets produce their own reports and follow changed d
   const result = await buildDevThemes({ root });
 
   /** Generated palette JSON report path used by the assertion. */
-  const reportPath = join(root, "docs/palettes/generated-reports/inherited/palette.json");
+  const reportPath = join(root, "docs/palettes/generated-reports/dev/inherited/palette.json");
 
   /** Parsed palette measurements and source provenance. */
   const report = JSON.parse(await readFile(reportPath, "utf8"));
 
   assert.equal(result.length, 1);
   assert.equal(report.generated.target, "dev/inherited");
-  assert.equal(report.generated.source, "src/prod/themes/default/colors/palette.jsonc");
+  assert.equal(report.generated.source, "src/themes/prod/default/colors/palette.jsonc");
   assert.equal(report.generated.fallback, true);
   assert.equal(
     parse(await readFile(join(root, "dev/themes/cassidy-dark-color-theme-inherited.json"), "utf8")).name,
@@ -335,7 +337,7 @@ test("fully inherited dev targets produce their own reports and follow changed d
   const input = createPaletteConfig();
 
   input.families.yellow.hue = 95;
-  await writeFile(join(root, "src/prod/themes/default/colors/palette.jsonc"), JSON.stringify(input));
+  await writeFile(join(root, "src/themes/prod/default/colors/palette.jsonc"), JSON.stringify(input));
   await assert.rejects(buildDevThemes({ root, check: true }), /missing or stale/);
   assert.equal(await readFile(reportPath, "utf8"), JSON.stringify(report, null, 2) + "\n");
   await buildDevThemes({ root });
@@ -363,7 +365,7 @@ for (const [path, contents, pattern] of [
     const root = await createBuildProject(t);
 
     /** Development target source directory prepared by this test. */
-    const devThemeDirectory = join(root, "src/dev/themes/sample");
+    const devThemeDirectory = join(root, "src/themes/dev/sample");
 
     await mkdir(join(devThemeDirectory, path, ".."), { recursive: true });
     await writeFile(join(devThemeDirectory, path), contents);
@@ -376,8 +378,8 @@ test("a supplied dev UI mapping replaces the whole file while omitted files inhe
   /** Temporary source project root for this test scenario. */
   const root = await createBuildProject(t);
 
-  await mkdir(join(root, "src/dev/themes/sample/tokens"), { recursive: true });
-  await writeFile(join(root, "src/dev/themes/sample/tokens/ui.jsonc"), '{"colors":{"editor.background":"#010203"}}');
+  await mkdir(join(root, "src/themes/dev/sample/tokens"), { recursive: true });
+  await writeFile(join(root, "src/themes/dev/sample/tokens/ui.jsonc"), '{"colors":{"editor.background":"#010203"}}');
   await buildDevThemes({ root });
 
   /** Parsed generated theme inspected by this test. */
@@ -397,7 +399,7 @@ for (const group of ["prod", "dev"]) {
     const build = group === "prod" ? buildProdThemes : buildDevThemes;
 
     /** Destination manifest or source target path used by this scenario. */
-    const target = join(root, `src/${group}/themes/z-invalid`);
+    const target = join(root, `src/themes/${group}/z-invalid`);
 
     await mkdir(join(target, "colors"), { recursive: true });
     await build({ root });
@@ -409,7 +411,7 @@ for (const group of ["prod", "dev"]) {
     const config = createPaletteConfig();
 
     config.families.yellow.hue = 95;
-    await writeFile(join(root, "src/prod/themes/default/colors/palette.jsonc"), JSON.stringify(config));
+    await writeFile(join(root, "src/themes/prod/default/colors/palette.jsonc"), JSON.stringify(config));
     await writeFile(join(target, "colors/variables.jsonc"), '{"unused":{"alias":{"color":"unknown.color"}}}');
     await assert.rejects(build({ root }), /Unknown reference/);
     assert.deepEqual(await readBuildOutputs(root), before);
@@ -428,8 +430,8 @@ test("prod targets register matching theme types and preserve unrelated manifest
 
   manifest.contributes.commands = [{ command: "fixture.command", title: "Keep" }];
   await writeFile(manifestPath, JSON.stringify(manifest));
-  await mkdir(join(root, "src/prod/themes/high-contrast"));
-  await writeFile(join(root, "src/prod/themes/high-contrast/metadata.jsonc"), '{"name":"Fixture","type":"hc"}');
+  await mkdir(join(root, "src/themes/prod/high-contrast"));
+  await writeFile(join(root, "src/themes/prod/high-contrast/metadata.jsonc"), '{"name":"Fixture","type":"hc"}');
   await buildProdThemes({ root });
 
   /** Manifest reloaded after production theme registration updates. */
@@ -461,7 +463,7 @@ for (const name of ["default", "bad..name", "Uppercase", ".hidden"]) {
     /** Temporary source project root for this test scenario. */
     const root = await createBuildProject(t);
 
-    await mkdir(join(root, "src/dev/themes", name), { recursive: true });
+    await mkdir(join(root, "src/themes/dev", name), { recursive: true });
     await assert.rejects(buildProdThemes({ root }), /Duplicate theme name|Invalid theme name/);
     assert.deepEqual(await readdir(root), ["package.json", "src"]);
   });
@@ -474,8 +476,8 @@ test("stale report and theme detection is read-only and archives are never regen
   await mkdir(join(root, "docs/palettes/archive"), { recursive: true });
   await writeFile(join(root, "docs/palettes/archive/old.md"), "Historical palette\n");
   await buildProdThemes({ root });
-  await mkdir(join(root, "docs/palettes/generated-reports/removed"));
-  await writeFile(join(root, "docs/palettes/generated-reports/removed/palette.md"), "stale");
+  await mkdir(join(root, "docs/palettes/generated-reports/prod/removed"));
+  await writeFile(join(root, "docs/palettes/generated-reports/prod/removed/palette.md"), "stale");
 
   /** Output snapshot or file metadata retained before the operation under test. */
   const before = await readBuildOutputs(root);
@@ -483,7 +485,7 @@ test("stale report and theme detection is read-only and archives are never regen
   await assert.rejects(buildProdThemes({ root, check: true }), /Stale generated outputs.*removed/);
   await assert.rejects(buildDevThemes({ root }), /Stale generated outputs.*removed/);
   assert.deepEqual(await readBuildOutputs(root), before);
-  await rm(join(root, "docs/palettes/generated-reports/removed"), { recursive: true });
+  await rm(join(root, "docs/palettes/generated-reports/prod/removed"), { recursive: true });
   await writeFile(join(root, "themes/cassidy-dark-color-theme-removed.json"), "stale");
   await assert.rejects(buildProdThemes({ root }), /Stale generated outputs.*theme-removed.json/);
   assert.equal(await readFile(join(root, "docs/palettes/archive/old.md"), "utf8"), "Historical palette\n");
@@ -493,11 +495,11 @@ test("palette-only builds all prod reports without metadata, variables, mappings
   /** Temporary source project root for this test scenario. */
   const root = await createBuildProject(t);
 
-  await mkdir(join(root, "src/prod/themes/inherited"));
+  await mkdir(join(root, "src/themes/prod/inherited"));
   await rm(join(root, "package.json"));
-  await rm(join(root, "src/prod/themes/default/metadata.jsonc"));
-  await rm(join(root, "src/prod/themes/default/colors/variables.jsonc"));
-  await rm(join(root, "src/prod/themes/default/tokens"), { recursive: true });
+  await rm(join(root, "src/themes/prod/default/metadata.jsonc"));
+  await rm(join(root, "src/themes/prod/default/colors/variables.jsonc"));
+  await rm(join(root, "src/themes/prod/default/tokens"), { recursive: true });
 
   /** Build summary inspected for target palettes and changed artifact paths. */
   const result = await buildProdThemes({ root, paletteOnly: true });

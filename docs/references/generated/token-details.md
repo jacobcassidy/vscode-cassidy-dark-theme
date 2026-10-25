@@ -52,7 +52,7 @@ Here, `ui.errorForeground` reads `diagnostic.error.foreground`, which reads the 
 
 The build resolves this chain into the final hex color. Unknown references and cycles fail, including in unused variables. An alias keeps its referenced opacity unless it supplies `alpha`, which replaces that opacity rather than multiplying it. Literal hex colors require a separate `reason` field.
 
-The prod default defines all six source inputs under `src/prod/themes/default/`. Other prod and dev themes may omit files to inherit those default files; supplied files replace them in full. File fallback is separate from both variable alias resolution and the upstream relationships documented below. See the [development guide](development-guide.md#adding-prod-or-dev-themes) for the complete rules.
+The prod default defines all six source inputs under `src/themes/prod/default/`. Other prod and dev themes may omit files to inherit those default files; supplied files replace them in full. File fallback is separate from both variable alias resolution and the upstream relationships documented below. See the [development guide](development-guide.md#adding-prod-or-dev-themes) for the complete rules.
 
 ## Fields
 

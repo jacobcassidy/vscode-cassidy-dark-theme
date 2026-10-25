@@ -114,12 +114,12 @@ export async function createBuildProject(t) {
   const root = await mkdtemp(join(tmpdir(), "cassidy-build-"));
 
   t.after(() => rm(root, { recursive: true, force: true }));
-  await mkdir(join(root, "src/prod/themes/default/colors"), { recursive: true });
-  await writeFile(join(root, "src/prod/themes/default/colors/palette.jsonc"), JSON.stringify(createPaletteConfig()));
+  await mkdir(join(root, "src/themes/prod/default/colors"), { recursive: true });
+  await writeFile(join(root, "src/themes/prod/default/colors/palette.jsonc"), JSON.stringify(createPaletteConfig()));
 
-  await writeFile(join(root, "src/prod/themes/default/colors/variables.jsonc"), JSON.stringify(createVariables()));
+  await writeFile(join(root, "src/themes/prod/default/colors/variables.jsonc"), JSON.stringify(createVariables()));
 
-  await writeThemeParts(join(root, "src/prod/themes/default"), themeTemplate);
+  await writeThemeParts(join(root, "src/themes/prod/default"), themeTemplate);
   await writeFile(
     join(root, "package.json"),
     JSON.stringify({

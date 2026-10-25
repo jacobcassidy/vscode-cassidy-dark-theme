@@ -10,13 +10,13 @@ Run the commands in this guide from the repository root unless stated otherwise.
 | ----------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
 | [`package.json`](../../../package.json)                                 | Prod extension manifest, dependencies, commands, and generated prod theme registrations.                           |
 | [`package-lock.json`](../../../package-lock.json)                       | Locked development dependencies.                                                                                   |
-| [`src/prod/themes/default/`](../../../src/prod/themes/default/)         | The six required default input files.                                                                              |
-| [`src/prod/themes/`](../../../src/prod/themes/)                         | Prod targets; additional named themes can omit input files to inherit the default.                                 |
-| [`src/dev/themes/`](../../../src/dev/themes/)                           | Dev targets, including `test` and `v1.3`, with the same input layout and default fallback.                         |
+| [`src/themes/prod/default/`](../../../src/themes/prod/default/)         | The six required default input files.                                                                              |
+| [`src/themes/prod/`](../../../src/themes/prod/)                         | Prod targets; additional named themes can omit input files to inherit the default.                                 |
+| [`src/themes/dev/`](../../../src/themes/dev/)                           | Dev targets, including `test` and `v1.3`, with the same input layout and default fallback.                         |
 | [`themes/`](../../../themes/)                                           | Committed generated prod themes shipped in the VSIX.                                                               |
 | [`dev/themes/`](../../../dev/themes/)                                   | Committed generated dev previews.                                                                                  |
 | [`dev/snapshots/`](../../../dev/snapshots/)                             | Historical comparison themes, excluded from regeneration.                                                          |
-| [`docs/palettes/generated-reports/`](../../palettes/generated-reports/) | Generated JSON, Markdown, and SVG palette reports grouped by theme directory name.                                 |
+| [`docs/palettes/generated-reports/`](../../palettes/generated-reports/) | Generated JSON, Markdown, and SVG palette reports grouped by source group and theme directory name.                |
 | [`docs/palettes/archive/`](../../palettes/archive/)                     | Preserved palette documentation and previous versions.                                                             |
 | [`docs/references/generated/`](./)                                      | Development guides and reference material.                                                                         |
 | [`docs/plans/`](../../plans/)                                           | Implementation plans, including the completed [restructuring plan 1b](../../plans/archive/restructure-1b-plan.md). |
@@ -101,7 +101,7 @@ For safety, the sync script refuses to use a symlink for the dev extension direc
 npm run watch
 ```
 
-[`scripts/themes/watch.js`](../../../scripts/themes/watch.js) builds prod themes, builds dev themes, and syncs the dev extension on startup. It then watches `src/prod/themes/` and `src/dev/themes/` recursively and repeats those steps when you save source changes. You do not need to run `dev:sync` first. Prod defaults are watched because dev themes inherit omitted input files. Creating a dev source tree after startup is supported.
+[`scripts/themes/watch.js`](../../../scripts/themes/watch.js) builds prod themes, builds dev themes, and syncs the dev extension on startup. It then watches `src/themes/prod/` and `src/themes/dev/` recursively and repeats those steps when you save source changes. You do not need to run `dev:sync` first. Prod defaults are watched because dev themes inherit omitted input files. Creating a dev source tree after startup is supported.
 
 After the initial setup, run **Developer: Reload Window** and select a **Cassidy Dark Dev** theme. Saving source inputs rebuilds the generated JSON; the extension's `_watch: true` entries tell VS Code to reload the selected theme's colors. The command prints another reload reminder when theme registrations change, such as after adding a theme or changing its metadata name or type. Reload VS Code to pick up those registration changes.
 
@@ -165,7 +165,7 @@ Vue and Svelte samples require their respective VS Code language extensions for 
 
 ### Editing theme inputs
 
-The prod default lives under `src/prod/themes/default/` and requires these six files:
+The prod default lives under `src/themes/prod/default/` and requires these six files:
 
 | Relative input path      | Purpose                                                                                                                                                       |
 | ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -182,16 +182,16 @@ Variables resolve by their nested paths. A `color` of `palette.yellow.400` selec
 
 ### Adding prod or dev themes
 
-Add a directory under `src/prod/themes/<name>/` for a shipped theme, or `src/dev/themes/<name>/` for a dev preview. Theme directory names must be lowercase, begin with a letter, and use only letters, digits, periods, and hyphens. Consecutive periods and trailing periods are rejected. Names must be unique across both source groups because they share the report destination.
+Add a directory under `src/themes/prod/<name>/` for a shipped theme, or `src/themes/dev/<name>/` for a dev preview. Theme directory names must be lowercase, begin with a letter, and use only letters, digits, periods, and hyphens. Consecutive periods and trailing periods are rejected. Names must be unique across both source groups even though reports are grouped separately.
 
 Each of the six files is optional outside the prod default. An omitted file uses the file at the same relative path in the default directory. A supplied file replaces that entire file; individual missing keys are not merged or inherited. Empty or invalid supplied files fail validation. Missing or invalid default inputs also fail, even when building dev themes. There is no inheritance chain through other named themes.
 
 For example, to try a different yellow palette locally:
 
-1. Create `src/dev/themes/yellow-test/colors/`.
+1. Create `src/themes/dev/yellow-test/colors/`.
 2. Copy the complete default `colors/palette.jsonc` into it and change the yellow parameters.
 3. Omit `colors/variables.jsonc`, `metadata.jsonc`, and the `tokens/` files to inherit the default versions.
-4. Run `npm run build:dev` to generate `dev/themes/cassidy-dark-color-theme-yellow-test.json` and `docs/palettes/generated-reports/yellow-test/palette.{json,md,svg}`.
+4. Run `npm run build:dev` to generate `dev/themes/cassidy-dark-color-theme-yellow-test.json` and `docs/palettes/generated-reports/dev/yellow-test/palette.{json,md,svg}`.
 5. Run `npm run dev:sync` and select **Cassidy Dark Dev (Yellow Test)** in VS Code.
 
 The inherited variable and token mapping files resolve against the dev palette. If you supply a variable file instead, include every variable required by the selected mappings and other variables. Copy the complete default file as a starting point. Changes to a default file affect every target inheriting it.
@@ -202,7 +202,7 @@ An existing empty target directory can inherit every file. To track that theme i
 
 `npm run build:palette` builds reports for all prod targets without requiring variables, metadata, token mappings, or the manifest. `npm run build:prod` generates all prod themes and reports and synchronizes `package.json` theme contributions while preserving unrelated fields. `npm run build:dev` builds all dev themes and their reports without changing prod outputs or the source manifest. `npm run build` runs `build:prod` followed by `build:dev`; if the prod build fails, the dev build does not run.
 
-Reports always live under `docs/palettes/generated-reports/<theme name>/` as `palette.json`, `palette.md`, and `palette.svg`. JSON records measurements and source provenance; Markdown embeds the sibling swatch sheet. A target inheriting the default palette still gets its own reports. Reports and archived documents are never used to discover source themes. Historical themes under `dev/snapshots/` and documentation under `docs/palettes/archive/` are excluded from regeneration.
+Reports always live under `docs/palettes/generated-reports/<group>/<theme name>/` as `palette.json`, `palette.md`, and `palette.svg`. JSON records measurements and source provenance; Markdown embeds the sibling swatch sheet. A target inheriting the default palette still gets its own reports. Reports and archived documents are never used to discover source themes. Historical themes under `dev/snapshots/` and documentation under `docs/palettes/archive/` are excluded from regeneration.
 
 The builder rejects duplicate JSONC keys, invalid settings, malformed details, missing references, alias cycles, and placeholders outside color positions. Details remain documentation only. Comments inside mapping sections and scope order survive generation. All selected targets are validated and formatted before any destination is replaced. Builds write only changed files. Commit source and generated changes together; no automatic watch process runs.
 
