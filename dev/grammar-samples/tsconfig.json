@@ -7,11 +7,13 @@
     "noImplicitOverride": true,
     "allowJs": true,
     "checkJs": false,
+    "jsx": "preserve",
     "noEmit": true,
     "skipLibCheck": true,
     "types": []
   },
   "include": [
-    "typescript-grammar-sample.ts"
+    "typescript.ts",
+    "tsx.tsx"
   ]
 }

@@ -26,7 +26,7 @@ If you come across any issues, please feel free to [report them here](https://gi
 
 See the [development guide](docs/references/generated/development-guide.md) for project structure, dev previewing, validation, packaging, and releases.
 
-Use the [syntax samples](docs/references/generated/development-guide.md#syntax-samples) in `dev/samples/` to inspect highlighting across programming, markup, stylesheet, configuration, and log formats.
+Use the [syntax samples](docs/references/generated/development-guide.md#syntax-samples) in `dev/grammar-samples/` to inspect highlighting across programming, markup, stylesheet, configuration, and log formats.
 
 See the [color system proposal](docs/references/generated/color-system-proposal.md) for suggested palette rules, semantic color roles, and contrast checks based on the v1.3 palette.
 

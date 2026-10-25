@@ -197,7 +197,7 @@ pub fn literals() {
     let registry = palette!["accent" => 0x92c1fd, "surface" => 0x242424,];
     let qualified = <Color as Default>::default();
     let explicit_generic = std::iter::empty::<Color>().collect::<Vec<_>>();
-    let source = include_str!("rust-grammar-sample.rs");
+    let source = include_str!("rust.rs");
     let location = (file!(), line!(), column!(), module_path!());
     let platform = cfg!(target_pointer_width = "64");
 }

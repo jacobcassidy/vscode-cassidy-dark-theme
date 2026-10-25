@@ -30,3 +30,6 @@
 
 # IGNORE MINIFIED FILES
 **/**.min.js
+
+# Svelte grammar fixture: no Svelte Prettier plugin is installed in this project.
+dev/grammar-samples/svelte.svelte

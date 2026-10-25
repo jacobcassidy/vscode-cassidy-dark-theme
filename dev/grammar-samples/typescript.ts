@@ -13,9 +13,9 @@
  * @remarks This source deliberately mixes current and legacy declaration forms.
  */
 
-import JavaScriptRecord, { Priority as JavaScriptPriority, type BaseRecord } from "./javascript-grammar-sample.js";
-import * as JavaScriptSample from "./javascript-grammar-sample.js";
-import type { HighlightRecord as ImportedRecord } from "./javascript-grammar-sample.js";
+import JavaScriptRecord, { Priority as JavaScriptPriority, type BaseRecord } from "./javascript.js";
+import * as JavaScriptSample from "./javascript.js";
+import type { HighlightRecord as ImportedRecord } from "./javascript.js";
 
 // Comments: TODO inspect interface, readonly, `${interpolation}`, and @decorators.
 /* A block comment: public field!: string; and <Component /> remain comment text. */
@@ -108,9 +108,9 @@ export type SwatchKey = keyof Swatch;
 
 export type SwatchValue = Swatch[keyof Swatch];
 
-export type ImportedModule = typeof import("./javascript-grammar-sample.js");
+export type ImportedModule = typeof import("./javascript.js");
 
-export type ImportedClass = import("./javascript-grammar-sample.js").HighlightRecord;
+export type ImportedClass = import("./javascript.js").HighlightRecord;
 
 export type JavaScriptPriorityValue = (typeof JavaScriptPriority)[keyof typeof JavaScriptPriority];
 
@@ -422,7 +422,7 @@ export interface PaletteRenderer {
   sampleNote?: string;
 }
 
-declare module "./javascript-grammar-sample.js" {
+declare module "./javascript.js" {
   interface HighlightRecord {
     sampleNote?: string;
   }
@@ -605,11 +605,11 @@ export function runtimeExpressions(input: unknown, options: Partial<PaletteOptio
 }
 
 // Default exports, named re-exports, type-only re-exports, and namespace re-exports.
-export { repeat as repeatJavaScriptValue } from "./javascript-grammar-sample.js";
+export { repeat as repeatJavaScriptValue } from "./javascript.js";
 
-export type { HighlightRecord as JavaScriptRecordType } from "./javascript-grammar-sample.js";
+export type { HighlightRecord as JavaScriptRecordType } from "./javascript.js";
 
-export * as JavaScriptExamples from "./javascript-grammar-sample.js";
+export * as JavaScriptExamples from "./javascript.js";
 
 export const moduleReady: boolean = await Promise.resolve(true);
 

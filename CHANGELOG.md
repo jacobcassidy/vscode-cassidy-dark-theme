@@ -6,6 +6,7 @@ All notable changes to this project are documented in this file.
 
 ### Added
 
+- Added JSX, TSX, Bash, Zsh, SQL, C, C++, C#, Vue, and Svelte grammar samples with mixed-language syntax, shell expansions, queries, preprocessor directives, templates, attributes, and framework-specific constructs.
 - Added `npm run watch` to rebuild prod and dev themes and sync the dev preview extension on source changes, with debounced saves, queued builds, error recovery, and graceful shutdown.
 
 - Added Go and Rust grammar samples covering generics, literals, declarations, control flow, Go concurrency and iterators, and Rust lifetimes, traits, macros, patterns, and async syntax.
@@ -24,6 +25,7 @@ All notable changes to this project are documented in this file.
 
 ### Changed
 
+- Renamed `dev/samples/` to `dev/grammar-samples/`, shortened sample filenames to language names, and updated imports, documentation, and the samples-only TypeScript configuration.
 - Standardized theme naming on prod/dev, moved authoring sources to `src/prod/` and `src/dev/`, renamed dev extension scripts and tests, and clarified build and sync function names.
 
 - Split tests by color, palette, variable, build, validation, and local extension responsibilities; moved reusable temporary project setup into `test-projects.js` and limited test discovery to `*.test.js` files.
@@ -49,7 +51,7 @@ All notable changes to this project are documented in this file.
 - Expanded the PHP grammar sample with PHPDoc, imports, attributes, enums, traits, literals, interpolation, operators, callables, control flow, generators, and embedded HTML while preserving its original property type probes.
 - Renamed formatting and lint commands, and added `npm run lint` to run Markdown and JavaScript lint checks.
 - Moved the development extension reload reminder into `dev:sync`, removed the redundant `dev:setup` command, and removed the legacy `setup:dev`, `sync:dev-pkgJSON`, and `publish:azure` aliases. Use `dev:sync` and `release:queue`.
-- Grouped development and release scripts by purpose and moved highlighting samples into `dev/samples`, including the renamed PHP fixture.
+- Grouped development and release scripts by purpose and moved highlighting samples into `dev/grammar-samples`, including the renamed PHP fixture.
 - Made `npm run check` run formatting, Markdown linting, JavaScript linting, theme validation, and tests before pipeline packaging.
 - Curated the palette development reference and updated the development guide.
 - Removed installation metadata from the extension manifest and aligned the lockfile version.

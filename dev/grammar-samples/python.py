@@ -447,7 +447,7 @@ builtins_sample = {
     "attributes": (getattr(Palette, "category"), hasattr(Palette, "enabled")),
     "encoding": (ord("A"), chr(0x41), hex(255), bin(10), oct(8)),
     "module": (__name__, __doc__, __debug__),
-    "path": Path("samples") / "python-grammar-sample.py",
+    "path": Path("grammar-samples") / "python.py",
 }
 
 if __name__ == "__main__":

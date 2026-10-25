@@ -51,7 +51,7 @@ This is the next source line.
 [Inline link](https://example.com/path?mode=dark&count=2#tokens "Double-quoted title")
 
 <!-- prettier-ignore -->
-[Relative link](./html-grammar-sample.html 'Single-quoted title')
+[Relative link](./html.html 'Single-quoted title')
 
 <!-- prettier-ignore -->
 [Parenthesized title](https://example.com/ (A parenthesized title))
