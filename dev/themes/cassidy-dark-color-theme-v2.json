@@ -4,7 +4,7 @@
   "name": "Cassidy Dark",
   "type": "dark",
   "author": "Jacob Cassidy",
-  "version": "1.3",
+  "version": "2.0.0",
   "colors": {
     "actionBar.toggledBackground": "#f0f", // [inherits` inputOption.activeBackground` || `focusBorder`] | example: backward P button in diff editor toolbar
     "activeSessionView.background": "#f0f",
