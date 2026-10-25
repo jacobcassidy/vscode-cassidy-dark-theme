@@ -129,12 +129,17 @@ export function watchThemes(
       /** Total generated files changed across both build groups. */
       const changed = prod.changed.length + dev.reduce((sum, target) => sum + target.changed.length, 0);
 
+      /** Changed generated paths already expressed relative to the repository root. */
+      const changedFiles = [...prod.changed, ...dev.flatMap((target) => target.changed)];
+
       logger.log(
         styled(
           `[watch] Built ${prod.targets.length} prod and ${dev.length} dev themes; ${changed} generated files updated.`,
           styles.green,
         ),
       );
+
+      for (const path of changedFiles) logger.log(`[watch]   ${path}`);
 
       if (themeRegistrations(previous) !== themeRegistrations(current)) {
         logger.log(
