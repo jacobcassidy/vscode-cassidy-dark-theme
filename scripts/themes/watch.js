@@ -12,6 +12,20 @@ import { buildDevThemes, buildProdThemes } from "./build.js";
 import { syncDevExtension } from "../dev-extension/sync.js";
 import { readOptional } from "../lib/theme-source-inputs.js";
 
+/** ANSI styles used to distinguish watcher status messages in terminal output. */
+const styles = {
+  yellow: "\u001b[33m",
+  green: "\u001b[32m",
+  orange: "\u001b[38;5;208m",
+  dim: "\u001b[2m",
+  reset: "\u001b[0m",
+};
+
+/** Apply an ANSI style to a watcher message. */
+function styled(message, style) {
+  return `${style}${message}${styles.reset}`;
+}
+
 /**
  * Extract a stable registration snapshot, returning undefined for absent or invalid manifests.
  *
@@ -93,7 +107,7 @@ export function watchThemes(
   /** Run one prod/dev build and preview sync, reporting failures without stopping future retries. */
   async function build() {
     pending = false;
-    logger.log("[watch] Building prod and dev themes...");
+    logger.log(styled("[watch] Building prod and dev themes...", styles.green));
 
     try {
       /** Production build summary for this watcher cycle. */
@@ -122,7 +136,10 @@ export function watchThemes(
         logger.log("[watch] Theme registrations changed. Run Developer: Reload Window, then select a Dev theme.");
       }
     } catch (error) {
-      logger.error(`[watch] ${error.message}\n[watch] Waiting for the next source change to retry.`);
+      const message = `[watch] ${error.message}`;
+      const diagnostic = /stale/i.test(error.message) ? styled(message, styles.orange) : message;
+
+      logger.error(`${diagnostic}\n${styled("[watch] Waiting for the next source change to retry.", styles.dim)}`);
     }
   }
 
@@ -168,7 +185,7 @@ export function watchThemes(
     void close();
   });
 
-  logger.log("[watch] Watching src/themes/prod/ and src/themes/dev/. Press Ctrl+C to stop.");
+  logger.log(styled("[watch] Watching src/themes/prod/ and src/themes/dev/. Press Ctrl+C to stop.", styles.yellow));
   startBuild();
 
   return { ready: running, close, closed };
