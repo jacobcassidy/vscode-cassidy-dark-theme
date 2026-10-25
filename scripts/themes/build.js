@@ -778,8 +778,6 @@ if (import.meta.main) {
       throw new Error("Usage: node scripts/themes/build.js [--check] [--palette-only | --dev]");
     }
 
-    console.log();
-
     if (flags.includes("--dev")) {
       const check = flags.includes("--check");
 
@@ -820,6 +818,8 @@ if (import.meta.main) {
 
       for (const path of result.changed) console.log(styled(`  - ${path}`, styles.dim));
     }
+
+    console.log();
   } catch (error) {
     console.error(styled(error.message, styles.red));
     process.exitCode = 1;
