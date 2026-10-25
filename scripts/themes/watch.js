@@ -139,7 +139,7 @@ export function watchThemes(
         ),
       );
 
-      for (const path of changedFiles) logger.log(`[watch]   ${path}`);
+      for (const path of changedFiles) logger.log(styled(`[watch]   ${path}`, styles.dim));
 
       if (themeRegistrations(previous) !== themeRegistrations(current)) {
         logger.log(
