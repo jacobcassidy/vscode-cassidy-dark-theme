@@ -1,0 +1,177 @@
+@charset "UTF-8";
+// SCSS highlighting sample; inspect as source, compilation is unnecessary.
+// Uses built-in Sass modules; the CSS fixture contains additional CSS probes.
+@use "sass:color";
+@use "sass:list";
+@use "sass:map";
+@use "sass:math";
+@use "sass:meta";
+@use "sass:selector";
+@use "sass:string";
+
+/* Block comments remain in expanded CSS; // comments are Sass-only. */
+/*! A loud comment survives compressed output. */
+$prefix: "sample" !default;
+$accent: #92c1fd !default;
+$gap: 1rem;
+$enabled: true;
+$missing: null;
+$families: "Sample Sans", sans-serif;
+$sizes: (
+  small: 0.5rem,
+  medium: 1rem,
+  large: 2rem,
+);
+$palette: (
+  accent: $accent,
+  surface: #242424,
+  nested: (
+    text: #f8f8f8,
+  ),
+);
+$selector: selector.append(".card", "__title");
+$escaped: string.quote('Quotes "and" interpolation #{$prefix}');
+
+/// Returns a fluid spacing value.
+/// @param {Number} $value - Unitless scale multiplier.
+/// @return {Number} Rem-based spacing.
+@function spacing($value, $base: $gap) {
+  @if not math.is-unitless($value) {
+    @error "Expected a unitless multiplier, received #{$value}";
+  }
+
+  @return $value * $base;
+}
+
+@function contrast-label($background) {
+  @if color.channel($background, "lightness", $space: hsl) > 60% {
+    @return #242424;
+  } @else {
+    @return #f8f8f8;
+  }
+}
+
+/// Variadic arguments, keyword defaults, and nested content.
+@mixin surface($background: $accent, $radius: 0.5rem, $shadows...) {
+  background-color: $background;
+  color: contrast-label($background);
+  border-radius: $radius;
+
+  @if list.length($shadows) > 0 {
+    box-shadow: $shadows;
+  }
+
+  @content ($background);
+}
+
+@mixin breakpoint($width) {
+  @media (min-width: $width) {
+    @content;
+  }
+}
+
+%focus-ring {
+  outline: 2px solid $accent;
+  outline-offset: 2px;
+}
+
+.#{$prefix}-card {
+  @include surface($accent, 0.5rem, 0 2px 8px #0004) using ($background) {
+    border: 1px solid color.adjust($background, $lightness: -10%);
+  }
+
+  --accent: #{$accent};
+  --spacing: #{spacing(2)};
+  padding: spacing(math.div(3, 2));
+  width: calc(100% - #{$gap * 2});
+  font: {
+    family: $families;
+    size: 1rem;
+    weight: 600;
+  }
+
+  &__title {
+    color: map.get($palette, nested, text);
+  }
+
+  &:hover,
+  &:focus-visible {
+    @extend %focus-ring;
+    background: color.mix(white, $accent, $weight: 20%);
+  }
+
+  [dir="rtl"] & {
+    text-align: right;
+  }
+
+  > a[href^="https"]::after {
+    content: " #{$prefix} \2197";
+  }
+
+  @include breakpoint(40em) {
+    display: grid;
+    gap: $gap;
+  }
+
+  @at-root .#{$prefix}-overlay {
+    position: fixed;
+    inset: 0;
+  }
+}
+
+@each $name, $size in $sizes {
+  .gap-#{$name} {
+    gap: $size;
+  }
+}
+
+@each $name, $foreground, $background in (info, #92c1fd, #242424), (error, #f4877f, #333) {
+  .status-#{$name} {
+    color: $foreground;
+    background: $background;
+  }
+}
+
+@for $index from 1 through 4 {
+  .column-#{$index} {
+    width: math.percentage(math.div($index, 4));
+    z-index: $index;
+  }
+}
+
+$step: 3;
+
+@while $step > 0 {
+  .step-#{$step} {
+    margin-inline: $step * $gap;
+  }
+
+  $step: $step - 1;
+}
+
+.operators {
+  $count: 2 + 3 * 4 - math.div(6, 2);
+  $matches: $count >= 2 and $count != 0 or not $enabled;
+  $remainder: $count % 3;
+  content: string.to-upper-case($prefix) + " tokens";
+  margin: list.nth((0, $gap, 2rem), 2);
+  padding: ($remainder + 1) * 1px;
+  opacity: math.clamp(0, 0.75, 1);
+
+  @if $matches and $missing == null {
+    display: block;
+  }
+}
+
+// Diagnostics are deliberate syntax probes; this file is for source inspection.
+@debug meta.type-of($palette);
+@warn "Sample warning for #{$prefix}";
+
+@keyframes #{$prefix}-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

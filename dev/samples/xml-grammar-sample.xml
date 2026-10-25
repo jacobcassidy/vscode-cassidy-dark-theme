@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!-- XML highlighting sample; inspect as source with Cassidy Dark Dev.
+     Internal DTD, namespaces, attributes, entities, CDATA, and processing instructions.
+     Stylesheet and schema URIs are illustrative; external resolution is unnecessary. -->
+<?xml-stylesheet type="text/xsl" href="https://example.com/theme.xsl"?>
+<!DOCTYPE gallery [
+  <!ELEMENT gallery ANY>
+  <!ELEMENT swatch (#PCDATA)>
+  <!ATTLIST swatch id ID #REQUIRED enabled (true|false) "true">
+  <!ENTITY theme "Cassidy Dark">
+  <!ENTITY copyright "&#169; 2026">
+  <!ENTITY % extraEntities '<!ENTITY accent "#92c1fd">'>
+  %extraEntities;
+  <!NOTATION png SYSTEM "image/png">
+]>
+<gallery
+  xmlns="urn:example:theme"
+  xmlns:theme="urn:example:theme:tokens"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:svg="http://www.w3.org/2000/svg"
+  xmlns:xlink="http://www.w3.org/1999/xlink"
+  xsi:schemaLocation="urn:example:theme https://example.com/theme.xsd"
+  xml:lang="en"
+  xml:base="https://example.com/samples/"
+  name="Cassidy Dark"
+  version='1.0'
+>
+  <!-- TODO: inspect delimiters, namespace prefixes, names, values, and text. -->
+  <title>&theme; &#8212; XML entity gallery</title>
+  <description>Use XML entities &amp; &lt; &gt; &quot; &apos; and numeric references &#9733; &#x1F680;.</description>
+  <copyright>&copyright;</copyright>
+  <swatch id="accent" enabled="true">&accent;</swatch>
+  <swatch id='surface' enabled='false'>#242424</swatch>
+  <theme:tokens>
+    <theme:token theme:role="keyword" color="#cfabf9" priority="42" enabled="true" />
+    <theme:token theme:role='string' color='#f6e3b3' priority='-1.5e2' enabled='false'></theme:token>
+    <theme:token theme:role="empty" value="" xsi:nil="true" />
+    <theme:token theme:role="escaped" value="Quotes &quot;sample&quot; &amp; apostrophe &apos;" />
+  </theme:tokens>
+  <mixed>Text before <emphasis>nested text</emphasis>, text after, and Unicode café 日本語 🚀.</mixed>
+  <preserved xml:space="preserve">  Leading spaces
+    and line breaks remain text.
+  </preserved>
+  <raw><![CDATA[
+    <not-an-element key="value"> &not-an-entity;
+    const pattern = /[A-Z]+\d?/g;
+    if (left < right && enabled) { color = "#92c1fd"; }
+    /* CDATA keeps markup characters literal. */
+  ]]></raw>
+  <?sample action="inspect" count='42'?>
+  <svg:svg viewBox="0 0 100 40" width="100" height="40">
+    <svg:defs>
+      <svg:linearGradient id="gradient">
+        <svg:stop offset="0%" stop-color="#92c1fd" />
+        <svg:stop offset="100%" stop-color="#cfabf9" />
+      </svg:linearGradient>
+    </svg:defs>
+    <svg:rect id="rectangle" x="0" y="0" width="100" height="40" fill="url(#gradient)" />
+    <svg:use xlink:href="#rectangle" opacity="0.5" />
+    <svg:text x="10" y="25">Namespaced SVG text</svg:text>
+  </svg:svg>
+  <local xmlns="urn:example:local">
+    <child>Default namespace changes in this subtree.</child>
+    <plain xmlns="">This element has no namespace.</plain>
+  </local>
+  <empty />
+  <explicit-empty></explicit-empty>
+</gallery>

@@ -1,0 +1,224 @@
+<!doctype html>
+<!--
+  HTML highlighting sample; inspect as source in VS Code with Cassidy Dark Dev.
+  Covers tags, attributes, entities, forms, templates, SVG, MathML, CSS, and JS.
+  External URLs are illustrative; opening this file in a browser is unnecessary.
+-->
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content='Quotes "like this" &amp; character references' />
+    <title>HTML &mdash; token gallery &#9733; &#x1F680;</title>
+    <base href="https://example.com/samples/" target="_self" />
+    <link rel="stylesheet" href="./css-grammar-sample.css" media="screen" crossorigin="anonymous" />
+    <style>
+      /* Embedded CSS: selectors, properties, custom properties, and functions. */
+      :root {
+        --accent: #92c1fd;
+      }
+
+      main > .card[data-state="ready"]:hover {
+        color: var(--accent);
+        width: calc(100% - 2rem);
+      }
+    </style>
+    <script type="module">
+      // Embedded JavaScript, including template interpolation and optional access.
+      const settings = { enabled: true, limit: 0xff };
+      const label = `Sample ${settings?.limit ?? 0}`;
+
+      document.documentElement.dataset.label = label;
+    </script>
+    <script src="https://example.com/theme.js" async defer crossorigin="anonymous"></script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "CreativeWork",
+        "name": "Token gallery",
+        "isAccessibleForFree": true
+      }
+    </script>
+  </head>
+  <body id="top" class="gallery dark" data-state="ready" data-count="42">
+    <!-- TODO: inspect comment punctuation, <tags>, and attribute="values". -->
+    <header>
+      <h1 title='A "single-quoted" attribute'>HTML token gallery</h1>
+      <nav aria-label="Sample navigation">
+        <a href="#forms" aria-current="page">Forms</a>
+        <a href="https://example.com/?mode=dark&amp;page=2#preview" rel="noopener" target="_blank">External link</a>
+        <a href="mailto:reader@example.com">Email</a>
+        <a href="./sample.txt" download="tokens.txt">Download</a>
+      </nav>
+    </header>
+    <main>
+      <article class="card" data-state="ready" itemscope itemtype="https://schema.org/Article">
+        <h2 itemprop="headline">Text &amp; inline elements</h2>
+        <p>
+          Plain text, <strong>strong</strong>, <em>emphasis</em>, <b>bold</b>, <i>italic</i>, <u>underline</u>,
+          <s>removed</s>, <mark>marked</mark>, <small>small</small>, H<sub>2</sub>O, x<sup>2</sup>, and&nbsp;entities.
+          <abbr title="HyperText Markup Language">HTML</abbr>, <code>&lt;div&gt;</code>, <kbd>Ctrl</kbd>,
+          <samp>ready</samp>, <var>count</var>, <q cite="https://example.com/quote">quoted text</q>.
+        </p>
+        <p>
+          <del datetime="2026-01-01">Old text</del> <ins datetime="2026-01-02">New text</ins><br />Next line<wbr />break.
+        </p>
+        <time datetime="2026-10-25T12:34:56Z">25 October 2026</time>
+        <!-- prettier-ignore -->
+        <p title=unquoted hidden>Unquoted attribute and boolean attribute probes.</p>
+        <p style="color: #92c1fd; margin: calc(1rem + 2px)">Inline CSS attribute.</p>
+        <data value="42">Forty-two</data>
+        <bdi>العربية</bdi>
+        <bdo dir="rtl">direction</bdo>
+        <ruby>漢<rp>(</rp><rt>かん</rt><rp>)</rp></ruby>
+        <pre><code>&lt;tag key=&quot;value&quot;&gt; &amp; &#65; &#x42;</code></pre>
+        <blockquote cite="https://example.com/source"><p>Block quotation.</p></blockquote>
+        <hr />
+        <ul>
+          <li>Unordered item</li>
+          <li>Another item</li>
+        </ul>
+        <ol start="3" reversed>
+          <li value="5">Numbered item</li>
+        </ol>
+        <dl>
+          <dt>Term</dt>
+          <dd>Definition</dd>
+        </dl>
+      </article>
+      <section id="forms" aria-labelledby="form-title">
+        <h2 id="form-title">Form controls</h2>
+        <form action="https://example.com/preview" method="get" autocomplete="off">
+          <fieldset>
+            <legend>Theme settings</legend>
+            <label for="theme-name">Name</label>
+            <input
+              id="theme-name"
+              name="theme"
+              type="text"
+              value="Cassidy"
+              placeholder="Theme name"
+              required
+              autofocus
+            />
+            <input name="email" type="email" readonly value="reader@example.com" />
+            <input name="pattern" type="text" pattern="[A-Za-z]{3,16}" minlength="3" maxlength="16" />
+            <input name="count" type="number" min="0" max="100" step="0.5" value="42" />
+            <input name="accent" type="color" value="#92c1fd" />
+            <input name="date" type="date" value="2026-10-25" />
+            <input name="opacity" type="range" min="0" max="1" step="0.1" />
+            <input name="enabled" type="checkbox" checked />
+            <input name="mode" type="radio" value="dark" checked />
+            <input name="asset" type="file" accept="image/*" multiple disabled />
+            <select name="language">
+              <optgroup label="Markup">
+                <option selected>HTML</option>
+                <option>XML</option>
+              </optgroup>
+            </select>
+            <textarea name="notes" rows="3" cols="40" spellcheck="true">Text &amp; entities</textarea>
+            <input name="suggestion" list="languages" />
+            <datalist id="languages">
+              <option value="HTML"></option>
+              <option value="CSS"></option>
+            </datalist>
+            <output name="total" for="theme-name">42</output>
+            <meter min="0" max="100" low="25" high="75" optimum="90" value="80">80%</meter>
+            <progress max="100" value="60">60%</progress>
+            <button type="submit" formaction="https://example.com/inspect">Preview</button>
+            <button type="button" onclick="this.dataset.clicked = 'true'">Inline JavaScript handler</button>
+          </fieldset>
+        </form>
+      </section>
+      <table>
+        <caption>
+          Token families
+        </caption>
+        <colgroup>
+          <col span="2" />
+        </colgroup>
+        <thead>
+          <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Value</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">Accent</th>
+            <td>#92c1fd</td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td colspan="2">One swatch</td>
+          </tr>
+        </tfoot>
+      </table>
+      <figure>
+        <picture>
+          <source
+            srcset="https://example.com/wide.webp 1x, https://example.com/wide@2x.webp 2x"
+            media="(min-width: 40em)"
+            type="image/webp"
+          />
+          <img
+            src="https://example.com/swatch.png"
+            alt="Blue swatch"
+            width="80"
+            height="40"
+            loading="lazy"
+            decoding="async"
+          />
+        </picture>
+        <figcaption>Responsive image attributes.</figcaption>
+      </figure>
+      <audio controls preload="none"><source src="https://example.com/tone.ogg" type="audio/ogg" /></audio>
+      <video controls muted loop playsinline poster="https://example.com/poster.png">
+        <source src="https://example.com/preview.webm" type="video/webm" />
+        <track kind="captions" src="https://example.com/captions.vtt" srclang="en" label="English" default />
+      </video>
+      <iframe title="Embedded preview" src="about:blank" sandbox="allow-scripts" loading="lazy"></iframe>
+      <details open>
+        <summary>Disclosure</summary>
+        <p>Expanded content.</p>
+      </details>
+      <dialog open>
+        <p>Dialog content.</p>
+        <button type="button">Close</button>
+      </dialog>
+      <div popover id="hint">Popover content</div>
+      <button type="button" popovertarget="hint">Show hint</button>
+      <template id="swatch-template"
+        ><sample-swatch color="#92c1fd"><span slot="label">Accent</span></sample-swatch></template
+      >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        xmlns:xlink="http://www.w3.org/1999/xlink"
+        viewBox="0 0 100 40"
+        role="img"
+      >
+        <title>Inline SVG</title>
+        <defs>
+          <linearGradient id="accent">
+            <stop offset="0%" stop-color="#92c1fd" />
+            <stop offset="100%" stop-color="#cfabf9" />
+          </linearGradient>
+        </defs>
+        <rect id="swatch" x="0" y="0" width="100" height="40" fill="url(#accent)" />
+        <use xlink:href="#swatch" opacity="0.5" />
+        <text x="10" y="25">SVG text</text>
+      </svg>
+      <math xmlns="http://www.w3.org/1998/Math/MathML"
+        ><mrow
+          ><mi>x</mi><mo>=</mo><mfrac><mn>1</mn><mn>2</mn></mfrac></mrow
+        ></math
+      >
+      <noscript>JavaScript is optional for inspecting this fixture.</noscript>
+    </main>
+    <footer>
+      <address>Sample author &copy; 2026</address>
+      <a href="#top">Back to top</a>
+    </footer>
+  </body>
+</html>

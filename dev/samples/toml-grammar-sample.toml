@@ -1,0 +1,97 @@
+# TOML 1.0 highlighting sample; inspect as source with Cassidy Dark Dev.
+# Keys, strings, number bases, dates, tables, inline tables, and arrays of tables.
+title = "Cassidy Dark"
+bare_key = "Underscores"
+bare-key = "Hyphens"
+1234 = "Numeric-looking bare key"
+"quoted.key" = "A dot inside a quoted key"
+'literal key' = 'A key with spaces'
+"" = "Empty key"
+"escaped\u0020key" = "Unicode escape in a key"
+enabled = true
+disabled = false
+
+[strings]
+basic = "Quotes \"text\", slash \\, tab \t, newline \n, return \r, backspace \b, form feed \f"
+unicode = "Escapes \u00A9 \U0001F680 and literal café 日本語"
+literal = 'C:\themes\sample.toml'
+empty = ""
+syntax = '# literal comment, [table], { key = value }, true, 42'
+multiline_basic = """
+First line
+Second line with \"quotes\" and \u2603.
+"""
+multiline_literal = '''
+Raw lines: \n \t \\ \u0041
+Regex: ^[A-Za-z_]\w*\s*[:=]\s*(.*)$
+'''
+continued = """
+  Whitespace after this backslash \
+  is trimmed, joining the lines.
+  """
+
+[numbers]
+zero = 0
+positive = +42
+negative = -42
+separated = 1_000_000
+hex = 0xFF_AA_00
+octal = 0o755
+binary = 0b1010_0101
+fraction = 3.141_592
+exponent = 6.022e23
+signed_exponent = -2.5E-4
+positive_exponent = 1e+6
+infinity = inf
+positive_infinity = +inf
+negative_infinity = -inf
+not_a_number = nan
+positive_nan = +nan
+negative_nan = -nan
+
+[dates]
+offset_utc = 2026-10-25T12:34:56Z
+offset_zone = 2026-10-25T19:34:56.123+07:00
+local_datetime = 2026-10-25T12:34:56.123
+space_separator = 2026-10-25 12:34:56Z
+local_date = 2026-10-25
+local_time = 12:34:56.123
+
+[collections]
+empty = []
+integers = [1, 2, 3]
+mixed = ["text", 42, true, 3.14]
+nested = [[1, 2], [3, 4]]
+multiline = [
+  "accent", # Inline comment.
+  "surface",
+]
+inline = { name = "accent", color = "#92c1fd", channels = { r = 146, g = 193, b = 253 } }
+empty_table = {}
+
+[theme.colors]
+accent = "#92c1fd"
+surface = "#242424"
+
+[theme."quoted.section".contrast]
+minimum = 4.5
+
+[dotted]
+tokens.keyword.color = "#cfabf9"
+tokens.string.color = "#f6e3b3"
+tokens."property.name".enabled = true
+
+[[swatches]]
+name = "accent"
+rgb = [146, 193, 253]
+
+[swatches.metadata]
+role = "primary"
+
+[[swatches.variants]]
+name = "muted"
+opacity = 0.6
+
+[[swatches]]
+name = "surface"
+rgb = [36, 36, 36]

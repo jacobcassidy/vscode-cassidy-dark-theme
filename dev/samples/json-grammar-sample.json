@@ -1,0 +1,91 @@
+{
+  "description": "Strict JSON highlighting sample; inspect keys, values, escapes, numbers, and punctuation in VS Code.",
+  "strings": {
+    "empty": "",
+    "plain": "Cassidy Dark",
+    "quotes": "A \"quoted\" value",
+    "backslash": "C:\\themes\\sample.json",
+    "slash": "https:\/\/example.com\/sample?mode=dark#tokens",
+    "controls": "backspace\b form feed\f newline\n carriage return\r tab\t",
+    "unicodeEscapes": "\u0041\u00a9\u2603\uD83D\uDE80",
+    "unicodeText": "café 日本語 العربية 🚀",
+    "looksLikeSyntax": "true false null 42 // comment /* comment */ { [ : , ] }",
+    "markup": "<span class=\"accent\">&amp;</span>",
+    "regex": "^(?<name>[A-Za-z_]\\w*)\\s*[:=]\\s*(.*)$"
+  },
+  "numbers": {
+    "zero": 0,
+    "negativeZero": -0,
+    "positive": 42,
+    "negative": -42,
+    "fraction": 3.14159,
+    "negativeFraction": -0.125,
+    "exponent": 6.022e23,
+    "upperExponent": 1e6,
+    "positiveExponent": 1.25e3,
+    "negativeExponent": -2.5e-4
+  },
+  "keywords": {
+    "enabled": true,
+    "disabled": false,
+    "missing": null,
+    "quotedBoolean": "true",
+    "quotedNull": "null",
+    "quotedNumber": "123"
+  },
+  "keys.with.dots": {
+    "key-with-hyphens": "value",
+    "key with spaces": "value",
+    "": "empty key",
+    "123": "numeric-looking key",
+    "true": "keyword-looking key",
+    "escaped\"key": "quote in a key",
+    "\u006bey": "Unicode escape in a key",
+    "$schema": "https://example.com/sample.schema.json",
+    "@type": "TokenGallery"
+  },
+  "collections": {
+    "emptyObject": {},
+    "emptyArray": [],
+    "heterogeneous": [
+      "string",
+      42,
+      -1.5e-2,
+      true,
+      false,
+      null,
+      {},
+      []
+    ],
+    "matrix": [
+      [
+        1,
+        2
+      ],
+      [
+        3,
+        4
+      ]
+    ],
+    "records": [
+      {
+        "name": "accent",
+        "color": "#92c1fd",
+        "channels": {
+          "r": 146,
+          "g": 193,
+          "b": 253
+        }
+      },
+      {
+        "name": "surface",
+        "color": "#242424",
+        "channels": {
+          "r": 36,
+          "g": 36,
+          "b": 36
+        }
+      }
+    ]
+  }
+}

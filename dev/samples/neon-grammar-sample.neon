@@ -1,0 +1,85 @@
+# NEON highlighting sample; inspect as source with a NEON language extension.
+# Format reference: https://doc.nette.org/en/neon/format
+# Generic values and illustrative Nette DI configuration; no execution needed.
+title: Cassidy Dark
+strings:
+  plain: Unquoted text with Unicode café 日本語
+  single: 'Doubled ''quotes'' and literal \n'
+  double: "Quotes \"text\", tab\t newline\n return\r slash\\ solidus\/ nbsp\_ unicode\u2603"
+  punctuation: '# : = , [ ] { } ( ) are quoted here'
+  quotedBoolean: 'true'
+  quotedNumber: '42'
+  quotedDate: '2026-10-25'
+  literal: '''
+    A multiline literal.
+    Backslashes stay literal: \n \t
+    '''
+  escaped: """
+    A multiline string with \u00A9.
+    Quotes and escapes: \"sample\" \t
+    """
+
+numbers:
+  integer: 42
+  negative: -42
+  decimal: 3.14159
+  exponent: +1.25e-3
+  binary: 0b10100101
+  octal: 0o755
+  hexadecimal: 0xFFAA00
+
+keywords:
+  booleans: [true, false, True, FALSE, yes, no, YES, No]
+  nulls: [null, Null, NULL]
+  implicitNull:
+
+dates:
+  date: 2026-10-25
+  datetime: 2026-10-25 12:34:56
+  fraction: 2026-10-25 12:34:56.1234
+  offset: 2026-10-25 12:34:56 +07:00
+
+collections:
+  emptyMap: {}
+  emptyList: []
+  inlineMap: {name: accent, color: '#92c1fd'}
+  alternateSeparator: {name=accent, enabled=true}
+  inlineList: [accent, 42, true, null, {nested: value}]
+  blockList:
+    - name: accent
+      color: '#92c1fd' # An inline comment.
+    - name: surface
+      color: '#242424'
+  mixed:
+    - indexed entry
+    named: mapped entry
+    - another indexed entry
+
+# Entities support positional/named arguments, nesting, and chains.
+entities:
+  empty: Swatch()
+  positional: Swatch(accent, '#92c1fd')
+  named: Swatch(name: accent, enabled: yes)
+  nested: Palette(Swatch(accent), colors: [red, green, blue])
+  chained: Column(type: string, nulls: no) Field(id: 1)
+  multiline: Swatch(
+    name: accent
+    color: '#92c1fd'
+    enabled: true
+  )
+
+# Framework-specific strings: parameters, service references, types, and setup.
+parameters:
+  appDir: /srv/sample
+  cacheDir: '%appDir%/cache'
+  literalPercent: '100%%'
+
+services:
+  formatter:
+    factory: App\Theme\Formatter(%appDir%)
+    arguments: [@cache, @self]
+    setup:
+      - setMode(dark)
+  cache:
+    factory: App\Cache(%cacheDir%)
+    autowired: false

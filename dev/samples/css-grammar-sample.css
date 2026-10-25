@@ -1,0 +1,204 @@
+@charset "UTF-8";
+/* CSS highlighting sample; inspect as source with Cassidy Dark Dev.
+ * Includes modern selectors, at-rules, units, colors, functions, and nesting.
+ * Referenced assets are illustrative and do not need to exist.
+ */
+@import url("https://example.com/fonts.css") layer(reset) screen;
+@namespace svg url("http://www.w3.org/2000/svg");
+@layer reset, base, components, utilities;
+
+@font-face {
+  font-family: "Sample Sans";
+  src:
+    local("Sample Sans"),
+    url("https://example.com/sample.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+}
+
+@property --progress {
+  syntax: "<number>";
+  inherits: false;
+  initial-value: 0;
+}
+
+@layer base {
+  :root {
+    --accent: #92c1fd;
+    --translucent: #92c1fd80;
+    --short: #abc;
+    --short-alpha: #abcd;
+    --surface: rgb(36 36 36 / 95%);
+    --highlight: hsl(250deg 80% 75% / 0.8);
+    --hue-white-black: hwb(250 10% 20% / 80%);
+    --lab: lab(80% -10 -25);
+    --lch: lch(80% 30 250);
+    --oklab: oklab(80% -0.02 -0.1);
+    --perceptual: oklch(80% 0.1 250);
+    --wide-gamut: color(display-p3 0.5 0.7 1);
+    --spacing: clamp(0.5rem, 2vw, 2rem);
+    color-scheme: dark light;
+    font:
+      italic small-caps 600 1rem / 1.5 "Sample Sans",
+      sans-serif;
+  }
+
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    accent-color: var(--accent, rebeccapurple);
+  }
+}
+
+/* Type, namespace, class, ID, escaped identifier, combinators, and attributes. */
+svg|a,
+#gallery > .card + .card ~ aside,
+.utility\:hover:hover,
+[data-state],
+[data-state="ready" i],
+[lang|="en"],
+[class~="selected"],
+a[href^="https://"][href$=".pdf"],
+a[href*="example"] {
+  display: grid;
+  grid-template-columns: [start] repeat(auto-fit, minmax(min(100%, 15rem), 1fr)) [end];
+  gap: var(--spacing);
+  margin: 0 auto;
+  padding-block: 1.5em;
+  inline-size: calc(100% - 2 * var(--spacing));
+  max-inline-size: 80ch;
+  min-block-size: 100dvh;
+  border: 1px solid currentColor;
+  border-radius: 0.5rem / 1rem;
+  background: linear-gradient(135deg, transparent 0%, var(--accent) 100%);
+  box-shadow: 0 0.25rem 1rem rgb(0 0 0 / 25%);
+}
+
+/* Pseudo-classes with selector lists, arguments, and structural expressions. */
+.card:is(article, section):not([hidden]):has(> img):where(.active, :hover),
+li:nth-child(2n + 1 of .visible),
+li:nth-last-of-type(-n + 3),
+input:checked + label,
+input:disabled,
+input:required:invalid,
+input:in-range,
+a:link,
+a:visited,
+button:focus-visible,
+section:focus-within,
+:target,
+:lang(en),
+:dir(rtl) {
+  color: color-mix(in oklch, var(--accent) 70%, white);
+  outline: 2px dashed Highlight !important;
+  outline-offset: -2px;
+}
+
+.card::before {
+  content: "Label: " attr(data-label) " \2192\A next line";
+  white-space: pre-wrap;
+  counter-increment: cards;
+}
+
+.card::after {
+  content: counter(cards, decimal-leading-zero);
+}
+
+p::first-letter,
+p::first-line,
+::selection,
+::placeholder,
+li::marker,
+dialog::backdrop,
+sample-swatch::part(label) {
+  color: rebeccapurple;
+  text-decoration: underline wavy #f4877f;
+}
+
+.card {
+  container: card / inline-size;
+  isolation: isolate;
+  overflow: clip;
+  aspect-ratio: 16 / 9;
+  transform: translate3d(1px, -2%, 0) rotate(0.125turn) scale(1.05);
+  filter: blur(0.5px) saturate(120%);
+  clip-path: polygon(0 0, 100% 0, 90% 100%, 0 100%);
+  transition:
+    opacity 200ms ease-in-out,
+    transform 0.4s cubic-bezier(0.2, 0, 0.8, 1);
+  animation: reveal 1s steps(4, end) 100ms 2 alternate both;
+
+  & > .title {
+    margin-block: 0 1lh;
+  }
+
+  &:hover {
+    opacity: 0.9;
+  }
+}
+
+@keyframes reveal {
+  from {
+    opacity: 0;
+    transform: translateY(1rem);
+  }
+  50% {
+    opacity: 0.5;
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media screen and (min-width: 40em) and (orientation: landscape), print {
+  .card {
+    padding: 1cm 2mm 3pt 4px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none;
+    transition: none;
+  }
+}
+
+@supports (display: grid) and not (display: subgrid) {
+  .layout {
+    display: grid;
+  }
+}
+
+@container card (inline-size > 30rem) {
+  .title {
+    font-size: clamp(1rem, 5cqi, 2rem);
+  }
+}
+
+@scope (.gallery) to (.nested-gallery) {
+  :scope {
+    counter-reset: cards;
+  }
+}
+
+@layer utilities {
+  .inherit {
+    color: inherit;
+    background: initial;
+    border: unset;
+    display: revert;
+    padding: revert-layer;
+  }
+}
+
+@page :first {
+  size: A4 portrait;
+  margin: 2cm;
+}

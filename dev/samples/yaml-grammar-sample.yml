@@ -1,0 +1,100 @@
+%YAML 1.2
+---
+# YAML highlighting sample; inspect as source with Cassidy Dark Dev.
+# Directives, documents, scalars, tags, anchors, aliases, and collection styles.
+title: Cassidy Dark
+plain: Text with Unicode café 日本語 🚀
+single: 'Single quotes with doubled ''apostrophes'' and literal \n'
+double: "Escapes: \0 \a \b \t \n \v \f \r \e \" \\ \/ \N \_ \L \P \x41 \u0042 \U0001F680"
+quoted-syntax: "# not a comment: [brackets] {braces} &anchor *alias !tag"
+"key: with punctuation": "value # still a string"
+"true": "Keyword-looking key"
+"": empty key
+
+scalars:
+  integer: 42
+  negative: -42
+  explicit-positive: +42
+  hexadecimal: 0xFF
+  octal: 0o755
+  float: 3.14159
+  exponent: 6.022e+23
+  infinity: .inf
+  negative-infinity: -.Inf
+  not-a-number: .NaN
+  enabled: true
+  disabled: false
+  missing: null
+  tilde: ~
+  implicit-null:
+  string-boolean: "false"
+  date-looking: 2026-10-25
+  timestamp: !!timestamp 2026-10-25T12:34:56.123Z
+
+blocks:
+  literal: |
+    First line keeps its newline.
+    # This is content, not a comment.
+    <tag key="value">Text & entities</tag>
+  literal-strip: |-
+    No trailing newline.
+    Indented content stays literal.
+  literal-keep: |+
+    Keep trailing blank lines.
+
+  folded: >
+    These source lines fold
+    into a single paragraph.
+
+    A blank line starts another paragraph.
+  explicit-indent: |2-
+      Leading spaces are content.
+    This line has the explicit base indentation.
+
+defaults: &defaults
+  color: "#92c1fd"
+  enabled: true
+  nested: &nested { padding: 8, labels: [primary, accent] }
+
+copy: *defaults
+nested-copy: *nested
+empty-map: {}
+empty-list: []
+flow: { name: sample, values: [1, "two", true, null], nested: { x: 1, y: 2 } }
+sequence:
+  - plain scalar
+  - [nested, flow, sequence]
+  - name: accent
+    color: "#92c1fd" # Inline comment.
+  - name: surface
+    color: "#242424"
+  - - nested block item
+    - another nested item
+
+explicit-types:
+  string: !!str 42
+  integer: !!int "42"
+  float: !!float "3.14"
+  boolean: !!bool "true"
+  null: !!null "null"
+  binary: !!binary |
+    VG9rZW4gZ2FsbGVyeQ==
+  set: !!set
+    ? red
+    ? green
+    ? blue
+
+# prettier-ignore
+explicit-keys:
+  ? [theme, accent]
+  : "A sequence as a mapping key"
+  ? a long explicit scalar key
+  : its value
+...
+%TAG !sample! tag:example.com,2026:
+---
+# Local and verbatim tags belong to this separate document.
+tagged: !sample!Swatch { name: accent, color: "#92c1fd" }
+local: !Swatch [accent, blue]
+verbatim: !<tag:example.com,2026:Label> "Custom tag"
+...

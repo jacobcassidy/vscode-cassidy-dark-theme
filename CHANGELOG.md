@@ -6,6 +6,7 @@ All notable changes to this project are documented in this file.
 
 ### Added
 
+- Added HTML, Markdown, CSS, SCSS, JSON, YAML, TOML, log, NEON, Ruby, and XML grammar samples covering varied literals, punctuation, declarations, nesting, embedded languages, and language-specific syntax.
 - Added `npm run build` to build production and local themes together.
 - Added named development experiments with reusable palette/token builds, isolated generated previews and reports, historical snapshot discovery, and a `build:dev` command.
 - Added generated contrast ratios for each chromatic `600` tone against foreground `#f8f8f8` in the Markdown palette report, calculated from exported sRGB hex values.
