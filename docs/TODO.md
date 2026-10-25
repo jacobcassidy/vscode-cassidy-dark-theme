@@ -1,4 +1,4 @@
-# TODO
+# TODOS
 
 ## Bugs/Missing colors
 
