@@ -108,7 +108,7 @@ The repository root continues to hold formatter, lint, hook, pipeline, and other
 
 `scripts/themes/` contains palette/theme generation and validation for both production and local targets. Move the existing `build-theme.js` and `check-theme.js` there. The selected target group determines which themes are built; the directory itself is shared by both workflows.
 
-`scripts/local-extensions/` contains the local preview extension setup and synchronization script, `sync.js`. It writes the separate development manifest, registers theme picker entries, and links checkout assets so generated themes and snapshots can be selected locally. Theme generation runs through `scripts/themes/`; `npm run dev:sync` orchestrates both builds before invoking extension synchronization.
+`scripts/local-extension/` contains the local preview extension setup and synchronization script, `sync.js`. It writes the separate development manifest, registers theme picker entries, and links checkout assets so generated themes and snapshots can be selected locally. Theme generation runs through `scripts/themes/`; `npm run dev:sync` orchestrates both builds before invoking extension synchronization.
 
 `scripts/shared/` contains reusable color calculations, palette generation, variable resolution, and JSONC parsing used by the entry scripts. Keep packaging and publishing operations in `scripts/release/`.
 
@@ -215,12 +215,12 @@ Use the current checkout as the baseline; several tooling and snapshot moves fro
 | `palette/reports/production/palette.*`          | `docs/palettes/generated-reports/default/palette.*`    |
 | `palette/reports/experiments/<name>/palette.*`  | `docs/palettes/generated-reports/<name>/palette.*`     |
 | `scripts/build/`                                | `scripts/themes/`                                      |
-| `scripts/dev/`                                  | `scripts/local-extensions/`                            |
+| `scripts/dev/`                                  | `scripts/local-extension/`                             |
 | `scripts/lib/`                                  | `scripts/shared/`                                      |
 
 The current builder already supports optional per-experiment palette and variable overrides. Where such overrides exist, materialize their effective complete files before adopting replacement semantics, so the migration preserves their behavior. For `test` and `v1.3`, preserve their existing literal template colors, including diagnostic marker colors. Do not replace literals with palette references solely because their hex values match.
 
-Existing palette Markdown has been moved from `docs/palettes/*.md` to `docs/palettes/archive/*.md` as part of this plan revision. Keep preserved palette notes there and generate current reports under `docs/palettes/generated-reports/<theme name>/`. Keep development guides and other references under `docs/references/`, implementation plans under `docs/plans/`, and outstanding work in `docs/TODO.md`. Preserve historical reference content when updating active paths and terminology. Remove obsolete `palette/`, `src/theme/`, and `dev/experiments/` directories after migrating their contents and consumers. Group scripts under `scripts/themes/`, `scripts/local-extensions/`, `scripts/release/`, and `scripts/shared/` according to the responsibilities above.
+Existing palette Markdown has been moved from `docs/palettes/*.md` to `docs/palettes/archive/*.md` as part of this plan revision. Keep preserved palette notes there and generate current reports under `docs/palettes/generated-reports/<theme name>/`. Keep development guides and other references under `docs/references/`, implementation plans under `docs/plans/`, and outstanding work in `docs/TODO.md`. Preserve historical reference content when updating active paths and terminology. Remove obsolete `palette/`, `src/theme/`, and `dev/experiments/` directories after migrating their contents and consumers. Group scripts under `scripts/themes/`, `scripts/local-extension/`, `scripts/release/`, and `scripts/shared/` according to the responsibilities above.
 
 ## Command responsibilities
 
@@ -250,7 +250,7 @@ Keep the existing release command names and pipeline publishing behavior. An aut
 
 - [ ] Move the six default inputs according to the migration mapping, including `tokens.jsonc` to `colors/variables.jsonc` and `colors.jsonc` to `tokens/ui.jsonc`.
 - [ ] Move default reports to `docs/palettes/generated-reports/default/palette.*` and update generation notices and documentation links; keep the Markdown image reference as `palette.svg`.
-- [ ] Rename `scripts/build/` to `scripts/themes/`, `scripts/dev/` to `scripts/local-extensions/`, and `scripts/lib/` to `scripts/shared/`.
+- [ ] Rename `scripts/build/` to `scripts/themes/`, `scripts/dev/` to `scripts/local-extension/`, and `scripts/lib/` to `scripts/shared/`.
 - [ ] Update npm script paths, relative imports, repository-root resolution, test imports, release/pipeline references, and documentation links for the script directory moves.
 - [ ] Update path constants, imports, formatter/linter discovery, tests, and build entry points affected by the layout.
 - [ ] Confirm the default rebuild preserves parsed theme data and palette measurements.
