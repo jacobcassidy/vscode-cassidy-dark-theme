@@ -797,7 +797,7 @@ if (import.meta.main) {
         ),
       );
 
-      for (const path of changedFiles) console.log(`- ${path}`);
+      for (const path of changedFiles) console.log(`  ${path}`);
     } else {
       const paletteOnly = flags.includes("--palette-only");
       const check = flags.includes("--check");
@@ -822,7 +822,7 @@ if (import.meta.main) {
         ),
       );
 
-      for (const path of result.changed) console.log(`- ${path}`);
+      for (const path of result.changed) console.log(`  ${path}`);
     }
 
     console.log();
