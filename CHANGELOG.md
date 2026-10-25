@@ -19,6 +19,7 @@ All notable changes to this project are documented in this file.
 
 ### Changed
 
+- Renamed `scripts/shared/` to `scripts/lib/` and updated script and test imports.
 - Implemented restructuring plan 1b: grouped production and local theme inputs under `src/`, renamed color variables and UI mappings, added whole-file fallback to the production default, and moved generated palette reports to `docs/palettes/generated-reports/<theme name>/`.
 - Renamed script groups to `themes/`, `local-extension/`, and `shared/`; added production theme registration, shared report-name collision checks, and validation of every selected target before writing outputs.
 

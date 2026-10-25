@@ -22,7 +22,7 @@ Run the commands in this guide from the repository root unless stated otherwise.
 | [`docs/plans/`](../plans/)                                               | Implementation plans, including the completed [restructuring plan 1b](../plans/restructure-1b-plan.md). |
 | [`scripts/themes/`](../../scripts/themes/)                               | Builds and checks production and local palettes/themes.                                                 |
 | [`scripts/local-extension/`](../../scripts/local-extension/)             | Creates and refreshes the local preview extension's manifest and asset links.                           |
-| [`scripts/shared/`](../../scripts/shared/)                               | Shared color calculations, palette and variable resolution, JSONC parsing, and target discovery.        |
+| [`scripts/lib/`](../../../scripts/lib/)                                  | Shared color calculations, palette and variable resolution, JSONC parsing, and target discovery.        |
 | [`scripts/release/`](../../scripts/release/)                             | VSIX packaging, release notes, pipeline submission, and GitHub publishing.                              |
 | [`tests/`](../../tests/)                                                 | Automated tests and isolated fixtures.                                                                  |
 | [`dev/samples/`](../../dev/samples/)                                     | JavaScript, TypeScript, Python, and PHP files for inspecting syntax highlighting.                       |

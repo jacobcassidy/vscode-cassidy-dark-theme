@@ -5,9 +5,9 @@ import { applyEdits, modify, parseTree } from "jsonc-parser";
 // Prettier's generated entry point hides its default export from the import resolver.
 // eslint-disable-next-line import-x/default
 import prettier from "prettier";
-import { object, parseJsonc } from "../shared/jsonc.js";
-import { generatePalette, resolveTokens } from "../shared/palette.js";
-import { contrastRatio, validateHex } from "../shared/colors.js";
+import { object, parseJsonc } from "../lib/jsonc.js";
+import { generatePalette, resolveTokens } from "../lib/palette.js";
+import { contrastRatio, validateHex } from "../lib/colors.js";
 import {
   discoverTargets,
   listDirectories,
@@ -17,7 +17,7 @@ import {
   themeContribution,
   themeInputPaths,
   validateThemePart,
-} from "../shared/theme-targets.js";
+} from "../lib/theme-targets.js";
 
 const defaultRoot = fileURLToPath(new URL("../../", import.meta.url));
 const themeSections = new Set(["colors", "semanticHighlighting", "semanticTokenColors", "tokenColors"]);

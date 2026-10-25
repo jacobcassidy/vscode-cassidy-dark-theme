@@ -1,8 +1,8 @@
 import { readFile, stat } from "node:fs/promises";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
-import { parseJsonc } from "../shared/jsonc.js";
-import { listFiles, themeUiType } from "../shared/theme-targets.js";
+import { parseJsonc } from "../lib/jsonc.js";
+import { listFiles, themeUiType } from "../lib/theme-targets.js";
 
 function isObject(value) {
   return value !== null && typeof value === "object" && !Array.isArray(value);

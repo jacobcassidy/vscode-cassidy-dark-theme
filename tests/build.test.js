@@ -6,9 +6,9 @@ import { fileURLToPath } from "node:url";
 import test from "node:test";
 import { parse, parseTree } from "jsonc-parser";
 import { assembleThemeTemplate, buildDev, buildTheme, renderTemplate } from "../scripts/themes/build-theme.js";
-import { contrastRatio, fromHex, inGamut, maxChroma, toHex, withAlpha } from "../scripts/shared/colors.js";
-import { parseJsonc } from "../scripts/shared/jsonc.js";
-import { generatePalette, resolveTokens } from "../scripts/shared/palette.js";
+import { contrastRatio, fromHex, inGamut, maxChroma, toHex, withAlpha } from "../scripts/lib/colors.js";
+import { parseJsonc } from "../scripts/lib/jsonc.js";
+import { generatePalette, resolveTokens } from "../scripts/lib/palette.js";
 
 function configuration() {
   return {
