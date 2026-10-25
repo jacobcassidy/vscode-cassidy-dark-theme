@@ -43,7 +43,7 @@
     "prettier-plugin-multiline-arrays": "^4.1.11"
   },
   "allowScripts": {
-    "lefthook@2.1.12": true,
+    "lefthook@2.2.2": true,
     "unrs-resolver@1.12.2": true,
     "@vscode/vsce-sign@2.1.0": true
   },
