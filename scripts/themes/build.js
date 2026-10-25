@@ -781,6 +781,7 @@ if (import.meta.main) {
     if (flags.includes("--dev")) {
       const check = flags.includes("--check");
 
+      console.log();
       console.log(`${check ? "Checking" : "Building"} dev themes...`);
 
       /** Development target summaries returned to the command-line entry point. */
@@ -801,6 +802,7 @@ if (import.meta.main) {
       const paletteOnly = flags.includes("--palette-only");
       const check = flags.includes("--check");
 
+      console.log();
       console.log(`${check ? "Checking" : "Building"} ${paletteOnly ? "palette reports" : "prod themes"}...`);
 
       /** Completed build summary for the selected command or target group. */
