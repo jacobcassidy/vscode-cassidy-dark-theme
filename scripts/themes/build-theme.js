@@ -132,7 +132,7 @@ function colorPosition(path) {
   );
 }
 
-export function renderTemplate(source, tokens, palette, label = "theme template", notice = "npm run build:theme") {
+export function renderTemplate(source, tokens, palette, label = "theme template", notice = "npm run build:prod") {
   const { value, tree } = parseJsonc(source, label);
 
   validateTheme(value);
@@ -336,7 +336,7 @@ async function prepareTarget(root, target, paletteOnly) {
     throw new Error(`${input.label}: ${error.message}`, { cause: error });
   }
 
-  const command = target.group === "production" ? "npm run build:theme" : "npm run build:dev";
+  const command = target.group === "production" ? "npm run build:prod" : "npm run build:dev";
   const output = reports(palette, target, input, target.group === "production" ? "npm run build:palette" : command);
   let metadata;
 
@@ -481,7 +481,7 @@ async function buildTargets({ root, check, paletteOnly = false, group }) {
   await staleOutputs(root, targets, group, paletteOnly);
 
   const command =
-    group === "local" ? "npm run build:dev" : paletteOnly ? "npm run build:palette" : "npm run build:theme";
+    group === "local" ? "npm run build:dev" : paletteOnly ? "npm run build:palette" : "npm run build:prod";
   const changed = await stageOutputs(root, output, check, command);
 
   return {

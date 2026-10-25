@@ -6,30 +6,30 @@ Run the commands in this guide from the repository root unless stated otherwise.
 
 ## Project structure
 
-| Path                                                                     | Purpose                                                                                                 |
-| ------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------- |
-| [`package.json`](../../package.json)                                     | Production extension manifest, dependencies, commands, and generated production theme registrations.    |
-| [`package-lock.json`](../../package-lock.json)                           | Locked development dependencies.                                                                        |
-| [`src/production/themes/default/`](../../src/production/themes/default/) | The six required default input files.                                                                   |
-| [`src/production/themes/`](../../src/production/themes/)                 | Production targets; additional named themes can omit input files to inherit the default.                |
-| [`src/local/themes/`](../../src/local/themes/)                           | Local targets, including `test` and `v1.3`, with the same input layout and default fallback.            |
-| [`themes/`](../../themes/)                                               | Committed generated production themes shipped in the VSIX.                                              |
-| [`dev/themes/`](../../dev/themes/)                                       | Committed generated local previews.                                                                     |
-| [`dev/snapshots/`](../../dev/snapshots/)                                 | Historical comparison themes, excluded from regeneration.                                               |
-| [`docs/palettes/generated-reports/`](../palettes/generated-reports/)     | Generated JSON, Markdown, and SVG palette reports grouped by theme directory name.                      |
-| [`docs/palettes/archive/`](../palettes/archive/)                         | Preserved palette documentation and previous versions.                                                  |
-| [`docs/references/`](./)                                                 | Development guides and reference material.                                                              |
-| [`docs/plans/`](../plans/)                                               | Implementation plans, including the completed [restructuring plan 1b](../plans/restructure-1b-plan.md). |
-| [`scripts/themes/`](../../scripts/themes/)                               | Builds and checks production and local palettes/themes.                                                 |
-| [`scripts/local-extension/`](../../scripts/local-extension/)             | Creates and refreshes the local preview extension's manifest and asset links.                           |
-| [`scripts/lib/`](../../../scripts/lib/)                                  | Shared color calculations, palette and variable resolution, JSONC parsing, and target discovery.        |
-| [`scripts/release/`](../../scripts/release/)                             | VSIX packaging, release notes, pipeline submission, and GitHub publishing.                              |
-| [`tests/`](../../tests/)                                                 | Automated tests and isolated fixtures.                                                                  |
-| [`dev/samples/`](../../dev/samples/)                                     | JavaScript, TypeScript, Python, and PHP files for inspecting syntax highlighting.                       |
-| [`images/`](../../images/)                                               | Extension icons and the README screenshot.                                                              |
-| [`azure-pipelines.yml`](../../azure-pipelines.yml)                       | Manual packaging and publication pipeline.                                                              |
-| [`.vscodeignore`](../../.vscodeignore)                                   | VSIX exclusions.                                                                                        |
-| [`CHANGELOG.md`](../../CHANGELOG.md)                                     | Versioned release notes used for GitHub releases.                                                       |
+| Path                                                                        | Purpose                                                                                                            |
+| --------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
+| [`package.json`](../../../package.json)                                     | Production extension manifest, dependencies, commands, and generated production theme registrations.               |
+| [`package-lock.json`](../../../package-lock.json)                           | Locked development dependencies.                                                                                   |
+| [`src/production/themes/default/`](../../../src/production/themes/default/) | The six required default input files.                                                                              |
+| [`src/production/themes/`](../../../src/production/themes/)                 | Production targets; additional named themes can omit input files to inherit the default.                           |
+| [`src/local/themes/`](../../../src/local/themes/)                           | Local targets, including `test` and `v1.3`, with the same input layout and default fallback.                       |
+| [`themes/`](../../../themes/)                                               | Committed generated production themes shipped in the VSIX.                                                         |
+| [`dev/themes/`](../../../dev/themes/)                                       | Committed generated local previews.                                                                                |
+| [`dev/snapshots/`](../../../dev/snapshots/)                                 | Historical comparison themes, excluded from regeneration.                                                          |
+| [`docs/palettes/generated-reports/`](../../palettes/generated-reports/)     | Generated JSON, Markdown, and SVG palette reports grouped by theme directory name.                                 |
+| [`docs/palettes/archive/`](../../palettes/archive/)                         | Preserved palette documentation and previous versions.                                                             |
+| [`docs/references/generated/`](./)                                          | Development guides and reference material.                                                                         |
+| [`docs/plans/`](../../plans/)                                               | Implementation plans, including the completed [restructuring plan 1b](../../plans/archive/restructure-1b-plan.md). |
+| [`scripts/themes/`](../../../scripts/themes/)                               | Builds and checks production and local palettes/themes.                                                            |
+| [`scripts/local-extension/`](../../../scripts/local-extension/)             | Creates and refreshes the local preview extension's manifest and asset links.                                      |
+| [`scripts/lib/`](../../../scripts/lib/)                                     | Shared color calculations, palette and variable resolution, JSONC parsing, and target discovery.                   |
+| [`scripts/release/`](../../../scripts/release/)                             | VSIX packaging, release notes, pipeline submission, and GitHub publishing.                                         |
+| [`tests/`](../../../tests/)                                                 | Automated tests and isolated fixtures.                                                                             |
+| [`dev/samples/`](../../../dev/samples/)                                     | JavaScript, TypeScript, Python, and PHP files for inspecting syntax highlighting.                                  |
+| [`images/`](../../../images/)                                               | Extension icons and the README screenshot.                                                                         |
+| [`azure-pipelines.yml`](../../../azure-pipelines.yml)                       | Manual packaging and publication pipeline.                                                                         |
+| [`.vscodeignore`](../../../.vscodeignore)                                   | VSIX exclusions.                                                                                                   |
+| [`CHANGELOG.md`](../../../CHANGELOG.md)                                     | Versioned release notes used for GitHub releases.                                                                  |
 
 The published extension ID is `jacobcassidy.cassidy-dark`, combining the manifest's `publisher` and `name`. Its theme picker label is **Cassidy Dark**, with `uiTheme: "vs-dark"`. The manifest declares VS Code compatibility as `^1.64.2`.
 
@@ -59,7 +59,7 @@ The repository uses ES modules (`"type": "module"`). Its npm dependencies suppor
 npm run dev:sync
 ```
 
-This command runs `build:theme` for production targets and `build:dev` for local targets. Then [`scripts/local-extension/sync.js`](../../scripts/local-extension/sync.js) creates or refreshes a separate extension directory at:
+This command runs `npm run build`, which runs `build:prod` for production targets followed by `build:dev` for local targets. Then [`scripts/local-extension/sync.js`](../../../scripts/local-extension/sync.js) creates or refreshes a separate extension directory at:
 
 ```text
 ~/.vscode/extensions/jacobcassidy.cassidy-dark-dev/
@@ -89,16 +89,16 @@ For safety, the sync script refuses to use a symlink for the development extensi
 
 The files in `dev/samples/` are source examples for visual inspection; no execution is required.
 
-| Sample                                                       | Coverage                                                                                                                                                                                                                                                                  |
-| ------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [JavaScript](../../dev/samples/javascript-grammar-sample.js) | ES modules, JSDoc types and tags, literals and escapes, regex groups and assertions, Unicode regex sets, templates, destructuring, private and static class members, operators, control flow, generators, and async code. Uses modern JavaScript supported by Node.js 24. |
-| [TypeScript](../../dev/samples/typescript-grammar-sample.ts) | TypeScript 5.4+ annotations, unions and intersections, conditional and mapped types, infer and template literal types, generics, assertions, overloads, decorators, declaration merging, ambient declarations, resource management, and runtime syntax.                   |
-| [Python](../../dev/samples/python-grammar-sample.py)         | Python 3.12+ literals and string prefixes, f-strings, regexes, annotations and generic type parameters, decorators, protocols and data classes, comprehensions, pattern matching, exception groups, generators, context managers, and async code.                         |
-| [PHP](../../dev/samples/php-grammar-sample.php)              | PHP 8.2+ property type probes, PHPDoc, namespace imports, attributes, enums, traits, readonly and anonymous classes, literals and interpolation, regex strings, operators, closures, generators, exceptions, and embedded PHP/HTML with alternative control syntax.       |
+| Sample                                                          | Coverage                                                                                                                                                                                                                                                                  |
+| --------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [JavaScript](../../../dev/samples/javascript-grammar-sample.js) | ES modules, JSDoc types and tags, literals and escapes, regex groups and assertions, Unicode regex sets, templates, destructuring, private and static class members, operators, control flow, generators, and async code. Uses modern JavaScript supported by Node.js 24. |
+| [TypeScript](../../../dev/samples/typescript-grammar-sample.ts) | TypeScript 5.4+ annotations, unions and intersections, conditional and mapped types, infer and template literal types, generics, assertions, overloads, decorators, declaration merging, ambient declarations, resource management, and runtime syntax.                   |
+| [Python](../../../dev/samples/python-grammar-sample.py)         | Python 3.12+ literals and string prefixes, f-strings, regexes, annotations and generic type parameters, decorators, protocols and data classes, comprehensions, pattern matching, exception groups, generators, context managers, and async code.                         |
+| [PHP](../../../dev/samples/php-grammar-sample.php)              | PHP 8.2+ property type probes, PHPDoc, namespace imports, attributes, enums, traits, readonly and anonymous classes, literals and interpolation, regex strings, operators, closures, generators, exceptions, and embedded PHP/HTML with alternative control syntax.       |
 
 Use the matching VS Code language mode. Inspect both a declaration and its references with **Developer: Inspect Editor Tokens and Scopes**. Compare the same text with semantic highlighting enabled and disabled in workspace settings; language tooling can refine the colors beyond the TextMate grammar. Python semantic highlighting depends on the installed Python language tooling. The JavaScript file uses the JavaScript grammar; JSX and TypeScript require their respective language modes and syntax.
 
-The TypeScript sample imports the sibling JavaScript fixture for module and usage-site highlighting. Its [samples-only TypeScript configuration](../../dev/samples/tsconfig.json) enables strict checking, ESNext libraries, NodeNext modules, standard decorators, and JavaScript imports. VS Code discovers that configuration automatically. It emits no JavaScript and requires no changes to extension packaging. If a TypeScript compiler is available, run `tsc --project dev/samples/tsconfig.json` to check it; the repository does not install TypeScript or include that check in `npm run check`.
+The TypeScript sample imports the sibling JavaScript fixture for module and usage-site highlighting. Its [samples-only TypeScript configuration](../../../dev/samples/tsconfig.json) enables strict checking, ESNext libraries, NodeNext modules, standard decorators, and JavaScript imports. VS Code discovers that configuration automatically. It emits no JavaScript and requires no changes to extension packaging. If a TypeScript compiler is available, run `tsc --project dev/samples/tsconfig.json` to check it; the repository does not install TypeScript or include that check in `npm run check`.
 
 The PHP sample retains its original property type regression probes. It also includes a labeled legacy backtick command-string example for grammar coverage; PHP 8.5 reports that syntax as deprecated during `php -l`. The sample is intended for source inspection, and linting does not execute its examples.
 
@@ -139,7 +139,7 @@ An existing empty target directory can inherit every file. To track that theme i
 
 ### Building and checking outputs
 
-`npm run build:palette` builds reports for all production targets without requiring variables, metadata, token mappings, or the manifest. `npm run build:theme` generates all production themes and reports and synchronizes `package.json` theme contributions while preserving unrelated fields. `npm run build:dev` builds all local themes and their reports without changing production outputs or the source manifest.
+`npm run build:palette` builds reports for all production targets without requiring variables, metadata, token mappings, or the manifest. `npm run build:prod` generates all production themes and reports and synchronizes `package.json` theme contributions while preserving unrelated fields. `npm run build:dev` builds all local themes and their reports without changing production outputs or the source manifest. `npm run build` runs `build:prod` followed by `build:dev`; if the production build fails, the local build does not run.
 
 Reports always live under `docs/palettes/generated-reports/<theme name>/` as `palette.json`, `palette.md`, and `palette.svg`. JSON records measurements and source provenance; Markdown embeds the sibling swatch sheet. A target inheriting the default palette still gets its own reports. Reports and archived documents are never used to discover source themes. Historical themes under `dev/snapshots/` and documentation under `docs/palettes/archive/` are excluded from regeneration.
 
@@ -152,8 +152,9 @@ The editor settings in `.vscode/` recommend Prettier, ESLint, Markdown linting, 
 | Command                   | Behavior                                                                                                         |
 | ------------------------- | ---------------------------------------------------------------------------------------------------------------- |
 | `npm run check`           | Check generated output, formatting, Markdown and JavaScript linting, theme validation, and tests.                |
+| `npm run build`           | Generate production and local themes and their palette reports.                                                  |
 | `npm run build:palette`   | Generate palette reports for all production themes without variables or mappings.                                |
-| `npm run build:theme`     | Generate production themes/reports and synchronize production manifest entries.                                  |
+| `npm run build:prod`      | Generate production themes/reports and synchronize production manifest entries.                                  |
 | `npm run build:dev`       | Generate local themes and their palette reports.                                                                 |
 | `npm run dev:sync`        | Build both groups and refresh the local preview extension.                                                       |
 | `npm run check:generated` | Fail on stale or missing generated artifacts without rewriting files.                                            |
@@ -167,7 +168,7 @@ The editor settings in `.vscode/` recommend Prettier, ESLint, Markdown linting, 
 | `npm run check:theme`     | Parse production and development theme JSONC, check basic structure, and verify manifest theme and icon files.   |
 | `npm test`                | Run the Node.js tests for validation failures and development extension protections using temporary directories. |
 
-[`lefthook.yml`](../../lefthook.yml) defines a pre-commit hook that runs ESLint, Markdown linting, and Prettier in that order against matching staged files. Each command can fix files and stage the fixes. To explicitly install the configured hooks locally, run:
+[`lefthook.yml`](../../../lefthook.yml) defines a pre-commit hook that runs ESLint, Markdown linting, and Prettier in that order against matching staged files. Each command can fix files and stage the fixes. To explicitly install the configured hooks locally, run:
 
 ```bash
 npx lefthook install
@@ -177,18 +178,17 @@ The tests cover palette math, variable aliases and alpha, file-level fallback an
 
 ## Building the extension
 
-Generate the theme with `npm run build:theme`, then package it using the VS Code extension CLI, `@vscode/vsce`, installed by `npm ci`. There is no extension compilation step or `vscode:prepublish` script.
+Generate the theme with `npm run build:prod`, then package it using the VS Code extension CLI, `@vscode/vsce`, installed by `npm ci`. There is no extension compilation step or `vscode:prepublish` script.
 
 Validate and package the current checkout:
 
 ```bash
-npm run build:theme
-npm run build:dev
+npm run build
 npm run check
 npm run package:vsix
 ```
 
-[`scripts/release/package.sh`](../../scripts/release/package.sh) checks that all generated artifacts are current, reads the version from `package.json`, creates the destination directory, and invokes the local `vsce` executable. The default output is `dist/cassidy-dark-VERSION.vsix`. To choose another output file, pass its path after `--`:
+[`scripts/release/package.sh`](../../../scripts/release/package.sh) checks that all generated artifacts are current, reads the version from `package.json`, creates the destination directory, and invokes the local `vsce` executable. The default output is `dist/cassidy-dark-VERSION.vsix`. To choose another output file, pass its path after `--`:
 
 ```bash
 npm run package:vsix -- /absolute/path/to/cassidy-dark-VERSION.vsix
@@ -202,7 +202,7 @@ The pipeline uses the same `npm run package:vsix` entry point with its artifact 
 
 ## Release configuration
 
-Releases are orchestrated by Azure DevOps through [`azure-pipelines.yml`](../../azure-pipelines.yml). Both `trigger: none` and `pr: none` are set: pushes, pull requests, and tags do not automatically start publication. There is no GitHub Actions release workflow in this repository.
+Releases are orchestrated by Azure DevOps through [`azure-pipelines.yml`](../../../azure-pipelines.yml). Both `trigger: none` and `pr: none` are set: pushes, pull requests, and tags do not automatically start publication. There is no GitHub Actions release workflow in this repository.
 
 The pipeline and helper scripts refer to these resources:
 
@@ -240,7 +240,7 @@ To submit a run from your computer, the Azure CLI must be installed, authenticat
 
 5. Commit the release changes and push them to `main` on the remote used by the Azure pipeline. Confirm the intended release commit is on that branch before starting publication.
 
-[`scripts/release/changelog-notes.sh`](../../scripts/release/changelog-notes.sh) reads the manifest version and extracts the body below the matching `## [VERSION]` heading, stopping at the next level-two heading. It fails if that section is missing or empty. Entries under `[Unreleased]` do not become release notes automatically.
+[`scripts/release/changelog-notes.sh`](../../../scripts/release/changelog-notes.sh) reads the manifest version and extracts the body below the matching `## [VERSION]` heading, stopping at the next level-two heading. It fails if that section is missing or empty. Entries under `[Unreleased]` do not become release notes automatically.
 
 ### Start the pipeline
 
@@ -250,7 +250,7 @@ From a local checkout on `main`, run:
 npm run release:publish
 ```
 
-[`scripts/release/publish-azure.sh`](../../scripts/release/publish-azure.sh) rejects any branch other than `main`, including detached HEAD, then submits:
+[`scripts/release/publish-azure.sh`](../../../scripts/release/publish-azure.sh) rejects any branch other than `main`, including detached HEAD, then submits:
 
 ```bash
 az pipelines run \
@@ -280,7 +280,7 @@ Both destinations receive the same packaged file. Marketplace publication runs f
 
 ### GitHub release behavior
 
-[`scripts/release/create-github-release.sh`](../../scripts/release/create-github-release.sh) derives the tag and release title as `vVERSION` from `package.json`, and supplies the matching changelog body as release notes. For a new release, it targets `BUILD_SOURCEVERSION` in Azure Pipelines, or the current `git rev-parse HEAD` when run locally. The GitHub CLI creates the tag if needed as part of release creation; no separate tag push is scripted.
+[`scripts/release/create-github-release.sh`](../../../scripts/release/create-github-release.sh) derives the tag and release title as `vVERSION` from `package.json`, and supplies the matching changelog body as release notes. For a new release, it targets `BUILD_SOURCEVERSION` in Azure Pipelines, or the current `git rev-parse HEAD` when run locally. The GitHub CLI creates the tag if needed as part of release creation; no separate tag push is scripted.
 
 For an existing release, the helper checks the VSIX asset's filename. It uploads the file if that name is missing, or skips it if the name is already present. It does not compare file contents, replace existing assets, update existing release notes, or retarget an existing tag. The release helper itself has no branch guard; the normal submission script and pipeline enforce `main`.
 

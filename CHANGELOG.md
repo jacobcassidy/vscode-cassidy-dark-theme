@@ -6,6 +6,7 @@ All notable changes to this project are documented in this file.
 
 ### Added
 
+- Added `npm run build` to build production and local themes together.
 - Added named development experiments with reusable palette/token builds, isolated generated previews and reports, historical snapshot discovery, and a `build:dev` command.
 - Added generated contrast ratios for each chromatic `600` tone against foreground `#f8f8f8` in the Markdown palette report, calculated from exported sRGB hex values.
 - Added palette and theme generation from JSONC palette inputs, semantic tokens, and a comment-preserving theme template, with generated JSON/Markdown/SVG palette references and stale-output checks in validation and packaging.
@@ -19,6 +20,8 @@ All notable changes to this project are documented in this file.
 
 ### Changed
 
+- Renamed `build:theme` to `build:prod`, updated production build notices and documentation, and made `dev:sync` use the combined build.
+- Updated development tooling dependencies and the lockfile, including the version-specific Lefthook install approval.
 - Renamed `scripts/shared/` to `scripts/lib/` and updated script and test imports.
 - Implemented restructuring plan 1b: grouped production and local theme inputs under `src/`, renamed color variables and UI mappings, added whole-file fallback to the production default, and moved generated palette reports to `docs/palettes/generated-reports/<theme name>/`.
 - Renamed script groups to `themes/`, `local-extension/`, and `shared/`; added production theme registration, shared report-name collision checks, and validation of every selected target before writing outputs.
