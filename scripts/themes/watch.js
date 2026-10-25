@@ -16,7 +16,7 @@ import { readOptional } from "../lib/theme-source-inputs.js";
 const styles = {
   yellow: "\u001b[33m",
   green: "\u001b[32m",
-  orange: "\u001b[38;5;208m",
+  red: "\u001b[31m",
   dim: "\u001b[2m",
   reset: "\u001b[0m",
 };
@@ -137,7 +137,7 @@ export function watchThemes(
       }
     } catch (error) {
       const message = `[watch] ${error.message}`;
-      const diagnostic = /stale/i.test(error.message) ? styled(message, styles.orange) : message;
+      const diagnostic = /stale/i.test(error.message) ? styled(message, styles.red) : message;
 
       logger.error(`${diagnostic}\n${styled("[watch] Waiting for the next source change to retry.", styles.dim)}`);
     }
