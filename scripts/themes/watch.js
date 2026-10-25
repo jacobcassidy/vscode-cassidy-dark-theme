@@ -14,8 +14,10 @@ import { readOptional } from "../lib/theme-source-inputs.js";
 
 /** ANSI styles used to distinguish watcher status messages in terminal output. */
 const styles = {
+  blue: "\u001b[34m",
   yellow: "\u001b[33m",
   green: "\u001b[32m",
+  orange: "\u001b[38;5;208m",
   red: "\u001b[31m",
   dim: "\u001b[2m",
   reset: "\u001b[0m",
@@ -107,7 +109,7 @@ export function watchThemes(
   /** Run one prod/dev build and preview sync, reporting failures without stopping future retries. */
   async function build() {
     pending = false;
-    logger.log(styled("[watch] Building prod and dev themes...", styles.green));
+    logger.log(styled("[watch] Building prod and dev themes...", styles.yellow));
 
     try {
       /** Production build summary for this watcher cycle. */
@@ -129,11 +131,19 @@ export function watchThemes(
       const changed = prod.changed.length + dev.reduce((sum, target) => sum + target.changed.length, 0);
 
       logger.log(
-        `[watch] Built ${prod.targets.length} prod and ${dev.length} dev themes; ${changed} generated files updated.`,
+        styled(
+          `[watch] Built ${prod.targets.length} prod and ${dev.length} dev themes; ${changed} generated files updated.`,
+          styles.green,
+        ),
       );
 
       if (themeRegistrations(previous) !== themeRegistrations(current)) {
-        logger.log("[watch] Theme registrations changed. Run Developer: Reload Window, then select a Dev theme.");
+        logger.log(
+          styled(
+            "[watch] Theme registrations changed. Run Developer: Reload Window, then select a Dev theme.",
+            styles.orange,
+          ),
+        );
       }
     } catch (error) {
       const message = `[watch] ${error.message}`;
@@ -185,7 +195,7 @@ export function watchThemes(
     void close();
   });
 
-  logger.log(styled("[watch] Watching src/themes/prod/ and src/themes/dev/. Press Ctrl+C to stop.", styles.yellow));
+  logger.log(styled("[watch] Watching src/themes/prod/ and src/themes/dev/. Press Ctrl+C to stop.", styles.blue));
   startBuild();
 
   return { ready: running, close, closed };
