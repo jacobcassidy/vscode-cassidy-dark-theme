@@ -28,6 +28,19 @@ import {
 /** Repository root inferred from the build module’s location. */
 const defaultRoot = fileURLToPath(new URL("../../", import.meta.url));
 
+/** ANSI styles used to distinguish build status messages in terminal output. */
+const styles = {
+  green: "\u001b[32m",
+  red: "\u001b[31m",
+  dim: "\u001b[2m",
+  reset: "\u001b[0m",
+};
+
+/** Apply an ANSI style to a build message. */
+function styled(message, style) {
+  return `${style}${message}${styles.reset}`;
+}
+
 /** Top-level token sections that must not appear in metadata inputs. */
 const themeSections = new Set(["colors", "semanticHighlighting", "semanticTokenColors", "tokenColors"]);
 
@@ -766,23 +779,47 @@ if (import.meta.main) {
     }
 
     if (flags.includes("--dev")) {
+      const check = flags.includes("--check");
+
+      console.log(`${check ? "Checking" : "Building"} dev themes...`);
+
       /** Development target summaries returned to the command-line entry point. */
-      const targets = await buildDevThemes({ check: flags.includes("--check") });
+      const targets = await buildDevThemes({ check });
+
+      /** Changed generated paths from all development targets. */
+      const changedFiles = targets.flatMap((target) => target.changed);
 
       console.log(
-        `Validated ${targets.length} dev themes; ${targets.reduce((sum, target) => sum + target.changed.length, 0)} generated files updated.`,
+        styled(
+          `${check ? "Validated" : "Built"} ${targets.length} dev themes; ${changedFiles.length} generated files updated.`,
+          styles.green,
+        ),
       );
+
+      for (const path of changedFiles) console.log(styled(`  - ${path}`, styles.dim));
     } else {
+      const paletteOnly = flags.includes("--palette-only");
+      const check = flags.includes("--check");
+
+      console.log(`${check ? "Checking" : "Building"} ${paletteOnly ? "palette reports" : "prod themes"}...`);
+
       /** Completed build summary for the selected command or target group. */
       const result = await buildProdThemes({
-        check: flags.includes("--check"),
-        paletteOnly: flags.includes("--palette-only"),
+        check,
+        paletteOnly,
       });
 
-      console.log(`Validated ${result.targets.length} prod themes; ${result.changed.length} generated files updated.`);
+      console.log(
+        styled(
+          `${check ? "Validated" : "Built"} ${result.targets.length} prod themes; ${result.changed.length} generated files updated.`,
+          styles.green,
+        ),
+      );
+
+      for (const path of result.changed) console.log(styled(`  - ${path}`, styles.dim));
     }
   } catch (error) {
-    console.error(error.message);
+    console.error(styled(error.message, styles.red));
     process.exitCode = 1;
   }
 }
