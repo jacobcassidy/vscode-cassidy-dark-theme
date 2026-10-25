@@ -33,13 +33,13 @@
     "@eslint/compat": "^2.1.1",
     "@eslint/js": "^10.0.1",
     "@vscode/vsce": "^4.0.0",
-    "eslint": "^10.10.0",
+    "eslint": "^10.13.0",
     "eslint-plugin-import-x": "^4.17.1",
-    "globals": "^17.12.0",
+    "globals": "^17.13.0",
     "jsonc-parser": "^3.3.1",
-    "lefthook": "^2.1.12",
-    "markdownlint-cli2": "^0.23.2",
-    "prettier": "^3.9.6",
+    "lefthook": "^2.2.2",
+    "markdownlint-cli2": "^0.24.0",
+    "prettier": "^3.9.10",
     "prettier-plugin-multiline-arrays": "^4.1.11"
   },
   "allowScripts": {
@@ -63,11 +63,11 @@
     ]
   },
   "scripts": {
+    "build:dev": "node scripts/themes/build-theme.js --dev",
     "build:palette": "node scripts/themes/build-theme.js --palette-only",
     "build:theme": "node scripts/themes/build-theme.js",
-    "build:dev": "node scripts/themes/build-theme.js --dev",
-    "check:generated": "node scripts/themes/build-theme.js --check && node scripts/themes/build-theme.js --dev --check",
     "check": "npm run check:generated && npm run check:prettier && npm run lint && npm run check:theme && npm test",
+    "check:generated": "node scripts/themes/build-theme.js --check && node scripts/themes/build-theme.js --dev --check",
     "check:prettier": "prettier . --check",
     "check:theme": "node scripts/themes/check-theme.js",
     "dev:sync": "npm run build:theme && npm run build:dev && node scripts/local-extension/sync.js",
