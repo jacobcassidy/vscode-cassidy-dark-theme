@@ -5,7 +5,7 @@ import { fileURLToPath } from "node:url";
 import { parseJsonc } from "../lib/jsonc.js";
 import { listFiles, themeUiType } from "../lib/theme-targets.js";
 
-export async function syncDev({
+export async function syncDevExtension({
   root = fileURLToPath(new URL("../../", import.meta.url)),
   extensionDirectory = join(homedir(), ".vscode/extensions/jacobcassidy.cassidy-dark-dev"),
 } = {}) {
@@ -119,6 +119,6 @@ async function statIfPresent(path) {
 }
 
 if (import.meta.main) {
-  console.log(`Synced dev manifest: ${await syncDev()}`);
+  console.log(`Synced dev manifest: ${await syncDevExtension()}`);
   console.log("Run Developer: Reload Window in VS Code, then select a Cassidy Dark Dev theme.");
 }

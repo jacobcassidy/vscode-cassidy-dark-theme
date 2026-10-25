@@ -14,7 +14,7 @@ import {
   listFiles,
   readOptional,
   readTargetInput,
-  themeContribution,
+  prodThemeContribution,
   themeInputPaths,
   validateThemePart,
 } from "../lib/theme-targets.js";
@@ -336,8 +336,8 @@ async function prepareTarget(root, target, paletteOnly) {
     throw new Error(`${input.label}: ${error.message}`, { cause: error });
   }
 
-  const command = target.group === "production" ? "npm run build:prod" : "npm run build:dev";
-  const output = reports(palette, target, input, target.group === "production" ? "npm run build:palette" : command);
+  const command = target.group === "prod" ? "npm run build:prod" : "npm run build:dev";
+  const output = reports(palette, target, input, target.group === "prod" ? "npm run build:palette" : command);
   let metadata;
 
   if (!paletteOnly) {
@@ -358,7 +358,7 @@ async function prepareTarget(root, target, paletteOnly) {
   return { ...target, palette, outputs: output, metadata };
 }
 
-async function manifestOutput(root, targets) {
+async function prodManifestOutput(root, targets) {
   const path = "package.json";
   const source = await readFile(join(root, path), "utf8");
   const manifest = parseJsonc(source, path).value;
@@ -368,7 +368,7 @@ async function manifestOutput(root, targets) {
   if (manifest.contributes !== undefined) object(manifest.contributes, "package.json.contributes");
 
   const themes = targets.map((target) => {
-    const contribution = themeContribution(target, target.metadata);
+    const contribution = prodThemeContribution(target, target.metadata);
     const existing = manifest.contributes?.themes?.find((entry) => entry.path === contribution.path);
 
     return { ...existing, ...contribution };
@@ -376,7 +376,7 @@ async function manifestOutput(root, targets) {
 
   const labels = themes.map((theme) => theme.label);
 
-  if (new Set(labels).size !== labels.length) throw new Error("Production theme labels must be unique");
+  if (new Set(labels).size !== labels.length) throw new Error("Prod theme labels must be unique");
 
   return applyEdits(source, modify(source, ["contributes", "themes"], themes, {}));
 }
@@ -390,7 +390,7 @@ async function staleOutputs(root, targets, group, paletteOnly) {
     ]),
   );
   const actual = [];
-  const themeDirectory = group === "production" ? "themes" : "dev/themes";
+  const themeDirectory = group === "prod" ? "themes" : "dev/themes";
 
   if (!paletteOnly) {
     for (const file of await listFiles(join(root, themeDirectory))) {
@@ -463,7 +463,7 @@ async function stageOutputs(root, output, check, command) {
 
 async function buildTargets({ root, check, paletteOnly = false, group }) {
   const targets = await discoverTargets(root);
-  const defaultTarget = targets.find((target) => target.group === "production" && target.name === "default");
+  const defaultTarget = targets.find((target) => target.group === "prod" && target.name === "default");
   const baseline = await prepareTarget(root, defaultTarget, paletteOnly);
   const selected = [];
   const output = new Map();
@@ -476,12 +476,11 @@ async function buildTargets({ root, check, paletteOnly = false, group }) {
     for (const [path, text] of prepared.outputs) output.set(path, text);
   }
 
-  if (group === "production" && !paletteOnly) output.set("package.json", await manifestOutput(root, selected));
+  if (group === "prod" && !paletteOnly) output.set("package.json", await prodManifestOutput(root, selected));
 
   await staleOutputs(root, targets, group, paletteOnly);
 
-  const command =
-    group === "local" ? "npm run build:dev" : paletteOnly ? "npm run build:palette" : "npm run build:prod";
+  const command = group === "dev" ? "npm run build:dev" : paletteOnly ? "npm run build:palette" : "npm run build:prod";
   const changed = await stageOutputs(root, output, check, command);
 
   return {
@@ -495,12 +494,12 @@ async function buildTargets({ root, check, paletteOnly = false, group }) {
   };
 }
 
-export async function buildTheme({ root = defaultRoot, check = false, paletteOnly = false } = {}) {
-  return buildTargets({ root, check, paletteOnly, group: "production" });
+export async function buildProdThemes({ root = defaultRoot, check = false, paletteOnly = false } = {}) {
+  return buildTargets({ root, check, paletteOnly, group: "prod" });
 }
 
-export async function buildDev({ root = defaultRoot, check = false } = {}) {
-  const result = await buildTargets({ root, check, group: "local" });
+export async function buildDevThemes({ root = defaultRoot, check = false } = {}) {
+  const result = await buildTargets({ root, check, group: "dev" });
 
   return result.targets;
 }
@@ -517,20 +516,18 @@ if (import.meta.main) {
     }
 
     if (flags.includes("--dev")) {
-      const targets = await buildDev({ check: flags.includes("--check") });
+      const targets = await buildDevThemes({ check: flags.includes("--check") });
 
       console.log(
-        `Validated ${targets.length} local themes; ${targets.reduce((sum, target) => sum + target.changed.length, 0)} generated files updated.`,
+        `Validated ${targets.length} dev themes; ${targets.reduce((sum, target) => sum + target.changed.length, 0)} generated files updated.`,
       );
     } else {
-      const result = await buildTheme({
+      const result = await buildProdThemes({
         check: flags.includes("--check"),
         paletteOnly: flags.includes("--palette-only"),
       });
 
-      console.log(
-        `Validated ${result.targets.length} production themes; ${result.changed.length} generated files updated.`,
-      );
+      console.log(`Validated ${result.targets.length} prod themes; ${result.changed.length} generated files updated.`);
     }
   } catch (error) {
     console.error(error.message);

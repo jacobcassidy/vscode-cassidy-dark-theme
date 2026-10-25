@@ -2,15 +2,15 @@ import assert from "node:assert/strict";
 import { mkdir, readFile, realpath, symlink, writeFile } from "node:fs/promises";
 import { join } from "node:path";
 import test from "node:test";
-import { syncDev } from "../scripts/local-extension/sync.js";
+import { syncDevExtension } from "../scripts/dev-extension/sync.js";
 import { createPreviewProject } from "./test-projects.js";
 
-test("development sync is repeatable and refreshes themes without modifying the source manifest", async (t) => {
+test("dev extension sync is repeatable and refreshes themes without modifying the source manifest", async (t) => {
   const project = await createPreviewProject(t);
   const source = await readFile(join(project.root, "package.json"), "utf8");
-  const target = await syncDev(project);
+  const target = await syncDevExtension(project);
 
-  await syncDev(project);
+  await syncDevExtension(project);
 
   const manifest = JSON.parse(await readFile(target, "utf8"));
 
@@ -30,7 +30,7 @@ test("development sync is repeatable and refreshes themes without modifying the 
   }
 
   await writeFile(join(project.root, "dev/themes/cassidy-dark-color-theme-new.json"), project.theme);
-  await syncDev(project);
+  await syncDevExtension(project);
 
   const refreshed = JSON.parse(await readFile(target, "utf8"));
 
@@ -39,25 +39,25 @@ test("development sync is repeatable and refreshes themes without modifying the 
   assert.equal(await readFile(join(project.root, "package.json"), "utf8"), source);
 });
 
-test("development sync refuses a linked extension directory", async (t) => {
+test("dev extension sync refuses a linked extension directory", async (t) => {
   const project = await createPreviewProject(t);
 
   await symlink(project.root, project.extensionDirectory, "dir");
-  await assert.rejects(syncDev(project), /folder must be a regular directory/);
+  await assert.rejects(syncDevExtension(project), /folder must be a regular directory/);
 });
 
-test("development sync refuses a linked manifest without overwriting its target", async (t) => {
+test("dev extension sync refuses a linked manifest without overwriting its target", async (t) => {
   const project = await createPreviewProject(t);
   const source = await readFile(join(project.root, "package.json"), "utf8");
 
   await mkdir(project.extensionDirectory);
   await symlink(join(project.root, "package.json"), join(project.extensionDirectory, "package.json"));
-  await assert.rejects(syncDev(project), /manifest is a symlink/);
+  await assert.rejects(syncDevExtension(project), /manifest is a symlink/);
   assert.equal(await readFile(join(project.root, "package.json"), "utf8"), source);
 });
 
 for (const kind of ["directory", "wrong symlink"]) {
-  test(`development sync refuses an asset occupied by a ${kind}`, async (t) => {
+  test(`dev extension sync refuses an asset occupied by a ${kind}`, async (t) => {
     const project = await createPreviewProject(t);
     const link = join(project.extensionDirectory, "themes");
 
@@ -69,11 +69,11 @@ for (const kind of ["directory", "wrong symlink"]) {
       await symlink(join(project.root, "images"), link, "dir");
     }
 
-    await assert.rejects(syncDev(project), /Expected a symlink/);
+    await assert.rejects(syncDevExtension(project), /Expected a symlink/);
   });
 }
 
-test("preview sync includes all production themes, derives local theme types, and labels sorted snapshots", async (t) => {
+test("dev extension sync includes all prod themes, derives dev theme types, and labels sorted snapshots", async (t) => {
   const project = await createPreviewProject(t);
   const manifest = project.manifest;
 
@@ -93,11 +93,11 @@ test("preview sync includes all production themes, derives local theme types, an
   }
 
   const source = await readFile(join(project.root, "package.json"), "utf8");
-  const target = await syncDev(project);
+  const target = await syncDevExtension(project);
   const preview = JSON.parse(await readFile(target, "utf8"));
   const first = await readFile(target, "utf8");
 
-  await syncDev(project);
+  await syncDevExtension(project);
   assert.equal(await readFile(target, "utf8"), first);
   assert.deepEqual(
     preview.contributes.themes.map(({ label, uiTheme }) => [label, uiTheme]),

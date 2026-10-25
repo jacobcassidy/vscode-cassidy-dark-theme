@@ -59,7 +59,7 @@ export async function checkThemes(root = fileURLToPath(new URL("../../", import.
 
   for (const theme of themes) {
     if (typeof theme.label !== "string" || !theme.label.trim() || labels.has(theme.label)) {
-      throw new Error("Production theme labels must be nonempty and unique");
+      throw new Error("Prod theme labels must be nonempty and unique");
     }
 
     labels.add(theme.label);
@@ -68,7 +68,7 @@ export async function checkThemes(root = fileURLToPath(new URL("../../", import.
     const path = theme.path.replace(/^\.\//, "");
 
     if (!path.startsWith("themes/") || path.split("/").includes("..") || paths.has(path)) {
-      throw new Error(`Invalid or duplicate production theme path: ${theme.path}`);
+      throw new Error(`Invalid or duplicate prod theme path: ${theme.path}`);
     }
 
     const metadata = await readTheme(join(root, path));
@@ -82,7 +82,7 @@ export async function checkThemes(root = fileURLToPath(new URL("../../", import.
 
   for (const file of await listFiles(join(root, "themes"))) {
     if (file.endsWith(".json") && !paths.has(`themes/${file}`)) {
-      throw new Error(`Unregistered production theme: themes/${file}`);
+      throw new Error(`Unregistered prod theme: themes/${file}`);
     }
   }
 

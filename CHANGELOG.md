@@ -22,6 +22,8 @@ All notable changes to this project are documented in this file.
 
 ### Changed
 
+- Standardized theme naming on prod/dev, moved authoring sources to `src/prod/` and `src/dev/`, renamed dev extension scripts and tests, and clarified build and sync function names.
+
 - Split tests by color, palette, variable, build, validation, and local extension responsibilities; moved reusable temporary project setup into `test-projects.js` and limited test discovery to `*.test.js` files.
 - Renamed `build:theme` to `build:prod`, updated production build notices and documentation, and made `dev:sync` use the combined build.
 - Updated development tooling dependencies and the lockfile, including the version-specific Lefthook install approval.

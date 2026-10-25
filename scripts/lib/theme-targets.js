@@ -2,7 +2,7 @@ import { readFile, readdir } from "node:fs/promises";
 import { join } from "node:path";
 import { fields, object, parseJsonc } from "./jsonc.js";
 
-export const defaultThemeDirectory = "src/production/themes/default";
+export const defaultThemeDirectory = "src/prod/themes/default";
 
 export const themeInputPaths = ["metadata.jsonc", "tokens/ui.jsonc", "tokens/semantic.jsonc", "tokens/syntax.jsonc"];
 
@@ -54,16 +54,16 @@ export async function discoverTargets(root) {
   const targets = [];
   const names = new Set();
 
-  for (const group of ["production", "local"]) {
+  for (const group of ["prod", "dev"]) {
     const directory = `src/${group}/themes`;
 
-    for (const name of await listDirectories(join(root, directory), group === "local")) {
+    for (const name of await listDirectories(join(root, directory), group === "dev")) {
       if (!/^[a-z][a-z0-9.-]*$/.test(name) || name.includes("..") || name.endsWith(".")) {
         throw new Error(`Invalid theme name: ${group}/${name}`);
       }
 
       if (names.has(name)) {
-        throw new Error(`Duplicate theme name ${name}: production and local themes share palette report paths`);
+        throw new Error(`Duplicate theme name ${name}: prod and dev themes share palette report paths`);
       }
 
       names.add(name);
@@ -72,12 +72,12 @@ export async function discoverTargets(root) {
         name,
         directory: `${directory}/${name}`,
         reportDirectory: `docs/palettes/generated-reports/${name}`,
-        output: `${group === "production" ? "themes" : "dev/themes"}/cassidy-dark-color-theme${group === "production" && name === "default" ? "" : `-${name}`}.json`,
+        output: `${group === "prod" ? "themes" : "dev/themes"}/cassidy-dark-color-theme${group === "prod" && name === "default" ? "" : `-${name}`}.json`,
       });
     }
   }
 
-  if (!targets.some((target) => target.group === "production" && target.name === "default")) {
+  if (!targets.some((target) => target.group === "prod" && target.name === "default")) {
     throw new Error(`Missing required default theme: ${defaultThemeDirectory}`);
   }
 
@@ -129,7 +129,7 @@ export function themeUiType(metadata, label) {
   return themeTypes.get(metadata.type);
 }
 
-export function themeContribution(target, metadata) {
+export function prodThemeContribution(target, metadata) {
   const name = target.name
     .split("-")
     .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
