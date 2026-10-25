@@ -46,7 +46,7 @@ docs/
 images/                          # Images shipped with the extension
 scripts/
   themes/                        # Production and local palette/theme builds and checks
-  local-extensions/              # Local preview extension manifests and asset links
+  local-extension/               # Local preview extension manifests and asset links
   release/                       # Packaging and publishing
   shared/                        # Shared color, palette, and JSONC logic
 src/
