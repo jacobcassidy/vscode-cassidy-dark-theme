@@ -4,6 +4,10 @@ All notable changes to this project are documented in this file.
 
 ## [Unreleased]
 
+### Changed
+
+- Moved syntax highlighting samples from `dev/grammar-samples/` to `docs/grammar-samples/`.
+
 ### Added
 
 - Moved generated palette reports into each source theme’s `colors/generated-palette/` directory.
