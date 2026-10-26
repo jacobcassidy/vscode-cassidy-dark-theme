@@ -6,6 +6,7 @@ All notable changes to this project are documented in this file.
 
 ### Changed
 
+- Grouped generated file paths by theme in build output and limited blank lines to separators between theme and build summaries.
 - Moved generated development themes and static snapshots under `dev-extension/`.
 - Moved syntax highlighting samples from `dev/grammar-samples/` to `docs/grammar-samples/`.
 

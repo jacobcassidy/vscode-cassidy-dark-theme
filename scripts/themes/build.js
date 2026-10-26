@@ -754,19 +754,81 @@ export async function buildDevThemes({ root = defaultRoot, check = false } = {})
   return result.targets;
 }
 
+/**
+ * Print a build summary and its changed files, separating target groups and following summaries.
+ *
+ * @param summary - Summary line to print before the generated paths.
+ * @param targets - Theme targets and their changed output paths.
+ * @param changedFiles - All changed output paths counted in the summary.
+ * @param hasFollowingSummary - Whether another build summary follows this one.
+ */
+function logSummary(summary, targets, changedFiles, hasFollowingSummary) {
+  console.log(styled(summary, styles.green));
+
+  /** Changed output paths assigned to a specific theme target. */
+  const assigned = new Set(targets.flatMap((target) => target.changed));
+
+  for (const [index, target] of targets.entries()) {
+    for (const path of target.changed) console.log(`  ${path}`);
+
+    /** Whether a later target has output paths to print. */
+    const hasFollowingTarget = targets.slice(index + 1).some((next) => next.changed.length > 0);
+
+    if (target.changed.length > 0 && hasFollowingTarget) console.log();
+  }
+
+  for (const path of changedFiles) {
+    if (!assigned.has(path)) console.log(`  ${path}`);
+  }
+
+  if (hasFollowingSummary) console.log();
+}
+
 if (import.meta.main) {
   try {
     /** Command-line options validated before selecting a build mode. */
     const flags = process.argv.slice(2);
+    /** Whether to build prod and dev targets in sequence in one process. */
+    const all = flags.includes("--all");
 
     if (
-      flags.some((flag) => !["--check", "--palette-only", "--dev"].includes(flag)) ||
-      (flags.includes("--dev") && flags.includes("--palette-only"))
+      flags.some((flag) => !["--check", "--palette-only", "--dev", "--all"].includes(flag)) ||
+      (flags.includes("--dev") && flags.includes("--palette-only")) ||
+      (all && (flags.includes("--dev") || flags.includes("--palette-only")))
     ) {
-      throw new Error("Usage: node scripts/themes/build.js [--check] [--palette-only | --dev]");
+      throw new Error("Usage: node scripts/themes/build.js [--check] [--palette-only | --dev | --all]");
     }
 
-    if (flags.includes("--dev")) {
+    if (all) {
+      const check = flags.includes("--check");
+
+      console.log(styled(`${check ? "Checking" : "Building"} prod themes...`, styles.yellow));
+
+      /** Production build result with per-target paths and aggregate changed paths. */
+      const prod = await buildProdThemes({ check });
+
+      logSummary(
+        `${check ? "Validated" : "Built"} ${prod.targets.length} prod themes; ${prod.changed.length} generated files updated.`,
+        prod.targets,
+        prod.changed,
+        true,
+      );
+
+      console.log(styled(`${check ? "Checking" : "Building"} dev themes...`, styles.yellow));
+
+      /** Development target summaries returned to the command-line entry point. */
+      const targets = await buildDevThemes({ check });
+
+      /** Changed generated paths from all development targets. */
+      const changedFiles = targets.flatMap((target) => target.changed);
+
+      logSummary(
+        `${check ? "Validated" : "Built"} ${targets.length} dev themes; ${changedFiles.length} generated files updated.`,
+        targets,
+        changedFiles,
+        false,
+      );
+    } else if (flags.includes("--dev")) {
       const check = flags.includes("--check");
 
       console.log(styled(`${check ? "Checking" : "Building"} dev themes...`, styles.yellow));
@@ -777,14 +839,12 @@ if (import.meta.main) {
       /** Changed generated paths from all development targets. */
       const changedFiles = targets.flatMap((target) => target.changed);
 
-      console.log(
-        styled(
-          `${check ? "Validated" : "Built"} ${targets.length} dev themes; ${changedFiles.length} generated files updated.`,
-          styles.green,
-        ),
+      logSummary(
+        `${check ? "Validated" : "Built"} ${targets.length} dev themes; ${changedFiles.length} generated files updated.`,
+        targets,
+        changedFiles,
+        false,
       );
-
-      for (const path of changedFiles) console.log(`  ${path}`);
     } else {
       const paletteOnly = flags.includes("--palette-only");
       const check = flags.includes("--check");
@@ -802,17 +862,13 @@ if (import.meta.main) {
         paletteOnly,
       });
 
-      console.log(
-        styled(
-          `${check ? "Validated" : "Built"} ${result.targets.length} prod themes; ${result.changed.length} generated files updated.`,
-          styles.green,
-        ),
+      logSummary(
+        `${check ? "Validated" : "Built"} ${result.targets.length} prod themes; ${result.changed.length} generated files updated.`,
+        result.targets,
+        result.changed,
+        false,
       );
-
-      for (const path of result.changed) console.log(`  ${path}`);
     }
-
-    console.log();
   } catch (error) {
     console.error(styled(error.message, styles.red));
     process.exitCode = 1;

@@ -63,7 +63,7 @@
     ]
   },
   "scripts": {
-    "build": "npm run build:prod && npm run build:dev",
+    "build": "node scripts/themes/build.js --all",
     "build:dev": "node scripts/themes/build.js --dev",
     "build:palette": "node scripts/themes/build.js --palette-only",
     "build:prod": "node scripts/themes/build.js",
