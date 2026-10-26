@@ -22,10 +22,10 @@ function identifier(value, label) {
  * @param target - Requested OKLCH color before gamut limiting or overrides.
  * @param resolved - Color after gamut limiting or an authored override.
  * @param [hex] - Short or full hexadecimal sRGB color.
- * @param reason - Explanation attached to a deliberate color override.
+ * @param [colorReason] - Explanation attached to a deliberate color override.
  */
-function record(target, resolved, hex = toHex(resolved), reason) {
-  return { target, resolved, hex, exported: fromHex(hex), ...(reason ? { reason } : {}) };
+function record(target, resolved, hex = toHex(resolved), colorReason) {
+  return { target, resolved, hex, exported: fromHex(hex), ...(colorReason ? { colorReason } : {}) };
 }
 
 /**
@@ -65,16 +65,15 @@ export function generatePalette(config) {
     /** Requested color with chroma limited to the allowed gamut fraction. */
     const resolved = { ...target, c: Math.min(target.c, fraction * maxChroma(target.l, target.h)) };
 
-    if (!override) {
+    if (!Object.hasOwn(overrides, id)) {
       colors.set(id, record(target, resolved));
-
       return;
     }
 
-    fields(override, ["hex", "oklch", "reason"], `override ${id}`);
+    fields(override, ["hex", "oklch", "colorReason"], `override ${id}`);
 
-    if (typeof override.reason !== "string" || !override.reason.trim()) {
-      throw new Error(`override ${id}: a reason is required`);
+    if (typeof override.colorReason !== "string" || !override.colorReason.trim()) {
+      throw new Error(`override ${id}: a colorReason is required`);
     }
 
     if (Object.hasOwn(override, "hex") === Object.hasOwn(override, "oklch")) {
@@ -86,15 +85,13 @@ export function generatePalette(config) {
 
       /** Normalized literal hex supplied by a documented override. */
       const hex = normalizeHex(override.hex);
-
-      colors.set(id, record(target, fromHex(hex), hex, override.reason));
+      colors.set(id, record(target, fromHex(hex), hex, override.colorReason));
     } else {
       validateOklch(override.oklch, id);
 
       /** OKLCH override limited to the full sRGB gamut. */
       const color = { ...override.oklch, c: Math.min(override.oklch.c, maxChroma(override.oklch.l, override.oklch.h)) };
-
-      colors.set(id, record(override.oklch, color, toHex(color), override.reason));
+      colors.set(id, record(override.oklch, color, toHex(color), override.colorReason));
     }
   }
 
@@ -148,7 +145,6 @@ export function generatePalette(config) {
 
   for (const [tone, l] of neutrals) {
     if (!/^[a-z0-9-]+$/i.test(tone)) throw new Error(`invalid neutral ID ${tone}`);
-
     number(l, 0, 1, `neutral ${tone}`);
     add(`palette.gray.${tone}`, { l, c: 0, h: 0 });
   }

@@ -9,6 +9,7 @@ import { mkdir, readFile, realpath, rename, rm, writeFile } from "node:fs/promis
 import { join } from "node:path";
 import { setTimeout as delay } from "node:timers/promises";
 import test from "node:test";
+import { stripVTControlCharacters } from "node:util";
 import { parse } from "jsonc-parser";
 import { syncDevExtension } from "../scripts/dev-extension/sync.js";
 import { watchThemes } from "../scripts/themes/watch.js";
@@ -46,7 +47,7 @@ function captureLogs() {
        *
        * @param message - Diagnostic or log message to record.
        */
-      log: (message) => logs.push(message),
+      log: (message = "") => logs.push(stripVTControlCharacters(message)),
 
       /**
        * Capture a watcher error message for later assertions.
@@ -116,7 +117,10 @@ test("watch builds both groups on startup and syncs linked dev theme registratio
       ["Dev Fixture Dev (Sample)", true],
     ],
   );
-  assert.equal(await realpath(join(project.extensionDirectory, "dev")), await realpath(join(project.root, "dev")));
+  assert.equal(
+    await realpath(join(project.extensionDirectory, "dev-extension")),
+    await realpath(join(project.root, "dev-extension")),
+  );
   await project.controller.close();
 });
 
@@ -131,7 +135,10 @@ test("watch rebuilds prod and inherited dev colors and follows repeated replacem
     /** Build count recorded before or during a simulated source change. */
     const count = project.builds();
 
-    await writeFile(`${input}.tmp`, JSON.stringify({ colors: { "editor.background": color } }));
+    await writeFile(
+      `${input}.tmp`,
+      JSON.stringify({ "editor.background": { color, colorReason: "Replacement save preview." } }),
+    );
     await rename(`${input}.tmp`, input);
     await waitFor(() => project.builds() > count);
 
@@ -161,7 +168,7 @@ test("watch rebuilds dev overrides, refreshes metadata registrations, and preser
   await mkdir(join(project.root, "src/themes/dev/sample/tokens"));
   await writeFile(
     join(project.root, "src/themes/dev/sample/tokens/ui.jsonc"),
-    '{"colors":{"editor.background":"#010203"}}',
+    '{"editor.background":{"color":"#010203","colorReason":"Dev preview background."}}',
   );
   await writeFile(join(project.root, "src/themes/dev/sample/metadata.jsonc"), '{"name":"Renamed","type":"light"}');
   await waitFor(() => project.builds() > count);
@@ -189,15 +196,11 @@ test("watch discovers a dev source tree created after startup", async (t) => {
 
   /** Build count recorded before or during a simulated source change. */
   const count = project.builds();
-
   await mkdir(join(project.root, "src/themes/dev/new"), { recursive: true });
   await waitFor(() => project.builds() > count);
 
   /** Generated palette report inspected for target provenance. */
-  const report = JSON.parse(
-    await readFile(join(project.root, "src/themes/dev/new/colors/generated-palette/palette.json")),
-  );
-
+  const report = JSON.parse(await readFile(join(project.root, "src/themes/dev/new/palette/generated/palette.json")));
   assert.equal(report.generated.target, "dev/new");
   assert.equal(report.generated.fallback, true);
   assert.deepEqual(project.errors, []);
@@ -228,7 +231,6 @@ test("watch preserves outputs after invalid source and recovers on the next save
 
   /** Build count recorded before or during a simulated source change. */
   const count = project.builds();
-
   await writeFile(source, '{"name":');
   await waitFor(() => project.errors.length > 0);
   assert.equal(await readFile(themePath, "utf8"), theme);
@@ -253,7 +255,7 @@ test("watch ignores generated output changes and unrelated source directories", 
     join(project.root, "dev-extension/themes/cassidy-dark-color-theme-sample.json"),
     "// Edited output\n",
   );
-  await writeFile(join(project.root, "src/themes/dev/sample/colors/generated-palette/palette.md"), "Edited report\n");
+  await writeFile(join(project.root, "src/themes/dev/sample/palette/generated/palette.md"), "Edited report\n");
   await mkdir(join(project.root, "src/unrelated"));
   await writeFile(join(project.root, "src/unrelated/input.jsonc"), "{}");
   await delay(150);
@@ -274,23 +276,19 @@ test("watch keeps stale-output safeguards when a dev target is removed", async (
 
   /** Development output contents expected to survive stale-target rejection. */
   const devTheme = await readFile(devThemePath, "utf8");
-
   await rm(join(project.root, "src/themes/dev/sample"), { recursive: true });
   await waitFor(() => project.errors.length > 0);
   assert.match(project.errors[0], /Stale generated outputs/);
   assert.equal(await readFile(devThemePath, "utf8"), devTheme);
   await rm(devThemePath);
-  await rm(join(project.root, "src/themes/dev/sample/colors/generated-palette"), { recursive: true });
 
   /** Metadata input path changed to exercise watcher recovery or registration updates. */
   const source = join(project.root, "src/themes/prod/default/metadata.jsonc");
-
   await writeFile(source, await readFile(source, "utf8"));
   await waitFor(() => project.builds() > count);
 
   /** Preview manifest contents used for registration or preservation assertions. */
   const manifest = JSON.parse(await readFile(join(project.extensionDirectory, "package.json"), "utf8"));
-
   assert.equal(manifest.contributes.themes.length, 1);
   assert.equal(project.reminders(), 2);
   await project.controller.close();
@@ -348,7 +346,6 @@ function createScheduler(t, project, overrides = {}) {
        */
       buildProdThemes: async () => {
         calls.push("prod");
-
         return { changed: [], targets: [{}] };
       },
 
@@ -359,7 +356,6 @@ function createScheduler(t, project, overrides = {}) {
        */
       buildDevThemes: async () => {
         calls.push("dev");
-
         return [{ changed: [] }];
       },
 
@@ -371,7 +367,6 @@ function createScheduler(t, project, overrides = {}) {
        */
       syncDevExtension: async (options) => {
         calls.push("sync");
-
         return syncDevExtension(options);
       },
       ...overrides,
@@ -398,16 +393,15 @@ test("watch debounces burst saves and ignores paths outside both source trees", 
 
   /** Controllable watcher and captured service calls for scheduler assertions. */
   const scheduler = createScheduler(t, project);
-
   await scheduler.controller.ready;
   scheduler.notify("change", "unrelated/input.jsonc");
   scheduler.notify("change", "../dev-extension/themes/generated.json");
-  scheduler.notify("change", "../src/themes/dev/test/colors/generated-palette/palette.json");
+  scheduler.notify("change", "themes/dev/test/palette/generated/palette.json");
+  scheduler.notify("rename", "themes/dev/test/palette/generated");
+  scheduler.notify("change", "themes\\dev\\test\\palette\\generated\\palette.md");
   await delay(60);
   assert.equal(scheduler.builds(), 1);
-
   for (let index = 0; index < 10; index++) scheduler.notify("change", "themes/dev/test/tokens/ui.jsonc");
-
   await waitFor(() => scheduler.builds() === 2);
   await delay(60);
   assert.deepEqual(scheduler.calls, ["prod", "dev", "sync", "prod", "dev", "sync"]);
@@ -467,7 +461,6 @@ test("watch retries when a native event has no filename and accepts Windows path
 
   /** Controllable watcher and captured service calls for scheduler assertions. */
   const scheduler = createScheduler(t, project);
-
   await scheduler.controller.ready;
   scheduler.notify("rename", undefined);
   await waitFor(() => scheduler.builds() === 2);
@@ -496,9 +489,7 @@ for (const stage of ["prod", "dev", "sync"]) {
        */
       buildProdThemes: async () => {
         calls.push("prod");
-
         if (failing && stage === "prod") throw new Error("Invalid prod source");
-
         return { changed: [], targets: [{}] };
       },
 
@@ -509,9 +500,7 @@ for (const stage of ["prod", "dev", "sync"]) {
        */
       buildDevThemes: async () => {
         calls.push("dev");
-
         if (failing && stage === "dev") throw new Error("Invalid dev source");
-
         return [];
       },
 
@@ -523,9 +512,7 @@ for (const stage of ["prod", "dev", "sync"]) {
        */
       syncDevExtension: async (options) => {
         calls.push("sync");
-
         if (failing && stage === "sync") throw new Error("Cannot sync dev extension");
-
         return syncDevExtension(options);
       },
     });
@@ -559,7 +546,6 @@ test("watch shutdown cancels pending rebuilds and waits for an active build", as
      */
     buildProdThemes: async () => {
       await release.promise;
-
       return { changed: [], targets: [{}] };
     },
   });
@@ -592,12 +578,10 @@ test("watch reports native watcher failures and closes cleanly", async (t) => {
 
   /** Controllable watcher and captured service calls for scheduler assertions. */
   const scheduler = createScheduler(t, project);
-
   await scheduler.controller.ready;
 
   /** Synthetic native watcher failure used to verify error shutdown. */
   const error = new Error("Native watcher unavailable");
-
   scheduler.events.emit("error", error);
   assert.equal(await scheduler.controller.closed, error);
   assert.equal(scheduler.didClose(), true);

@@ -1,0 +1,943 @@
+{
+  "activityBar.activeBackground": {
+    "for": "Active activity bar item backgrounds."
+  },
+  "activityBar.background": {
+    "for": "Activity bar backgrounds."
+  },
+  "activityBar.dropBorder": {
+    "for": "Activity bar drag and drop indicators.",
+    "inherits": [
+      "activityBar.foreground"
+    ]
+  },
+  "activityBar.foreground": {
+    "for": "Active activity bar icons."
+  },
+  "activityBar.inactiveForeground": {
+    "for": "Inactive activity bar icons.",
+    "inherits": [
+      "activityBar.foreground"
+    ]
+  },
+  "activityBarBadge.background": {
+    "for": "Activity bar notification badge backgrounds."
+  },
+  "activityBarBadge.foreground": {
+    "for": "Activity bar notification badge text."
+  },
+  "badge.background": {
+    "for": "Count badge backgrounds, such as Problems totals."
+  },
+  "badge.foreground": {
+    "for": "Count badge text."
+  },
+  "button.background": {
+    "for": "Primary button backgrounds."
+  },
+  "button.foreground": {
+    "for": "Primary button text."
+  },
+  "button.hoverBackground": {
+    "for": "Primary button backgrounds on hover.",
+    "inherits": [
+      "button.background"
+    ]
+  },
+  "button.secondaryBackground": {
+    "for": "Secondary button backgrounds.",
+    "inherits": [
+      "list.hoverBackground"
+    ]
+  },
+  "button.secondaryForeground": {
+    "for": "Secondary button text.",
+    "inherits": [
+      "foreground"
+    ]
+  },
+  "button.secondaryHoverBackground": {
+    "for": "Secondary button backgrounds on hover.",
+    "inherits": [
+      "list.hoverBackground"
+    ]
+  },
+  "charts.green": {
+    "for": "Green chart markers, including source control graphs."
+  },
+  "charts.orange": {
+    "for": "Orange chart markers, including source control graphs."
+  },
+  "charts.purple": {
+    "for": "Purple chart markers, including source control graphs."
+  },
+  "debugIcon.pauseForeground": {
+    "for": "Debug toolbar icon for pause."
+  },
+  "debugIcon.restartForeground": {
+    "for": "Debug toolbar icon for restart."
+  },
+  "debugIcon.startForeground": {
+    "for": "Debug toolbar icon for start debugging."
+  },
+  "debugIcon.stopForeground": {
+    "for": "Debug toolbar icon for stop."
+  },
+  "debugToolBar.background": {
+    "for": "Debug toolbar background color."
+  },
+  "diffEditor.diagonalFill": {
+    "for": "Color of the diff editor's diagonal fill."
+  },
+  "diffEditor.insertedLineBackground": {
+    "for": "Background color for lines that got inserted."
+  },
+  "diffEditor.insertedTextBackground": {
+    "for": "Background color for text that got inserted."
+  },
+  "diffEditor.removedLineBackground": {
+    "for": "Background color for lines that got removed."
+  },
+  "diffEditor.removedTextBackground": {
+    "for": "Background color for text that got removed."
+  },
+  "diffEditor.unchangedCodeBackground": {
+    "for": "The background color of unchanged code in the diff editor."
+  },
+  "diffEditor.unchangedRegionBackground": {
+    "for": "The background color of unchanged blocks in the diff editor.",
+    "inherits": [
+      "sideBar.background"
+    ]
+  },
+  "diffEditor.unchangedRegionForeground": {
+    "for": "The foreground color of unchanged blocks in the diff editor.",
+    "inherits": [
+      "foreground"
+    ]
+  },
+  "diffEditor.unchangedRegionShadow": {
+    "for": "The color of the shadow around unchanged region widgets."
+  },
+  "diffEditorGutter.insertedLineBackground": {
+    "for": "Background color for the margin where lines got inserted."
+  },
+  "diffEditorGutter.removedLineBackground": {
+    "for": "Background color for the margin where lines got removed."
+  },
+  "disabledForeground": {
+    "for": "Disabled workbench text and icons."
+  },
+  "dropdown.background": {
+    "for": "Dropdown background."
+  },
+  "dropdown.border": {
+    "for": "Dropdown border.",
+    "inherits": [
+      "dropdown.background"
+    ]
+  },
+  "dropdown.foreground": {
+    "for": "Dropdown foreground."
+  },
+  "dropdown.listBackground": {
+    "for": "Dropdown list background.",
+    "inherits": [
+      "dropdown.background"
+    ]
+  },
+  "editor.background": {
+    "for": "Editor backgrounds."
+  },
+  "editor.findMatchBackground": {
+    "for": "Current search match backgrounds."
+  },
+  "editor.findMatchForeground": {
+    "for": "Current search match text."
+  },
+  "editor.findMatchHighlightBackground": {
+    "for": "Other search match backgrounds."
+  },
+  "editor.findMatchHighlightForeground": {
+    "for": "Other search match text."
+  },
+  "editor.findRangeHighlightBackground": {
+    "for": "Selected search range backgrounds."
+  },
+  "editor.foldBackground": {
+    "for": "Background color behind folded ranges.",
+    "inherits": [
+      "editor.selectionBackground"
+    ]
+  },
+  "editor.foldPlaceholderForeground": {
+    "for": "Collapsed code placeholders."
+  },
+  "editor.foreground": {
+    "for": "Default editor text."
+  },
+  "editor.hoverHighlightBackground": {
+    "for": "Highlight below the word for which a hover is shown."
+  },
+  "editor.lineHighlightBackground": {
+    "for": "Background color for the highlight of line at the cursor position."
+  },
+  "editor.lineHighlightBorder": {
+    "for": "Background color for the border around the line at the cursor position."
+  },
+  "editor.rangeHighlightBackground": {
+    "for": "Background color of highlighted ranges, like by quick open and find features."
+  },
+  "editor.selectionBackground": {
+    "for": "Color of the editor selection."
+  },
+  "editor.wordHighlightBackground": {
+    "for": "Background color of a symbol during read-access, like reading a variable."
+  },
+  "editor.wordHighlightStrongBackground": {
+    "for": "Background color of a symbol during write-access, like writing to a variable."
+  },
+  "editorBracketMatch.border": {
+    "for": "Color for matching brackets boxes."
+  },
+  "editorCodeLens.foreground": {
+    "for": "CodeLens actions above code."
+  },
+  "editorCursor.background": {
+    "for": "The background color of the editor cursor."
+  },
+  "editorCursor.foreground": {
+    "for": "Color of the editor cursor."
+  },
+  "editorError.foreground": {
+    "for": "Foreground color of error squigglies in the editor."
+  },
+  "editorGhostText.foreground": {
+    "for": "Inline suggestion text."
+  },
+  "editorGroup.border": {
+    "for": "Color to separate multiple editor groups from each other."
+  },
+  "editorGroup.dropBackground": {
+    "for": "Background color when dragging editors around."
+  },
+  "editorGroupHeader.tabsBackground": {
+    "for": "Background color of the editor group title header when tabs are enabled."
+  },
+  "editorGutter.addedBackground": {
+    "for": "Editor gutter background color for lines that are added."
+  },
+  "editorGutter.commentRangeForeground": {
+    "for": "Comment range markers in the editor gutter.",
+    "inherits": [
+      "list.inactiveSelectionBackground",
+      "editor.background"
+    ]
+  },
+  "editorGutter.deletedBackground": {
+    "for": "Editor gutter background color for lines that are deleted.",
+    "inherits": [
+      "editorError.foreground"
+    ]
+  },
+  "editorGutter.modifiedBackground": {
+    "for": "Editor gutter background color for lines that are modified."
+  },
+  "editorHint.foreground": {
+    "for": "Foreground color of hint squigglies in the editor."
+  },
+  "editorIndentGuide.activeBackground1": {
+    "for": "Color of the active editor indentation guides (1).",
+    "inherits": [
+      "editorIndentGuide.activeBackground"
+    ]
+  },
+  "editorInfo.foreground": {
+    "for": "Foreground color of info squigglies in the editor."
+  },
+  "editorLightBulb.foreground": {
+    "for": "The color used for the lightbulb actions icon."
+  },
+  "editorLightBulbAi.foreground": {
+    "for": "The color used for the lightbulb AI icon.",
+    "inherits": [
+      "editorLightBulb.foreground"
+    ]
+  },
+  "editorLightBulbAutoFix.foreground": {
+    "for": "The color used for the lightbulb auto fix actions icon."
+  },
+  "editorLineNumber.activeForeground": {
+    "for": "Color of editor active line number.",
+    "inherits": [
+      "editorActiveLineNumber.foreground"
+    ]
+  },
+  "editorLineNumber.foreground": {
+    "for": "Color of editor line numbers."
+  },
+  "editorLink.activeForeground": {
+    "for": "Color of active links."
+  },
+  "editorOverviewRuler.addedForeground": {
+    "for": "Overview ruler marker color for added content.",
+    "inherits": [
+      "editorGutter.addedBackground"
+    ]
+  },
+  "editorOverviewRuler.background": {
+    "for": "Background color of the editor overview ruler."
+  },
+  "editorOverviewRuler.border": {
+    "for": "Color of the overview ruler border."
+  },
+  "editorOverviewRuler.bracketMatchForeground": {
+    "for": "Overview ruler marker color for matching brackets."
+  },
+  "editorOverviewRuler.deletedForeground": {
+    "for": "Overview ruler marker color for deleted content.",
+    "inherits": [
+      "editorGutter.deletedBackground"
+    ]
+  },
+  "editorOverviewRuler.errorForeground": {
+    "for": "Overview ruler marker color for errors."
+  },
+  "editorOverviewRuler.findMatchForeground": {
+    "for": "Overview ruler marker color for find matches."
+  },
+  "editorOverviewRuler.infoForeground": {
+    "for": "Overview ruler marker color for infos.",
+    "inherits": [
+      "editorInfo.foreground"
+    ]
+  },
+  "editorOverviewRuler.modifiedForeground": {
+    "for": "Overview ruler marker color for modified content.",
+    "inherits": [
+      "editorGutter.modifiedBackground"
+    ]
+  },
+  "editorOverviewRuler.selectionHighlightForeground": {
+    "for": "Overview ruler marker color for selection highlights."
+  },
+  "editorOverviewRuler.warningForeground": {
+    "for": "Overview ruler marker color for warnings.",
+    "inherits": [
+      "editorWarning.foreground"
+    ]
+  },
+  "editorOverviewRuler.wordHighlightForeground": {
+    "for": "Overview ruler marker color for symbol highlights."
+  },
+  "editorOverviewRuler.wordHighlightStrongForeground": {
+    "for": "Overview ruler marker color for write-access symbol highlights."
+  },
+  "editorRuler.foreground": {
+    "for": "Color of the editor rulers."
+  },
+  "editorStickyScroll.background": {
+    "for": "Background color of sticky scroll in the editor.",
+    "inherits": [
+      "editor.background"
+    ]
+  },
+  "editorStickyScrollHover.background": {
+    "for": "Background color of sticky scroll on hover in the editor."
+  },
+  "editorUnicodeHighlight.background": {
+    "for": "Background color used to highlight unicode characters.",
+    "inherits": [
+      "editorWarning.background"
+    ]
+  },
+  "editorUnicodeHighlight.border": {
+    "for": "Border color used to highlight unicode characters.",
+    "inherits": [
+      "editorWarning.foreground"
+    ]
+  },
+  "editorWarning.foreground": {
+    "for": "Foreground color of warning squigglies in the editor."
+  },
+  "editorWhitespace.foreground": {
+    "for": "Color of whitespace characters in the editor."
+  },
+  "editorWidget.background": {
+    "for": "Background color of editor widgets, such as find/replace."
+  },
+  "editorWidget.border": {
+    "for": "Border color of editor widgets.",
+    "inherits": [
+      "editorWidget.foreground"
+    ]
+  },
+  "errorForeground": {
+    "for": "Default error message text."
+  },
+  "extensionIcon.preReleaseForeground": {
+    "for": "The icon color for pre-release extension."
+  },
+  "extensionIcon.sponsorForeground": {
+    "for": "The icon color for extension sponsor."
+  },
+  "extensionIcon.starForeground": {
+    "for": "The icon color for extension ratings."
+  },
+  "focusBorder": {
+    "for": "Default keyboard focus borders."
+  },
+  "foreground": {
+    "for": "Default workbench text."
+  },
+  "gitDecoration.addedResourceForeground": {
+    "for": "Color for added resources."
+  },
+  "gitDecoration.deletedResourceForeground": {
+    "for": "Color for deleted resources."
+  },
+  "gitDecoration.ignoredResourceForeground": {
+    "for": "Color for ignored resources."
+  },
+  "gitDecoration.modifiedResourceForeground": {
+    "for": "Color for modified resources."
+  },
+  "gitDecoration.stageModifiedResourceForeground": {
+    "for": "Color for modified resources which have been staged."
+  },
+  "gitDecoration.untrackedResourceForeground": {
+    "for": "Color for untracked resources."
+  },
+  "icon.foreground": {
+    "for": "The default color for icons in the workbench."
+  },
+  "input.background": {
+    "for": "Input box background."
+  },
+  "input.border": {
+    "for": "Input box border."
+  },
+  "input.foreground": {
+    "for": "Input box foreground.",
+    "inherits": [
+      "foreground"
+    ]
+  },
+  "input.placeholderForeground": {
+    "for": "Input placeholder text.",
+    "inherits": [
+      "foreground"
+    ]
+  },
+  "inputOption.activeBackground": {
+    "for": "Background hover color of options in input fields.",
+    "inherits": [
+      "focusBorder"
+    ]
+  },
+  "inputOption.activeBorder": {
+    "for": "Border color of activated options in input fields."
+  },
+  "inputOption.activeForeground": {
+    "for": "Foreground color of activated options in input fields."
+  },
+  "inputOption.hoverBackground": {
+    "for": "Background color of activated options in input fields."
+  },
+  "keybindingLabel.background": {
+    "for": "Keybinding label background color."
+  },
+  "keybindingLabel.border": {
+    "for": "Keybinding label border color."
+  },
+  "keybindingLabel.bottomBorder": {
+    "for": "Keybinding label border bottom color."
+  },
+  "keybindingLabel.foreground": {
+    "for": "Keybinding label foreground color."
+  },
+  "keybindingTable.headerBackground": {
+    "for": "'Background color for the keyboard shortcuts table header.'.",
+    "inherits": [
+      "tree.tableOddRowsBackground"
+    ]
+  },
+  "list.activeSelectionBackground": {
+    "for": "List/Tree background color for the selected item when the list/tree is active."
+  },
+  "list.activeSelectionForeground": {
+    "for": "List/Tree foreground color for the selected item when the list/tree is active."
+  },
+  "list.activeSelectionIconForeground": {
+    "for": "List/Tree icon foreground color for the selected item when the list/tree is active."
+  },
+  "list.dropBackground": {
+    "for": "List/Tree drag and drop background when moving items over other items when using the mouse."
+  },
+  "list.errorForeground": {
+    "for": "Foreground color of list items containing errors."
+  },
+  "list.focusAndSelectionOutline": {
+    "for": "List/Tree outline color for the focused item when the list/tree is active and selected."
+  },
+  "list.highlightForeground": {
+    "for": "List/Tree foreground color of the match highlights when searching inside the list/tree."
+  },
+  "list.hoverBackground": {
+    "for": "List/Tree background when hovering over items using the mouse."
+  },
+  "list.hoverForeground": {
+    "for": "List/Tree foreground when hovering over items using the mouse."
+  },
+  "list.inactiveSelectionBackground": {
+    "for": "List/Tree background color for the selected item when the list/tree is inactive."
+  },
+  "list.warningForeground": {
+    "for": "Foreground color of list items containing warnings."
+  },
+  "minimap.errorHighlight": {
+    "for": "Minimap marker color for errors."
+  },
+  "minimap.findMatchHighlight": {
+    "for": "Minimap marker color for find matches.",
+    "inherits": [
+      "editor.findMatchHighlightBackground"
+    ]
+  },
+  "minimap.foregroundOpacity": {
+    "for": "Opacity of minimap text and symbols."
+  },
+  "minimap.infoHighlight": {
+    "for": "Minimap marker color for infos.",
+    "inherits": [
+      "editorInfo.foreground"
+    ]
+  },
+  "minimap.selectionHighlight": {
+    "for": "Minimap marker color for the editor selection.",
+    "inherits": [
+      "editor.selectionBackground"
+    ]
+  },
+  "minimap.selectionOccurrenceHighlight": {
+    "for": "Minimap marker color for repeating editor selections.",
+    "inherits": [
+      "editor.selectionHighlightBackground"
+    ]
+  },
+  "minimap.warningHighlight": {
+    "for": "Minimap marker color for warnings.",
+    "inherits": [
+      "editorWarning.foreground"
+    ]
+  },
+  "multiDiffEditor.headerBackground": {
+    "for": "The background color of the diff editor's header."
+  },
+  "notebook.cellBorderColor": {
+    "for": "The border color for notebook cells.",
+    "inherits": [
+      "list.inactiveSelectionBackground"
+    ]
+  },
+  "outputViewStickyScroll.background": {
+    "for": "Output view sticky scroll background color.",
+    "inherits": [
+      "outputView.background"
+    ]
+  },
+  "panel.background": {
+    "for": "Panel background color.",
+    "inherits": [
+      "editor.background"
+    ]
+  },
+  "panel.border": {
+    "for": "Panel border color to separate the panel from the editor."
+  },
+  "panel.dropBorder": {
+    "for": "Drag and drop feedback color for the panel titles.",
+    "inherits": [
+      "panelTitle.activeForeground"
+    ]
+  },
+  "panelSectionHeader.background": {
+    "for": "Panel section header background color."
+  },
+  "panelStickyScroll.background": {
+    "for": "Background color of sticky scroll in the panel.",
+    "inherits": [
+      "panel.background"
+    ]
+  },
+  "panelTitle.activeBorder": {
+    "for": "Border color for the active panel title.",
+    "inherits": [
+      "panelTitle.activeForeground"
+    ]
+  },
+  "panelTitle.activeForeground": {
+    "for": "Title color for the active panel."
+  },
+  "panelTitle.inactiveForeground": {
+    "for": "Title color for the inactive panel.",
+    "inherits": [
+      "panelTitle.activeForeground"
+    ]
+  },
+  "peekView.border": {
+    "for": "Color of the peek view borders and arrow.",
+    "inherits": [
+      "editorInfo.foreground"
+    ]
+  },
+  "peekViewTitle.background": {
+    "for": "Background color of the peek view title area."
+  },
+  "peekViewTitleDescription.foreground": {
+    "for": "Color of the peek view title info."
+  },
+  "peekViewTitleLabel.foreground": {
+    "for": "Color of the peek view title."
+  },
+  "pickerGroup.border": {
+    "for": "Quick picker color for grouping borders."
+  },
+  "pickerGroup.foreground": {
+    "for": "Quick picker color for grouping labels."
+  },
+  "profileBadge.background": {
+    "for": "Profile badge background color."
+  },
+  "profileBadge.foreground": {
+    "for": "Profile badge foreground color."
+  },
+  "progressBar.background": {
+    "for": "Background color of the progress bar that can show for long running operations."
+  },
+  "quickInputTitle.background": {
+    "for": "Quick picker title background color."
+  },
+  "scrollbar.shadow": {
+    "for": "Scrollbar shadow to indicate that the view is scrolled."
+  },
+  "scrollbarSlider.activeBackground": {
+    "for": "Scrollbar slider background color when clicked on."
+  },
+  "scrollbarSlider.background": {
+    "for": "Scrollbar slider background color."
+  },
+  "scrollbarSlider.hoverBackground": {
+    "for": "Scrollbar slider background color when hovering."
+  },
+  "selection.background": {
+    "for": "The background color of text selections in the workbench (e.g. for input fields or text areas)."
+  },
+  "settings.focusedRowBorder": {
+    "for": "The color of the row's top and bottom border when the row is focused.",
+    "inherits": [
+      "focusBorder"
+    ]
+  },
+  "settings.headerForeground": {
+    "for": "The foreground color for a section header or active title."
+  },
+  "settings.modifiedItemIndicator": {
+    "for": "The color of the modified setting indicator."
+  },
+  "sideBar.background": {
+    "for": "Side bar background color."
+  },
+  "sideBarSectionHeader.background": {
+    "for": "Side bar section header background color."
+  },
+  "sideBarSectionHeader.foreground": {
+    "for": "Side bar section header foreground color.",
+    "inherits": [
+      "sideBar.foreground"
+    ]
+  },
+  "sideBarStickyScroll.background": {
+    "for": "Background color of sticky scroll in the side bar.",
+    "inherits": [
+      "sideBar.background"
+    ]
+  },
+  "sideBarTitle.foreground": {
+    "for": "Sidebar titles, such as Explorer.",
+    "inherits": [
+      "sideBar.foreground"
+    ]
+  },
+  "simpleFindWidget.sashBorder": {
+    "for": "Border color of the sash border."
+  },
+  "statusBar.background": {
+    "for": "Status bar background color when a workspace or folder is opened."
+  },
+  "statusBar.debuggingBackground": {
+    "for": "Status bar background color when a program is being debugged.",
+    "overrides": [
+      "statusBar.background",
+      "statusBar.noFolderBackground"
+    ]
+  },
+  "statusBar.debuggingForeground": {
+    "for": "Status bar foreground color when a program is being debugged.",
+    "inherits": [
+      "statusBar.foreground"
+    ],
+    "overrides": [
+      "statusBar.foreground",
+      "statusBar.noFolderForeground"
+    ]
+  },
+  "statusBar.focusBorder": {
+    "for": "Status bar border color when focused on keyboard navigation.",
+    "inherits": [
+      "statusBar.foreground"
+    ]
+  },
+  "statusBar.foreground": {
+    "for": "Status bar foreground color when a workspace or folder is opened."
+  },
+  "statusBar.noFolderBackground": {
+    "for": "Status bar background color when no folder is opened.",
+    "overrides": [
+      "statusBar.background"
+    ]
+  },
+  "statusBar.noFolderForeground": {
+    "for": "Status bar foreground color when no folder is opened.",
+    "inherits": [
+      "statusBar.foreground"
+    ],
+    "overrides": [
+      "statusBar.foreground"
+    ]
+  },
+  "statusBarItem.focusBorder": {
+    "for": "Status bar item border color when focused on keyboard navigation.",
+    "inherits": [
+      "statusBar.foreground"
+    ]
+  },
+  "statusBarItem.hoverForeground": {
+    "for": "Status bar item foreground color when hovering.",
+    "inherits": [
+      "statusBar.foreground"
+    ]
+  },
+  "statusBarItem.remoteBackground": {
+    "for": "Background color for the remote indicator on the status bar.",
+    "inherits": [
+      "activityBarBadge.background"
+    ]
+  },
+  "statusBarItem.remoteForeground": {
+    "for": "Foreground color for the remote indicator on the status bar.",
+    "inherits": [
+      "activityBarBadge.foreground"
+    ]
+  },
+  "statusBarItem.remoteHoverBackground": {
+    "for": "Background color for the remote indicator on the status bar when hovering.",
+    "inherits": [
+      "statusBarItem.hoverBackground"
+    ]
+  },
+  "statusBarItem.remoteHoverForeground": {
+    "for": "Foreground color for the remote indicator on the status bar when hovering.",
+    "inherits": [
+      "statusBarItem.hoverForeground"
+    ]
+  },
+  "symbolIcon.classForeground": {
+    "for": "Class icons in outlines, breadcrumbs, and suggestions."
+  },
+  "symbolIcon.functionForeground": {
+    "for": "Function icons in outlines, breadcrumbs, and suggestions."
+  },
+  "symbolIcon.variableForeground": {
+    "for": "Variable icons in outlines, breadcrumbs, and suggestions."
+  },
+  "tab.activeForeground": {
+    "for": "Active tab foreground color in an active group."
+  },
+  "tab.border": {
+    "for": "Border around tabs."
+  },
+  "tab.dragAndDropBorder": {
+    "for": "Border between tabs to indicate that a tab can be inserted between two tabs.",
+    "inherits": [
+      "tab.activeForeground"
+    ]
+  },
+  "tab.hoverForeground": {
+    "for": "Tab foreground color when hovering."
+  },
+  "tab.inactiveBackground": {
+    "for": "Inactive tab background color in an active group."
+  },
+  "tab.inactiveForeground": {
+    "for": "Inactive tab foreground color in an active group.",
+    "inherits": [
+      "tab.activeForeground"
+    ]
+  },
+  "tab.unfocusedActiveForeground": {
+    "for": "Active tab foreground color in an unfocused group.",
+    "inherits": [
+      "tab.activeForeground"
+    ]
+  },
+  "tab.unfocusedHoverForeground": {
+    "for": "Tab foreground color in an unfocused group when hovering.",
+    "inherits": [
+      "tab.hoverForeground"
+    ]
+  },
+  "tab.unfocusedInactiveForeground": {
+    "for": "Inactive tab foreground color in an unfocused group.",
+    "inherits": [
+      "tab.inactiveForeground"
+    ]
+  },
+  "terminal.ansiBlack": {
+    "for": "Terminal ANSI black."
+  },
+  "terminal.ansiBlue": {
+    "for": "Terminal ANSI blue."
+  },
+  "terminal.ansiBrightBlack": {
+    "for": "Terminal ANSI bright black."
+  },
+  "terminal.ansiBrightBlue": {
+    "for": "Terminal ANSI bright blue."
+  },
+  "terminal.ansiBrightCyan": {
+    "for": "Terminal ANSI bright cyan."
+  },
+  "terminal.ansiBrightGreen": {
+    "for": "Terminal ANSI bright green."
+  },
+  "terminal.ansiBrightMagenta": {
+    "for": "Terminal ANSI bright magenta."
+  },
+  "terminal.ansiBrightRed": {
+    "for": "Terminal ANSI bright red."
+  },
+  "terminal.ansiBrightWhite": {
+    "for": "Terminal ANSI bright white."
+  },
+  "terminal.ansiBrightYellow": {
+    "for": "Terminal ANSI bright yellow."
+  },
+  "terminal.ansiCyan": {
+    "for": "Terminal ANSI cyan."
+  },
+  "terminal.ansiGreen": {
+    "for": "Terminal ANSI green."
+  },
+  "terminal.ansiMagenta": {
+    "for": "Terminal ANSI magenta."
+  },
+  "terminal.ansiRed": {
+    "for": "Terminal ANSI red."
+  },
+  "terminal.ansiWhite": {
+    "for": "Terminal ANSI white."
+  },
+  "terminal.ansiYellow": {
+    "for": "Terminal ANSI yellow."
+  },
+  "terminal.background": {
+    "for": "Terminal backgrounds in the editor, panel, or sidebar.",
+    "inherits": [
+      "editor.background",
+      "panel.background",
+      "sideBar.background"
+    ]
+  },
+  "terminal.foreground": {
+    "for": "The foreground color of the terminal."
+  },
+  "terminalOverviewRuler.cursorForeground": {
+    "for": "The overview ruler cursor color."
+  },
+  "textBlockQuote.background": {
+    "for": "Background color for block quotes in text."
+  },
+  "textBlockQuote.border": {
+    "for": "Border color for block quotes in text."
+  },
+  "textCodeBlock.background": {
+    "for": "Background color for code blocks in text."
+  },
+  "textLink.activeForeground": {
+    "for": "Foreground color for links in text when clicked on and on mouse hover."
+  },
+  "textLink.foreground": {
+    "for": "Foreground color for links in text."
+  },
+  "textPreformat.background": {
+    "for": "Background color for preformatted text segments."
+  },
+  "textPreformat.foreground": {
+    "for": "Foreground color for preformatted text segments."
+  },
+  "titleBar.activeBackground": {
+    "for": "Title bar background when the window is active."
+  },
+  "titleBar.activeForeground": {
+    "for": "Title bar foreground when the window is active."
+  },
+  "titleBar.inactiveBackground": {
+    "for": "Title bar background when the window is inactive.",
+    "inherits": [
+      "titleBar.activeBackground"
+    ]
+  },
+  "titleBar.inactiveForeground": {
+    "for": "Title bar foreground when the window is inactive.",
+    "inherits": [
+      "titleBar.activeForeground"
+    ]
+  },
+  "toolbar.hoverBackground": {
+    "for": "Toolbar background when hovering over actions using the mouse."
+  },
+  "tree.indentGuidesStroke": {
+    "for": "Tree stroke color for the indentation guides."
+  },
+  "tree.tableColumnsBorder": {
+    "for": "Table border color between columns."
+  },
+  "tree.tableOddRowsBackground": {
+    "for": "Background color for odd table rows.",
+    "inherits": [
+      "foreground"
+    ]
+  },
+  "walkthrough.stepTitle.foreground": {
+    "for": "Foreground color of the heading of each walkthrough step."
+  },
+  "welcomePage.progress.background": {
+    "for": "Welcome page progress tracks.",
+    "inherits": [
+      "input.background"
+    ]
+  },
+  "welcomePage.progress.foreground": {
+    "for": "Welcome page progress fills.",
+    "inherits": [
+      "textLink.foreground"
+    ]
+  },
+  "widget.border": {
+    "for": "Border color of widgets such as find/replace inside the editor."
+  },
+  "widget.shadow": {
+    "for": "Shadow color of widgets such as find/replace inside the editor."
+  }
+}

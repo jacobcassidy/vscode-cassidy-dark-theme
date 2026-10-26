@@ -1,7 +1,7 @@
 {
   "generated": {
     "target": "dev/v2",
-    "source": "src/themes/prod/default/colors/palette.jsonc",
+    "source": "src/themes/prod/default/palette/palette-config.jsonc",
     "fallback": true,
     "rebuild": "npm run build:dev"
   },

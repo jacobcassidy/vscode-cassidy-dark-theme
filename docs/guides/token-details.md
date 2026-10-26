@@ -1,76 +1,91 @@
-# Color variable details
+# Tokens and details
 
-`colors/variables.jsonc` in each theme source directory keeps color documentation in an optional `details` object after `color` and optional `alpha`. The builder validates this metadata and leaves it out of the generated theme and palette reports. Editing details alone does not change generated files.
+Each theme under `src/themes/{prod,dev}/<name>/` has consolidated styling in `tokens/` and independent documentation in `details/`. Both directories contain `base.jsonc`, `ui.jsonc`, `semantic.jsonc`, and `syntax.jsonc`. The default theme supplies every file. Other targets inherit omitted files independently; supplying `{}` in a details file suppresses its documentation fallback. Details are validated against the effective authored tokens, including disabled entries. Editing documentation alone leaves generated files unchanged.
 
-Comments above every level 1 and level 2 property describe where that group appears or when its colors are used. Per-variable usage and relationship data stays in `details`.
+## Token definitions and aliases
 
-```jsonc
-{
-  // Workbench controls and surfaces outside the syntax-colored text of a file.
-  "ui": {
-    // The bar of view icons beside the sidebar, such as Explorer and Search.
-    "activityBar": {
-      "dropBorder": {
-        "color": "palette.gray.white",
-        "alpha": 0.5,
-        "details": {
-          "for": "Activity bar drag and drop indicators.",
-          "inherits": ["activityBar.foreground"],
-        },
-      },
-    },
-  },
-}
-```
+| File                    | Structure and output                                                                                                                                                                                                                                                             |
+| ----------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `tokens/base.jsonc`     | Nested `surface`, `text`, `diagnostic`, and `diff` roles expose `base.*` aliases without emitting theme entries.                                                                                                                                                                 |
+| `tokens/ui.jsonc`       | Flat VS Code setting keys define color descriptors and expose `ui.<key>` aliases. Entries compile into `colors`.                                                                                                                                                                 |
+| `tokens/semantic.jsonc` | Exact selectors, including `function.defaultLibrary` and `*.readonly`, define color and/or boolean `bold`, `italic`, `underline`, and `strikethrough` flags. Entries compile into style objects in `semanticTokenColors`.                                                        |
+| `tokens/syntax.jsonc`   | An ordered array retains names, scopes, and precedence. Rules use color descriptor fields directly alongside `fontStyle`; optional `background` holds its own color descriptor. Optional unique `id` exposes the foreground as `syntax.<id>` and identifies the rule in details. |
 
-## Variable references
+Color descriptors contain `color`, optional `alpha`, and optional `colorReason`. A color references a generated palette primitive or another token alias directly, without braces. Every literal hex color requires a nonempty `colorReason`. Every palette override in `palette/palette-config.jsonc` also requires `colorReason`, which appears in generated palette records and the report's **Color reason** column. Whenever supplied, `colorReason` must be a nonempty string, including for reference colors and disabled styles.
 
-A variable's name comes from its nested path in `colors/variables.jsonc`. `color` can reference a generated palette primitive or another variable:
+For example, these two files define an alias chain:
 
 ```jsonc
+// tokens/base.jsonc
 {
   "diagnostic": {
     "error": {
       "foreground": { "color": "palette.red.500" },
     },
   },
-  "ui": {
-    "errorForeground": { "color": "diagnostic.error.foreground" },
+}
+```
+
+```jsonc
+// tokens/ui.jsonc
+{
+  "errorForeground": { "color": "base.diagnostic.error.foreground" },
+}
+```
+
+All aliases are collected before resolution, so forward and cross-section references work. An alias keeps the referenced opacity unless it supplies `alpha`, which replaces that opacity rather than multiplying it. Unknown references and cycles fail, including unused or disabled colors. References to entries without configured colors fail with a specific diagnostic. Relationships in details do not participate in color resolution.
+
+Formatting-only semantic entries are supported, including explicit `false` flags. Syntax formatting uses `fontStyle`, such as `"bold italic"` or `""` to reset formatting. Rule order and scope order are preserved.
+
+## Separate documentation
+
+Details files are flat objects keyed by base paths such as `diagnostic.error.foreground`, exact UI or semantic keys, or syntax IDs. There is no `details` wrapper:
+
+```jsonc
+// details/ui.jsonc
+{
+  "activityBar.dropBorder": {
+    "for": "Activity bar drag and drop indicators.",
+    "inherits": ["activityBar.foreground"],
   },
 }
 ```
 
-Here, `ui.errorForeground` reads `diagnostic.error.foreground`, which reads the generated primitive `palette.red.500`. A mapping in `tokens/ui.jsonc` can use either variable:
+| Field                  | Meaning                                                                                                                 |
+| ---------------------- | ----------------------------------------------------------------------------------------------------------------------- |
+| `for`                  | Nonempty description of purpose or usage.                                                                               |
+| `inherits`             | Sources used when no explicit styling applies, including transformed defaults and conditional fallbacks.                |
+| `overrides`            | Tokens this token takes precedence over, including conditional, state-specific, and component-specific relationships.   |
+| `globallyOverriddenBy` | Tokens that unconditionally replace this token across every consumer and fallback path, leaving its own styling unused. |
+
+Omit empty fields and undocumented entries. Relationship fields contain nonempty arrays of unique, nonempty token or scope names. Workbench names use VS Code IDs such as `activityBar.foreground`, without the authoring-only `ui.` prefix. Semantic names use `semantic.function`; TextMate fallback probes use `scope:support.function`. These documentation names may identify tokens absent from this theme.
+
+`globallyOverriddenBy` is a reviewed assertion. Establish complete replacement across all consumers and fallback paths before adding it. Omit it if any applicable use remains, or if replacement is limited to components, states, or surfaces. Do not infer it by reversing `overrides`. It requires the corresponding effective UI entry, semantic entry, or named syntax rule to have `disabled: true` and a nonempty `disabledReason`. Base roles reject it because they emit no theme entries. The builder validates the assertion's structure and disabling requirement, including after independent token/details fallback; it does not prove runtime precedence.
+
+The existing status bar override lists describe conditional state behavior and remain `overrides`. For example, debugging colors take precedence only while debugging colors are enabled. Default inheritance and state precedence are separate: a token may appear in both lists when it independently has both relationships. Equal colors and shared aliases do not establish either relationship.
+
+## Disabled entries
+
+UI, semantic, and syntax entries accept `disabled` (default `false`) and `disabledReason`. Base roles accept neither field. A disabled entry requires a nonempty `disabledReason`; it may omit styling and remain a documentation target. Retained styles validate normally, and configured foreground colors remain available as aliases. A valid `disabledReason` may be retained while the entry is enabled.
 
 ```jsonc
 {
-  "colors": {
-    "errorForeground": "{ui.errorForeground}",
+  "button.background": {
+    "color": "#1c6bc4",
+    "colorReason": "Maintain contrast with the button text.",
+    "disabled": true,
+    "disabledReason": "Use the default button background in this comparison.",
   },
 }
 ```
 
-The build resolves this chain into the final hex color. Unknown references and cycles fail, including in unused variables. An alias keeps its referenced opacity unless it supplies `alpha`, which replaces that opacity rather than multiplying it. Literal hex colors require a separate `reason` field.
+Generated output contains the resolved configured style as a comment:
 
-The prod default defines all six source inputs under `src/themes/prod/default/`. Other prod and dev themes may omit files to inherit those default files; supplied files replace them in full. File fallback is separate from both variable alias resolution and the upstream relationships documented below. See the [development guide](development-guide.md#adding-prod-or-dev-themes) for the complete rules.
+```jsonc
+// "button.background": "#1c6bc4" // Use the default button background in this comparison.
+```
 
-## Fields
-
-| Field       | Value                         | Meaning                                                                                                                |
-| ----------- | ----------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
-| `for`       | Brief string                  | Where the token is used.                                                                                               |
-| `inherits`  | Array of token or scope names | Sources used when this token has no explicit color, including transformed defaults and conditional consumer fallbacks. |
-| `overrides` | Array of token names          | Colors this token takes precedence over in its UI state.                                                               |
-
-Omit empty fields and omit `details` entirely when there is nothing to document. Relationship arrays contain unique, nonempty names. Keep `alpha` only when it differs from 1. Literal color exceptions still require their separate `reason` field.
-
-Workbench relationships use VS Code color IDs, such as `activityBar.foreground`, without the authoring-only `ui.` prefix. Semantic selectors use `semantic.function`, for example; `scope:support.function` identifies a TextMate fallback probe. These are documentation names, so they can reference colors and selectors that this theme does not explicitly set. Only `color` controls the actual Cassidy Dark palette/token alias.
-
-For example, `activityBar.dropBorder` defaults to `activityBar.foreground`, so it lists the foreground only in `inherits`. This fallback does not create an `overrides` entry. Relationships describe direct links; transitive dependents are not repeated.
-
-State precedence is separate: `statusBar.debuggingBackground` takes precedence over `statusBar.background` and `statusBar.noFolderBackground` while debugging colors are enabled. Those links belong in `overrides`. Omitting the debugging background from the theme uses VS Code's literal debugging default, so it has no `inherits` list.
-
-A pair can appear in both lists when it independently has both relationships. For example, `statusBar.debuggingForeground` inherits `statusBar.foreground` when omitted, and its debugging state also takes precedence over the normal foreground. The current override lists cover the status bar's debugging and empty-window backgrounds and foregrounds. Search `inherits` and `overrides` for a token ID to find its incoming relationships.
+The annotation comes only from `disabledReason`, with whitespace normalized to one line. UI and semantic placeholders without styling use commented `null`. Syntax rules are commented in full, including names, scopes, and retained settings, with the explanation on the first commented line; placeholders have empty settings. Disabled entries are absent from the parsed theme. Only explicitly disabled entries are included; missing tokens are never added automatically. Ordinary source comments are omitted from generated themes.
 
 ## Source review
 

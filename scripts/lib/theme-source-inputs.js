@@ -5,16 +5,16 @@
 
 import { readFile, readdir } from "node:fs/promises";
 import { join } from "node:path";
-import { fields, object, parseJsonc } from "./jsonc-validation.js";
+import { parseJsonc } from "./jsonc-validation.js";
 
 /** Required default source directory used for whole-file input fallback. */
 export const defaultThemeDirectory = "src/themes/prod/default";
 
-/** Metadata and token-section paths in template assembly order. */
-export const themeInputPaths = ["metadata.jsonc", "tokens/ui.jsonc", "tokens/semantic.jsonc", "tokens/syntax.jsonc"];
-
-/** Allowed top-level fields for each non-metadata theme section. */
-const sectionFields = [[], [], [], []];
+/** Required metadata, consolidated token sections, and independent documentation inputs. */
+export const themeInputPaths = [
+  "metadata.jsonc",
+  ...["base", "ui", "semantic", "syntax"].flatMap((section) => [`tokens/${section}.jsonc`, `details/${section}.jsonc`]),
+];
 
 /** Mapping from authored theme types to VS Code UI theme identifiers. */
 const themeTypes = new Map([
@@ -35,7 +35,6 @@ export async function readOptional(path) {
     return await readFile(path, "utf8");
   } catch (error) {
     if (error.code === "ENOENT") return undefined;
-
     throw error;
   }
 }
@@ -55,7 +54,6 @@ export async function listDirectories(path, optional = false) {
       .sort();
   } catch (error) {
     if (optional && error.code === "ENOENT") return [];
-
     throw error;
   }
 }
@@ -74,7 +72,6 @@ export async function listFiles(path) {
       .sort();
   } catch (error) {
     if (error.code === "ENOENT") return [];
-
     throw error;
   }
 }
@@ -110,7 +107,7 @@ export async function discoverTargets(root) {
         group,
         name,
         directory: `${directory}/${name}`,
-        reportDirectory: `${directory}/${name}/colors/generated-palette`,
+        reportDirectory: `${directory}/${name}/palette/generated`,
         output: `${group === "prod" ? "themes" : "dev-extension/themes"}/cassidy-dark-color-theme${group === "prod" && name === "default" ? "" : `-${name}`}.json`,
       });
     }
@@ -149,48 +146,11 @@ export async function readTargetInput(root, target, relative) {
 
   /** Target and input path context included in validation errors. */
   const label = `${target.group}/${target.name}: ${path}${fallback ? " (default fallback)" : ""}`;
-
   if (source === undefined) throw new Error(`${label}: missing required theme input`);
 
   /** Parsed input value and its source syntax tree. */
   const parsed = parseJsonc(source, label);
-
   return { ...parsed, source, path, label, fallback };
-}
-
-/**
- * Validate a metadata or token section against its position in the theme input list.
- *
- * @param input - Parsed input and its source metadata, or the value used by a grammar probe.
- * @param index - Position of the section in the ordered theme input list.
- */
-export function validateThemePart(input, index) {
-  if (index === 0) {
-    object(input.value, input.label);
-    themeUiType(input.value, input.label);
-
-    return;
-  }
-
-  if (index === 3) {
-    if (!Array.isArray(input.value)) throw new Error(`${input.label} must contain a token color array`);
-
-    return;
-  }
-
-  if (index === 1 || index === 2) {
-    object(input.value, input.label);
-  } else {
-    fields(input.value, sectionFields[index], input.label);
-  }
-
-  if (index === 1) {
-    for (const [key, value] of Object.entries(input.value)) {
-      if (typeof value !== "string") throw new Error(`${input.label}.${key} must be a string`);
-    }
-  }
-
-  if (index === 2) object(input.value, input.label);
 }
 
 /**

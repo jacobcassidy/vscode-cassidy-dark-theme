@@ -7,8 +7,8 @@ import { mkdir, mkdtemp, readFile, readdir, rm, writeFile } from "node:fs/promis
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
-import { parseTree } from "jsonc-parser";
-import { assembleThemeTemplate } from "../scripts/themes/build.js";
+import { parseJsonc } from "../scripts/lib/jsonc-validation.js";
+import { themeInputPaths } from "../scripts/lib/theme-source-inputs.js";
 
 /** Create a small palette configuration with chromatic families and neutral endpoints. */
 export function createPaletteConfig() {
@@ -20,87 +20,65 @@ export function createPaletteConfig() {
   };
 }
 
-/** Comment-bearing theme fixture with references in each supported color section. */
-export const themeTemplate = `{
-  "name": "Fixture",
-  "type": "dark",
-  "colors": {
-    // Keep comments, including disabled {missing.reference} examples.
-    "editor.background": "{surface.editor}", "editor.foreground": "{syntax.string}"
-  },
-  "semanticHighlighting": true,
-  "semanticTokenColors": {
-    "variable": "{syntax.string}",
-    "function": { "foreground": "{syntax.string}", "italic": true }
-  },
-  "tokenColors": [{
-    "name": "Ordered scopes", "scope": ["second", "first"],
-    "settings": { "foreground": "{syntax.string}", "background": "{surface.editor}", "fontStyle": "bold italic" }
-  }]
-}`;
+/** Required default source paths without the JSONC filename extension. */
+export const themePartNames = themeInputPaths.map((path) => path.replace(/\.jsonc$/, ""));
 
-/** Ordered metadata and token-section names written by fixture builders. */
-export const themePartNames = ["metadata", "tokens/ui", "tokens/semantic", "tokens/syntax"];
+/** Create consolidated tokens exercising references, formatting, backgrounds, and scope order. */
+export function createTokens() {
+  return {
+    base: { surface: { editor: { color: "palette.gray.900" } } },
+    ui: {
+      "editor.background": { color: "base.surface.editor" },
+      "editor.foreground": { color: "syntax.string" },
+    },
+    semantic: {
+      variable: { color: "syntax.string" },
+      function: { color: "syntax.string", italic: true },
+    },
+    syntax: [
+      {
+        id: "string",
+        name: "Ordered scopes",
+        scope: ["second", "first"],
+        color: "palette.yellow.400",
+        background: { color: "base.surface.editor" },
+        fontStyle: "bold italic",
+      },
+    ],
+  };
+}
 
-/** Top-level theme properties assigned to each fixture source section. */
-const themePartGroups = {
-  metadata: ["$schema", "name", "type", "author"],
-  "tokens/ui": ["colors"],
-  "tokens/semantic": ["semanticHighlighting", "semanticTokenColors"],
-  "tokens/syntax": ["tokenColors"],
-};
-
-/**
- * Split a fixture template into source section files while preserving property source text.
- *
- * @param directory - Source or fixture directory to read or populate.
- * @param source - Source text to parse, inspect, or transform.
- */
-async function writeThemeParts(directory, source) {
-  /** Fixture template syntax tree used to retain property source slices. */
-  const tree = parseTree(source);
-
-  /** Original template properties indexed by their authored names. */
-  const properties = new Map(
-    (tree.children ?? []).map((property) => {
-      /** Property-name node paired with its original authored source text. */
-      const [key] = property.children;
-
-      return [key.value, source.slice(property.offset, property.offset + property.length)];
-    }),
-  );
-
-  await mkdir(join(directory, "tokens"), { recursive: true });
-
-  for (const name of themePartNames) {
-    /** Property source slices included in the current fixture section. */
-    const part = themePartGroups[name].map((key) => properties.get(key)).filter(Boolean);
-
-    await writeFile(join(directory, `${name}.jsonc`), `{\n${part.join(",\n")}\n}\n`);
-  }
+/** Create independent empty documentation sections. */
+export function createDetails() {
+  return { base: {}, ui: {}, semantic: {}, syntax: {} };
 }
 
 /**
- * Read a fixture’s metadata and token sections and assemble them into one theme template.
- *
- * @param directory - Source or fixture directory to read or populate.
+ * Read all effective authored inputs from a complete fixture or default theme directory.
+ * @param directory - Source directory path or URL.
+ * @returns Metadata, token sections, and separate documentation sections.
  */
 export async function readThemeParts(directory) {
-  /** Normalized fixture source path or recursively visited output path. */
+  /** Normalized source directory path. */
   const path = directory instanceof URL ? fileURLToPath(directory) : directory;
 
-  /** Fixture section source texts read in assembly order. */
-  const parts = await Promise.all(themePartNames.map((name) => readFile(join(path, `${name}.jsonc`), "utf8")));
+  /** Independently parsed metadata, tokens, and documentation. */
+  const parts = { tokens: {}, details: {} };
 
-  return assembleThemeTemplate(parts);
-}
+  for (const name of themePartNames) {
+    /** Parsed authored input with duplicate-key validation. */
+    const value = parseJsonc(await readFile(join(path, `${name}.jsonc`), "utf8"), name).value;
 
-/** Create the minimal variable groups referenced by the shared fixture template. */
-export function createVariables() {
-  return {
-    surface: { editor: { color: "palette.gray.900", alpha: 1 } },
-    syntax: { string: { color: "palette.yellow.400", alpha: 1 } },
-  };
+    if (name === "metadata") {
+      parts.metadata = JSON.parse(JSON.stringify(value));
+    } else {
+      /** Section group and name associated with this authored input. */
+      const [group, section] = name.split("/");
+      parts[group][section] = JSON.parse(JSON.stringify(value));
+    }
+  }
+
+  return parts;
 }
 
 /**
@@ -114,12 +92,32 @@ export async function createBuildProject(t) {
   const root = await mkdtemp(join(tmpdir(), "cassidy-build-"));
 
   t.after(() => rm(root, { recursive: true, force: true }));
-  await mkdir(join(root, "src/themes/prod/default/colors"), { recursive: true });
-  await writeFile(join(root, "src/themes/prod/default/colors/palette.jsonc"), JSON.stringify(createPaletteConfig()));
+  /** Complete default inputs required by all full-theme fixture builds. */
+  const inputs = {
+    metadata: { name: "Fixture", type: "dark", semanticHighlighting: true },
+    tokens: createTokens(),
+    details: createDetails(),
+  };
 
-  await writeFile(join(root, "src/themes/prod/default/colors/variables.jsonc"), JSON.stringify(createVariables()));
+  for (const directory of ["palette", "tokens", "details"]) {
+    await mkdir(join(root, "src/themes/prod/default", directory), { recursive: true });
+  }
 
-  await writeThemeParts(join(root, "src/themes/prod/default"), themeTemplate);
+  await writeFile(
+    join(root, "src/themes/prod/default/palette/palette-config.jsonc"),
+    JSON.stringify(createPaletteConfig()),
+  );
+
+  for (const name of themePartNames) {
+    /** Group and section used to select the fixture input. */
+    const [group, section] = name.split("/");
+
+    await writeFile(
+      join(root, "src/themes/prod/default", `${name}.jsonc`),
+      JSON.stringify(section ? inputs[group][section] : inputs[group]),
+    );
+  }
+
   await writeFile(
     join(root, "package.json"),
     JSON.stringify({
@@ -155,7 +153,6 @@ export async function readBuildOutputs(root) {
       entries = await readdir(join(root, relative), { withFileTypes: true });
     } catch (error) {
       if (error.code === "ENOENT") return;
-
       throw error;
     }
 
@@ -165,13 +162,14 @@ export async function readBuildOutputs(root) {
 
       if (entry.isDirectory()) {
         await visit(path);
-      } else {
+      } else if (!path.startsWith("src/") || path.includes("/palette/generated/")) {
         files.set(path, await readFile(join(root, path), "utf8"));
       }
     }
   }
 
-  for (const directory of ["themes", "dev-extension/themes", "docs/palettes"]) await visit(directory);
+  for (const directory of ["themes", "dev-extension/themes", "src/themes", "docs/references/palettes"])
+    await visit(directory);
 
   return files;
 }

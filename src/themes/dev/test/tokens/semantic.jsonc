@@ -1,41 +1,54 @@
 {
   "builtinConstant": {
-    "foreground": "#d6aaea" // -color--purple-base | example: Python boolean value
+    "color": "#d6aaea",
+    "colorReason": "-color--purple-base | example: Python boolean value"
   },
   "class": {
-    "foreground": "#89dfdf" // -color--cyan-base
+    "color": "#89dfdf",
+    "colorReason": "-color--cyan-base"
   },
   "class.builtin": {
-    "foreground": "#f8f8f8" // Such as python's str()
+    "color": "#f8f8f8",
+    "colorReason": "Such as python's str()"
   },
   "function": {
-    "foreground": "#89dfdf" // -color--cyan-base
+    "color": "#89dfdf",
+    "colorReason": "-color--cyan-base"
   },
   "function.builtin": {
-    "foreground": "#f8f8f8" // -color--gray-white || example: Python's str()
+    "color": "#f8f8f8",
+    "colorReason": "-color--gray-white || example: Python's str()"
   },
   "function.defaultLibrary": {
-    "foreground": "#f8f8f8" // -color--gray-white
+    "color": "#f8f8f8",
+    "colorReason": "-color--gray-white"
   },
   "keyword": {
-    "foreground": "#ef9182" // -color--red-base || example: Python's match keyword
+    "color": "#ef9182",
+    "colorReason": "-color--red-base || example: Python's match keyword"
   },
   "method": {
-    "foreground": "#f8f8f8" // -color--gray-white
+    "color": "#f8f8f8",
+    "colorReason": "-color--gray-white"
   },
   "namespace": {
-    "foreground": "#d6aaea" // -color--purple-base
+    "color": "#d6aaea",
+    "colorReason": "-color--purple-base"
   },
   "parameter": {
-    "foreground": "#eeae7b" // -color--orange-base
+    "color": "#eeae7b",
+    "colorReason": "-color--orange-base"
   },
   "property": {
-    "foreground": "#a2cd8b" // -color--green-base
+    "color": "#a2cd8b",
+    "colorReason": "-color--green-base"
   },
   "variable": {
-    "foreground": "#fcb7cb" // -color--pink-base
+    "color": "#fcb7cb",
+    "colorReason": "-color--pink-base"
   },
   "variable.defaultLibrary": {
-    "foreground": "#d1d1d1" // -color--gray-white-light-2
+    "color": "#d1d1d1",
+    "colorReason": "-color--gray-white-light-2"
   }
 }

@@ -8,9 +8,7 @@
       //*** MARKDOWN ***
       "markup.bold.markdown"
     ],
-    "settings": {
-      "fontStyle": "bold"
-    }
+    "fontStyle": "bold"
   },
   {
     "name": "ITALIC",
@@ -30,9 +28,7 @@
       "keyword.operator.type.annotation.ts",
       "support.type.primitive.ts"
     ],
-    "settings": {
-      "fontStyle": "italic"
-    }
+    "fontStyle": "italic"
   },
   {
     "name": "BOLD ITALIC",
@@ -40,16 +36,12 @@
       //*** MARKDOWN ***
       "markup.bold.markdown markup.italic.markdown"
     ],
-    "settings": {
-      "fontStyle": "bold italic"
-    }
+    "fontStyle": "bold italic"
   },
   // {
   //   "name": "NORMAL",
   //   "scope": [],
-  //   "settings": {
-  //     "fontStyle": ""
-  //   }
+  //   "fontStyle": ""
   // },
   {
     "name": "STRIKETHROUGH",
@@ -57,9 +49,7 @@
       //*** MARKDOWN ***
       "markup.strikethrough.markdown"
     ],
-    "settings": {
-      "fontStyle": "strikethrough"
-    }
+    "fontStyle": "strikethrough"
   },
 
   //--------------------------------------------------------------------------
@@ -84,14 +74,14 @@
       //*** XML ***
       "text.xml"
     ],
-    "settings": {
-      "foreground": "{syntax.support}"
-    }
+    "id": "support",
+    "color": "palette.gray.000"
   },
   // {
   //   "name": "GRAY WHITE-LIGHT (OKLCH 90%)",
   //   "scope": [],
-  //   "settings": { "foreground": "#dedede" }
+  //   "color": "#dedede",
+  //   "colorReason": "Retain this unused syntax color for comparison."
   // },
   {
     "name": "GRAY WHITE-LIGHT-LIGHT (OKLCH 86%)",
@@ -101,9 +91,8 @@
       //*** SHELL ***
       "meta.scope"
     ],
-    "settings": {
-      "foreground": "{syntax.defaultLibrary}"
-    }
+    "id": "defaultLibrary",
+    "color": "palette.gray.150"
   },
   {
     "name": "GRAY LIGHT (OKLCH 82%)",
@@ -115,16 +104,14 @@
       //*** HTML ***
       "entity.other.attribute-name"
     ],
-    "settings": {
-      "foreground": "{syntax.text}"
-    }
+    "id": "text",
+    "color": "palette.gray.200"
   },
   // {
   //   "name": "GRAY LIGHT-MEDIUM (OKLCH 74%)",
   //   "scope": [],
-  //   "settings": {
-  //     "foreground": "#ababab"
-  //   }
+  //   "color": "#ababab",
+  //   "colorReason": "Retain this unused syntax color for comparison."
   // },
   {
     "name": "GRAY MEDIUM (OKLCH 66%) [PUNCTUATION]",
@@ -160,9 +147,8 @@
       //*** ZSH ***
       "meta.parameter-expansion"
     ],
-    "settings": {
-      "foreground": "{syntax.punctuation}"
-    }
+    "id": "punctuation",
+    "color": "palette.gray.400"
   },
   {
     "name": "GRAY MEDIUM-DARK (OKLCH 58%) [COMMENTS]",
@@ -182,9 +168,8 @@
       "punctuation.definition.comment",
       "source.embedded"
     ],
-    "settings": {
-      "foreground": "{syntax.comment}"
-    }
+    "id": "comment",
+    "color": "palette.gray.500"
   },
   {
     "name": "GRAY DARK (OKLCH 50%)",
@@ -194,19 +179,20 @@
       //*** MARKDOWN ***
       "markup.underline.link"
     ],
-    "settings": {
-      "foreground": "{syntax.invalid}"
-    }
+    "id": "invalid",
+    "color": "palette.gray.600"
   },
   // {
   //   "name": "GRAY DARK-FADE (OKLCH 42%)",
   //   "scope": [],
-  //   "settings": { "foreground": "#4d4d4d" }
+  //   "color": "#4d4d4d",
+  //   "colorReason": "Retain this unused syntax color for comparison."
   // },
   // {
   //   "name": "GRAY FADE (OKLCH 34%)",
   //   "scope": [],
-  //   "settings": { "foreground": "#525252" }
+  //   "color": "#525252",
+  //   "colorReason": "Retain this unused syntax color for comparison."
   // },
 
   //--------------------------------------------------------------------------
@@ -238,14 +224,14 @@
       //*** SCSS ***
       "variable.parameter.url" // SCSS `to` in background: linear-gradient(to ...); -- Red in CSS. Also for background:url(../../../../assets/images/icons/icon-phone-white.svg) without quotes.
     ],
-    "settings": {
-      "foreground": "{syntax.storageType}"
-    }
+    "id": "storageType",
+    "color": "palette.blue.400"
   },
   // {
   //   "name": "BLUE 500",
   //   "scope": [],
-  //   "settings": { "foreground": "#62a1f0" }
+  //   "color": "#62a1f0",
+  //   "colorReason": "Retain this unused syntax color for comparison."
   // },
   {
     "name": "BLUE 400-muted",
@@ -263,9 +249,8 @@
       "keyword.operator.type.annotation.ts",
       "support.type.primitive.ts"
     ],
-    "settings": {
-      "foreground": "{syntax.typeHint}"
-    }
+    "id": "typeHint",
+    "color": "palette.blue.400-muted"
   },
   {
     "name": "BLUE 400 AT 50% OPACITY",
@@ -273,9 +258,9 @@
       //*** MARKDOWN ***
       "markup.strikethrough.markdown string.other.link.title.markdown"
     ],
-    "settings": {
-      "foreground": "{syntax.linkStrikethrough}"
-    }
+    "id": "linkStrikethrough",
+    "color": "palette.blue.400",
+    "alpha": 0.5019607843137255
   },
 
   {
@@ -307,9 +292,8 @@
       //*** YAML ***
       "entity.name.tag.yaml"
     ],
-    "settings": {
-      "foreground": "{syntax.function}"
-    }
+    "id": "function",
+    "color": "palette.cyan.400"
   },
 
   {
@@ -342,9 +326,8 @@
       //*** SCSS ***
       "entity.other.attribute-name.parent-selector-suffix.css punctuation" // SCSS &__name
     ],
-    "settings": {
-      "foreground": "{syntax.property}"
-    }
+    "id": "property",
+    "color": "palette.green.400"
   },
 
   {
@@ -373,9 +356,8 @@
       "meta.at-rule.keyframes entity.name.function",
       "entity.other.attribute-name.scss"
     ],
-    "settings": {
-      "foreground": "{syntax.parameter}"
-    }
+    "id": "parameter",
+    "color": "palette.orange.400"
   },
 
   {
@@ -391,9 +373,8 @@
       //*** SHELL ***
       "variable.other.assignment.shell"
     ],
-    "settings": {
-      "foreground": "{syntax.variable}"
-    }
+    "id": "variable",
+    "color": "palette.pink.400"
   },
 
   {
@@ -434,9 +415,8 @@
       //*** XML ***
       "punctuation.definition.constant.xml"
     ],
-    "settings": {
-      "foreground": "{syntax.constant}"
-    }
+    "id": "constant",
+    "color": "palette.purple.400"
   },
   {
     "name": "PURPLE 500",
@@ -444,9 +424,8 @@
       //*** DEFAULT ***
       "entity.other.attribute-name.namespace"
     ],
-    "settings": {
-      "foreground": "{syntax.attributeNamespace}"
-    }
+    "id": "attributeNamespace",
+    "color": "palette.purple.500"
   },
 
   {
@@ -463,18 +442,14 @@
       //*** SHELL ***
       "punctuation.separator.statement.and.shell" //example: &&
     ],
-    "settings": {
-      "foreground": "{syntax.keyword}"
-    }
+    "id": "keyword",
+    "color": "palette.red.400"
   },
   {
     "name": "RED 500",
     "scope": [
       //*** DEFAULT ***
-    ],
-    "settings": {
-      // "foreground": "#db6656",
-    }
+    ]
   },
 
   {
@@ -494,9 +469,8 @@
       //*** XML ***
       "meta.tag.sgml.doctype.xml"
     ],
-    "settings": {
-      "foreground": "{syntax.string}"
-    }
+    "id": "string",
+    "color": "palette.yellow.400"
   },
   {
     "name": "YELLOW 500",
@@ -504,9 +478,8 @@
       //*** MARKDOWN ***
       "markup.inline.raw.string.markdown"
     ],
-    "settings": {
-      "foreground": "{syntax.code}"
-    }
+    "id": "code",
+    "color": "palette.yellow.500"
   },
 
   //--------------------------------------------------------------------------
@@ -518,45 +491,35 @@
     "scope": [
       "source.dockerfile string"
     ],
-    "settings": {
-      "foreground": "{syntax.support}"
-    }
+    "color": "syntax.support"
   },
   {
     "name": "[DOCKERFILE] - CYAN 400",
     "scope": [
       "source.dockerfile keyword.other.special-method"
     ],
-    "settings": {
-      "foreground": "{syntax.function}"
-    }
+    "color": "syntax.function"
   },
   {
     "name": "[DOCKERFILE] - GREEN 400",
     "scope": [
       "source.dockerfile entity.name"
     ],
-    "settings": {
-      "foreground": "{syntax.property}"
-    }
+    "color": "syntax.property"
   },
   {
     "name": "[DOCKERFILE] - ORANGE 400",
     "scope": [
       "source.dockerfile constant.other.option"
     ],
-    "settings": {
-      "foreground": "{syntax.parameter}"
-    }
+    "color": "syntax.parameter"
   },
   {
     "name": "[DOCKERFILE] - RED 400",
     "scope": [
       "punctuation.separator.statement.and.shell.dockerfile"
     ],
-    "settings": {
-      "foreground": "{syntax.keyword}"
-    }
+    "color": "syntax.keyword"
   },
 
   //--------------------------------------------------------------------------
@@ -568,18 +531,14 @@
     "scope": [
       "source.nginx"
     ],
-    "settings": {
-      "foreground": "{syntax.text}"
-    }
+    "color": "syntax.text"
   },
   {
     "name": "GRAY MEDIUM (OKLCH 66%) [PUNCTUATION]",
     "scope": [
       "source.nginx constant.character"
     ],
-    "settings": {
-      "foreground": "{syntax.punctuation}"
-    }
+    "color": "syntax.punctuation"
   },
 
   {
@@ -587,27 +546,21 @@
     "scope": [
       "source.nginx constant.language.module"
     ],
-    "settings": {
-      "foreground": "{syntax.storageType}"
-    }
+    "color": "syntax.storageType"
   },
   {
     "name": "[NGINX] - CYAN 400",
     "scope": [
       "source.nginx constant.language"
     ],
-    "settings": {
-      "foreground": "{syntax.function}"
-    }
+    "color": "syntax.function"
   },
   {
     "name": "[NGINX] - RED 400",
     "scope": [
       "source.nginx constant.language.directive.module.main"
     ],
-    "settings": {
-      "foreground": "{syntax.keyword}"
-    }
+    "color": "syntax.keyword"
   },
 
   //--------------------------------------------------------------------------
@@ -619,9 +572,7 @@
     "scope": [
       "code.log support" // For "Output Colorizer" extension
     ],
-    "settings": {
-      "foreground": "{syntax.support}"
-    }
+    "color": "syntax.support"
   },
 
   {
@@ -629,9 +580,7 @@
     "scope": [
       "code.log invalid"
     ],
-    "settings": {
-      "foreground": "{syntax.keyword}"
-    }
+    "color": "syntax.keyword"
   },
 
   //--------------------------------------------------------------------------
@@ -644,27 +593,21 @@
       "comment.rainbow4",
       "invalid.rainbow10"
     ],
-    "settings": {
-      "fontStyle": ""
-    }
+    "fontStyle": ""
   },
   {
     "name": "GRAY WHITE (OKLCH 98%)",
     "scope": [
       "markup.bold.rainbow9"
     ],
-    "settings": {
-      "foreground": "{syntax.support}"
-    }
+    "color": "syntax.support"
   },
   {
     "name": "GRAY LIGHT (OKLCH 82%)",
     "scope": [
       "comment.rainbow4"
     ],
-    "settings": {
-      "foreground": "{syntax.text}"
-    }
+    "color": "syntax.text"
   },
 
   {
@@ -672,71 +615,55 @@
     "scope": [
       "constant.numeric.rainbow7"
     ],
-    "settings": {
-      "foreground": "{syntax.storageType}"
-    }
+    "color": "syntax.storageType"
   },
   {
     "name": "CYAN 400",
     "scope": [
       "rainbow1"
     ],
-    "settings": {
-      "foreground": "{syntax.function}"
-    }
+    "color": "syntax.function"
   },
   {
     "name": "GREEN 400",
     "scope": [
       "string.rainbow5"
     ],
-    "settings": {
-      "foreground": "{syntax.property}"
-    }
+    "color": "syntax.property"
   },
   {
     "name": "ORANGE 400",
     "scope": [
       "variable.parameter.rainbow6"
     ],
-    "settings": {
-      "foreground": "{syntax.parameter}"
-    }
+    "color": "syntax.parameter"
   },
   {
     "name": "PINK 400",
     "scope": [
       "entity.name.type.rainbow8"
     ],
-    "settings": {
-      "foreground": "{syntax.variable}"
-    }
+    "color": "syntax.variable"
   },
   {
     "name": "PURPLE 400",
     "scope": [
       "entity.name.function.rainbow3"
     ],
-    "settings": {
-      "foreground": "{syntax.constant}"
-    }
+    "color": "syntax.constant"
   },
   {
     "name": "RED 400",
     "scope": [
       "invalid.rainbow10"
     ],
-    "settings": {
-      "foreground": "{syntax.keyword}"
-    }
+    "color": "syntax.keyword"
   },
   {
     "name": "YELLOW 400",
     "scope": [
       "keyword.rainbow2"
     ],
-    "settings": {
-      "foreground": "{syntax.string}"
-    }
+    "color": "syntax.string"
   }
 ]

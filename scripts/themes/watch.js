@@ -23,7 +23,12 @@ const styles = {
   reset: "\u001b[0m",
 };
 
-/** Apply an ANSI style to a watcher message. */
+/**
+ * Apply an ANSI style to a status message.
+ * @param message - Status text to color.
+ * @param style - ANSI color sequence applied to the message.
+ * @returns Styled text ending with a reset sequence.
+ */
 function styled(message, style) {
   return `${style}${message}${styles.reset}`;
 }
@@ -52,12 +57,11 @@ function isThemeSource(filename) {
   /** Watcher event path normalized to forward slashes. */
   const path = filename.toString().replaceAll("\\", "/");
 
-  if (path.includes("/generated-palette/")) return false;
+  if (/\/palette\/generated(?:\/|$)/.test(path)) return false;
 
   return ["prod", "dev"].some((group) => {
     /** Theme-source directory inside the current prod or dev group. */
     const directory = `themes/${group}`;
-
     return path === "themes" || path === directory || path.startsWith(`${directory}/`);
   });
 }
@@ -155,9 +159,11 @@ export function watchThemes(
         );
       }
     } catch (error) {
+      /** Failed build message retained for diagnostic styling. */
       const message = `[watch] ${error.message}`;
-      const diagnostic = /stale/i.test(error.message) ? styled(message, styles.red) : message;
 
+      /** Stale-output errors highlighted distinctly in watcher output. */
+      const diagnostic = /stale/i.test(error.message) ? styled(message, styles.red) : message;
       logger.error(`${diagnostic}\n${styled("[watch] Waiting for the next source change to retry.", styles.dim)}`);
     }
   }
@@ -168,7 +174,6 @@ export function watchThemes(
 
     running = build().finally(() => {
       running = undefined;
-
       if (pending && !timer && !stopping) startBuild();
     });
   }

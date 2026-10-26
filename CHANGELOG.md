@@ -6,6 +6,9 @@ All notable changes to this project are documented in this file.
 
 ### Changed
 
+- Consolidated base, UI, semantic, and syntax styling and targeting into `tokens/`, with independently inherited documentation in `details/`.
+- Moved palette configuration to `palette/palette-config.jsonc` and reports to `palette/generated/`, and renamed color explanations to `colorReason`.
+- Added explicitly disabled tokens with resolved styles and explanations in generated JSONC comments, plus validation for reviewed `globallyOverriddenBy` assertions.
 - Added a leading blank line before the production build heading in combined CLI builds.
 - Colored generated theme file paths green in the build CLI while leaving report paths uncolored.
 - Removed source comments from generated theme files while keeping the generated-by notice.
@@ -14,28 +17,6 @@ All notable changes to this project are documented in this file.
 - Grouped generated file paths by theme in build output and limited blank lines to separators between theme and build summaries.
 - Moved generated development themes and static snapshots under `dev-extension/`.
 - Moved syntax highlighting samples from `dev/grammar-samples/` to `docs/grammar-samples/`.
-
-### Added
-
-- Moved generated palette reports into each source theme’s `colors/generated-palette/` directory.
-- Added JSX, TSX, Bash, Zsh, SQL, C, C++, C#, Vue, and Svelte grammar samples with mixed-language syntax, shell expansions, queries, preprocessor directives, templates, attributes, and framework-specific constructs.
-- Added `npm run watch` to rebuild prod and dev themes and sync the dev preview extension on source changes, with debounced saves, queued builds, error recovery, and graceful shutdown.
-
-- Added Go and Rust grammar samples covering generics, literals, declarations, control flow, Go concurrency and iterators, and Rust lifetimes, traits, macros, patterns, and async syntax.
-- Added HTML, Markdown, CSS, SCSS, JSON, YAML, TOML, log, NEON, Ruby, and XML grammar samples covering varied literals, punctuation, declarations, nesting, embedded languages, and language-specific syntax.
-- Added `npm run build` to build production and local themes together.
-- Added named development experiments with reusable palette/token builds, isolated generated previews and reports, historical snapshot discovery, and a `build:dev` command.
-- Added generated contrast ratios for each chromatic `600` tone against foreground `#f8f8f8` in the Markdown palette report, calculated from exported sRGB hex values.
-- Added palette and theme generation from JSONC palette inputs, semantic tokens, and a comment-preserving theme template, with generated JSON/Markdown/SVG palette references and stale-output checks in validation and packaging.
-- Added tests for color conversions, gamut limits, base chroma anchors, aliases, alpha handling, template preservation, deterministic output, and failed builds.
-- Added a color system proposal based on the v1.3 palette, with shared OKLCH variant rules, semantic color roles, an sRGB export policy, and contrast checks.
-- Added a source-based workbench color audit covering missing stable and upcoming colors, deprecated IDs, and reference entries absent from current VS Code registrations.
-- Added a TypeScript grammar sample covering advanced type operators, generics, declarations, decorators, resource management, and runtime syntax, with a samples-only compiler configuration.
-- Added JavaScript and Python grammar samples covering literals, imports, annotations, classes, control flow, generators, and asynchronous syntax.
-- Added shared local and pipeline packaging with a locked VS Code extension CLI and a Node.js 24 baseline.
-- Added JSONC theme and manifest asset validation, with tests for validation failures and development extension protections.
-
-### Changed
 
 - Added descriptive file headers and declaration JSDoc throughout the JavaScript scripts, configuration, tests, and grammar sample, with parameter documentation and ongoing requirements in `AGENTS.md`.
 - Shortened the theme script filenames to `scripts/themes/build.js`, `check.js`, and `watch.js`, updating commands, imports, usage text, and documentation.
@@ -74,6 +55,26 @@ All notable changes to this project are documented in this file.
 - Full refactor of workbench colors
 - Updated `terminal.ansiBrightBlack` to #929292 from #636363.
 - Updated semanticTokenColors namespace from purple-deep to purple-base color.
+
+### Added
+
+- Moved generated palette reports into each source theme’s `colors/generated-palette/` directory.
+- Added JSX, TSX, Bash, Zsh, SQL, C, C++, C#, Vue, and Svelte grammar samples with mixed-language syntax, shell expansions, queries, preprocessor directives, templates, attributes, and framework-specific constructs.
+- Added `npm run watch` to rebuild prod and dev themes and sync the dev preview extension on source changes, with debounced saves, queued builds, error recovery, and graceful shutdown.
+
+- Added Go and Rust grammar samples covering generics, literals, declarations, control flow, Go concurrency and iterators, and Rust lifetimes, traits, macros, patterns, and async syntax.
+- Added HTML, Markdown, CSS, SCSS, JSON, YAML, TOML, log, NEON, Ruby, and XML grammar samples covering varied literals, punctuation, declarations, nesting, embedded languages, and language-specific syntax.
+- Added `npm run build` to build production and local themes together.
+- Added named development experiments with reusable palette/token builds, isolated generated previews and reports, historical snapshot discovery, and a `build:dev` command.
+- Added generated contrast ratios for each chromatic `600` tone against foreground `#f8f8f8` in the Markdown palette report, calculated from exported sRGB hex values.
+- Added palette and theme generation from JSONC palette inputs, semantic tokens, and a comment-preserving theme template, with generated JSON/Markdown/SVG palette references and stale-output checks in validation and packaging.
+- Added tests for color conversions, gamut limits, base chroma anchors, aliases, alpha handling, template preservation, deterministic output, and failed builds.
+- Added a color system proposal based on the v1.3 palette, with shared OKLCH variant rules, semantic color roles, an sRGB export policy, and contrast checks.
+- Added a source-based workbench color audit covering missing stable and upcoming colors, deprecated IDs, and reference entries absent from current VS Code registrations.
+- Added a TypeScript grammar sample covering advanced type operators, generics, declarations, decorators, resource management, and runtime syntax, with a samples-only compiler configuration.
+- Added JavaScript and Python grammar samples covering literals, imports, annotations, classes, control flow, generators, and asynchronous syntax.
+- Added shared local and pipeline packaging with a locked VS Code extension CLI and a Node.js 24 baseline.
+- Added JSONC theme and manifest asset validation, with tests for validation failures and development extension protections.
 
 ## [1.2.1] - 2026-09-12
 

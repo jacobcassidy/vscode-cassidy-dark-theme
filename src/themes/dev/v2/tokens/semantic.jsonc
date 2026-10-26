@@ -1,62 +1,236 @@
 {
-  "*.abstract": "#ff0000",
-  "*.async": "#ff0000",
-  "*.builtin": "#ff0000",
-  "*.callable": "#ff0000",
-  "*.classMember": "#ff0000",
-  "*.declaration": "#ff0000",
-  "*.decorator": "#ff0000",
-  "*.deprecated": "#ff0000",
-  "*.documentation": "#ff0000",
-  "*.escapeCharacter": "#ff0000",
-  "*.invalid": "#ff0000",
-  "*.keywordArgument": "#ff0000",
-  "*.library": "#ff0000",
-  "*.modification": "#ff0000",
-  "*.overridden": "#ff0000",
-  "*.readonly": "#ff0000",
-  "*.static": "#ff0000",
-  "*.typeHint": "#ff0000",
-  "*.typeHintComment": "#ff0000",
-  "arrow": "#ff0000",
-  "bracket": "#ff0000",
-  "builtinConstant": "#ff0000",
-  "class": "#ff0000",
-  "clsParameter": "#ff0000",
-  "colon": "#ff0000",
-  "comment": "#ff0000",
-  "curlybrace": "#ff0000",
-  "decorator": "#ff0000",
-  "enum": "#ff0000",
-  "enumMember": "#ff0000",
-  "event": "#ff0000",
-  "function": "#ff0000",
-  "interface": "#ff0000",
-  "intrinsic": "#ff0000",
-  "keyword": "#ff0000",
-  "label": "#ff0000",
-  "macro": "#ff0000",
-  "magicFunction": "#ff0000",
-  "method": "#ff0000",
-  "module": "#ff0000",
-  "namespace": "#ff0000",
-  "number": "#ff0000",
-  "operator": "#ff0000",
-  "parameter": "#ff0000",
-  "parenthesis": "#ff0000",
-  "property": "#ff0000",
-  "regexp": "#ff0000",
-  "selfParameter": "#ff0000",
-  "semicolon": "#ff0000",
-  "string": "#ff0000",
-  "struct": "#ff0000",
-  "type": "#ff0000",
-  "typeParameter": "#ff0000",
-  "variable": "#ff0000",
+  "*.abstract": {
+    "color": "#ff0000",
+    "colorReason": "Highlight *.abstract in the semantic selector preview."
+  },
+  "*.async": {
+    "color": "#ff0000",
+    "colorReason": "Highlight *.async in the semantic selector preview."
+  },
+  "*.builtin": {
+    "color": "#ff0000",
+    "colorReason": "Highlight *.builtin in the semantic selector preview."
+  },
+  "*.callable": {
+    "color": "#ff0000",
+    "colorReason": "Highlight *.callable in the semantic selector preview."
+  },
+  "*.classMember": {
+    "color": "#ff0000",
+    "colorReason": "Highlight *.classMember in the semantic selector preview."
+  },
+  "*.declaration": {
+    "color": "#ff0000",
+    "colorReason": "Highlight *.declaration in the semantic selector preview."
+  },
+  "*.decorator": {
+    "color": "#ff0000",
+    "colorReason": "Highlight *.decorator in the semantic selector preview."
+  },
+  "*.deprecated": {
+    "color": "#ff0000",
+    "colorReason": "Highlight *.deprecated in the semantic selector preview."
+  },
+  "*.documentation": {
+    "color": "#ff0000",
+    "colorReason": "Highlight *.documentation in the semantic selector preview."
+  },
+  "*.escapeCharacter": {
+    "color": "#ff0000",
+    "colorReason": "Highlight *.escapeCharacter in the semantic selector preview."
+  },
+  "*.invalid": {
+    "color": "#ff0000",
+    "colorReason": "Highlight *.invalid in the semantic selector preview."
+  },
+  "*.keywordArgument": {
+    "color": "#ff0000",
+    "colorReason": "Highlight *.keywordArgument in the semantic selector preview."
+  },
+  "*.library": {
+    "color": "#ff0000",
+    "colorReason": "Highlight *.library in the semantic selector preview."
+  },
+  "*.modification": {
+    "color": "#ff0000",
+    "colorReason": "Highlight *.modification in the semantic selector preview."
+  },
+  "*.overridden": {
+    "color": "#ff0000",
+    "colorReason": "Highlight *.overridden in the semantic selector preview."
+  },
+  "*.readonly": {
+    "color": "#ff0000",
+    "colorReason": "Highlight *.readonly in the semantic selector preview."
+  },
+  "*.static": {
+    "color": "#ff0000",
+    "colorReason": "Highlight *.static in the semantic selector preview."
+  },
+  "*.typeHint": {
+    "color": "#ff0000",
+    "colorReason": "Highlight *.typeHint in the semantic selector preview."
+  },
+  "*.typeHintComment": {
+    "color": "#ff0000",
+    "colorReason": "Highlight *.typeHintComment in the semantic selector preview."
+  },
+  "arrow": {
+    "color": "#ff0000",
+    "colorReason": "Highlight arrow in the semantic selector preview."
+  },
+  "bracket": {
+    "color": "#ff0000",
+    "colorReason": "Highlight bracket in the semantic selector preview."
+  },
+  "builtinConstant": {
+    "color": "#ff0000",
+    "colorReason": "Highlight builtinConstant in the semantic selector preview."
+  },
+  "class": {
+    "color": "#ff0000",
+    "colorReason": "Highlight class in the semantic selector preview."
+  },
+  "clsParameter": {
+    "color": "#ff0000",
+    "colorReason": "Highlight clsParameter in the semantic selector preview."
+  },
+  "colon": {
+    "color": "#ff0000",
+    "colorReason": "Highlight colon in the semantic selector preview."
+  },
+  "comment": {
+    "color": "#ff0000",
+    "colorReason": "Highlight comment in the semantic selector preview."
+  },
+  "curlybrace": {
+    "color": "#ff0000",
+    "colorReason": "Highlight curlybrace in the semantic selector preview."
+  },
+  "decorator": {
+    "color": "#ff0000",
+    "colorReason": "Highlight decorator in the semantic selector preview."
+  },
+  "enum": {
+    "color": "#ff0000",
+    "colorReason": "Highlight enum in the semantic selector preview."
+  },
+  "enumMember": {
+    "color": "#ff0000",
+    "colorReason": "Highlight enumMember in the semantic selector preview."
+  },
+  "event": {
+    "color": "#ff0000",
+    "colorReason": "Highlight event in the semantic selector preview."
+  },
+  "function": {
+    "color": "#ff0000",
+    "colorReason": "Highlight function in the semantic selector preview."
+  },
+  "interface": {
+    "color": "#ff0000",
+    "colorReason": "Highlight interface in the semantic selector preview."
+  },
+  "intrinsic": {
+    "color": "#ff0000",
+    "colorReason": "Highlight intrinsic in the semantic selector preview."
+  },
+  "keyword": {
+    "color": "#ff0000",
+    "colorReason": "Highlight keyword in the semantic selector preview."
+  },
+  "label": {
+    "color": "#ff0000",
+    "colorReason": "Highlight label in the semantic selector preview."
+  },
+  "macro": {
+    "color": "#ff0000",
+    "colorReason": "Highlight macro in the semantic selector preview."
+  },
+  "magicFunction": {
+    "color": "#ff0000",
+    "colorReason": "Highlight magicFunction in the semantic selector preview."
+  },
+  "method": {
+    "color": "#ff0000",
+    "colorReason": "Highlight method in the semantic selector preview."
+  },
+  "module": {
+    "color": "#ff0000",
+    "colorReason": "Highlight module in the semantic selector preview."
+  },
+  "namespace": {
+    "color": "#ff0000",
+    "colorReason": "Highlight namespace in the semantic selector preview."
+  },
+  "number": {
+    "color": "#ff0000",
+    "colorReason": "Highlight number in the semantic selector preview."
+  },
+  "operator": {
+    "color": "#ff0000",
+    "colorReason": "Highlight operator in the semantic selector preview."
+  },
+  "parameter": {
+    "color": "#ff0000",
+    "colorReason": "Highlight parameter in the semantic selector preview."
+  },
+  "parenthesis": {
+    "color": "#ff0000",
+    "colorReason": "Highlight parenthesis in the semantic selector preview."
+  },
+  "property": {
+    "color": "#ff0000",
+    "colorReason": "Highlight property in the semantic selector preview."
+  },
+  "regexp": {
+    "color": "#ff0000",
+    "colorReason": "Highlight regexp in the semantic selector preview."
+  },
+  "selfParameter": {
+    "color": "#ff0000",
+    "colorReason": "Highlight selfParameter in the semantic selector preview."
+  },
+  "semicolon": {
+    "color": "#ff0000",
+    "colorReason": "Highlight semicolon in the semantic selector preview."
+  },
+  "string": {
+    "color": "#ff0000",
+    "colorReason": "Highlight string in the semantic selector preview."
+  },
+  "struct": {
+    "color": "#ff0000",
+    "colorReason": "Highlight struct in the semantic selector preview."
+  },
+  "type": {
+    "color": "#ff0000",
+    "colorReason": "Highlight type in the semantic selector preview."
+  },
+  "typeParameter": {
+    "color": "#ff0000",
+    "colorReason": "Highlight typeParameter in the semantic selector preview."
+  },
+  "variable": {
+    "color": "#ff0000",
+    "colorReason": "Highlight variable in the semantic selector preview."
+  },
 
   // Other examples - not in scheme
-  "defaultLibrary": "#ff0",
-  "parameter.readwrite": "#ff0",
-  "variable.defaultLibrary": "#ff0",
-  "variable.definition": "#ff0"
+  "defaultLibrary": {
+    "color": "#ff0",
+    "colorReason": "Highlight defaultLibrary in the semantic selector preview."
+  },
+  "parameter.readwrite": {
+    "color": "#ff0",
+    "colorReason": "Highlight parameter.readwrite in the semantic selector preview."
+  },
+  "variable.defaultLibrary": {
+    "color": "#ff0",
+    "colorReason": "Highlight variable.defaultLibrary in the semantic selector preview."
+  },
+  "variable.definition": {
+    "color": "#ff0",
+    "colorReason": "Highlight variable.definition in the semantic selector preview."
+  }
 }

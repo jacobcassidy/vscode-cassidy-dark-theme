@@ -1,29 +1,29 @@
 {
   "class": {
-    "foreground": "{semantic.class}"
+    "color": "syntax.function"
   },
   "function": {
-    "foreground": "{semantic.function}"
+    "color": "syntax.function"
   },
   "function.defaultLibrary": {
-    "foreground": "{semantic.function.defaultLibrary}"
+    "color": "syntax.support"
   },
   "method": {
-    "foreground": "{semantic.method}"
+    "color": "syntax.support"
   },
   "namespace": {
-    "foreground": "{semantic.namespace}"
+    "color": "syntax.constant"
   },
   "parameter": {
-    "foreground": "{semantic.parameter}"
+    "color": "syntax.parameter"
   },
   "property": {
-    "foreground": "{semantic.property}"
+    "color": "syntax.property"
   },
   "variable": {
-    "foreground": "{semantic.variable}"
+    "color": "syntax.variable"
   },
   "variable.defaultLibrary": {
-    "foreground": "{semantic.variable.defaultLibrary}"
+    "color": "syntax.defaultLibrary"
   }
 }

@@ -6,14 +6,14 @@
 import { readFile, mkdir, mkdtemp, rename, rm, writeFile } from "node:fs/promises";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
-import { applyEdits, modify, parseTree } from "jsonc-parser";
+import { applyEdits, modify } from "jsonc-parser";
 // Prettier's generated entry point hides its default export from the import resolver.
 // eslint-disable-next-line import-x/default
 import prettier from "prettier";
 import { object, parseJsonc } from "../lib/jsonc-validation.js";
 import { generatePalette } from "../lib/palette-generation.js";
-import { resolveTokens } from "../lib/color-variable-resolution.js";
-import { contrastRatio, validateHex } from "../lib/color-math.js";
+import { compileTokens, renderTheme } from "../lib/theme-compilation.js";
+import { contrastRatio } from "../lib/color-math.js";
 import {
   discoverTargets,
   listDirectories,
@@ -22,7 +22,7 @@ import {
   readTargetInput,
   prodThemeContribution,
   themeInputPaths,
-  validateThemePart,
+  themeUiType,
 } from "../lib/theme-source-inputs.js";
 
 /** Repository root inferred from the build module’s location. */
@@ -37,132 +37,60 @@ const styles = {
   reset: "\u001b[0m",
 };
 
-/** Apply an ANSI style to a build message. */
+/**
+ * Apply an ANSI style to a status message.
+ * @param message - Status text to color.
+ * @param style - ANSI color sequence applied to the message.
+ * @returns Styled text ending with a reset sequence.
+ */
 function styled(message, style) {
   return `${style}${message}${styles.reset}`;
 }
 
-/** Top-level token sections that must not appear in metadata inputs. */
-const themeSections = new Set(["colors", "semanticTokenColors", "tokenColors"]);
-
 /**
- * Extract top-level properties as source slices so theme comments and formatting survive assembly.
- *
- * @param source - Authored or generated JSONC source text for this build phase.
- * @param label - Human-readable context included in validation diagnostics.
- */
-function templateProperties(source, label) {
-  /** Parsed syntax tree used to preserve authored property source text. */
-  const tree = parseTree(source, [], { allowTrailingComma: true });
-
-  if (tree?.type !== "object") throw new Error(`${label} must contain a JSONC object`);
-
-  return (tree.children ?? []).map((property) => {
-    /** Property-name node paired with its original authored source text. */
-    const [key] = property.children;
-
-    return { key: key.value, source: source.slice(property.offset, property.offset + property.length) };
-  });
-}
-
-/**
- * Combine metadata and token sections while rejecting duplicate or misplaced properties.
- *
- * @param parts - Ordered source sections or tagged-template string segments.
- * @param [labels] - Source labels for the corresponding input sections.
- * @returns Combined theme source retaining the authored property text.
- */
-export function assembleThemeTemplate(parts, labels = []) {
-  /** Ordered property source slices retained during template assembly. */
-  const properties = [];
-
-  /** Top-level property names already included in the assembled template. */
-  const seen = new Set();
-
-  for (const [index, source] of parts.entries()) {
-    /** Diagnostic label for the current input section or color position. */
-    const label = labels[index] ?? `theme part ${themeInputPaths[index] ?? index + 1}`;
-
-    parseJsonc(source, label);
-
-    /** Property source slices adapted to the generated theme structure. */
-    let inputProperties;
-
-    if (index === 1 || index === 2) {
-      templateProperties(source, label);
-
-      /** Generated theme property corresponding to this flat token section. */
-      const sectionName = index === 1 ? "colors" : "semanticTokenColors";
-      /** Parsed object syntax tree used to locate the authored section body. */
-      const tree = parseTree(source, [], { allowTrailingComma: true });
-
-      /** Whitespace-preserving source body so attached comments survive wrapping. */
-      const body = source.slice(tree.offset + 1, tree.offset + tree.length - 1).trim();
-
-      inputProperties = [
-        {
-          key: sectionName,
-          source: `"${sectionName}": {\n${body
-            .split("\n")
-            .map((line) => `  ${line}`)
-            .join("\n")}\n  }`,
-        },
-      ];
-    } else if (index === 3) {
-      /** Parsed top-level array syntax tree for the token color rules. */
-      const tree = parseTree(source, [], { allowTrailingComma: true });
-
-      if (tree?.type !== "array") throw new Error(`${label} must contain a token color array`);
-
-      inputProperties = [
-        { key: "tokenColors", source: `"tokenColors": ${source.slice(tree.offset, tree.offset + tree.length)}` },
-      ];
-    } else {
-      inputProperties = templateProperties(source, label);
-    }
-
-    for (const property of inputProperties) {
-      if (seen.has(property.key)) throw new Error(`${label}: duplicate top-level theme property ${property.key}`);
-
-      if (index === 0 && themeSections.has(property.key)) {
-        throw new Error(`${label}: theme section ${property.key} belongs in its section file`);
-      }
-
-      seen.add(property.key);
-      properties.push(`  ${property.source}`);
-    }
-  }
-
-  return `{\n${properties.join(",\n")}\n}`;
-}
-
-/**
- * Read and validate a target’s effective input sections, then assemble their theme template.
- *
+ * Load independent whole-file inputs and compile one target’s effective token sections.
  * @param root - Repository or isolated project root directory.
- * @param target - Discovered theme target and its source/output locations.
+ * @param target - Discovered target and source paths.
+ * @param palette - Generated palette records for this target.
+ * @param command - Rebuild command included in the output notice.
+ * @returns Compiled theme JSONC with all input labels attached to diagnostics.
  */
-async function readThemeTemplate(root, target) {
-  /** Authored section source texts in template assembly order. */
-  const parts = [];
+async function readCompiledTheme(root, target, palette, command) {
+  /** Effective authored inputs indexed by their independent relative paths. */
+  const inputs = new Map();
 
-  /** Source labels or display labels checked during this build phase. */
-  const labels = [];
-
-  for (const [index, path] of themeInputPaths.entries()) {
-    /** Effective palette or section input with fallback provenance. */
-    const input = await readTargetInput(root, target, path);
-
-    validateThemePart(input, index);
-    parts.push(input.source);
-    labels.push(input.label);
+  for (const path of themeInputPaths) {
+    inputs.set(path, await readTargetInput(root, target, path));
   }
 
-  return { source: assembleThemeTemplate(parts, labels), labels };
+  try {
+    /** Consolidated token sections in compilation order. */
+    const tokens = {};
+
+    /** Independently inherited documentation sections. */
+    const details = {};
+
+    for (const section of ["base", "ui", "semantic", "syntax"]) {
+      tokens[section] = inputs.get(`tokens/${section}.jsonc`).value;
+      details[section] = inputs.get(`details/${section}.jsonc`).value;
+    }
+
+    /** Effective metadata validated before compilation and registration. */
+    const metadata = inputs.get("metadata.jsonc");
+
+    object(metadata.value, metadata.label);
+    themeUiType(metadata.value, metadata.label);
+
+    return renderTheme(metadata.value, compileTokens(tokens, details, palette), command);
+  } catch (error) {
+    throw new Error(`${[...inputs.values()].map((input) => input.label).join("; ")}: ${error.message}`, {
+      cause: error,
+    });
+  }
 }
 
 /**
- * Validate the structure and color-bearing fields of a resolved theme or authored template.
+ * Validate the structure and color-bearing fields of a resolved theme.
  *
  * @param theme - Parsed theme object to validate.
  */
@@ -212,100 +140,6 @@ function validateTheme(theme) {
       }
     }
   }
-}
-
-/**
- * Identify JSON paths where whole-string color references are allowed.
- *
- * @param path - Output path or JSON property path inspected by the current build helper.
- */
-function colorPosition(path) {
-  return (
-    (path[0] === "colors" && path.length === 2) ||
-    (path[0] === "semanticTokenColors" && (path.length === 2 || (path.length === 3 && path[2] === "foreground"))) ||
-    (path[0] === "tokenColors" &&
-      path.length === 4 &&
-      path[2] === "settings" &&
-      ["foreground", "background"].includes(path[3]))
-  );
-}
-
-/**
- * Replace color references through source edits while preserving comments and non-color content.
- *
- * @param source - Authored or generated JSONC source text for this build phase.
- * @param tokens - Resolved named color variables keyed by identifier.
- * @param palette - Generated palette records keyed by primitive identifier.
- * @param [label] - Human-readable context included in validation diagnostics.
- * @param [notice] - Rebuild command embedded in the generated-file notice.
- * @returns Generated JSONC source with resolved color values and a rebuild notice.
- */
-export function renderTemplate(source, tokens, palette, label = "theme template", notice = "npm run build:prod") {
-  /** Parsed template value and syntax tree used for validation and source edits. */
-  const { value, tree } = parseJsonc(source, label);
-
-  validateTheme(value);
-
-  /** Source replacements for resolved color references. */
-  const edits = [];
-
-  /**
-   * Traverse template nodes and collect edits only for permitted color-reference positions.
-   *
-   * @param node - JSONC syntax-tree node to inspect recursively.
-   * @param [path] - Path to the file, directory, or configuration value being processed.
-   */
-  function walk(node, path = []) {
-    if (node.type === "object") {
-      for (const property of node.children ?? []) {
-        /** Property name and value nodes visited together during template traversal. */
-        const [key, child] = property.children;
-
-        if (/\{[^{}]+\}/.test(key.value)) throw new Error(`Template reference in property name ${key.value}`);
-
-        walk(child, [...path, key.value]);
-      }
-    } else if (node.type === "array") {
-      for (const [index, child] of node.children.entries()) {
-        walk(child, [...path, index]);
-      }
-    } else if (node.type === "string") {
-      /** Whole-string color-reference match for the current value node. */
-      const reference = /^\{([a-z0-9.-]+)\}$/i.exec(node.value);
-
-      /** Diagnostic label for the current input section or color position. */
-      const label = path.join(".");
-
-      if (!colorPosition(path)) {
-        if (/\{[^{}]+\}/.test(node.value)) throw new Error(`Template reference outside a color position: ${label}`);
-
-        return;
-      }
-
-      if (!reference) {
-        validateHex(node.value, label);
-
-        return;
-      }
-
-      /** Palette or variable identifier captured from a template reference. */
-      const id = reference[1];
-
-      /** Resolved hex color for the current reference or swatch. */
-      const hex = tokens.get(id) ?? palette.get(id)?.hex;
-
-      if (!hex) throw new Error(`${label}: unknown template reference ${id}`);
-
-      edits.push({ offset: node.offset, length: node.length, content: JSON.stringify(hex) });
-    }
-  }
-
-  walk(tree);
-
-  /** Resolved theme value after color references have been replaced. */
-  const resolved = parseJsonc(applyEdits(source, edits), label).value;
-
-  return `// Generated by ${notice}. Edit the corresponding inputs and rebuild.\n${JSON.stringify(resolved, null, 2)}\n`;
 }
 
 /**
@@ -370,7 +204,6 @@ function reports(palette, target, input, notice) {
     .map(([id, color]) => {
       /** Foreground/background contrast, or null when compositing is required. */
       const ratio = contrastRatio("#f8f8f8", color.hex);
-
       return `| \`${id}\` | \`${color.hex}\` | ${ratio === null ? "Needs backdrop" : `${ratio.toFixed(2)}:1`} |`;
     });
 
@@ -394,11 +227,11 @@ function reports(palette, target, input, notice) {
     "",
     "Target is the requested color; resolved includes gamut limits or overrides; exported is measured from the rounded hex.",
     "",
-    "| Token | Target OKLCH | Resolved OKLCH | Hex | Exported OKLCH | Override reason |",
+    "| Token | Target OKLCH | Resolved OKLCH | Hex | Exported OKLCH | Color reason |",
     "| --- | --- | --- | --- | --- | --- |",
     ...[...palette].map(
       ([id, color]) =>
-        `| \`${id}\` | ${oklch(color.target)} | ${oklch(color.resolved)} | \`${color.hex}\` | ${oklch(color.exported)} | ${(color.reason ?? "").replaceAll("|", "\\|").replaceAll(/\r?\n/g, " ")} |`,
+        `| \`${id}\` | ${oklch(color.target)} | ${oklch(color.resolved)} | \`${color.hex}\` | ${oklch(color.exported)} | ${(color.colorReason ?? "").replaceAll("|", "\\|").replaceAll(/\r?\n/g, " ")} |`,
     ),
     "",
   ].join("\n");
@@ -409,9 +242,7 @@ function reports(palette, target, input, notice) {
   for (const [id, color] of palette) {
     /** Family and tone segments extracted from a palette identifier. */
     const [, family, tone] = id.split(".");
-
     if (!families.has(family)) families.set(family, new Map());
-
     families.get(family).set(tone, color.hex);
   }
 
@@ -505,7 +336,6 @@ async function formatted(root, path, source) {
 
   /** Whether this output needs JSONC theme formatting. */
   const theme = path.startsWith("themes/") || path.startsWith("dev-extension/themes/");
-
   return prettier.format(source, { ...options, filepath, ...(theme ? { parser: "jsonc" } : {}) });
 }
 
@@ -514,13 +344,13 @@ async function formatted(root, path, source) {
  *
  * @param root - Repository or isolated project root directory.
  * @param target - Discovered theme target and its source/output locations.
- * @param paletteOnly - Whether to generate palette reports without resolving theme mappings.
+ * @param paletteOnly - Whether to generate palette reports without compiling token sections.
  */
 async function prepareTarget(root, target, paletteOnly) {
   /** Effective palette or section input with fallback provenance. */
-  const input = await readTargetInput(root, target, "colors/palette.jsonc");
+  const input = await readTargetInput(root, target, "palette/palette-config.jsonc");
 
-  /** Validated palette generated before resolving theme variables. */
+  /** Validated palette generated before compiling theme tokens. */
   let palette;
 
   try {
@@ -539,24 +369,10 @@ async function prepareTarget(root, target, paletteOnly) {
   let metadata;
 
   if (!paletteOnly) {
-    /** Effective named color variable input with diagnostic provenance. */
-    const variables = await readTargetInput(root, target, "colors/variables.jsonc");
-
-    /** Assembled metadata/token source with labels for each input section. */
-    const template = await readThemeTemplate(root, target);
-
-    try {
-      /** Final hex colors for the target’s named color variables. */
-      const resolved = resolveTokens(variables.value, palette);
-
-      /** Generated theme source after replacing all permitted color references. */
-      const rendered = renderTemplate(template.source, resolved, palette, target.directory, command);
-
-      output.set(target.output, rendered);
-      metadata = parseJsonc(rendered, target.output).value;
-    } catch (error) {
-      throw new Error(`${variables.label}; ${template.labels.join("; ")}: ${error.message}`, { cause: error });
-    }
+    /** Generated JSONC after validating effective tokens, details, and cross-section aliases. */
+    const rendered = await readCompiledTheme(root, target, palette, command);
+    output.set(target.output, rendered);
+    metadata = parseJsonc(rendered, target.output).value;
   }
 
   return { ...target, palette, outputs: output, metadata };
@@ -589,7 +405,6 @@ async function prodManifestOutput(root, targets) {
 
     /** Existing manifest registration matched by its generated theme path. */
     const existing = manifest.contributes?.themes?.find((entry) => entry.path === contribution.path);
-
     return { ...existing, ...contribution };
   });
 
@@ -607,7 +422,7 @@ async function prodManifestOutput(root, targets) {
  * @param root - Repository or isolated project root directory.
  * @param targets - Theme targets participating in the selected build or validation pass.
  * @param group - Nested color variable group or selected prod/dev build group.
- * @param paletteOnly - Whether to generate palette reports without resolving theme mappings.
+ * @param paletteOnly - Whether to generate palette reports without compiling token sections.
  */
 async function staleOutputs(root, targets, group, paletteOnly) {
   /** Targets selected for the current prod or dev build group. */
@@ -637,9 +452,9 @@ async function staleOutputs(root, targets, group, paletteOnly) {
   const sourceDirectory = `src/themes/${group}`;
 
   for (const name of await listDirectories(join(root, sourceDirectory), group === "dev")) {
-    for (const file of await listFiles(join(root, sourceDirectory, name, "colors", "generated-palette"))) {
+    for (const file of await listFiles(join(root, sourceDirectory, name, "palette", "generated"))) {
       if (/^palette\.(json|md|svg)$/.test(file)) {
-        actual.push(`${sourceDirectory}/${name}/colors/generated-palette/${file}`);
+        actual.push(`${sourceDirectory}/${name}/palette/generated/${file}`);
       }
     }
   }
@@ -699,7 +514,6 @@ async function stageOutputs(root, output, check, command) {
     try {
       /** Temporary file containing the complete replacement artifact. */
       const staged = join(temporary, "output");
-
       await writeFile(staged, output.get(path));
       await rename(staged, destination);
     } finally {
@@ -738,9 +552,7 @@ async function buildTargets({ root, check, paletteOnly = false, group }) {
   for (const target of targets.filter((candidate) => candidate.group === group)) {
     /** Validated palette and output candidates for the current target. */
     const prepared = target === defaultTarget ? baseline : await prepareTarget(root, target, paletteOnly);
-
     selected.push(prepared);
-
     for (const [path, text] of prepared.outputs) output.set(path, text);
   }
 
@@ -790,7 +602,6 @@ export async function buildProdThemes({ root = defaultRoot, check = false, palet
 export async function buildDevThemes({ root = defaultRoot, check = false } = {}) {
   /** Completed build summary for the selected command or target group. */
   const result = await buildTargets({ root, check, group: "dev" });
-
   return result.targets;
 }
 
@@ -825,6 +636,7 @@ if (import.meta.main) {
   try {
     /** Command-line options validated before selecting a build mode. */
     const flags = process.argv.slice(2);
+
     /** Whether to build prod and dev targets in sequence in one process. */
     const all = flags.includes("--all");
 
@@ -837,6 +649,7 @@ if (import.meta.main) {
     }
 
     if (all) {
+      /** Whether to check artifacts without writing them. */
       const check = flags.includes("--check");
 
       console.log();
@@ -867,6 +680,7 @@ if (import.meta.main) {
         false,
       );
     } else if (flags.includes("--dev")) {
+      /** Whether to check artifacts without writing them. */
       const check = flags.includes("--check");
 
       console.log(styled(`${check ? "Checking" : "Building"} dev themes...`, styles.yellow));
@@ -884,7 +698,10 @@ if (import.meta.main) {
         false,
       );
     } else {
+      /** Whether to build palette reports independently of theme inputs. */
       const paletteOnly = flags.includes("--palette-only");
+
+      /** Whether to check artifacts without writing them. */
       const check = flags.includes("--check");
 
       console.log(

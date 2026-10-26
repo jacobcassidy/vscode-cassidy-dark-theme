@@ -1,0 +1,56 @@
+{
+  "support": {
+    "for": "Built-in functions, HTML text, and support names."
+  },
+  "defaultLibrary": {
+    "for": "Library objects and shell scope names."
+  },
+  "text": {
+    "for": "Embedded text and attribute names."
+  },
+  "punctuation": {
+    "for": "Punctuation, brackets, and generic names."
+  },
+  "comment": {
+    "for": "Comments and comment punctuation."
+  },
+  "invalid": {
+    "for": "Invalid code and Markdown link underlines."
+  },
+  "storageType": {
+    "for": "Type keywords, paths, and linked text."
+  },
+  "typeHint": {
+    "for": "PHP type hints and TypeScript type operators."
+  },
+  "linkStrikethrough": {
+    "for": "Links inside struck-through Markdown text."
+  },
+  "function": {
+    "for": "Function and type names."
+  },
+  "property": {
+    "for": "Properties, labels, and CSS classes."
+  },
+  "parameter": {
+    "for": "Parameters, CSS IDs, and keyframe offsets."
+  },
+  "variable": {
+    "for": "Variables and variable sigils."
+  },
+  "constant": {
+    "for": "Constants, units, and regular expressions."
+  },
+  "attributeNamespace": {
+    "for": "Attribute namespace prefixes."
+  },
+  "keyword": {
+    "for": "Keywords, tags, and storage modifiers."
+  },
+  "string": {
+    "for": "Strings and selected Markdown text."
+  },
+  "code": {
+    "for": "Inline Markdown code."
+  }
+}

@@ -9,6 +9,28 @@ import { inGamut, maxChroma } from "../scripts/lib/color-math.js";
 import { generatePalette } from "../scripts/lib/palette-generation.js";
 import { createPaletteConfig } from "./test-projects.js";
 
+test("palette overrides require a nonempty colorReason and preserve multiline explanations", () => {
+  for (const override of [null, false, 0, "", []]) {
+    /** Supplied overrides must validate even when their values are falsy. */
+    const input = createPaletteConfig();
+    input.overrides["palette.blue.400"] = override;
+    assert.throws(() => generatePalette(input), /expected an object/);
+  }
+
+  for (const colorReason of [undefined, "", " \n ", null, false, []]) {
+    /** Palette override with an absent, blank, or malformed explanation. */
+    const input = createPaletteConfig();
+    input.overrides["palette.blue.400"] = { hex: "#123456", colorReason };
+    assert.throws(() => generatePalette(input), /colorReason is required/);
+  }
+
+  /** Multiline explanations remain intact in generated measurement records. */
+  const input = createPaletteConfig();
+
+  input.overrides["palette.blue.400"] = { hex: "#123456", colorReason: "Preserve\n the comparison color." };
+  assert.equal(generatePalette(input).get("palette.blue.400").colorReason, "Preserve\n the comparison color.");
+});
+
 test("yellow's selected anchor generates the agreed five tones", () => {
   /** Generated palette shared by this test’s color and variable assertions. */
   const palette = generatePalette(createPaletteConfig());
@@ -53,15 +75,15 @@ test("default chroma, zero anchors, gamut headroom, and override policy", () => 
 
   assert.equal(zero.get("palette.yellow.400").target.c, 0);
   assert.equal(zero.get("palette.yellow.300").target.c, 0);
-  input.overrides["palette.blue.400"] = { oklch: { l: 0.75, c: 1, h: 255 }, reason: "Test gamut boundary" };
+  input.overrides["palette.blue.400"] = { oklch: { l: 0.75, c: 1, h: 255 }, colorReason: "Test gamut boundary" };
 
   /** Primitive generated from an explicit palette override. */
   const overridden = generatePalette(input).get("palette.blue.400");
 
   assert.ok(inGamut(overridden.resolved));
   assert.ok(overridden.resolved.c > blue.resolved.c);
-  assert.equal(overridden.reason, "Test gamut boundary");
-  input.overrides["palette.blue.400"] = { hex: "#123456", reason: "Preserve a released value" };
+  assert.equal(overridden.colorReason, "Test gamut boundary");
+  input.overrides["palette.blue.400"] = { hex: "#123456", colorReason: "Preserve a released value" };
   assert.equal(generatePalette(input).get("palette.blue.400").hex, "#123456");
 });
 
@@ -86,18 +108,21 @@ test("invalid palette parameters and unknown overrides fail", () => {
       value.families.yellow.typo = 1;
     },
     (value) => {
-      value.overrides["palette.yellow.999"] = { hex: "#123456", reason: "Unknown" };
+      value.overrides["palette.yellow.999"] = { hex: "#123456", colorReason: "Unknown" };
     },
     (value) => {
       value.overrides["palette.yellow.400"] = { hex: "#123456" };
     },
     (value) => {
-      value.overrides["palette.yellow.400"] = { hex: "#123456", oklch: { l: 0.9, c: 0.1, h: 90 }, reason: "Ambiguous" };
+      value.overrides["palette.yellow.400"] = {
+        hex: "#123456",
+        oklch: { l: 0.9, c: 0.1, h: 90 },
+        colorReason: "Ambiguous",
+      };
     },
   ]) {
     /** Authored fixture configuration mutated for the current validation scenario. */
     const input = createPaletteConfig();
-
     mutate(input);
     assert.throws(() => generatePalette(input));
   }

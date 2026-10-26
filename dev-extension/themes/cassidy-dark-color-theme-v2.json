@@ -1040,64 +1040,180 @@
     "quickInput.list.focusBackground": "#00f"
   },
   "semanticTokenColors": {
-    "*.abstract": "#ff0000",
-    "*.async": "#ff0000",
-    "*.builtin": "#ff0000",
-    "*.callable": "#ff0000",
-    "*.classMember": "#ff0000",
-    "*.declaration": "#ff0000",
-    "*.decorator": "#ff0000",
-    "*.deprecated": "#ff0000",
-    "*.documentation": "#ff0000",
-    "*.escapeCharacter": "#ff0000",
-    "*.invalid": "#ff0000",
-    "*.keywordArgument": "#ff0000",
-    "*.library": "#ff0000",
-    "*.modification": "#ff0000",
-    "*.overridden": "#ff0000",
-    "*.readonly": "#ff0000",
-    "*.static": "#ff0000",
-    "*.typeHint": "#ff0000",
-    "*.typeHintComment": "#ff0000",
-    "arrow": "#ff0000",
-    "bracket": "#ff0000",
-    "builtinConstant": "#ff0000",
-    "class": "#ff0000",
-    "clsParameter": "#ff0000",
-    "colon": "#ff0000",
-    "comment": "#ff0000",
-    "curlybrace": "#ff0000",
-    "decorator": "#ff0000",
-    "enum": "#ff0000",
-    "enumMember": "#ff0000",
-    "event": "#ff0000",
-    "function": "#ff0000",
-    "interface": "#ff0000",
-    "intrinsic": "#ff0000",
-    "keyword": "#ff0000",
-    "label": "#ff0000",
-    "macro": "#ff0000",
-    "magicFunction": "#ff0000",
-    "method": "#ff0000",
-    "module": "#ff0000",
-    "namespace": "#ff0000",
-    "number": "#ff0000",
-    "operator": "#ff0000",
-    "parameter": "#ff0000",
-    "parenthesis": "#ff0000",
-    "property": "#ff0000",
-    "regexp": "#ff0000",
-    "selfParameter": "#ff0000",
-    "semicolon": "#ff0000",
-    "string": "#ff0000",
-    "struct": "#ff0000",
-    "type": "#ff0000",
-    "typeParameter": "#ff0000",
-    "variable": "#ff0000",
-    "defaultLibrary": "#ff0",
-    "parameter.readwrite": "#ff0",
-    "variable.defaultLibrary": "#ff0",
-    "variable.definition": "#ff0"
+    "*.abstract": {
+      "foreground": "#ff0000"
+    },
+    "*.async": {
+      "foreground": "#ff0000"
+    },
+    "*.builtin": {
+      "foreground": "#ff0000"
+    },
+    "*.callable": {
+      "foreground": "#ff0000"
+    },
+    "*.classMember": {
+      "foreground": "#ff0000"
+    },
+    "*.declaration": {
+      "foreground": "#ff0000"
+    },
+    "*.decorator": {
+      "foreground": "#ff0000"
+    },
+    "*.deprecated": {
+      "foreground": "#ff0000"
+    },
+    "*.documentation": {
+      "foreground": "#ff0000"
+    },
+    "*.escapeCharacter": {
+      "foreground": "#ff0000"
+    },
+    "*.invalid": {
+      "foreground": "#ff0000"
+    },
+    "*.keywordArgument": {
+      "foreground": "#ff0000"
+    },
+    "*.library": {
+      "foreground": "#ff0000"
+    },
+    "*.modification": {
+      "foreground": "#ff0000"
+    },
+    "*.overridden": {
+      "foreground": "#ff0000"
+    },
+    "*.readonly": {
+      "foreground": "#ff0000"
+    },
+    "*.static": {
+      "foreground": "#ff0000"
+    },
+    "*.typeHint": {
+      "foreground": "#ff0000"
+    },
+    "*.typeHintComment": {
+      "foreground": "#ff0000"
+    },
+    "arrow": {
+      "foreground": "#ff0000"
+    },
+    "bracket": {
+      "foreground": "#ff0000"
+    },
+    "builtinConstant": {
+      "foreground": "#ff0000"
+    },
+    "class": {
+      "foreground": "#ff0000"
+    },
+    "clsParameter": {
+      "foreground": "#ff0000"
+    },
+    "colon": {
+      "foreground": "#ff0000"
+    },
+    "comment": {
+      "foreground": "#ff0000"
+    },
+    "curlybrace": {
+      "foreground": "#ff0000"
+    },
+    "decorator": {
+      "foreground": "#ff0000"
+    },
+    "enum": {
+      "foreground": "#ff0000"
+    },
+    "enumMember": {
+      "foreground": "#ff0000"
+    },
+    "event": {
+      "foreground": "#ff0000"
+    },
+    "function": {
+      "foreground": "#ff0000"
+    },
+    "interface": {
+      "foreground": "#ff0000"
+    },
+    "intrinsic": {
+      "foreground": "#ff0000"
+    },
+    "keyword": {
+      "foreground": "#ff0000"
+    },
+    "label": {
+      "foreground": "#ff0000"
+    },
+    "macro": {
+      "foreground": "#ff0000"
+    },
+    "magicFunction": {
+      "foreground": "#ff0000"
+    },
+    "method": {
+      "foreground": "#ff0000"
+    },
+    "module": {
+      "foreground": "#ff0000"
+    },
+    "namespace": {
+      "foreground": "#ff0000"
+    },
+    "number": {
+      "foreground": "#ff0000"
+    },
+    "operator": {
+      "foreground": "#ff0000"
+    },
+    "parameter": {
+      "foreground": "#ff0000"
+    },
+    "parenthesis": {
+      "foreground": "#ff0000"
+    },
+    "property": {
+      "foreground": "#ff0000"
+    },
+    "regexp": {
+      "foreground": "#ff0000"
+    },
+    "selfParameter": {
+      "foreground": "#ff0000"
+    },
+    "semicolon": {
+      "foreground": "#ff0000"
+    },
+    "string": {
+      "foreground": "#ff0000"
+    },
+    "struct": {
+      "foreground": "#ff0000"
+    },
+    "type": {
+      "foreground": "#ff0000"
+    },
+    "typeParameter": {
+      "foreground": "#ff0000"
+    },
+    "variable": {
+      "foreground": "#ff0000"
+    },
+    "defaultLibrary": {
+      "foreground": "#ff0"
+    },
+    "parameter.readwrite": {
+      "foreground": "#ff0"
+    },
+    "variable.defaultLibrary": {
+      "foreground": "#ff0"
+    },
+    "variable.definition": {
+      "foreground": "#ff0"
+    }
   },
   "tokenColors": []
 }

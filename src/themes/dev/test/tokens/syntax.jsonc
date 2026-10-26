@@ -8,9 +8,7 @@
       //*** MARKDOWN ***
       "markup.bold.markdown"
     ],
-    "settings": {
-      "fontStyle": "bold"
-    }
+    "fontStyle": "bold"
   },
   {
     "name": "ITALIC",
@@ -29,9 +27,7 @@
       "meta.function.php punctuation.separator.inheritance.php" // function parameter and return typehint
       // "meta.function.php support.class.php" // function parameter and return typehint
     ],
-    "settings": {
-      "fontStyle": "italic"
-    }
+    "fontStyle": "italic"
   },
   {
     "name": "BOLD ITALIC",
@@ -39,16 +35,12 @@
       //*** MARKDOWN ***
       "markup.bold.markdown markup.italic.markdown"
     ],
-    "settings": {
-      "fontStyle": "bold italic"
-    }
+    "fontStyle": "bold italic"
   },
   // {
   //   "name": "NORMAL",
   //   "scope": [],
-  //   "settings": {
-  //     "fontStyle": ""
-  //   }
+  //   "fontStyle": ""
   // },
   {
     "name": "STRIKETHROUGH",
@@ -56,9 +48,7 @@
       //*** MARKDOWN ***
       "markup.strikethrough.markdown"
     ],
-    "settings": {
-      "fontStyle": "strikethrough"
-    }
+    "fontStyle": "strikethrough"
   },
 
   //--------------------------------------------------------------------------
@@ -85,14 +75,14 @@
       //*** XML ***
       "text.xml"
     ],
-    "settings": {
-      "foreground": "#f8f8f8"
-    }
+    "color": "#f8f8f8",
+    "colorReason": "Preserve GRAY WHITE (OKLCH 98%) foreground in the test comparison theme."
   },
   // {
   //   "name": "GRAY WHITE-LIGHT (OKLCH 90%)",
   //   "scope": [],
-  //   "settings": { "foreground": "#dedede" }
+  //   "color": "#dedede",
+  //   "colorReason": "Retain this unused syntax color for comparison."
   // },
   {
     "name": "GRAY WHITE-LIGHT-LIGHT (OKLCH 86%)",
@@ -100,9 +90,8 @@
       //*** SHELL ***
       "meta.scope"
     ],
-    "settings": {
-      "foreground": "#d1d1d1"
-    }
+    "color": "#d1d1d1",
+    "colorReason": "Preserve GRAY WHITE-LIGHT-LIGHT (OKLCH 86%) foreground in the test comparison theme."
   },
   {
     "name": "GRAY LIGHT (OKLCH 82%)",
@@ -114,18 +103,16 @@
       //*** HTML ***
       "entity.other.attribute-name"
     ],
-    "settings": {
-      "foreground": "#c4c4c4"
-    }
+    "color": "#c4c4c4",
+    "colorReason": "Preserve GRAY LIGHT (OKLCH 82%) foreground in the test comparison theme."
   },
   {
     "name": "GRAY LIGHT-MEDIUM (OKLCH 74%)",
     "scope": [
       "comment variable"
     ],
-    "settings": {
-      "foreground": "#ababab"
-    }
+    "color": "#ababab",
+    "colorReason": "Preserve GRAY LIGHT-MEDIUM (OKLCH 74%) foreground in the test comparison theme."
   },
   {
     "name": "GRAY MEDIUM (OKLCH 66%) [PUNCTUATION]",
@@ -169,9 +156,8 @@
       //*** ZSH ***
       "meta.parameter-expansion"
     ],
-    "settings": {
-      "foreground": "#929292"
-    }
+    "color": "#929292",
+    "colorReason": "Preserve GRAY MEDIUM (OKLCH 66%) [PUNCTUATION] foreground in the test comparison theme."
   },
   {
     "name": "GRAY MEDIUM-DARK (OKLCH 58%) [COMMENTS]",
@@ -189,9 +175,8 @@
       //*** MARKDOWN ***
       "markup.underline.link"
     ],
-    "settings": {
-      "foreground": "#7a7a7a"
-    }
+    "color": "#7a7a7a",
+    "colorReason": "Preserve GRAY MEDIUM-DARK (OKLCH 58%) [COMMENTS] foreground in the test comparison theme."
   },
   {
     "name": "GRAY DARK (OKLCH 50%)",
@@ -200,19 +185,20 @@
       "invalid",
       "meta.resultLinePrefix.contextLinePrefix.search meta" // match `"editorLineNumber.foreground` | example: when using global search results in editor instead of search panel
     ],
-    "settings": {
-      "foreground": "#636363"
-    }
+    "color": "#636363",
+    "colorReason": "Preserve GRAY DARK (OKLCH 50%) foreground in the test comparison theme."
   },
   // {
   //   "name": "GRAY DARK-FADE (OKLCH 42%)",
   //   "scope": [],
-  //   "settings": { "foreground": "#4d4d4d" }
+  //   "color": "#4d4d4d",
+  //   "colorReason": "Retain this unused syntax color for comparison."
   // },
   // {
   //   "name": "GRAY FADE (OKLCH 34%)",
   //   "scope": [],
-  //   "settings": { "foreground": "#525252" }
+  //   "color": "#525252",
+  //   "colorReason": "Retain this unused syntax color for comparison."
   // },
 
   //--------------------------------------------------------------------------
@@ -244,14 +230,14 @@
       //*** SCSS ***
       "variable.parameter.url" // SCSS `to` in background: linear-gradient(to ...); -- Red in CSS. Also for background:url(../../../../assets/images/icons/icon-phone-white.svg) without quotes.
     ],
-    "settings": {
-      "foreground": "#92c1fd" // -color--blue-base
-    }
+    "color": "#92c1fd",
+    "colorReason": "-color--blue-base"
   },
   // {
   //   "name": "BLUE DEEP",
   //   "scope": [],
-  //   "settings": { "foreground": "#62a1f0" }
+  //   "color": "#62a1f0",
+  //   "colorReason": "Retain this unused syntax color for comparison."
   // },
   {
     "name": "BLUE FADE",
@@ -267,9 +253,8 @@
       // "meta.function.php support.class.php", // function parameter and return typehint
       "meta.other.type.phpdoc.php"
     ],
-    "settings": {
-      "foreground": "#a9c0de"
-    }
+    "color": "#a9c0de",
+    "colorReason": "Preserve BLUE FADE foreground in the test comparison theme."
   },
   {
     "name": "BLUE 50 OPACITY",
@@ -277,9 +262,8 @@
       //*** MARKDOWN ***
       "markup.strikethrough.markdown string.other.link.title.markdown"
     ],
-    "settings": {
-      "foreground": "#92c1fd80"
-    }
+    "color": "#92c1fd80",
+    "colorReason": "Preserve BLUE 50 OPACITY foreground in the test comparison theme."
   },
 
   {
@@ -311,9 +295,8 @@
       //*** YAML ***
       "entity.name.tag.yaml"
     ],
-    "settings": {
-      "foreground": "#89dfdf"
-    }
+    "color": "#89dfdf",
+    "colorReason": "Preserve CYAN BASE foreground in the test comparison theme."
   },
 
   {
@@ -348,9 +331,8 @@
       //*** SNIPPETS ***
       "meta.insertion.placeholder.json.comments.snippets string" // example: `javascript.json` vscode snippets
     ],
-    "settings": {
-      "foreground": "#a2cd8b"
-    }
+    "color": "#a2cd8b",
+    "colorReason": "Preserve GREEN BASE foreground in the test comparison theme."
   },
 
   {
@@ -385,9 +367,8 @@
       "custom.punctuation.section.insertion.bracket.json.comments.snippets", // example: `javascript.json` vscode snippets
       "custom.variable.other.normal.numeric.json.comments.snippets" // example: `javascript.json` vscode snippets
     ],
-    "settings": {
-      "foreground": "#eeae7b"
-    }
+    "color": "#eeae7b",
+    "colorReason": "Preserve ORANGE BASE foreground in the test comparison theme."
   },
 
   {
@@ -404,9 +385,8 @@
       //*** SHELL ***
       "variable.other.assignment.shell"
     ],
-    "settings": {
-      "foreground": "#fcb7cb"
-    }
+    "color": "#fcb7cb",
+    "colorReason": "Preserve PINK BASE foreground in the test comparison theme."
   },
 
   {
@@ -449,9 +429,8 @@
       //*** XML ***
       "punctuation.definition.constant.xml"
     ],
-    "settings": {
-      "foreground": "#d6aaea"
-    }
+    "color": "#d6aaea",
+    "colorReason": "Preserve PURPLE BASE foreground in the test comparison theme."
   },
   {
     "name": "PURPLE DEEP",
@@ -466,9 +445,8 @@
       "punctuation.separator.inheritance.php", // for namespaces
       "support.other.namespace.php"
     ],
-    "settings": {
-      "foreground": "#bd84d7"
-    }
+    "color": "#bd84d7",
+    "colorReason": "Preserve PURPLE DEEP foreground in the test comparison theme."
   },
 
   {
@@ -485,18 +463,16 @@
       //*** SHELL ***
       "punctuation.separator.statement.and.shell" //example: &&
     ],
-    "settings": {
-      "foreground": "#ef9182"
-    }
+    "color": "#ef9182",
+    "colorReason": "Preserve RED BASE foreground in the test comparison theme."
   },
   {
     "name": "RED DEEP",
     "scope": [
       //*** DEFAULT ***
     ],
-    "settings": {
-      "foreground": "#db6656"
-    }
+    "color": "#db6656",
+    "colorReason": "Preserve RED DEEP foreground in the test comparison theme."
   },
 
   {
@@ -518,9 +494,8 @@
       //*** XML ***
       "meta.tag.sgml.doctype.xml"
     ],
-    "settings": {
-      "foreground": "#efddac"
-    }
+    "color": "#efddac",
+    "colorReason": "Preserve YELLOW BASE foreground in the test comparison theme."
   },
   {
     "name": "YELLOW DEEP",
@@ -528,9 +503,8 @@
       //*** MARKDOWN ***
       "markup.inline.raw.string.markdown"
     ],
-    "settings": {
-      "foreground": "#d7bb70"
-    }
+    "color": "#d7bb70",
+    "colorReason": "Preserve YELLOW DEEP foreground in the test comparison theme."
   },
 
   //--------------------------------------------------------------------------
@@ -542,45 +516,40 @@
     "scope": [
       "source.dockerfile string"
     ],
-    "settings": {
-      "foreground": "#f8f8f8"
-    }
+    "color": "#f8f8f8",
+    "colorReason": "Preserve [DOCKERFILE] - GRAY WHITE foreground in the test comparison theme."
   },
   {
     "name": "[DOCKERFILE] - CYAN BASE",
     "scope": [
       "source.dockerfile keyword.other.special-method"
     ],
-    "settings": {
-      "foreground": "#89dfdf"
-    }
+    "color": "#89dfdf",
+    "colorReason": "Preserve [DOCKERFILE] - CYAN BASE foreground in the test comparison theme."
   },
   {
     "name": "[DOCKERFILE] - GREEN BASE",
     "scope": [
       "source.dockerfile entity.name"
     ],
-    "settings": {
-      "foreground": "#a2cd8b"
-    }
+    "color": "#a2cd8b",
+    "colorReason": "Preserve [DOCKERFILE] - GREEN BASE foreground in the test comparison theme."
   },
   {
     "name": "[DOCKERFILE] - ORANGE BASE",
     "scope": [
       "source.dockerfile constant.other.option"
     ],
-    "settings": {
-      "foreground": "#eeae7b"
-    }
+    "color": "#eeae7b",
+    "colorReason": "Preserve [DOCKERFILE] - ORANGE BASE foreground in the test comparison theme."
   },
   {
     "name": "[DOCKERFILE] - RED BASE",
     "scope": [
       "punctuation.separator.statement.and.shell.dockerfile"
     ],
-    "settings": {
-      "foreground": "#ef9182"
-    }
+    "color": "#ef9182",
+    "colorReason": "Preserve [DOCKERFILE] - RED BASE foreground in the test comparison theme."
   },
 
   //--------------------------------------------------------------------------
@@ -592,18 +561,16 @@
     "scope": [
       "source.nginx"
     ],
-    "settings": {
-      "foreground": "#c4c4c4"
-    }
+    "color": "#c4c4c4",
+    "colorReason": "Preserve [NGINX] - GRAY LIGHT (OKLCH 82%) foreground in the test comparison theme."
   },
   {
     "name": "GRAY MEDIUM (OKLCH 66%) [PUNCTUATION]",
     "scope": [
       "source.nginx constant.character"
     ],
-    "settings": {
-      "foreground": "#929292"
-    }
+    "color": "#929292",
+    "colorReason": "Preserve GRAY MEDIUM (OKLCH 66%) [PUNCTUATION] foreground in the test comparison theme."
   },
 
   {
@@ -611,27 +578,24 @@
     "scope": [
       "source.nginx constant.language.module"
     ],
-    "settings": {
-      "foreground": "#92c1fd"
-    }
+    "color": "#92c1fd",
+    "colorReason": "Preserve [NGINX] - BLUE BASE foreground in the test comparison theme."
   },
   {
     "name": "[NGINX] - CYAN BASE",
     "scope": [
       "source.nginx constant.language"
     ],
-    "settings": {
-      "foreground": "#89dfdf"
-    }
+    "color": "#89dfdf",
+    "colorReason": "Preserve [NGINX] - CYAN BASE foreground in the test comparison theme."
   },
   {
     "name": "[NGINX] - RED BASE",
     "scope": [
       "source.nginx constant.language.directive.module.main"
     ],
-    "settings": {
-      "foreground": "#ef9182"
-    }
+    "color": "#ef9182",
+    "colorReason": "Preserve [NGINX] - RED BASE foreground in the test comparison theme."
   },
 
   //--------------------------------------------------------------------------
@@ -643,9 +607,8 @@
     "scope": [
       "code.log support" // For "Output Colorizer" extension
     ],
-    "settings": {
-      "foreground": "#f8f8f8"
-    }
+    "color": "#f8f8f8",
+    "colorReason": "Preserve GRAY WHITE (OKLCH 98%) foreground in the test comparison theme."
   },
 
   {
@@ -653,9 +616,8 @@
     "scope": [
       "code.log invalid"
     ],
-    "settings": {
-      "foreground": "#ef9182"
-    }
+    "color": "#ef9182",
+    "colorReason": "Preserve RED BASE foreground in the test comparison theme."
   },
 
   //--------------------------------------------------------------------------
@@ -668,27 +630,23 @@
       "comment.rainbow4",
       "invalid.rainbow10"
     ],
-    "settings": {
-      "fontStyle": ""
-    }
+    "fontStyle": ""
   },
   {
     "name": "GRAY WHITE (OKLCH 98%)",
     "scope": [
       "markup.bold.rainbow9"
     ],
-    "settings": {
-      "foreground": "#f8f8f8"
-    }
+    "color": "#f8f8f8",
+    "colorReason": "Preserve GRAY WHITE (OKLCH 98%) foreground in the test comparison theme."
   },
   {
     "name": "GRAY LIGHT (OKLCH 82%)",
     "scope": [
       "comment.rainbow4"
     ],
-    "settings": {
-      "foreground": "#c4c4c4"
-    }
+    "color": "#c4c4c4",
+    "colorReason": "Preserve GRAY LIGHT (OKLCH 82%) foreground in the test comparison theme."
   },
 
   {
@@ -696,71 +654,63 @@
     "scope": [
       "constant.numeric.rainbow7"
     ],
-    "settings": {
-      "foreground": "#92c1fd"
-    }
+    "color": "#92c1fd",
+    "colorReason": "Preserve BLUE BASE foreground in the test comparison theme."
   },
   {
     "name": "CYAN BASE",
     "scope": [
       "rainbow1"
     ],
-    "settings": {
-      "foreground": "#89dfdf"
-    }
+    "color": "#89dfdf",
+    "colorReason": "Preserve CYAN BASE foreground in the test comparison theme."
   },
   {
     "name": "GREEN BASE",
     "scope": [
       "string.rainbow5"
     ],
-    "settings": {
-      "foreground": "#a2cd8b"
-    }
+    "color": "#a2cd8b",
+    "colorReason": "Preserve GREEN BASE foreground in the test comparison theme."
   },
   {
     "name": "ORANGE BASE",
     "scope": [
       "variable.parameter.rainbow6"
     ],
-    "settings": {
-      "foreground": "#eeae7b"
-    }
+    "color": "#eeae7b",
+    "colorReason": "Preserve ORANGE BASE foreground in the test comparison theme."
   },
   {
     "name": "PINK BASE",
     "scope": [
       "entity.name.type.rainbow8"
     ],
-    "settings": {
-      "foreground": "#fcb7cb"
-    }
+    "color": "#fcb7cb",
+    "colorReason": "Preserve PINK BASE foreground in the test comparison theme."
   },
   {
     "name": "PURPLE BASE",
     "scope": [
       "entity.name.function.rainbow3"
     ],
-    "settings": {
-      "foreground": "#d6aaea"
-    }
+    "color": "#d6aaea",
+    "colorReason": "Preserve PURPLE BASE foreground in the test comparison theme."
   },
   {
     "name": "RED BASE",
     "scope": [
       "invalid.rainbow10"
     ],
-    "settings": {
-      "foreground": "#ef9182"
-    }
+    "color": "#ef9182",
+    "colorReason": "Preserve RED BASE foreground in the test comparison theme."
   },
   {
     "name": "YELLOW BASE",
     "scope": [
       "keyword.rainbow2"
     ],
-    "settings": {
-      "foreground": "#efddac"
-    }
+    "color": "#efddac",
+    "colorReason": "Preserve YELLOW BASE foreground in the test comparison theme."
   }
 ]

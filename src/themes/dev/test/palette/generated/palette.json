@@ -1,9 +1,9 @@
 {
   "generated": {
-    "target": "prod/default",
-    "source": "src/themes/prod/default/colors/palette.jsonc",
-    "fallback": false,
-    "rebuild": "npm run build:palette"
+    "target": "dev/test",
+    "source": "src/themes/prod/default/palette/palette-config.jsonc",
+    "fallback": true,
+    "rebuild": "npm run build:dev"
   },
   "primitives": {
     "palette.blue.300": {

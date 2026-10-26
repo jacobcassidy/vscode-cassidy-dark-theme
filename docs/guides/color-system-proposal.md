@@ -1,6 +1,6 @@
 # Cassidy Dark color system proposal
 
-Status: the build and palette described here are implemented. The file paths and command examples below record the original design; [restructuring plan 1b](../../plans/archive/restructure-1b-plan.md) and the development guide describe the current layout. Current commands are `npm run build` for both target groups, `npm run build:prod` for prod themes, and `npm run build:dev` for dev previews. Authoring inputs live in `src/`; the shipped theme and palette references are generated. The initial migration verified that every parsed theme value and original comment was preserved before the new palette was applied in a separate change. The [development guide](development-guide.md) describes the available commands, and the [generated palette](../../../src/themes/prod/default/colors/generated-palette/palette.md) shows the current output.
+Status: the build and palette described here are implemented. The file paths and command examples below record the original design; [restructuring plan 1b](../plans/archive/restructure-1b-plan.md) and the development guide describe the current layout. Current commands are `npm run build` for both target groups, `npm run build:prod` for prod themes, and `npm run build:dev` for dev previews. Authoring inputs live in `src/`; the shipped theme and palette references are generated. The initial migration verified that every parsed theme value and original comment was preserved before the new palette was applied in a separate change. The [development guide](development-guide.md) describes the available commands, and the [generated palette](../../../src/themes/prod/default/palette/generated/palette.md) shows the current output.
 
 ## Recommendation
 
@@ -198,7 +198,7 @@ The build uses these paths:
 
 | Path                                   | Purpose                                                                                                          |
 | -------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
-| `palette/source/palette.jsonc`         | Authored hue/lightness parameters, optional base chroma, neutrals, and documented primitive overrides            |
+| `palette/palette-config.jsonc`         | Authored hue/lightness parameters, optional base chroma, neutrals, and documented primitive overrides            |
 | `src/tokens.jsonc`                     | Semantic aliases and explicit alpha values for overlays                                                          |
 | `src/theme/base.jsonc`                 | Theme root properties such as schema, name, type, and author                                                     |
 | `src/theme/colors.jsonc`               | Workbench and editor UI color mappings                                                                           |
@@ -207,7 +207,7 @@ The build uses these paths:
 | `scripts/build/build-theme.js`         | Parameter validation, palette generation, alias resolution, template substitution, and output comparison/writing |
 | `themes/cassidy-dark-color-theme.json` | Committed generated theme; edit the source files after migration                                                 |
 
-`npm run build:palette` generates `palette.json`, `palette.md`, and `palette.svg` under `palette/reports/production/`. JSON includes requested, resolved, and exported OKLCH values, hex values, and override reasons. The Markdown report includes the swatch sheet. This command needs only `palette/source/palette.jsonc`; `npm run build:theme` generates those same reports and the resolved theme together.
+`npm run build:palette` generates `palette.json`, `palette.md`, and `palette.svg` under each prod theme’s `palette/generated/` directory. JSON includes requested, resolved, and exported OKLCH values, hex values, and color reasons. The Markdown report includes the swatch sheet. This command needs only `palette/palette-config.jsonc`; `npm run build:prod` generates those same reports and the resolved theme together.
 
 The dependency flow is:
 
@@ -221,7 +221,7 @@ Keep generated development themes in `dev-extension/themes/` separate from stati
 
 ### Color variables and template references
 
-An excerpt from `palette/source/palette.jsonc` could look like this. Each family generates tones `300`, `400`, `500`, and `600`, plus `400-muted`, using the shared chroma settings and its optional `baseChroma` anchor. This example includes all eight families and a subset of the neutrals. Neutral lightness values use the 0–1 scale, zero chroma, and a conventional hue of zero.
+An excerpt from `palette/palette-config.jsonc` could look like this. Each family generates tones `300`, `400`, `500`, and `600`, plus `400-muted`, using the shared chroma settings and its optional `baseChroma` anchor. This example includes all eight families and a subset of the neutrals. Neutral lightness values use the 0–1 scale, zero chroma, and a conventional hue of zero.
 
 ```jsonc
 {
@@ -248,7 +248,7 @@ An excerpt from `palette/source/palette.jsonc` could look like this. Each family
 }
 ```
 
-Internally, this produces primitive IDs such as `palette.cyan.400` and `palette.gray.900`. The complete configuration would include every neutral required by the theme. Allow primitive overrides with either explicit OKLCH coordinates or an exact sRGB hex, plus a required reason. Exact hex overrides support a migration that preserves the released colors; OKLCH overrides still pass through the export policy.
+Internally, this produces primitive IDs such as `palette.cyan.400` and `palette.gray.900`. The complete configuration would include every neutral required by the theme. Allow primitive overrides with either explicit OKLCH coordinates or an exact sRGB hex, plus a required `colorReason`. Exact hex overrides support a migration that preserves the released colors; OKLCH overrides still pass through the export policy.
 
 Group semantic IDs by role in `src/tokens.jsonc`. Each leaf has a `color` reference or a documented hex literal. Use optional [`details` metadata](token-details.md) after `color` and optional `alpha` for a short usage description and nonempty inheritance or override lists. Nested paths resolve to dotted IDs such as `diff.added.foreground`; dotted semantic selectors such as `function.defaultLibrary` stay together as keys under `semantic` so they can coexist with the base `function` token:
 
@@ -322,7 +322,7 @@ The builder shares rendering between write mode and check mode:
 4. Resolve references only in supported template color positions. Validate literal and resolved colors, and fail on unresolved placeholders in active values. Disabled examples inside comments remain comments.
 5. Preserve template comments and ordering with the existing [`jsonc-parser`](https://github.com/microsoft/node-jsonc-parser) dependency. Its syntax tree provides offsets for replacing string values, and its edit APIs can apply those changes without serializing the document from scratch. Add a stable generated-file header directing edits to `src/`.
 6. Format the result using the installed [Prettier API](https://prettier.io/docs/api), explicitly loading the repository configuration and applying the output file's overrides with `parser: "jsonc"`. Reparse the rendered result and validate its theme structure before writing. Keep output deterministic: no timestamps, host paths, or reordered scope arrays.
-7. In normal mode, write only when the generated bytes differ. In `--check` mode, render in memory, compare against the committed output, and exit nonzero on missing or stale output with instructions to run `npm run build:theme`. Check mode must not rewrite files.
+7. In normal mode, write only when the generated bytes differ. In `--check` mode, render in memory, compare against the committed output, and exit nonzero on missing or stale output with instructions to run `npm run build:prod`. Check mode must not rewrite files.
 
 Finish validation before replacing the output; use a temporary sibling file and rename it after successful rendering. A failed build must leave the previous theme intact.
 
@@ -341,7 +341,7 @@ The npm scripts expose the builder:
 Integrate them with the existing workflow:
 
 - Put `npm run check:generated` first in `npm run check`, followed by the existing formatting, linting, theme validation, and tests. CI should report stale committed output before any command can overwrite it.
-- Run `npm run build:theme` before the current `dev:sync` script so the linked development extension loads the latest generated theme. Rebuild after editing palette inputs; a watch command can be added later if needed.
+- Run `npm run build:prod` before the current `dev:sync` script so the linked development extension loads the latest generated theme. Rebuild after editing palette inputs; a watch command can be added later if needed.
 - Put `npm run check:generated` before VSIX creation in `scripts/release/package-vsix.sh`. The Azure pipeline already runs `npm run check`, so it inherits the same check. A standalone local packaging command must also refuse stale output.
 - Add `src/` to `.vscodeignore`; the existing exclusions already omit scripts and development dependencies. Package the resolved theme, and keep the manifest's theme path unchanged.
 - Commit the source edits and generated output together. Update the development guide to identify `src/` as the authoring source and `themes/` as generated output. README and release notes should explain the new build command.
@@ -354,7 +354,7 @@ After that migration passes, apply the proposed OKLCH palette as a separate revi
 
 Before adopting the builder, add focused tests for alias chains and cycles, missing references, alpha rounding and replacement, duplicate-key errors, invalid parameters, known OKLCH/sRGB conversions, and out-of-gamut chroma reduction. Cover omitted versus explicit `baseChroma` (including zero), the nonnegative target floor, yellow's selected base and derived tones, and halving resolved chroma for `400-muted`. Integration checks should cover all supported color positions, preservation of scope order and comments, deterministic output, read-only stale-output detection, and leaving the previous file intact after a failed build. The existing theme validator currently checks basic structure and asset paths; it does not replace these build-specific checks.
 
-These cases are covered in `tests/colors.test.js`, `tests/palette.test.js`, `tests/variables.test.js`, and `tests/theme-build.test.js`. Literal semantic exceptions use `{ "color": "#rrggbb", "reason": "..." }`, with optional `alpha` below 1; this keeps component adjustments separate from palette primitives. The builder also accepts three- and four-digit sRGB hex literals to preserve existing theme values during migration.
+These cases are covered in `tests/colors.test.js`, `tests/palette.test.js`, `tests/theme-compilation.test.js`, and `tests/theme-build.test.js`. Literal semantic exceptions use `{ "color": "#rrggbb", "colorReason": "..." }`, with optional `alpha` below 1; this keeps component adjustments separate from palette primitives. The builder also accepts three- and four-digit sRGB hex literals to preserve existing theme values during migration.
 
 ## Adoption sequence
 

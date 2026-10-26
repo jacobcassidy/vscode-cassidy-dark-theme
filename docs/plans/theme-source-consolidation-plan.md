@@ -1,5 +1,7 @@
 # Consolidate theme sources and document disabled entries
 
+Status: implemented. See the [development guide](../guides/development-guide.md#editing-theme-inputs) and [token authoring guide](../guides/token-details.md) for the resulting format.
+
 ## Summary
 
 Combine styling and targeting into one token file per section. Separate descriptive details from token definitions, and support disabled entries that appear as explained comments in generated themes.
