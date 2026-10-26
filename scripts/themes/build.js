@@ -759,6 +759,7 @@ async function buildTargets({ root, check, paletteOnly = false, group }) {
     palette: baseline.palette,
     targets: selected.map((target) => ({
       name: target.name,
+      output: target.output,
       palette: target.palette,
       changed: changed.filter((path) => target.outputs.has(path)),
     })),
