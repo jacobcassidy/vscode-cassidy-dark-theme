@@ -217,7 +217,7 @@ palette parameters → gamut-mapped primitives → semantic aliases
 theme template ───────────────────────────────────→ resolved theme
 ```
 
-Keep development and historical themes in `dev/themes/` independent. Do not infer mappings by globally replacing matching hex strings: two uses of the same hex can have different semantic roles.
+Keep generated development themes in `dev/extension/generated-themes/` separate from static comparison themes in `dev/extension/static-snapshots/`. Do not infer mappings by globally replacing matching hex strings: two uses of the same hex can have different semantic roles.
 
 ### Color variables and template references
 

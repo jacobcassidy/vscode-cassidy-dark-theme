@@ -34,7 +34,9 @@ export async function syncDevExtension({
   delete manifest.__metadata;
 
   /** Generated development theme filenames to register for preview. */
-  const generatedThemes = (await listFiles(join(root, "dev/themes"))).filter((file) => file.endsWith(".json"));
+  const generatedThemes = (await listFiles(join(root, "dev/extension/generated-themes"))).filter((file) =>
+    file.endsWith(".json"),
+  );
 
   manifest.contributes ??= {};
   manifest.contributes.themes = [
@@ -61,7 +63,7 @@ export async function syncDevExtension({
           .join(" ");
 
         /** Checkout-relative theme path used by the preview registration. */
-        const path = `dev/themes/${file}`;
+        const path = `dev/extension/generated-themes/${file}`;
 
         /** Parsed theme metadata used for preview labels and UI types. */
         const metadata = parseJsonc(await readFile(join(root, path), "utf8"), path).value;
@@ -69,17 +71,17 @@ export async function syncDevExtension({
         return {
           label: `${metadata.name} Dev (${name})`,
           uiTheme: themeUiType(metadata, path),
-          path: `./dev/themes/${file}`,
+          path: `./dev/extension/generated-themes/${file}`,
           _watch: true,
         };
       }),
     )),
     ...(await Promise.all(
-      (await listFiles(join(root, "dev/snapshots")))
+      (await listFiles(join(root, "dev/extension/static-snapshots")))
         .filter((file) => file.endsWith(".json"))
         .map(async (file) => {
           /** Checkout-relative theme path used by the preview registration. */
-          const path = `dev/snapshots/${file}`;
+          const path = `dev/extension/static-snapshots/${file}`;
 
           /** Parsed theme metadata used for preview labels and UI types. */
           const metadata = parseJsonc(await readFile(join(root, path), "utf8"), path).value;

@@ -111,7 +111,7 @@ export async function discoverTargets(root) {
         name,
         directory: `${directory}/${name}`,
         reportDirectory: `${directory}/${name}/colors/generated-palette`,
-        output: `${group === "prod" ? "themes" : "dev/themes"}/cassidy-dark-color-theme${group === "prod" && name === "default" ? "" : `-${name}`}.json`,
+        output: `${group === "prod" ? "themes" : "dev/extension/generated-themes"}/cassidy-dark-color-theme${group === "prod" && name === "default" ? "" : `-${name}`}.json`,
       });
     }
   }
