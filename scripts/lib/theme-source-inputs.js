@@ -179,7 +179,11 @@ export function validateThemePart(input, index) {
     return;
   }
 
-  fields(input.value, sectionFields[index], input.label);
+  if (index === 1 || index === 2) {
+    object(input.value, input.label);
+  } else {
+    fields(input.value, sectionFields[index], input.label);
+  }
 
   if (index === 1) {
     for (const [key, value] of Object.entries(input.value)) {
