@@ -6,6 +6,7 @@ All notable changes to this project are documented in this file.
 
 ### Changed
 
+- Added a leading blank line before the production build heading in combined CLI builds.
 - Colored generated theme file paths green in the build CLI while leaving report paths uncolored.
 - Removed source comments from generated theme files while keeping the generated-by notice.
 - Flattened UI token source files and moved semantic highlighting metadata into each theme’s metadata file.

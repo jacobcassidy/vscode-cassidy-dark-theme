@@ -838,6 +838,7 @@ if (import.meta.main) {
     if (all) {
       const check = flags.includes("--check");
 
+      console.log();
       console.log(styled(`${check ? "Checking" : "Building"} prod themes...`, styles.yellow));
 
       /** Production build result with per-target paths and aggregate changed paths. */
