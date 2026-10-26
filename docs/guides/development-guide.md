@@ -25,7 +25,7 @@ Run the commands in this guide from the repository root unless stated otherwise.
 | [`scripts/release/`](../../../scripts/release/)                 | VSIX packaging, release notes, pipeline submission, and GitHub publishing.                                         |
 | [`tests/`](../../../tests/)                                     | Automated tests and isolated fixtures.                                                                             |
 
-Generated palette reports live in each theme source directory’s `generated-palette/` folder.
+Generated palette reports live in each theme source directory’s `colors/generated-palette/` folder.
 | [`dev/grammar-samples/`](../../../dev/grammar-samples/) | Programming, markup, stylesheet, configuration, and log files for inspecting syntax highlighting. |
 | [`images/`](../../../images/) | Extension icons and the README screenshot. |
 | [`azure-pipelines.yml`](../../../azure-pipelines.yml) | Manual packaging and publication pipeline. |
@@ -192,7 +192,7 @@ For example, to try a different yellow palette locally:
 1. Create `src/themes/dev/yellow-test/colors/`.
 2. Copy the complete default `colors/palette.jsonc` into it and change the yellow parameters.
 3. Omit `colors/variables.jsonc`, `metadata.jsonc`, and the `tokens/` files to inherit the default versions.
-4. Run `npm run build:dev` to generate `dev/themes/cassidy-dark-color-theme-yellow-test.json` and `src/themes/dev/yellow-test/generated-palette/palette.{json,md,svg}`.
+4. Run `npm run build:dev` to generate `dev/themes/cassidy-dark-color-theme-yellow-test.json` and `src/themes/dev/yellow-test/colors/generated-palette/palette.{json,md,svg}`.
 5. Run `npm run dev:sync` and select **Cassidy Dark Dev (Yellow Test)** in VS Code.
 
 The inherited variable and token mapping files resolve against the dev palette. If you supply a variable file instead, include every variable required by the selected mappings and other variables. Copy the complete default file as a starting point. Changes to a default file affect every target inheriting it.
@@ -203,7 +203,7 @@ An existing empty target directory can inherit every file. To track that theme i
 
 `npm run build:palette` builds reports for all prod targets without requiring variables, metadata, token mappings, or the manifest. `npm run build:prod` generates all prod themes and reports and synchronizes `package.json` theme contributions while preserving unrelated fields. `npm run build:dev` builds all dev themes and their reports without changing prod outputs or the source manifest. `npm run build` runs `build:prod` followed by `build:dev`; if the prod build fails, the dev build does not run.
 
-Reports always live under `src/themes/<prod or dev>/<theme name>/generated-palette/` as `palette.json`, `palette.md`, and `palette.svg`. JSON records measurements and source provenance; Markdown embeds the sibling swatch sheet. A target inheriting the default palette still gets its own reports. Reports and archived documents are never used to discover source themes. Historical themes under `dev/snapshots/` and documentation under `docs/palettes/archive/` are excluded from regeneration.
+Reports always live under `src/themes/<prod or dev>/<theme name>/colors/generated-palette/` as `palette.json`, `palette.md`, and `palette.svg`. JSON records measurements and source provenance; Markdown embeds the sibling swatch sheet. A target inheriting the default palette still gets its own reports. Reports and archived documents are never used to discover source themes. Historical themes under `dev/snapshots/` and documentation under `docs/palettes/archive/` are excluded from regeneration.
 
 The builder rejects duplicate JSONC keys, invalid settings, malformed details, missing references, alias cycles, and placeholders outside color positions. Details remain documentation only. Comments inside mapping sections and scope order survive generation. All selected targets are validated and formatted before any destination is replaced. Builds write only changed files. Commit source and generated changes together; no automatic watch process runs.
 

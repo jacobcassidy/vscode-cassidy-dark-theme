@@ -188,7 +188,9 @@ test("watch discovers a dev source tree created after startup", async (t) => {
   await waitFor(() => project.builds() > count);
 
   /** Generated palette report inspected for target provenance. */
-  const report = JSON.parse(await readFile(join(project.root, "src/themes/dev/new/generated-palette/palette.json")));
+  const report = JSON.parse(
+    await readFile(join(project.root, "src/themes/dev/new/colors/generated-palette/palette.json")),
+  );
 
   assert.equal(report.generated.target, "dev/new");
   assert.equal(report.generated.fallback, true);
@@ -242,7 +244,7 @@ test("watch ignores generated output changes and unrelated source directories", 
   const count = project.builds();
 
   await writeFile(join(project.root, "dev/themes/cassidy-dark-color-theme-sample.json"), "// Edited output\n");
-  await writeFile(join(project.root, "src/themes/dev/sample/generated-palette/palette.md"), "Edited report\n");
+  await writeFile(join(project.root, "src/themes/dev/sample/colors/generated-palette/palette.md"), "Edited report\n");
   await mkdir(join(project.root, "src/unrelated"));
   await writeFile(join(project.root, "src/unrelated/input.jsonc"), "{}");
   await delay(150);
@@ -269,7 +271,7 @@ test("watch keeps stale-output safeguards when a dev target is removed", async (
   assert.match(project.errors[0], /Stale generated outputs/);
   assert.equal(await readFile(devThemePath, "utf8"), devTheme);
   await rm(devThemePath);
-  await rm(join(project.root, "src/themes/dev/sample/generated-palette"), { recursive: true });
+  await rm(join(project.root, "src/themes/dev/sample/colors/generated-palette"), { recursive: true });
 
   /** Metadata input path changed to exercise watcher recovery or registration updates. */
   const source = join(project.root, "src/themes/prod/default/metadata.jsonc");
@@ -391,7 +393,7 @@ test("watch debounces burst saves and ignores paths outside both source trees", 
   await scheduler.controller.ready;
   scheduler.notify("change", "unrelated/input.jsonc");
   scheduler.notify("change", "../dev/themes/generated.json");
-  scheduler.notify("change", "../src/themes/dev/test/generated-palette/palette.json");
+  scheduler.notify("change", "../src/themes/dev/test/colors/generated-palette/palette.json");
   await delay(60);
   assert.equal(scheduler.builds(), 1);
 

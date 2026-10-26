@@ -598,9 +598,9 @@ async function staleOutputs(root, targets, group, paletteOnly) {
   const sourceDirectory = `src/themes/${group}`;
 
   for (const name of await listDirectories(join(root, sourceDirectory), group === "dev")) {
-    for (const file of await listFiles(join(root, sourceDirectory, name, "generated-palette"))) {
+    for (const file of await listFiles(join(root, sourceDirectory, name, "colors", "generated-palette"))) {
       if (/^palette\.(json|md|svg)$/.test(file)) {
-        actual.push(`${sourceDirectory}/${name}/generated-palette/${file}`);
+        actual.push(`${sourceDirectory}/${name}/colors/generated-palette/${file}`);
       }
     }
   }

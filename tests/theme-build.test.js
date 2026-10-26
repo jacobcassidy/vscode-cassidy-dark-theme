@@ -108,7 +108,7 @@ test("prod theme build is deterministic, checks every artifact without writing, 
   assert.equal((await stat(themePath)).mtimeMs, before.mtimeMs);
 
   /** Generated palette JSON report path used by the assertion. */
-  const reportPath = join(root, "src/themes/prod/default/generated-palette/palette.json");
+  const reportPath = join(root, "src/themes/prod/default/colors/generated-palette/palette.json");
 
   /** Parsed palette measurements and source provenance. */
   const report = JSON.parse(await readFile(reportPath, "utf8"));
@@ -118,7 +118,7 @@ test("prod theme build is deterministic, checks every artifact without writing, 
   await assert.rejects(buildProdThemes({ root, check: true }), /palette.json/);
   assert.equal(await readFile(reportPath, "utf8"), "stale");
   assert.deepEqual((await buildProdThemes({ root })).changed, [
-    "src/themes/prod/default/generated-palette/palette.json",
+    "src/themes/prod/default/colors/generated-palette/palette.json",
   ]);
   assert.equal(await readFile(themePath, "utf8"), output);
 });
@@ -173,7 +173,7 @@ test("prod palette reports include 600 contrast from final hex and flag transluc
   await buildProdThemes({ root, paletteOnly: true });
 
   /** Generated palette Markdown report path. */
-  const path = join(root, "src/themes/prod/default/generated-palette/palette.md");
+  const path = join(root, "src/themes/prod/default/colors/generated-palette/palette.md");
 
   /** Generated palette report text used to inspect its contrast section. */
   const markdown = await readFile(path, "utf8");
@@ -317,7 +317,7 @@ test("fully inherited dev targets produce their own reports and follow changed d
   const result = await buildDevThemes({ root });
 
   /** Generated palette JSON report path used by the assertion. */
-  const reportPath = join(root, "src/themes/dev/inherited/generated-palette/palette.json");
+  const reportPath = join(root, "src/themes/dev/inherited/colors/generated-palette/palette.json");
 
   /** Parsed palette measurements and source provenance. */
   const report = JSON.parse(await readFile(reportPath, "utf8"));
