@@ -813,7 +813,7 @@ function logSummary(summary, targets, changedFiles, hasFollowingSummary) {
     /** Whether a later target has output paths to print. */
     const hasFollowingTarget = targets.slice(index + 1).some((next) => next.changed.length > 0);
 
-    if (target.changed.length > 0 && hasFollowingTarget) console.log();
+    if (target.changed.length > 0 && hasFollowingTarget) console.log(styled(" ", styles.green));
   }
 
   for (const path of changedFiles) {
