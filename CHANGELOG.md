@@ -6,7 +6,7 @@ All notable changes to this project are documented in this file.
 
 ### Changed
 
-- Colored blank separators between changed theme output groups green in the build CLI.
+- Colored generated theme file paths green in the build CLI while leaving report paths uncolored.
 - Removed source comments from generated theme files while keeping the generated-by notice.
 - Flattened UI token source files and moved semantic highlighting metadata into each theme’s metadata file.
 - Changed syntax token source files to use a top-level array, with the build adding the `tokenColors` property.

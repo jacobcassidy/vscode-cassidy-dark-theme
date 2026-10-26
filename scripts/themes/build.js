@@ -807,13 +807,10 @@ function logSummary(summary, targets, changedFiles, hasFollowingSummary) {
   /** Changed output paths assigned to a specific theme target. */
   const assigned = new Set(targets.flatMap((target) => target.changed));
 
-  for (const [index, target] of targets.entries()) {
-    for (const path of target.changed) console.log(`  ${path}`);
-
-    /** Whether a later target has output paths to print. */
-    const hasFollowingTarget = targets.slice(index + 1).some((next) => next.changed.length > 0);
-
-    if (target.changed.length > 0 && hasFollowingTarget) console.log(styled(" ", styles.green));
+  for (const target of targets) {
+    for (const path of target.changed) {
+      console.log(path === target.output ? styled(`  ${path}`, styles.green) : `  ${path}`);
+    }
   }
 
   for (const path of changedFiles) {
