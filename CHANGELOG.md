@@ -6,7 +6,7 @@ All notable changes to this project are documented in this file.
 
 ### Added
 
-- Moved generated palette reports into each source theme’s `generated-reports/` directory.
+- Moved generated palette reports into each source theme’s `generated-palette/` directory.
 - Added JSX, TSX, Bash, Zsh, SQL, C, C++, C#, Vue, and Svelte grammar samples with mixed-language syntax, shell expansions, queries, preprocessor directives, templates, attributes, and framework-specific constructs.
 - Added `npm run watch` to rebuild prod and dev themes and sync the dev preview extension on source changes, with debounced saves, queued builds, error recovery, and graceful shutdown.
 
