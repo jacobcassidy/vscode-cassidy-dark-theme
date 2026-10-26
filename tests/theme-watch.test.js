@@ -78,7 +78,7 @@ async function createWatchProject(t, { dev = true } = {}) {
   /** Isolated preview extension destination for native watcher tests. */
   const extensionDirectory = join(root, "extension");
 
-  for (const directory of ["images", "dev/extension/static-snapshots"])
+  for (const directory of ["images", "dev-extension/static-snapshots"])
     await mkdir(join(root, directory), { recursive: true });
 
   if (dev) {
@@ -137,7 +137,7 @@ test("watch rebuilds prod and inherited dev colors and follows repeated replacem
 
     for (const path of [
       "themes/cassidy-dark-color-theme.json",
-      "dev/extension/generated-themes/cassidy-dark-color-theme-sample.json",
+      "dev-extension/generated-themes/cassidy-dark-color-theme-sample.json",
     ]) {
       assert.equal(parse(await readFile(join(project.root, path), "utf8")).colors["editor.background"], color);
     }
@@ -168,7 +168,7 @@ test("watch rebuilds dev overrides, refreshes metadata registrations, and preser
 
   /** Parsed development output inspected after a source change. */
   const dev = parse(
-    await readFile(join(project.root, "dev/extension/generated-themes/cassidy-dark-color-theme-sample.json"), "utf8"),
+    await readFile(join(project.root, "dev-extension/generated-themes/cassidy-dark-color-theme-sample.json"), "utf8"),
   );
 
   /** Preview manifest contents used for registration or preservation assertions. */
@@ -250,7 +250,7 @@ test("watch ignores generated output changes and unrelated source directories", 
   const count = project.builds();
 
   await writeFile(
-    join(project.root, "dev/extension/generated-themes/cassidy-dark-color-theme-sample.json"),
+    join(project.root, "dev-extension/generated-themes/cassidy-dark-color-theme-sample.json"),
     "// Edited output\n",
   );
   await writeFile(join(project.root, "src/themes/dev/sample/colors/generated-palette/palette.md"), "Edited report\n");
@@ -270,7 +270,7 @@ test("watch keeps stale-output safeguards when a dev target is removed", async (
   const count = project.builds();
 
   /** Generated development theme path retained during target-removal checks. */
-  const devThemePath = join(project.root, "dev/extension/generated-themes/cassidy-dark-color-theme-sample.json");
+  const devThemePath = join(project.root, "dev-extension/generated-themes/cassidy-dark-color-theme-sample.json");
 
   /** Development output contents expected to survive stale-target rejection. */
   const devTheme = await readFile(devThemePath, "utf8");
@@ -401,7 +401,7 @@ test("watch debounces burst saves and ignores paths outside both source trees", 
 
   await scheduler.controller.ready;
   scheduler.notify("change", "unrelated/input.jsonc");
-  scheduler.notify("change", "../dev/extension/generated-themes/generated.json");
+  scheduler.notify("change", "../dev-extension/generated-themes/generated.json");
   scheduler.notify("change", "../src/themes/dev/test/colors/generated-palette/palette.json");
   await delay(60);
   assert.equal(scheduler.builds(), 1);

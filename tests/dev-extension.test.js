@@ -33,7 +33,7 @@ test("dev extension sync is repeatable and refreshes themes without modifying th
     ["Cassidy Dark Dev", "Cassidy Dark Dev (Test)"],
   );
 
-  for (const directory of ["themes", "dev", "images"]) {
+  for (const directory of ["themes", "dev-extension", "images"]) {
     assert.equal(
       await realpath(join(project.extensionDirectory, directory)),
       await realpath(join(project.root, directory)),
@@ -41,7 +41,7 @@ test("dev extension sync is repeatable and refreshes themes without modifying th
   }
 
   await writeFile(
-    join(project.root, "dev/extension/generated-themes/cassidy-dark-color-theme-new.json"),
+    join(project.root, "dev-extension/generated-themes/cassidy-dark-color-theme-new.json"),
     project.theme,
   );
   await syncDevExtension(project);
@@ -109,12 +109,12 @@ test("dev extension sync includes all prod themes, derives dev theme types, and 
   );
   await writeFile(join(project.root, "package.json"), JSON.stringify(manifest));
   await writeFile(
-    join(project.root, "dev/extension/generated-themes/cassidy-dark-color-theme-test.json"),
+    join(project.root, "dev-extension/generated-themes/cassidy-dark-color-theme-test.json"),
     '{"name":"Cassidy Dark","type":"light","colors":{},"tokenColors":[]}',
   );
 
   for (const name of ["z-old", "a-old"]) {
-    await writeFile(join(project.root, `dev/extension/static-snapshots/${name}.json`), project.theme);
+    await writeFile(join(project.root, `dev-extension/static-snapshots/${name}.json`), project.theme);
   }
 
   /** Original source text or assembled theme template used by the assertion. */

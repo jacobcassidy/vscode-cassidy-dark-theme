@@ -171,7 +171,7 @@ export async function readBuildOutputs(root) {
     }
   }
 
-  for (const directory of ["themes", "dev/extension/generated-themes", "docs/palettes"]) await visit(directory);
+  for (const directory of ["themes", "dev-extension/generated-themes", "docs/palettes"]) await visit(directory);
 
   return files;
 }
@@ -207,7 +207,7 @@ export async function createPreviewProject(t) {
     __metadata: { id: "installed-extension" },
   };
 
-  for (const path of ["themes", "dev/extension/generated-themes", "dev/extension/static-snapshots", "images"]) {
+  for (const path of ["themes", "dev-extension/generated-themes", "dev-extension/static-snapshots", "images"]) {
     await mkdir(join(root, path), { recursive: true });
   }
 
@@ -217,7 +217,7 @@ export async function createPreviewProject(t) {
 
   await writeFile(join(root, "package.json"), JSON.stringify(manifest));
   await writeFile(join(root, "themes/theme.json"), theme);
-  await writeFile(join(root, "dev/extension/generated-themes/cassidy-dark-color-theme-test.json"), theme);
+  await writeFile(join(root, "dev-extension/generated-themes/cassidy-dark-color-theme-test.json"), theme);
   await writeFile(join(root, "images/icon.png"), "fixture");
 
   return { root, extensionDirectory, manifest, theme };
