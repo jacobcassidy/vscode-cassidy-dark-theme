@@ -85,7 +85,20 @@ export function assembleThemeTemplate(parts, labels = []) {
 
     parseJsonc(source, label);
 
-    const inputProperties = templateProperties(source, label);
+    /** Property source slices adapted to the generated theme structure. */
+    const inputProperties =
+      index === 3
+        ? (() => {
+            /** Parsed top-level array syntax tree for the token color rules. */
+            const tree = parseTree(source, [], { allowTrailingComma: true });
+
+            if (tree?.type !== "array") throw new Error(`${label} must contain a token color array`);
+
+            return [
+              { key: "tokenColors", source: `"tokenColors": ${source.slice(tree.offset, tree.offset + tree.length)}` },
+            ];
+          })()
+        : templateProperties(source, label);
 
     for (const property of inputProperties) {
       if (seen.has(property.key)) throw new Error(`${label}: duplicate top-level theme property ${property.key}`);

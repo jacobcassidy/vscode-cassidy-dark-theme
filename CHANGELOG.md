@@ -7,6 +7,7 @@ All notable changes to this project are documented in this file.
 ### Changed
 
 - Flattened UI token source files and moved semantic highlighting metadata into each theme’s metadata file.
+- Changed syntax token source files to use a top-level array, with the build adding the `tokenColors` property.
 - Grouped generated file paths by theme in build output and limited blank lines to separators between theme and build summaries.
 - Moved generated development themes and static snapshots under `dev-extension/`.
 - Moved syntax highlighting samples from `dev/grammar-samples/` to `docs/grammar-samples/`.
