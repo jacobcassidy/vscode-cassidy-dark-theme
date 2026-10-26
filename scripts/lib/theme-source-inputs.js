@@ -10,6 +10,9 @@ import { parseJsonc } from "./jsonc-validation.js";
 /** Required default source directory used for whole-file input fallback. */
 export const defaultThemeDirectory = "src/themes/prod/default";
 
+/** Palette configuration required explicitly in every theme directory. */
+export const paletteInputPath = "palette/palette-config.jsonc";
+
 /** Required metadata, consolidated token sections, and independent documentation inputs. */
 export const themeInputPaths = [
   "metadata.jsonc",
@@ -121,7 +124,7 @@ export async function discoverTargets(root) {
 }
 
 /**
- * Load a target input with whole-file fallback to the required default theme input.
+ * Load a target input, allowing whole-file default fallback only for non-palette inputs.
  *
  * @param root - Repository or isolated project root directory.
  * @param target - Discovered theme target and its source/output locations.
@@ -136,7 +139,7 @@ export async function readTargetInput(root, target, relative) {
   const own = await readOptional(join(root, ownPath));
 
   /** Effective input path after selecting the whole-file fallback. */
-  const path = own === undefined ? `${defaultThemeDirectory}/${relative}` : ownPath;
+  const path = own === undefined && relative !== paletteInputPath ? `${defaultThemeDirectory}/${relative}` : ownPath;
 
   /** Effective source text from the target or required default input. */
   const source = own ?? (await readOptional(join(root, path)));

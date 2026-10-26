@@ -6,6 +6,9 @@ All notable changes to this project are documented in this file.
 
 ### Changed
 
+- Required an explicit `palette/palette-config.jsonc` in every source theme, with `useDefaultPalette: true` selecting the default palette.
+- Replaced duplicate palette reports with a single `palette/generated/default.txt` note for default-palette themes, and automatically removed obsolete reports or notes when switching palette modes.
+
 - Consolidated base, UI, semantic, and syntax styling and targeting into `tokens/`, with independently inherited documentation in `details/`.
 - Moved palette configuration to `palette/palette-config.jsonc` and reports to `palette/generated/`, and renamed color explanations to `colorReason`.
 - Added explicitly disabled tokens with resolved styles and explanations in generated JSONC comments, plus validation for reviewed `globallyOverriddenBy` assertions.

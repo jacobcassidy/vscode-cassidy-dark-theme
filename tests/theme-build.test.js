@@ -20,6 +20,7 @@ import {
   readBuildOutputs,
   readThemeParts,
   themePartNames,
+  writeDefaultPaletteConfig,
 } from "./test-projects.js";
 
 test("JSONC parsing rejects duplicate keys and reports file locations", () => {
@@ -167,6 +168,7 @@ for (const section of ["ui", "semantic", "syntax"]) {
     /** Dev source path for independent file replacements. */
     const directory = join(root, "src/themes/dev/sample");
 
+    await writeDefaultPaletteConfig(directory);
     await mkdir(join(directory, "tokens"), { recursive: true });
     await mkdir(join(directory, "details"));
     await writeFile(
@@ -219,6 +221,7 @@ test("empty details suppress fallback and supplied details must match whole-file
   /** Independently replaced UI token section. */
   const directory = join(root, "src/themes/dev/sample");
 
+  await writeDefaultPaletteConfig(directory);
   await mkdir(join(directory, "tokens"), { recursive: true });
   await mkdir(join(directory, "details"));
   await writeFile(
@@ -390,49 +393,177 @@ for (const relative of [
   });
 }
 
-test("fully inherited dev targets produce their own reports and follow changed default palettes", async (t) => {
-  /** Temporary source project root for this test scenario. */
+test("explicit default palettes produce only a note and follow changes without rewriting prod output", async (t) => {
+  /** Temporary project whose dev target explicitly uses the default palette. */
   const root = await createBuildProject(t);
 
-  /** Development target source directory prepared by this test. */
-  const devThemeDirectory = join(root, "src/themes/dev/inherited");
+  /** Dev source directory and generated palette-note location. */
+  const directory = join(root, "src/themes/dev/inherited");
 
-  await mkdir(devThemeDirectory, { recursive: true });
+  await writeDefaultPaletteConfig(directory);
   await buildProdThemes({ root });
 
-  /** Production artifact snapshot retained before a development build. */
+  /** Production artifacts retained before the independent dev build. */
   const prodOutputs = await readBuildOutputs(root);
 
-  /** Build summary inspected for target palettes and changed artifact paths. */
+  /** Dev palette and artifact changes returned by the build. */
   const result = await buildDevThemes({ root });
 
-  /** Generated palette JSON report path used by the assertion. */
-  const reportPath = join(root, "src/themes/dev/inherited/palette/generated/palette.json");
+  /** Note explaining why per-theme palette measurements and swatches are omitted. */
+  const notePath = join(directory, "palette/generated/default.txt");
 
-  /** Parsed palette measurements and source provenance. */
-  const report = JSON.parse(await readFile(reportPath, "utf8"));
+  /** Original note must remain unchanged when default palette values change. */
+  const note = await readFile(notePath, "utf8");
 
   assert.equal(result.length, 1);
-  assert.equal(report.generated.target, "dev/inherited");
-  assert.equal(report.generated.source, "src/themes/prod/default/palette/palette-config.jsonc");
-  assert.equal(report.generated.fallback, true);
-  assert.equal(
-    parse(await readFile(join(root, "dev-extension/themes/cassidy-dark-color-theme-inherited.json"), "utf8")).name,
-    "Fixture",
-  );
+  assert.equal(result[0].changed.length, 2);
+  assert.match(note, /No palette is generated.*default palette is being used/);
+  assert.match(note, /src\/themes\/prod\/default\/palette\/palette-config.jsonc/);
+  assert.deepEqual(await readdir(join(directory, "palette/generated")), ["default.txt"]);
 
   for (const [path, text] of prodOutputs) assert.equal(await readFile(join(root, path), "utf8"), text);
 
-  /** Authored fixture configuration mutated for the current validation scenario. */
+  /** New default color propagates through the inherited token definitions. */
   const input = createPaletteConfig();
 
   input.families.yellow.hue = 95;
   await writeFile(join(root, "src/themes/prod/default/palette/palette-config.jsonc"), JSON.stringify(input));
   await assert.rejects(buildDevThemes({ root, check: true }), /missing or stale/);
-  assert.equal(await readFile(reportPath, "utf8"), JSON.stringify(report, null, 2) + "\n");
-  await buildDevThemes({ root });
-  assert.equal(JSON.parse(await readFile(reportPath, "utf8")).primitives["palette.yellow.400"].target.h, 95);
+  assert.equal(await readFile(notePath, "utf8"), note);
+
+  /** Dev build uses the updated palette while leaving production artifacts intact. */
+  const changed = await buildDevThemes({ root });
+
+  assert.equal(changed[0].palette.get("palette.yellow.400").target.h, 95);
+  assert.deepEqual(changed[0].changed, ["dev-extension/themes/cassidy-dark-color-theme-inherited.json"]);
+  assert.equal(await readFile(notePath, "utf8"), note);
+  await buildDevThemes({ root, check: true });
   await assert.rejects(buildProdThemes({ root, check: true }), /missing or stale/);
+});
+
+for (const group of ["prod", "dev"]) {
+  test(`${group} themes require their own palette config even when the default palette exists`, async (t) => {
+    /** Project with an explicit default-palette selection and existing generated artifacts. */
+    const root = await createBuildProject(t);
+
+    /** Theme and build operation selected for this source group. */
+    const directory = join(root, `src/themes/${group}/sample`);
+
+    /** Public build entry point for the selected group. */
+    const build = group === "prod" ? buildProdThemes : buildDevThemes;
+
+    await writeDefaultPaletteConfig(directory);
+    await build({ root });
+
+    /** Existing artifacts must survive a missing required configuration. */
+    const before = await readBuildOutputs(root);
+
+    await rm(join(directory, "palette/palette-config.jsonc"));
+    await assert.rejects(build({ root }), /sample\/palette\/palette-config.jsonc: missing required theme input/);
+    assert.deepEqual(await readBuildOutputs(root), before);
+  });
+}
+
+for (const [group, paletteOnly] of [
+  ["prod", false],
+  ["dev", false],
+  ["prod", true],
+]) {
+  test(`${group} palette modes replace reports and notes safely with paletteOnly=${paletteOnly}`, async (t) => {
+    /** Project and theme that initially select the default palette explicitly. */
+    const root = await createBuildProject(t);
+
+    /** Named theme source directory used for both palette modes. */
+    const directory = join(root, `src/themes/${group}/sample`);
+
+    /** Generated directory whose contents must match the current mode exactly. */
+    const generated = join(directory, "palette/generated");
+
+    /** Public build operation with the requested palette-only mode. */
+    const build = group === "prod" ? buildProdThemes : buildDevThemes;
+
+    await writeDefaultPaletteConfig(directory);
+    await build({ root, paletteOnly });
+    assert.deepEqual(await readdir(generated), ["default.txt"]);
+
+    /** Read-only checks must leave the old note in place until the build succeeds. */
+    const beforeCustom = await readBuildOutputs(root);
+
+    await writeFile(
+      join(directory, "palette/palette-config.jsonc"),
+      JSON.stringify({ useDefaultPalette: false, ...createPaletteConfig() }),
+    );
+    await assert.rejects(build({ root, paletteOnly, check: true }), /missing or stale/);
+    assert.deepEqual(await readBuildOutputs(root), beforeCustom);
+    await build({ root, paletteOnly });
+    assert.deepEqual(await readdir(generated), ["palette.json", "palette.md", "palette.svg"]);
+    await build({ root, paletteOnly, check: true });
+
+    /** Custom reports must survive validation failure in a later target before any cleanup runs. */
+    const beforeDefault = await readBuildOutputs(root);
+
+    /** Later target used to fail validation after the valid palette-mode switch is prepared. */
+    const invalid = join(root, `src/themes/${group}/z-invalid`);
+
+    await writeDefaultPaletteConfig(directory);
+    await writeDefaultPaletteConfig(invalid);
+    await writeFile(join(invalid, "palette/palette-config.jsonc"), '{"useDefaultPalette":"yes"}');
+    await assert.rejects(build({ root, paletteOnly }), /useDefaultPalette must be a boolean/);
+    assert.deepEqual(await readBuildOutputs(root), beforeDefault);
+    await rm(invalid, { recursive: true });
+    await assert.rejects(build({ root, paletteOnly, check: true }), /missing or stale/);
+    assert.deepEqual(await readBuildOutputs(root), beforeDefault);
+    await build({ root, paletteOnly });
+    assert.deepEqual(await readdir(generated), ["default.txt"]);
+    await build({ root, paletteOnly, check: true });
+
+    await writeFile(join(generated, "default.txt"), "Outdated note\n");
+    await assert.rejects(build({ root, paletteOnly, check: true }), /default.txt/);
+    assert.equal(await readFile(join(generated, "default.txt"), "utf8"), "Outdated note\n");
+    await build({ root, paletteOnly });
+    assert.match(await readFile(join(generated, "default.txt"), "utf8"), /default palette is being used/);
+  });
+}
+
+for (const [config, pattern] of [
+  [null, /expected an object/],
+  [[], /expected an object/],
+  [{}, /palette.chroma/],
+  [{ useDefaultPalette: "true" }, /useDefaultPalette must be a boolean/],
+  [{ useDefaultPalette: 1 }, /useDefaultPalette must be a boolean/],
+  [{ useDefaultPalette: null }, /useDefaultPalette must be a boolean/],
+  [{ useDefaultPalette: false }, /palette.chroma/],
+  [{ useDefaultPalette: true, overrides: {} }, /unknown field overrides/],
+  [{ useDefaultPalette: true, families: {} }, /unknown field families/],
+  [{ useDefaultPalette: true, typo: true }, /unknown field typo/],
+]) {
+  test(`palette selection rejects invalid or mixed configuration ${JSON.stringify(config)}`, async (t) => {
+    /** Valid default project with a malformed target-local palette selection. */
+    const root = await createBuildProject(t);
+
+    /** Target directory whose local configuration must never silently fall back. */
+    const directory = join(root, "src/themes/dev/sample");
+
+    await writeDefaultPaletteConfig(directory);
+    await writeFile(join(directory, "palette/palette-config.jsonc"), JSON.stringify(config));
+    await assert.rejects(buildDevThemes({ root }), pattern);
+    await assert.rejects(readFile(join(directory, "palette/generated/default.txt")), { code: "ENOENT" });
+  });
+}
+
+test("the default theme cannot select its own palette as a fallback", async (t) => {
+  /** Existing default outputs must survive an invalid self-reference. */
+  const root = await createBuildProject(t);
+
+  await buildProdThemes({ root });
+
+  /** Snapshot captured before replacing the required concrete default palette. */
+  const before = await readBuildOutputs(root);
+
+  await writeDefaultPaletteConfig(join(root, "src/themes/prod/default"));
+  await assert.rejects(buildProdThemes({ root }), /default theme must define its own palette/);
+  await assert.rejects(buildProdThemes({ root, paletteOnly: true }), /default theme must define its own palette/);
+  assert.deepEqual(await readBuildOutputs(root), before);
 });
 
 for (const [path, contents, pattern] of [
@@ -461,6 +592,7 @@ for (const [path, contents, pattern] of [
     /** Development target source directory prepared by this test. */
     const devThemeDirectory = join(root, "src/themes/dev/sample");
 
+    await writeDefaultPaletteConfig(devThemeDirectory);
     await mkdir(join(devThemeDirectory, path, ".."), { recursive: true });
     await writeFile(join(devThemeDirectory, path), contents);
     await assert.rejects(buildDevThemes({ root }), pattern);
@@ -474,6 +606,7 @@ test("a supplied dev UI mapping replaces the whole file while omitted files inhe
   /** Temporary source project root for this test scenario. */
   const root = await createBuildProject(t);
 
+  await writeDefaultPaletteConfig(join(root, "src/themes/dev/sample"));
   await mkdir(join(root, "src/themes/dev/sample/tokens"), { recursive: true });
   await writeFile(
     join(root, "src/themes/dev/sample/tokens/ui.jsonc"),
@@ -499,6 +632,8 @@ for (const group of ["prod", "dev"]) {
 
     /** Destination manifest or source target path used by this scenario. */
     const target = join(root, `src/themes/${group}/z-invalid`);
+
+    await writeDefaultPaletteConfig(target);
     await mkdir(join(target, "tokens"), { recursive: true });
     await build({ root });
 
@@ -527,7 +662,7 @@ test("prod targets register matching theme types and preserve unrelated manifest
 
   manifest.contributes.commands = [{ command: "fixture.command", title: "Keep" }];
   await writeFile(manifestPath, JSON.stringify(manifest));
-  await mkdir(join(root, "src/themes/prod/high-contrast"));
+  await writeDefaultPaletteConfig(join(root, "src/themes/prod/high-contrast"));
   await writeFile(join(root, "src/themes/prod/high-contrast/metadata.jsonc"), '{"name":"Fixture","type":"hc"}');
   await buildProdThemes({ root });
 
@@ -583,7 +718,7 @@ test("stale report and theme detection is read-only and archives are never regen
 test("palette-only builds all prod reports without metadata, tokens, details, or a manifest", async (t) => {
   /** Temporary source project root for this test scenario. */
   const root = await createBuildProject(t);
-  await mkdir(join(root, "src/themes/prod/inherited"));
+  await writeDefaultPaletteConfig(join(root, "src/themes/prod/inherited"));
   await rm(join(root, "package.json"));
   await rm(join(root, "src/themes/prod/default/metadata.jsonc"));
   await rm(join(root, "src/themes/prod/default/tokens"), { recursive: true });
@@ -592,7 +727,7 @@ test("palette-only builds all prod reports without metadata, tokens, details, or
   /** Build summary inspected for target palettes and changed artifact paths. */
   const result = await buildProdThemes({ root, paletteOnly: true });
   assert.equal(result.targets.length, 2);
-  assert.equal(result.changed.length, 6);
+  assert.equal(result.changed.length, 4);
   assert.equal((await buildProdThemes({ root, paletteOnly: true, check: true })).changed.length, 0);
   await assert.rejects(readFile(join(root, "themes/cassidy-dark-color-theme.json")), { code: "ENOENT" });
 });

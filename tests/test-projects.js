@@ -20,6 +20,15 @@ export function createPaletteConfig() {
   };
 }
 
+/**
+ * Create a theme directory with an explicit selection of the default palette.
+ * @param directory - Theme source directory to populate.
+ */
+export async function writeDefaultPaletteConfig(directory) {
+  await mkdir(join(directory, "palette"), { recursive: true });
+  await writeFile(join(directory, "palette/palette-config.jsonc"), '{"useDefaultPalette":true}\n');
+}
+
 /** Required default source paths without the JSONC filename extension. */
 export const themePartNames = themeInputPaths.map((path) => path.replace(/\.jsonc$/, ""));
 

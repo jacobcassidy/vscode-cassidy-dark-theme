@@ -10,16 +10,18 @@ import { applyEdits, modify } from "jsonc-parser";
 // Prettier's generated entry point hides its default export from the import resolver.
 // eslint-disable-next-line import-x/default
 import prettier from "prettier";
-import { object, parseJsonc } from "../lib/jsonc-validation.js";
+import { fields, object, parseJsonc } from "../lib/jsonc-validation.js";
 import { generatePalette } from "../lib/palette-generation.js";
 import { compileTokens, renderTheme } from "../lib/theme-compilation.js";
 import { contrastRatio } from "../lib/color-math.js";
 import {
   discoverTargets,
+  defaultThemeDirectory,
   listDirectories,
   listFiles,
   readOptional,
   readTargetInput,
+  paletteInputPath,
   prodThemeContribution,
   themeInputPaths,
   themeUiType,
@@ -326,7 +328,7 @@ function reports(palette, target, input, notice) {
  * @param source - Authored or generated JSONC source text for this build phase.
  */
 async function formatted(root, path, source) {
-  if (path.endsWith(".svg")) return source;
+  if (path.endsWith(".svg") || path.endsWith(".txt")) return source;
 
   /** Absolute output path used to select Prettier configuration. */
   const filepath = join(root, path);
@@ -345,16 +347,35 @@ async function formatted(root, path, source) {
  * @param root - Repository or isolated project root directory.
  * @param target - Discovered theme target and its source/output locations.
  * @param paletteOnly - Whether to generate palette reports without compiling token sections.
+ * @param [defaultPalette] - Already validated default palette available to other themes.
  */
-async function prepareTarget(root, target, paletteOnly) {
-  /** Effective palette or section input with fallback provenance. */
-  const input = await readTargetInput(root, target, "palette/palette-config.jsonc");
+async function prepareTarget(root, target, paletteOnly, defaultPalette) {
+  /** Required target-local configuration selecting a custom or default palette. */
+  const input = await readTargetInput(root, target, paletteInputPath);
 
   /** Validated palette generated before compiling theme tokens. */
   let palette;
 
   try {
-    palette = generatePalette(input.value);
+    object(input.value, input.label);
+
+    if (Object.hasOwn(input.value, "useDefaultPalette") && typeof input.value.useDefaultPalette !== "boolean") {
+      throw new Error("useDefaultPalette must be a boolean");
+    }
+
+    if (input.value.useDefaultPalette) {
+      fields(input.value, ["useDefaultPalette"], "palette");
+
+      if (!defaultPalette)
+        throw new Error("The default theme must define its own palette; useDefaultPalette cannot reference itself");
+
+      palette = defaultPalette;
+    } else {
+      /** Complete generation settings, excluding the optional explicit false selection flag. */
+      const config = { ...input.value };
+      delete config.useDefaultPalette;
+      palette = generatePalette(config);
+    }
   } catch (error) {
     throw new Error(`${input.label}: ${error.message}`, { cause: error });
   }
@@ -362,8 +383,18 @@ async function prepareTarget(root, target, paletteOnly) {
   /** Rebuild command used in generated notices and stale-output errors. */
   const command = target.group === "prod" ? "npm run build:prod" : "npm run build:dev";
 
-  /** In-memory palette reports and optional rendered theme for one target. */
-  const output = reports(palette, target, input, target.group === "prod" ? "npm run build:palette" : command);
+  /** In-memory artifacts; null values schedule removal of obsolete palette files. */
+  const output = input.value.useDefaultPalette
+    ? new Map([
+        [
+          `${target.reportDirectory}/default.txt`,
+          `No palette is generated for ${target.group}/${target.name} because the default palette is being used.\nDefault palette configuration: ${defaultThemeDirectory}/${paletteInputPath}\nGenerated default palette: ${defaultThemeDirectory}/palette/generated/\n`,
+        ],
+        ...["json", "md", "svg"].map((extension) => [`${target.reportDirectory}/palette.${extension}`, null]),
+      ])
+    : reports(palette, target, input, target.group === "prod" ? "npm run build:palette" : command);
+
+  if (!input.value.useDefaultPalette) output.set(`${target.reportDirectory}/default.txt`, null);
 
   /** Resolved theme metadata used to build manifest registrations. */
   let metadata;
@@ -417,7 +448,7 @@ async function prodManifestOutput(root, targets) {
 }
 
 /**
- * Reject generated files that no longer belong to the selected source targets.
+ * Reject unowned generated files, allowing scheduled palette-mode cleanup for selected targets.
  *
  * @param root - Repository or isolated project root directory.
  * @param targets - Theme targets participating in the selected build or validation pass.
@@ -429,12 +460,7 @@ async function staleOutputs(root, targets, group, paletteOnly) {
   const selected = targets.filter((target) => target.group === group);
 
   /** Theme and palette artifact paths allowed for the selected target group. */
-  const expected = new Set(
-    selected.flatMap((target) => [
-      target.output,
-      ...["json", "md", "svg"].map((extension) => `${target.reportDirectory}/palette.${extension}`),
-    ]),
-  );
+  const expected = new Set(selected.flatMap((target) => [...target.outputs.keys()]));
 
   /** Generated artifact paths found on disk for stale-output checks. */
   const actual = [];
@@ -453,9 +479,7 @@ async function staleOutputs(root, targets, group, paletteOnly) {
 
   for (const name of await listDirectories(join(root, sourceDirectory), group === "dev")) {
     for (const file of await listFiles(join(root, sourceDirectory, name, "palette", "generated"))) {
-      if (/^palette\.(json|md|svg)$/.test(file)) {
-        actual.push(`${sourceDirectory}/${name}/palette/generated/${file}`);
-      }
+      actual.push(`${sourceDirectory}/${name}/palette/generated/${file}`);
     }
   }
 
@@ -473,12 +497,14 @@ async function staleOutputs(root, targets, group, paletteOnly) {
  * Format and validate all output candidates before checking or atomically replacing changed files.
  *
  * @param root - Repository or isolated project root directory.
- * @param output - Output path-to-source map prepared before writing any artifacts.
+ * @param output - Output path-to-source map, with null marking obsolete palette files for removal.
  * @param check - Whether to report stale artifacts without writing files.
  * @param command - Rebuild command included in stale-output diagnostics.
  */
 async function stageOutputs(root, output, check, command) {
   for (const [path, source] of output) {
+    if (source === null) continue;
+
     /** Formatted generated source ready for validation and comparison. */
     const text = await formatted(root, path, source);
 
@@ -493,7 +519,9 @@ async function stageOutputs(root, output, check, command) {
   const changed = [];
 
   for (const [path, text] of output) {
-    if ((await readOptional(join(root, path))) !== text) changed.push(path);
+    /** Existing artifact contents, read before any replacement or removal. */
+    const existing = await readOptional(join(root, path));
+    if (text === null ? existing !== undefined : existing !== text) changed.push(path);
   }
 
   if (check && changed.length) {
@@ -505,6 +533,11 @@ async function stageOutputs(root, output, check, command) {
   for (const path of changed) {
     /** Final artifact path to replace after successful staging. */
     const destination = join(root, path);
+
+    if (output.get(path) === null) {
+      await rm(destination);
+      continue;
+    }
 
     await mkdir(dirname(destination), { recursive: true });
 
@@ -551,14 +584,17 @@ async function buildTargets({ root, check, paletteOnly = false, group }) {
 
   for (const target of targets.filter((candidate) => candidate.group === group)) {
     /** Validated palette and output candidates for the current target. */
-    const prepared = target === defaultTarget ? baseline : await prepareTarget(root, target, paletteOnly);
+    const prepared =
+      target === defaultTarget ? baseline : await prepareTarget(root, target, paletteOnly, baseline.palette);
+
     selected.push(prepared);
+
     for (const [path, text] of prepared.outputs) output.set(path, text);
   }
 
   if (group === "prod" && !paletteOnly) output.set("package.json", await prodManifestOutput(root, selected));
 
-  await staleOutputs(root, targets, group, paletteOnly);
+  await staleOutputs(root, selected, group, paletteOnly);
 
   /** Rebuild command used in generated notices and stale-output errors. */
   const command = group === "dev" ? "npm run build:dev" : paletteOnly ? "npm run build:palette" : "npm run build:prod";

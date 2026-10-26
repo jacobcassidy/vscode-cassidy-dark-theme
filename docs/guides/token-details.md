@@ -1,6 +1,6 @@
 # Tokens and details
 
-Each theme under `src/themes/{prod,dev}/<name>/` has consolidated styling in `tokens/` and independent documentation in `details/`. Both directories contain `base.jsonc`, `ui.jsonc`, `semantic.jsonc`, and `syntax.jsonc`. The default theme supplies every file. Other targets inherit omitted files independently; supplying `{}` in a details file suppresses its documentation fallback. Details are validated against the effective authored tokens, including disabled entries. Editing documentation alone leaves generated files unchanged.
+Each theme under `src/themes/{prod,dev}/<name>/` has consolidated styling in `tokens/` and independent documentation in `details/`. Both directories contain `base.jsonc`, `ui.jsonc`, `semantic.jsonc`, and `syntax.jsonc`. The default theme supplies every file. Every target requires an explicit `palette/palette-config.jsonc`; `{ "useDefaultPalette": true }` selects the default palette. Other targets inherit omitted token, details, and metadata files independently; supplying `{}` in a details file suppresses its documentation fallback. Details are validated against the effective authored tokens, including disabled entries. Editing documentation alone leaves generated files unchanged.
 
 ## Token definitions and aliases
 

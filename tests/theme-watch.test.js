@@ -13,7 +13,7 @@ import { stripVTControlCharacters } from "node:util";
 import { parse } from "jsonc-parser";
 import { syncDevExtension } from "../scripts/dev-extension/sync.js";
 import { watchThemes } from "../scripts/themes/watch.js";
-import { createBuildProject, createPreviewProject } from "./test-projects.js";
+import { createBuildProject, createPreviewProject, writeDefaultPaletteConfig } from "./test-projects.js";
 
 /**
  * Poll an asynchronous condition until it succeeds or the watcher test deadline expires.
@@ -83,7 +83,7 @@ async function createWatchProject(t, { dev = true } = {}) {
     await mkdir(join(root, directory), { recursive: true });
 
   if (dev) {
-    await mkdir(join(root, "src/themes/dev/sample"), { recursive: true });
+    await writeDefaultPaletteConfig(join(root, "src/themes/dev/sample"));
     await writeFile(join(root, "src/themes/dev/sample/metadata.jsonc"), '{"name":"Dev Fixture","type":"dark"}');
   }
 
@@ -196,13 +196,13 @@ test("watch discovers a dev source tree created after startup", async (t) => {
 
   /** Build count recorded before or during a simulated source change. */
   const count = project.builds();
-  await mkdir(join(project.root, "src/themes/dev/new"), { recursive: true });
+  await writeDefaultPaletteConfig(join(project.root, "src/themes/dev/new"));
   await waitFor(() => project.builds() > count);
 
-  /** Generated palette report inspected for target provenance. */
-  const report = JSON.parse(await readFile(join(project.root, "src/themes/dev/new/palette/generated/palette.json")));
-  assert.equal(report.generated.target, "dev/new");
-  assert.equal(report.generated.fallback, true);
+  /** New target records its explicit default-palette choice instead of duplicating reports. */
+  const note = await readFile(join(project.root, "src/themes/dev/new/palette/generated/default.txt"), "utf8");
+
+  assert.match(note, /dev\/new.*default palette is being used/);
   assert.deepEqual(project.errors, []);
   await project.controller.close();
 });
@@ -255,7 +255,7 @@ test("watch ignores generated output changes and unrelated source directories", 
     join(project.root, "dev-extension/themes/cassidy-dark-color-theme-sample.json"),
     "// Edited output\n",
   );
-  await writeFile(join(project.root, "src/themes/dev/sample/palette/generated/palette.md"), "Edited report\n");
+  await writeFile(join(project.root, "src/themes/dev/sample/palette/generated/default.txt"), "Edited report\n");
   await mkdir(join(project.root, "src/unrelated"));
   await writeFile(join(project.root, "src/unrelated/input.jsonc"), "{}");
   await delay(150);
