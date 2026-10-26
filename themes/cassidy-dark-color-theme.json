@@ -4,6 +4,7 @@
   "name": "Cassidy Dark",
   "type": "dark",
   "author": "Jacob Cassidy",
+  "semanticHighlighting": true,
   "colors": {
     "activityBar.activeBackground": "#292929",
     "activityBar.background": "#333333",
@@ -249,7 +250,6 @@
     "widget.border": "#ffffff0d",
     "widget.shadow": "#00000033"
   },
-  "semanticHighlighting": true,
   "semanticTokenColors": {
     "class": {
       "foreground": "#92dedd"

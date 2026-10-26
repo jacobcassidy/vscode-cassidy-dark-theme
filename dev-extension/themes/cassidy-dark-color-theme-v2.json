@@ -5,6 +5,7 @@
   "type": "dark",
   "author": "Jacob Cassidy",
   "version": "2.0.0",
+  "semanticHighlighting": true,
   "colors": {
     "actionBar.toggledBackground": "#f0f", // [inherits` inputOption.activeBackground` || `focusBorder`] | example: backward P button in diff editor toolbar
     "activeSessionView.background": "#f0f",
@@ -1044,7 +1045,6 @@
     "modernActivityBar.hoverForeground": "#00f",
     "quickInput.list.focusBackground": "#00f"
   },
-  "semanticHighlighting": true,
   "semanticTokenColors": {
     "*.abstract": "#ff0000",
     "*.async": "#ff0000",

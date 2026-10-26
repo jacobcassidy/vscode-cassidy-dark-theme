@@ -5,6 +5,7 @@
   "type": "dark",
   "author": "Jacob Cassidy",
   "version": "test",
+  "semanticHighlighting": true,
   "colors": {
     "activityBar.activeBackground": "#292929", // [base] (match `sideBar.background`)
     "activityBar.background": "#333333", // -color--oklch-32-gray [overrides core #3333333] (match sidebar header)
@@ -397,7 +398,6 @@
     "widget.border": "#ffffff0d", // -color--white at 5% opacity [base]
     "widget.shadow": "#00000033" // -color--black at 20% opacity | non-editor widgets [overrides core black at opacity]
   },
-  "semanticHighlighting": true,
   "semanticTokenColors": {
     "builtinConstant": {
       "foreground": "#d6aaea" // -color--purple-base | example: Python boolean value

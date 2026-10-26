@@ -155,8 +155,6 @@ export async function readTargetInput(root, target, relative) {
   /** Parsed input value and its source syntax tree. */
   const parsed = parseJsonc(source, label);
 
-  object(parsed.value, label);
-
   return { ...parsed, source, path, label, fallback };
 }
 
@@ -168,6 +166,7 @@ export async function readTargetInput(root, target, relative) {
  */
 export function validateThemePart(input, index) {
   if (index === 0) {
+    object(input.value, input.label);
     themeUiType(input.value, input.label);
 
     return;

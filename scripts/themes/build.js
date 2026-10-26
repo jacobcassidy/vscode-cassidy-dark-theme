@@ -86,19 +86,40 @@ export function assembleThemeTemplate(parts, labels = []) {
     parseJsonc(source, label);
 
     /** Property source slices adapted to the generated theme structure. */
-    const inputProperties =
-      index === 3
-        ? (() => {
-            /** Parsed top-level array syntax tree for the token color rules. */
-            const tree = parseTree(source, [], { allowTrailingComma: true });
+    let inputProperties;
 
-            if (tree?.type !== "array") throw new Error(`${label} must contain a token color array`);
+    if (index === 1 || index === 2) {
+      templateProperties(source, label);
 
-            return [
-              { key: "tokenColors", source: `"tokenColors": ${source.slice(tree.offset, tree.offset + tree.length)}` },
-            ];
-          })()
-        : templateProperties(source, label);
+      /** Generated theme property corresponding to this flat token section. */
+      const sectionName = index === 1 ? "colors" : "semanticTokenColors";
+      /** Parsed object syntax tree used to locate the authored section body. */
+      const tree = parseTree(source, [], { allowTrailingComma: true });
+
+      /** Whitespace-preserving source body so attached comments survive wrapping. */
+      const body = source.slice(tree.offset + 1, tree.offset + tree.length - 1).trim();
+
+      inputProperties = [
+        {
+          key: sectionName,
+          source: `"${sectionName}": {\n${body
+            .split("\n")
+            .map((line) => `  ${line}`)
+            .join("\n")}\n  }`,
+        },
+      ];
+    } else if (index === 3) {
+      /** Parsed top-level array syntax tree for the token color rules. */
+      const tree = parseTree(source, [], { allowTrailingComma: true });
+
+      if (tree?.type !== "array") throw new Error(`${label} must contain a token color array`);
+
+      inputProperties = [
+        { key: "tokenColors", source: `"tokenColors": ${source.slice(tree.offset, tree.offset + tree.length)}` },
+      ];
+    } else {
+      inputProperties = templateProperties(source, label);
+    }
 
     for (const property of inputProperties) {
       if (seen.has(property.key)) throw new Error(`${label}: duplicate top-level theme property ${property.key}`);
@@ -109,17 +130,6 @@ export function assembleThemeTemplate(parts, labels = []) {
 
       seen.add(property.key);
       properties.push(`  ${property.source}`);
-    }
-
-    if (index === 1 || index === 2) {
-      /** Generated theme property corresponding to this flat token section. */
-      const sectionName = index === 1 ? "colors" : "semanticTokenColors";
-
-      properties.splice(
-        properties.length - inputProperties.length,
-        inputProperties.length,
-        `  "${sectionName}": {\n${inputProperties.map((property) => `    ${property.source}`).join(",\n")}\n  }`,
-      );
     }
   }
 
