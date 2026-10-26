@@ -101,7 +101,7 @@
     "editorStickyScrollHover.background": "#161616",
     "editorUnicodeHighlight.background": "#eeae7b40",
     "editorUnicodeHighlight.border": "#eeae7b80",
-    "editorUnnecessaryCode.opacity": "#0009", // -color--black at 60% opacity [overrides core black opacity]
+    "editorUnnecessaryCode.opacity": "#0009",
     "editorWarning.foreground": "#eeae7b",
     "editorWhitespace.foreground": "#383838",
     "editorWidget.background": "#333333",
@@ -280,13 +280,9 @@
     }
   },
   "tokenColors": [
-    //--------------------------------------------------------------------------
-    //--- FONT STYLES ---
-    //--------------------------------------------------------------------------
     {
       "name": "BOLD",
       "scope": [
-        //*** MARKDOWN ***
         "markup.bold.markdown"
       ],
       "settings": {
@@ -296,18 +292,14 @@
     {
       "name": "ITALIC",
       "scope": [
-        //*** DEFAULT ***
         "comment",
         "invalid",
         "variable.language.this",
-        //*** MARKDOWN ***
         "entity.name.section.markdown",
         "markup.italic.markdown",
-        //*** PHP ***
         "keyword.operator.return-value.php",
         "keyword.other.type.php",
         "meta.function.php support.class.php",
-        //*** TYPESCRIPT ***
         "keyword.operator.type.annotation.ts",
         "support.type.primitive.ts"
       ],
@@ -318,68 +310,42 @@
     {
       "name": "BOLD ITALIC",
       "scope": [
-        //*** MARKDOWN ***
         "markup.bold.markdown markup.italic.markdown"
       ],
       "settings": {
         "fontStyle": "bold italic"
       }
     },
-    // {
-    //   "name": "NORMAL",
-    //   "scope": [],
-    //   "settings": {
-    //     "fontStyle": ""
-    //   }
-    // },
     {
       "name": "STRIKETHROUGH",
       "scope": [
-        //*** MARKDOWN ***
         "markup.strikethrough.markdown"
       ],
       "settings": {
         "fontStyle": "strikethrough"
       }
     },
-
-    //--------------------------------------------------------------------------
-    //--- GRAY SHADES ---
-    //--------------------------------------------------------------------------
     {
       "name": "GRAY WHITE (OKLCH 98%)",
       "scope": [
-        //*** DEFAULT ***
         "meta.method-call entity.name.function",
         "support.function",
-        //*** APACHE ***
-        "entity.helper.apacheconf", // Using Apache Conf extension for syntax grammar
-        //*** CSS ***
+        "entity.helper.apacheconf",
         "entity.other.attribute-name.pseudo-class",
         "entity.other.attribute-name.pseudo-element",
-        //*** HTML ***
         "text.html",
         "meta.element.structure.svg.text.html",
-        //*** JSX ***
         "meta.jsx.children",
-        //*** XML ***
         "text.xml"
       ],
       "settings": {
         "foreground": "#f8f8f8"
       }
     },
-    // {
-    //   "name": "GRAY WHITE-LIGHT (OKLCH 90%)",
-    //   "scope": [],
-    //   "settings": { "foreground": "#dedede" }
-    // },
     {
       "name": "GRAY WHITE-LIGHT-LIGHT (OKLCH 86%)",
       "scope": [
-        //*** JAVASCRIPT ***
-        "variable.other.object", // semantic token type for JS
-        //*** SHELL ***
+        "variable.other.object",
         "meta.scope"
       ],
       "settings": {
@@ -389,56 +355,39 @@
     {
       "name": "GRAY LIGHT (OKLCH 82%)",
       "scope": [
-        //*** DEFAULT ***
-        "meta.embedded.block", // Such as  ```shell text``` in markdown
-        "support.constant.property", // semantic token type for JS
-        "support.variable", // semantic token type for JS
-        //*** HTML ***
+        "meta.embedded.block",
+        "support.constant.property",
+        "support.variable",
         "entity.other.attribute-name"
       ],
       "settings": {
         "foreground": "#c4c4c4"
       }
     },
-    // {
-    //   "name": "GRAY LIGHT-MEDIUM (OKLCH 74%)",
-    //   "scope": [],
-    //   "settings": {
-    //     "foreground": "#ababab"
-    //   }
-    // },
     {
       "name": "GRAY MEDIUM (OKLCH 66%) [PUNCTUATION]",
       "scope": [
-        //*** DEFAULT ***
         "entity.name",
         "meta.at-rule.keyframes.body",
         "meta.block",
         "meta.brace",
         "meta.embedded.line",
         "punctuation",
-        //*** CSS ***
-        "meta.function.calc.css", // For nesting parentheses in calc function
+        "meta.function.calc.css",
         "meta.property-list",
-        //*** MARKDOWN ***
         "meta.separator.markdown",
         "markup.strikethrough.markdown",
-        //*** PHP ***
-        "comment keyword", // example: @package in PHPdoc comment
-        "comment keyword.operator.nullable-type.php", // example: ?array in docblock type hint
-        "comment support.class", // example: `editor` in @return editor in PHPdoc comment
-        "keyword.other.phpdoc.php", // The PHPDoc block keywords
-        "keyword.operator.return-value.php", // For function return type colon
-        "meta.embedded.block.php", // For else colon when using alternative syntax
-        "meta.embedded.line.php", // For closing bracket } when opening a new PHP tag
-        "string.quoted.double.php punctuation.definition.variable.php", // for {} braces syntax used in string interpolation.
-        //*** RUBY ***
-        "meta.function.method.with-arguments.ruby storage.type", // For Ruby's parameter block `&` operator
-        //*** SHELL ***
-        "meta.expression.assignment.modified.shell", //example `/` in .zshrc: export PATH=/opt/homebrew/bin:$PATH
-        //*** XML ***
+        "comment keyword",
+        "comment keyword.operator.nullable-type.php",
+        "comment support.class",
+        "keyword.other.phpdoc.php",
+        "keyword.operator.return-value.php",
+        "meta.embedded.block.php",
+        "meta.embedded.line.php",
+        "string.quoted.double.php punctuation.definition.variable.php",
+        "meta.function.method.with-arguments.ruby storage.type",
+        "meta.expression.assignment.modified.shell",
         "meta.tag",
-        //*** ZSH ***
         "meta.parameter-expansion"
       ],
       "settings": {
@@ -448,7 +397,6 @@
     {
       "name": "GRAY MEDIUM-DARK (OKLCH 58%) [COMMENTS]",
       "scope": [
-        //*** DEFAULT ***
         "comment",
         "comment constant",
         "comment entity.name.type",
@@ -470,77 +418,46 @@
     {
       "name": "GRAY DARK (OKLCH 50%)",
       "scope": [
-        //*** DEFAULT ***
         "invalid",
-        //*** MARKDOWN ***
         "markup.underline.link"
       ],
       "settings": {
         "foreground": "#636363"
       }
     },
-    // {
-    //   "name": "GRAY DARK-FADE (OKLCH 42%)",
-    //   "scope": [],
-    //   "settings": { "foreground": "#4d4d4d" }
-    // },
-    // {
-    //   "name": "GRAY FADE (OKLCH 34%)",
-    //   "scope": [],
-    //   "settings": { "foreground": "#525252" }
-    // },
-
-    //--------------------------------------------------------------------------
-    //--- COLOR CUSTOMIZATIONS ---
-    //--------------------------------------------------------------------------
     {
       "name": "BLUE 400",
       "scope": [
-        //*** DEFAULT ***
         "storage.type",
-        //*** APACHE ***
         "string.path.apacheconf",
-        //*** CSS ***
         "meta.attribute.unrecognized.xmlns.html string",
         "meta.attribute.unrecognized.xmlns:xlink.html string",
-        "meta.function.url string.quoted.double", //css such as content: url("");
-        "meta.function.url string.quoted.single", //css such as content: url('');
-        //*** HTML ***
+        "meta.function.url string.quoted.double",
+        "meta.function.url string.quoted.single",
         "meta.attribute.href string",
         "meta.attribute.src.html string",
         "meta.attribute.srcset.html string",
-        //*** LOG ***
         "log.date",
-        //*** MARKDOWN ***
         "meta.link.reference",
         "meta.link.reference constant",
         "meta.link.reference string",
         "string.other.link.title.markdown",
-        //*** SCSS ***
-        "variable.parameter.url" // SCSS `to` in background: linear-gradient(to ...); -- Red in CSS. Also for background:url(../../../../assets/images/icons/icon-phone-white.svg) without quotes.
+        "variable.parameter.url"
       ],
       "settings": {
         "foreground": "#7ab1f7"
       }
     },
-    // {
-    //   "name": "BLUE 500",
-    //   "scope": [],
-    //   "settings": { "foreground": "#62a1f0" }
-    // },
     {
       "name": "BLUE 400-muted",
       "scope": [
-        //*** PHP - TYPEHINT ***
-        "keyword.other.type.php", // For parameter type hinting and other types
+        "keyword.other.type.php",
         "meta.other.type.phpdoc.php",
-        "keyword.operator.nullable-type.php", // For nullable types using the question mark, such as ?callable
-        // "keyword.other.type.cassidydark.php", // class typehint
-        "meta.function.php storage.type.php", // ... : self
-        "meta.function.php support.class.php", // ... : DB
-        "meta.function.parameter.typehinted.php support", // ( \WP_Query $query )
-        "meta.other.type.phpdoc.php support.class", // @param \WP_Post
-        //*** TYPESCRIPT ***
+        "keyword.operator.nullable-type.php",
+        "meta.function.php storage.type.php",
+        "meta.function.php support.class.php",
+        "meta.function.parameter.typehinted.php support",
+        "meta.other.type.phpdoc.php support.class",
         "keyword.operator.type.annotation.ts",
         "support.type.primitive.ts"
       ],
@@ -551,106 +468,81 @@
     {
       "name": "BLUE 400 AT 50% OPACITY",
       "scope": [
-        //*** MARKDOWN ***
         "markup.strikethrough.markdown string.other.link.title.markdown"
       ],
       "settings": {
         "foreground": "#7ab1f780"
       }
     },
-
     {
       "name": "CYAN 400",
       "scope": [
-        //*** DEFAULT ***
-        "entity.name.type", // such are class or trait name in PHP
+        "entity.name.type",
         "entity.name.function",
-        "keyword.other.special-method", // such as Ruby loop
+        "keyword.other.special-method",
         "meta.attribute.style string",
         "meta.property-name",
         "meta.property-value support.function",
         "support",
-        //*** APACHE ***
         "entity.tag.apacheconf",
-        //*** CSS ***
-        "meta.at-rule support.function", // such as `calc` and `var`
+        "meta.at-rule support.function",
         "meta.property-value",
-        //*** INI ***
         "keyword.other.definition",
-        //*** PHP ***
         "support.function.basic_functions",
-        "entity.other.inherited-class.php", // extends class
-        "entity.other.alias.php", // use as
-        //*** PYTHON ***
+        "entity.other.inherited-class.php",
+        "entity.other.alias.php",
         "meta.function-call.generic.python",
-        //*** SHELL ***
         "support.function.builtin.shell",
-        //*** YAML ***
         "entity.name.tag.yaml"
       ],
       "settings": {
         "foreground": "#92dedd"
       }
     },
-
     {
       "name": "GREEN 400",
       "scope": [
-        //*** DEFAULT ***
-        "entity.name.label", // property??
+        "entity.name.label",
         "entity.other.attribute-name.class",
         "meta.attribute.class string",
         "meta.object-literal",
-        "support.variable.property", // semantic token type
-        "variable.other.constant.property", // semantic token type
+        "support.variable.property",
+        "variable.other.constant.property",
         "variable.other.property",
         "variable.other.object.property",
-        //*** APACHE ***
         "entity.mime-type.apacheconf",
-        //*** MARKDOWN ***
         "entity.name.section.markdown",
         "markup.heading.markdown string.other.link.title.markdown",
         "markup.heading.markdown meta.other.valid-ampersand.markdown",
         "punctuation.definition.heading.markdown",
-        //*** PHP ***
         "variable.other.property.php punctuation.definition.variable.php",
-        //*** RUBY ***
         "constant.other.symbol.hashkey.ruby",
         "constant.other.symbol.ruby",
-        //*** SHELL ***
         "entity.name.command",
-        "entity.name.section.group-title", // example: [difftool "sourcetree"] in .gitconfig
-        //*** SCSS ***
-        "entity.other.attribute-name.parent-selector-suffix.css punctuation" // SCSS &__name
+        "entity.name.section.group-title",
+        "entity.other.attribute-name.parent-selector-suffix.css punctuation"
       ],
       "settings": {
         "foreground": "#a2cd8b"
       }
     },
-
     {
       "name": "ORANGE 400",
       "scope": [
-        //*** DEFAULT ***
         "entity.other.attribute-name.id",
         "entity.other.attribute-name.id punctuation",
         "meta.attribute.id string",
         "variable.parameter",
-        //*** APACHE ***
         "string.replacement.apacheconf",
-        //*** CSS ***
         "entity.other.keyframe-offset",
         "meta.at-rule.keyframes",
-        "support.constant.container-name.container.css", // For @container <container-name> (this token is from my CSS Nesting Syntax Highlighting extension)
-        "variable.parameter.misc.css", // such as `content: counter(count, decimal);`
-        //*** LOG ***
+        "support.constant.container-name.container.css",
+        "variable.parameter.misc.css",
         "log.warning",
-        //*** PHP ***
         "meta.function.parameters.php variable",
         "meta.function.parameters.php punctuation.definition.variable",
         "punctuation.section.embedded.begin.php",
         "punctuation.section.embedded.end.php",
-        //*** SCSS ***
         "meta.at-rule.keyframes entity.name.function",
         "entity.other.attribute-name.scss"
       ],
@@ -658,47 +550,33 @@
         "foreground": "#eeae7b"
       }
     },
-
     {
       "name": "PINK 400",
       "scope": [
-        //*** DEFAULT ***
         "punctuation.definition.variable",
         "variable",
-        //*** PHP ***
-        "string.quoted.double.php variable.other.php punctuation.definition.variable.php", // for $ in string interpolation.
-        //*** PYTHON ***
+        "string.quoted.double.php variable.other.php punctuation.definition.variable.php",
         "meta.function-call.arguments.python",
-        //*** SHELL ***
         "variable.other.assignment.shell"
       ],
       "settings": {
         "foreground": "#f8bacc"
       }
     },
-
     {
       "name": "PURPLE 400",
       "scope": [
-        //*** DEFAULT ***
         "constant",
         "keyword.other.unit",
-        //*** APACHE ***
         "entity.status.apacheconf",
-        //*** CSS ***
-        "support.constant.boolean.container.css", // for @container <style-query> boolean property-value (this token is from my CSS Nesting Syntax Highlighting extension)
-        //*** HTML ***
-        "constant punctuation.definition.entity", // HTML symbol entity
+        "support.constant.boolean.container.css",
+        "constant punctuation.definition.entity",
         "meta.attribute.async.html entity.other.attribute-name",
         "meta.attribute.crossorigin entity.other.attribute-name",
         "meta.attribute.defer.html entity.other.attribute-name",
-        //*** INI ***
         "source.ini",
-        //*** JAVASCRIPT ***
         "variable.other.constant.object.js",
-        //*** PHP ***
-        "entity.name.type.namespace.php", // namespace name
-        //*** REGEX ***
+        "entity.name.type.namespace.php",
         "meta.assertion.look-ahead.regexp",
         "meta.assertion.negative-look-ahead.regexp",
         "meta.group.regexp",
@@ -707,12 +585,10 @@
         "string.regexp constant",
         "string.regexp keyword",
         "string.regexp punctuation",
-        //*** SHELL ***
-        "constant.other.option", //example: -i in shell
-        "meta.arithmetic.shell", //example: $+functions[p10k]
-        "keyword.operator.logical.shell", //example: `-f` in if [ -f "$ray_php"]
-        "keyword.operator.expansion.shell", //example: ${tag//\%/%%}
-        //*** XML ***
+        "constant.other.option",
+        "meta.arithmetic.shell",
+        "keyword.operator.logical.shell",
+        "keyword.operator.expansion.shell",
         "punctuation.definition.constant.xml"
       ],
       "settings": {
@@ -722,27 +598,21 @@
     {
       "name": "PURPLE 500",
       "scope": [
-        //*** DEFAULT ***
         "entity.other.attribute-name.namespace"
       ],
       "settings": {
         "foreground": "#b669d7"
       }
     },
-
     {
       "name": "RED 400",
       "scope": [
-        //*** DEFAULT ***
         "entity.name.tag",
         "keyword",
         "storage.modifier",
-        //*** LOG ***
         "log.error",
-        //*** PHP ***
-        "entity.name.goto-label.php", // For 'else' using alternative colon syntax
-        //*** SHELL ***
-        "punctuation.separator.statement.and.shell" //example: &&
+        "entity.name.goto-label.php",
+        "punctuation.separator.statement.and.shell"
       ],
       "settings": {
         "foreground": "#f38e7e"
@@ -750,29 +620,18 @@
     },
     {
       "name": "RED 500",
-      "scope": [
-        //*** DEFAULT ***
-      ],
-      "settings": {
-        // "foreground": "#db6656",
-      }
+      "scope": [],
+      "settings": {}
     },
-
     {
       "name": "YELLOW 400",
       "scope": [
-        //*** DEFAULT ***
         "string",
-        //*** CSS ***
         "meta.attribute-selector entity.other.attribute-name",
-        //*** MARKDOWN ***
         "string.other.link.description.markdown",
-        //*** PHP ***
-        "string.quoted.single.php", // Override for "meta.attribute.src.html string"
-        "string.quoted.double.php", // Override for "meta.attribute.src.html string"
-        //*** SCSS ***
+        "string.quoted.single.php",
+        "string.quoted.double.php",
         "meta.attribute-selector.scss",
-        //*** XML ***
         "meta.tag.sgml.doctype.xml"
       ],
       "settings": {
@@ -782,18 +641,12 @@
     {
       "name": "YELLOW 500",
       "scope": [
-        //*** MARKDOWN ***
         "markup.inline.raw.string.markdown"
       ],
       "settings": {
         "foreground": "#ddba56"
       }
     },
-
-    //--------------------------------------------------------------------------
-    // Better DockerFile Syntax - Extension
-    // https://marketplace.visualstudio.com/items?itemName=jeff-hykin.better-dockerfile-syntax
-    //--------------------------------------------------------------------------
     {
       "name": "[DOCKERFILE] - GRAY WHITE",
       "scope": [
@@ -839,11 +692,6 @@
         "foreground": "#f38e7e"
       }
     },
-
-    //--------------------------------------------------------------------------
-    // Nginx.conf - (Syntax) Extension
-    // https://marketplace.visualstudio.com/items?itemName=shanoor.vscode-nginx
-    //--------------------------------------------------------------------------
     {
       "name": "[NGINX] - GRAY LIGHT (OKLCH 82%)",
       "scope": [
@@ -862,7 +710,6 @@
         "foreground": "#929292"
       }
     },
-
     {
       "name": "[NGINX] - BLUE 400",
       "scope": [
@@ -890,21 +737,15 @@
         "foreground": "#f38e7e"
       }
     },
-
-    //--------------------------------------------------------------------------
-    // Output Colorizer - Extension
-    // https://marketplace.visualstudio.com/items?itemName=IBM.output-colorizer
-    //--------------------------------------------------------------------------
     {
       "name": "GRAY WHITE (OKLCH 98%)",
       "scope": [
-        "code.log support" // For "Output Colorizer" extension
+        "code.log support"
       ],
       "settings": {
         "foreground": "#f8f8f8"
       }
     },
-
     {
       "name": "RED 400",
       "scope": [
@@ -914,11 +755,6 @@
         "foreground": "#f38e7e"
       }
     },
-
-    //--------------------------------------------------------------------------
-    // Rainbow CSV - Extension
-    // https://marketplace.visualstudio.com/items?itemName=mechatroner.rainbow-csv
-    //--------------------------------------------------------------------------
     {
       "name": "NORMAL",
       "scope": [
@@ -947,7 +783,6 @@
         "foreground": "#c4c4c4"
       }
     },
-
     {
       "name": "BLUE 400",
       "scope": [
