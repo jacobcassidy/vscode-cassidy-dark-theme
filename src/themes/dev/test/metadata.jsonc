@@ -3,5 +3,6 @@
   "name": "Cassidy Dark",
   "type": "dark",
   "author": "Jacob Cassidy",
-  "version": "test"
+  "version": "test",
+  "semanticHighlighting": true
 }

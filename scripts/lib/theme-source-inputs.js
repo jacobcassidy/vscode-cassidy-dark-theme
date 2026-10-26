@@ -14,7 +14,7 @@ export const defaultThemeDirectory = "src/themes/prod/default";
 export const themeInputPaths = ["metadata.jsonc", "tokens/ui.jsonc", "tokens/semantic.jsonc", "tokens/syntax.jsonc"];
 
 /** Allowed top-level fields for each non-metadata theme section. */
-const sectionFields = [[], ["colors"], ["semanticHighlighting", "semanticTokenColors"], ["tokenColors"]];
+const sectionFields = [[], [], [], ["tokenColors"]];
 
 /** Mapping from authored theme types to VS Code UI theme identifiers. */
 const themeTypes = new Map([
@@ -175,7 +175,13 @@ export function validateThemePart(input, index) {
 
   fields(input.value, sectionFields[index], input.label);
 
-  if (index === 1) object(input.value.colors, `${input.label}.colors`);
+  if (index === 1) {
+    for (const [key, value] of Object.entries(input.value)) {
+      if (typeof value !== "string") throw new Error(`${input.label}.${key} must be a string`);
+    }
+  }
+
+  if (index === 2) object(input.value, input.label);
 
   if (index === 3 && !Array.isArray(input.value.tokenColors)) {
     throw new Error(`${input.label}.tokenColors must be an array`);

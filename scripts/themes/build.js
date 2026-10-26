@@ -43,7 +43,7 @@ function styled(message, style) {
 }
 
 /** Top-level token sections that must not appear in metadata inputs. */
-const themeSections = new Set(["colors", "semanticHighlighting", "semanticTokenColors", "tokenColors"]);
+const themeSections = new Set(["colors", "semanticTokenColors", "tokenColors"]);
 
 /**
  * Extract top-level properties as source slices so theme comments and formatting survive assembly.
@@ -85,7 +85,9 @@ export function assembleThemeTemplate(parts, labels = []) {
 
     parseJsonc(source, label);
 
-    for (const property of templateProperties(source, label)) {
+    const inputProperties = templateProperties(source, label);
+
+    for (const property of inputProperties) {
       if (seen.has(property.key)) throw new Error(`${label}: duplicate top-level theme property ${property.key}`);
 
       if (index === 0 && themeSections.has(property.key)) {
@@ -94,6 +96,17 @@ export function assembleThemeTemplate(parts, labels = []) {
 
       seen.add(property.key);
       properties.push(`  ${property.source}`);
+    }
+
+    if (index === 1 || index === 2) {
+      /** Generated theme property corresponding to this flat token section. */
+      const sectionName = index === 1 ? "colors" : "semanticTokenColors";
+
+      properties.splice(
+        properties.length - inputProperties.length,
+        inputProperties.length,
+        `  "${sectionName}": {\n${inputProperties.map((property) => `    ${property.source}`).join(",\n")}\n  }`,
+      );
     }
   }
 
