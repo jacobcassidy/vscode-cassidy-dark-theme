@@ -23,7 +23,7 @@ Run the commands in this guide from the repository root unless stated otherwise.
 | [`scripts/release/`](../../../scripts/release/)                 | VSIX packaging, release notes, pipeline submission, and GitHub publishing.                                         |
 | [`tests/`](../../../tests/)                                     | Automated tests and isolated fixtures.                                                                             |
 
-`dev-extension/generated-themes/` contains generated dev themes loaded by the local extension. `dev-extension/static-snapshots/` contains fixed comparison themes that are not regenerated.
+`dev-extension/themes/` contains generated dev themes loaded by the local extension. `dev-extension/static-snapshots/` contains fixed comparison themes that are not regenerated.
 
 Generated palette reports live in each theme source directory’s `colors/generated-palette/` folder.
 | [`docs/grammar-samples/`](../grammar-samples/) | Programming, markup, stylesheet, configuration, and log files for inspecting syntax highlighting. |
@@ -76,7 +76,7 @@ This command runs `npm run build`, which runs `build:prod` for prod targets foll
 ~/.vscode/extensions/jacobcassidy.cassidy-dark-dev/
 ```
 
-The script writes a generated `package.json` there with the name `cassidy-dark-dev` and display name **Cassidy Dark Dev**, and removes the published manifest's `__metadata`. It links the checkout's `themes/`, `dev-extension/`, and `images/` directories into that extension directory. The checkout's `dev-extension/generated-themes/` and `dev-extension/static-snapshots/` directories therefore provide the local extension's generated themes and fixed comparison themes. The source manifest stays in the checkout; the generated dev manifest is a separate file.
+The script writes a generated `package.json` there with the name `cassidy-dark-dev` and display name **Cassidy Dark Dev**, and removes the published manifest's `__metadata`. It links the checkout's `themes/`, `dev-extension/`, and `images/` directories into that extension directory. The checkout's `dev-extension/themes/` and `dev-extension/static-snapshots/` directories therefore provide the local extension's generated themes and fixed comparison themes. The source manifest stays in the checkout; the generated dev manifest is a separate file.
 
 The dev manifest registers:
 
@@ -192,7 +192,7 @@ For example, to try a different yellow palette locally:
 1. Create `src/themes/dev/yellow-test/colors/`.
 2. Copy the complete default `colors/palette.jsonc` into it and change the yellow parameters.
 3. Omit `colors/variables.jsonc`, `metadata.jsonc`, and the `tokens/` files to inherit the default versions.
-4. Run `npm run build:dev` to generate `dev-extension/generated-themes/cassidy-dark-color-theme-yellow-test.json` and `src/themes/dev/yellow-test/colors/generated-palette/palette.{json,md,svg}`.
+4. Run `npm run build:dev` to generate `dev-extension/themes/cassidy-dark-color-theme-yellow-test.json` and `src/themes/dev/yellow-test/colors/generated-palette/palette.{json,md,svg}`.
 5. Run `npm run dev:sync` and select **Cassidy Dark Dev (Yellow Test)** in VS Code.
 
 The inherited variable and token mapping files resolve against the dev palette. If you supply a variable file instead, include every variable required by the selected mappings and other variables. Copy the complete default file as a starting point. Changes to a default file affect every target inheriting it.

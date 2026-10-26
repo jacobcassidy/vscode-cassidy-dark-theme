@@ -34,7 +34,7 @@ export async function syncDevExtension({
   delete manifest.__metadata;
 
   /** Generated development theme filenames to register for preview. */
-  const generatedThemes = (await listFiles(join(root, "dev-extension/generated-themes"))).filter((file) =>
+  const generatedThemes = (await listFiles(join(root, "dev-extension/themes"))).filter((file) =>
     file.endsWith(".json"),
   );
 
@@ -63,7 +63,7 @@ export async function syncDevExtension({
           .join(" ");
 
         /** Checkout-relative theme path used by the preview registration. */
-        const path = `dev-extension/generated-themes/${file}`;
+        const path = `dev-extension/themes/${file}`;
 
         /** Parsed theme metadata used for preview labels and UI types. */
         const metadata = parseJsonc(await readFile(join(root, path), "utf8"), path).value;
@@ -71,7 +71,7 @@ export async function syncDevExtension({
         return {
           label: `${metadata.name} Dev (${name})`,
           uiTheme: themeUiType(metadata, path),
-          path: `./dev-extension/generated-themes/${file}`,
+          path: `./dev-extension/themes/${file}`,
           _watch: true,
         };
       }),

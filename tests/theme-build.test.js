@@ -269,10 +269,7 @@ test("dev targets use independent complete palettes and variables and isolate ou
   assert.equal(result[0].changed.length, 4);
 
   /** Generated development theme source inspected for independent overrides. */
-  const devTheme = await readFile(
-    join(root, "dev-extension/generated-themes/cassidy-dark-color-theme-sample.json"),
-    "utf8",
-  );
+  const devTheme = await readFile(join(root, "dev-extension/themes/cassidy-dark-color-theme-sample.json"), "utf8");
 
   assert.match(devTheme, /#abcdef/);
   assert.equal(parse(devTheme).colors["editor.background"], "#010203");
@@ -330,8 +327,7 @@ test("fully inherited dev targets produce their own reports and follow changed d
   assert.equal(report.generated.source, "src/themes/prod/default/colors/palette.jsonc");
   assert.equal(report.generated.fallback, true);
   assert.equal(
-    parse(await readFile(join(root, "dev-extension/generated-themes/cassidy-dark-color-theme-inherited.json"), "utf8"))
-      .name,
+    parse(await readFile(join(root, "dev-extension/themes/cassidy-dark-color-theme-inherited.json"), "utf8")).name,
     "Fixture",
   );
 
@@ -374,7 +370,7 @@ for (const [path, contents, pattern] of [
     await mkdir(join(devThemeDirectory, path, ".."), { recursive: true });
     await writeFile(join(devThemeDirectory, path), contents);
     await assert.rejects(buildDevThemes({ root }), pattern);
-    await assert.rejects(readFile(join(root, "dev-extension/generated-themes/cassidy-dark-color-theme-sample.json")), {
+    await assert.rejects(readFile(join(root, "dev-extension/themes/cassidy-dark-color-theme-sample.json")), {
       code: "ENOENT",
     });
   });
@@ -389,9 +385,7 @@ test("a supplied dev UI mapping replaces the whole file while omitted files inhe
   await buildDevThemes({ root });
 
   /** Parsed generated theme inspected by this test. */
-  const theme = parse(
-    await readFile(join(root, "dev-extension/generated-themes/cassidy-dark-color-theme-sample.json"), "utf8"),
-  );
+  const theme = parse(await readFile(join(root, "dev-extension/themes/cassidy-dark-color-theme-sample.json"), "utf8"));
 
   assert.deepEqual(theme.colors, { "editor.background": "#010203" });
   assert.equal(theme.type, "dark");

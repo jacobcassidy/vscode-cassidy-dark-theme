@@ -40,10 +40,7 @@ test("dev extension sync is repeatable and refreshes themes without modifying th
     );
   }
 
-  await writeFile(
-    join(project.root, "dev-extension/generated-themes/cassidy-dark-color-theme-new.json"),
-    project.theme,
-  );
+  await writeFile(join(project.root, "dev-extension/themes/cassidy-dark-color-theme-new.json"), project.theme);
   await syncDevExtension(project);
 
   /** Preview manifest reloaded after synchronization. */
@@ -109,7 +106,7 @@ test("dev extension sync includes all prod themes, derives dev theme types, and 
   );
   await writeFile(join(project.root, "package.json"), JSON.stringify(manifest));
   await writeFile(
-    join(project.root, "dev-extension/generated-themes/cassidy-dark-color-theme-test.json"),
+    join(project.root, "dev-extension/themes/cassidy-dark-color-theme-test.json"),
     '{"name":"Cassidy Dark","type":"light","colors":{},"tokenColors":[]}',
   );
 

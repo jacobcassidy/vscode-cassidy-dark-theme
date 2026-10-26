@@ -465,7 +465,7 @@ async function formatted(root, path, source) {
   const options = await prettier.resolveConfig(filepath);
 
   /** Whether this output needs JSONC theme formatting. */
-  const theme = path.startsWith("themes/") || path.startsWith("dev-extension/generated-themes/");
+  const theme = path.startsWith("themes/") || path.startsWith("dev-extension/themes/");
 
   return prettier.format(source, { ...options, filepath, ...(theme ? { parser: "jsonc" } : {}) });
 }
@@ -586,7 +586,7 @@ async function staleOutputs(root, targets, group, paletteOnly) {
   const actual = [];
 
   /** Generated theme directory belonging to the selected build group. */
-  const themeDirectory = group === "prod" ? "themes" : "dev-extension/generated-themes";
+  const themeDirectory = group === "prod" ? "themes" : "dev-extension/themes";
 
   if (!paletteOnly) {
     for (const file of await listFiles(join(root, themeDirectory))) {
@@ -628,7 +628,7 @@ async function stageOutputs(root, output, check, command) {
     /** Formatted generated source ready for validation and comparison. */
     const text = await formatted(root, path, source);
 
-    if (path.startsWith("themes/") || path.startsWith("dev-extension/generated-themes/")) {
+    if (path.startsWith("themes/") || path.startsWith("dev-extension/themes/")) {
       validateTheme(parseJsonc(text, path).value);
     }
 

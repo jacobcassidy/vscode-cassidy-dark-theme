@@ -122,7 +122,7 @@ export async function checkThemes(root = fileURLToPath(new URL("../../", import.
     }
   }
 
-  for (const directory of ["dev-extension/generated-themes", "dev-extension/static-snapshots"]) {
+  for (const directory of ["dev-extension/themes", "dev-extension/static-snapshots"]) {
     for (const file of await listFiles(join(root, directory))) {
       if (file.endsWith(".json")) paths.add(`${directory}/${file}`);
     }
