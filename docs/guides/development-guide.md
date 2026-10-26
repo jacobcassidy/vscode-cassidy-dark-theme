@@ -180,6 +180,25 @@ Use `color` for a direct palette or token alias, such as `palette.yellow.400`, `
 
 See [tokens and details](token-details.md) for the schemas, independent relationship metadata, formatting-only entries, and explained disabled comments. `globallyOverriddenBy` requires reviewed complete replacement and an explicitly disabled effective entry. Existing conditional `overrides` relationships remain conditional documentation.
 
+#### Palette overrides
+
+Use the top-level `overrides` object in `palette/palette-config.jsonc` to replace a generated palette primitive with a documented color. For example, replace the existing `"overrides": {}` property with this entry, keeping the other configuration properties:
+
+```jsonc
+"overrides": {
+  "palette.blue.600": {
+    "hex": "#1c6bc4",
+    "colorReason": "Keep the selected blue control background while tuning the family."
+  }
+}
+```
+
+This fixes `palette.blue.600` to the exact hex color `#1c6bc4` even when the family's generation settings change. When themes are rebuilt, tokens that reference this primitive directly or through aliases use the overridden color. The family's hue and lightness anchors remain as configured.
+
+Each override must name an existing primitive, include a nonempty `colorReason`, and supply exactly one of `hex` or `oklch`. An `oklch` override uses `{ "l": 0.55, "c": 0.14, "h": 255 }` coordinates, with chroma limited to the sRGB gamut. The explanation appears in the generated palette JSON and the Markdown report's **Color reason** column.
+
+Run `npm run build:palette` to update prod palette reports, `npm run build:prod` to also rebuild prod themes, or `npm run build:dev` for dev previews and their reports.
+
 ### Adding prod or dev themes
 
 Add a directory under `src/themes/prod/<name>/` for a shipped theme, or `src/themes/dev/<name>/` for a dev preview. Theme directory names must be lowercase, begin with a letter, and use only letters, digits, periods, and hyphens. Consecutive periods and trailing periods are rejected. Names must be unique across both source groups even though reports are grouped separately.
