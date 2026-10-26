@@ -594,27 +594,14 @@ async function staleOutputs(root, targets, group, paletteOnly) {
     }
   }
 
-  /** Root directory of generated palette reports. */
-  const reportsRoot = "docs/palettes/generated-reports";
+  /** Source directory containing reports for the selected target group. */
+  const sourceDirectory = `src/themes/${group}`;
 
-  /** Report directory names owned by the unselected target group. */
-  const otherNames = new Set(targets.filter((target) => target.group !== group).map((target) => target.name));
-
-  for (const sourceGroup of ["prod", "dev"]) {
-    for (const name of await listDirectories(join(root, reportsRoot, sourceGroup), true)) {
-      if (sourceGroup !== group && otherNames.has(name)) continue;
-
-      for (const file of await listFiles(join(root, reportsRoot, sourceGroup, name))) {
-        if (/^palette\.(json|md|svg)$/.test(file)) actual.push(`${reportsRoot}/${sourceGroup}/${name}/${file}`);
+  for (const name of await listDirectories(join(root, sourceDirectory), group === "dev")) {
+    for (const file of await listFiles(join(root, sourceDirectory, name, "generated-reports"))) {
+      if (/^palette\.(json|md|svg)$/.test(file)) {
+        actual.push(`${sourceDirectory}/${name}/generated-reports/${file}`);
       }
-    }
-  }
-
-  for (const name of await listDirectories(join(root, reportsRoot), true)) {
-    if (["prod", "dev"].includes(name)) continue;
-
-    for (const file of await listFiles(join(root, reportsRoot, name))) {
-      if (/^palette\.(json|md|svg)$/.test(file)) actual.push(`${reportsRoot}/${name}/${file}`);
     }
   }
 

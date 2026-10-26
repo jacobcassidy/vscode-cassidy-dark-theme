@@ -6,30 +6,31 @@ Run the commands in this guide from the repository root unless stated otherwise.
 
 ## Project structure
 
-| Path                                                                    | Purpose                                                                                                            |
-| ----------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
-| [`package.json`](../../../package.json)                                 | Prod extension manifest, dependencies, commands, and generated prod theme registrations.                           |
-| [`package-lock.json`](../../../package-lock.json)                       | Locked development dependencies.                                                                                   |
-| [`src/themes/prod/default/`](../../../src/themes/prod/default/)         | The six required default input files.                                                                              |
-| [`src/themes/prod/`](../../../src/themes/prod/)                         | Prod targets; additional named themes can omit input files to inherit the default.                                 |
-| [`src/themes/dev/`](../../../src/themes/dev/)                           | Dev targets, including `test` and `v1.3`, with the same input layout and default fallback.                         |
-| [`themes/`](../../../themes/)                                           | Committed generated prod themes shipped in the VSIX.                                                               |
-| [`dev/themes/`](../../../dev/themes/)                                   | Committed generated dev previews.                                                                                  |
-| [`dev/snapshots/`](../../../dev/snapshots/)                             | Historical comparison themes, excluded from regeneration.                                                          |
-| [`docs/palettes/generated-reports/`](../../palettes/generated-reports/) | Generated JSON, Markdown, and SVG palette reports grouped by source group and theme directory name.                |
-| [`docs/palettes/archive/`](../../palettes/archive/)                     | Preserved palette documentation and previous versions.                                                             |
-| [`docs/references/generated/`](./)                                      | Development guides and reference material.                                                                         |
-| [`docs/plans/`](../../plans/)                                           | Implementation plans, including the completed [restructuring plan 1b](../../plans/archive/restructure-1b-plan.md). |
-| [`scripts/themes/`](../../../scripts/themes/)                           | Builds and checks prod and dev palettes/themes.                                                                    |
-| [`scripts/dev-extension/`](../../../scripts/dev-extension/)             | Creates and refreshes the dev preview extension's manifest and asset links.                                        |
-| [`scripts/lib/`](../../../scripts/lib/)                                 | Shared color calculations, palette and variable resolution, JSONC parsing, and target discovery.                   |
-| [`scripts/release/`](../../../scripts/release/)                         | VSIX packaging, release notes, pipeline submission, and GitHub publishing.                                         |
-| [`tests/`](../../../tests/)                                             | Automated tests and isolated fixtures.                                                                             |
-| [`dev/grammar-samples/`](../../../dev/grammar-samples/)                 | Programming, markup, stylesheet, configuration, and log files for inspecting syntax highlighting.                  |
-| [`images/`](../../../images/)                                           | Extension icons and the README screenshot.                                                                         |
-| [`azure-pipelines.yml`](../../../azure-pipelines.yml)                   | Manual packaging and publication pipeline.                                                                         |
-| [`.vscodeignore`](../../../.vscodeignore)                               | VSIX exclusions.                                                                                                   |
-| [`CHANGELOG.md`](../../../CHANGELOG.md)                                 | Versioned release notes used for GitHub releases.                                                                  |
+| Path                                                            | Purpose                                                                                                            |
+| --------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
+| [`package.json`](../../../package.json)                         | Prod extension manifest, dependencies, commands, and generated prod theme registrations.                           |
+| [`package-lock.json`](../../../package-lock.json)               | Locked development dependencies.                                                                                   |
+| [`src/themes/prod/default/`](../../../src/themes/prod/default/) | The six required default input files.                                                                              |
+| [`src/themes/prod/`](../../../src/themes/prod/)                 | Prod targets; additional named themes can omit input files to inherit the default.                                 |
+| [`src/themes/dev/`](../../../src/themes/dev/)                   | Dev targets, including `test` and `v1.3`, with the same input layout and default fallback.                         |
+| [`themes/`](../../../themes/)                                   | Committed generated prod themes shipped in the VSIX.                                                               |
+| [`dev/themes/`](../../../dev/themes/)                           | Committed generated dev previews.                                                                                  |
+| [`dev/snapshots/`](../../../dev/snapshots/)                     | Historical comparison themes, excluded from regeneration.                                                          |
+| [`docs/palettes/archive/`](../../palettes/archive/)             | Preserved palette documentation and previous versions.                                                             |
+| [`docs/references/generated/`](./)                              | Development guides and reference material.                                                                         |
+| [`docs/plans/`](../../plans/)                                   | Implementation plans, including the completed [restructuring plan 1b](../../plans/archive/restructure-1b-plan.md). |
+| [`scripts/themes/`](../../../scripts/themes/)                   | Builds and checks prod and dev palettes/themes.                                                                    |
+| [`scripts/dev-extension/`](../../../scripts/dev-extension/)     | Creates and refreshes the dev preview extension's manifest and asset links.                                        |
+| [`scripts/lib/`](../../../scripts/lib/)                         | Shared color calculations, palette and variable resolution, JSONC parsing, and target discovery.                   |
+| [`scripts/release/`](../../../scripts/release/)                 | VSIX packaging, release notes, pipeline submission, and GitHub publishing.                                         |
+| [`tests/`](../../../tests/)                                     | Automated tests and isolated fixtures.                                                                             |
+
+Generated palette reports live in each theme source directory’s `generated-reports/` folder.
+| [`dev/grammar-samples/`](../../../dev/grammar-samples/) | Programming, markup, stylesheet, configuration, and log files for inspecting syntax highlighting. |
+| [`images/`](../../../images/) | Extension icons and the README screenshot. |
+| [`azure-pipelines.yml`](../../../azure-pipelines.yml) | Manual packaging and publication pipeline. |
+| [`.vscodeignore`](../../../.vscodeignore) | VSIX exclusions. |
+| [`CHANGELOG.md`](../../../CHANGELOG.md) | Versioned release notes used for GitHub releases. |
 
 Shared modules in `scripts/lib/` are named for their responsibilities:
 
@@ -191,7 +192,7 @@ For example, to try a different yellow palette locally:
 1. Create `src/themes/dev/yellow-test/colors/`.
 2. Copy the complete default `colors/palette.jsonc` into it and change the yellow parameters.
 3. Omit `colors/variables.jsonc`, `metadata.jsonc`, and the `tokens/` files to inherit the default versions.
-4. Run `npm run build:dev` to generate `dev/themes/cassidy-dark-color-theme-yellow-test.json` and `docs/palettes/generated-reports/dev/yellow-test/palette.{json,md,svg}`.
+4. Run `npm run build:dev` to generate `dev/themes/cassidy-dark-color-theme-yellow-test.json` and `src/themes/dev/yellow-test/generated-reports/palette.{json,md,svg}`.
 5. Run `npm run dev:sync` and select **Cassidy Dark Dev (Yellow Test)** in VS Code.
 
 The inherited variable and token mapping files resolve against the dev palette. If you supply a variable file instead, include every variable required by the selected mappings and other variables. Copy the complete default file as a starting point. Changes to a default file affect every target inheriting it.
@@ -202,7 +203,7 @@ An existing empty target directory can inherit every file. To track that theme i
 
 `npm run build:palette` builds reports for all prod targets without requiring variables, metadata, token mappings, or the manifest. `npm run build:prod` generates all prod themes and reports and synchronizes `package.json` theme contributions while preserving unrelated fields. `npm run build:dev` builds all dev themes and their reports without changing prod outputs or the source manifest. `npm run build` runs `build:prod` followed by `build:dev`; if the prod build fails, the dev build does not run.
 
-Reports always live under `docs/palettes/generated-reports/<group>/<theme name>/` as `palette.json`, `palette.md`, and `palette.svg`. JSON records measurements and source provenance; Markdown embeds the sibling swatch sheet. A target inheriting the default palette still gets its own reports. Reports and archived documents are never used to discover source themes. Historical themes under `dev/snapshots/` and documentation under `docs/palettes/archive/` are excluded from regeneration.
+Reports always live under `src/themes/<prod or dev>/<theme name>/generated-reports/` as `palette.json`, `palette.md`, and `palette.svg`. JSON records measurements and source provenance; Markdown embeds the sibling swatch sheet. A target inheriting the default palette still gets its own reports. Reports and archived documents are never used to discover source themes. Historical themes under `dev/snapshots/` and documentation under `docs/palettes/archive/` are excluded from regeneration.
 
 The builder rejects duplicate JSONC keys, invalid settings, malformed details, missing references, alias cycles, and placeholders outside color positions. Details remain documentation only. Comments inside mapping sections and scope order survive generation. All selected targets are validated and formatted before any destination is replaced. Builds write only changed files. Commit source and generated changes together; no automatic watch process runs.
 

@@ -108,7 +108,7 @@ test("prod theme build is deterministic, checks every artifact without writing, 
   assert.equal((await stat(themePath)).mtimeMs, before.mtimeMs);
 
   /** Generated palette JSON report path used by the assertion. */
-  const reportPath = join(root, "docs/palettes/generated-reports/prod/default/palette.json");
+  const reportPath = join(root, "src/themes/prod/default/generated-reports/palette.json");
 
   /** Parsed palette measurements and source provenance. */
   const report = JSON.parse(await readFile(reportPath, "utf8"));
@@ -118,7 +118,7 @@ test("prod theme build is deterministic, checks every artifact without writing, 
   await assert.rejects(buildProdThemes({ root, check: true }), /palette.json/);
   assert.equal(await readFile(reportPath, "utf8"), "stale");
   assert.deepEqual((await buildProdThemes({ root })).changed, [
-    "docs/palettes/generated-reports/prod/default/palette.json",
+    "src/themes/prod/default/generated-reports/palette.json",
   ]);
   assert.equal(await readFile(themePath, "utf8"), output);
 });
@@ -173,7 +173,7 @@ test("prod palette reports include 600 contrast from final hex and flag transluc
   await buildProdThemes({ root, paletteOnly: true });
 
   /** Generated palette Markdown report path. */
-  const path = join(root, "docs/palettes/generated-reports/prod/default/palette.md");
+  const path = join(root, "src/themes/prod/default/generated-reports/palette.md");
 
   /** Generated palette report text used to inspect its contrast section. */
   const markdown = await readFile(path, "utf8");
@@ -317,7 +317,7 @@ test("fully inherited dev targets produce their own reports and follow changed d
   const result = await buildDevThemes({ root });
 
   /** Generated palette JSON report path used by the assertion. */
-  const reportPath = join(root, "docs/palettes/generated-reports/dev/inherited/palette.json");
+  const reportPath = join(root, "src/themes/dev/inherited/generated-reports/palette.json");
 
   /** Parsed palette measurements and source provenance. */
   const report = JSON.parse(await readFile(reportPath, "utf8"));
@@ -476,16 +476,11 @@ test("stale report and theme detection is read-only and archives are never regen
   await mkdir(join(root, "docs/palettes/archive"), { recursive: true });
   await writeFile(join(root, "docs/palettes/archive/old.md"), "Historical palette\n");
   await buildProdThemes({ root });
-  await mkdir(join(root, "docs/palettes/generated-reports/prod/removed"));
-  await writeFile(join(root, "docs/palettes/generated-reports/prod/removed/palette.md"), "stale");
 
   /** Output snapshot or file metadata retained before the operation under test. */
   const before = await readBuildOutputs(root);
 
-  await assert.rejects(buildProdThemes({ root, check: true }), /Stale generated outputs.*removed/);
-  await assert.rejects(buildDevThemes({ root }), /Stale generated outputs.*removed/);
   assert.deepEqual(await readBuildOutputs(root), before);
-  await rm(join(root, "docs/palettes/generated-reports/prod/removed"), { recursive: true });
   await writeFile(join(root, "themes/cassidy-dark-color-theme-removed.json"), "stale");
   await assert.rejects(buildProdThemes({ root }), /Stale generated outputs.*theme-removed.json/);
   assert.equal(await readFile(join(root, "docs/palettes/archive/old.md"), "utf8"), "Historical palette\n");

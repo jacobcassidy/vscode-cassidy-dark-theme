@@ -52,6 +52,8 @@ function isThemeSource(filename) {
   /** Watcher event path normalized to forward slashes. */
   const path = filename.toString().replaceAll("\\", "/");
 
+  if (path.includes("/generated-reports/")) return false;
+
   return ["prod", "dev"].some((group) => {
     /** Theme-source directory inside the current prod or dev group. */
     const directory = `themes/${group}`;
