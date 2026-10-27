@@ -3,7 +3,7 @@
   "name": "Cassidy Dark",
   "type": "dark",
   "author": "Jacob Cassidy",
-  "version": "1.2.1",
+  "version": "1.2.0",
   "semanticHighlighting": true,
   "colors": {
     "activityBar.activeBackground": "#292929", // [base] (match `sideBar.background`)
