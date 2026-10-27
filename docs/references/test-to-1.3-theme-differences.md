@@ -1,0 +1,817 @@
+# v1.3 theme differences from test
+
+Comparison of the [v1.3 snapshot](../../dev-extension/static-snapshots/cassidy-dark-color-theme-v1.3.json) with the [test theme](../../dev-extension/themes/cassidy-dark-color-theme-test.json). Changes are reported in the direction **test → v1.3**.
+
+“Inactive” means absent or commented out in the compared file; it does not imply that VS Code has no default or that another selector cannot supply styling. Descriptive comments, formatting, metadata, rule names, and scope ordering within an unchanged rule are excluded. Commented-out properties and scope entries are considered when identifying activations and deactivations; their placeholder values are not active values. Properties inactive in both files are excluded.
+
+For `tokenColors`, entries are compared by exact scope selector and setting (`foreground` or `fontStyle`), rather than by array index. A selector moved to another color rule is listed as a value change. For duplicate exact selectors, the tables use the last declared value for each setting; changes to the other assignments are noted separately. These are declaration comparisons, not a prediction of the final rendering after selector specificity, semantic highlighting, and defaults are applied. Empty-scope rules are listed separately.
+
+| Section               | Active in v1.3, inactive in test                        | Inactive in v1.3, active in test | Active in both, updated in v1.3                       |
+| --------------------- | ------------------------------------------------------- | -------------------------------- | ----------------------------------------------------- |
+| `colors`              | 209 properties                                          | 3 properties                     | 166 properties                                        |
+| `semanticTokenColors` | 0 selectors                                             | 4 selectors                      | 0 selectors                                           |
+| `tokenColors`         | 143 scope/setting combinations; 25 empty-scope settings | 67 scope/setting combinations    | 103 scope/setting combinations; 1 empty-scope setting |
+
+## colors
+
+### Active in v1.3, inactive in test
+
+209 properties. All are absent from the test file. Values are copied literally, including short hex forms and the active diagnostic colors under the snapshot’s `ISSUES`, `TBO`, and `NEW` comments.
+
+| Property                                            | v1.3 value  |
+| --------------------------------------------------- | ----------- |
+| `activityBar.activeBorder`                          | `#ffffff40` |
+| `activityErrorBadge.background`                     | `#00c`      |
+| `activityErrorBadge.foreground`                     | `#00c`      |
+| `activityWarningBadge.background`                   | `#00c`      |
+| `activityWarningBadge.foreground`                   | `#00c`      |
+| `agentSessionReadIndicator.foreground`              | `#0e0`      |
+| `agentSessionSelectedBadge.border`                  | `#0e0`      |
+| `agentSessionSelectedUnfocusedBadge.border`         | `#0e0`      |
+| `banner.background`                                 | `#4495f880` |
+| `banner.foreground`                                 | `#f8f8f8`   |
+| `banner.iconForeground`                             | `#f8f8f8`   |
+| `button.secondaryBorder`                            | `#636363`   |
+| `chart.axis`                                        | `#00c`      |
+| `chart.guide`                                       | `#00c`      |
+| `chart.line`                                        | `#00c`      |
+| `chat.checkpointSeparator`                          | `#4495f8`   |
+| `chat.editedFileForeground`                         | `#00c`      |
+| `chat.linesAddedForeground`                         | `#a2cd8bd9` |
+| `chat.linesRemovedForeground`                       | `#f38e7ed9` |
+| `chat.requestBackground`                            | `#242424`   |
+| `chat.requestBubbleBackground`                      | `#b7d6ff26` |
+| `chat.requestBubbleHoverBackground`                 | `#b7d6ff33` |
+| `chat.requestCodeBorder`                            | `#00fc`     |
+| `chat.thinkingShimmer`                              | `#f8f8f8e6` |
+| `checkbox.disabled.background`                      | `#00f`      |
+| `checkbox.disabled.foreground`                      | `#00f`      |
+| `commandCenter.debuggingBackground`                 | `#00c9`     |
+| `commandCenter.inactiveForeground`                  | `#00c`      |
+| `commentsView.resolvedIcon`                         | `#00c`      |
+| `debugExceptionWidget.background`                   | `#00c`      |
+| `debugExceptionWidget.border`                       | `#00c`      |
+| `debugIcon.breakpointUnverifiedForeground`          | `#00c`      |
+| `debugIcon.stepBackForeground`                      | `#00c`      |
+| `debugTokenExpression.type`                         | `#00c`      |
+| `debugView.exceptionLabelBackground`                | `#00c`      |
+| `debugView.exceptionLabelForeground`                | `#00c`      |
+| `diffEditor.move.border`                            | `#00c`      |
+| `diffEditor.moveActive.border`                      | `#00c`      |
+| `editor.compositionBorder`                          | `#00c`      |
+| `editor.inlineValuesBackground`                     | `#00c`      |
+| `editor.inlineValuesForeground`                     | `#00c`      |
+| `editor.placeholder.foreground`                     | `#7a7a7a`   |
+| `editor.snippetFinalTabstopHighlightBackground`     | `#f0f`      |
+| `editorBracketMatch.foreground`                     | `#c4c4c4`   |
+| `editorBracketPairGuide.activeBackground1`          | `#00c`      |
+| `editorBracketPairGuide.activeBackground2`          | `#00c`      |
+| `editorBracketPairGuide.activeBackground3`          | `#00c`      |
+| `editorBracketPairGuide.activeBackground4`          | `#00c`      |
+| `editorBracketPairGuide.activeBackground5`          | `#00c`      |
+| `editorBracketPairGuide.activeBackground6`          | `#00c`      |
+| `editorBracketPairGuide.background1`                | `#00c`      |
+| `editorBracketPairGuide.background2`                | `#00c`      |
+| `editorBracketPairGuide.background3`                | `#00c`      |
+| `editorBracketPairGuide.background4`                | `#00c`      |
+| `editorBracketPairGuide.background5`                | `#00c`      |
+| `editorBracketPairGuide.background6`                | `#00c`      |
+| `editorCommentsWidget.replyInputBackground`         | `#00c`      |
+| `editorCommentsWidget.resolvedBorder`               | `#00c`      |
+| `editorGhostText.border`                            | `#a2cd8b0d` |
+| `editorGroupHeader.noTabsBackground`                | `#00c`      |
+| `editorGutter.commentDraftGlyphForeground`          | `#0e0`      |
+| `editorGutter.commentUnresolvedGlyphForeground`     | `#00c`      |
+| `editorInlayHint.background`                        | `#ffffff08` |
+| `editorMinimap.inlineChatInserted`                  | `#00c`      |
+| `editorOverviewRuler.commentDraftForeground`        | `#0e0`      |
+| `editorOverviewRuler.commentUnresolvedForeground`   | `#00c`      |
+| `editorOverviewRuler.commonContentForeground`       | `#00c`      |
+| `editorOverviewRuler.inlineChatRemoved`             | `#00c`      |
+| `editorStickyScrollGutter.background`               | `#292929`   |
+| `editorSuggestWidgetStatus.foreground`              | `#00c`      |
+| `extensionBadge.remoteBackground`                   | `#00c`      |
+| `extensionBadge.remoteForeground`                   | `#00c`      |
+| `extensionButton.border`                            | `#636363`   |
+| `extensionIcon.privateForeground`                   | `#00f`      |
+| `git.blame.editorDecorationForeground`              | `#636363`   |
+| `gitDecoration.submoduleResourceForeground`         | `#00c`      |
+| `inlineChat.shadow`                                 | `#00c`      |
+| `inlineChatInput.background`                        | `#00c`      |
+| `inlineChatInput.focusBorder`                       | `#00c`      |
+| `inlineChatInput.placeholderForeground`             | `#00c`      |
+| `inlineEdit.gutterIndicator.primaryBackground`      | `#4495f8`   |
+| `inlineEdit.gutterIndicator.primaryBorder`          | `#0071f1`   |
+| `inlineEdit.gutterIndicator.primaryForeground`      | `#f8f8f8`   |
+| `inlineEdit.gutterIndicator.secondaryBackground`    | `#18c6c6`   |
+| `inlineEdit.gutterIndicator.secondaryBorder`        | `#00a7a8`   |
+| `inlineEdit.gutterIndicator.secondaryForeground`    | `#f8f8f8`   |
+| `inlineEdit.gutterIndicator.successfulBackground`   | `#74b24c`   |
+| `inlineEdit.gutterIndicator.successfulBorder`       | `#439800`   |
+| `inlineEdit.gutterIndicator.successfulForeground`   | `#f8f8f8`   |
+| `inlineEdit.originalChangedLineBackground`          | `#00cc`     |
+| `inputValidation.infoBackground`                    | `#00c`      |
+| `inputValidation.infoForeground`                    | `#00c`      |
+| `interactive.activeCodeBorder`                      | `#00c`      |
+| `interactive.inactiveCodeBorder`                    | `#00c`      |
+| `listFilterWidget.noMatchesOutline`                 | `#00c`      |
+| `listFilterWidget.outline`                          | `#00c`      |
+| `markdownAlert.caution.foreground`                  | `#00f`      |
+| `markdownAlert.important.foreground`                | `#00f`      |
+| `markdownAlert.note.foreground`                     | `#00f`      |
+| `markdownAlert.tip.foreground`                      | `#00f`      |
+| `markdownAlert.warning.foreground`                  | `#00f`      |
+| `mcpIcon.starForeground`                            | `#00f`      |
+| `menu.selectionBackground`                          | `#00c`      |
+| `menu.selectionForeground`                          | `#00c`      |
+| `menubar.selectionBackground`                       | `#00c`      |
+| `menubar.selectionBorder`                           | `#00c`      |
+| `menubar.selectionForeground`                       | `#f0f`      |
+| `merge.commonContentBackground`                     | `#00c9`     |
+| `merge.commonHeaderBackground`                      | `#00c9`     |
+| `mergeEditor.changeBase.background`                 | `#00c`      |
+| `mergeEditor.changeBase.word.background`            | `#00c`      |
+| `mergeEditor.conflict.input1.background`            | `#00c`      |
+| `mergeEditor.conflict.input2.background`            | `#00c`      |
+| `mergeEditor.conflictingLines.background`           | `#00c`      |
+| `minimap.chatEditHighlight`                         | `#00f`      |
+| `notebook.inactiveSelectedCellBorder`               | `#00c`      |
+| `notebook.outputContainerBorderColor`               | `#00c`      |
+| `notebook.selectedCellBackground`                   | `#00c`      |
+| `notebook.selectedCellBorder`                       | `#00c`      |
+| `notebook.symbolHighlightBackground`                | `#00c`      |
+| `notebookEditorOverviewRuler.runningCellForeground` | `#00c`      |
+| `notebookStatusRunningIcon.foreground`              | `#00c`      |
+| `panelSectionHeader.border`                         | `#00c`      |
+| `peekViewEditorStickyScrollGutter.background`       | `#303030`   |
+| `ports.iconRunningProcessForeground`                | `#00c`      |
+| `scrollbar.background`                              | `#0000001a` |
+| `settings.dropdownListBorder`                       | `#00c`      |
+| `sideBySideEditor.horizontalBorder`                 | `#00c`      |
+| `statusBarItem.offlineBackground`                   | `#00c`      |
+| `statusBarItem.offlineForeground`                   | `#00c`      |
+| `statusBarItem.offlineHoverBackground`              | `#00c`      |
+| `statusBarItem.offlineHoverForeground`              | `#00c`      |
+| `statusBarItem.prominentForeground`                 | `#f8f8f8`   |
+| `statusBarItem.prominentHoverForeground`            | `#f8f8f8`   |
+| `symbolIcon.colorForeground`                        | `#00c`      |
+| `symbolIcon.enumeratorMemberForeground`             | `#00c`      |
+| `symbolIcon.keyForeground`                          | `#00c`      |
+| `symbolIcon.nullForeground`                         | `#00c`      |
+| `symbolIcon.objectForeground`                       | `#00c`      |
+| `symbolIcon.operatorForeground`                     | `#00c`      |
+| `symbolIcon.packageForeground`                      | `#00c`      |
+| `symbolIcon.structForeground`                       | `#00c`      |
+| `symbolIcon.typeParameterForeground`                | `#00c`      |
+| `tab.activeBorderTop`                               | `#ffffff40` |
+| `tab.activeModifiedBorder`                          | `#00c`      |
+| `tab.inactiveModifiedBorder`                        | `#00c`      |
+| `tab.selectedBackground`                            | `#00c`      |
+| `tab.selectedForeground`                            | `#00c`      |
+| `tab.unfocusedActiveModifiedBorder`                 | `#00c`      |
+| `tab.unfocusedInactiveModifiedBorder`               | `#00c`      |
+| `terminal.findMatchBackground`                      | `#ffff00e9` |
+| `terminal.initialHintForeground`                    | `#636363`   |
+| `terminalStickyScroll.background`                   | `#00c`      |
+| `terminalStickyScroll.border`                       | `#00c`      |
+| `terminalStickyScrollHover.background`              | `#00c`      |
+| `terminalSymbolIcon.aliasForeground`                | `#00f`      |
+| `terminalSymbolIcon.argumentForeground`             | `#00f`      |
+| `terminalSymbolIcon.branchForeground`               | `#00f`      |
+| `terminalSymbolIcon.commitForeground`               | `#00f`      |
+| `terminalSymbolIcon.fileForeground`                 | `#00f`      |
+| `terminalSymbolIcon.flagForeground`                 | `#00f`      |
+| `terminalSymbolIcon.folderForeground`               | `#00f`      |
+| `terminalSymbolIcon.inlineSuggestionForeground`     | `#00f`      |
+| `terminalSymbolIcon.methodForeground`               | `#00f`      |
+| `terminalSymbolIcon.optionForeground`               | `#00f`      |
+| `terminalSymbolIcon.optionValueForeground`          | `#00f`      |
+| `terminalSymbolIcon.pullRequestDoneForeground`      | `#00f`      |
+| `terminalSymbolIcon.pullRequestForeground`          | `#00f`      |
+| `terminalSymbolIcon.remoteForeground`               | `#00f`      |
+| `terminalSymbolIcon.stashForeground`                | `#00f`      |
+| `terminalSymbolIcon.symbolText`                     | `#00f`      |
+| `terminalSymbolIcon.symbolicLinkFileForeground`     | `#00f`      |
+| `terminalSymbolIcon.symbolicLinkFolderForeground`   | `#00f`      |
+| `terminalSymbolIcon.tagForeground`                  | `#00f`      |
+| `testing.coverCountBadgeBackground`                 | `#00c`      |
+| `testing.coverCountBadgeForeground`                 | `#00c`      |
+| `testing.coveredBackground`                         | `#00c`      |
+| `testing.coveredBorder`                             | `#00c`      |
+| `testing.coveredGutterBackground`                   | `#00c`      |
+| `testing.iconErrored`                               | `#00c`      |
+| `testing.iconErrored.retired`                       | `#00c`      |
+| `testing.iconFailed`                                | `#00c`      |
+| `testing.iconFailed.retired`                        | `#00c`      |
+| `testing.iconPassed`                                | `#00c`      |
+| `testing.iconPassed.retired`                        | `#00c`      |
+| `testing.iconQueued`                                | `#00c`      |
+| `testing.iconQueued.retired`                        | `#00c`      |
+| `testing.iconSkipped`                               | `#00c`      |
+| `testing.iconSkipped.retired`                       | `#00c`      |
+| `testing.iconUnset`                                 | `#00c`      |
+| `testing.iconUnset.retired`                         | `#00c`      |
+| `testing.message.error.badgeBackground`             | `#00c`      |
+| `testing.message.error.badgeBorder`                 | `#00c`      |
+| `testing.message.error.badgeForeground`             | `#00c`      |
+| `testing.message.error.lineBackground`              | `#00c`      |
+| `testing.message.info.decorationForeground`         | `#00c`      |
+| `testing.message.info.lineBackground`               | `#00c`      |
+| `testing.messagePeekBorder`                         | `#00c`      |
+| `testing.messagePeekHeaderBackground`               | `#00c`      |
+| `testing.peekBorder`                                | `#00c`      |
+| `testing.peekHeaderBackground`                      | `#00c`      |
+| `testing.runAction`                                 | `#00c`      |
+| `testing.uncoveredBackground`                       | `#00c`      |
+| `testing.uncoveredBorder`                           | `#00c`      |
+| `testing.uncoveredBranchBackground`                 | `#00c`      |
+| `testing.uncoveredGutterBackground`                 | `#00c`      |
+| `textPreformat.border`                              | `#ffffff0d` |
+| `textSeparator.foreground`                          | `#00c`      |
+| `walkThrough.embeddedEditorBackground`              | `#00c`      |
+
+### Inactive in v1.3, active in test
+
+3 properties. All are commented out in v1.3. The comments below summarize the snapshot’s recorded explanations; the commented placeholder values are not replacements for the test values.
+
+| Property                          | Test value  | Comment                                                                                                                        |
+| --------------------------------- | ----------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| `activityBarTop.activeBackground` | `#292929`   | Listed under `UNNEEDED`, marked “[blank]”, with a note to match `activityBar.activeBackground`. No further reason is recorded. |
+| `editor.findMatchHighlightBorder` | `#d6aaea40` | Listed under `UNNEEDED` and marked “unneeded [base]” for inactive search matches.                                              |
+| `editorInlayHint.typeForeground`  | `#a9c0de99` | Listed under `INHERITS`; the snapshot records inheritance from `editorInlayHint.foreground` (active in v1.3 as `#6f6f6f`).     |
+
+### Active in both, updated in v1.3
+
+166 properties.
+
+| Property                                              | Test value  | v1.3 value  |
+| ----------------------------------------------------- | ----------- | ----------- |
+| `activityBar.foreground`                              | `#efddac`   | `#f8f8f8`   |
+| `activityBarBadge.background`                         | `#efddac`   | `#0071f1`   |
+| `activityBarBadge.foreground`                         | `#121212`   | `#f8f8f8`   |
+| `activityBarTop.foreground`                           | `#efddac`   | `#f8f8f8`   |
+| `button.background`                                   | `#006fd9`   | `#0071f1`   |
+| `button.hoverBackground`                              | `#1578e3`   | `#007bfb`   |
+| `charts.blue`                                         | `#92c1fd`   | `#80b7fc`   |
+| `charts.purple`                                       | `#d6aaea`   | `#cc95e4`   |
+| `charts.red`                                          | `#ef9182`   | `#f38e7e`   |
+| `charts.yellow`                                       | `#efddac`   | `#e6d5a7`   |
+| `chat.avatarBackground`                               | `#92c1fd26` | `#80b7fc26` |
+| `chat.requestBorder`                                  | `#92c1fd40` | `#80b7fc40` |
+| `chat.slashCommandBackground`                         | `#62a1f026` | `#4495f826` |
+| `chat.slashCommandForeground`                         | `#62a1f0`   | `#4495f8`   |
+| `commentsView.unresolvedIcon`                         | `#d7bb70`   | `#d2b35c`   |
+| `debugIcon.breakpointCurrentStackframeForeground`     | `#d7bb70`   | `#d2b35c`   |
+| `debugIcon.breakpointForeground`                      | `#db6656`   | `#e65c4a`   |
+| `debugIcon.breakpointStackframeForeground`            | `#da883e`   | `#e18528`   |
+| `debugIcon.continueForeground`                        | `#92c1fd`   | `#80b7fc`   |
+| `debugIcon.disconnectForeground`                      | `#ef9182`   | `#f38e7e`   |
+| `debugIcon.pauseForeground`                           | `#92c1fd`   | `#80b7fc`   |
+| `debugIcon.stepIntoForeground`                        | `#92c1fd`   | `#80b7fc`   |
+| `debugIcon.stepOutForeground`                         | `#92c1fd`   | `#80b7fc`   |
+| `debugIcon.stepOverForeground`                        | `#92c1fd`   | `#80b7fc`   |
+| `debugIcon.stopForeground`                            | `#ef9182`   | `#f38e7e`   |
+| `debugTokenExpression.boolean`                        | `#d6aaea`   | `#cc95e4`   |
+| `debugTokenExpression.error`                          | `#ef9182`   | `#f38e7e`   |
+| `debugTokenExpression.name`                           | `#89dfdf`   | `#92dedd`   |
+| `debugTokenExpression.number`                         | `#d6aaea`   | `#cc95e4`   |
+| `debugTokenExpression.string`                         | `#efddac`   | `#e6d5a7`   |
+| `debugView.stateLabelBackground`                      | `#a75c00`   | `#bb6800`   |
+| `debugView.valueChangedHighlight`                     | `#62a1f080` | `#4495f880` |
+| `diffEditor.removedLineBackground`                    | `#ef91821a` | `#f38e7e1a` |
+| `diffEditor.removedTextBackground`                    | `#ef918233` | `#f38e7e33` |
+| `diffEditorGutter.removedLineBackground`              | `#ef91821a` | `#f38e7e1a` |
+| `editor.findMatchBackground`                          | `#9847b9`   | `#0071f166` |
+| `editor.findMatchForeground`                          | `#d6aaeae6` | `#ffffff80` |
+| `editor.findMatchHighlightBackground`                 | `#9847b980` | `#bb680066` |
+| `editor.findRangeHighlightBackground`                 | `#ffffff0f` | `#0071f126` |
+| `editor.focusedStackFrameHighlightBackground`         | `#da883e40` | `#bc900040` |
+| `editor.foldBackground`                               | `#92c1fd26` | `#ffffff1a` |
+| `editor.linkedEditingBackground`                      | `#a75c0040` | `#bc900040` |
+| `editor.selectionBackground`                          | `#006fd980` | `#0071f180` |
+| `editor.snippetFinalTabstopHighlightBorder`           | `#92c1fd80` | `#80b7fc80` |
+| `editor.snippetTabstopHighlightBackground`            | `#92c1fd40` | `#80b7fc40` |
+| `editor.stackFrameHighlightBackground`                | `#d7bb7033` | `#d2b35c33` |
+| `editor.wordHighlightStrongBackground`                | `#fcb7cb66` | `#f8bacc66` |
+| `editorBracketHighlight.foreground1`                  | `#d7bb70`   | `#d2b35c`   |
+| `editorBracketHighlight.foreground2`                  | `#ea8eab`   | `#ee8bab`   |
+| `editorBracketHighlight.foreground3`                  | `#62a1f0`   | `#4495f8`   |
+| `editorBracketHighlight.foreground4`                  | `#d7bb70`   | `#d2b35c`   |
+| `editorBracketHighlight.foreground5`                  | `#ea8eab`   | `#ee8bab`   |
+| `editorBracketHighlight.foreground6`                  | `#62a1f0`   | `#4495f8`   |
+| `editorBracketHighlight.unexpectedBracket.foreground` | `#b71a0c`   | `#d60400`   |
+| `editorCommentsWidget.rangeActiveBackground`          | `#d7bb7026` | `#d2b35c26` |
+| `editorCommentsWidget.rangeBackground`                | `#d7bb7026` | `#d2b35c26` |
+| `editorCommentsWidget.unresolvedBorder`               | `#d7bb70`   | `#d2b35c`   |
+| `editorError.foreground`                              | `#db6656`   | `#e65c4a`   |
+| `editorGhostText.background`                          | `#1e242c`   | `#a2cd8b26` |
+| `editorGhostText.foreground`                          | `#62a1f0bf` | `#636363`   |
+| `editorGroup.focusedEmptyBorder`                      | `#62a1f0cc` | `#4495f8cc` |
+| `editorGutter.commentGlyphForeground`                 | `#d7bb70bf` | `#d2b35cbf` |
+| `editorGutter.deletedBackground`                      | `#ef9182bf` | `#f38e7ebf` |
+| `editorGutter.modifiedBackground`                     | `#efddacbf` | `#e6d5a7bf` |
+| `editorHint.foreground`                               | `#92c1fd`   | `#80b7fc`   |
+| `editorInfo.foreground`                               | `#92c1fd`   | `#80b7fc`   |
+| `editorInlayHint.foreground`                          | `#929292`   | `#6f6f6f`   |
+| `editorLightBulb.foreground`                          | `#d7bb70`   | `#d2b35c`   |
+| `editorLightBulbAi.foreground`                        | `#d7bb70`   | `#d2b35c`   |
+| `editorLightBulbAutoFix.foreground`                   | `#92c1fd`   | `#80b7fc`   |
+| `editorLink.activeForeground`                         | `#efddac`   | `#9bb6d9`   |
+| `editorOverviewRuler.commentForeground`               | `#d7bb70bf` | `#d2b35cbf` |
+| `editorOverviewRuler.deletedForeground`               | `#ef9182bf` | `#f38e7ebf` |
+| `editorOverviewRuler.errorForeground`                 | `#db6656bf` | `#e65c4abf` |
+| `editorOverviewRuler.findMatchForeground`             | `#9847b9bf` | `#bb680066` |
+| `editorOverviewRuler.infoForeground`                  | `#92c1fdbf` | `#80b7fcbf` |
+| `editorOverviewRuler.modifiedForeground`              | `#efddacbf` | `#e6d5a7bf` |
+| `editorOverviewRuler.wordHighlightStrongForeground`   | `#fcb7cbbf` | `#f8baccbf` |
+| `editorRuler.foreground`                              | `#eeae7b1a` | `#ffffff0d` |
+| `errorForeground`                                     | `#ef9182`   | `#f38e7e`   |
+| `extensionIcon.preReleaseForeground`                  | `#438500e6` | `#439800e6` |
+| `extensionIcon.sponsorForeground`                     | `#cb4c7ce6` | `#e0588be6` |
+| `extensionIcon.starForeground`                        | `#da883ee6` | `#e18528e6` |
+| `focusBorder`                                         | `#62a1f0cc` | `#4495f8cc` |
+| `gitDecoration.conflictingResourceForeground`         | `#db6656`   | `#e65c4a`   |
+| `gitDecoration.deletedResourceForeground`             | `#ef9182`   | `#f38e7e`   |
+| `gitDecoration.modifiedResourceForeground`            | `#efddac`   | `#e6d5a7`   |
+| `gitDecoration.renamedResourceForeground`             | `#92c1fd`   | `#80b7fc`   |
+| `gitDecoration.stageDeletedResourceForeground`        | `#ef9182`   | `#f38e7e`   |
+| `gitDecoration.stageModifiedResourceForeground`       | `#efddac`   | `#e6d5a7`   |
+| `inputOption.activeBackground`                        | `#efddac40` | `#4495f854` |
+| `inputOption.activeBorder`                            | `#efddac40` | `#4495f880` |
+| `inputOption.activeForeground`                        | `#efddac`   | `#ffffffcc` |
+| `inputOption.hoverBackground`                         | `#efddac40` | `#ffffff1a` |
+| `inputValidation.errorBackground`                     | `#db6656`   | `#e65c4a`   |
+| `inputValidation.errorBorder`                         | `#db6656`   | `#e65c4a`   |
+| `inputValidation.infoBorder`                          | `#92c1fd80` | `#80b7fc80` |
+| `inputValidation.warningBackground`                   | `#a75c00`   | `#bb6800`   |
+| `inputValidation.warningBorder`                       | `#da883e`   | `#e18528`   |
+| `list.errorForeground`                                | `#ef9182`   | `#f38e7e`   |
+| `list.focusAndSelectionOutline`                       | `#62a1f066` | `#4495f866` |
+| `list.highlightForeground`                            | `#92c1fd`   | `#80b7fc`   |
+| `merge.currentHeaderBackground`                       | `#35c5c580` | `#18c6c680` |
+| `merge.incomingHeaderBackground`                      | `#62a1f080` | `#4495f880` |
+| `mergeEditor.conflict.handled.minimapOverViewRuler`   | `#92c1fd80` | `#80b7fc80` |
+| `mergeEditor.conflict.handledFocused.border`          | `#92c1fd80` | `#80b7fc80` |
+| `mergeEditor.conflict.handledUnfocused.border`        | `#92c1fd40` | `#80b7fc40` |
+| `minimap.errorHighlight`                              | `#db6656bf` | `#e65c4abf` |
+| `minimap.findMatchHighlight`                          | `#9847b9bf` | `#bb680066` |
+| `minimap.infoHighlight`                               | `#92c1fdbf` | `#80b7fcbf` |
+| `minimap.selectionHighlight`                          | `#006fd961` | `#0071f161` |
+| `notebook.outputContainerBackgroundColor`             | `#333`      | `#333333`   |
+| `panelTitle.activeForeground`                         | `#efddac`   | `#f8f8f8`   |
+| `peekViewEditor.background`                           | `#2e2e2e`   | `#2b2b2b`   |
+| `peekViewEditor.matchHighlightBackground`             | `#9847b980` | `#ff963054` |
+| `peekViewEditorStickyScroll.background`               | `#333333`   | `#303030`   |
+| `peekViewResult.background`                           | `#333333`   | `#303030`   |
+| `peekViewResult.matchHighlightBackground`             | `#9847b980` | `#bb680066` |
+| `progressBar.background`                              | `#79b158`   | `#74b24c`   |
+| `scmGraph.foreground2`                                | `#efddac`   | `#e6d5a7`   |
+| `scmGraph.foreground3`                                | `#ef9182`   | `#f38e7e`   |
+| `scmGraph.foreground4`                                | `#fcb7cb`   | `#f8bacc`   |
+| `scmGraph.foreground5`                                | `#89dfdf`   | `#92dedd`   |
+| `scmGraph.historyItemHoverDeletionsForeground`        | `#ef9182`   | `#f38e7e`   |
+| `selection.background`                                | `#006fd980` | `#0071f180` |
+| `settings.modifiedItemIndicator`                      | `#efddac`   | `#e6d5a7`   |
+| `statusBar.debuggingBackground`                       | `#a75c00`   | `#bb6800`   |
+| `statusBarItem.errorBackground`                       | `#b71a0c`   | `#e65c4a`   |
+| `statusBarItem.errorHoverBackground`                  | `#db6656`   | `#e65c4a`   |
+| `statusBarItem.focusBorder`                           | `#efddac`   | `#0071f1`   |
+| `statusBarItem.prominentBackground`                   | `#006fd9`   | `#0071f1`   |
+| `statusBarItem.remoteHoverBackground`                 | `#efddac`   | `#0071f1`   |
+| `statusBarItem.remoteHoverForeground`                 | `#121212`   | `#f8f8f8`   |
+| `symbolIcon.booleanForeground`                        | `#d6aaea`   | `#cc95e4`   |
+| `symbolIcon.classForeground`                          | `#92c1fd`   | `#80b7fc`   |
+| `symbolIcon.constantForeground`                       | `#d6aaea`   | `#cc95e4`   |
+| `symbolIcon.constructorForeground`                    | `#92c1fd`   | `#80b7fc`   |
+| `symbolIcon.fieldForeground`                          | `#ef9182`   | `#f38e7e`   |
+| `symbolIcon.functionForeground`                       | `#89dfdf`   | `#92dedd`   |
+| `symbolIcon.interfaceForeground`                      | `#92c1fd`   | `#80b7fc`   |
+| `symbolIcon.keywordForeground`                        | `#ef9182`   | `#f38e7e`   |
+| `symbolIcon.namespaceForeground`                      | `#d6aaea`   | `#cc95e4`   |
+| `symbolIcon.numberForeground`                         | `#d6aaea`   | `#cc95e4`   |
+| `symbolIcon.stringForeground`                         | `#efddac`   | `#e6d5a7`   |
+| `symbolIcon.variableForeground`                       | `#fcb7cb`   | `#f8bacc`   |
+| `terminal.ansiBlue`                                   | `#92c1fd`   | `#80b7fc`   |
+| `terminal.ansiBrightBlue`                             | `#62a1f0`   | `#4495f8`   |
+| `terminal.ansiBrightCyan`                             | `#35c5c5`   | `#18c6c6`   |
+| `terminal.ansiBrightGreen`                            | `#79b158`   | `#74b24c`   |
+| `terminal.ansiBrightMagenta`                          | `#bd84d7`   | `#b669d7`   |
+| `terminal.ansiBrightRed`                              | `#db6656`   | `#e65c4a`   |
+| `terminal.ansiBrightWhite`                            | `#f8f8f8`   | `#ffffff`   |
+| `terminal.ansiBrightYellow`                           | `#d7bb70`   | `#d2b35c`   |
+| `terminal.ansiCyan`                                   | `#89dfdf`   | `#92dedd`   |
+| `terminal.ansiMagenta`                                | `#d6aaea`   | `#cc95e4`   |
+| `terminal.ansiRed`                                    | `#ef9182`   | `#f38e7e`   |
+| `terminal.ansiWhite`                                  | `#c4c4c4`   | `#f8f8f8`   |
+| `terminal.ansiYellow`                                 | `#efddac`   | `#e6d5a7`   |
+| `terminal.tab.activeBorder`                           | `#efddac`   | `#ffffff40` |
+| `terminalCommandDecoration.defaultBackground`         | `#62a1f0`   | `#4495f8`   |
+| `terminalCommandDecoration.errorBackground`           | `#db6656`   | `#e65c4a`   |
+| `terminalCommandDecoration.successBackground`         | `#79b158`   | `#74b24c`   |
+| `textLink.activeForeground`                           | `#efddac`   | `#b7d6ff`   |
+| `textLink.foreground`                                 | `#92c1fd`   | `#80b7fc`   |
+| `textPreformat.foreground`                            | `#d7bb70`   | `#d2b35c`   |
+| `welcomePage.progress.foreground`                     | `#a2cd8b`   | `#74b24c`   |
+
+## semanticTokenColors
+
+### Active in v1.3, inactive in test
+
+None. All nine v1.3 semantic selectors are already active in test.
+
+### Inactive in v1.3, active in test
+
+4 selectors. All are absent from v1.3, with no removal reason documented in the snapshot. Each test value below is the selector’s `foreground`; none has other settings in test.
+
+| Selector           | Test foreground | Comment                                                                                                                                |
+| ------------------ | --------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
+| `builtinConstant`  | `#d6aaea`       | Absent; no removal reason documented.                                                                                                  |
+| `class.builtin`    | `#f8f8f8`       | Absent; the distinct `class` selector remains active at `#89dfdf`. No removal reason documented.                                       |
+| `function.builtin` | `#f8f8f8`       | Absent; `function` and `function.defaultLibrary` remain active at `#89dfdf` and `#f8f8f8`, respectively. No removal reason documented. |
+| `keyword`          | `#ef9182`       | Absent as a semantic selector; the TextMate `keyword` selector remains active, changing to `#f38e7e`. No removal reason documented.    |
+
+### Active in both, updated in v1.3
+
+None. All nine shared semantic selectors retain exactly the same settings, even where the v1.3 TextMate palette changes.
+
+## tokenColors
+
+### Active in v1.3, inactive in test
+
+143 new scope/setting combinations. All are absent from the test output. A selector may already have a different setting in test; for example, `keyword.operator.nullable-type.php` gains `fontStyle: "italic"` while its existing foreground also changes. `fontStyle: ""` explicitly clears font styling.
+
+The active `TEST RED` rule assigns `foreground: "#ff0011"` to its selectors. Those are included as active values here and in the value-change table, even when adjacent comments name an earlier intended color group.
+
+| Scope selector                                                                 | Setting      | v1.3 value |
+| ------------------------------------------------------------------------------ | ------------ | ---------- |
+| `comment meta.tag`                                                             | `foreground` | `#7a7a7a`  |
+| `comment punctuation.separator.delimiter.php`                                  | `fontStyle`  | `""`       |
+| `comment support.class`                                                        | `foreground` | `#9bb6d9`  |
+| `comment support.other.namespace`                                              | `foreground` | `#9bb6d9`  |
+| `comment support.type.property-name.css.cassidydark`                           | `foreground` | `#7a7a7a`  |
+| `comment variable punctuation`                                                 | `foreground` | `#ababab`  |
+| `comment.block.documentation.phpdoc.php meta`                                  | `foreground` | `#7a7a7a`  |
+| `constant.character.escape.backslash.coffee punctuation`                       | `foreground` | `#ff0011`  |
+| `constant.character.format.placeholder.other.python`                           | `foreground` | `#929292`  |
+| `constant.language.access-type.jsdoc`                                          | `foreground` | `#d3a097`  |
+| `entity.name.class`                                                            | `foreground` | `#c4c4c4`  |
+| `entity.name.function.neon`                                                    | `foreground` | `#a2cd8b`  |
+| `entity.name.type entity.name.type.interface`                                  | `foreground` | `#ff0011`  |
+| `entity.name.type.go`                                                          | `foreground` | `#ff0011`  |
+| `entity.name.type.module.ts`                                                   | `fontStyle`  | `italic`   |
+| `entity.name.type.module.ts`                                                   | `foreground` | `#9bb6d9`  |
+| `entity.name.type.namespace`                                                   | `foreground` | `#cc95e4`  |
+| `entity.name.type.package.go`                                                  | `foreground` | `#ff0011`  |
+| `entity.name.type.ts`                                                          | `fontStyle`  | `italic`   |
+| `entity.name.type.ts`                                                          | `foreground` | `#9bb6d9`  |
+| `entity.other.attribute-name.html`                                             | `foreground` | `#c4c4c4`  |
+| `entity.other.attribute-name.id.css`                                           | `foreground` | `#eeae7b`  |
+| `entity.other.attribute-name.id.css punctuation`                               | `foreground` | `#eeae7b`  |
+| `entity.other.attribute-name.localname.xml`                                    | `foreground` | `#c4c4c4`  |
+| `entity.other.attribute-name.namespace.xml`                                    | `foreground` | `#cc95e4`  |
+| `entity.other.attribute-name.tsx`                                              | `foreground` | `#c4c4c4`  |
+| `entity.other.inherited-class`                                                 | `foreground` | `#92dedd`  |
+| `entity.other.namespace-prefix.css`                                            | `foreground` | `#ff0011`  |
+| `entity.tag.tagbraces.nunjucks`                                                | `foreground` | `#cc95e4`  |
+| `invalid punctuation`                                                          | `foreground` | `#636363`  |
+| `keyword.operator.expression.void.ts`                                          | `fontStyle`  | `italic`   |
+| `keyword.operator.expression.void.ts`                                          | `foreground` | `#9bb6d9`  |
+| `keyword.operator.neon`                                                        | `foreground` | `#929292`  |
+| `keyword.operator.nullable-type.php`                                           | `fontStyle`  | `italic`   |
+| `keyword.operator.type.annotation.ts`                                          | `foreground` | `#929292`  |
+| `keyword.other.array.phpdoc.php`                                               | `foreground` | `#929292`  |
+| `keyword.other.type`                                                           | `foreground` | `#9bb6d9`  |
+| `log.info`                                                                     | `foreground` | `#80b7fc`  |
+| `markup.heading.markdown`                                                      | `foreground` | `#a2cd8b`  |
+| `markup.heading.markdown entity`                                               | `foreground` | `#a2cd8b`  |
+| `meta.arguments.coffee`                                                        | `foreground` | `#ff0011`  |
+| `meta.at-rule.header.css`                                                      | `foreground` | `#eeae7b`  |
+| `meta.attribute-selector.css`                                                  | `foreground` | `#ff0011`  |
+| `meta.attribute.class.html string`                                             | `foreground` | `#92dedd`  |
+| `meta.attribute.href meta.function-call.php string`                            | `foreground` | `#e6d5a7`  |
+| `meta.attribute.id.html string`                                                | `foreground` | `#eeae7b`  |
+| `meta.attribute.python`                                                        | `foreground` | `#f8f8f8`  |
+| `meta.attribute.src string`                                                    | `foreground` | `#80b7fc`  |
+| `meta.attribute.srcset string`                                                 | `foreground` | `#80b7fc`  |
+| `meta.attribute.style.html string`                                             | `foreground` | `#a2cd8b`  |
+| `meta.attribute.style.html string source`                                      | `foreground` | `#a2cd8b`  |
+| `meta.character.set.regexp`                                                    | `foreground` | `#cc95e4`  |
+| `meta.class`                                                                   | `foreground` | `#92dedd`  |
+| `meta.class entity`                                                            | `foreground` | `#92dedd`  |
+| `meta.delimiter.decimal.period.js`                                             | `foreground` | `#cc95e4`  |
+| `meta.embedded.block.php source`                                               | `foreground` | `#929292`  |
+| `meta.embedded.line.php source`                                                | `foreground` | `#929292`  |
+| `meta.fstring.python`                                                          | `foreground` | `#f8bacc`  |
+| `meta.function support.class`                                                  | `fontStyle`  | `italic`   |
+| `meta.function support.class`                                                  | `foreground` | `#9bb6d9`  |
+| `meta.function-call`                                                           | `foreground` | `#92dedd`  |
+| `meta.function-call.ts entity.name.function.ts`                                | `foreground` | `#f8f8f8`  |
+| `meta.function.color.css`                                                      | `foreground` | `#929292`  |
+| `meta.function.parameter.typehinted.php punctuation.separator.inheritance.php` | `fontStyle`  | `italic`   |
+| `meta.function.parameter.typehinted.php punctuation.separator.inheritance.php` | `foreground` | `#9bb6d9`  |
+| `meta.function.parameters punctuation.definition.variable.php`                 | `foreground` | `#eeae7b`  |
+| `meta.function.parameters variable`                                            | `foreground` | `#eeae7b`  |
+| `meta.function.parameters.python`                                              | `foreground` | `#9bb6d9`  |
+| `meta.function.php storage.type.php`                                           | `fontStyle`  | `italic`   |
+| `meta.function.python`                                                         | `foreground` | `#9bb6d9`  |
+| `meta.function.url string`                                                     | `foreground` | `#80b7fc`  |
+| `meta.function.variable.css`                                                   | `foreground` | `#f8bacc`  |
+| `meta.group.regexp meta`                                                       | `foreground` | `#ff0011`  |
+| `meta.indexed-name.python`                                                     | `foreground` | `#a2cd8b`  |
+| `meta.item-access.arguments.python`                                            | `foreground` | `#f8bacc`  |
+| `meta.method-call entity.name.function`                                        | `foreground` | `#f8f8f8`  |
+| `meta.named.regexp`                                                            | `foreground` | `#cc95e4`  |
+| `meta.namespace.declaration.ts`                                                | `foreground` | `#ff0011`  |
+| `meta.objectliteral.js`                                                        | `foreground` | `#ff0011`  |
+| `meta.other.type.phpdoc.php keyword.other.array.phpdoc.php`                    | `foreground` | `#9bb6d9`  |
+| `meta.other.type.phpdoc.php support.other.namespace.php`                       | `foreground` | `#9bb6d9`  |
+| `meta.paragraph.markdown`                                                      | `foreground` | `#c4c4c4`  |
+| `meta.path.basename.search`                                                    | `foreground` | `#ff0011`  |
+| `meta.property-value.delimiter.css`                                            | `foreground` | `#ff0011`  |
+| `meta.property.css`                                                            | `foreground` | `#ff0011`  |
+| `meta.ratio.css keyword.operator.arithmetic.css`                               | `foreground` | `#ff0011`  |
+| `meta.resultLine`                                                              | `foreground` | `#ff0011`  |
+| `meta.return.type entity.name.type`                                            | `foreground` | `#ff0011`  |
+| `meta.scope.logical-expression.shell keyword.operator.tilde.shell`             | `foreground` | `#c4c4c4`  |
+| `meta.scope.subshell`                                                          | `foreground` | `#f38e7e`  |
+| `meta.shebang.shell`                                                           | `foreground` | `#9bb6d9`  |
+| `meta.toc-list.id.html`                                                        | `foreground` | `#eeae7b`  |
+| `meta.type.annotation.ts meta.brace.square.ts`                                 | `foreground` | `#9bb6d9`  |
+| `punctuation source`                                                           | `foreground` | `#929292`  |
+| `punctuation text.html`                                                        | `foreground` | `#ff0011`  |
+| `punctuation.definition.comment.shebang.shell`                                 | `foreground` | `#9bb6d9`  |
+| `punctuation.section.embedded`                                                 | `foreground` | `#eeae7b`  |
+| `punctuation.section.embedded source`                                          | `foreground` | `#eeae7b`  |
+| `punctuation.section.supports.begin.bracket.round.css`                         | `foreground` | `#ff0011`  |
+| `punctuation.section.supports.end.bracket.round.css`                           | `foreground` | `#ff0011`  |
+| `source.shell meta.parameter-expansion`                                        | `foreground` | `#929292`  |
+| `string source`                                                                | `foreground` | `#e6d5a7`  |
+| `string.other.link`                                                            | `foreground` | `#80b7fc`  |
+| `string.quoted entity.name.import.go`                                          | `foreground` | `#ff0011`  |
+| `string.quoted invalid.illegal.newline.js`                                     | `foreground` | `#ff0011`  |
+| `string.quoted.docstring`                                                      | `foreground` | `#7a7a7a`  |
+| `string.regexp meta.assertion`                                                 | `foreground` | `#ff0011`  |
+| `string.regexp punctuation.definition.string.begin`                            | `foreground` | `#cc95e4`  |
+| `string.regexp punctuation.definition.string.end`                              | `foreground` | `#cc95e4`  |
+| `string.unquoted.argument.shell`                                               | `foreground` | `#ded5bf`  |
+| `support.class`                                                                | `foreground` | `#92dedd`  |
+| `support.constant`                                                             | `foreground` | `#cc95e4`  |
+| `support.constant.container-name.css`                                          | `foreground` | `#ff0011`  |
+| `support.constant.language-range.css`                                          | `foreground` | `#ff0011`  |
+| `support.constant.media.css`                                                   | `foreground` | `#f8f8f8`  |
+| `support.constant.property-value.container.css`                                | `foreground` | `#b0c5a5`  |
+| `support.constant.property-value.css`                                          | `foreground` | `#b0c5a5`  |
+| `support.other.neon`                                                           | `foreground` | `#a2cd8b`  |
+| `support.query-name.container.css`                                             | `foreground` | `#ff0011`  |
+| `support.size.property-name.container.css`                                     | `foreground` | `#a2cd8b`  |
+| `support.style-query.container.css`                                            | `foreground` | `#f8f8f8`  |
+| `support.type`                                                                 | `foreground` | `#9bb6d9`  |
+| `support.type.builtin.ts`                                                      | `fontStyle`  | `italic`   |
+| `support.type.builtin.ts`                                                      | `foreground` | `#9bb6d9`  |
+| `support.type.graphql`                                                         | `foreground` | `#9bb6d9`  |
+| `support.type.primitive`                                                       | `fontStyle`  | `italic`   |
+| `support.type.primitive.ts`                                                    | `foreground` | `#9bb6d9`  |
+| `support.type.primitive.tsx`                                                   | `foreground` | `#9bb6d9`  |
+| `support.type.property-name`                                                   | `foreground` | `#a2cd8b`  |
+| `support.type.python`                                                          | `fontStyle`  | `italic`   |
+| `support.type.python`                                                          | `foreground` | `#9bb6d9`  |
+| `text`                                                                         | `foreground` | `#f8f8f8`  |
+| `text meta`                                                                    | `foreground` | `#f8f8f8`  |
+| `text.html.markdown meta.embedded.block`                                       | `foreground` | `#f8f8f8`  |
+| `text.searchResult`                                                            | `foreground` | `#ff0011`  |
+| `variable punctuation`                                                         | `foreground` | `#f8bacc`  |
+| `variable.language.this punctuation`                                           | `fontStyle`  | `italic`   |
+| `variable.language.this punctuation`                                           | `foreground` | `#cc95e4`  |
+| `variable.object.property.ts`                                                  | `foreground` | `#a2cd8b`  |
+| `variable.other.constant.object.property.ts`                                   | `foreground` | `#ff0011`  |
+| `variable.other.object.ts`                                                     | `foreground` | `#f8f8f8`  |
+| `variable.other.phpdoc`                                                        | `foreground` | `#ababab`  |
+| `variable.parameter.keyframe-list.css`                                         | `foreground` | `#f38e7e`  |
+
+25 additional active `settings.foreground` properties occur on rules with `scope: []`, all absent from test. They declare no target selectors, so they are counted separately from the combinations above. The retained empty-scope `RED DEEP` rule is covered under value changes.
+
+| Empty-scope rule       | v1.3 foreground |
+| ---------------------- | --------------- |
+| `BLUE LIGHT [OPTIONS]` | `#b7d6ff`       |
+| `BLUE BG`              | `#0071f1`       |
+| `CYAN FADE`            | `#b2d6d5`       |
+| `CYAN LIGHT`           | `#dcf4f4`       |
+| `CYAN DEEP`            | `#18c6c6`       |
+| `CYAN BG`              | `#00a7a8`       |
+| `GREEN LIGHT`          | `#d0e6c5`       |
+| `GREEN DEEP`           | `#74b24c`       |
+| `GREEN BG`             | `#439800`       |
+| `ORANGE FADE`          | `#d7b79e`       |
+| `ORANGE LIGHT`         | `#f8d7be`       |
+| `ORANGE DEEP`          | `#e18528`       |
+| `ORANGE BG`            | `#bb6800`       |
+| `PINK FADE`            | `#e4c4cd`       |
+| `PINK LIGHT`           | `#fee8ee`       |
+| `PINK DEEP`            | `#ee8bab`       |
+| `PINK BG`              | `#e0588b`       |
+| `PURPLE FADE`          | `#bda2ca`       |
+| `PURPLE LIGHT`         | `#e1c0f0`       |
+| `PURPLE DEEP`          | `#b669d7`       |
+| `PURPLE BG`            | `#a034c9`       |
+| `RED LIGHT`            | `#fbbcb1`       |
+| `RED BG`               | `#d60400`       |
+| `YELLOW LIGHT`         | `#faf7ee`       |
+| `YELLOW BG`            | `#bc9000`       |
+
+### Inactive in v1.3, active in test
+
+67 scope/setting combinations lose their exact explicit assignments. The status column distinguishes commented-out selectors from absent selectors. The snapshot does not document a removal reason for these assignments; comments retained beside disabled selectors describe examples rather than reasons. Broader or differently targeted selectors may still style the same tokens.
+
+| Scope selector                                                                    | Setting      | Test value | Status / related v1.3 declaration                                                                                                        |
+| --------------------------------------------------------------------------------- | ------------ | ---------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
+| `comment keyword`                                                                 | `foreground` | `#7a7a7a`  | Commented out; no removal reason documented.                                                                                             |
+| `comment keyword.operator.nullable-type.php`                                      | `foreground` | `#929292`  | Absent; `keyword.operator.nullable-type.php` remains active, and `comment punctuation` is also active.                                   |
+| `comment meta.tag.inline`                                                         | `foreground` | `#7a7a7a`  | Absent; v1.3 instead declares the broader `comment meta.tag` at `#7a7a7a`.                                                               |
+| `comment storage`                                                                 | `foreground` | `#7a7a7a`  | Commented out; no removal reason documented.                                                                                             |
+| `comment support`                                                                 | `foreground` | `#7a7a7a`  | Commented out; no removal reason documented.                                                                                             |
+| `comment support.other.namespace.php`                                             | `foreground` | `#929292`  | Absent; v1.3 declares the broader `comment support.other.namespace` at `#9bb6d9`.                                                        |
+| `constant.other.option`                                                           | `foreground` | `#d6aaea`  | Commented out; no removal reason documented.                                                                                             |
+| `entity.name`                                                                     | `foreground` | `#929292`  | Absent; no removal reason documented.                                                                                                    |
+| `entity.name.function.rainbow3`                                                   | `foreground` | `#d6aaea`  | Commented out; no removal reason documented.                                                                                             |
+| `entity.name.section.markdown`                                                    | `fontStyle`  | `italic`   | Absent; v1.3 adds `markup.heading.markdown` foreground styling, with no corresponding heading italic assignment.                         |
+| `entity.name.section.markdown`                                                    | `foreground` | `#a2cd8b`  | Absent; v1.3 adds `markup.heading.markdown` foreground styling, with no corresponding heading italic assignment.                         |
+| `entity.name.type.namespace.php`                                                  | `foreground` | `#bd84d7`  | Absent; both test assignments are removed (see note below). v1.3 declares broader `entity.name.type.namespace` at `#cc95e4`.             |
+| `entity.other.attribute-name.id`                                                  | `foreground` | `#eeae7b`  | Absent; v1.3 declares narrower `entity.other.attribute-name.id.css` at the same `#eeae7b`.                                               |
+| `entity.other.attribute-name.namespace`                                           | `foreground` | `#bd84d7`  | Absent; v1.3 adds `entity.other.attribute-name.namespace.xml` at `#cc95e4`.                                                              |
+| `entity.other.attribute-name.pseudo-class`                                        | `foreground` | `#f8f8f8`  | Absent; broader `entity.other.attribute-name` remains active at `#f8f8f8`.                                                               |
+| `entity.other.attribute-name.pseudo-element`                                      | `foreground` | `#f8f8f8`  | Absent; broader `entity.other.attribute-name` remains active at `#f8f8f8`.                                                               |
+| `entity.other.inherited-class.php`                                                | `foreground` | `#89dfdf`  | Absent; v1.3 declares broader `entity.other.inherited-class` at `#92dedd`.                                                               |
+| `keyword.operator.expansion.shell`                                                | `foreground` | `#d6aaea`  | Absent; no removal reason documented.                                                                                                    |
+| `keyword.operator.logical.shell`                                                  | `foreground` | `#d6aaea`  | Absent; no removal reason documented.                                                                                                    |
+| `keyword.other.class`                                                             | `foreground` | `#bd84d7`  | Absent; no removal reason documented.                                                                                                    |
+| `keyword.other.type.php`                                                          | `foreground` | `#a9c0de`  | Foreground assignment absent; its italic assignment remains active. v1.3 declares broader `keyword.other.type` foreground at `#9bb6d9`.  |
+| `meta.assertion.look-ahead.regexp`                                                | `foreground` | `#d6aaea`  | Absent; no removal reason documented.                                                                                                    |
+| `meta.assertion.negative-look-ahead.regexp`                                       | `foreground` | `#d6aaea`  | Absent; no removal reason documented.                                                                                                    |
+| `meta.at-rule support.function`                                                   | `foreground` | `#89dfdf`  | Absent; no removal reason documented.                                                                                                    |
+| `meta.attribute-selector entity.other.attribute-name`                             | `foreground` | `#efddac`  | Absent; no removal reason documented.                                                                                                    |
+| `meta.attribute.src.html string`                                                  | `foreground` | `#92c1fd`  | Absent; v1.3 declares broader `meta.attribute.src string` at `#80b7fc`.                                                                  |
+| `meta.attribute.srcset.html string`                                               | `foreground` | `#92c1fd`  | Absent; v1.3 declares broader `meta.attribute.srcset string` at `#80b7fc`.                                                               |
+| `meta.attribute.style string`                                                     | `foreground` | `#89dfdf`  | Absent; v1.3 declares narrower `meta.attribute.style.html string` at `#a2cd8b`.                                                          |
+| `meta.embedded.line.php`                                                          | `foreground` | `#929292`  | Absent; broader `meta.embedded.line` remains active at the same `#929292`.                                                               |
+| `meta.function-call.generic.python`                                               | `foreground` | `#89dfdf`  | Absent; v1.3 declares broader `meta.function-call` at `#92dedd`.                                                                         |
+| `meta.function-call.php`                                                          | `foreground` | `#bd84d7`  | Commented out; no removal reason documented.                                                                                             |
+| `meta.function.calc.css`                                                          | `foreground` | `#929292`  | Commented out; no removal reason documented.                                                                                             |
+| `meta.function.parameters.php variable`                                           | `foreground` | `#eeae7b`  | Absent; v1.3 declares broader `meta.function.parameters variable` at the same `#eeae7b`.                                                 |
+| `meta.function.php punctuation.separator.inheritance.php`                         | `fontStyle`  | `italic`   | Absent; v1.3 adds both settings to the distinct `meta.function.parameter.typehinted.php punctuation.separator.inheritance.php` selector. |
+| `meta.function.php punctuation.separator.inheritance.php`                         | `foreground` | `#929292`  | Absent; v1.3 adds both settings to the distinct `meta.function.parameter.typehinted.php punctuation.separator.inheritance.php` selector. |
+| `meta.function.url string.quoted.double`                                          | `foreground` | `#92c1fd`  | Absent; v1.3 declares broader `meta.function.url string` at `#80b7fc`.                                                                   |
+| `meta.function.url string.quoted.single`                                          | `foreground` | `#92c1fd`  | Absent; v1.3 declares broader `meta.function.url string` at `#80b7fc`.                                                                   |
+| `meta.group.assertion.regexp`                                                     | `foreground` | `#d6aaea`  | Absent; no removal reason documented.                                                                                                    |
+| `meta.parameter-expansion`                                                        | `foreground` | `#929292`  | Absent; v1.3 declares narrower `source.shell meta.parameter-expansion` at the same `#929292`.                                            |
+| `meta.property-value support.function`                                            | `foreground` | `#89dfdf`  | Absent; no removal reason documented.                                                                                                    |
+| `meta.scope`                                                                      | `foreground` | `#d1d1d1`  | Absent; no removal reason documented.                                                                                                    |
+| `punctuation.definition.variable`                                                 | `foreground` | `#fcb7cb`  | Absent; v1.3 declares `variable punctuation` at `#f8bacc`.                                                                               |
+| `punctuation.section.embedded.begin.php`                                          | `foreground` | `#eeae7b`  | Absent; v1.3 declares broader `punctuation.section.embedded` at the same `#eeae7b`.                                                      |
+| `punctuation.section.embedded.end.php`                                            | `foreground` | `#eeae7b`  | Absent; v1.3 declares broader `punctuation.section.embedded` at the same `#eeae7b`.                                                      |
+| `source.dockerfile entity.name`                                                   | `foreground` | `#a2cd8b`  | Commented out; no removal reason documented.                                                                                             |
+| `source.dockerfile string`                                                        | `foreground` | `#f8f8f8`  | Absent; no removal reason documented.                                                                                                    |
+| `source.embedded`                                                                 | `foreground` | `#7a7a7a`  | Absent; no removal reason documented.                                                                                                    |
+| `source.ini`                                                                      | `foreground` | `#d6aaea`  | Absent; no removal reason documented.                                                                                                    |
+| `string.other.link.description.markdown`                                          | `foreground` | `#efddac`  | Absent; no removal reason documented.                                                                                                    |
+| `string.other.link.title.markdown`                                                | `foreground` | `#92c1fd`  | Absent; v1.3 declares broader `string.other.link` at `#80b7fc`.                                                                          |
+| `string.quoted.double.php`                                                        | `foreground` | `#efddac`  | Absent; broader `string` remains active, changing to `#e6d5a7`.                                                                          |
+| `string.quoted.double.php punctuation.definition.variable.php`                    | `foreground` | `#929292`  | Absent; no removal reason documented.                                                                                                    |
+| `string.quoted.double.php variable.other.php punctuation.definition.variable.php` | `foreground` | `#fcb7cb`  | Absent; no removal reason documented.                                                                                                    |
+| `string.quoted.single.php`                                                        | `foreground` | `#efddac`  | Absent; broader `string` remains active, changing to `#e6d5a7`.                                                                          |
+| `string.regexp constant`                                                          | `foreground` | `#d6aaea`  | Absent; broader `string.regexp` and `constant` remain active at `#cc95e4`.                                                               |
+| `string.regexp keyword`                                                           | `foreground` | `#d6aaea`  | Absent; broader `string.regexp` remains active at `#cc95e4`.                                                                             |
+| `string.regexp punctuation`                                                       | `foreground` | `#d6aaea`  | Absent; broader `string.regexp` remains active at `#cc95e4`; delimiter selectors are also added.                                         |
+| `support`                                                                         | `foreground` | `#89dfdf`  | Absent; no removal reason documented.                                                                                                    |
+| `support.constant.boolean.container.css`                                          | `foreground` | `#d6aaea`  | Absent; no removal reason documented.                                                                                                    |
+| `support.function.basic_functions`                                                | `foreground` | `#89dfdf`  | Absent; no removal reason documented.                                                                                                    |
+| `support.function.builtin.shell`                                                  | `foreground` | `#89dfdf`  | Absent; no removal reason documented.                                                                                                    |
+| `text.html`                                                                       | `foreground` | `#f8f8f8`  | Absent; v1.3 declares broader `text` at the same `#f8f8f8`.                                                                              |
+| `text.xml`                                                                        | `foreground` | `#f8f8f8`  | Absent; v1.3 declares broader `text` at the same `#f8f8f8`.                                                                              |
+| `variable.language.this punctuation.definition.variable`                          | `foreground` | `#d6aaea`  | Absent; v1.3 declares broader `variable.language.this punctuation` at `#cc95e4` and adds italic styling.                                 |
+| `variable.other.assignment.shell`                                                 | `foreground` | `#fcb7cb`  | Absent; no removal reason documented.                                                                                                    |
+| `variable.other.constant.object.js`                                               | `foreground` | `#d6aaea`  | Absent; no removal reason documented.                                                                                                    |
+| `variable.parameter.misc.css`                                                     | `foreground` | `#eeae7b`  | Absent; no removal reason documented.                                                                                                    |
+
+Test assigns `entity.name.type.namespace.php` twice: `#d6aaea` in `PURPLE BASE`, then `#bd84d7` in `PURPLE DEEP`. Both assignments disappear in v1.3. The table uses the later test value; the earlier assignment is an additional removed declaration, not another distinct scope/setting combination.
+
+No active empty-scope setting is deactivated: test’s `RED DEEP` foreground remains active under the renamed `RED DEEP [ERRORS]` rule, with the changed value listed below.
+
+### Active in both, updated in v1.3
+
+103 scope/setting combinations change foreground. No retained combination changes its `fontStyle` value. Values of `#ff0011` come from the active `TEST RED` rule.
+
+| Scope selector                                                       | Setting      | Test value  | v1.3 value |
+| -------------------------------------------------------------------- | ------------ | ----------- | ---------- |
+| `code.log invalid`                                                   | `foreground` | `#ef9182`   | `#ff0011`  |
+| `code.log support`                                                   | `foreground` | `#f8f8f8`   | `#ff0011`  |
+| `comment entity.name.type`                                           | `foreground` | `#a9c0de`   | `#9bb6d9`  |
+| `comment punctuation.separator.inheritance.php`                      | `foreground` | `#929292`   | `#9bb6d9`  |
+| `comment storage.modifier`                                           | `foreground` | `#7a7a7a`   | `#d3a097`  |
+| `comment.rainbow4`                                                   | `foreground` | `#c4c4c4`   | `#ff0011`  |
+| `constant`                                                           | `foreground` | `#d6aaea`   | `#cc95e4`  |
+| `constant punctuation.definition.entity`                             | `foreground` | `#d6aaea`   | `#cc95e4`  |
+| `constant.numeric.rainbow7`                                          | `foreground` | `#92c1fd`   | `#ff0011`  |
+| `constant.other.symbol.hashkey.ruby`                                 | `foreground` | `#a2cd8b`   | `#ff0011`  |
+| `constant.other.symbol.ruby`                                         | `foreground` | `#a2cd8b`   | `#ff0011`  |
+| `entity.helper.apacheconf`                                           | `foreground` | `#f8f8f8`   | `#ff0011`  |
+| `entity.mime-type.apacheconf`                                        | `foreground` | `#a2cd8b`   | `#ff0011`  |
+| `entity.name.function`                                               | `foreground` | `#89dfdf`   | `#92dedd`  |
+| `entity.name.goto-label.php`                                         | `foreground` | `#ef9182`   | `#ff0011`  |
+| `entity.name.section.group-title`                                    | `foreground` | `#a2cd8b`   | `#f8f8f8`  |
+| `entity.name.tag`                                                    | `foreground` | `#ef9182`   | `#f38e7e`  |
+| `entity.name.tag.yaml`                                               | `foreground` | `#89dfdf`   | `#a2cd8b`  |
+| `entity.name.type`                                                   | `foreground` | `#89dfdf`   | `#92dedd`  |
+| `entity.name.type.rainbow8`                                          | `foreground` | `#fcb7cb`   | `#ff0011`  |
+| `entity.name.variable.parameter.php`                                 | `foreground` | `#fcb7cb`   | `#ff0011`  |
+| `entity.other.alias.php`                                             | `foreground` | `#89dfdf`   | `#92dedd`  |
+| `entity.other.attribute-name`                                        | `foreground` | `#c4c4c4`   | `#f8f8f8`  |
+| `entity.other.attribute-name.class`                                  | `foreground` | `#a2cd8b`   | `#92dedd`  |
+| `entity.other.attribute-name.id punctuation`                         | `foreground` | `#eeae7b`   | `#ff0011`  |
+| `entity.other.attribute-name.parent-selector-suffix.css punctuation` | `foreground` | `#a2cd8b`   | `#ff0011`  |
+| `entity.status.apacheconf`                                           | `foreground` | `#d6aaea`   | `#ff0011`  |
+| `entity.tag.apacheconf`                                              | `foreground` | `#89dfdf`   | `#ff0011`  |
+| `invalid.rainbow10`                                                  | `foreground` | `#ef9182`   | `#ff0011`  |
+| `keyword`                                                            | `foreground` | `#ef9182`   | `#f38e7e`  |
+| `keyword.operator.nullable-type.php`                                 | `foreground` | `#a9c0de`   | `#9bb6d9`  |
+| `keyword.other.definition`                                           | `foreground` | `#89dfdf`   | `#a2cd8b`  |
+| `keyword.other.special-method`                                       | `foreground` | `#89dfdf`   | `#ff0011`  |
+| `keyword.other.type.cassidydark.php`                                 | `foreground` | `#a9c0de`   | `#ff0011`  |
+| `keyword.other.unit`                                                 | `foreground` | `#d6aaea`   | `#cc95e4`  |
+| `keyword.rainbow2`                                                   | `foreground` | `#efddac`   | `#ff0011`  |
+| `log.date`                                                           | `foreground` | `#92c1fd`   | `#7a7a7a`  |
+| `log.error`                                                          | `foreground` | `#ef9182`   | `#f38e7e`  |
+| `markup.bold.rainbow9`                                               | `foreground` | `#f8f8f8`   | `#ff0011`  |
+| `markup.inline.raw.string.markdown`                                  | `foreground` | `#d7bb70`   | `#d2b35c`  |
+| `markup.strikethrough.markdown`                                      | `foreground` | `#929292`   | `#ff0011`  |
+| `markup.strikethrough.markdown string.other.link.title.markdown`     | `foreground` | `#92c1fd80` | `#ff0011`  |
+| `meta.arithmetic.shell`                                              | `foreground` | `#d6aaea`   | `#cc95e4`  |
+| `meta.attribute-selector.scss`                                       | `foreground` | `#efddac`   | `#e6d5a7`  |
+| `meta.attribute.async.html entity.other.attribute-name`              | `foreground` | `#d6aaea`   | `#ff0011`  |
+| `meta.attribute.class string`                                        | `foreground` | `#a2cd8b`   | `#ff0011`  |
+| `meta.attribute.crossorigin entity.other.attribute-name`             | `foreground` | `#d6aaea`   | `#ff0011`  |
+| `meta.attribute.defer.html entity.other.attribute-name`              | `foreground` | `#d6aaea`   | `#ff0011`  |
+| `meta.attribute.href string`                                         | `foreground` | `#92c1fd`   | `#80b7fc`  |
+| `meta.attribute.id string`                                           | `foreground` | `#eeae7b`   | `#ff0011`  |
+| `meta.attribute.unrecognized.xmlns.html string`                      | `foreground` | `#92c1fd`   | `#80b7fc`  |
+| `meta.attribute.unrecognized.xmlns:xlink.html string`                | `foreground` | `#92c1fd`   | `#ff0011`  |
+| `meta.element.structure.svg.text.html`                               | `foreground` | `#f8f8f8`   | `#ff0011`  |
+| `meta.embedded.block`                                                | `foreground` | `#c4c4c4`   | `#929292`  |
+| `meta.function-call.arguments.python`                                | `foreground` | `#fcb7cb`   | `#f8bacc`  |
+| `meta.function.method.with-arguments.ruby storage.type`              | `foreground` | `#929292`   | `#ff0011`  |
+| `meta.function.parameter.default`                                    | `foreground` | `#929292`   | `#ff0011`  |
+| `meta.function.parameters.php`                                       | `foreground` | `#eeae7b`   | `#ff0011`  |
+| `meta.function.parameters.php punctuation.definition.variable`       | `foreground` | `#eeae7b`   | `#ff0011`  |
+| `meta.function.php storage.type.php`                                 | `foreground` | `#a9c0de`   | `#9bb6d9`  |
+| `meta.group.regexp`                                                  | `foreground` | `#d6aaea`   | `#cc95e4`  |
+| `meta.insertion.placeholder.json.comments.snippets string`           | `foreground` | `#a2cd8b`   | `#f8f8f8`  |
+| `meta.link.reference`                                                | `foreground` | `#92c1fd`   | `#ff0011`  |
+| `meta.link.reference constant`                                       | `foreground` | `#92c1fd`   | `#4495f8`  |
+| `meta.link.reference string`                                         | `foreground` | `#92c1fd`   | `#ff0011`  |
+| `meta.method-call.php`                                               | `foreground` | `#bd84d7`   | `#ff0011`  |
+| `meta.other.type.phpdoc.php`                                         | `foreground` | `#a9c0de`   | `#9bb6d9`  |
+| `meta.path.basename`                                                 | `foreground` | `#f8f8f8`   | `#ff0011`  |
+| `meta.path.dirname.search`                                           | `foreground` | `#929292`   | `#ff0011`  |
+| `meta.property-list`                                                 | `foreground` | `#929292`   | `#a2cd8b`  |
+| `meta.property-name`                                                 | `foreground` | `#89dfdf`   | `#a2cd8b`  |
+| `meta.property-value`                                                | `foreground` | `#89dfdf`   | `#a2cd8b`  |
+| `meta.resultLinePrefix.contextLinePrefix.search meta`                | `foreground` | `#636363`   | `#ff0011`  |
+| `meta.resultLinePrefix.matchLinePrefix.search meta`                  | `foreground` | `#c4c4c4`   | `#ff0011`  |
+| `meta.tag`                                                           | `foreground` | `#929292`   | `#f38e7e`  |
+| `meta.tag.sgml.doctype.xml`                                          | `foreground` | `#efddac`   | `#e6d5a7`  |
+| `punctuation.definition.constant.xml`                                | `foreground` | `#d6aaea`   | `#cc95e4`  |
+| `punctuation.separator.inheritance.php`                              | `foreground` | `#bd84d7`   | `#cc95e4`  |
+| `punctuation.separator.statement.and.shell`                          | `foreground` | `#ef9182`   | `#f38e7e`  |
+| `punctuation.separator.statement.and.shell.dockerfile`               | `foreground` | `#ef9182`   | `#ff0011`  |
+| `rainbow1`                                                           | `foreground` | `#89dfdf`   | `#ff0011`  |
+| `source.dockerfile constant.other.option`                            | `foreground` | `#eeae7b`   | `#ff0011`  |
+| `source.dockerfile keyword.other.special-method`                     | `foreground` | `#89dfdf`   | `#f8f8f8`  |
+| `source.nginx`                                                       | `foreground` | `#c4c4c4`   | `#ff0011`  |
+| `source.nginx constant.character`                                    | `foreground` | `#929292`   | `#ff0011`  |
+| `source.nginx constant.language`                                     | `foreground` | `#89dfdf`   | `#ff0011`  |
+| `source.nginx constant.language.directive.module.main`               | `foreground` | `#ef9182`   | `#ff0011`  |
+| `source.nginx constant.language.module`                              | `foreground` | `#92c1fd`   | `#ff0011`  |
+| `storage.modifier`                                                   | `foreground` | `#ef9182`   | `#f38e7e`  |
+| `storage.type`                                                       | `foreground` | `#92c1fd`   | `#80b7fc`  |
+| `string`                                                             | `foreground` | `#efddac`   | `#e6d5a7`  |
+| `string meta.any.json.comments.snippets`                             | `foreground` | `#efddac`   | `#e6d5a7`  |
+| `string.path.apacheconf`                                             | `foreground` | `#92c1fd`   | `#ff0011`  |
+| `string.rainbow5`                                                    | `foreground` | `#a2cd8b`   | `#ff0011`  |
+| `string.regexp`                                                      | `foreground` | `#d6aaea`   | `#cc95e4`  |
+| `string.replacement.apacheconf`                                      | `foreground` | `#eeae7b`   | `#ff0011`  |
+| `support.constant.property`                                          | `foreground` | `#c4c4c4`   | `#ff0011`  |
+| `support.other.namespace.php`                                        | `foreground` | `#bd84d7`   | `#cc95e4`  |
+| `variable`                                                           | `foreground` | `#fcb7cb`   | `#f8bacc`  |
+| `variable.language.this`                                             | `foreground` | `#d6aaea`   | `#cc95e4`  |
+| `variable.other.constant.property`                                   | `foreground` | `#a2cd8b`   | `#cc95e4`  |
+| `variable.parameter.rainbow6`                                        | `foreground` | `#eeae7b`   | `#ff0011`  |
+| `variable.parameter.url`                                             | `foreground` | `#92c1fd`   | `#80b7fc`  |
+
+One retained empty-scope setting also changes:
+
+| Test rule  | v1.3 rule           | Setting      | Test value | v1.3 value |
+| ---------- | ------------------- | ------------ | ---------- | ---------- |
+| `RED DEEP` | `RED DEEP [ERRORS]` | `foreground` | `#db6656`  | `#e65c4a`  |
+
+Both versions of this rule have `scope: []`; the rename is included only to identify the corresponding setting.
+
+The v1.3 `TEST RED` rule lists `meta.attribute-selector.css` twice, both at `#ff0011`. Test has neither assignment. The activation table counts the combination once; the repeated scope entry is an additional identical declaration. There are no duplicate keys in either file’s `colors` or `semanticTokenColors` objects.
