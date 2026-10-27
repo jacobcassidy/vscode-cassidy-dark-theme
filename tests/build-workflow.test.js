@@ -133,3 +133,36 @@ test("build reports missing production outputs and sync failures without a reloa
   await assert.rejects(runBuild(project), /folder must be a regular directory/);
   assert.ok(!project.logs.includes(reminder));
 });
+
+for (const mode of ["all", "prod", "dev"]) {
+  test(`${mode} command reports removed generated paths and refreshes preview registrations`, async (t) => {
+    /** Isolated command workflow whose named source is removed after preview installation. */
+    const project = await createWorkflow(t);
+
+    /** Source group whose orphaned output must appear in command logs. */
+    const group = mode === "prod" ? "prod" : "dev";
+
+    /** Target name remains unique across source groups in this fixture. */
+    const name = group === "prod" ? "production-sample" : "sample";
+
+    /** Named source directory removed after its first successful build. */
+    const source = join(project.root, `src/themes/${group}/${name}`);
+
+    /** Orphaned generated path that no remaining target can include in its own summary. */
+    const path = `${group === "prod" ? "themes" : "dev-extension/themes"}/cassidy-dark-color-theme-${name}.json`;
+
+    if (group === "prod") await writeDefaultPaletteConfig(source);
+
+    await runBuild(project);
+    await rm(source, { recursive: true });
+    project.logs.length = 0;
+    assert.equal((await runBuild({ ...project, mode })).reloadRequired, true);
+    assert.ok(project.logs.includes(`\u001b[34m  ${path} (removed)\u001b[0m`));
+    assert.ok(project.logs.some((line) => line.includes("1 generated output removed")));
+    assert.equal(project.logs.filter((line) => line === reminder).length, 1);
+    await assert.rejects(access(join(project.root, path)), { code: "ENOENT" });
+    project.logs.length = 0;
+    assert.equal((await runBuild({ ...project, mode })).reloadRequired, false);
+    assert.ok(!project.logs.some((line) => line.includes("(removed)")));
+  });
+}

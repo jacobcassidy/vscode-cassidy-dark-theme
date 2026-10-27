@@ -6,6 +6,7 @@ All notable changes to this project are documented in this file.
 
 ### Changed
 
+- Made theme builds and watch automatically remove stale theme JSON files with the matching generated header after validation, report removed paths and counts, and refresh preview registrations. Kept check mode read-only and preserved stale-output errors for unrecognized files.
 - Changed terminal heading messages from cyan to yellow.
 - Changed filename messages from terminal yellow to terminal blue.
 - Swapped terminal colors for indented file paths and user actions: filenames now use yellow, and action messages use magenta.

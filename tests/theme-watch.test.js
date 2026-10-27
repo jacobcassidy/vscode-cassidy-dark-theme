@@ -298,33 +298,32 @@ test("watch ignores generated output changes and unrelated source directories", 
   await project.controller.close();
 });
 
-test("watch keeps stale-output safeguards when a dev target is removed", async (t) => {
+test("watch removes a deleted dev target's generated output and refreshes registrations", async (t) => {
   /** Temporary source/preview fixture used by this watcher scenario. */
   const project = await createWatchProject(t);
 
-  /** Build count recorded before or during a simulated source change. */
+  /** Build count recorded before a source theme is removed. */
   const count = project.builds();
 
-  /** Generated development theme path retained during target-removal checks. */
-  const devThemePath = join(project.root, "dev-extension/themes/cassidy-dark-color-theme-sample.json");
+  /** Generated development theme that becomes stale when its source is removed. */
+  const path = "dev-extension/themes/cassidy-dark-color-theme-sample.json";
 
-  /** Development output contents expected to survive stale-target rejection. */
-  const devTheme = await readFile(devThemePath, "utf8");
   await rm(join(project.root, "src/themes/dev/sample"), { recursive: true });
-  await waitFor(() => project.errors.length > 0);
-  assert.match(project.errors[0], /Stale generated outputs/);
-  assert.equal(await readFile(devThemePath, "utf8"), devTheme);
-  await rm(devThemePath);
-
-  /** Metadata input path changed to exercise watcher recovery or registration updates. */
-  const source = join(project.root, "src/themes/prod/default/metadata.jsonc");
-  await writeFile(source, await readFile(source, "utf8"));
   await waitFor(() => project.builds() > count);
+  await assert.rejects(readFile(join(project.root, path)), { code: "ENOENT" });
 
-  /** Preview manifest contents used for registration or preservation assertions. */
+  /** Preview registrations after cleanup and synchronization. */
   const manifest = JSON.parse(await readFile(join(project.extensionDirectory, "package.json"), "utf8"));
+
   assert.equal(manifest.contributes.themes.length, 1);
   assert.equal(project.reminders(), 2);
+  assert.ok(project.rawLogs.includes(`\u001b[34m  ${path} (removed)\u001b[0m`));
+  assert.ok(
+    project.logs.some(
+      (line) => line.includes("Built 1 prod and 0 dev themes") && line.includes("1 generated output removed"),
+    ),
+  );
+  assert.deepEqual(project.errors, []);
   await project.controller.close();
 });
 
@@ -381,17 +380,17 @@ function createScheduler(t, project, overrides = {}) {
        */
       buildProdThemes: async () => {
         calls.push("prod");
-        return { changed: [], targets: [{}] };
+        return { changed: [], removed: [], targets: [{}] };
       },
 
       /**
        * Record or control the development build phase for the current scheduler scenario.
        *
-       * @returns Per-target palettes and changed output paths.
+       * @returns Aggregate development summary, including removed files.
        */
-      buildDevThemes: async () => {
+      buildDevThemeSummary: async () => {
         calls.push("dev");
-        return [{ changed: [] }];
+        return { changed: [], removed: [], targets: [{ changed: [] }] };
       },
 
       /**
@@ -484,7 +483,7 @@ test("watch queues edits during a build without overlapping passes", async (t) =
         await release.promise;
       }
 
-      return { changed: [], targets: [{}] };
+      return { changed: [], removed: [], targets: [{}] };
     },
   });
 
@@ -536,18 +535,18 @@ for (const stage of ["prod", "dev", "sync"]) {
       buildProdThemes: async () => {
         calls.push("prod");
         if (failing && stage === "prod") throw new Error("Invalid prod source");
-        return { changed: [], targets: [{}] };
+        return { changed: [], removed: [], targets: [{}] };
       },
 
       /**
        * Record or control the development build phase for the current scheduler scenario.
        *
-       * @returns Per-target palettes and changed output paths.
+       * @returns Aggregate development summary, including removed files.
        */
-      buildDevThemes: async () => {
+      buildDevThemeSummary: async () => {
         calls.push("dev");
         if (failing && stage === "dev") throw new Error("Invalid dev source");
-        return [];
+        return { changed: [], removed: [], targets: [] };
       },
 
       /**
@@ -592,7 +591,7 @@ test("watch shutdown cancels pending rebuilds and waits for an active build", as
      */
     buildProdThemes: async () => {
       await release.promise;
-      return { changed: [], targets: [{}] };
+      return { changed: [], removed: [], targets: [{}] };
     },
   });
 
