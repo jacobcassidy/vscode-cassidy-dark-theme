@@ -203,7 +203,7 @@ function identifySyntax(input) {
  */
 async function addDefaultDetails(root, target, updates) {
   /** Offline descriptions reviewed against the pinned VS Code source snapshots. */
-  const referencePath = "docs/references/token-details.jsonc";
+  const referencePath = "docs/references/lookups/token-details.jsonc";
 
   /** Optional catalog text; isolated fixtures and new custom IDs may have no reviewed descriptions. */
   const referenceSource = await readOptional(join(root, referencePath));
