@@ -2,17 +2,17 @@
 
 ## Table of Contents
 
-| Section                                                                                                       | Subsection                                                                                                      |
-| ------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
-| [Result](#result)                                                                                             |                                                                                                                 |
-| [Missing colors in stable source](#missing-colors-in-stable-source)                                           |                                                                                                                 |
-| [Additional missing colors on main](#additional-missing-colors-on-main)                                       |                                                                                                                 |
-| [Source registrations versus documentation and schema](#source-registrations-versus-documentation-and-schema) |                                                                                                                 |
-| [Deprecated IDs already in the reference](#deprecated-ids-already-in-the-reference)                           |                                                                                                                 |
-| [Reference IDs absent from both source snapshots](#reference-ids-absent-from-both-source-snapshots)           |                                                                                                                 |
-|                                                                                                               | [Entries outside the remoteHub and gitblame namespaces](#entries-outside-the-remotehub-and-gitblame-namespaces) |
-|                                                                                                               | [Entries requiring separate extension verification](#entries-requiring-separate-extension-verification)         |
-| [Method and limits](#method-and-limits)                                                                       |                                                                                                                 |
+| Section                                                                                                          | Subsection                                                                                                          |
+| ---------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| [1. Result](#result)                                                                                             |                                                                                                                     |
+| [2. Missing colors in stable source](#missing-colors-in-stable-source)                                           |                                                                                                                     |
+| [3. Additional missing colors on main](#additional-missing-colors-on-main)                                       |                                                                                                                     |
+| [4. Source registrations versus documentation and schema](#source-registrations-versus-documentation-and-schema) |                                                                                                                     |
+| [5. Deprecated IDs already in the reference](#deprecated-ids-already-in-the-reference)                           |                                                                                                                     |
+| [6. Reference IDs absent from both source snapshots](#reference-ids-absent-from-both-source-snapshots)           |                                                                                                                     |
+|                                                                                                                  | [6.1 Entries outside the remoteHub and gitblame namespaces](#entries-outside-the-remotehub-and-gitblame-namespaces) |
+|                                                                                                                  | [6.2 Entries requiring separate extension verification](#entries-requiring-separate-extension-verification)         |
+| [7. Method and limits](#method-and-limits)                                                                       |                                                                                                                     |
 
 Reviewed on 2026-10-24 against [`all-workbench-settings-clean.json`](all-workbench-settings-clean.json). The annotated [`all-workbench-settings.json`](all-workbench-settings.json) has exactly the same color IDs, so these findings apply to both files.
 
