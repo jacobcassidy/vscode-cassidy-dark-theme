@@ -47,8 +47,15 @@ tooling/
   shared/
     color-math.js
   themes/
-  token-data/
   tokens/
+    formats.js
+    category-validation.js
+    compilation.js
+    data/
+      load.js
+      sources.js
+      extraction.js
+      update-details.js
 
 scripts/
   token-data/
@@ -68,8 +75,8 @@ tests/
   shared/
     color-math.test.js
   themes/
-  token-data/
   tokens/
+    data/
   workflows/
   helpers/
   fixtures/
@@ -103,15 +110,15 @@ Move the remaining human reference, `hex-opacity.md`, into `docs/references/`. R
 
 Give each tooling directory a specific purpose:
 
-| Directory     | Responsibility                                                                                                                              |
-| ------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
-| `palette/`    | Palette generation and palette report rendering.                                                                                            |
-| `tokens/`     | Shared nested-format handling, category validation, alias resolution, token compilation, and theme rendering.                               |
-| `token-data/` | Loading shared token data and category indexes, retrieving pinned upstream sources, extracting descriptions, and refreshing shared details. |
-| `themes/`     | Target discovery, fallback resolution, manifests, generated-theme validation, build preparation, and build/watch workflows.                 |
-| `generators/` | Theme scaffolding, property addition, syntax ID assignment, and comment-preserving source edits.                                            |
-| `preview/`    | Development extension synchronization, registrations, asset links, and reload guidance.                                                     |
-| `shared/`     | Reusable color math, repository paths, JSONC parsing, filesystem helpers, terminal output, and artifact staging.                            |
+| Directory      | Responsibility                                                                                                                              |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| `palette/`     | Palette generation and palette report rendering.                                                                                            |
+| `tokens/`      | Shared nested-format handling, category validation, alias resolution, token compilation, and theme rendering.                               |
+| `tokens/data/` | Loading shared token data and category indexes, retrieving pinned upstream sources, extracting descriptions, and refreshing shared details. |
+| `themes/`      | Target discovery, fallback resolution, manifests, generated-theme validation, build preparation, and build/watch workflows.                 |
+| `generators/`  | Theme scaffolding, property addition, syntax ID assignment, and comment-preserving source edits.                                            |
+| `preview/`     | Development extension synchronization, registrations, asset links, and reload guidance.                                                     |
+| `shared/`      | Reusable color math, repository paths, JSONC parsing, filesystem helpers, terminal output, and artifact staging.                            |
 
 Apply these boundaries:
 
@@ -120,7 +127,8 @@ Apply these boundaries:
 - **Core builds prepare outputs before writing.** Separate palette reports, manifest generation, and artifact replacement from build orchestration. Combined builds preflight both groups before either group writes, as required by the upcoming plan.
 - **Preview synchronization belongs to workflows.** Compilation and artifact preparation do not synchronize extensions. Build/watch workflows invoke preview synchronization after successful writes.
 - **Use one token-format implementation.** Compiler, generators, updater, and validators share canonical ID construction, category traversal, semantic selector encoding, and syntax ordering.
-- **Load one token-data snapshot per pass.** Expose shared definitions, shared details, classification indexes, and originating paths through the loader in `tooling/token-data/`. Keep upstream extraction separate from ordinary local builds.
+- **Group token processing under one parent.** Keep format handling, category validation, and compilation in `tooling/tokens/`, with shared-data operations under `tooling/tokens/data/`. Use `load.js` for checked-in data, `sources.js` for pinned source retrieval, `extraction.js` for description extraction, and `update-details.js` for refresh orchestration. Mirror data-operation tests under `tests/tokens/data/`.
+- **Load one token-data snapshot per pass.** Expose shared definitions, shared details, classification indexes, and originating paths through `tooling/tokens/data/load.js`. Keep upstream retrieval and extraction confined to explicit refresh operations; ordinary builds load checked-in data without fetching sources.
 - **Separate validation data from styling inputs.** Build preflight uses checked-in token data to validate category membership. Compilation resolves styling from theme definitions and their effective palette, including existing prod-default fallback. Builds do not copy shared placeholder styling or descriptions into theme inputs; `add:theme` and `add:properties` perform that optional authoring work through `tooling/generators/`. Palette-only builds remain independent of token data.
 - **Centralize repository paths.** Keep stable roots and token-data filenames in one paths module; retain injectable repository roots for isolated tests.
 
@@ -140,7 +148,7 @@ Group shared inputs by token family, as selected, while preserving their distinc
 
 Keep shared definitions and detail files separate. Their inventories intentionally differ, and refreshing descriptions must not expand shared definitions or overwrite theme-specific documentation. The UI and semantic files named templates in the token-catalog plan become `src/token-data/ui/definitions.jsonc` and `src/token-data/semantic/definitions.jsonc`; their generator and classification authority roles remain unchanged.
 
-Adapt the upcoming [token-catalog plan](token-catalog-and-nested-sources-plan.md) to these destinations while preserving its format and validation requirements: four categories, protected descriptions, optional non-standard usage context, exact semantic selectors, and explicit syntax order. Keep `src/token-data/syntax/` details-only, without a shared `definitions.jsonc`; syntax definitions remain authored in themes. Internal variables also remain theme-owned, without a shared token-data family. Use `src/token-data/` for the shared inputs, `tooling/token-data/` for loading and refreshing those inputs, and `tooling/generators/` for code that creates or updates theme inputs. Put the updater command wrapper in `scripts/token-data/update-token-details.js`, preserving the `update:token-details` npm command.
+Adapt the upcoming [token-catalog plan](token-catalog-and-nested-sources-plan.md) to these destinations while preserving its format and validation requirements: four categories, protected descriptions, optional non-standard usage context, exact semantic selectors, and explicit syntax order. Keep `src/token-data/syntax/` details-only, without a shared `definitions.jsonc`; syntax definitions remain authored in themes. Internal variables also remain theme-owned, without a shared token-data family. Use `src/token-data/` for the shared inputs, `tooling/tokens/data/` for loading and refreshing those inputs, and `tooling/generators/` for code that creates or updates theme inputs. Put the updater command wrapper in `scripts/token-data/update-token-details.js`, preserving the `update:token-details` npm command.
 
 Document ownership, update commands, and authoring-versus-validation dependencies in `src/token-data/README.md`. In the development guide, explain the flow once:
 
@@ -171,8 +179,8 @@ Update the README, development guide links and sample tables, `.prettierignore`'
 1. **Capture the baseline.** Record theme membership, styling, syntax precedence, fallback behavior, generated outputs, and snapshot bytes.
 2. **Establish the tooling boundaries.** Move reusable code, extract build responsibilities, and update test imports without changing source formats. Move existing color math into `tooling/shared/color-math.js`; place palette generation and report rendering under `tooling/palette/`, updating both palette and token compilation imports to use shared color math.
 3. **Group theme inputs by family.** Move existing local token and details files to their paired family paths, preserving contents and omitted files. Update input discovery, compiler loading, scaffolding, property addition, updater source inventories, and test fixtures together. Preserve alias names and independent per-file fallback.
-4. **Implement the upcoming token-data migration at the final paths.** Move shared inputs directly into `src/token-data/`, using `definitions.jsonc` for UI and semantic starter definitions and `details.jsonc` for shared descriptions, avoiding the proposed intermediate `docs/` destinations. Update generator readers, category authority paths, watcher subscriptions, updater inputs, and fixtures to those exact filenames. Use `tooling/token-data/` for loading/extraction/refresh and `tooling/generators/` for theme authoring. Apply the token-catalog plan's categorized authoring format to the theme files at their new family paths.
-5. **Align tests with responsibilities.** Move shared project builders into `tests/helpers/`, place upstream extraction samples in `tests/fixtures/`, and update test discovery for nested suites. Group palette generation/report tests under `tests/palette/` and color math tests under `tests/shared/color-math.test.js`. Verify independent definition/details fallback in both directions, explicit empty details, omitted local files, required default files, and generator output paths.
+4. **Implement the upcoming token-data migration at the final paths.** Move shared inputs directly into `src/token-data/`, using `definitions.jsonc` for UI and semantic starter definitions and `details.jsonc` for shared descriptions, avoiding the proposed intermediate `docs/` destinations. Update generator readers, category authority paths, watcher subscriptions, updater inputs, and fixtures to those exact filenames. Group format handling, validation, and compilation under `tooling/tokens/`, loading/extraction/refresh under its `data/` subdirectory, and theme authoring under `tooling/generators/`. Apply the token-catalog plan's categorized authoring format to the theme files at their new family paths.
+5. **Align tests with responsibilities.** Move shared project builders into `tests/helpers/`, place upstream extraction samples in `tests/fixtures/`, and update test discovery for nested suites. Group palette generation/report tests under `tests/palette/`, color math tests under `tests/shared/color-math.test.js`, and shared token-data operation tests under `tests/tokens/data/`. Verify independent definition/details fallback in both directions, explicit empty details, omitted local files, required default files, and generator output paths.
 6. **Move grammar samples.** Move `docs/grammar-samples/` into `samples/grammar/` with its adjacent `tsconfig.json`. Update active guide/README links, embedded paths and validation commands, and formatter/linter/editor configuration. Verify that the TypeScript configuration and sibling imports still resolve in the new directory.
 7. **Update all consumers.** Audit active links, npm scripts, imports, watcher subscriptions, formatting/lint configuration, packaging exclusions, and generated-file notices. Exclude `tooling/` and `samples/` from the VSIX and ignore the upstream cache.
 8. **Verify and commit completed stages.** Run focused tests and `npm run check`; confirm repeatable builds, read-only checks, isolated preview synchronization, and VSIX contents.
