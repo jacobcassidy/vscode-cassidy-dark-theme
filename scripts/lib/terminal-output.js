@@ -10,9 +10,9 @@ const colors = {
   info: "\u001b[34m",
   success: "\u001b[32m",
   default: "",
-  action: "\u001b[35m",
+  action: "\u001b[36m",
   file: "\u001b[34m",
-  heading: "\u001b[36m",
+  heading: "\u001b[33m",
   important: "\u001b[35m",
 };
 

@@ -10,9 +10,9 @@ import test from "node:test";
 import { buildDevThemes, buildProdThemes, runBuild } from "../scripts/themes/build.js";
 import { createBuildProject, writeDefaultPaletteConfig } from "./test-projects.js";
 
-/** Exact terminal instruction, including the requested magenta color and reset. */
+/** Exact terminal instruction, including the requested cyan color and reset. */
 const reminder =
-  "\u001b[35mRun Developer: Reload Window in VS Code, then select a Cassidy Dark Preview theme.\u001b[0m";
+  "\u001b[36mRun Developer: Reload Window in VS Code, then select a Cassidy Dark Preview theme.\u001b[0m";
 
 /**
  * Create an isolated command workflow with source inputs and a captured logger.
