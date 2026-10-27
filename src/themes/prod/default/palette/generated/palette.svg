@@ -53,11 +53,11 @@
 <rect x="498" y="526" width="108" height="38" rx="3" fill="#cc2b1c"/><text x="498" y="583">#cc2b1c</text>
 <rect x="620" y="526" width="108" height="38" rx="3" fill="#d3a097"/><text x="620" y="583">#d3a097</text>
 <text x="20" y="626">yellow</text>
-<rect x="132" y="602" width="108" height="38" rx="3" fill="#fef6e2"/><text x="132" y="659">#fef6e2</text>
-<rect x="254" y="602" width="108" height="38" rx="3" fill="#f1dda5"/><text x="254" y="659">#f1dda5</text>
-<rect x="376" y="602" width="108" height="38" rx="3" fill="#ddba56"/><text x="376" y="659">#ddba56</text>
+<rect x="132" y="602" width="108" height="38" rx="3" fill="#faf7ee"/><text x="132" y="659">#faf7ee</text>
+<rect x="254" y="602" width="108" height="38" rx="3" fill="#ebddb9"/><text x="254" y="659">#ebddb9</text>
+<rect x="376" y="602" width="108" height="38" rx="3" fill="#d7bb70"/><text x="376" y="659">#d7bb70</text>
 <rect x="498" y="602" width="108" height="38" rx="3" fill="#bd9a2c"/><text x="498" y="659">#bd9a2c</text>
-<rect x="620" y="602" width="108" height="38" rx="3" fill="#e8ddc3"/><text x="620" y="659">#e8ddc3</text>
+<rect x="620" y="602" width="108" height="38" rx="3" fill="#e4decc"/><text x="620" y="659">#e4decc</text>
 <text x="20" y="694">Neutrals</text>
 <rect x="20" y="710" width="132" height="32" rx="3" fill="#f8f8f8"/><text x="20" y="759">000 #f8f8f8</text>
 <rect x="166" y="710" width="132" height="32" rx="3" fill="#dedede"/><text x="166" y="759">100 #dedede</text>

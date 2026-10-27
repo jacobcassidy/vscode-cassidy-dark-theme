@@ -34,8 +34,7 @@
     },
     "yellow": {
       "hue": 90,
-      "lightness": 0.9,
-      "baseChroma": 0.075
+      "lightness": 0.9
     }
   },
   "neutrals": {
