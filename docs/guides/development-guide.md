@@ -23,7 +23,7 @@ Theme builds generate both groups before applying their combined artifacts, then
 
 After initial setup, run **Developer: Reload Window**, then choose **Cassidy Dark Preview** or a named preview. Ordinary color changes load live. A magenta reload reminder appears only when registrations or asset setup change. Preview snapshots use **Cassidy Dark Snapshot** labels. `previewName` in a theme's metadata overrides its named preview suffix without changing production labels.
 
-Watch coalesces saves, validates stable inputs, and serializes application. Ctrl+C closes its subscriptions and waits for active work. If preview synchronization fails after application, generated artifacts remain available; `npm run sync:preview` retries registration/link setup without generating palettes or compiling themes. Watch retains that pending retry while continuing to process source events.
+Watch coalesces saves, validates stable inputs, and serializes application. Ctrl+C closes its subscriptions and waits for active work. If preview synchronization fails after application, generated artifacts remain available; rerun `npm run build` to retry. Watch automatically retries pending preview synchronization without recompiling themes while continuing to process source events.
 
 ## Project structure and ownership
 
@@ -129,7 +129,6 @@ Upstream inventory/category/scope changes are informational proposals, with exac
 | `npm run build`                            | Prepare/apply both groups and synchronize preview once.                                     |
 | `npm run build:prod` / `npm run build:dev` | Build a selected group, then synchronize current previews.                                  |
 | `npm run build:palette`                    | Generate production palettes without token/shared-data dependencies.                        |
-| `npm run sync:preview`                     | Retry current generated registrations/asset links without compilation.                      |
 | `npm run check:generated`                  | Compare prepared artifacts and pending cleanup without writes/sync.                         |
 | `npm run check:theme`                      | Validate sources plus generated themes, registrations, and assets.                          |
 | `npm run check:docs`                       | Validate maintained local links/anchors and complete examples without networking/writes.    |

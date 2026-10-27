@@ -669,7 +669,7 @@ export async function runBuild({
     preview = await syncDevExtension({ root, extensionDirectory });
   } catch (error) {
     throw Object.assign(
-      new Error(`Build completed; preview synchronization failed: ${error.message}. Retry npm run sync:preview.`, {
+      new Error(`Build completed; preview synchronization failed: ${error.message}. Retry npm run build.`, {
         cause: error,
       }),
       { code: "PREVIEW_SYNC_FAILED" },

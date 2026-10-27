@@ -28,4 +28,4 @@ Use Node.js 24 and `npm ci`, then run `npm run build` and `npm run watch`. Reloa
 
 The [development guide](docs/guides/development-guide.md) covers paired family inputs, palettes, shared categorized token data, generators, explicit upstream description updates, validation, [visual language samples](samples/grammar/), packaging, and release/recovery workflows. `npm run check` validates generated artifacts, documentation, legacy consumers, formatting, lint, themes, and recursive behavioral suites.
 
-Shared data lives in [`src/token-data/`](src/token-data/); authored themes live in [`src/themes/`](src/themes/). Generated previews and preserved snapshots live in [`preview/`](preview/). Use `npm run sync:preview` to retry preview setup without recompiling themes.
+Shared data lives in [`src/token-data/`](src/token-data/); authored themes live in [`src/themes/`](src/themes/). Generated previews and preserved snapshots live in [`preview/`](preview/). Theme builds and watch synchronize preview setup automatically.

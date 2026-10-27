@@ -206,10 +206,9 @@ export function watchThemes(
           if (preview.reloadRequired) logReloadReminder(logger);
         } catch (error) {
           report(
-            new Error(
-              `Build completed; preview synchronization failed: ${error.message}. Retry npm run sync:preview.`,
-              { cause: error },
-            ),
+            new Error(`Build completed; preview synchronization failed: ${error.message}. Retry npm run build.`, {
+              cause: error,
+            }),
           );
 
           observeRecovery();

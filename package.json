@@ -88,7 +88,6 @@
     "package:vsix": "npm run check && bash scripts/release/package-vsix.sh",
     "release:github-recover": "bash scripts/release/publish/create-github-release.sh",
     "release:publish": "bash scripts/release/publish/run-azure-pipeline.sh",
-    "sync:preview": "node scripts/preview/sync.js",
     "test": "node --test \"tests/**/*.test.js\"",
     "update:token-details": "node scripts/token-data/update-token-details.js",
     "watch": "node scripts/themes/watch.js"

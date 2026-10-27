@@ -6,6 +6,7 @@ All notable changes to this project are documented in this file.
 
 ### Changed
 
+- Removed the redundant `sync:preview` command; builds synchronize previews and watch automatically retries failed synchronization.
 - Grouped theme definitions/details by family, adopted categorized nested token sources, and separated shared inventory/documentation under `src/token-data/` without changing theme styling or syntax precedence.
 - Moved preview assets to `preview/`, palette settings to `palette/config.jsonc`, language probes to `samples/grammar/`, reusable code to `tooling/`, and behavioral suites into recursive responsibility directories.
 - Prepared combined build artifacts before application, added coordinated writers and explicit interrupted-generation verification, and enabled compilation-free preview retries and watcher recovery resumption.
