@@ -77,7 +77,7 @@
     "lint:es:fix": "eslint --fix",
     "lint:md": "markdownlint-cli2 \"**/*.md\"",
     "lint:md:fix": "markdownlint-cli2 \"**/*.md\" --fix",
-    "package:vsix": "bash scripts/release/package-vsix.sh",
+    "package:vsix": "npm run check && bash scripts/release/package-vsix.sh",
     "release:github-recover": "bash scripts/release/publish/create-github-release.sh",
     "release:publish": "bash scripts/release/publish/run-azure-pipeline.sh",
     "sync": "npm run build && node scripts/dev-extension/sync.js",

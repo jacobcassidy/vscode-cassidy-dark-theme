@@ -296,17 +296,16 @@ Validate and package the current checkout:
 
 ```bash
 npm run build
-npm run check
 npm run package:vsix
 ```
 
-[`scripts/release/package-vsix.sh`](../../../scripts/release/package-vsix.sh) checks that all generated artifacts are current, reads the version from `package.json`, creates the destination directory, and invokes the local `vsce` executable. The default output is `dist/cassidy-dark-VERSION.vsix`. To choose another output file, pass its path after `--`:
+`npm run package:vsix` runs the full `npm run check` and invokes [`scripts/release/package-vsix.sh`](../../../scripts/release/package-vsix.sh) only if every check passes. The Bash script also checks that all generated artifacts are current, reads the version from `package.json`, creates the destination directory, and invokes the local `vsce` executable. The default output is `dist/cassidy-dark-VERSION.vsix`. To choose another output file, pass its path after `--`:
 
 ```bash
 npm run package:vsix -- /absolute/path/to/cassidy-dark-VERSION.vsix
 ```
 
-Relative output paths resolve from the repository root. Packaging does not publish. It checks generated output; run the aggregate `npm run check` for the remaining validation. Stale output is rejected rather than silently rebuilt during packaging. In VS Code, use **Extensions: Install from VSIX...** to install the archive and inspect the packaged theme.
+Relative output paths resolve from the repository root. Packaging does not publish. The npm command checks generated output, formatting, linting, theme validation, and tests before packaging. Stale output is rejected rather than silently rebuilt during packaging. In VS Code, use **Extensions: Install from VSIX...** to install the archive and inspect the packaged theme.
 
 The manifest registers all prod themes from `themes/`; the current checkout ships only `themes/cassidy-dark-color-theme.json`. `.vscodeignore` excludes the `src/` authoring files, dev themes and samples, documentation, scripts, tests, editor settings, agent instructions, the Node.js version file, palette reports, local packages, and the listed tooling configuration files. The package carries the prod theme, manifest, and distributable assets such as the README, changelog, license, and images. `dist/` and generated `*.vsix` archives are ignored by Git.
 

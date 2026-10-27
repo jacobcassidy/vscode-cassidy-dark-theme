@@ -6,6 +6,7 @@ All notable changes to this project are documented in this file.
 
 ### Changed
 
+- Made `npm run package:vsix` run the full `npm run check` before invoking the Bash packaging script.
 - Renamed `dev:sync` to `sync`; run `npm run sync` to build both theme groups and refresh the dev preview extension.
 - Required an explicit `palette/palette-config.jsonc` in every source theme, with `useDefaultPalette: true` selecting the default palette.
 - Replaced duplicate palette reports with `palette/default-palette.txt` for default-palette themes, removing their `palette/generated/` directories and recreating them when custom generation is enabled.
