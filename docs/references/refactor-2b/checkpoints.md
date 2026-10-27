@@ -21,3 +21,9 @@ These are local measurements, not CI budgets. The original watcher has no shared
 Moved reusable implementations into `tooling/`, retained thin command wrappers, and relocated all 189 existing behavioral tests by responsibility. Recursive discovery runs all relocated suites; CLI fixtures copy both wrappers and tooling. No source formats or generated styling changed. The independent oracle passes for all four targets and preserved snapshots. ESLint and generated-output checks pass. All 189 relocated tests pass on macOS outside the sandbox; the sandbox reports `EMFILE` from native filesystem watching even with serial execution. The original watcher suite also passes outside the sandbox.
 
 Removed `scripts/lib/` and `scripts/dev-extension/`; current consumers import their owning tooling modules directly. Build API retirement follows the prepared-pass checkpoint.
+
+## Prepared application and coordination
+
+Combined builds now prepare one artifact map before any replacement, reuse default work, and compare that same map in read-only mode. Added canonical resource guards outside the checkout, dependency/destination fingerprints, controlled-failure rollback, retained interrupted-generation markers, and exact restored-set verification. Preview errors retain successful artifacts and identify `npm run sync:preview`, which retries without compilation. Preview destination and checkout guards coordinate shared installations.
+
+The focused build/workflow/oracle suite passes 88 cases; preview/workflow coverage passes 36 cases. Tests cover malformed development inputs before production writes, later replacement failure, new-file rollback, newer editor edits during rollback, stale preparation, canonical contention, and complete-set recovery verification. Full platform/process/recovery evidence remains open until the integrated acceptance checkpoint.

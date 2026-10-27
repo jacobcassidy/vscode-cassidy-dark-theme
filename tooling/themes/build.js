@@ -3,8 +3,8 @@
  * @file Assemble theme inputs, resolve colors, generate reports, and write or check build outputs.
  */
 
-import { readFile, lstat, mkdir, mkdtemp, rename, rm, writeFile } from "node:fs/promises";
-import { dirname, join } from "node:path";
+import { readFile, lstat } from "node:fs/promises";
+import { join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { applyEdits, modify } from "jsonc-parser";
 // Prettier's generated entry point hides its default export from the import resolver.
@@ -15,6 +15,7 @@ import { formatMessage } from "../shared/terminal-output.js";
 import { fields, object, parseJsonc } from "../shared/jsonc.js";
 import { generatePalette } from "../palette/generation.js";
 import { compileTokens, renderTheme } from "../tokens/compilation.js";
+import { applyArtifacts, assertFresh, capturePaths, requireStable, withGuards } from "../shared/transactions.js";
 import { contrastRatio } from "../shared/color-math.js";
 import {
   discoverTargets,
@@ -41,12 +42,12 @@ const defaultRoot = fileURLToPath(new URL("../../", import.meta.url));
  * @param command - Rebuild command included in the output notice.
  * @returns Compiled theme JSONC with all input labels attached to diagnostics.
  */
-async function readCompiledTheme(root, target, palette, command) {
+async function readCompiledTheme(root, target, palette, command, readInput) {
   /** Effective authored inputs indexed by their independent relative paths. */
   const inputs = new Map();
 
   for (const path of themeInputPaths) {
-    inputs.set(path, await readTargetInput(root, target, path));
+    inputs.set(path, await readInput(target, path));
   }
 
   try {
@@ -337,9 +338,9 @@ async function formatted(root, path, source) {
  * @param paletteOnly - Whether to generate palette reports without compiling token sections.
  * @param [defaultPalette] - Already validated default palette available to other themes.
  */
-async function prepareTarget(root, target, paletteOnly, defaultPalette) {
+async function prepareTarget(root, target, paletteOnly, defaultPalette, readInput) {
   /** Required target-local configuration selecting a custom or default palette. */
-  const input = await readTargetInput(root, target, paletteInputPath);
+  const input = await readInput(target, paletteInputPath);
 
   /** Validated palette generated before compiling theme tokens. */
   let palette;
@@ -392,7 +393,7 @@ async function prepareTarget(root, target, paletteOnly, defaultPalette) {
 
   if (!paletteOnly) {
     /** Generated JSONC after validating effective tokens, details, and cross-section aliases. */
-    const rendered = await readCompiledTheme(root, target, palette, command);
+    const rendered = await readCompiledTheme(root, target, palette, command, readInput);
     output.set(target.output, rendered);
     metadata = parseJsonc(rendered, target.output).value;
   }
@@ -541,7 +542,7 @@ async function artifactExists(path) {
  * @param check - Whether to report stale artifacts without writing files.
  * @param command - Rebuild command included in stale-output diagnostics.
  */
-async function stageOutputs(root, output, check, command) {
+async function checkOutputs(root, output, check, command) {
   for (const [path, source] of output) {
     if (source === null) continue;
 
@@ -575,92 +576,107 @@ async function stageOutputs(root, output, check, command) {
 
   if (check) return changed;
 
-  for (const path of changed) {
-    /** Final artifact path to replace after successful staging. */
-    const destination = join(root, path);
-
-    if (output.get(path) === null) {
-      if (path.startsWith("themes/") || path.startsWith("dev-extension/themes/")) {
-        await rm(destination);
-      } else {
-        await rm(destination, { recursive: true });
-      }
-
-      continue;
-    }
-
-    await mkdir(dirname(destination), { recursive: true });
-
-    /** Sibling staging directory used for an atomic artifact replacement. */
-    const temporary = await mkdtemp(join(dirname(destination), ".theme-build-"));
-
-    try {
-      /** Temporary file containing the complete replacement artifact. */
-      const staged = join(temporary, "output");
-      await writeFile(staged, output.get(path));
-      await rename(staged, destination);
-    } finally {
-      await rm(temporary, { recursive: true, force: true });
-    }
-  }
-
   return changed;
 }
 
 /**
- * Prepare the default and selected target group before validating and staging their combined outputs.
- *
- * @param options - Options passed to this operation.
- * @param options.root - Repository or isolated fixture root selected by the build entry point.
- * @param options.check - Whether to compare generated files without writing them.
- * @param [options.paletteOnly] - Whether to produce only palette reports.
- * @param options.group - Source group to build: prod or dev.
+ * Prepare both selected groups once, retaining one stable input snapshot and artifact map.
+ * @param [options] - Preparation options.
+ * @param [options.root] - Isolated project or checkout root.
+ * @param [options.mode] - all, prod, dev, or palette.
  */
-async function buildTargets({ root, check, paletteOnly = false, group }) {
-  /** All discovered prod/dev targets used for validation and collision checks. */
+export async function prepareBuild({ root = defaultRoot, mode = "all" } = {}) {
+  if (!["all", "prod", "dev", "palette"].includes(mode)) throw new Error(`Unknown build mode: ${mode}`);
+
+  /** Read-only boundary check and complete dependency fingerprints. */
+  const generation = await requireStable(root);
+  const expected = await capturePaths([
+    join(root, "src"),
+    join(root, "package.json"),
+    join(root, "themes"),
+    join(root, "dev-extension"),
+  ]);
   const targets = await discoverTargets(root);
+  const defaultTarget = targets.find((target) => target.directory === defaultThemeDirectory);
+  const cache = new Map();
 
-  /** Required default production target that supplies fallback inputs. */
-  const defaultTarget = targets.find((target) => target.group === "prod" && target.name === "default");
+  /**
+   * Reuse independently inherited parsed files throughout this pass.
+   * @param target - Current target.
+   * @param path - Independent family or palette input.
+   */
+  async function readInput(target, path) {
+    /** Target/path cache identity includes fallback diagnostics. */
+    const key = `${target.directory}/${path}`;
 
-  /** Prepared default palette and theme used before processing selected targets. */
-  const baseline = await prepareTarget(root, defaultTarget, paletteOnly);
+    if (!cache.has(key)) cache.set(key, readTargetInput(root, target, path));
 
-  /** Targets selected for the current prod or dev build group. */
-  const selected = [];
+    return cache.get(key);
+  }
 
-  /** Combined output candidates validated before any file is written. */
-  const output = new Map();
+  /** Default work is shared by prod and dev targets in a combined pass. */
+  const paletteOnly = mode === "palette";
+  const baseline = await prepareTarget(root, defaultTarget, paletteOnly, undefined, readInput);
+  const selected = [],
+    output = new Map();
 
-  for (const target of targets.filter((candidate) => candidate.group === group)) {
-    /** Validated palette and output candidates for the current target. */
+  for (const target of targets.filter(
+    (candidate) => mode === "all" || candidate.group === (mode === "palette" ? "prod" : mode),
+  )) {
+    /** Each required target compiles at most once. */
     const prepared =
-      target === defaultTarget ? baseline : await prepareTarget(root, target, paletteOnly, baseline.palette);
+      target === defaultTarget ? baseline : await prepareTarget(root, target, paletteOnly, baseline.palette, readInput);
 
     selected.push(prepared);
 
     for (const [path, text] of prepared.outputs) output.set(path, text);
   }
 
-  if (group === "prod" && !paletteOnly) output.set("package.json", await prodManifestOutput(root, selected));
+  if ((mode === "all" || mode === "prod") && !paletteOnly)
+    output.set(
+      "package.json",
+      await prodManifestOutput(
+        root,
+        selected.filter((target) => target.group === "prod"),
+      ),
+    );
 
-  /** Unowned theme files verified by their generated header before any outputs are applied. */
-  const obsolete = await staleOutputs(root, selected, group, paletteOnly);
+  for (const group of ["prod", "dev"].filter((group) => mode === "all" || group === (paletteOnly ? "prod" : mode))) {
+    for (const path of await staleOutputs(root, selected, group, paletteOnly)) output.set(path, null);
+  }
 
-  for (const path of obsolete) output.set(path, null);
+  await checkOutputs(root, output, false, "npm run build");
+  await assertFresh(expected);
 
-  /** Rebuild command used in generated notices and stale-output errors. */
-  const command = group === "dev" ? "npm run build:dev" : paletteOnly ? "npm run build:palette" : "npm run build:prod";
+  if (JSON.stringify(await requireStable(root)) !== JSON.stringify(generation))
+    throw Object.assign(new Error("Stale application generation; retry the build."), { code: "STALE_INPUT" });
 
-  /** Generated output paths whose contents differ from the prepared result. */
-  const changed = await stageOutputs(root, output, check, command);
+  return { root, mode, output, expected, selected, palette: baseline.palette };
+}
+
+/**
+ * Check or apply the same completely prepared map without recompiling.
+ * @param prepared - Stable result of prepareBuild.
+ * @param [options] - Application options.
+ * @param [options.check] - Read-only comparison mode.
+ * @param [options.operations] - Narrow filesystem adapter for failure tests.
+ */
+export async function applyBuild(prepared, { check = false, operations } = {}) {
+  /** Validated immutable preparation data. */
+  const { root, output, expected, selected, palette } = prepared;
+
+  /** Changed paths returned by comparison or coordinated application. */
+  const changed = check
+    ? await checkOutputs(root, output, true, "npm run build")
+    : await withGuards([root], async ([owner]) => applyArtifacts({ root, output, expected, owner, operations }));
 
   return {
     changed,
     removed: changed.filter((path) => output.get(path) === null),
-    palette: baseline.palette,
+    palette,
     targets: selected.map((target) => ({
       name: target.name,
+      group: target.group,
       output: target.output,
       palette: target.palette,
       changed: changed.filter((path) => target.outputs.has(path)),
@@ -669,41 +685,35 @@ async function buildTargets({ root, check, paletteOnly = false, group }) {
 }
 
 /**
- * Build or check production themes and reports, optionally generating only palette artifacts.
- *
- * @param [options] - Options passed to this operation.
- * @param [options.root] - Repository or fixture root; defaults to this checkout.
- * @param [options.check] - Whether to compare generated files without writing them.
- * @param [options.paletteOnly] - Whether to produce only palette reports.
- * @returns Build summary containing changed and removed paths, the default palette, and per-target results.
+ * Prepare and apply a selected build pass without preview side effects.
+ * @param [options] - Build options including root, mode, and check.
  */
-export async function buildProdThemes({ root = defaultRoot, check = false, paletteOnly = false } = {}) {
-  return buildTargets({ root, check, paletteOnly, group: "prod" });
+export async function buildThemes(options = {}) {
+  return applyBuild(await prepareBuild(options), options);
 }
 
 /**
- * Build or check development themes with aggregate paths, including removed targets' files.
- * @param [options] - Options passed to this operation.
- * @param [options.root] - Repository or fixture root; defaults to this checkout.
- * @param [options.check] - Whether to compare generated files without writing them.
- * @returns Build summary containing changed and removed paths, the default palette, and per-target results.
+ * Build the production group through the common prepared workflow.
+ * @param [options] - Build options including paletteOnly.
  */
-export async function buildDevThemeSummary({ root = defaultRoot, check = false } = {}) {
-  return buildTargets({ root, check, group: "dev" });
+export async function buildProdThemes(options = {}) {
+  return buildThemes({ ...options, mode: options.paletteOnly ? "palette" : "prod" });
 }
 
 /**
- * Build or check development themes and return each target’s palette and changed output paths.
- *
- * @param [options] - Options passed to this operation.
- * @param [options.root] - Repository or fixture root; defaults to this checkout.
- * @param [options.check] - Whether to compare generated files without writing them.
- * @returns Per-target palettes and changed output paths.
+ * Build the development group through the common prepared workflow.
+ * @param [options] - Build options.
  */
-export async function buildDevThemes({ root = defaultRoot, check = false } = {}) {
-  /** Completed build summary for the selected command or target group. */
-  const result = await buildDevThemeSummary({ root, check });
-  return result.targets;
+export async function buildDevThemeSummary(options = {}) {
+  return buildThemes({ ...options, mode: "dev" });
+}
+
+/**
+ * Return development target summaries for existing programmatic consumers.
+ * @param [options] - Build options.
+ */
+export async function buildDevThemes(options = {}) {
+  return (await buildDevThemeSummary(options)).targets;
 }
 
 /**
@@ -757,49 +767,35 @@ export async function runBuild({
 } = {}) {
   if (!["all", "prod", "dev", "palette"].includes(mode)) throw new Error(`Unknown build mode: ${mode}`);
 
-  if (mode === "all") logger.log();
+  logger.log(formatMessage(`${check ? "Checking" : "Building"} ${mode} themes...`, "heading"));
 
-  if (mode !== "dev") {
-    logger.log(
-      formatMessage(
-        `${check ? "Checking" : "Building"} ${mode === "palette" ? "palette reports" : "prod themes"}...`,
-        "heading",
-      ),
-    );
+  /** Both groups validate before the first replacement. */
+  const result = await buildThemes({ root, mode, check });
 
-    /** Production outputs generated before optional development builds. */
-    const prod = await buildProdThemes({ root, check, paletteOnly: mode === "palette" });
-
-    logSummary(
-      `${check ? "Validated" : "Built"} ${prod.targets.length} prod themes; ${prod.changed.length - prod.removed.length} generated files updated${prod.removed.length ? `; ${prod.removed.length} generated output${prod.removed.length === 1 ? "" : "s"} removed` : ""}.`,
-      prod.targets,
-      prod.changed,
-      prod.removed,
-      mode === "all",
-      logger,
-    );
-  }
-
-  if (mode === "all" || mode === "dev") {
-    logger.log(formatMessage(`${check ? "Checking" : "Building"} dev themes...`, "heading"));
-
-    /** Aggregate development results, including stale outputs without a remaining target. */
-    const dev = await buildDevThemeSummary({ root, check });
-
-    logSummary(
-      `${check ? "Validated" : "Built"} ${dev.targets.length} dev themes; ${dev.changed.length - dev.removed.length} generated files updated${dev.removed.length ? `; ${dev.removed.length} generated output${dev.removed.length === 1 ? "" : "s"} removed` : ""}.`,
-      dev.targets,
-      dev.changed,
-      dev.removed,
-      false,
-      logger,
-    );
-  }
+  logSummary(
+    `${check ? "Validated" : "Built"} ${result.targets.length} themes; ${result.changed.length - result.removed.length} generated files updated${result.removed.length ? `; ${result.removed.length} generated output${result.removed.length === 1 ? "" : "s"} removed` : ""}.`,
+    result.targets,
+    result.changed,
+    result.removed,
+    false,
+    logger,
+  );
 
   if (check || mode === "palette") return;
 
   /** Applied preview changes and their reload requirement. */
-  const preview = await syncDevExtension({ root, extensionDirectory });
+  let preview;
+
+  try {
+    preview = await syncDevExtension({ root, extensionDirectory });
+  } catch (error) {
+    throw Object.assign(
+      new Error(`Build completed; preview synchronization failed: ${error.message}. Retry npm run sync:preview.`, {
+        cause: error,
+      }),
+      { code: "PREVIEW_SYNC_FAILED" },
+    );
+  }
 
   logger.log(formatMessage(`Synced dev manifest: ${preview.manifestPath}`, "success"));
 

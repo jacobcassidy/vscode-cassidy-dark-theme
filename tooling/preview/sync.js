@@ -4,6 +4,7 @@
  */
 
 import { readFile, writeFile, mkdir, lstat, realpath, symlink } from "node:fs/promises";
+import { assertFresh, capturePaths, requireStable, withGuards, observeWriter } from "../shared/transactions.js";
 import { homedir } from "node:os";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -80,6 +81,16 @@ export async function syncDevExtension({
   root = fileURLToPath(new URL("../../", import.meta.url)),
   extensionDirectory = join(homedir(), ".vscode/extensions/jacobcassidy.cassidy-dark-dev"),
 } = {}) {
+  await requireStable(root);
+
+  /** Registration sources and installed entries frozen before preparation. */
+  const expected = await capturePaths([
+    join(root, "package.json"),
+    join(root, "themes"),
+    join(root, "dev-extension"),
+    extensionDirectory,
+  ]);
+
   /** Destination path of the separate development manifest. */
   const target = join(extensionDirectory, "package.json");
 
@@ -186,67 +197,84 @@ export async function syncDevExtension({
 
   if (new Set(labels).size !== labels.length) throw new Error("Preview theme labels must be unique");
 
-  // Keep the generated manifest separate from the source checkout.
+  return withGuards([root, extensionDirectory], async () => {
+    await requireStablePreview();
+    await assertFresh(expected);
 
-  /** Existing extension-directory entry inspected without following links. */
-  const extensionInfo = await statIfPresent(extensionDirectory);
+    // Keep the generated manifest separate from the source checkout.
 
-  if (extensionInfo?.isSymbolicLink()) {
-    throw new Error(`Dev extension folder must be a regular directory: ${extensionDirectory}`);
-  }
+    /** Existing extension-directory entry inspected without following links. */
+    const extensionInfo = await statIfPresent(extensionDirectory);
 
-  await mkdir(join(root, "dev-extension"), { recursive: true });
-  await mkdir(extensionDirectory, { recursive: true });
-
-  // Refuse to overwrite the source through a linked dev manifest.
-
-  /** Existing manifest entry checked before writing the preview manifest. */
-  const targetInfo = await statIfPresent(target);
-
-  if (targetInfo?.isSymbolicLink()) {
-    throw new Error(`Dev manifest is a symlink; replace it with a regular file: ${target}`);
-  }
-
-  /** Previous preview manifest retained for change detection and write avoidance. */
-  const previous = await readOptional(target);
-
-  /** New preview manifest text, including unrelated source metadata updates. */
-  const current = `${JSON.stringify(manifest, null, 2)}\n`;
-
-  /** Whether registrations or repaired preview assets require VS Code to reload. */
-  let reloadRequired = previewRegistrations(previous) !== previewRegistrations(current);
-
-  // Link assets directly to the checkout so edits appear without copying files.
-  for (const directory of ["themes", "dev-extension", "images"]) {
-    /** Checkout asset directory to expose through the preview extension. */
-    const sourceDirectory = join(root, directory);
-
-    /** Canonical checkout path expected behind an existing asset link. */
-    const sourceRealPath = await realpath(sourceDirectory).catch((error) => {
-      if (error.code === "ENOENT" && directory === "themes") {
-        throw new Error("Missing generated themes directory. Run npm run build.", { cause: error });
-      }
-
-      throw error;
-    });
-
-    /** Destination asset-link path inside the development extension. */
-    const link = join(extensionDirectory, directory);
-
-    /** Existing asset entry inspected before creating or accepting a symlink. */
-    const linkInfo = await statIfPresent(link);
-
-    if (!linkInfo) {
-      await symlink(sourceDirectory, link, "dir");
-      reloadRequired = true;
-    } else if (!linkInfo.isSymbolicLink() || (await realpath(link)) !== sourceRealPath) {
-      throw new Error(`Expected a symlink to ${sourceDirectory}: ${link}`);
+    if (extensionInfo?.isSymbolicLink()) {
+      throw new Error(`Dev extension folder must be a regular directory: ${extensionDirectory}`);
     }
+
+    await mkdir(join(root, "dev-extension"), { recursive: true });
+    await mkdir(extensionDirectory, { recursive: true });
+
+    // Refuse to overwrite the source through a linked dev manifest.
+
+    /** Existing manifest entry checked before writing the preview manifest. */
+    const targetInfo = await statIfPresent(target);
+
+    if (targetInfo?.isSymbolicLink()) {
+      throw new Error(`Dev manifest is a symlink; replace it with a regular file: ${target}`);
+    }
+
+    /** Previous preview manifest retained for change detection and write avoidance. */
+    const previous = await readOptional(target);
+
+    /** New preview manifest text, including unrelated source metadata updates. */
+    const current = `${JSON.stringify(manifest, null, 2)}\n`;
+
+    /** Whether registrations or repaired preview assets require VS Code to reload. */
+    let reloadRequired = previewRegistrations(previous) !== previewRegistrations(current);
+
+    // Link assets directly to the checkout so edits appear without copying files.
+    for (const directory of ["themes", "dev-extension", "images"]) {
+      /** Checkout asset directory to expose through the preview extension. */
+      const sourceDirectory = join(root, directory);
+
+      /** Canonical checkout path expected behind an existing asset link. */
+      const sourceRealPath = await realpath(sourceDirectory).catch((error) => {
+        if (error.code === "ENOENT" && directory === "themes") {
+          throw new Error("Missing generated themes directory. Run npm run build.", { cause: error });
+        }
+
+        throw error;
+      });
+
+      /** Destination asset-link path inside the development extension. */
+      const link = join(extensionDirectory, directory);
+
+      /** Existing asset entry inspected before creating or accepting a symlink. */
+      const linkInfo = await statIfPresent(link);
+
+      if (!linkInfo) {
+        await symlink(sourceDirectory, link, "dir");
+        reloadRequired = true;
+      } else if (!linkInfo.isSymbolicLink() || (await realpath(link)) !== sourceRealPath) {
+        throw new Error(`Expected a symlink to ${sourceDirectory}: ${link}`);
+      }
+    }
+
+    if (previous !== current) await writeFile(target, current);
+
+    return { manifestPath: target, reloadRequired };
+  });
+
+  /** Verify incomplete checkout state while retaining our own root guard. */
+  async function requireStablePreview() {
+    // Input freshness covers completed generations; interrupted markers remain fatal.
+    /** Existing writer state, observed without releasing destination ownership. */
+    const { marker } = await observeWriter(root);
+
+    if (marker)
+      throw Object.assign(new Error(`Incomplete generation ${marker.id}; run ${marker.recovery}.`), {
+        code: "INCOMPLETE_GENERATION",
+      });
   }
-
-  if (previous !== current) await writeFile(target, current);
-
-  return { manifestPath: target, reloadRequired };
 }
 
 /**

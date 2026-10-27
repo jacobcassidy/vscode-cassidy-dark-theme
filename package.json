@@ -83,6 +83,7 @@
     "release:github-recover": "bash scripts/release/publish/create-github-release.sh",
     "release:publish": "bash scripts/release/publish/run-azure-pipeline.sh",
     "test": "node --test \"tests/**/*.test.js\"",
+    "sync:preview": "node scripts/preview/sync.js",
     "watch": "node scripts/themes/watch.js"
   }
 }
