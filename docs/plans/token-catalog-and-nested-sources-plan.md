@@ -37,11 +37,11 @@ docs/
 | `docs/templates/all-ui-tokens.json`       | `docs/templates/tokens/ui-template.jsonc`                         |
 | `docs/lookups/hex-opacity.md`             | Keep its current path.                                            |
 
-Use JSONC comments for file purpose, upstream provenance, and required license notices. Remove the VS Code color-theme `$schema` and theme metadata wrappers from templates because the new grouped authoring structure is a repository format. These files will have only category objects at the root. Do not add a syntax template: syntax rules continue to come from authored theme definitions.
+Use JSONC comments for file purpose, upstream provenance, and required license notices. Remove the VS Code color-theme `$schema` and theme metadata wrappers from templates because the new grouped authoring structure is a repository format. UI and semantic files have category objects at the root; syntax files have exactly one root property, `textmate`, whose value is an object. Do not add a syntax template: syntax rules continue to come from authored theme definitions.
 
 ## Classification and file structures
 
-All five catalog/template files use the same ordered root categories: `standard`, `source`, `non-standard`, and `deprecated`. Keep unused categories as empty objects so the allowed structure is explicit. UI and semantic theme files and their matching details use those categories too.
+The UI and semantic catalog/template files use the same ordered root categories: `standard`, `source`, `non-standard`, and `deprecated`. Keep unused categories as empty objects so the allowed structure is explicit. UI and semantic theme files and their matching details use those categories too. Syntax lookup, token, and detail files use a single `textmate` object instead of category groups.
 
 | Category       | Meaning                                                                                                                                                 |
 | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -129,25 +129,39 @@ A selector containing the modifier `deprecated`, such as `*.deprecated`, belongs
 
 ### Syntax details
 
-`syntax-details.jsonc` uses category objects containing exact, stable syntax rule IDs, rather than splitting rule IDs or TextMate scope expressions:
+`syntax-details.jsonc` has one top-level `textmate` object containing exact, stable syntax rule IDs, rather than splitting rule IDs or TextMate scope expressions:
 
 ```jsonc
 {
-  "standard": {},
-  "source": {},
-  "non-standard": {
+  "textmate": {
     "bold": {
       "for": "Bold formatting for Markdown bold spans.",
       "source": "Jacob Cassidy",
     },
   },
-  "deprecated": {},
 }
 ```
 
-All 46 current syntax IDs are repository-defined authoring rules, so their initial category is `non-standard`, including rules that target conventional TextMate scopes. Add entries to other categories only when their identity and origin justify it. A disabled rule stays in its existing category; disabled styling does not establish deprecation.
+All 46 current syntax IDs live directly inside `textmate`. Syntax files do not use `standard`, `source`, `non-standard`, or `deprecated` root groups. Retain any retirement explanation in the relevant rule's details and its existing disabled fields where applicable.
 
-Keep `src/themes/*/*/tokens/syntax.jsonc` as an ordered array and keep source `details/syntax.jsonc` indexed by exact IDs. Neither supplied formatting example replaces the syntax array contract. Preserve rule order, scope order, IDs, names, formatting-only rules, backgrounds, and disabled definitions. Base roles remain in their existing nested format, with purpose details derived from those definitions; metadata and palette formats continue to use their current schemas.
+Wrap source `details/syntax.jsonc` in the same `textmate` object, indexed by exact IDs. In `src/themes/*/*/tokens/syntax.jsonc`, keep the ordered rules under `textmate.rules`:
+
+```jsonc
+{
+  "textmate": {
+    "rules": [
+      {
+        "id": "bold",
+        "name": "BOLD",
+        "scope": ["markup.bold.markdown"],
+        "fontStyle": "bold",
+      },
+    ],
+  },
+}
+```
+
+An explicitly empty syntax token file becomes `{ "textmate": { "rules": [] } }`; an explicitly empty syntax details file becomes `{ "textmate": {} }`. Omitted files retain whole-file fallback. Validate the wrapper and unwrap the ordered array before compilation. Preserve rule order, scope order, IDs, names, formatting-only rules, backgrounds, and disabled definitions. Base roles remain in their existing nested format, with purpose details derived from those definitions; metadata and palette formats continue to use their current schemas.
 
 ## Detail source overrides
 
@@ -198,18 +212,20 @@ Source retrieval and modes:
 
 ## Shared format handling and source migration
 
-Add `scripts/lib/token-formats.js` to validate and normalize the new structures. It supplies consistent category ordering, canonical ID construction, nested record traversal, and diagnostics for templates, lookups, source tokens, and source details.
+Add `scripts/lib/token-formats.js` to validate and normalize the new structures. It supplies consistent category ordering, canonical ID construction, nested record traversal, syntax `textmate` wrapper handling, and diagnostics for templates, lookups, source tokens, and source details.
 
 Normalize UI and semantic inputs to the compiler's existing canonical IDs before alias collection, details validation, and rendering. Strip category wrappers, UI grouping objects, and semantic `default` markers from emitted IDs. Keep aliases such as `ui.activityBar.foreground`, `semantic.function`, and `syntax.parameter` stable, along with relationship references in details.
+
+Normalize syntax tokens from `textmate.rules` to the existing ordered compiler array, and syntax lookup/detail entries from `textmate` to the existing ID map. The wrapper adds no prefix to syntax IDs, aliases, or emitted TextMate scopes.
 
 Recognize records using the schema for the relevant file, including formatting-only or disabled entries without a color. A node can hold record fields and descendants; traverse both. Reject unknown scalar fields, invalid child structures, duplicate normalized IDs, and reserved-field collisions with diagnostics containing the authored path and canonical ID.
 
 Perform the migration with a repeatable, one-time utility that inventories and stages the complete selected set before writes:
 
-1. Split the current catalog without losing any of its 1,136 entries or its provenance and license. Translate flat purpose IDs into the new nesting and seed category membership from the audited inventory.
+1. Split the current catalog without losing any of its 1,136 entries or its provenance and license. Translate UI and semantic purpose IDs into the new nesting and seed category membership from the audited inventory; place syntax purpose records inside `textmate`.
 2. Move and reshape both templates, preserving their token inventories. Add the four category objects and style-descriptor leaves. Any token additions or removals require a separate, explicit decision.
 3. Migrate every existing local `tokens/ui.jsonc` and `tokens/semantic.jsonc` in prod/default, dev/test, dev/beta, and dev/reviewer. Discover targets through the existing discovery API rather than hardcoding those names.
-4. Migrate corresponding local `details/ui.jsonc` and `details/semantic.jsonc` to matching category/path nesting. Preserve all `for`, attribution, `inherits`, `overrides`, and `globallyOverriddenBy` values and their array order.
+4. Migrate corresponding local `details/ui.jsonc` and `details/semantic.jsonc` to matching category/path nesting. Preserve all `for`, attribution, `inherits`, `overrides`, and `globallyOverriddenBy` values and their array order. Wrap every existing local syntax token array in `textmate.rules` and every local syntax details ID map in `textmate`, preserving array order and file-level fallback.
 5. Preserve JSONC comments by using syntax-tree spans and attaching comments to their original token records during reparenting. Retain disabled definitions, configured colors, alpha, reasons, formatting flags, key case, and deliberate ordering. Never reconstruct authored files solely by parsing and stringifying their values.
 6. Keep omitted files omitted and local empty sections empty. Preserve independent whole-file fallback for tokens and details; do not materialize inherited files. An empty categorized input continues to suppress local definitions just as `{}` does today.
 7. Inventory unknown and custom IDs and classify them explicitly rather than dropping them. Keep existing theme membership unchanged; migration does not run `add:properties` to populate every theme from expanded catalogs.
@@ -220,9 +236,9 @@ Source changes that only reparent tokens must preserve rendering order as well a
 
 ## Scripts, tests, and documentation affected
 
-- `scripts/themes/add-properties.js`: replace the obsolete combined catalog path with the split lookups; read categorized templates; add missing entries at nested paths; keep existing review and comment-preservation behavior; propagate explicit attribution when filling details; keep syntax ID generation and base-purpose derivation.
+- `scripts/themes/add-properties.js`: replace the obsolete combined catalog path with the split lookups; read categorized templates; add missing entries at nested paths; keep existing review and comment-preservation behavior; propagate explicit attribution when filling details; read/update syntax rules at `textmate.rules` and syntax purposes inside `textmate`; keep syntax ID generation and base-purpose derivation.
 - `scripts/themes/add-theme.js`: scaffold categorized UI/semantic token and detail objects, populate from the renamed templates, and retain metadata copying, whole-file fallback, rollback, terminal colors, and build command guidance.
-- `scripts/lib/theme-compilation.js`: normalize nested tokens/details before validation and emission; accept the new `source` detail field; retain all color, alias, disabled-entry, and relationship contracts.
+- `scripts/lib/theme-compilation.js`: normalize nested tokens/details and syntax wrappers before validation and emission; accept the new `source` detail field; retain all color, alias, disabled-entry, and relationship contracts.
 - `scripts/lib/theme-source-inputs.js`, `scripts/themes/build.js`, and `scripts/themes/check.js`: use the shared reader wherever they inspect source shapes. Preserve target discovery, independent fallback, selected-group cleanup, check-mode immutability, and preview registration behavior.
 - `scripts/themes/watch.js`: ensure the nested source migration is handled through normal source events. Templates and lookups remain explicit generator inputs rather than runtime build dependencies; catalog-only changes need no automatic rebuild or reload. Actual registration changes still use the existing conditional reminder.
 - `package.json` and lockfile: add the updater command, extraction dependency where needed, and any necessary validation integration. Ordinary `npm run check` validates checked-in schemas and coverage offline; upstream refresh checking remains an explicit updater command with pinned inputs.
@@ -237,7 +253,7 @@ Every authored JavaScript module follows `AGENTS.md` header, declaration JSDoc, 
 ## Implementation sequence
 
 - [ ] Capture canonical token, purpose, alias, scope-order, and generated-output inventories for every current theme; record the template/catalog membership differences.
-- [ ] Implement the shared format codec and detail `source` validation; cover ambiguous UI nodes, selectors, and duplicate IDs.
+- [ ] Implement the shared format codec and detail `source` validation; cover ambiguous UI nodes, selectors, syntax wrappers, and duplicate IDs.
 - [ ] Implement pinned description extraction and the lookup updater, using fixture snapshots for reproducible behavior checks.
 - [ ] Prepare categorized templates and split lookup candidates, including explicit attribution handling and a classification report.
 - [ ] Update compiler, catalog readers, generators, and their fixtures; migrate all local source and detail files in the same integrated change.
@@ -249,7 +265,7 @@ Every authored JavaScript module follows `AGENTS.md` header, declaration JSDoc, 
 ## Acceptance checks
 
 1. All requested destination files exist and active consumers use their new paths; the old combined catalog and old templates have been removed after successful migration.
-2. All lookup/template files have validated category roots and correct per-family record shapes. No canonical token is duplicated or silently omitted, including the 29 UI and two semantic source-only entries.
+2. UI and semantic files have validated category roots; every syntax lookup, token, and detail file has exactly one root `textmate` object with the appropriate ID map or ordered `rules` array. No canonical token is duplicated or silently omitted, including the 29 UI and two semantic source-only entries.
 3. Every theme retains its authored token membership, configured styling, reasons, flags, IDs, and independent fallback behavior. Syntax rule and scope order are identical. Normalized aliases and relationship strings remain stable.
 4. UI parent/child tokens both survive; unmodified and compound wildcard semantic selectors and language-qualified selectors reconstruct exactly; `*.deprecated` is not misclassified as a retired selector.
 5. The lookup updater uses extracted descriptions by default and preserves explicit developer/source overrides. Conflicts, incomplete extraction, missing pins, and malformed inputs produce accurate diagnostics and leave files intact on fatal errors.
