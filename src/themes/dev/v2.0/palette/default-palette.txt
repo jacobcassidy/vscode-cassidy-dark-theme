@@ -1,3 +1,0 @@
-No palette is generated for dev/v2.0 because the default palette is being used.
-Default palette configuration: src/themes/prod/default/palette/palette-config.jsonc
-Generated default palette: src/themes/prod/default/palette/generated/
