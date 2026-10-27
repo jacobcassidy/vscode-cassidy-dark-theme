@@ -7,9 +7,9 @@ import assert from "node:assert/strict";
 import { mkdir, readFile, realpath, rm, stat, symlink, writeFile } from "node:fs/promises";
 import { join } from "node:path";
 import test from "node:test";
-import { syncDevExtension } from "../scripts/dev-extension/sync.js";
-import { checkThemes } from "../scripts/themes/check.js";
-import { createPreviewProject } from "./test-projects.js";
+import { syncDevExtension } from "../../tooling/preview/sync.js";
+import { checkThemes } from "../../tooling/themes/check.js";
+import { createPreviewProject } from "../helpers/projects.js";
 
 test("dev extension sync is repeatable and refreshes themes without modifying the source manifest", async (t) => {
   /** Isolated preview/source fixture with cleanup registered by the test. */

@@ -10,11 +10,11 @@ import { join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { promisify } from "node:util";
 import test from "node:test";
-import { addTheme } from "../scripts/themes/add-theme.js";
-import { addThemeProperties } from "../scripts/themes/add-properties.js";
-import { buildDevThemes, buildProdThemes } from "../scripts/themes/build.js";
-import { parseJsonc } from "../scripts/lib/jsonc-validation.js";
-import { createBuildProject, readBuildOutputs } from "./test-projects.js";
+import { addTheme } from "../../tooling/generators/add-theme.js";
+import { addThemeProperties } from "../../tooling/generators/add-properties.js";
+import { buildDevThemes, buildProdThemes } from "../../tooling/themes/build.js";
+import { parseJsonc } from "../../tooling/shared/jsonc.js";
+import { createBuildProject, readBuildOutputs } from "../helpers/projects.js";
 
 /** Asynchronous child-process runner used to exercise the actual CLI entry points. */
 const run = promisify(execFile);
@@ -240,7 +240,7 @@ test("a failure during property population removes only the newly created theme"
 
   await writeFile(
     plugin,
-    `import { parsers as babelParsers } from ${JSON.stringify(new URL("../node_modules/prettier/plugins/babel.mjs", import.meta.url).href)};
+    `import { parsers as babelParsers } from ${JSON.stringify(new URL("../../node_modules/prettier/plugins/babel.mjs", import.meta.url).href)};
 export const parsers = {
   jsonc: {
     ...babelParsers.jsonc,
@@ -270,8 +270,9 @@ test("CLI setup and explicit property targets work without changing the configur
   /** Isolated executable copy of the scripts using fixture inputs and installed dependencies. */
   const root = await createSetupProject(t);
 
-  await cp(new URL("../scripts/", import.meta.url), join(root, "scripts"), { recursive: true });
-  await symlink(fileURLToPath(new URL("../node_modules/", import.meta.url)), join(root, "node_modules"), "dir");
+  await cp(new URL("../../scripts/", import.meta.url), join(root, "scripts"), { recursive: true });
+  await cp(new URL("../../tooling/", import.meta.url), join(root, "tooling"), { recursive: true });
+  await symlink(fileURLToPath(new URL("../../node_modules/", import.meta.url)), join(root, "node_modules"), "dir");
 
   /** CLI entry points resolve their source root relative to the copied script location. */
   const setupScript = join(root, "scripts/themes/add-theme.js");

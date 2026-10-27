@@ -5,7 +5,7 @@
 
 import assert from "node:assert/strict";
 import test from "node:test";
-import { contrastRatio, fromHex, toHex } from "../scripts/lib/color-math.js";
+import { contrastRatio, fromHex, toHex } from "../../tooling/shared/color-math.js";
 
 test("known sRGB/OKLCH conversions and neutral endpoints", () => {
   assert.equal(toHex({ l: 0.9, c: 0.075, h: 90 }), "#f1dda5");

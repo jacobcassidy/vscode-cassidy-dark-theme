@@ -3,7 +3,7 @@
  * @file Convert OKLCH and sRGB colors, find gamut limits, handle alpha, and calculate contrast.
  */
 
-import { fields, number } from "./jsonc-validation.js";
+import { fields, number } from "./jsonc.js";
 
 // OKLab/sRGB matrices: https://www.w3.org/TR/css-color-4/#color-conversion-code
 

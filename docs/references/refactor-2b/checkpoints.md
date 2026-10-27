@@ -15,3 +15,9 @@ Timing capture used the original production/development APIs in one Node process
 | Generated check | 98.80  | 98.61–106.12  |
 
 These are local measurements, not CI budgets. The original watcher has no shared-data dependency or description-only path; those scenarios require final implementation measurements. Native Linux verification remains required before final acceptance; local macOS results cannot establish it.
+
+## Tooling boundaries and suite discovery
+
+Moved reusable implementations into `tooling/`, retained thin command wrappers, and relocated all 189 existing behavioral tests by responsibility. Recursive discovery runs all relocated suites; CLI fixtures copy both wrappers and tooling. No source formats or generated styling changed. The independent oracle passes for all four targets and preserved snapshots. ESLint and generated-output checks pass. All 189 relocated tests pass on macOS outside the sandbox; the sandbox reports `EMFILE` from native filesystem watching even with serial execution. The original watcher suite also passes outside the sandbox.
+
+Removed `scripts/lib/` and `scripts/dev-extension/`; current consumers import their owning tooling modules directly. Build API retirement follows the prepared-pass checkpoint.

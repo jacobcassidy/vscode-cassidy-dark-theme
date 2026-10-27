@@ -3,8 +3,8 @@
  * @file Validate consolidated tokens and details, resolve aliases, and emit ordered JSONC with disabled entries.
  */
 
-import { fields, object } from "./jsonc-validation.js";
-import { validateHex, withAlpha } from "./color-math.js";
+import { fields, object } from "../shared/jsonc.js";
+import { validateHex, withAlpha } from "../shared/color-math.js";
 
 /** Fields accepted by every foreground or background color descriptor. */
 const colorFields = ["color", "alpha", "colorReason"];

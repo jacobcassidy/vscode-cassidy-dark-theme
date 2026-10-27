@@ -11,9 +11,9 @@ import { setTimeout as delay } from "node:timers/promises";
 import test from "node:test";
 import { stripVTControlCharacters } from "node:util";
 import { parse } from "jsonc-parser";
-import { syncDevExtension } from "../scripts/dev-extension/sync.js";
-import { watchThemes } from "../scripts/themes/watch.js";
-import { createBuildProject, createPreviewProject, writeDefaultPaletteConfig } from "./test-projects.js";
+import { syncDevExtension } from "../../tooling/preview/sync.js";
+import { watchThemes } from "../../tooling/themes/watch.js";
+import { createBuildProject, createPreviewProject, writeDefaultPaletteConfig } from "../helpers/projects.js";
 
 /**
  * Poll an asynchronous condition until it succeeds or the watcher test deadline expires.

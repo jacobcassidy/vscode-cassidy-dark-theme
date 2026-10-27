@@ -3,8 +3,8 @@
  * @file Validate palette inputs and generate gamut-limited color families, neutrals, and overrides.
  */
 
-import { fields, number, object } from "./jsonc-validation.js";
-import { fromHex, maxChroma, normalizeHex, toHex, validateHex, validateOklch } from "./color-math.js";
+import { fields, number, object } from "../shared/jsonc.js";
+import { fromHex, maxChroma, normalizeHex, toHex, validateHex, validateOklch } from "../shared/color-math.js";
 
 /**
  * Require a palette identifier composed of letters, digits, and hyphens.

@@ -7,8 +7,8 @@ import assert from "node:assert/strict";
 import { access, mkdir, readFile, rm, symlink, writeFile } from "node:fs/promises";
 import { join } from "node:path";
 import test from "node:test";
-import { buildDevThemes, buildProdThemes, runBuild } from "../scripts/themes/build.js";
-import { createBuildProject, writeDefaultPaletteConfig } from "./test-projects.js";
+import { buildDevThemes, buildProdThemes, runBuild } from "../../tooling/themes/build.js";
+import { createBuildProject, writeDefaultPaletteConfig } from "../helpers/projects.js";
 
 /** Exact terminal instruction, including the requested magenta color and reset. */
 const reminder =

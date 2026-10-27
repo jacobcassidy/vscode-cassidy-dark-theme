@@ -5,9 +5,9 @@
 
 import assert from "node:assert/strict";
 import test from "node:test";
-import { inGamut, maxChroma } from "../scripts/lib/color-math.js";
-import { generatePalette } from "../scripts/lib/palette-generation.js";
-import { createPaletteConfig } from "./test-projects.js";
+import { inGamut, maxChroma } from "../../tooling/shared/color-math.js";
+import { generatePalette } from "../../tooling/palette/generation.js";
+import { createPaletteConfig } from "../helpers/projects.js";
 
 test("palette overrides require a nonempty colorReason and preserve multiline explanations", () => {
   for (const override of [null, false, 0, "", []]) {

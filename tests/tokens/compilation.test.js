@@ -5,10 +5,10 @@
 
 import assert from "node:assert/strict";
 import test from "node:test";
-import { parseJsonc } from "../scripts/lib/jsonc-validation.js";
-import { generatePalette } from "../scripts/lib/palette-generation.js";
-import { compileTokens, renderTheme } from "../scripts/lib/theme-compilation.js";
-import { createDetails, createPaletteConfig, createTokens } from "./test-projects.js";
+import { parseJsonc } from "../../tooling/shared/jsonc.js";
+import { generatePalette } from "../../tooling/palette/generation.js";
+import { compileTokens, renderTheme } from "../../tooling/tokens/compilation.js";
+import { createDetails, createPaletteConfig, createTokens } from "../helpers/projects.js";
 // Prettier's generated entry point hides its default export from the import resolver.
 // eslint-disable-next-line import-x/default
 import prettier from "prettier";

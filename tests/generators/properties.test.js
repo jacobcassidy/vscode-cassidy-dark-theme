@@ -7,10 +7,15 @@ import assert from "node:assert/strict";
 import { mkdir, readFile, readdir, rm, stat, writeFile } from "node:fs/promises";
 import { join } from "node:path";
 import test from "node:test";
-import { addThemeProperties } from "../scripts/themes/add-properties.js";
-import { buildProdThemes } from "../scripts/themes/build.js";
-import { parseJsonc } from "../scripts/lib/jsonc-validation.js";
-import { createBuildProject, readBuildOutputs, readThemeParts, writeDefaultPaletteConfig } from "./test-projects.js";
+import { addThemeProperties } from "../../tooling/generators/add-properties.js";
+import { buildProdThemes } from "../../tooling/themes/build.js";
+import { parseJsonc } from "../../tooling/shared/jsonc.js";
+import {
+  createBuildProject,
+  readBuildOutputs,
+  readThemeParts,
+  writeDefaultPaletteConfig,
+} from "../helpers/projects.js";
 
 /**
  * Write a reference using deliberately irrelevant values and metadata.

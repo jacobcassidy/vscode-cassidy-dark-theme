@@ -11,11 +11,11 @@ import { parse } from "jsonc-parser";
 // Prettier's generated entry point hides its default export from the import resolver.
 // eslint-disable-next-line import-x/default
 import prettier from "prettier";
-import { buildDevThemeSummary, buildDevThemes, buildProdThemes } from "../scripts/themes/build.js";
-import { contrastRatio } from "../scripts/lib/color-math.js";
-import { parseJsonc } from "../scripts/lib/jsonc-validation.js";
-import { generatePalette } from "../scripts/lib/palette-generation.js";
-import { compileTokens, renderTheme } from "../scripts/lib/theme-compilation.js";
+import { buildDevThemeSummary, buildDevThemes, buildProdThemes } from "../../tooling/themes/build.js";
+import { contrastRatio } from "../../tooling/shared/color-math.js";
+import { parseJsonc } from "../../tooling/shared/jsonc.js";
+import { generatePalette } from "../../tooling/palette/generation.js";
+import { compileTokens, renderTheme } from "../../tooling/tokens/compilation.js";
 import {
   createBuildProject,
   createPaletteConfig,
@@ -24,7 +24,7 @@ import {
   readThemeParts,
   themePartNames,
   writeDefaultPaletteConfig,
-} from "./test-projects.js";
+} from "../helpers/projects.js";
 
 test("JSONC parsing rejects duplicate keys and reports file locations", () => {
   assert.throws(
@@ -349,12 +349,12 @@ test("prod palette reports include 600 contrast from final hex and flag transluc
 test("the authored palette keeps base syntax and colored control text readable", async () => {
   /** Palette configuration parsed from authored inputs or created for this scenario. */
   const config = parseJsonc(
-    await readFile(new URL("../src/themes/prod/default/palette/palette-config.jsonc", import.meta.url), "utf8"),
+    await readFile(new URL("../../src/themes/prod/default/palette/palette-config.jsonc", import.meta.url), "utf8"),
     "palette",
   ).value;
 
   /** Effective consolidated source inputs used for readability assertions. */
-  const parts = await readThemeParts(new URL("../src/themes/prod/default", import.meta.url));
+  const parts = await readThemeParts(new URL("../../src/themes/prod/default", import.meta.url));
 
   /** Generated palette measured against the final authored colors. */
   const palette = generatePalette(config);

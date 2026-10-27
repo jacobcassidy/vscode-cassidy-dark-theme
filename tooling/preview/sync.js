@@ -7,9 +7,9 @@ import { readFile, writeFile, mkdir, lstat, realpath, symlink } from "node:fs/pr
 import { homedir } from "node:os";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
-import { formatMessage } from "../lib/terminal-output.js";
-import { parseJsonc } from "../lib/jsonc-validation.js";
-import { listFiles, readOptional, themeUiType } from "../lib/theme-source-inputs.js";
+import { formatMessage } from "../shared/terminal-output.js";
+import { parseJsonc } from "../shared/jsonc.js";
+import { listFiles, readOptional, themeUiType } from "../themes/inputs.js";
 
 /**
  * Serialize JSON with stable object-key ordering, retaining array order.

@@ -5,7 +5,7 @@
 
 import { readFile, readdir } from "node:fs/promises";
 import { join } from "node:path";
-import { parseJsonc } from "./jsonc-validation.js";
+import { parseJsonc } from "../shared/jsonc.js";
 
 /** Required default source directory used for whole-file input fallback. */
 export const defaultThemeDirectory = "src/themes/prod/default";

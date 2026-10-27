@@ -7,8 +7,8 @@ import { mkdir, mkdtemp, readFile, readdir, rm, writeFile } from "node:fs/promis
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
-import { parseJsonc } from "../scripts/lib/jsonc-validation.js";
-import { themeInputPaths } from "../scripts/lib/theme-source-inputs.js";
+import { parseJsonc } from "../../tooling/shared/jsonc.js";
+import { themeInputPaths } from "../../tooling/themes/inputs.js";
 
 /** Create a small palette configuration with chromatic families and neutral endpoints. */
 export function createPaletteConfig() {

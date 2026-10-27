@@ -7,8 +7,8 @@ import assert from "node:assert/strict";
 import { writeFile } from "node:fs/promises";
 import { join } from "node:path";
 import test from "node:test";
-import { checkThemes } from "../scripts/themes/check.js";
-import { createPreviewProject } from "./test-projects.js";
+import { checkThemes } from "../../tooling/themes/check.js";
+import { createPreviewProject } from "../helpers/projects.js";
 
 test("theme validation accepts JSONC in both prod and dev themes", async (t) => {
   /** Temporary source project root for this test scenario. */
