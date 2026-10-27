@@ -75,6 +75,7 @@ Seed classification from the existing template section comments and examples, th
       "inlineMessage": {
         "description": "Inline blame annotation text.",
         "modified-desc": true,
+        "use": "When a Git blame extension contributing this token is installed and its inline blame annotation is visible beside an editor line.",
       },
     },
   },
@@ -107,6 +108,7 @@ Support nodes that are both a token and a branch, as already demonstrated by `te
       "readwrite": {
         "description": "Provider-specific read/write parameter styling.",
         "modified-desc": true,
+        "use": "When the active language extension emits parameter.readwrite for a parameter occurrence.",
       },
     },
   },
@@ -177,6 +179,19 @@ Replace `for` with `description` in every lookup detail record and authored `det
 
 Protected catalog descriptions are authoritative for the lookup updater. Also import protected descriptions from `prod/default/details/`; if both locations have `modified-desc: true` and conflicting descriptions for one token, fail with both paths and require reconciliation. Protection flags and descriptions in dev themes stay local to that theme and do not silently replace the shared catalog.
 
+## Non-standard usage context
+
+Add optional `use` text to individual token records inside `non-standard`, documenting the conditions in which the token is used. Store it on non-standard UI and semantic lookup detail records and corresponding authored theme detail records. Allow it as documentation metadata on non-standard template leaves so templates can supply context when a lookup does not yet contain it. Keep the category object itself as a container of tokens.
+
+- `use` is a nonempty string when present. Omit it when the usage context is unknown; reject empty strings, whitespace-only strings, arrays, and other nonstring values.
+- Describe the contributing extension by display name and extension ID when verified, the relevant language/provider when applicable, and the visible object or state that uses the token. For example: `When Example Blame (example.blame) is installed and its inline blame annotation is visible beside an editor line.` This extension name is illustrative; populate real entries only from verified extension or provider evidence.
+- Keep `description` focused on the token's purpose and `use` focused on its activation/display context. An installed extension alone does not imply that its relevant UI is visible or its semantic provider is active.
+- Preserve authored `use` text during lookup refresh regardless of `modified-desc`. That flag protects only `description`. Extraction may supply missing usage context when the evidence establishes it; otherwise leave the property absent.
+- When generating a new theme detail record, copy `use` from the lookup, or from the template when the lookup has no value. Preserve an existing theme-specific value. Report conflicting lookup/template context for review rather than silently replacing authored text.
+- Treat template `use` as documentation metadata: transfer it into generated details, excluding it from styling token definitions and emitted VS Code theme JSON. It has no effect on token matching, aliases, rendering, or preview reload requirements.
+- Validate `use` on non-standard token leaves, alongside `description` and `modified-desc` where applicable. If a category correction would move an entry carrying `use` outside `non-standard`, report it for reconciliation before writing rather than silently dropping its usage text.
+- Syntax files retain their single `textmate` wrapper; this addition does not create a syntax `non-standard` group.
+
 ## Lookup updater and extraction
 
 Add `scripts/themes/update-token-details.js` and the package command:
@@ -197,7 +212,7 @@ The updater will:
 4. Parse TypeScript structurally, using a TypeScript AST parser and an explicit development dependency/lockfile update. Resolve supported static strings, localization message forms, and referenced constants; report unresolved dynamic expressions. Read extension manifests as data. Never execute upstream modules to obtain descriptions.
 5. Derive descriptions for semantic combinations from the extracted type/modifier definitions without claiming unsupported provider behavior. Extract local syntax rule names, ordered scopes, and available descriptive comments for source-derived syntax purposes. Preserve authored syntax descriptions marked `modified-desc: true`.
 6. Retain reviewed descriptions for unresolved existing tokens and report the missing extraction evidence. New unresolved tokens receive a nonempty `UNREVIEWED` description and a warning; do not manufacture reviewed descriptions. Retaining an entry because extraction is unavailable must not set `modified-desc: true` automatically; keep reporting it for review on later updates.
-7. Reconcile evidence-backed category changes, preserving protected descriptions, protection flags, relationships where present, provenance, and upstream license notices. Absence upstream never causes automatic deletion or deprecation.
+7. Reconcile evidence-backed category changes, preserving protected descriptions, protection flags, authored `use` context, relationships where present, provenance, and upstream license notices. Fill missing non-standard usage context only from verified evidence and report classification/context conflicts before writing. Absence upstream never causes automatic deletion or deprecation.
 8. Prepare, validate, and format all three candidate catalogs before replacing any destination. Write changed files only, stage replacements, and restore prior files on a commit failure. Repeated runs with identical inputs must leave files and timestamps unchanged.
 9. Report counts and changed paths using established colors: yellow headings, blue information and paths, green additions/success, bright yellow warnings, red errors, magenta required actions and important messages. A catalog refresh alone requires no VS Code reload.
 
@@ -225,25 +240,25 @@ Perform the migration with a repeatable, one-time utility that inventories and s
 1. Split the current catalog without losing any of its 1,136 entries or its provenance and license. Rename every `for` field to `description` while preserving its text. Translate UI and semantic purpose IDs into the new nesting and seed category membership from the audited inventory; place syntax purpose records inside `textmate`.
 2. Move and reshape both templates, preserving their token inventories. Add the four category objects and style-descriptor leaves. Any token additions or removals require a separate, explicit decision.
 3. Migrate every existing local `tokens/ui.jsonc` and `tokens/semantic.jsonc` in prod/default, dev/test, dev/beta, and dev/reviewer. Discover targets through the existing discovery API rather than hardcoding those names.
-4. Migrate corresponding local `details/ui.jsonc` and `details/semantic.jsonc` to matching category/path nesting. Rename `for` to `description` in every local details file, including base and syntax, without changing its text. Preserve any explicit `modified-desc` flags, `inherits`, `overrides`, and `globallyOverriddenBy` values and their array order. Wrap every existing local syntax token array in `textmate.rules` and every local syntax details ID map in `textmate`, preserving array order and file-level fallback.
+4. Migrate corresponding local `details/ui.jsonc` and `details/semantic.jsonc` to matching category/path nesting. Rename `for` to `description` in every local details file, including base and syntax, without changing its text. Preserve any explicit `modified-desc` flags, non-standard `use` context, `inherits`, `overrides`, and `globallyOverriddenBy` values and their array order. Wrap every existing local syntax token array in `textmate.rules` and every local syntax details ID map in `textmate`, preserving array order and file-level fallback.
 5. Preserve JSONC comments by using syntax-tree spans and attaching comments to their original token records during reparenting. Retain disabled definitions, configured colors, alpha, reasons, formatting flags, key case, and deliberate ordering. Never reconstruct authored files solely by parsing and stringifying their values.
 6. Keep omitted files omitted and local empty sections empty. Preserve independent whole-file fallback for tokens and details; do not materialize inherited files. An empty categorized input continues to suppress local definitions just as `{}` does today.
 7. Inventory unknown and custom IDs and classify them explicitly rather than dropping them. Keep existing theme membership unchanged; migration does not run `add:properties` to populate every theme from expanded catalogs.
 8. Refresh both examples to the same codec and classification rules. Document the compound semantic suffix/language conventions and UI parent/child case in the examples or adjacent guide.
-9. Switch all active readers and generators together. Update all field validation, required-description checks, diagnostics, examples, and fixtures to use `description` and optional boolean `modified-desc`; remove per-entry `source` support. Remove obsolete flat-format paths and `for` field support once committed sources and fixtures are migrated; no permanent dual-format guessing in the compiler. Fail a migration that encounters conflicting `for` and `description` values rather than discarding either value.
+9. Switch all active readers and generators together. Update all field validation, required-description checks, diagnostics, examples, and fixtures to use `description`, optional boolean `modified-desc`, and optional non-standard `use` text; remove per-entry `source` support. Remove obsolete flat-format paths and `for` field support once committed sources and fixtures are migrated; no permanent dual-format guessing in the compiler. Fail a migration that encounters conflicting `for` and `description` values rather than discarding either value.
 
-Source changes that only reparent tokens must preserve rendering order as well as values. Capture the current emitted UI/semantic order; where grouping necessarily changes object order, document and review that ordering difference while proving styling equality. Preserve syntax order exactly, since it affects precedence. No category, description, protection flag, or authoring-only grouping field appears in generated theme JSON.
+Source changes that only reparent tokens must preserve rendering order as well as values. Capture the current emitted UI/semantic order; where grouping necessarily changes object order, document and review that ordering difference while proving styling equality. Preserve syntax order exactly, since it affects precedence. No category, description, protection flag, `use` context, or authoring-only grouping field appears in generated theme JSON.
 
 ## Scripts, tests, and documentation affected
 
-- `scripts/themes/add-properties.js`: replace the obsolete combined catalog path with the split lookups; read categorized templates; add missing entries at nested paths; keep existing review and comment-preservation behavior; fill `description` and propagate `modified-desc` when adding details; read/update syntax rules at `textmate.rules` and syntax purposes inside `textmate`; keep syntax ID generation and base-purpose derivation.
+- `scripts/themes/add-properties.js`: replace the obsolete combined catalog path with the split lookups; read categorized templates; add missing entries at nested paths; keep existing review and comment-preservation behavior; fill `description` and propagate `modified-desc` and non-standard `use` context when adding details; read/update syntax rules at `textmate.rules` and syntax purposes inside `textmate`; keep syntax ID generation and base-purpose derivation.
 - `scripts/themes/add-theme.js`: scaffold categorized UI/semantic token and detail objects, populate from the renamed templates, and retain metadata copying, whole-file fallback, rollback, terminal colors, and build command guidance.
-- `scripts/lib/theme-compilation.js`: normalize nested tokens/details and syntax wrappers before validation and emission; validate `description` and optional boolean `modified-desc` instead of `for` or per-entry `source`; retain all color, alias, disabled-entry, and relationship contracts.
+- `scripts/lib/theme-compilation.js`: normalize nested tokens/details and syntax wrappers before validation and emission; validate `description`, optional boolean `modified-desc`, and optional non-standard `use` text instead of `for` or per-entry `source`; retain all color, alias, disabled-entry, and relationship contracts.
 - `scripts/lib/theme-source-inputs.js`, `scripts/themes/build.js`, and `scripts/themes/check.js`: use the shared reader wherever they inspect source shapes. Preserve target discovery, independent fallback, selected-group cleanup, check-mode immutability, and preview registration behavior.
 - `scripts/themes/watch.js`: ensure the nested source migration is handled through normal source events. Templates and lookups remain explicit generator inputs rather than runtime build dependencies; catalog-only changes need no automatic rebuild or reload. Actual registration changes still use the existing conditional reminder.
 - `package.json` and lockfile: add the updater command, extraction dependency where needed, and any necessary validation integration. Ordinary `npm run check` validates checked-in schemas and coverage offline; upstream refresh checking remains an explicit updater command with pinned inputs.
 - `tests/test-projects.js` and existing compilation, validation, property, setup, build, workflow, and watch tests: migrate fixtures and source-path assertions. Keep tests that verify behavior rather than reproducing the nesting implementation.
-- `README.md`, `docs/guides/token-details.md`, and `docs/guides/development-guide.md`: document the file tree, categories, nested authoring, `description` and `modified-desc` refresh protection, updater flags/source prerequisites, template-versus-lookup responsibilities, and generator workflow.
+- `README.md`, `docs/guides/token-details.md`, and `docs/guides/development-guide.md`: document the file tree, categories, nested authoring, `description` and `modified-desc` refresh protection, non-standard `use` context, updater flags/source prerequisites, template-versus-lookup responsibilities, and generator workflow.
 - `docs/guides/workbench-color-audit.md`: update active provenance instructions and links to the new catalogs. Preserve historical audit claims with their pinned versions.
 - `CHANGELOG.md`: record the completed format/catalog migration during implementation. Plans and historical changelog entries remain historical; repair broken links when relocating active resources without rewriting past behavior.
 - Search the whole repository for retired catalog/template paths, former names, and flat-format instructions. Update active prose, code, fixture paths, editor configuration, and any packaging/workflow references found. Verify `hex-opacity.md` links still target `docs/lookups/hex-opacity.md`.
@@ -253,7 +268,7 @@ Every authored JavaScript module follows `AGENTS.md` header, declaration JSDoc, 
 ## Implementation sequence
 
 - [ ] Capture canonical token, purpose, alias, scope-order, and generated-output inventories for every current theme; record the template/catalog membership differences.
-- [ ] Implement the shared format codec and detail `description`/`modified-desc` validation; cover ambiguous UI nodes, selectors, syntax wrappers, and duplicate IDs.
+- [ ] Implement the shared format codec and detail `description`/`modified-desc`/`use` validation; cover ambiguous UI nodes, selectors, syntax wrappers, and duplicate IDs.
 - [ ] Implement pinned description extraction and the lookup updater, using fixture snapshots for reproducible behavior checks.
 - [ ] Prepare categorized templates and split lookup candidates, including description refresh protection and a classification report.
 - [ ] Update compiler, catalog readers, generators, and their fixtures; migrate all local source and detail files in the same integrated change.
@@ -269,7 +284,7 @@ Every authored JavaScript module follows `AGENTS.md` header, declaration JSDoc, 
 3. Every theme retains its authored token membership, configured styling, reasons, flags, IDs, and independent fallback behavior. Syntax rule and scope order are identical. Normalized aliases and relationship strings remain stable.
 4. UI parent/child tokens both survive; unmodified and compound wildcard semantic selectors and language-qualified selectors reconstruct exactly; `*.deprecated` is not misclassified as a retired selector.
 5. All lookup and authored detail records use `description` instead of `for`, with no per-entry `source` field. The lookup updater preserves descriptions with `modified-desc: true`; absent or false flags permit extracted refresh. Nonboolean flags, empty protected descriptions, conflicts, incomplete extraction, missing pins, and malformed inputs produce accurate diagnostics and leave files intact on fatal errors.
-6. Extraction and merge behavior is covered with local fixture sources: registration strings/localization forms, stable/main precedence, protected descriptions, false/absent flag refresh, propagation to new detail records, unknown IDs, and failure-before-write behavior. Routine tests do not require network access.
+6. Extraction and merge behavior is covered with local fixture sources: registration strings/localization forms, stable/main precedence, protected descriptions, false/absent flag refresh, preservation and validation of non-standard `use` text independently of description refresh, context propagation to new detail records, context/category conflicts, exclusion of usage metadata from styling/output, unknown IDs, and failure-before-write behavior. Routine tests do not require network access.
 7. Repeated updater and generator runs are idempotent. Updater `--check` and build check modes make no writes. Catalog refreshes never manufacture a reload requirement.
 8. Generated themes have the same active styling and disabled definitions as the baseline, with exact syntax ordering. Any harmless UI/semantic serialization-order changes are reviewed explicitly rather than hidden by a broad snapshot update.
 9. Relevant focused tests and the aggregate checks pass, examples match the live authoring schema, documentation links resolve, and all completed changes are committed.
