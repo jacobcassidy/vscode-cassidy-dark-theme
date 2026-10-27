@@ -118,7 +118,7 @@ test("watch builds both groups on startup and syncs linked dev theme registratio
   assert.equal(project.reminders(), 1);
   assert.ok(
     project.rawLogs.includes(
-      "\u001b[35mRun Developer: Reload Window in VS Code, then select a Cassidy Dark Preview theme.\u001b[0m",
+      "\u001b[33mRun Developer: Reload Window in VS Code, then select a Cassidy Dark Preview theme.\u001b[0m",
     ),
   );
   assert.equal(manifest.name, "cassidy-dark-dev");

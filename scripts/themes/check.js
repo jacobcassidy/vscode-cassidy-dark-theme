@@ -6,6 +6,7 @@
 import { readFile, stat } from "node:fs/promises";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
+import { formatMessage } from "../lib/terminal-output.js";
 import { parseJsonc } from "../lib/jsonc-validation.js";
 import { listFiles, themeUiType } from "../lib/theme-source-inputs.js";
 
@@ -137,9 +138,9 @@ export async function checkThemes(root = fileURLToPath(new URL("../../", import.
 
 if (import.meta.main) {
   try {
-    console.log(`Validated ${await checkThemes()} themes and manifest asset paths.`);
+    console.log(formatMessage(`Validated ${await checkThemes()} themes and manifest asset paths.`, "success"));
   } catch (error) {
-    console.error(error.message);
+    console.error(formatMessage(error.message, "error"));
     process.exitCode = 1;
   }
 }

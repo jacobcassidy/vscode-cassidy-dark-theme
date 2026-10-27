@@ -6,6 +6,7 @@
 import { lstat, mkdir, rm, writeFile } from "node:fs/promises";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
+import { formatMessage } from "../lib/terminal-output.js";
 import { applyEdits, modify } from "jsonc-parser";
 // Prettier's generated entry point hides its default export from the import resolver.
 // eslint-disable-next-line import-x/default
@@ -150,15 +151,16 @@ if (import.meta.main) {
     /** Created theme files and property counts reported to the command-line caller. */
     const result = await addTheme({ theme: process.argv[2] });
 
-    console.log(`Created ${result.theme}:`);
+    console.log(formatMessage(`Created ${result.theme}:`, "success"));
 
     for (const path of result.files) console.log(`  ${path}`);
 
-    for (const update of result.updates) console.log(`${update.section}: added ${update.added.length} properties`);
+    for (const update of result.updates)
+      console.log(formatMessage(`${update.section}: added ${update.added.length} properties`, "success"));
 
-    console.log(`Build with ${result.command}`);
+    console.log(formatMessage(`Build with ${result.command}`, "action"));
   } catch (error) {
-    console.error(error.message);
+    console.error(formatMessage(error.message, "error"));
     process.exitCode = 1;
   }
 }

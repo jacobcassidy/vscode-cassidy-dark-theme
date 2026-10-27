@@ -7,6 +7,7 @@ import { readFile, writeFile, mkdir, lstat, realpath, symlink } from "node:fs/pr
 import { homedir } from "node:os";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
+import { formatMessage } from "../lib/terminal-output.js";
 import { parseJsonc } from "../lib/jsonc-validation.js";
 import { listFiles, readOptional, themeUiType } from "../lib/theme-source-inputs.js";
 
@@ -58,11 +59,13 @@ function previewRegistrations(source) {
 }
 
 /**
- * Print the shared magenta instruction after a reload-requiring preview update.
+ * Print the shared yellow instruction after a reload-requiring preview update.
  * @param [logger] - Logger receiving the reminder.
  */
 export function logReloadReminder(logger = console) {
-  logger.log("\u001b[35mRun Developer: Reload Window in VS Code, then select a Cassidy Dark Preview theme.\u001b[0m");
+  logger.log(
+    formatMessage("Run Developer: Reload Window in VS Code, then select a Cassidy Dark Preview theme.", "action"),
+  );
 }
 
 /**

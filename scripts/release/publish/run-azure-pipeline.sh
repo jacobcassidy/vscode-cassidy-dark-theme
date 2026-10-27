@@ -4,9 +4,9 @@ set -euo pipefail
 branch=$(git branch --show-current)
 
 if [[ "$branch" != "main" ]]; then
-  echo "Publishing is only allowed from main."
-  echo "Current branch: ${branch:-detached HEAD}"
-  echo "Switch with: git switch main"
+  printf '\033[31m%s\033[0m\n' "Publishing is only allowed from main."
+  printf '\033[34m%s\033[0m\n' "Current branch: ${branch:-detached HEAD}"
+  printf '\033[33m%s\033[0m\n' "Switch with: git switch main"
   exit 1
 fi
 

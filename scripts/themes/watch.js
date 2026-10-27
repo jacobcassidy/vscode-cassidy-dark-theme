@@ -9,27 +9,8 @@ import { join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { buildDevThemes, buildProdThemes } from "./build.js";
 import { logReloadReminder, syncDevExtension } from "../dev-extension/sync.js";
+import { formatMessage } from "../lib/terminal-output.js";
 import { readOptional } from "../lib/theme-source-inputs.js";
-
-/** ANSI styles used to distinguish watcher status messages in terminal output. */
-const styles = {
-  yellow: "\u001b[33m",
-  blue: "\u001b[34m",
-  green: "\u001b[32m",
-  red: "\u001b[31m",
-  dim: "\u001b[2m",
-  reset: "\u001b[0m",
-};
-
-/**
- * Apply an ANSI style to a status message.
- * @param message - Status text to color.
- * @param style - ANSI color sequence applied to the message.
- * @returns Styled text ending with a reset sequence.
- */
-function styled(message, style) {
-  return `${style}${message}${styles.reset}`;
-}
 
 /**
  * Accept events in prod/dev source trees, including unknown filenames that require a rebuild.
@@ -116,7 +97,7 @@ export function watchThemes(
     try {
       if (manifestOnly && (await readOptional(join(root, "package.json"))) === lastManifest) return;
 
-      logger.log(styled("[watch] Building prod and dev themes...", styles.yellow));
+      logger.log(formatMessage("[watch] Building prod and dev themes...", "heading"));
 
       /** Production build summary for this watcher cycle. */
       const prod = await services.buildProdThemes({ root });
@@ -139,9 +120,9 @@ export function watchThemes(
       const changedFiles = [...prod.changed, ...dev.flatMap((target) => target.changed)];
 
       logger.log(
-        styled(
+        formatMessage(
           `[watch] Built ${prod.targets.length} prod and ${dev.length} dev themes; ${changed} generated files updated.`,
-          styles.green,
+          "success",
         ),
       );
 
@@ -154,9 +135,9 @@ export function watchThemes(
       /** Failed build message retained for diagnostic styling. */
       const message = `[watch] ${error.message}`;
 
-      /** Stale-output errors highlighted distinctly in watcher output. */
-      const diagnostic = /stale/i.test(error.message) ? styled(message, styles.red) : message;
-      logger.error(`${diagnostic}\n${styled("[watch] Waiting for the next source change to retry.", styles.dim)}`);
+      logger.error(
+        `${formatMessage(message, "error")}\n${formatMessage("[watch] Waiting for the next source change to retry.", "info")}`,
+      );
     }
   }
 
@@ -219,7 +200,7 @@ export function watchThemes(
     watchers.push(watcher);
     watcher.on("error", (error) => {
       failure = error;
-      logger.error(`[watch] File watcher failed: ${error.message}`);
+      logger.error(formatMessage(`[watch] File watcher failed: ${error.message}`, "error"));
       void close();
     });
   }
@@ -247,7 +228,7 @@ export function watchThemes(
   }
 
   logger.log(
-    styled("[watch] Watching theme sources, package.json, and static snapshots. Press Ctrl+C to stop.", styles.blue),
+    `${formatMessage("[watch] Watching theme sources, package.json, and static snapshots.", "info")} ${formatMessage("Press Ctrl+C to stop.", "action")}`,
   );
   startBuild();
 
@@ -272,7 +253,7 @@ if (import.meta.main) {
       process.off("SIGTERM", stop);
     }
   } catch (error) {
-    console.error(`[watch] ${error.message}`);
+    console.error(formatMessage(`[watch] ${error.message}`, "error"));
     process.exitCode = 1;
   }
 }

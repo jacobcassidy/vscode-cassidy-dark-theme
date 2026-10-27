@@ -6,6 +6,7 @@
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
+import { formatMessage } from "../lib/terminal-output.js";
 import { applyEdits, createScanner, modify, SyntaxKind } from "jsonc-parser";
 // Prettier's generated entry point hides its default export from the import resolver.
 // eslint-disable-next-line import-x/default
@@ -407,10 +408,15 @@ if (import.meta.main) {
     const themes = process.argv.slice(2);
 
     for (const update of await addThemeProperties(themes.length ? { themes } : {})) {
-      console.log(`${update.theme} ${update.section}: added ${update.added.length} properties (${update.path})`);
+      console.log(
+        formatMessage(
+          `${update.theme} ${update.section}: added ${update.added.length} properties (${update.path})`,
+          "success",
+        ),
+      );
     }
   } catch (error) {
-    console.error(error.message);
+    console.error(formatMessage(error.message, "error"));
     process.exitCode = 1;
   }
 }

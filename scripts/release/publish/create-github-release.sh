@@ -2,10 +2,21 @@
 set -euo pipefail
 
 cd "$(dirname "$0")/../../.."
-: "${GH_TOKEN:?Set GH_TOKEN to a GitHub token with repository Contents write access.}"
-vsix=${1:?Usage: bash scripts/release/publish/create-github-release.sh /absolute/path/to/extension.vsix}
+if [[ -z "${GH_TOKEN:-}" ]]; then
+  printf '\033[31m%s\033[0m\n' "GH_TOKEN is required." >&2
+  printf '\033[33m%s\033[0m\n' "Set GH_TOKEN to a GitHub token with repository Contents write access." >&2
+  exit 1
+fi
+
+if [[ -z "${1:-}" ]]; then
+  printf '\033[31m%s\033[0m\n' "A VSIX file path is required." >&2
+  printf '\033[33m%s\033[0m\n' "Usage: bash scripts/release/publish/create-github-release.sh /absolute/path/to/extension.vsix" >&2
+  exit 1
+fi
+
+vsix=$1
 if [[ ! -f "$vsix" ]]; then
-  echo "VSIX file not found: $vsix" >&2
+  printf '\033[31m%s\033[0m\n' "VSIX file not found: $vsix" >&2
   exit 1
 fi
 
@@ -24,7 +35,7 @@ gh api "repos/$repo" --silent
 if gh release view "$tag" --repo "$repo" >/dev/null 2>&1; then
   assets=$(gh release view "$tag" --repo "$repo" --json assets --jq '.assets[].name')
   if grep -Fxq -- "$asset" <<< "$assets"; then
-    echo "Release $tag already contains $asset; skipping."
+    printf '\033[34m%s\033[0m\n' "Release $tag already contains $asset; skipping."
   else
     gh release upload "$tag" "$vsix" --repo "$repo"
   fi

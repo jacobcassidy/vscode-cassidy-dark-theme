@@ -11,6 +11,7 @@ import { applyEdits, modify } from "jsonc-parser";
 // eslint-disable-next-line import-x/default
 import prettier from "prettier";
 import { logReloadReminder, syncDevExtension } from "../dev-extension/sync.js";
+import { formatMessage } from "../lib/terminal-output.js";
 import { fields, object, parseJsonc } from "../lib/jsonc-validation.js";
 import { generatePalette } from "../lib/palette-generation.js";
 import { compileTokens, renderTheme } from "../lib/theme-compilation.js";
@@ -30,25 +31,6 @@ import {
 
 /** Repository root inferred from the build module’s location. */
 const defaultRoot = fileURLToPath(new URL("../../", import.meta.url));
-
-/** ANSI styles used to distinguish build status messages in terminal output. */
-const styles = {
-  yellow: "\u001b[33m",
-  green: "\u001b[32m",
-  red: "\u001b[31m",
-  dim: "\u001b[2m",
-  reset: "\u001b[0m",
-};
-
-/**
- * Apply an ANSI style to a status message.
- * @param message - Status text to color.
- * @param style - ANSI color sequence applied to the message.
- * @returns Styled text ending with a reset sequence.
- */
-function styled(message, style) {
-  return `${style}${message}${styles.reset}`;
-}
 
 /**
  * Load independent whole-file inputs and compile one target’s effective token sections.
@@ -681,14 +663,14 @@ export async function buildDevThemes({ root = defaultRoot, check = false } = {})
  * @param logger - Logger receiving build progress and generated paths.
  */
 function logSummary(summary, targets, changedFiles, hasFollowingSummary, logger) {
-  logger.log(styled(summary, styles.green));
+  logger.log(formatMessage(summary, "success"));
 
   /** Changed output paths assigned to a specific theme target. */
   const assigned = new Set(targets.flatMap((target) => target.changed));
 
   for (const target of targets) {
     for (const path of target.changed) {
-      logger.log(path === target.output ? styled(`  ${path}`, styles.green) : `  ${path}`);
+      logger.log(`  ${path}`);
     }
   }
 
@@ -722,9 +704,9 @@ export async function runBuild({
 
   if (mode !== "dev") {
     logger.log(
-      styled(
+      formatMessage(
         `${check ? "Checking" : "Building"} ${mode === "palette" ? "palette reports" : "prod themes"}...`,
-        styles.yellow,
+        "heading",
       ),
     );
 
@@ -741,7 +723,7 @@ export async function runBuild({
   }
 
   if (mode === "all" || mode === "dev") {
-    logger.log(styled(`${check ? "Checking" : "Building"} dev themes...`, styles.yellow));
+    logger.log(formatMessage(`${check ? "Checking" : "Building"} dev themes...`, "heading"));
 
     /** Development outputs generated for the selected workflow. */
     const targets = await buildDevThemes({ root, check });
@@ -763,7 +745,7 @@ export async function runBuild({
   /** Applied preview changes and their reload requirement. */
   const preview = await syncDevExtension({ root, extensionDirectory });
 
-  logger.log(`Synced dev manifest: ${preview.manifestPath}`);
+  logger.log(formatMessage(`Synced dev manifest: ${preview.manifestPath}`, "success"));
 
   if (preview.reloadRequired) logReloadReminder(logger);
 
@@ -793,7 +775,7 @@ if (import.meta.main) {
       check: flags.includes("--check"),
     });
   } catch (error) {
-    console.error(styled(error.message, styles.red));
+    console.error(formatMessage(error.message, "error"));
     process.exitCode = 1;
   }
 }

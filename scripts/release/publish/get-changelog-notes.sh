@@ -13,7 +13,7 @@ notes=$(awk -v version="$version" '
 ' CHANGELOG.md)
 
 if [[ -z "${notes//[[:space:]]/}" ]]; then
-  echo "CHANGELOG.md must contain nonempty notes under ## [$version]." >&2
+  printf '\033[31m%s\033[0m\n' "CHANGELOG.md must contain nonempty notes under ## [$version]." >&2
   exit 1
 fi
 printf '%s\n' "$notes"
