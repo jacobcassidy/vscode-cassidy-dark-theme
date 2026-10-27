@@ -2,7 +2,7 @@
 
 ## Summary
 
-Keep the current per-theme structure. The largest improvement would come from giving shared token data a source-owned home and separating reusable implementation from executable scripts.
+Keep the current theme target directories, grouping each token family's definitions and details together within its theme. Give shared token data a source-owned home and separate reusable implementation from executable scripts.
 
 Today, templates and lookups under `docs/` participate in generation and validation, while the 837-line build script handles several distinct responsibilities. The upcoming catalog plan makes both boundaries more important.
 
@@ -28,7 +28,18 @@ src/
       metadata.jsonc
       palette/
       tokens/
-      details/
+        variables/
+          definitions.jsonc
+          details.jsonc
+        ui/
+          definitions.jsonc
+          details.jsonc
+        semantic/
+          definitions.jsonc
+          details.jsonc
+        syntax/
+          definitions.jsonc
+          details.jsonc
 
 tooling/
   authoring/
@@ -74,6 +85,12 @@ images/
 
 Keep production outputs, preview outputs, snapshots, images, and each theme’s palette reports in their current locations. Those locations already communicate their relationships reasonably well.
 
+Both prod and dev themes use the illustrated family layout. Move each theme's `tokens/<family>.jsonc` to `tokens/<family>/definitions.jsonc` and `details/<family>.jsonc` to `tokens/<family>/details.jsonc`, for `variables`, `ui`, `semantic`, and `syntax`. Remove the old theme-level `details/` directory after migration.
+
+`definitions.jsonc` holds styling, aliases, or rules; `details.jsonc` holds purpose descriptions and relationships. This matches the family grouping in shared catalogs, where `template.jsonc` provides starter definitions and `details.jsonc` provides shared reference documentation. Keep these family directories as the final directory level.
+
+Preserve independent whole-file fallback for each file. A theme may supply `tokens/semantic/definitions.jsonc` while inheriting `tokens/semantic/details.jsonc`, or the reverse. A supplied empty details file in the applicable schema suppresses documentation fallback. Omitted files remain omitted; creating a family directory does not materialize inherited files or make fallback apply to the whole directory. The default theme continues to supply every required definition and details file.
+
 Move the remaining human reference, `hex-opacity.md`, into `docs/references/`. Remove `docs/templates/` and `docs/lookups/` after their consumers have migrated.
 
 ## Responsibilities and interfaces
@@ -105,13 +122,13 @@ Preserve existing npm command names and flags. Point them at the command wrapper
 
 Group shared inputs by token family, as selected, while preserving their distinct contracts:
 
-| Input               | Authority                                                                             |
-| ------------------- | ------------------------------------------------------------------------------------- |
-| Family template     | Supported inventory, category membership, and placeholder styling used by generators. |
-| Shared details      | Reusable descriptions, protected description flags, and usage context.                |
-| Theme-local tokens  | That theme’s styling and enabled state.                                               |
-| Theme-local details | Authored explanations, protection flags, usage context, and relationships.            |
-| `sources.jsonc`     | Pinned upstream revisions and extraction input configuration.                         |
+| Input                   | Authority                                                                             |
+| ----------------------- | ------------------------------------------------------------------------------------- |
+| Family template         | Supported inventory, category membership, and placeholder styling used by generators. |
+| Shared details          | Reusable descriptions, protected description flags, and usage context.                |
+| Theme-local definitions | That theme’s styling, aliases, rules, and enabled state.                              |
+| Theme-local details     | Authored explanations, protection flags, usage context, and relationships.            |
+| `sources.jsonc`         | Pinned upstream revisions and extraction input configuration.                         |
 
 Keep template and detail files separate. Their inventories intentionally differ, and refreshing descriptions must not expand templates or overwrite theme-specific documentation.
 
@@ -135,10 +152,11 @@ Keep active guides and examples current. Preserve archived plans and historical 
 
 1. **Capture the baseline.** Record theme membership, styling, syntax precedence, fallback behavior, generated outputs, and snapshot bytes.
 2. **Establish the tooling boundaries.** Move reusable code, extract build responsibilities, and update test imports without changing source formats.
-3. **Implement the upcoming catalog migration at the final paths.** Avoid moving catalogs into the proposed intermediate `docs/` destinations first.
-4. **Align tests with responsibilities.** Move shared project builders into `tests/helpers/`, place upstream extraction samples in `tests/fixtures/`, and update test discovery for nested suites.
-5. **Update all consumers.** Audit active links, npm scripts, imports, watcher subscriptions, formatting/lint configuration, packaging exclusions, and generated-file notices. Exclude `tooling/` from the VSIX and ignore the upstream cache.
-6. **Verify and commit completed stages.** Run focused tests and `npm run check`; confirm repeatable builds, read-only checks, isolated preview synchronization, and VSIX contents.
+3. **Group theme inputs by family.** Move existing local token and details files to their paired family paths, preserving contents and omitted files. Update input discovery, compiler loading, scaffolding, property addition, updater source inventories, and test fixtures together. Preserve alias names and independent per-file fallback.
+4. **Implement the upcoming catalog migration at the final paths.** Avoid moving catalogs into the proposed intermediate `docs/` destinations first. Apply its categorized authoring format to the theme files at their new family paths.
+5. **Align tests with responsibilities.** Move shared project builders into `tests/helpers/`, place upstream extraction samples in `tests/fixtures/`, and update test discovery for nested suites. Verify independent definition/details fallback in both directions, explicit empty details, omitted local files, required default files, and generator output paths.
+6. **Update all consumers.** Audit active links, npm scripts, imports, watcher subscriptions, formatting/lint configuration, packaging exclusions, and generated-file notices. Exclude `tooling/` from the VSIX and ignore the upstream cache.
+7. **Verify and commit completed stages.** Run focused tests and `npm run check`; confirm repeatable builds, read-only checks, isolated preview synchronization, and VSIX contents.
 
 Acceptance requires unchanged theme appearance and exact syntax precedence; preserved comments, descriptions, and fallback behavior; actionable category diagnostics; watcher recovery after catalog corrections; and no upstream downloads during ordinary builds or tests.
 
