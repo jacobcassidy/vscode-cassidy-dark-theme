@@ -151,14 +151,14 @@ if (import.meta.main) {
     /** Created theme files and property counts reported to the command-line caller. */
     const result = await addTheme({ theme: process.argv[2] });
 
-    console.log(formatMessage(`Created ${result.theme}:`, "success"));
+    console.log(formatMessage(`Created new ${result.theme} theme`, "success"));
 
     for (const path of result.files) console.log(formatMessage(`  ${path}`, "file"));
 
     for (const update of result.updates)
-      console.log(formatMessage(`${update.section}: added ${update.added.length} properties`, "success"));
+      console.log(formatMessage(`tokens/${update.section}.json: added ${update.added.length} properties`, "success"));
 
-    console.log(formatMessage(`Build with ${result.command}`, "action"));
+    console.log(formatMessage(`Build with \`${result.command}\` or \`npm run build\``, "action"));
   } catch (error) {
     console.error(formatMessage(error.message, "error"));
     process.exitCode = 1;

@@ -275,9 +275,9 @@ test("CLI setup and explicit property targets work without changing the configur
   /** Command output should explain the created files and the next build command. */
   const result = await run(process.execPath, [setupScript, "dev/cli"]);
 
-  assert.match(result.stdout, /Created dev\/cli:/);
-  assert.match(result.stdout, /ui: added 2 properties/);
-  assert.match(result.stdout, /Build with npm run build:dev/);
+  assert.match(result.stdout, /Created new dev\/cli theme/);
+  assert.match(result.stdout, /tokens\/ui\.json: added 2 properties/);
+  assert.match(result.stdout, /Build with `npm run build:dev` or `npm run build`/);
   await assert.rejects(run(process.execPath, [setupScript]), /Usage:/);
   await assert.rejects(run(process.execPath, [setupScript, "dev/extra", "dev/another"]), /Usage:/);
 
