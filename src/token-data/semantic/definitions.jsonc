@@ -1,0 +1,379 @@
+// Shared semantic token definitions: inventory, categories, and generator placeholders.
+// Upstream inputs last processed: VS Code 1.143.1
+// Stable commit: unknown (historical source tag; commit not recorded)
+// Supplemental main commit: 1184ad4d45794110deb6b897ea83b15aac44ed89
+/*
+MIT License
+
+Copyright (c) 2015 - present Microsoft Corporation
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+*/
+// Updater (run from the repository root): npm run update:token-details
+{
+  "standard": {
+    "*": {
+      "abstract": {
+        // -- STANDARD --
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+      },
+      "async": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+      },
+      "declaration": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+      },
+      "deprecated": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+      },
+      "documentation": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+      },
+      "modification": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+      },
+      "readonly": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+      },
+      "static": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+      }
+    },
+    "class": {
+      "default": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+      }
+    },
+    "comment": {
+      "default": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+      }
+    },
+    "decorator": {
+      "default": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+      }
+    },
+    "enum": {
+      "default": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+      }
+    },
+    "enumMember": {
+      "default": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+      }
+    },
+    "event": {
+      "default": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+      }
+    },
+    "function": {
+      "default": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+      },
+      "defaultLibrary": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+      }
+    },
+    "interface": {
+      "default": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+      }
+    },
+    "keyword": {
+      "default": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+      }
+    },
+    "macro": {
+      "default": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+      }
+    },
+    "method": {
+      "default": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+      }
+    },
+    "namespace": {
+      "default": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+      }
+    },
+    "number": {
+      "default": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+      }
+    },
+    "operator": {
+      "default": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+      }
+    },
+    "parameter": {
+      "default": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+      }
+    },
+    "property": {
+      "default": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+      }
+    },
+    "regexp": {
+      "default": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+      }
+    },
+    "string": {
+      "default": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+      }
+    },
+    "struct": {
+      "default": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+      }
+    },
+    "type": {
+      "default": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+      }
+    },
+    "typeParameter": {
+      "default": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+      }
+    },
+    "variable": {
+      "default": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+      },
+      "abstract": {
+        // -- STANDARD MODIFIERS --
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+      },
+      "async": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+      },
+      "declaration": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+      },
+      "defaultLibrary": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+      },
+      "definition": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+      },
+      "deprecated": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+      },
+      "documentation": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+      },
+      "modification": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+      },
+      "readonly": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+      },
+      "static": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+      }
+    }
+  },
+  "sourceCode": {},
+  "nonStandard": {
+    "*": {
+      "builtin": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+      },
+      "callable": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+      },
+      "classMember": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+      },
+      "decorator": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+      },
+      "escapeCharacter": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+      },
+      "invalid": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+      },
+      "keywordArgument": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+      },
+      "library": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+      },
+      "overridden": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+      },
+      "typeHint": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+      },
+      "typeHintComment": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+      }
+    },
+    "arrow": {
+      "default": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+      }
+    },
+    "bracket": {
+      "default": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+      }
+    },
+    "builtinConstant": {
+      "default": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+      }
+    },
+    "clsParameter": {
+      "default": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+      }
+    },
+    "colon": {
+      "default": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+      }
+    },
+    "curlybrace": {
+      "default": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+      }
+    },
+    "intrinsic": {
+      "default": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+      }
+    },
+    "label": {
+      "default": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+      }
+    },
+    "magicFunction": {
+      "default": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+      }
+    },
+    "module": {
+      "default": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+      }
+    },
+    "parenthesis": {
+      "default": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+      }
+    },
+    "selfParameter": {
+      "default": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+      }
+    },
+    "semicolon": {
+      "default": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+      }
+    },
+    "defaultLibrary": {
+      "default": {
+        // -- NON-STANDARD --
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+      }
+    }
+  },
+  "deprecated": {}
+}

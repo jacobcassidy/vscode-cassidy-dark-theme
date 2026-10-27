@@ -1,0 +1,184 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Shared ui definitions",
+  "type": "object",
+  "properties": {
+    "standard": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/definitions/standard"
+      }
+    },
+    "sourceCode": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/definitions/sourceCode"
+      }
+    },
+    "nonStandard": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/definitions/nonStandard"
+      }
+    },
+    "deprecated": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/definitions/deprecated"
+      }
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "standard",
+    "sourceCode",
+    "nonStandard",
+    "deprecated"
+  ],
+  "definitions": {
+    "standard": {
+      "type": "object",
+      "properties": {
+        "color": {
+          "type": "string",
+          "pattern": "\\S"
+        },
+        "alpha": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "colorReason": {
+          "type": "string",
+          "pattern": "\\S"
+        },
+        "disabled": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "$ref": "#/definitions/standard"
+            }
+          ]
+        },
+        "disabledReason": {
+          "type": "string",
+          "pattern": "\\S"
+        }
+      },
+      "additionalProperties": {
+        "$ref": "#/definitions/standard"
+      }
+    },
+    "sourceCode": {
+      "type": "object",
+      "properties": {
+        "color": {
+          "type": "string",
+          "pattern": "\\S"
+        },
+        "alpha": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "colorReason": {
+          "type": "string",
+          "pattern": "\\S"
+        },
+        "disabled": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "$ref": "#/definitions/sourceCode"
+            }
+          ]
+        },
+        "disabledReason": {
+          "type": "string",
+          "pattern": "\\S"
+        }
+      },
+      "additionalProperties": {
+        "$ref": "#/definitions/sourceCode"
+      }
+    },
+    "nonStandard": {
+      "type": "object",
+      "properties": {
+        "color": {
+          "type": "string",
+          "pattern": "\\S"
+        },
+        "alpha": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "colorReason": {
+          "type": "string",
+          "pattern": "\\S"
+        },
+        "disabled": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "$ref": "#/definitions/nonStandard"
+            }
+          ]
+        },
+        "disabledReason": {
+          "type": "string",
+          "pattern": "\\S"
+        },
+        "use": {
+          "type": "string",
+          "pattern": "\\S"
+        }
+      },
+      "additionalProperties": {
+        "$ref": "#/definitions/nonStandard"
+      }
+    },
+    "deprecated": {
+      "type": "object",
+      "properties": {
+        "color": {
+          "type": "string",
+          "pattern": "\\S"
+        },
+        "alpha": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "colorReason": {
+          "type": "string",
+          "pattern": "\\S"
+        },
+        "disabled": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "$ref": "#/definitions/deprecated"
+            }
+          ]
+        },
+        "disabledReason": {
+          "type": "string",
+          "pattern": "\\S"
+        }
+      },
+      "additionalProperties": {
+        "$ref": "#/definitions/deprecated"
+      }
+    }
+  }
+}

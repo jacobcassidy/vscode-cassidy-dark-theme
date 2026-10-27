@@ -118,9 +118,10 @@
     "chat.thinkingShimmer": "#ff00ff99",
     "chat.voiceGlowBaseColor": "#ff00ff99",
     "chat.voiceListeningGlow": "#ff00ff99",
-    "chat.voiceSpeakingGlow": "#ff00ff99",
     "chat.workingProgressInsidersIconForeground": "#f0f",
     "chat.workingProgressStableIconForeground": "#f0f",
+    "chat.inputWorkingBorderColor2": "#0000ff99",
+    "chat.inputWorkingBorderColor3": "#0000ff99",
     "checkbox.background": "#f0f",
     "checkbox.border": "#f0f",
     "checkbox.disabled.background": "#f0f",
@@ -380,6 +381,7 @@
     "editorOverviewRuler.wordHighlightForeground": "#ff00ff99",
     "editorOverviewRuler.wordHighlightStrongForeground": "#ff00ff99",
     "editorOverviewRuler.wordHighlightTextForeground": "#ff00ff99",
+    "editorOverviewRuler.agentFeedbackForeground": "#00f",
     "editorPane.background": "#f0f",
     "editorRuler.foreground": "#ff00ff99",
     "editorStickyScroll.background": "#f0f",
@@ -994,7 +996,6 @@
     "agentsMobileDiff.addedForeground": "#00f",
     "agentsMobileDiff.deletedForeground": "#00f",
     "agentsMobileDiff.modifiedForeground": "#00f",
-    "editorOverviewRuler.agentFeedbackForeground": "#00f",
     "agentsWindowGraphic.orange": "#00f",
     "chat.fusionBadgeForeground": "#00f",
     "chat.fusionBadgeGradientEnd": "#00f",
@@ -1028,8 +1029,7 @@
     "scmGraph.historyItemGroupLocal": "#00f",
     "scmGraph.historyItemGroupRemote": "#00f",
     "testing.message.error.decorationForeground": "#00f",
-    "chat.inputWorkingBorderColor2": "#0000ff99",
-    "chat.inputWorkingBorderColor3": "#0000ff99",
+    "chat.voiceSpeakingGlow": "#ff00ff99",
     "editorActiveLineNumber.foreground": "#00f",
     "editorIndentGuide.activeBackground": "#00f",
     "editorIndentGuide.background": "#00f",
@@ -1046,19 +1046,7 @@
     "*.async": {
       "foreground": "#ff0000"
     },
-    "*.builtin": {
-      "foreground": "#ff0000"
-    },
-    "*.callable": {
-      "foreground": "#ff0000"
-    },
-    "*.classMember": {
-      "foreground": "#ff0000"
-    },
     "*.declaration": {
-      "foreground": "#ff0000"
-    },
-    "*.decorator": {
       "foreground": "#ff0000"
     },
     "*.deprecated": {
@@ -1067,22 +1055,7 @@
     "*.documentation": {
       "foreground": "#ff0000"
     },
-    "*.escapeCharacter": {
-      "foreground": "#ff0000"
-    },
-    "*.invalid": {
-      "foreground": "#ff0000"
-    },
-    "*.keywordArgument": {
-      "foreground": "#ff0000"
-    },
-    "*.library": {
-      "foreground": "#ff0000"
-    },
     "*.modification": {
-      "foreground": "#ff0000"
-    },
-    "*.overridden": {
       "foreground": "#ff0000"
     },
     "*.readonly": {
@@ -1091,34 +1064,10 @@
     "*.static": {
       "foreground": "#ff0000"
     },
-    "*.typeHint": {
-      "foreground": "#ff0000"
-    },
-    "*.typeHintComment": {
-      "foreground": "#ff0000"
-    },
-    "arrow": {
-      "foreground": "#ff0000"
-    },
-    "bracket": {
-      "foreground": "#ff0000"
-    },
-    "builtinConstant": {
-      "foreground": "#ff0000"
-    },
     "class": {
       "foreground": "#ff0000"
     },
-    "clsParameter": {
-      "foreground": "#ff0000"
-    },
-    "colon": {
-      "foreground": "#ff0000"
-    },
     "comment": {
-      "foreground": "#ff0000"
-    },
-    "curlybrace": {
       "foreground": "#ff0000"
     },
     "decorator": {
@@ -1139,25 +1088,13 @@
     "interface": {
       "foreground": "#ff0000"
     },
-    "intrinsic": {
-      "foreground": "#ff0000"
-    },
     "keyword": {
-      "foreground": "#ff0000"
-    },
-    "label": {
       "foreground": "#ff0000"
     },
     "macro": {
       "foreground": "#ff0000"
     },
-    "magicFunction": {
-      "foreground": "#ff0000"
-    },
     "method": {
-      "foreground": "#ff0000"
-    },
-    "module": {
       "foreground": "#ff0000"
     },
     "namespace": {
@@ -1172,19 +1109,10 @@
     "parameter": {
       "foreground": "#ff0000"
     },
-    "parenthesis": {
-      "foreground": "#ff0000"
-    },
     "property": {
       "foreground": "#ff0000"
     },
     "regexp": {
-      "foreground": "#ff0000"
-    },
-    "selfParameter": {
-      "foreground": "#ff0000"
-    },
-    "semicolon": {
       "foreground": "#ff0000"
     },
     "string": {
@@ -1202,16 +1130,88 @@
     "variable": {
       "foreground": "#ff0000"
     },
-    "defaultLibrary": {
-      "foreground": "#ff0"
-    },
-    "parameter.readwrite": {
-      "foreground": "#ff0"
-    },
     "variable.defaultLibrary": {
       "foreground": "#ff0"
     },
     "variable.definition": {
+      "foreground": "#ff0"
+    },
+    "*.builtin": {
+      "foreground": "#ff0000"
+    },
+    "*.callable": {
+      "foreground": "#ff0000"
+    },
+    "*.classMember": {
+      "foreground": "#ff0000"
+    },
+    "*.decorator": {
+      "foreground": "#ff0000"
+    },
+    "*.escapeCharacter": {
+      "foreground": "#ff0000"
+    },
+    "*.invalid": {
+      "foreground": "#ff0000"
+    },
+    "*.keywordArgument": {
+      "foreground": "#ff0000"
+    },
+    "*.library": {
+      "foreground": "#ff0000"
+    },
+    "*.overridden": {
+      "foreground": "#ff0000"
+    },
+    "*.typeHint": {
+      "foreground": "#ff0000"
+    },
+    "*.typeHintComment": {
+      "foreground": "#ff0000"
+    },
+    "arrow": {
+      "foreground": "#ff0000"
+    },
+    "bracket": {
+      "foreground": "#ff0000"
+    },
+    "builtinConstant": {
+      "foreground": "#ff0000"
+    },
+    "clsParameter": {
+      "foreground": "#ff0000"
+    },
+    "colon": {
+      "foreground": "#ff0000"
+    },
+    "curlybrace": {
+      "foreground": "#ff0000"
+    },
+    "intrinsic": {
+      "foreground": "#ff0000"
+    },
+    "label": {
+      "foreground": "#ff0000"
+    },
+    "magicFunction": {
+      "foreground": "#ff0000"
+    },
+    "module": {
+      "foreground": "#ff0000"
+    },
+    "parenthesis": {
+      "foreground": "#ff0000"
+    },
+    "selfParameter": {
+      "foreground": "#ff0000"
+    },
+    "semicolon": {
+      "foreground": "#ff0000"
+    },
+    "defaultLibrary": {
+      "foreground": "#ff0"
+    },
+    "parameter.readwrite": {
       "foreground": "#ff0"
     }
   },

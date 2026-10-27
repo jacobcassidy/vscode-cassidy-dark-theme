@@ -1,0 +1,390 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Theme syntax definitions",
+  "type": "object",
+  "properties": {
+    "standard": {
+      "type": "object",
+      "properties": {
+        "rules": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "color": {
+                "type": "string",
+                "pattern": "\\S"
+              },
+              "alpha": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              },
+              "colorReason": {
+                "type": "string",
+                "pattern": "\\S"
+              },
+              "disabled": {
+                "type": "boolean"
+              },
+              "disabledReason": {
+                "type": "string",
+                "pattern": "\\S"
+              },
+              "id": {
+                "type": "string",
+                "pattern": "^[a-zA-Z][a-zA-Z0-9.-]*$"
+              },
+              "name": {
+                "type": "string",
+                "pattern": "\\S"
+              },
+              "scope": {
+                "anyOf": [
+                  {
+                    "type": "string",
+                    "pattern": "\\S"
+                  },
+                  {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "pattern": "\\S"
+                    }
+                  }
+                ]
+              },
+              "fontStyle": {
+                "type": "string",
+                "pattern": "^(\\s*(bold|italic|underline|strikethrough))*\\s*$"
+              },
+              "background": {
+                "type": "object",
+                "properties": {
+                  "color": {
+                    "type": "string",
+                    "pattern": "\\S"
+                  },
+                  "alpha": {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 1
+                  },
+                  "colorReason": {
+                    "type": "string",
+                    "pattern": "\\S"
+                  }
+                },
+                "additionalProperties": false,
+                "required": [
+                  "color"
+                ]
+              },
+              "order": {
+                "type": "integer",
+                "minimum": 0
+              }
+            },
+            "additionalProperties": false,
+            "required": [
+              "order"
+            ]
+          }
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "rules"
+      ]
+    },
+    "sourceCode": {
+      "type": "object",
+      "properties": {
+        "rules": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "color": {
+                "type": "string",
+                "pattern": "\\S"
+              },
+              "alpha": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              },
+              "colorReason": {
+                "type": "string",
+                "pattern": "\\S"
+              },
+              "disabled": {
+                "type": "boolean"
+              },
+              "disabledReason": {
+                "type": "string",
+                "pattern": "\\S"
+              },
+              "id": {
+                "type": "string",
+                "pattern": "^[a-zA-Z][a-zA-Z0-9.-]*$"
+              },
+              "name": {
+                "type": "string",
+                "pattern": "\\S"
+              },
+              "scope": {
+                "anyOf": [
+                  {
+                    "type": "string",
+                    "pattern": "\\S"
+                  },
+                  {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "pattern": "\\S"
+                    }
+                  }
+                ]
+              },
+              "fontStyle": {
+                "type": "string",
+                "pattern": "^(\\s*(bold|italic|underline|strikethrough))*\\s*$"
+              },
+              "background": {
+                "type": "object",
+                "properties": {
+                  "color": {
+                    "type": "string",
+                    "pattern": "\\S"
+                  },
+                  "alpha": {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 1
+                  },
+                  "colorReason": {
+                    "type": "string",
+                    "pattern": "\\S"
+                  }
+                },
+                "additionalProperties": false,
+                "required": [
+                  "color"
+                ]
+              },
+              "order": {
+                "type": "integer",
+                "minimum": 0
+              }
+            },
+            "additionalProperties": false,
+            "required": [
+              "order"
+            ]
+          }
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "rules"
+      ]
+    },
+    "nonStandard": {
+      "type": "object",
+      "properties": {
+        "rules": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "color": {
+                "type": "string",
+                "pattern": "\\S"
+              },
+              "alpha": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              },
+              "colorReason": {
+                "type": "string",
+                "pattern": "\\S"
+              },
+              "disabled": {
+                "type": "boolean"
+              },
+              "disabledReason": {
+                "type": "string",
+                "pattern": "\\S"
+              },
+              "id": {
+                "type": "string",
+                "pattern": "^[a-zA-Z][a-zA-Z0-9.-]*$"
+              },
+              "name": {
+                "type": "string",
+                "pattern": "\\S"
+              },
+              "scope": {
+                "anyOf": [
+                  {
+                    "type": "string",
+                    "pattern": "\\S"
+                  },
+                  {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "pattern": "\\S"
+                    }
+                  }
+                ]
+              },
+              "fontStyle": {
+                "type": "string",
+                "pattern": "^(\\s*(bold|italic|underline|strikethrough))*\\s*$"
+              },
+              "background": {
+                "type": "object",
+                "properties": {
+                  "color": {
+                    "type": "string",
+                    "pattern": "\\S"
+                  },
+                  "alpha": {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 1
+                  },
+                  "colorReason": {
+                    "type": "string",
+                    "pattern": "\\S"
+                  }
+                },
+                "additionalProperties": false,
+                "required": [
+                  "color"
+                ]
+              },
+              "order": {
+                "type": "integer",
+                "minimum": 0
+              }
+            },
+            "additionalProperties": false,
+            "required": [
+              "order"
+            ]
+          }
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "rules"
+      ]
+    },
+    "deprecated": {
+      "type": "object",
+      "properties": {
+        "rules": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "color": {
+                "type": "string",
+                "pattern": "\\S"
+              },
+              "alpha": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              },
+              "colorReason": {
+                "type": "string",
+                "pattern": "\\S"
+              },
+              "disabled": {
+                "type": "boolean"
+              },
+              "disabledReason": {
+                "type": "string",
+                "pattern": "\\S"
+              },
+              "id": {
+                "type": "string",
+                "pattern": "^[a-zA-Z][a-zA-Z0-9.-]*$"
+              },
+              "name": {
+                "type": "string",
+                "pattern": "\\S"
+              },
+              "scope": {
+                "anyOf": [
+                  {
+                    "type": "string",
+                    "pattern": "\\S"
+                  },
+                  {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "pattern": "\\S"
+                    }
+                  }
+                ]
+              },
+              "fontStyle": {
+                "type": "string",
+                "pattern": "^(\\s*(bold|italic|underline|strikethrough))*\\s*$"
+              },
+              "background": {
+                "type": "object",
+                "properties": {
+                  "color": {
+                    "type": "string",
+                    "pattern": "\\S"
+                  },
+                  "alpha": {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 1
+                  },
+                  "colorReason": {
+                    "type": "string",
+                    "pattern": "\\S"
+                  }
+                },
+                "additionalProperties": false,
+                "required": [
+                  "color"
+                ]
+              },
+              "order": {
+                "type": "integer",
+                "minimum": 0
+              }
+            },
+            "additionalProperties": false,
+            "required": [
+              "order"
+            ]
+          }
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "rules"
+      ]
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "standard",
+    "sourceCode",
+    "nonStandard",
+    "deprecated"
+  ]
+}

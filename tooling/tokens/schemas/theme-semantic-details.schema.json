@@ -1,0 +1,266 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Theme semantic details",
+  "type": "object",
+  "properties": {
+    "standard": {
+      "type": "object",
+      "propertyNames": {
+        "pattern": "^(\\*|[a-zA-Z][\\w-]*)(:[a-zA-Z][\\w+-]*)?$"
+      },
+      "additionalProperties": {
+        "type": "object",
+        "propertyNames": {
+          "pattern": "^[a-zA-Z][\\w-]*(\\.[a-zA-Z][\\w-]*)*$"
+        },
+        "additionalProperties": {
+          "type": "object",
+          "properties": {
+            "description": {
+              "type": "string",
+              "pattern": "\\S"
+            },
+            "descriptionAddedIn": {
+              "type": "string",
+              "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$"
+            },
+            "descriptionUpdatedIn": {
+              "type": "string",
+              "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$"
+            },
+            "descriptionBasedOn": {
+              "type": "string",
+              "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$"
+            },
+            "inherits": {
+              "type": "array",
+              "minItems": 1,
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "pattern": "\\S"
+              }
+            },
+            "overrides": {
+              "type": "array",
+              "minItems": 1,
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "pattern": "\\S"
+              }
+            },
+            "globallyOverriddenBy": {
+              "type": "array",
+              "minItems": 1,
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "pattern": "\\S"
+              }
+            }
+          },
+          "additionalProperties": false,
+          "minProperties": 1
+        }
+      }
+    },
+    "sourceCode": {
+      "type": "object",
+      "propertyNames": {
+        "pattern": "^(\\*|[a-zA-Z][\\w-]*)(:[a-zA-Z][\\w+-]*)?$"
+      },
+      "additionalProperties": {
+        "type": "object",
+        "propertyNames": {
+          "pattern": "^[a-zA-Z][\\w-]*(\\.[a-zA-Z][\\w-]*)*$"
+        },
+        "additionalProperties": {
+          "type": "object",
+          "properties": {
+            "description": {
+              "type": "string",
+              "pattern": "\\S"
+            },
+            "descriptionAddedIn": {
+              "type": "string",
+              "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$"
+            },
+            "descriptionUpdatedIn": {
+              "type": "string",
+              "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$"
+            },
+            "descriptionBasedOn": {
+              "type": "string",
+              "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$"
+            },
+            "inherits": {
+              "type": "array",
+              "minItems": 1,
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "pattern": "\\S"
+              }
+            },
+            "overrides": {
+              "type": "array",
+              "minItems": 1,
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "pattern": "\\S"
+              }
+            },
+            "globallyOverriddenBy": {
+              "type": "array",
+              "minItems": 1,
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "pattern": "\\S"
+              }
+            }
+          },
+          "additionalProperties": false,
+          "minProperties": 1
+        }
+      }
+    },
+    "nonStandard": {
+      "type": "object",
+      "propertyNames": {
+        "pattern": "^(\\*|[a-zA-Z][\\w-]*)(:[a-zA-Z][\\w+-]*)?$"
+      },
+      "additionalProperties": {
+        "type": "object",
+        "propertyNames": {
+          "pattern": "^[a-zA-Z][\\w-]*(\\.[a-zA-Z][\\w-]*)*$"
+        },
+        "additionalProperties": {
+          "type": "object",
+          "properties": {
+            "description": {
+              "type": "string",
+              "pattern": "\\S"
+            },
+            "descriptionAddedIn": {
+              "type": "string",
+              "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$"
+            },
+            "descriptionUpdatedIn": {
+              "type": "string",
+              "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$"
+            },
+            "descriptionBasedOn": {
+              "type": "string",
+              "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$"
+            },
+            "inherits": {
+              "type": "array",
+              "minItems": 1,
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "pattern": "\\S"
+              }
+            },
+            "overrides": {
+              "type": "array",
+              "minItems": 1,
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "pattern": "\\S"
+              }
+            },
+            "globallyOverriddenBy": {
+              "type": "array",
+              "minItems": 1,
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "pattern": "\\S"
+              }
+            },
+            "use": {
+              "type": "string",
+              "pattern": "\\S"
+            }
+          },
+          "additionalProperties": false,
+          "minProperties": 1
+        }
+      }
+    },
+    "deprecated": {
+      "type": "object",
+      "propertyNames": {
+        "pattern": "^(\\*|[a-zA-Z][\\w-]*)(:[a-zA-Z][\\w+-]*)?$"
+      },
+      "additionalProperties": {
+        "type": "object",
+        "propertyNames": {
+          "pattern": "^[a-zA-Z][\\w-]*(\\.[a-zA-Z][\\w-]*)*$"
+        },
+        "additionalProperties": {
+          "type": "object",
+          "properties": {
+            "description": {
+              "type": "string",
+              "pattern": "\\S"
+            },
+            "descriptionAddedIn": {
+              "type": "string",
+              "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$"
+            },
+            "descriptionUpdatedIn": {
+              "type": "string",
+              "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$"
+            },
+            "descriptionBasedOn": {
+              "type": "string",
+              "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$"
+            },
+            "inherits": {
+              "type": "array",
+              "minItems": 1,
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "pattern": "\\S"
+              }
+            },
+            "overrides": {
+              "type": "array",
+              "minItems": 1,
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "pattern": "\\S"
+              }
+            },
+            "globallyOverriddenBy": {
+              "type": "array",
+              "minItems": 1,
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "pattern": "\\S"
+              }
+            }
+          },
+          "additionalProperties": false,
+          "minProperties": 1
+        }
+      }
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "standard",
+    "sourceCode",
+    "nonStandard",
+    "deprecated"
+  ]
+}

@@ -3,6 +3,7 @@
  * @file Validate consolidated tokens and details, resolve aliases, and emit ordered JSONC with disabled entries.
  */
 
+import { detailFields } from "./formats.js";
 import { fields, object } from "../shared/jsonc.js";
 import { validateHex, withAlpha } from "../shared/color-math.js";
 
@@ -80,7 +81,7 @@ function validateDetails(details, entries, requireDetails) {
           throw new Error(`details.${section}.${key}: missing property details; run npm run add:properties`);
         }
 
-        nonempty(details[section][key]?.for, `details.${section}.${key}.for`);
+        nonempty(details[section][key]?.description, `details.${section}.${key}.description`);
       }
     }
 
@@ -90,13 +91,15 @@ function validateDetails(details, entries, requireDetails) {
 
       if (!definitions.has(key)) throw new Error(`${label}: unknown authored entry`);
 
-      fields(value, ["for", "inherits", "overrides", "globallyOverriddenBy"], label);
+      fields(value, detailFields, label);
 
       if (!Object.keys(value).length) throw new Error(`${label}: omit empty details`);
 
       for (const [field, content] of Object.entries(value)) {
-        if (field === "for") {
-          nonempty(content, `${label}.for`);
+        if (
+          ["description", "descriptionAddedIn", "descriptionUpdatedIn", "descriptionBasedOn", "use"].includes(field)
+        ) {
+          nonempty(content, `${label}.description`);
         } else if (
           !Array.isArray(content) ||
           !content.length ||

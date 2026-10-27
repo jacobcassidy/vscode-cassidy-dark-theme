@@ -154,10 +154,8 @@ test("watch rebuilds prod and inherited dev colors and follows repeated replacem
     /** Build count recorded before or during a simulated source change. */
     const count = project.builds();
 
-    await writeFile(
-      `${input}.tmp`,
-      JSON.stringify({ ...tokens, "editor.background": { color, colorReason: "Replacement save preview." } }),
-    );
+    tokens.nonStandard.editor.background = { color, colorReason: "Replacement save preview." };
+    await writeFile(`${input}.tmp`, JSON.stringify(tokens));
     await rename(`${input}.tmp`, input);
     await waitFor(() => project.builds() > count);
 

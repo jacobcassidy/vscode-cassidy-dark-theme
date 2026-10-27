@@ -64,7 +64,6 @@
     "agentsUpdateButton.downloadingBackground": "#0ff",
     "agentsVoice.speakingBackground": "#0ff",
     "agentsVoice.speakingForeground": "#0ff",
-    "agentsWindowGraphic.orange": "#0ff",
     "badge.background": "#4d4d4d",
     "badge.foreground": "#f8f8f8",
     "banner.background": "#0ff",
@@ -103,9 +102,6 @@
     "chat.editedFileForeground": "#0ff",
     "chat.findMatchBackground": "#0ff",
     "chat.findMatchHighlightBackground": "#0ff",
-    "chat.fusionBadgeForeground": "#0ff",
-    "chat.fusionBadgeGradientEnd": "#0ff",
-    "chat.fusionBadgeGradientStart": "#0ff",
     "chat.inputWorkingBorderColor1": "#0ff",
     "chat.inputWorkingBorderColor2": "#0ff",
     "chat.inputWorkingBorderColor3": "#0ff",
@@ -126,7 +122,6 @@
     "chat.thinkingShimmer": "#0ff",
     "chat.voiceGlowBaseColor": "#0ff",
     "chat.voiceListeningGlow": "#0ff",
-    "chat.voiceSpeakingGlow": "#0ff",
     "chat.workingProgressInsidersIconForeground": "#0ff",
     "chat.workingProgressStableIconForeground": "#0ff",
     "checkbox.background": "#0ff",
@@ -256,7 +251,6 @@
     "editorActionList.focusBackground": "#0ff",
     "editorActionList.focusForeground": "#0ff",
     "editorActionList.foreground": "#0ff",
-    "editorActiveLineNumber.foreground": "#0ff",
     "editorBracketHighlight.foreground1": "#0ff",
     "editorBracketHighlight.foreground2": "#0ff",
     "editorBracketHighlight.foreground3": "#0ff",
@@ -326,14 +320,12 @@
     "editorHoverWidget.foreground": "#0ff",
     "editorHoverWidget.highlightForeground": "#0ff",
     "editorHoverWidget.statusBarBackground": "#0ff",
-    "editorIndentGuide.activeBackground": "#0ff",
     "editorIndentGuide.activeBackground1": "#4d4d4d",
     "editorIndentGuide.activeBackground2": "#0ff",
     "editorIndentGuide.activeBackground3": "#0ff",
     "editorIndentGuide.activeBackground4": "#0ff",
     "editorIndentGuide.activeBackground5": "#0ff",
     "editorIndentGuide.activeBackground6": "#0ff",
-    "editorIndentGuide.background": "#0ff",
     "editorIndentGuide.background1": "#0ff",
     "editorIndentGuide.background2": "#0ff",
     "editorIndentGuide.background3": "#0ff",
@@ -416,7 +408,6 @@
     "editorWarning.background": "#0ff",
     "editorWarning.border": "#0ff",
     "editorWarning.foreground": "#eeae7b",
-    "editorWatermark.foreground": "#0ff",
     "editorWhitespace.foreground": "#383838",
     "editorWidget.background": "#333333",
     "editorWidget.border": "#ffffff1a",
@@ -452,7 +443,6 @@
     "gitDecoration.stageModifiedResourceForeground": "#d7bb70",
     "gitDecoration.submoduleResourceForeground": "#0ff",
     "gitDecoration.untrackedResourceForeground": "#a2cd8b",
-    "gitblame.inlineMessage": "#0ff",
     "icon.foreground": "#929292",
     "inactiveSessionView.background": "#0ff",
     "inactiveSessionView.foreground": "#0ff",
@@ -590,12 +580,8 @@
     "minimapSlider.activeBackground": "#0ff",
     "minimapSlider.background": "#0ff",
     "minimapSlider.hoverBackground": "#0ff",
-    "modernActivityBar.activeBackground": "#0ff",
-    "modernActivityBar.activeForeground": "#0ff",
     "modernActivityBar.background": "#0ff",
     "modernActivityBar.border": "#0ff",
-    "modernActivityBar.hoverBackground": "#0ff",
-    "modernActivityBar.hoverForeground": "#0ff",
     "modernActivityBar.inactiveBackground": "#0ff",
     "modernActivityBarItem.activeBackground": "#0ff",
     "modernActivityBarItem.activeForeground": "#0ff",
@@ -705,7 +691,6 @@
     "progressBar.background": "#74b24c",
     "quickInput.background": "#0ff",
     "quickInput.foreground": "#0ff",
-    "quickInput.list.focusBackground": "#0ff",
     "quickInputList.focusBackground": "#0ff",
     "quickInputList.focusForeground": "#0ff",
     "quickInputList.focusHighlightForeground": "#0ff",
@@ -718,39 +703,13 @@
     "radio.inactiveBorder": "#0ff",
     "radio.inactiveForeground": "#0ff",
     "radio.inactiveHoverBackground": "#0ff",
-    "remoteHub.decorations.addedForegroundColor": "#0ff",
-    "remoteHub.decorations.conflictForegroundColor": "#0ff",
-    "remoteHub.decorations.deletedForegroundColor": "#0ff",
-    "remoteHub.decorations.ignoredResourceForeground": "#0ff",
-    "remoteHub.decorations.incomingAddedForegroundColor": "#0ff",
-    "remoteHub.decorations.incomingDeletedForegroundColor": "#0ff",
-    "remoteHub.decorations.incomingModifiedForegroundColor": "#0ff",
-    "remoteHub.decorations.incomingRenamedForegroundColor": "#0ff",
-    "remoteHub.decorations.modifiedForegroundColor": "#0ff",
-    "remoteHub.decorations.possibleConflictForegroundColor": "#0ff",
-    "remoteHub.decorations.submoduleForegroundColor": "#0ff",
-    "remoteHub.decorations.workspaceRepositoriesView.hasUncommittedChangesForegroundColor": "#0ff",
     "sash.hoverBorder": "#0ff",
-    "scm.historyGraph.green": "#0ff",
-    "scm.historyGraph.historyItemGroupBase": "#0ff",
-    "scm.historyGraph.historyItemGroupHoverLabelForeground": "#0ff",
-    "scm.historyGraph.historyItemGroupLocal": "#0ff",
-    "scm.historyGraph.historyItemGroupRemote": "#0ff",
-    "scm.historyGraph.red": "#0ff",
-    "scm.historyGraph.yellow": "#0ff",
-    "scm.historyItemAdditionsForeground": "#0ff",
-    "scm.historyItemDeletionsForeground": "#0ff",
-    "scm.historyItemSelectedStatisticsBorder": "#0ff",
-    "scm.historyItemStatisticsBorder": "#0ff",
     "scmGraph.foreground1": "#0ff",
     "scmGraph.foreground2": "#0ff",
     "scmGraph.foreground3": "#0ff",
     "scmGraph.foreground4": "#0ff",
     "scmGraph.foreground5": "#0ff",
     "scmGraph.historyItemBaseRefColor": "#0ff",
-    "scmGraph.historyItemGroupBase": "#0ff",
-    "scmGraph.historyItemGroupLocal": "#0ff",
-    "scmGraph.historyItemGroupRemote": "#0ff",
     "scmGraph.historyItemHoverAdditionsForeground": "#0ff",
     "scmGraph.historyItemHoverDefaultLabelBackground": "#0ff",
     "scmGraph.historyItemHoverDefaultLabelForeground": "#0ff",
@@ -990,7 +949,6 @@
     "testing.message.error.badgeBackground": "#0ff",
     "testing.message.error.badgeBorder": "#0ff",
     "testing.message.error.badgeForeground": "#0ff",
-    "testing.message.error.decorationForeground": "#0ff",
     "testing.message.error.lineBackground": "#0ff",
     "testing.message.info.decorationForeground": "#0ff",
     "testing.message.info.lineBackground": "#0ff",
@@ -1036,7 +994,49 @@
     "widget.border": "#ffffff0d",
     "widget.shadow": "#00000033",
     "window.activeBorder": "#0ff",
-    "window.inactiveBorder": "#0ff"
+    "window.inactiveBorder": "#0ff",
+    "agentsWindowGraphic.orange": "#0ff",
+    "chat.fusionBadgeForeground": "#0ff",
+    "chat.fusionBadgeGradientEnd": "#0ff",
+    "chat.fusionBadgeGradientStart": "#0ff",
+    "editorWatermark.foreground": "#0ff",
+    "gitblame.inlineMessage": "#0ff",
+    "remoteHub.decorations.addedForegroundColor": "#0ff",
+    "remoteHub.decorations.conflictForegroundColor": "#0ff",
+    "remoteHub.decorations.deletedForegroundColor": "#0ff",
+    "remoteHub.decorations.ignoredResourceForeground": "#0ff",
+    "remoteHub.decorations.incomingAddedForegroundColor": "#0ff",
+    "remoteHub.decorations.incomingDeletedForegroundColor": "#0ff",
+    "remoteHub.decorations.incomingModifiedForegroundColor": "#0ff",
+    "remoteHub.decorations.incomingRenamedForegroundColor": "#0ff",
+    "remoteHub.decorations.modifiedForegroundColor": "#0ff",
+    "remoteHub.decorations.possibleConflictForegroundColor": "#0ff",
+    "remoteHub.decorations.submoduleForegroundColor": "#0ff",
+    "remoteHub.decorations.workspaceRepositoriesView.hasUncommittedChangesForegroundColor": "#0ff",
+    "scm.historyGraph.green": "#0ff",
+    "scm.historyGraph.historyItemGroupBase": "#0ff",
+    "scm.historyGraph.historyItemGroupHoverLabelForeground": "#0ff",
+    "scm.historyGraph.historyItemGroupLocal": "#0ff",
+    "scm.historyGraph.historyItemGroupRemote": "#0ff",
+    "scm.historyGraph.red": "#0ff",
+    "scm.historyGraph.yellow": "#0ff",
+    "scm.historyItemAdditionsForeground": "#0ff",
+    "scm.historyItemDeletionsForeground": "#0ff",
+    "scm.historyItemSelectedStatisticsBorder": "#0ff",
+    "scm.historyItemStatisticsBorder": "#0ff",
+    "scmGraph.historyItemGroupBase": "#0ff",
+    "scmGraph.historyItemGroupLocal": "#0ff",
+    "scmGraph.historyItemGroupRemote": "#0ff",
+    "testing.message.error.decorationForeground": "#0ff",
+    "chat.voiceSpeakingGlow": "#0ff",
+    "editorActiveLineNumber.foreground": "#0ff",
+    "editorIndentGuide.activeBackground": "#0ff",
+    "editorIndentGuide.background": "#0ff",
+    "modernActivityBar.activeBackground": "#0ff",
+    "modernActivityBar.activeForeground": "#0ff",
+    "modernActivityBar.hoverBackground": "#0ff",
+    "modernActivityBar.hoverForeground": "#0ff",
+    "quickInput.list.focusBackground": "#0ff"
   },
   "semanticTokenColors": {
     "*.abstract": {
@@ -1045,19 +1045,7 @@
     "*.async": {
       "foreground": "#0ff"
     },
-    "*.builtin": {
-      "foreground": "#0ff"
-    },
-    "*.callable": {
-      "foreground": "#0ff"
-    },
-    "*.classMember": {
-      "foreground": "#0ff"
-    },
     "*.declaration": {
-      "foreground": "#0ff"
-    },
-    "*.decorator": {
       "foreground": "#0ff"
     },
     "*.deprecated": {
@@ -1066,22 +1054,7 @@
     "*.documentation": {
       "foreground": "#0ff"
     },
-    "*.escapeCharacter": {
-      "foreground": "#0ff"
-    },
-    "*.invalid": {
-      "foreground": "#0ff"
-    },
-    "*.keywordArgument": {
-      "foreground": "#0ff"
-    },
-    "*.library": {
-      "foreground": "#0ff"
-    },
     "*.modification": {
-      "foreground": "#0ff"
-    },
-    "*.overridden": {
       "foreground": "#0ff"
     },
     "*.readonly": {
@@ -1090,40 +1063,13 @@
     "*.static": {
       "foreground": "#0ff"
     },
-    "*.typeHint": {
-      "foreground": "#0ff"
-    },
-    "*.typeHintComment": {
-      "foreground": "#0ff"
-    },
-    "arrow": {
-      "foreground": "#0ff"
-    },
-    "bracket": {
-      "foreground": "#0ff"
-    },
-    "builtinConstant": {
-      "foreground": "#0ff"
-    },
     "class": {
       "foreground": "#92dedd"
-    },
-    "clsParameter": {
-      "foreground": "#0ff"
-    },
-    "colon": {
-      "foreground": "#0ff"
     },
     "comment": {
       "foreground": "#0ff"
     },
-    "curlybrace": {
-      "foreground": "#0ff"
-    },
     "decorator": {
-      "foreground": "#0ff"
-    },
-    "defaultLibrary": {
       "foreground": "#0ff"
     },
     "enum": {
@@ -1144,26 +1090,14 @@
     "interface": {
       "foreground": "#0ff"
     },
-    "intrinsic": {
-      "foreground": "#0ff"
-    },
     "keyword": {
-      "foreground": "#0ff"
-    },
-    "label": {
       "foreground": "#0ff"
     },
     "macro": {
       "foreground": "#0ff"
     },
-    "magicFunction": {
-      "foreground": "#0ff"
-    },
     "method": {
       "foreground": "#f8f8f8"
-    },
-    "module": {
-      "foreground": "#0ff"
     },
     "namespace": {
       "foreground": "#cc95e4"
@@ -1177,22 +1111,10 @@
     "parameter": {
       "foreground": "#eeae7b"
     },
-    "parameter.readwrite": {
-      "foreground": "#0ff"
-    },
-    "parenthesis": {
-      "foreground": "#0ff"
-    },
     "property": {
       "foreground": "#a2cd8b"
     },
     "regexp": {
-      "foreground": "#0ff"
-    },
-    "selfParameter": {
-      "foreground": "#0ff"
-    },
-    "semicolon": {
       "foreground": "#0ff"
     },
     "string": {
@@ -1214,6 +1136,84 @@
       "foreground": "#d1d1d1"
     },
     "variable.definition": {
+      "foreground": "#0ff"
+    },
+    "*.builtin": {
+      "foreground": "#0ff"
+    },
+    "*.callable": {
+      "foreground": "#0ff"
+    },
+    "*.classMember": {
+      "foreground": "#0ff"
+    },
+    "*.decorator": {
+      "foreground": "#0ff"
+    },
+    "*.escapeCharacter": {
+      "foreground": "#0ff"
+    },
+    "*.invalid": {
+      "foreground": "#0ff"
+    },
+    "*.keywordArgument": {
+      "foreground": "#0ff"
+    },
+    "*.library": {
+      "foreground": "#0ff"
+    },
+    "*.overridden": {
+      "foreground": "#0ff"
+    },
+    "*.typeHint": {
+      "foreground": "#0ff"
+    },
+    "*.typeHintComment": {
+      "foreground": "#0ff"
+    },
+    "arrow": {
+      "foreground": "#0ff"
+    },
+    "bracket": {
+      "foreground": "#0ff"
+    },
+    "builtinConstant": {
+      "foreground": "#0ff"
+    },
+    "clsParameter": {
+      "foreground": "#0ff"
+    },
+    "colon": {
+      "foreground": "#0ff"
+    },
+    "curlybrace": {
+      "foreground": "#0ff"
+    },
+    "defaultLibrary": {
+      "foreground": "#0ff"
+    },
+    "intrinsic": {
+      "foreground": "#0ff"
+    },
+    "label": {
+      "foreground": "#0ff"
+    },
+    "magicFunction": {
+      "foreground": "#0ff"
+    },
+    "module": {
+      "foreground": "#0ff"
+    },
+    "parameter.readwrite": {
+      "foreground": "#0ff"
+    },
+    "parenthesis": {
+      "foreground": "#0ff"
+    },
+    "selfParameter": {
+      "foreground": "#0ff"
+    },
+    "semicolon": {
       "foreground": "#0ff"
     }
   },

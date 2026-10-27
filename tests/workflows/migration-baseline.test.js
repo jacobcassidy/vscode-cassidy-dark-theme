@@ -11,6 +11,7 @@ import { createHash } from "node:crypto";
 import { fileURLToPath } from "node:url";
 import { join } from "node:path";
 import { discoverTargets, readTargetInput } from "../../tooling/themes/inputs.js";
+import { decode } from "../../tooling/tokens/formats.js";
 import { generatePalette } from "../../tooling/palette/generation.js";
 import { compileTokens } from "../../tooling/tokens/compilation.js";
 
@@ -53,8 +54,14 @@ test("all discovered targets retain independently captured styling, documentatio
         );
 
         assert.equal(input.fallback, expected.inputs[`${group}/${family}.jsonc`].fallback);
-        assert.deepEqual(JSON.parse(JSON.stringify(input.value)), expected.inputs[`${group}/${family}.jsonc`].value);
-        collection[family] = input.value;
+        /** Independently frozen records permit only the specified detail-field rename. */
+        const original = JSON.parse(
+          JSON.stringify(expected.inputs[`${group}/${family}.jsonc`].value).replaceAll('"for":', '"description":'),
+        );
+        const decoded = decode(input, family, group === "tokens" ? "definitions" : "details");
+
+        assert.deepEqual(JSON.parse(JSON.stringify(decoded.value)), original);
+        collection[family] = decoded.value;
       }
     }
 
@@ -69,7 +76,20 @@ test("all discovered targets retain independently captured styling, documentatio
       target.name === "default",
     );
 
-    assert.deepEqual(JSON.parse(JSON.stringify({ colors, semanticTokenColors, tokenColors })), expected.compiled);
+    assert.deepEqual(
+      JSON.parse(
+        JSON.stringify({
+          colors: colors.toSorted((a, b) => a.key.localeCompare(b.key)),
+          semanticTokenColors: semanticTokenColors.toSorted((a, b) => a.key.localeCompare(b.key)),
+          tokenColors,
+        }),
+      ),
+      {
+        ...expected.compiled,
+        colors: expected.compiled.colors.toSorted((a, b) => a.key.localeCompare(b.key)),
+        semanticTokenColors: expected.compiled.semanticTokenColors.toSorted((a, b) => a.key.localeCompare(b.key)),
+      },
+    );
   }
 });
 

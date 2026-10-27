@@ -1,20 +1,20 @@
 {
   "surface.editor": {
-    "for": "Shared editor background role."
+    "description": "Shared editor background role."
   },
   "text.default": {
-    "for": "Shared default text role."
+    "description": "Shared default text role."
   },
   "diagnostic.error.foreground": {
-    "for": "Shared error diagnostic foreground role."
+    "description": "Shared error diagnostic foreground role."
   },
   "diagnostic.warning.foreground": {
-    "for": "Shared warning diagnostic foreground role."
+    "description": "Shared warning diagnostic foreground role."
   },
   "diff.added.foreground": {
-    "for": "Shared added-content foreground role."
+    "description": "Shared added-content foreground role."
   },
   "diff.removed.foreground": {
-    "for": "Shared removed-content foreground role."
+    "description": "Shared removed-content foreground role."
   }
 }

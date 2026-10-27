@@ -126,20 +126,21 @@ export async function discoverTargets(root) {
  * @param root - Repository or isolated project root directory.
  * @param target - Discovered theme target and its source/output locations.
  * @param relative - Path relative to the theme source or fixture root.
+ * @param [overrides] - Prepared source candidates, keyed by repository-relative path.
  * @returns Parsed input with source, diagnostic label, path, and fallback status.
  */
-export async function readTargetInput(root, target, relative) {
+export async function readTargetInput(root, target, relative, overrides = new Map()) {
   /** Requested input path within the target’s own source tree. */
   const ownPath = `${target.directory}/${relative}`;
 
   /** Target-local source text, when that input exists. */
-  const own = await readOptional(join(root, ownPath));
+  const own = overrides.has(ownPath) ? overrides.get(ownPath) : await readOptional(join(root, ownPath));
 
   /** Effective input path after selecting the whole-file fallback. */
   const path = own === undefined && relative !== paletteInputPath ? `${defaultThemeDirectory}/${relative}` : ownPath;
 
   /** Effective source text from the target or required default input. */
-  const source = own ?? (await readOptional(join(root, path)));
+  const source = own ?? (overrides.has(path) ? overrides.get(path) : await readOptional(join(root, path)));
 
   /** Whether this input was loaded from the default theme. */
   const fallback = path !== ownPath;

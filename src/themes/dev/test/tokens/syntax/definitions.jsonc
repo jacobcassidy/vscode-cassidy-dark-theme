@@ -1,1 +1,14 @@
-[]
+{
+  "standard": {
+    "rules": []
+  },
+  "sourceCode": {
+    "rules": []
+  },
+  "nonStandard": {
+    "rules": []
+  },
+  "deprecated": {
+    "rules": []
+  }
+}

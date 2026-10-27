@@ -293,7 +293,7 @@
       }
     }
   },
-  "non-standard": {
+  "nonStandard": {
     "defaultLibrary": {
       "default": {
         "color": "#0ff",

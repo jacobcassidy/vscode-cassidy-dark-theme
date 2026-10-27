@@ -102,7 +102,7 @@ test("disabled entries retain resolved styles and aliases while placeholders rem
   /** Independent documentation referencing entries without colors. */
   const details = createDetails();
 
-  details.ui.first = { for: "Document fallback behavior.", globallyOverriddenBy: ["active"] };
+  details.ui.first = { description: "Document fallback behavior.", globallyOverriddenBy: ["active"] };
   details.syntax.placeholder = { inherits: ["scope:unknown.upstream"] };
 
   /** Deliberate comments survive parsing and repeated formatting. */
@@ -257,7 +257,7 @@ test("details enforce reviewed global replacements independently from aliases an
   const details = createDetails();
 
   details.ui["editor.background"] = {
-    for: "Editor background.",
+    description: "Editor background.",
     inherits: ["unknown.upstream"],
     overrides: ["component.color"],
   };
@@ -287,9 +287,9 @@ test("details reject blank entries, malformed lists, unknown fields, wrappers, a
     [],
     {},
     { typo: "Unknown" },
-    { for: "" },
-    { for: " " },
-    { for: [] },
+    { description: "" },
+    { description: " " },
+    { description: [] },
     { inherits: [] },
     { inherits: "color" },
     { inherits: [""] },
@@ -307,7 +307,7 @@ test("details reject blank entries, malformed lists, unknown fields, wrappers, a
   for (const section of ["variables", "ui", "semantic", "syntax"]) {
     /** Details keys must name effective authored entries in their own section. */
     const details = createDetails();
-    details[section].missing = { for: "Absent entry." };
+    details[section].missing = { description: "Absent entry." };
     assert.throws(() => compile(createTokens(), details), /unknown authored entry/);
     details[section] = { details: {} };
     assert.throws(() => compile(createTokens(), details), /unknown authored entry/);

@@ -8,6 +8,8 @@ import { mkdir, mkdtemp, readFile, readdir, rm, writeFile } from "node:fs/promis
 import { tmpdir } from "node:os";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
+import { categories, decode } from "../../tooling/tokens/formats.js";
+import { emptyFamily, recordPath, editSource } from "../../tooling/generators/source-edits.js";
 import { parseJsonc } from "../../tooling/shared/jsonc.js";
 
 /** Create a small palette configuration with chromatic families and neutral endpoints. */
@@ -83,7 +85,9 @@ export async function readThemeParts(directory) {
     } else {
       /** Section group and name associated with this authored input. */
       const [group, section, kind] = name.split("/");
-      parts[kind === "details" ? "details" : group][section] = JSON.parse(JSON.stringify(value));
+      parts[kind === "details" ? "details" : group][section] = JSON.parse(
+        JSON.stringify(decode({ value, label: name }, section, kind).value),
+      );
     }
   }
 
@@ -106,16 +110,16 @@ export async function createBuildProject(t) {
     metadata: { name: "Fixture", type: "dark", semanticHighlighting: true },
     tokens: createTokens(),
     details: {
-      variables: { "surface.editor": { for: "Shared editor surface." } },
+      variables: { "surface.editor": { description: "Shared editor surface." } },
       ui: {
-        "editor.background": { for: "Editor background." },
-        "editor.foreground": { for: "Editor foreground." },
+        "editor.background": { description: "Editor background." },
+        "editor.foreground": { description: "Editor foreground." },
       },
       semantic: {
-        variable: { for: "Semantic variables." },
-        function: { for: "Semantic functions." },
+        variable: { description: "Semantic variables." },
+        function: { description: "Semantic functions." },
       },
-      syntax: { string: { for: "Ordered string scopes." } },
+      syntax: { string: { description: "Ordered string scopes." } },
     },
   };
 
@@ -132,8 +136,20 @@ export async function createBuildProject(t) {
     await mkdir(join(root, "src/themes/prod/default", name, ".."), { recursive: true });
     await writeFile(
       join(root, "src/themes/prod/default", `${name}.jsonc`),
-      JSON.stringify(section ? inputs[kind === "details" ? "details" : group][section] : inputs[group]),
+      fixtureSource(
+        join(root, "src/themes/prod/default", `${name}.jsonc`),
+        JSON.stringify(section ? inputs[kind === "details" ? "details" : group][section] : inputs[group]),
+      ),
     );
+  }
+
+  for (const family of ["ui", "semantic", "syntax"]) {
+    for (const kind of family === "syntax" ? ["details"] : ["definitions", "details"]) {
+      await writeFixture(
+        join(root, `src/token-data/${family}/${kind}.jsonc`),
+        JSON.stringify(emptyFamily(family, kind)),
+      );
+    }
   }
 
   await writeFile(
@@ -251,5 +267,62 @@ export async function createPreviewProject(t) {
  */
 export async function writeFixture(path, source, options) {
   await mkdir(dirname(path), { recursive: true });
-  await writeFile(path, source, options);
+  await writeFile(path, fixtureSource(path, source), options);
+}
+
+/**
+ * Encode intentionally compact fixture records into the supported categorized source shape.
+ * @param path - Final fixture filename identifies family and file role.
+ * @param source - Compact test data or deliberately malformed source.
+ */
+function fixtureSource(path, source) {
+  /** Supported fixture family and file role, kept outside production readers. */
+  const match = path.match(/\/(?:tokens|token-data)\/(ui|semantic|syntax|variables)\/(definitions|details)\.jsonc$/);
+
+  if (!match || typeof source !== "string") return source;
+
+  /** Compact fixture values; malformed JSONC remains available to negative workflow tests. */
+  let parsed;
+
+  try {
+    parsed = parseJsonc(source, path);
+  } catch {
+    return source;
+  }
+
+  /** Family context and fixture-only placeholder wrapper. */
+  const [, family, kind] = match;
+  const value = parsed.value;
+
+  if (family === "variables" || categories.some((category) => Object.hasOwn(value, category))) return source;
+
+  /** Final shape starts with all required empty categories. */
+  let output = JSON.stringify(emptyFamily(family, kind));
+
+  if (family === "syntax" && kind === "definitions") {
+    if (!Array.isArray(value)) return source;
+
+    return editSource(
+      output,
+      ["standard", "rules"],
+      value.map((rule, order) => ({ ...rule, order })),
+    );
+  }
+
+  /** Independent fixture authorities use nonStandard for custom test IDs. */
+  const records = value.colors ?? value.semanticTokenColors ?? value;
+
+  if (!records || typeof records !== "object" || Array.isArray(records)) return source;
+
+  for (const [id, record] of Object.entries(records)) {
+    /** Source metadata is never used as styling; reference values are discovery placeholders. */
+    const candidate =
+      path.includes("/token-data/") && kind === "definitions"
+        ? { color: "#0ff", colorReason: "UNREVIEWED: Added from a token template; choose an intentional color." }
+        : record;
+
+    output = editSource(output, recordPath(family, family === "syntax" ? "standard" : "nonStandard", id), candidate);
+  }
+
+  return output;
 }

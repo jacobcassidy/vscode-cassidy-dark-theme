@@ -7,5 +7,87 @@
   "editor.formatOnSave": true,
   "editor.insertSpaces": true,
   "editor.tabSize": 2,
-  "prettier.configPath": "prettier.config.js"
+  "prettier.configPath": "prettier.config.js",
+  "json.schemas": [
+    {
+      "fileMatch": [
+        "/src/themes/*/*/tokens/ui/details.jsonc"
+      ],
+      "url": "./tooling/tokens/schemas/theme-ui-details.schema.json"
+    },
+    {
+      "fileMatch": [
+        "/src/token-data/semantic/definitions.jsonc"
+      ],
+      "url": "./tooling/tokens/schemas/shared-semantic-definitions.schema.json"
+    },
+    {
+      "fileMatch": [
+        "/src/themes/*/*/tokens/syntax/definitions.jsonc"
+      ],
+      "url": "./tooling/tokens/schemas/theme-syntax-definitions.schema.json"
+    },
+    {
+      "fileMatch": [
+        "/src/themes/*/*/tokens/syntax/details.jsonc"
+      ],
+      "url": "./tooling/tokens/schemas/theme-syntax-details.schema.json"
+    },
+    {
+      "fileMatch": [
+        "/src/themes/*/*/tokens/variables/details.jsonc"
+      ],
+      "url": "./tooling/tokens/schemas/variables-details.schema.json"
+    },
+    {
+      "fileMatch": [
+        "/src/token-data/ui/definitions.jsonc"
+      ],
+      "url": "./tooling/tokens/schemas/shared-ui-definitions.schema.json"
+    },
+    {
+      "fileMatch": [
+        "/src/token-data/ui/details.jsonc"
+      ],
+      "url": "./tooling/tokens/schemas/shared-ui-details.schema.json"
+    },
+    {
+      "fileMatch": [
+        "/src/themes/*/*/tokens/ui/definitions.jsonc",
+        "/docs/references/examples/example-ui.jsonc"
+      ],
+      "url": "./tooling/tokens/schemas/theme-ui-definitions.schema.json"
+    },
+    {
+      "fileMatch": [
+        "/src/token-data/syntax/details.jsonc"
+      ],
+      "url": "./tooling/tokens/schemas/shared-syntax-details.schema.json"
+    },
+    {
+      "fileMatch": [
+        "/src/themes/*/*/tokens/variables/definitions.jsonc"
+      ],
+      "url": "./tooling/tokens/schemas/variables-definitions.schema.json"
+    },
+    {
+      "fileMatch": [
+        "/src/themes/*/*/tokens/semantic/details.jsonc"
+      ],
+      "url": "./tooling/tokens/schemas/theme-semantic-details.schema.json"
+    },
+    {
+      "fileMatch": [
+        "/src/token-data/semantic/details.jsonc"
+      ],
+      "url": "./tooling/tokens/schemas/shared-semantic-details.schema.json"
+    },
+    {
+      "fileMatch": [
+        "/src/themes/*/*/tokens/semantic/definitions.jsonc",
+        "/docs/references/examples/example-semantic.jsonc"
+      ],
+      "url": "./tooling/tokens/schemas/theme-semantic-definitions.schema.json"
+    }
+  ]
 }

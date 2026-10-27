@@ -1,411 +1,228 @@
 /**
  * Missing theme properties.
- * @file Add missing UI and semantic tokens and complete matching documentation for the production default.
+ * @file Prepare nested placeholders, scope-matched documentation, and required syntax IDs before guarded source application.
  */
 
-import { themeSections } from "../shared/paths.js";
-import { mkdir, readFile, writeFile } from "node:fs/promises";
-import { dirname, join } from "node:path";
-import { fileURLToPath } from "node:url";
-import { applyEdits, createScanner, modify, SyntaxKind } from "jsonc-parser";
+import { join } from "node:path";
+import { findNodeAtLocation, getNodeValue } from "jsonc-parser";
 // Prettier's generated entry point hides its default export from the import resolver.
 // eslint-disable-next-line import-x/default
 import prettier from "prettier";
-import { object, parseJsonc } from "../shared/jsonc.js";
-import { discoverTargets, readOptional, readTargetInput } from "../themes/inputs.js";
+import { parseJsonc } from "../shared/jsonc.js";
+import { defaultThemeDirectory, familyPath, repositoryRoot, themeSections } from "../shared/paths.js";
+import { applyArtifacts, capturePaths, withGuards } from "../shared/transactions.js";
+import { discoverTargets, readTargetInput } from "../themes/inputs.js";
+import { prepareBuild } from "../themes/build.js";
+import { decode, normalizeHistory, scopeList } from "../tokens/formats.js";
+import { loadTokenData } from "../tokens/data/load.js";
+import { editSource, recordPath } from "./source-edits.js";
 
-/** Repository root inferred from this module's location. */
-const defaultRoot = fileURLToPath(new URL("../../", import.meta.url));
-
-/** Edit this allowlist to include or exclude source themes from the command. */
+/** Default explicit authoring selection; edit this allowlist to change command defaults. */
 const includedThemes = ["prod/default", "dev/test"];
 
-/** Reference sections and their corresponding authored token sections. */
-const sections = [
-  ["colors", "ui"],
-  ["semanticTokenColors", "semantic"],
-];
-
-/** Recognizable styling retained until an added entry has been reviewed. */
-const placeholder = {
-  color: "#0ff",
-  colorReason: "UNREVIEWED: Added from a token template; choose an intentional color.",
-};
-
 /**
- * Insert missing keys while retaining comments attached to neighboring entries.
- * @param input - Parsed JSONC source, including its syntax tree and original text.
- * @param keys - Missing property names to insert in case-sensitive lexical order.
- * @param [values] - Values indexed by property name; defaults to unreviewed color placeholders.
- * @returns Updated JSONC text, ready for repository formatting.
+ * Format one authored JSONC candidate with local repository settings.
+ * @param root - Checkout or fixture root.
+ * @param path - Repository-relative source filename.
+ * @param source - Prepared complete source.
  */
-function insertProperties(input, keys, values) {
-  /** Existing properties in their authored order. */
-  const properties = input.tree.children ?? [];
+export async function formatSource(root, path, source) {
+  /** Absolute formatter path and resolved local configuration. */
+  const filepath = join(root, path),
+    options = await prettier.resolveConfig(filepath);
 
-  /** Missing keys grouped by the existing property they should precede. */
-  const groups = new Map();
-
-  for (const key of keys.sort()) {
-    /** First existing property whose name sorts after the new key. */
-    const next = properties.findIndex((property) => property.children[0].value > key);
-
-    /** Insertion position, including the position after the last property. */
-    const index = next === -1 ? properties.length : next;
-
-    if (!groups.has(index)) groups.set(index, []);
-
-    groups.get(index).push(key);
-  }
-
-  /** Nonoverlapping source edits applied together after locating all comment boundaries. */
-  const edits = [];
-
-  for (const [index, names] of groups) {
-    /** Property preceding this group, when one exists. */
-    const previous = properties[index - 1];
-
-    /** Offset immediately after the previous value or the opening brace. */
-    const start = previous ? previous.offset + previous.length : input.tree.offset + 1;
-
-    /** Offset of the next property or the closing brace. */
-    const end = properties[index]?.offset ?? input.tree.offset + input.tree.length - 1;
-
-    /** Scanner used to retain commas and inline comments with the previous entry. */
-    const scanner = createScanner(input.source);
-
-    /** Whether the previous property already has a separating comma. */
-    let comma = false;
-
-    /** Insertion boundary before leading comments on the following entry. */
-    let offset = start;
-
-    /** Whether the insertion boundary already follows a line break. */
-    let newline = false;
-
-    if (previous) {
-      scanner.setPosition(start);
-      offset = end;
-
-      while (scanner.getPosition() < end) {
-        /** Next punctuation, whitespace, or comment token between existing properties. */
-        const kind = scanner.scan();
-
-        if (kind === SyntaxKind.CommaToken) comma = true;
-
-        if (kind === SyntaxKind.LineBreakTrivia) {
-          offset = scanner.getPosition();
-          newline = true;
-
-          break;
-        }
-      }
-    }
-
-    /** Serialized additions, without disturbing existing value text. */
-    const entries = names
-      .map((name) => `${JSON.stringify(name)}: ${JSON.stringify(values ? values[name] : placeholder)}`)
-      .join(",\n");
-
-    /** Text placed at the selected boundary, including its separator and line breaks. */
-    let content = `${newline ? "" : "\n"}${entries}${index < properties.length ? "," : ""}\n`;
-
-    if (previous && !comma) {
-      if (offset === start) {
-        content = `,${content}`;
-      } else {
-        edits.push({ offset: start, length: 0, content: "," });
-      }
-    }
-
-    edits.push({ offset, length: 0, content });
-  }
-
-  return applyEdits(input.source, edits);
+  return prettier.format(source, { ...options, filepath, parser: "jsonc" });
 }
 
 /**
- * Collect nested internal color descriptors under their flat documentation paths.
- * @param group - Variable group or leaf color descriptor.
- * @param [path] - Current dotted variable path.
- * @returns Variable documentation keys and their source descriptors.
+ * Read an existing detail leaf without losing authored fields or accepting malformed JSONC.
+ * @param source - Complete details source.
+ * @param path - Canonical nested record path.
  */
-function variableEntries(group, path = "") {
-  object(group, `variables.${path}`);
+function detailAt(source, path) {
+  /** Parsed candidate and exact leaf node. */
+  const parsed = parseJsonc(source, "prepared details"),
+    node = findNodeAtLocation(parsed.tree, path);
 
-  if (Object.hasOwn(group, "color")) return [[path, group]];
-
-  return Object.entries(group).flatMap(([key, value]) => variableEntries(value, path ? `${path}.${key}` : key));
+  return node ? getNodeValue(node) : undefined;
 }
 
 /**
- * Give undocumented syntax rules persistent, unique IDs without changing rule order or scopes.
- * @param input - Parsed syntax array and its original JSONC text.
- * @returns Updated parsed input and newly assigned IDs.
+ * Prepare complete nested property/detail candidates without creating theme files.
+ * @param options - Candidate preparation options.
+ * @param options.root - Checkout or isolated root.
+ * @param options.themes - Explicit group/name selection.
+ * @param [options.overrides] - Existing scaffold candidates.
+ * @param [options.additionalTargets] - Not-yet-created scaffolds.
+ * @param [options.snapshot] - Shared classification/documentation snapshot.
  */
-function identifySyntax(input) {
-  if (!Array.isArray(input.value)) throw new Error(`${input.label}: expected a syntax array`);
+export async function prepareProperties({ root, themes, overrides = new Map(), additionalTargets = [], snapshot }) {
+  /** Selected targets, shared data, and source/destination fingerprints. */
+  const targets = [...(await discoverTargets(root)), ...additionalTargets];
+  const indexed = new Map(targets.map((target) => [`${target.group}/${target.name}`, target]));
+  const expected = await capturePaths([join(root, "src"), join(root, "package.json")]);
 
-  /** Existing IDs reserved before choosing names for unnamed rules. */
-  const ids = new Set();
-
-  for (const [index, rule] of input.value.entries()) {
-    object(rule, `${input.label}[${index}]`);
-
-    if (!Object.hasOwn(rule, "id")) continue;
-
-    if (typeof rule.id !== "string" || !/^[a-z][a-z0-9.-]*$/i.test(rule.id) || ids.has(rule.id)) {
-      throw new Error(`${input.label}[${index}]: invalid or duplicate syntax ID ${rule.id}`);
-    }
-
-    ids.add(rule.id);
-  }
-
-  /** Newly assigned IDs reported alongside the syntax source update. */
-  const added = [];
-
-  /** Comment-preserving source edits applied in rule order. */
-  let source = input.source;
-
-  for (const [index, rule] of input.value.entries()) {
-    if (Object.hasOwn(rule, "id")) continue;
-
-    /** Readable base ID derived from the rule name, with a stable numeric fallback. */
-    const stem =
-      typeof rule.name === "string"
-        ? rule.name
-            .toLowerCase()
-            .replace(/[^a-z0-9]+/g, "-")
-            .replace(/^-|-$/g, "")
-        : "";
-
-    /** Valid identifier prefix, including names that begin with a digit. */
-    const prefix = /^[a-z]/.test(stem) ? stem : `rule-${stem || index + 1}`;
-
-    /** Unique ID selected without changing any existing alias. */
-    let id = prefix;
-
-    for (let suffix = 2; ids.has(id); suffix++) id = `${prefix}-${suffix}`;
-
-    ids.add(id);
-    added.push(id);
-    source = applyEdits(source, modify(source, [index, "id"], id, {}));
-  }
-
-  return { input: { ...parseJsonc(source, input.label), source, label: input.label }, added };
-}
-
-/**
- * Prepare complete default documentation after all reference token additions are known.
- * @param root - Repository or isolated fixture root.
- * @param target - Production default source target.
- * @param updates - Prepared token and detail updates; no files have been written yet.
- */
-async function addDefaultDetails(root, target, updates) {
-  /** Offline descriptions reviewed against the pinned VS Code source snapshots. */
-  const referencePath = "docs/lookups/token-details.jsonc";
-
-  /** Optional catalog text; isolated fixtures and new custom IDs may have no reviewed descriptions. */
-  const referenceSource = await readOptional(join(root, referencePath));
-
-  /** Descriptions grouped by token section. */
-  const reference = referenceSource === undefined ? {} : parseJsonc(referenceSource, referencePath).value;
-
-  object(reference, referencePath);
-
-  for (const section of themeSections) {
-    /** Original or already prepared token section, including newly added placeholders. */
-    let input = await readTargetInput(root, target, `tokens/${section}/definitions.jsonc`);
-
-    /** Earlier update for the matching default token file, if it has additions. */
-    const pending = updates.find((update) => update.path === `${target.directory}/tokens/${section}/definitions.jsonc`);
-
-    if (pending?.source) {
-      input = { ...parseJsonc(pending.source, input.label), source: pending.source, label: input.label };
-    }
-
-    if (section === "syntax") {
-      /** Syntax input with documentation IDs assigned to every rule. */
-      const identified = identifySyntax(input);
-
-      input = identified.input;
-      updates.push({
-        theme: "prod/default",
-        section,
-        path: `${target.directory}/tokens/syntax/definitions.jsonc`,
-        added: identified.added,
-        source: identified.added.length ? input.source : undefined,
-      });
-    } else {
-      object(input.value, input.label);
-    }
-
-    /** Flat property/descriptor pairs using the same keys as theme compilation. */
-    const entries =
-      section === "variables"
-        ? variableEntries(input.value)
-        : section === "syntax"
-          ? input.value.map((rule) => [rule.id, rule])
-          : Object.entries(input.value);
-
-    /** Existing documentation, whose reviewed descriptions and relationships are retained. */
-    const details = await readTargetInput(root, target, `tokens/${section}/details.jsonc`);
-
-    object(details.value, details.label);
-
-    /** New detail objects indexed by their exact documentation key. */
-    const values = {};
-
-    /** Insertions needed for completely missing entries. */
-    const added = [];
-
-    /** JSONC text also used to fill an existing entry that lacks a purpose description. */
-    let source = details.source;
-
-    if (Object.hasOwn(reference, section)) object(reference[section], `${referencePath}.${section}`);
-
-    for (const [key, definition] of entries) {
-      if (Object.hasOwn(reference[section] ?? {}, key)) {
-        object(reference[section][key], `${referencePath}.${section}.${key}`);
-      }
-
-      /** Reviewed purpose, or an explicit review marker for a previously unknown property. */
-      const description =
-        reference[section]?.[key]?.for ??
-        (section === "variables"
-          ? `Shared ${key.split(".").join(" ")} color role.`
-          : section === "syntax"
-            ? `TextMate rule ${definition.name || key} targeting ${[definition.scope ?? []].flat().join(", ") || "no explicit scope selectors"}.`
-            : `UNREVIEWED: Describe the purpose of ${section} property ${key}.`);
-
-      if (typeof description !== "string" || !description.trim()) {
-        throw new Error(`${referencePath}.${section}.${key}.for: expected a nonempty description`);
-      }
-
-      if (!Object.hasOwn(details.value, key)) {
-        values[key] = { for: description };
-        added.push(key);
-      } else {
-        object(details.value[key], `${details.label}.${key}`);
-
-        if (typeof details.value[key].for !== "string" || !details.value[key].for.trim()) {
-          source = applyEdits(source, modify(source, [key, "for"], description, {}));
-          added.push(key);
-        }
-      }
-    }
-
-    /** Reparsed positions after any edits to existing detail objects. */
-    const edited = { ...parseJsonc(source, details.label), source };
-
-    updates.push({
-      theme: "prod/default",
-      section: `details/${section}`,
-      path: `${target.directory}/tokens/${section}/details.jsonc`,
-      added,
-      source: added.length ? insertProperties(edited, Object.keys(values), values) : undefined,
-    });
-  }
-}
-
-/**
- * Read and validate the UI and semantic token templates used for property discovery.
- * @param root - Repository or isolated fixture root.
- * @returns Combined object containing validated colors and semanticTokenColors sections.
- */
-export async function readPropertyReference(root) {
-  /** UI token template path used for workbench property discovery. */
-  const uiPath = "docs/templates/all-ui-tokens.json";
-
-  /** Semantic token template path used for selector discovery. */
-  const semanticPath = "docs/templates/all-semantic-tokens.json";
-
-  /** Parsed UI token template, with duplicate-key validation. */
-  const uiTemplate = parseJsonc(await readFile(join(root, uiPath), "utf8"), uiPath).value;
-
-  /** Parsed semantic token template, with duplicate-key validation. */
-  const semanticTemplate = parseJsonc(await readFile(join(root, semanticPath), "utf8"), semanticPath).value;
-
-  object(uiTemplate, uiPath);
-  object(uiTemplate.colors, `${uiPath}.colors`);
-  object(semanticTemplate, semanticPath);
-  object(semanticTemplate.semanticTokenColors, `${semanticPath}.semanticTokenColors`);
-
-  return {
-    colors: uiTemplate.colors,
-    semanticTokenColors: semanticTemplate.semanticTokenColors,
-  };
-}
-
-/**
- * Prepare every selected source update before writing any files.
- * @param [options] - Source root and explicit theme selection for this run.
- * @param [options.root] - Repository or isolated fixture root.
- * @param [options.themes] - Allowlisted group/name identifiers; defaults to includedThemes.
- * @returns Per-theme, per-section paths and added property names, including unchanged sections.
- */
-export async function addThemeProperties({ root = defaultRoot, themes = includedThemes } = {}) {
-  /** Discovered targets indexed by their exact group/name identifiers. */
-  const targets = new Map((await discoverTargets(root)).map((target) => [`${target.group}/${target.name}`, target]));
-
-  if (!Array.isArray(themes) || themes.some((theme) => !targets.has(theme))) {
+  if (!Array.isArray(themes) || themes.some((theme) => !indexed.has(theme)))
     throw new Error("Included themes must be an array of known group/name IDs such as prod/default or dev/test");
-  }
 
-  /** Validated reference keys used by both source sections. */
-  const reference = await readPropertyReference(root);
+  snapshot ??= await loadTokenData({ root });
 
-  /** Prepared updates, including summaries for sections that need no changes. */
-  const updates = [];
+  /** Reference scope coverage derives from the default file, never another theme's same-named ID. */
+  const reference = decode(
+    await readTargetInput(root, indexed.get("prod/default"), familyPath("syntax", "definitions"), overrides),
+    "syntax",
+    "definitions",
+  );
+
+  snapshot.referenceScopes = new Map([...reference.records].map(([id, record]) => [id, scopeList(record.value)]));
+
+  /** Complete source candidates and user-facing change summaries. */
+  const output = new Map(overrides),
+    updates = [];
 
   for (const theme of new Set(themes)) {
-    for (const [referenceSection, section] of sections) {
-      /** Selected source target; no writes are made through a fallback path. */
-      const target = targets.get(theme);
+    /** Current independently inherited target files. */
+    const target = indexed.get(theme);
 
-      /** Effective source snapshot, read before any selected target is changed. */
-      const input = await readTargetInput(root, target, `tokens/${section}/definitions.jsonc`);
+    for (const family of themeSections) {
+      /** Definitions are normalized before any source edits or documentation generation. */
+      let input = await readTargetInput(root, target, familyPath(family, "definitions"), output);
+      let source = input.source;
+      let decoded = decode(input, family, "definitions");
 
-      object(input.value, input.label);
+      /** Canonical IDs newly added to this family. */
+      const added = [];
 
-      /** Reference keys absent from the effective source, including disabled definitions. */
-      const added = Object.keys(reference[referenceSection])
-        .filter((key) => !Object.hasOwn(input.value, key))
-        .sort();
+      if (["ui", "semantic"].includes(family)) {
+        for (const [id, record] of snapshot.definitions[family].records) {
+          if (decoded.records.has(id)) continue;
 
-      /** Destination always within the selected theme's own source directory. */
-      const path = `${target.directory}/tokens/${section}/definitions.jsonc`;
+          /** Shared placeholders contain documentation-only usage that never becomes styling. */
+          const style = {
+            color: "#0ff",
+            colorReason: "UNREVIEWED: Added from a token template; choose an intentional color.",
+          };
 
-      /** Comment-preserving candidate, formatted after every input has been validated. */
-      const source = added.length ? insertProperties(input, added) : undefined;
+          source = editSource(source, recordPath(family, record.category, id), style);
+          added.push(id);
+        }
+      } else if (family === "syntax" && target.directory === defaultThemeDirectory) {
+        /** Existing IDs remain stable while unnamed default rules receive unique readable IDs. */
+        const ids = new Set(decoded.records.keys());
 
-      updates.push({ theme, section, path, added, source });
+        for (const [category, container] of Object.entries(input.value)) {
+          for (const [index, rule] of container.rules.entries()) {
+            if (rule.id !== undefined) continue;
+
+            /** Human-readable ID stem, with a valid fallback for punctuation/numeric names. */
+            const stem = (rule.name ?? "")
+              .toLowerCase()
+              .replace(/[^a-z0-9]+/g, "-")
+              .replace(/^-|-$/g, "");
+            const prefix = /^[a-z]/.test(stem) ? stem : `rule-${stem || rule.order + 1}`;
+
+            /** Collision-free ID without changing scope/order/style. */
+            let id = prefix;
+
+            for (let suffix = 2; ids.has(id); suffix++) id = `${prefix}-${suffix}`;
+
+            ids.add(id);
+            added.push(id);
+            source = editSource(source, [category, "rules", index, "id"], id);
+          }
+        }
+      }
+
+      /** Local source destination; fallback files remain omitted when no edits are needed. */
+      const definitionPath = `${target.directory}/${familyPath(family, "definitions")}`;
+
+      if (source !== input.source) {
+        source = await formatSource(root, definitionPath, source);
+        output.set(definitionPath, source);
+        input = { ...input, ...parseJsonc(source, definitionPath), source, path: definitionPath };
+        decoded = decode(input, family, "definitions");
+      }
+
+      updates.push({ theme, section: family, path: definitionPath, added: added.sort() });
+
+      /** Independently inherited documentation source, preserved with syntax-tree edits. */
+      const details = await readTargetInput(root, target, familyPath(family, "details"), output);
+      const detailPath = `${target.directory}/${familyPath(family, "details")}`;
+      const completed = [];
+
+      source = details.source;
+
+      for (const [id, record] of decoded.records) {
+        /** Exact nested target record and any reusable shared documentation. */
+        const path = recordPath(family, record.category, id);
+        const existing = detailAt(source, path);
+        const shared = snapshot.details[family]?.records.get(id)?.value;
+        const matching =
+          family !== "syntax" ||
+          JSON.stringify(scopeList(record.value)) === JSON.stringify(snapshot.referenceScopes.get(id));
+        const reusable = matching ? shared : undefined;
+        const definitionUse = snapshot.definitions[family]?.records.get(id)?.value.use;
+
+        if (reusable?.use && definitionUse && reusable.use !== definitionUse)
+          throw new Error(`${detailPath}: conflicting shared usage for ${family} token "${id}"`);
+
+        /** Preserve authored wording/history/relationships; fill only missing purposes. */
+        let candidate = existing ? { ...existing } : {};
+
+        if (typeof candidate.description !== "string" || !candidate.description.trim()) {
+          candidate = {
+            ...candidate,
+            ...(reusable
+              ? Object.fromEntries(
+                  Object.entries(reusable).filter(([key]) => !["modified-desc", "scopeEvidence"].includes(key)),
+                )
+              : {}),
+            description:
+              reusable?.description ??
+              (family === "variables"
+                ? `Shared ${id.split(".").join(" ")} color role.`
+                : family === "syntax"
+                  ? `TextMate rule ${record.value.name || id} targeting ${scopeList(record.value).join(", ") || "no explicit scope selectors"}.`
+                  : `UNREVIEWED: Describe the purpose of ${family} property ${id}.`),
+          };
+        }
+
+        if (!candidate.use && record.category === "nonStandard" && (reusable?.use || definitionUse))
+          candidate.use = reusable?.use ?? definitionUse;
+
+        candidate = normalizeHistory(candidate);
+
+        if (JSON.stringify(candidate) !== JSON.stringify(existing)) {
+          source = editSource(source, path, candidate);
+          completed.push(id);
+        }
+      }
+
+      if (source !== details.source) output.set(detailPath, await formatSource(root, detailPath, source));
+
+      updates.push({ theme, section: `details/${family}`, path: detailPath, added: completed });
     }
   }
 
-  if (themes.includes("prod/default")) {
-    await addDefaultDetails(root, targets.get("prod/default"), updates);
-  }
+  // The normal workflow validates the full candidate generation before source application.
+  await prepareBuild({ root, overrides: output, additionalTargets, snapshot });
 
-  for (const update of updates) {
-    if (!update.added.length) continue;
+  return { output, expected, updates };
+}
 
-    /** Destination path used to resolve repository formatting for every prepared change. */
-    const filepath = join(root, update.path);
+/**
+ * Add missing properties/details through one guarded, rollback-capable source transaction.
+ * @param [options] - Authoring command options.
+ * @param [options.root] - Checkout or isolated fixture root.
+ * @param [options.themes] - Explicit selected group/name IDs.
+ */
+export async function addThemeProperties({ root = repositoryRoot, themes = includedThemes } = {}) {
+  /** Completely validated source candidate generation. */
+  const prepared = await prepareProperties({ root, themes });
 
-    /** Formatting settings shared by token and documentation sources. */
-    const options = await prettier.resolveConfig(filepath);
+  await withGuards([root], async ([owner]) =>
+    applyArtifacts({ root, ...prepared, owner, recovery: "npm run add:properties -- --recover=verify-restored" }),
+  );
 
-    update.source = await prettier.format(update.source, { ...options, filepath, parser: "jsonc" });
-    parseJsonc(update.source, update.path);
-  }
-
-  for (const update of updates) {
-    if (!update.added.length) continue;
-
-    await mkdir(dirname(join(root, update.path)), { recursive: true });
-    await writeFile(join(root, update.path), update.source);
-  }
-
-  return updates.map(({ theme, section, path, added }) => ({ theme, section, path, added }));
+  return prepared.updates;
 }

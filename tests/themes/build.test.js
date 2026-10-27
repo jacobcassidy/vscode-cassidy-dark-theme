@@ -197,7 +197,7 @@ test("editing prod token details leaves all generated artifacts unchanged", asyn
 
   await writeFile(
     join(root, "src/themes/prod/default/tokens/variables/details.jsonc"),
-    JSON.stringify({ "surface.editor": { for: "Editor background." } }),
+    JSON.stringify({ "surface.editor": { description: "Editor background." } }),
   );
   assert.deepEqual((await buildProdThemes({ root, check: true })).changed, []);
   assert.deepEqual((await buildProdThemes({ root })).changed, []);
@@ -290,7 +290,7 @@ test("empty details suppress fallback and supplied details must match whole-file
   await mkdir(join(directory, "details"));
   await writeFile(
     join(root, "src/themes/prod/default/tokens/ui/details.jsonc"),
-    '{"editor.background":{"for":"Default background."},"editor.foreground":{"for":"Default foreground."}}',
+    '{"editor.background":{"description":"Default background."},"editor.foreground":{"description":"Default foreground."}}',
   );
   await writeFile(join(directory, "tokens/ui/definitions.jsonc"), "{}");
   await assert.rejects(buildDevThemes({ root }), /unknown authored entry/);
@@ -302,7 +302,7 @@ test("empty details suppress fallback and supplied details must match whole-file
 
   await writeFile(
     join(root, "src/themes/prod/default/tokens/ui/details.jsonc"),
-    '{"editor.background":{"for":"Changed default documentation."},"editor.foreground":{"for":"Default foreground."}}',
+    '{"editor.background":{"description":"Changed default documentation."},"editor.foreground":{"description":"Default foreground."}}',
   );
   await buildDevThemes({ root, check: true });
   assert.deepEqual(await readBuildOutputs(root), before);
@@ -415,6 +415,10 @@ test("dev targets use independent complete palettes and token sections and isola
   await writeFile(
     join(devThemeDirectory, "tokens/syntax/definitions.jsonc"),
     JSON.stringify([{ ...tokens.syntax[0], scope: "test.syntax" }]),
+  );
+  await writeFile(
+    join(devThemeDirectory, "tokens/syntax/details.jsonc"),
+    '{"string":{"description":"Test syntax scopes."}}',
   );
 
   /** Build summary inspected for target palettes and changed artifact paths. */
@@ -726,7 +730,7 @@ for (const [path, contents, pattern] of [
   ["metadata.jsonc", "{}", /theme name must be/],
   ["tokens/ui/definitions.jsonc", '{"bad":{}}', /requires styling/],
   ["tokens/semantic/definitions.jsonc", '{"variable":{"italic":"yes"}}', /italic must be a boolean/],
-  ["tokens/syntax/definitions.jsonc", "{}", /token color array/],
+  ["tokens/syntax/definitions.jsonc", '{"standard":{"rules":{}}}', /expected an array/],
   ["palette/config.jsonc", "", /ValueExpected/],
   ["palette/config.jsonc", '{"chroma":', /ValueExpected/],
   [

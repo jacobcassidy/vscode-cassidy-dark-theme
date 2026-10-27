@@ -1,0 +1,260 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Shared ui details",
+  "type": "object",
+  "properties": {
+    "standard": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/definitions/standard"
+      }
+    },
+    "sourceCode": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/definitions/sourceCode"
+      }
+    },
+    "nonStandard": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/definitions/nonStandard"
+      }
+    },
+    "deprecated": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/definitions/deprecated"
+      }
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "standard",
+    "sourceCode",
+    "nonStandard",
+    "deprecated"
+  ],
+  "definitions": {
+    "standard": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string",
+          "pattern": "\\S"
+        },
+        "descriptionAddedIn": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$"
+        },
+        "descriptionUpdatedIn": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$"
+        },
+        "descriptionBasedOn": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$"
+        },
+        "inherits": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "\\S"
+          }
+        },
+        "overrides": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "\\S"
+          }
+        },
+        "globallyOverriddenBy": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "\\S"
+          }
+        },
+        "modified-desc": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": {
+        "$ref": "#/definitions/standard"
+      }
+    },
+    "sourceCode": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string",
+          "pattern": "\\S"
+        },
+        "descriptionAddedIn": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$"
+        },
+        "descriptionUpdatedIn": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$"
+        },
+        "descriptionBasedOn": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$"
+        },
+        "inherits": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "\\S"
+          }
+        },
+        "overrides": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "\\S"
+          }
+        },
+        "globallyOverriddenBy": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "\\S"
+          }
+        },
+        "modified-desc": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": {
+        "$ref": "#/definitions/sourceCode"
+      }
+    },
+    "nonStandard": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string",
+          "pattern": "\\S"
+        },
+        "descriptionAddedIn": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$"
+        },
+        "descriptionUpdatedIn": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$"
+        },
+        "descriptionBasedOn": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$"
+        },
+        "inherits": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "\\S"
+          }
+        },
+        "overrides": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "\\S"
+          }
+        },
+        "globallyOverriddenBy": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "\\S"
+          }
+        },
+        "modified-desc": {
+          "type": "boolean"
+        },
+        "use": {
+          "type": "string",
+          "pattern": "\\S"
+        }
+      },
+      "additionalProperties": {
+        "$ref": "#/definitions/nonStandard"
+      }
+    },
+    "deprecated": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string",
+          "pattern": "\\S"
+        },
+        "descriptionAddedIn": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$"
+        },
+        "descriptionUpdatedIn": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$"
+        },
+        "descriptionBasedOn": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$"
+        },
+        "inherits": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "\\S"
+          }
+        },
+        "overrides": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "\\S"
+          }
+        },
+        "globallyOverriddenBy": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "\\S"
+          }
+        },
+        "modified-desc": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": {
+        "$ref": "#/definitions/deprecated"
+      }
+    }
+  }
+}

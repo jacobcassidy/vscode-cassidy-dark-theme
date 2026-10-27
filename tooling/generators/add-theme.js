@@ -1,138 +1,96 @@
 /**
- * Minimal theme setup.
- * @file Create a default-backed theme with complete UI and semantic property placeholders.
+ * Theme scaffolding.
+ * @file Prepare minimal independently inherited theme inputs and apply validated source candidates under the checkout guard.
  */
 
-import { paletteInputPath, themeInputPaths } from "../shared/paths.js";
-import { lstat, mkdir, rm, writeFile } from "node:fs/promises";
-import { dirname, join } from "node:path";
-import { fileURLToPath } from "node:url";
+import { lstat } from "node:fs/promises";
+import { join } from "node:path";
 import { applyEdits, modify } from "jsonc-parser";
-// Prettier's generated entry point hides its default export from the import resolver.
-// eslint-disable-next-line import-x/default
-import prettier from "prettier";
-import { discoverTargets, readTargetInput, themeUiType, validateThemeName } from "../themes/inputs.js";
-import { object } from "../shared/jsonc.js";
-import { addThemeProperties, readPropertyReference } from "./add-properties.js";
-
-/** Repository root inferred from this module's location. */
-const defaultRoot = fileURLToPath(new URL("../../", import.meta.url));
+import { repositoryRoot, paletteInputPath, familyPath } from "../shared/paths.js";
+import { applyArtifacts, withGuards } from "../shared/transactions.js";
+import { discoverTargets, readTargetInput, validateThemeName, themeUiType } from "../themes/inputs.js";
+import { emptyFamily } from "./source-edits.js";
+import { formatSource, prepareProperties } from "./add-properties.js";
 
 /**
- * Create only the inputs needed for a new theme, then populate its reference properties.
- * @param options - New theme identifier and optional repository location.
- * @param options.theme - Exact prod/name or dev/name identifier.
- * @param [options.root] - Repository or isolated fixture root.
- * @returns Theme identifier, created file paths, property summaries, and the next build command.
- * @throws When the identifier or inputs are invalid, the name exists, or setup cannot complete.
+ * Create a single prod/dev theme without modifying existing themes or the default allowlist.
+ * @param [options] - Theme creation options.
+ * @param [options.root] - Checkout or isolated root.
+ * @param options.theme - Explicit prod/name or dev/name.
  */
-export async function addTheme({ root = defaultRoot, theme } = {}) {
-  if (typeof theme !== "string" || !/^(prod|dev)\/[^/]+$/.test(theme)) {
-    throw new Error("Usage: npm run add:theme -- <prod/name|dev/name>");
-  }
+export async function addTheme({ root = repositoryRoot, theme } = {}) {
+  if (typeof theme !== "string" || !/^(?:prod|dev)\/[^/]+$/.test(theme))
+    throw new Error("Theme must be prod/name or dev/name");
 
-  /** Requested source group and globally unique directory name. */
-  const [group, name] = theme.split("/");
+  /** Requested group/name and final source directory. */
+  const [group, name] = theme.split("/"),
+    directory = `src/themes/${theme}`;
 
   validateThemeName(name);
 
-  /** Existing targets checked before creating any directories. */
+  /** All names remain globally unique across both groups. */
   const targets = await discoverTargets(root);
 
-  if (targets.some((target) => target.name === name)) {
-    throw new Error(`Theme name already exists: ${name}`);
-  }
-
-  /** Relative destination used in logs and the returned file list. */
-  const directory = `src/themes/${theme}`;
-
-  /** Absolute destination reserved exclusively for this new theme. */
-  const destination = join(root, directory);
+  if (targets.some((target) => target.name === name)) throw new Error(`Theme name already exists: ${name}`);
 
   try {
-    await lstat(destination);
+    await lstat(join(root, directory));
 
     throw new Error(`Theme destination already exists: ${directory}`);
   } catch (error) {
     if (error.code !== "ENOENT") throw error;
   }
 
-  /** Required default target supplying all omitted inputs. */
+  /** Default metadata is copied through source edits, preserving comments and unrelated fields. */
   const baseline = targets.find((target) => target.group === "prod" && target.name === "default");
-
-  /** Validated default input snapshots, including the metadata copied into the new theme. */
-  const inputs = new Map();
-
-  for (const path of [paletteInputPath, ...themeInputPaths]) {
-    inputs.set(path, await readTargetInput(root, baseline, path));
-  }
-
-  await readPropertyReference(root);
-
-  /** Default metadata source retained so its JSONC comments and fields survive copying. */
-  const metadata = inputs.get("metadata.jsonc");
-
-  object(metadata.value, metadata.label);
-  themeUiType(metadata.value, metadata.label);
-
-  /** Initial preview label using the same capitalization as theme picker suffixes. */
+  const metadata = await readTargetInput(root, baseline, "metadata.jsonc");
   const previewName = name
     .split("-")
     .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
     .join(" ");
 
-  /** Local metadata with the target preview name added after name or replacing an existing value. */
-  const metadataSource = applyEdits(
-    metadata.source,
-    modify(metadata.source, ["previewName"], previewName, {
-      getInsertionIndex: (properties) => properties.indexOf("name") + 1,
-    }),
+  themeUiType(metadata.value, metadata.label);
+
+  /** Six minimal authored files; omitted syntax/variables retain independent fallback. */
+  const files = new Map([
+    [paletteInputPath, JSON.stringify({ useDefaultPalette: true })],
+    [
+      "metadata.jsonc",
+      applyEdits(
+        metadata.source,
+        modify(metadata.source, ["previewName"], previewName, {
+          getInsertionIndex: (properties) => properties.indexOf("name") + 1,
+        }),
+      ),
+    ],
+    ...["ui", "semantic"].flatMap((family) =>
+      ["definitions", "details"].map((kind) => [familyPath(family, kind), JSON.stringify(emptyFamily(family, kind))]),
+    ),
+  ]);
+  const overrides = new Map();
+
+  for (const [relative, source] of files) {
+    overrides.set(`${directory}/${relative}`, await formatSource(root, `${directory}/${relative}`, source));
+  }
+
+  /** New target participates in the normal candidate validation before it exists on disk. */
+  const target = {
+    group,
+    name,
+    directory,
+    reportDirectory: `${directory}/palette/generated`,
+    output: `${group === "prod" ? "themes" : "preview/themes"}/cassidy-dark-color-theme-${name}.json`,
+  };
+  const prepared = await prepareProperties({ root, themes: [theme], overrides, additionalTargets: [target] });
+
+  await withGuards([root], async ([owner]) =>
+    applyArtifacts({ root, ...prepared, owner, recovery: "npm run add:theme -- --recover=verify-restored" }),
   );
 
-  /** Minimal local sources; empty details prevent incompatible documentation fallback. */
-  const sources = new Map([
-    [paletteInputPath, '{"useDefaultPalette":true}'],
-    ["metadata.jsonc", metadataSource],
-    ["tokens/ui/definitions.jsonc", "{}"],
-    ["tokens/semantic/definitions.jsonc", "{}"],
-    ["tokens/ui/details.jsonc", "{}"],
-    ["tokens/semantic/details.jsonc", "{}"],
-  ]);
-
-  /** Formatted source files prepared before the destination is reserved. */
-  const files = new Map();
-
-  for (const [path, source] of sources) {
-    /** Absolute file path used to resolve repository formatting settings. */
-    const filepath = join(destination, path);
-
-    /** Formatting configuration for this authored source. */
-    const options = await prettier.resolveConfig(filepath);
-
-    files.set(path, await prettier.format(source, { ...options, filepath, parser: "jsonc" }));
-  }
-
-  await mkdir(dirname(destination), { recursive: true });
-  await mkdir(destination);
-
-  try {
-    for (const [path, source] of files) {
-      await mkdir(dirname(join(destination, path)), { recursive: true });
-      await writeFile(join(destination, path), source, { flag: "wx" });
-    }
-
-    /** Only the new theme is populated; other targets and the allowlist remain untouched. */
-    const updates = await addThemeProperties({ root, themes: [theme] });
-
-    return {
-      theme,
-      files: [...files.keys()].map((path) => `${directory}/${path}`),
-      updates,
-      command: `npm run build:${group}`,
-    };
-  } catch (error) {
-    await rm(destination, { recursive: true, force: true });
-
-    throw error;
-  }
+  return {
+    theme,
+    files: [...files.keys()].map((path) => `${directory}/${path}`),
+    updates: prepared.updates,
+    command: `npm run build:${group}`,
+  };
 }

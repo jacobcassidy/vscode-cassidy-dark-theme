@@ -17,6 +17,9 @@ import { fields, object, parseJsonc } from "../shared/jsonc.js";
 import { generatePalette } from "../palette/generation.js";
 import { compileTokens, renderTheme } from "../tokens/compilation.js";
 import { applyArtifacts, assertFresh, capturePaths, requireStable, withGuards } from "../shared/transactions.js";
+import { decode } from "../tokens/formats.js";
+import { loadTokenData } from "../tokens/data/load.js";
+import { validateCategories } from "../tokens/category-validation.js";
 import { contrastRatio } from "../shared/color-math.js";
 import {
   discoverTargets,
@@ -39,7 +42,7 @@ const defaultRoot = fileURLToPath(new URL("../../", import.meta.url));
  * @param command - Rebuild command included in the output notice.
  * @returns Compiled theme JSONC with all input labels attached to diagnostics.
  */
-async function readCompiledTheme(root, target, palette, command, readInput) {
+async function readCompiledTheme(root, target, palette, command, readInput, snapshot) {
   /** Effective authored inputs indexed by their independent relative paths. */
   const inputs = new Map();
 
@@ -54,10 +57,24 @@ async function readCompiledTheme(root, target, palette, command, readInput) {
     /** Independently inherited documentation sections. */
     const details = {};
 
+    /** Effective categorized inputs retain origins for authority diagnostics. */
+    const families = { definitions: {}, details: {} };
+
     for (const section of themeSections) {
-      tokens[section] = inputs.get(`tokens/${section}/definitions.jsonc`).value;
-      details[section] = inputs.get(`tokens/${section}/details.jsonc`).value;
+      families.definitions[section] = decode(inputs.get(`tokens/${section}/definitions.jsonc`), section, "definitions");
+      families.details[section] = decode(inputs.get(`tokens/${section}/details.jsonc`), section, "details");
+      tokens[section] = families.definitions[section].value;
+      details[section] = families.details[section].value;
     }
+
+    if (target.directory === defaultThemeDirectory)
+      snapshot.referenceScopes = new Map(
+        tokens.syntax
+          .filter((rule) => rule.id)
+          .map((rule) => [rule.id, rule.scope === undefined ? [] : [rule.scope].flat()]),
+      );
+
+    validateCategories(families, snapshot, `${target.group}/${target.name}`);
 
     /** Effective metadata validated before compilation and registration. */
     const metadata = inputs.get("metadata.jsonc");
@@ -335,7 +352,7 @@ async function formatted(root, path, source) {
  * @param paletteOnly - Whether to generate palette reports without compiling token sections.
  * @param [defaultPalette] - Already validated default palette available to other themes.
  */
-async function prepareTarget(root, target, paletteOnly, defaultPalette, readInput) {
+async function prepareTarget(root, target, paletteOnly, defaultPalette, readInput, snapshot) {
   /** Required target-local configuration selecting a custom or default palette. */
   const input = await readInput(target, paletteInputPath);
 
@@ -390,7 +407,7 @@ async function prepareTarget(root, target, paletteOnly, defaultPalette, readInpu
 
   if (!paletteOnly) {
     /** Generated JSONC after validating effective tokens, details, and cross-section aliases. */
-    const rendered = await readCompiledTheme(root, target, palette, command, readInput);
+    const rendered = await readCompiledTheme(root, target, palette, command, readInput, snapshot);
     output.set(target.output, rendered);
     metadata = parseJsonc(rendered, target.output).value;
   }
@@ -581,8 +598,17 @@ async function checkOutputs(root, output, check, command) {
  * @param [options] - Preparation options.
  * @param [options.root] - Isolated project or checkout root.
  * @param [options.mode] - all, prod, dev, or palette.
+ * @param [options.overrides] - Prepared authored source candidates.
+ * @param [options.additionalTargets] - Validated targets being scaffolded.
+ * @param [options.snapshot] - Already loaded shared snapshot for generator/watch reuse.
  */
-export async function prepareBuild({ root = defaultRoot, mode = "all" } = {}) {
+export async function prepareBuild({
+  root = defaultRoot,
+  mode = "all",
+  overrides = new Map(),
+  additionalTargets = [],
+  snapshot,
+} = {}) {
   if (!["all", "prod", "dev", "palette"].includes(mode)) throw new Error(`Unknown build mode: ${mode}`);
 
   /** Read-only boundary check and complete dependency fingerprints. */
@@ -593,7 +619,9 @@ export async function prepareBuild({ root = defaultRoot, mode = "all" } = {}) {
     join(root, "themes"),
     join(root, "preview"),
   ]);
-  const targets = await discoverTargets(root);
+  const targets = [...(await discoverTargets(root)), ...additionalTargets];
+  snapshot ??= mode === "palette" ? undefined : await loadTokenData({ root });
+
   const defaultTarget = targets.find((target) => target.directory === defaultThemeDirectory);
   const cache = new Map();
 
@@ -606,14 +634,14 @@ export async function prepareBuild({ root = defaultRoot, mode = "all" } = {}) {
     /** Target/path cache identity includes fallback diagnostics. */
     const key = `${target.directory}/${path}`;
 
-    if (!cache.has(key)) cache.set(key, readTargetInput(root, target, path));
+    if (!cache.has(key)) cache.set(key, readTargetInput(root, target, path, overrides));
 
     return cache.get(key);
   }
 
   /** Default work is shared by prod and dev targets in a combined pass. */
   const paletteOnly = mode === "palette";
-  const baseline = await prepareTarget(root, defaultTarget, paletteOnly, undefined, readInput);
+  const baseline = await prepareTarget(root, defaultTarget, paletteOnly, undefined, readInput, snapshot);
   const selected = [],
     output = new Map();
 
@@ -622,7 +650,9 @@ export async function prepareBuild({ root = defaultRoot, mode = "all" } = {}) {
   )) {
     /** Each required target compiles at most once. */
     const prepared =
-      target === defaultTarget ? baseline : await prepareTarget(root, target, paletteOnly, baseline.palette, readInput);
+      target === defaultTarget
+        ? baseline
+        : await prepareTarget(root, target, paletteOnly, baseline.palette, readInput, snapshot);
 
     selected.push(prepared);
 

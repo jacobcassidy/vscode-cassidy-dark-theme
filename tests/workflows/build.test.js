@@ -84,7 +84,7 @@ for (const mode of ["all", "prod", "dev"]) {
     /** Existing documented properties retained while updating one color. */
     const tokens = JSON.parse(await readFile(input, "utf8"));
 
-    tokens["editor.background"] = { color: "#123456", colorReason: "Test live color preview." };
+    tokens.nonStandard.editor.background = { color: "#123456", colorReason: "Test live color preview." };
     await writeFile(input, JSON.stringify(tokens));
     project.logs.length = 0;
     assert.equal((await runBuild({ ...project, mode })).reloadRequired, false);
