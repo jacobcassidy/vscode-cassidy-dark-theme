@@ -69,7 +69,7 @@ function validateDisabling(definition, label) {
  * @param requireDetails - Whether every authored entry must have a purpose description.
  */
 function validateDetails(details, entries, requireDetails) {
-  fields(details, ["base", "ui", "semantic", "syntax"], "details");
+  fields(details, ["variables", "ui", "semantic", "syntax"], "details");
 
   for (const [section, definitions] of Object.entries(entries)) {
     object(details[section], `details.${section}`);
@@ -108,7 +108,7 @@ function validateDetails(details, entries, requireDetails) {
       }
 
       if (Object.hasOwn(value, "globallyOverriddenBy")) {
-        if (section === "base") throw new Error(`${label}: base roles cannot be globallyOverriddenBy`);
+        if (section === "variables") throw new Error(`${label}: internal variables cannot be globallyOverriddenBy`);
 
         if (definitions.get(key).disabled !== true) {
           throw new Error(`${label}: globallyOverriddenBy requires disabled: true and disabledReason`);
@@ -120,22 +120,22 @@ function validateDetails(details, entries, requireDetails) {
 
 /**
  * Collect and resolve consolidated token sections before compiling active and disabled entries.
- * @param tokens - Complete base, UI, semantic, and syntax token sections.
+ * @param tokens - Complete internal variable, UI, semantic, and syntax sections.
  * @param details - Complete corresponding details sections.
  * @param palette - Generated palette records keyed by primitive identifier.
  * @param [requireDetails] - Require matching purpose details and IDs for every syntax rule in the default theme.
  * @returns Resolved aliases and ordered compiled entries for each emitted section.
  */
 export function compileTokens(tokens, details, palette, requireDetails = false) {
-  fields(tokens, ["base", "ui", "semantic", "syntax"], "tokens");
-  fields(tokens.base, ["surface", "text", "diagnostic", "diff"], "tokens.base");
+  fields(tokens, ["variables", "ui", "semantic", "syntax"], "tokens");
+  fields(tokens.variables, ["surface", "text", "diagnostic", "diff"], "tokens.variables");
   object(tokens.ui, "tokens.ui");
   object(tokens.semantic, "tokens.semantic");
 
   if (!Array.isArray(tokens.syntax)) throw new Error("tokens.syntax must contain a token color array");
 
   /** Definitions eligible for documentation, including entries without colors. */
-  const entries = Object.fromEntries(["base", "ui", "semantic", "syntax"].map((section) => [section, new Map()]));
+  const entries = Object.fromEntries(["variables", "ui", "semantic", "syntax"].map((section) => [section, new Map()]));
 
   /** All named foreground definitions, collected before resolving any reference. */
   const aliases = new Map();
@@ -158,28 +158,28 @@ export function compileTokens(tokens, details, palette, requireDetails = false) 
   }
 
   /**
-   * Walk nested base roles and register their leaf descriptors.
+   * Walk nested internal variables and register their leaf descriptors.
    * @param group - Nested group or color descriptor.
-   * @param path - Dotted base path built so far.
+   * @param path - Dotted variable path built so far.
    */
-  function collectBase(group, path) {
-    object(group, `base.${path}`);
+  function collectVariables(group, path) {
+    object(group, `variables.${path}`);
 
     if (Object.keys(group).some((key) => [...colorFields, ...disablingFields].includes(key))) {
-      fields(group, colorFields, `base.${path}`);
-      validateColor(group, `base.${path}`);
-      if (!Object.hasOwn(group, "color")) throw new Error(`base.${path}: color is required`);
-      register("base", path, group);
+      fields(group, colorFields, `variables.${path}`);
+      validateColor(group, `variables.${path}`);
+      if (!Object.hasOwn(group, "color")) throw new Error(`variables.${path}: color is required`);
+      register("variables", path, group);
       return;
     }
 
     for (const [key, value] of Object.entries(group)) {
-      if (!/^[a-z][a-z0-9-]*(?:\.[a-z0-9-]+)*$/i.test(key)) throw new Error(`invalid base token ID ${key}`);
-      collectBase(value, path ? `${path}.${key}` : key);
+      if (!/^[a-z][a-z0-9-]*(?:\.[a-z0-9-]+)*$/i.test(key)) throw new Error(`invalid variable ID ${key}`);
+      collectVariables(value, path ? `${path}.${key}` : key);
     }
   }
 
-  collectBase(tokens.base, "");
+  collectVariables(tokens.variables, "");
 
   for (const section of ["ui", "semantic"]) {
     for (const [key, definition] of Object.entries(tokens[section])) {

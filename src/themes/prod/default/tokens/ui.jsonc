@@ -707,11 +707,11 @@
     "color": "palette.gray.700"
   },
   "diffEditor.insertedLineBackground": {
-    "color": "base.diff.added.foreground",
+    "color": "variables.diff.added.foreground",
     "alpha": 0.10196078431372549
   },
   "diffEditor.insertedTextBackground": {
-    "color": "base.diff.added.foreground",
+    "color": "variables.diff.added.foreground",
     "alpha": 0.2
   },
   "diffEditor.insertedTextBorder": {
@@ -727,11 +727,11 @@
     "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
   },
   "diffEditor.removedLineBackground": {
-    "color": "base.diff.removed.foreground",
+    "color": "variables.diff.removed.foreground",
     "alpha": 0.10196078431372549
   },
   "diffEditor.removedTextBackground": {
-    "color": "base.diff.removed.foreground",
+    "color": "variables.diff.removed.foreground",
     "alpha": 0.2
   },
   "diffEditor.removedTextBorder": {
@@ -754,11 +754,11 @@
     "alpha": 0.2
   },
   "diffEditorGutter.insertedLineBackground": {
-    "color": "base.diff.added.foreground",
+    "color": "variables.diff.added.foreground",
     "alpha": 0.10196078431372549
   },
   "diffEditorGutter.removedLineBackground": {
-    "color": "base.diff.removed.foreground",
+    "color": "variables.diff.removed.foreground",
     "alpha": 0.10196078431372549
   },
   "diffEditorOverview.insertedForeground": {
@@ -786,7 +786,7 @@
     "color": "palette.gray.825"
   },
   "editor.background": {
-    "color": "base.surface.editor"
+    "color": "variables.surface.editor"
   },
   "editor.border": {
     "color": "#0ff",
@@ -840,7 +840,7 @@
     "color": "palette.gray.400"
   },
   "editor.foreground": {
-    "color": "base.text.default"
+    "color": "variables.text.default"
   },
   "editor.hoverHighlightBackground": {
     "color": "palette.gray.white",
@@ -1097,7 +1097,7 @@
     "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
   },
   "editorError.foreground": {
-    "color": "base.diagnostic.error.foreground"
+    "color": "variables.diagnostic.error.foreground"
   },
   "editorGhostText.background": {
     "color": "#0ff",
@@ -1586,7 +1586,7 @@
     "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
   },
   "editorWarning.foreground": {
-    "color": "base.diagnostic.warning.foreground"
+    "color": "variables.diagnostic.warning.foreground"
   },
   "editorWatermark.foreground": {
     "color": "#0ff",
@@ -1615,7 +1615,7 @@
     "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
   },
   "errorForeground": {
-    "color": "base.diagnostic.error.foreground"
+    "color": "variables.diagnostic.error.foreground"
   },
   "extensionBadge.remoteBackground": {
     "color": "#0ff",

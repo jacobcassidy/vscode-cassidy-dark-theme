@@ -43,7 +43,7 @@ test("compilation resolves all color positions and strips source-only fields", (
   /** Compiled theme source with a generated notice and no ordinary source comments. */
   const output = renderTheme(
     { name: "Fixture", type: "dark" },
-    compileTokens(createTokens(), { base: {}, ui: {}, semantic: {}, syntax: {} }, palette),
+    compileTokens(createTokens(), { variables: {}, ui: {}, semantic: {}, syntax: {} }, palette),
   );
 
   /** Active theme entries and preserved scope order. */
@@ -64,7 +64,7 @@ test("compilation resolves all color positions and strips source-only fields", (
     () =>
       renderTheme(
         { colors: {} },
-        compileTokens(createTokens(), { base: {}, ui: {}, semantic: {}, syntax: {} }, palette),
+        compileTokens(createTokens(), { variables: {}, ui: {}, semantic: {}, syntax: {} }, palette),
       ),
     /belongs in its section file/,
   );
@@ -399,7 +399,7 @@ test("dev targets use independent complete palettes and token sections and isola
   await mkdir(join(devThemeDirectory, "details"));
   await writeFile(join(devThemeDirectory, "details/ui.jsonc"), "{}");
   await writeFile(join(devThemeDirectory, "palette/palette-config.jsonc"), JSON.stringify(input));
-  await writeFile(join(devThemeDirectory, "tokens/variables.jsonc"), JSON.stringify(tokens.base));
+  await writeFile(join(devThemeDirectory, "tokens/variables.jsonc"), JSON.stringify(tokens.variables));
   await writeFile(
     join(devThemeDirectory, "tokens/ui.jsonc"),
     '{"editor.background":{"color":"#010203","colorReason":"Preview background."}}',
@@ -714,7 +714,7 @@ for (const [path, contents, pattern] of [
   [
     "tokens/variables.jsonc",
     "{}",
-    /Unknown reference:.*base.surface.editor/,
+    /Unknown reference:.*variables.surface.editor/,
   ],
   ["metadata.jsonc", "{}", /theme name must be/],
   ["tokens/ui.jsonc", '{"bad":{}}', /requires styling/],
@@ -724,7 +724,7 @@ for (const [path, contents, pattern] of [
   ["palette/palette-config.jsonc", '{"chroma":', /ValueExpected/],
   [
     "tokens/variables.jsonc",
-    '{"surface":{"one":{"color":"base.surface.two"},"two":{"color":"base.surface.one"}}}',
+    '{"surface":{"one":{"color":"variables.surface.two"},"two":{"color":"variables.surface.one"}}}',
     /Token cycle/,
   ],
 ]) {

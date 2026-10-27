@@ -8,7 +8,7 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { parseJsonc } from "../scripts/lib/jsonc-validation.js";
-import { themeInputPaths, themeSectionFiles } from "../scripts/lib/theme-source-inputs.js";
+import { themeInputPaths } from "../scripts/lib/theme-source-inputs.js";
 
 /** Create a small palette configuration with chromatic families and neutral endpoints. */
 export function createPaletteConfig() {
@@ -35,9 +35,9 @@ export const themePartNames = themeInputPaths.map((path) => path.replace(/\.json
 /** Create consolidated tokens exercising references, formatting, backgrounds, and scope order. */
 export function createTokens() {
   return {
-    base: { surface: { editor: { color: "palette.gray.900" } } },
+    variables: { surface: { editor: { color: "palette.gray.900" } } },
     ui: {
-      "editor.background": { color: "base.surface.editor" },
+      "editor.background": { color: "variables.surface.editor" },
       "editor.foreground": { color: "syntax.string" },
     },
     semantic: {
@@ -50,7 +50,7 @@ export function createTokens() {
         name: "Ordered scopes",
         scope: ["second", "first"],
         color: "palette.yellow.400",
-        background: { color: "base.surface.editor" },
+        background: { color: "variables.surface.editor" },
         fontStyle: "bold italic",
       },
     ],
@@ -59,7 +59,7 @@ export function createTokens() {
 
 /** Create independent empty documentation sections. */
 export function createDetails() {
-  return { base: {}, ui: {}, semantic: {}, syntax: {} };
+  return { variables: {}, ui: {}, semantic: {}, syntax: {} };
 }
 
 /**
@@ -83,7 +83,7 @@ export async function readThemeParts(directory) {
     } else {
       /** Section group and name associated with this authored input. */
       const [group, section] = name.split("/");
-      parts[group][section === themeSectionFiles.base ? "base" : section] = JSON.parse(JSON.stringify(value));
+      parts[group][section] = JSON.parse(JSON.stringify(value));
     }
   }
 
@@ -106,7 +106,7 @@ export async function createBuildProject(t) {
     metadata: { name: "Fixture", type: "dark", semanticHighlighting: true },
     tokens: createTokens(),
     details: {
-      base: { "surface.editor": { for: "Shared editor surface." } },
+      variables: { "surface.editor": { for: "Shared editor surface." } },
       ui: {
         "editor.background": { for: "Editor background." },
         "editor.foreground": { for: "Editor foreground." },
@@ -134,7 +134,7 @@ export async function createBuildProject(t) {
 
     await writeFile(
       join(root, "src/themes/prod/default", `${name}.jsonc`),
-      JSON.stringify(section ? inputs[group][section === themeSectionFiles.base ? "base" : section] : inputs[group]),
+      JSON.stringify(section ? inputs[group][section] : inputs[group]),
     );
   }
 

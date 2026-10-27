@@ -6,6 +6,8 @@ All notable changes to this project are documented in this file.
 
 ### Changed
 
+- Renamed internal color aliases from `base.*` to `variables.*`, aligning references, validation, and documentation with `variables.jsonc` while preserving generated theme colors.
+
 - Corrected property purpose catalog paths after moving `lookups/` out of `references/`.
 - Renamed `tokens/base.jsonc` and `details/base.jsonc` to `variables.jsonc` to clarify their internal color-variable role, preserving `base.*` aliases and generated theme output.
 

@@ -134,7 +134,7 @@ for (const group of ["dev", "prod"]) {
     /** Built theme confirms placeholder styling, copied metadata, and inherited syntax. */
     const outputPath = `${group === "prod" ? "themes" : "dev-extension/themes"}/cassidy-dark-color-theme-my-theme.json`;
 
-    /** Generated JSONC with base and syntax aliases resolved against the default palette. */
+    /** Generated JSONC with variable and syntax aliases resolved against the default palette. */
     const output = parseJsonc(await readFile(join(root, outputPath), "utf8"), outputPath).value;
 
     assert.equal(output.name, "Fixture");

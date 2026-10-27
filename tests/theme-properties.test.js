@@ -9,7 +9,6 @@ import { join } from "node:path";
 import test from "node:test";
 import { addThemeProperties } from "../scripts/themes/add-properties.js";
 import { buildProdThemes } from "../scripts/themes/build.js";
-import { themeSectionFiles } from "../scripts/lib/theme-source-inputs.js";
 import { parseJsonc } from "../scripts/lib/jsonc-validation.js";
 import { createBuildProject, readBuildOutputs, readThemeParts, writeDefaultPaletteConfig } from "./test-projects.js";
 
@@ -45,8 +44,8 @@ async function createPropertyProject(t) {
   await writeReference(root, { "new.background": "#f0f" }, { "*.readonly:typescript": "#f00" });
   await writeFile(join(root, ".prettierrc.json"), JSON.stringify({ printWidth: 1, trailingComma: "none" }));
 
-  for (const section of ["base", "ui", "semantic", "syntax"]) {
-    await writeFile(join(root, `src/themes/prod/default/details/${themeSectionFiles[section]}.jsonc`), "{}");
+  for (const section of ["variables", "ui", "semantic", "syntax"]) {
+    await writeFile(join(root, `src/themes/prod/default/details/${section}.jsonc`), "{}");
   }
 
   return root;
@@ -61,7 +60,7 @@ async function createPropertyProject(t) {
  */
 async function readSection(root, theme, section) {
   /** Source path used in diagnostics and file reads. */
-  const path = join(root, `src/themes/${theme}/tokens/${themeSectionFiles[section]}.jsonc`);
+  const path = join(root, `src/themes/${theme}/tokens/${section}.jsonc`);
 
   /** Source text retained for comment and unchanged-file assertions. */
   const source = await readFile(path, "utf8");
@@ -368,7 +367,7 @@ test("default details cover nested roles, disabled tokens, new reference keys, a
   /** Original token values retained for assertions about styling and rule order. */
   const parts = await readThemeParts(join(root, "src/themes/prod/default"));
 
-  parts.tokens.base.surface.extra = { color: "palette.gray.900" };
+  parts.tokens.variables.surface.extra = { color: "palette.gray.900" };
   parts.tokens.ui["retained.disabled"] = { disabled: true, disabledReason: "Use the default styling." };
   parts.tokens.syntax.push(
     { name: "String", scope: "string.one", fontStyle: "bold" },
@@ -376,9 +375,9 @@ test("default details cover nested roles, disabled tokens, new reference keys, a
     { fontStyle: "italic" },
   );
 
-  for (const section of ["base", "ui", "syntax"]) {
+  for (const section of ["variables", "ui", "syntax"]) {
     await writeFile(
-      join(root, `src/themes/prod/default/tokens/${themeSectionFiles[section]}.jsonc`),
+      join(root, `src/themes/prod/default/tokens/${section}.jsonc`),
       JSON.stringify(parts.tokens[section]),
     );
   }
@@ -419,7 +418,7 @@ test("default details cover nested roles, disabled tokens, new reference keys, a
   assert.equal(updated.details.ui["new.background"].for, "Reviewed new widget background.");
   assert.equal(updated.details.semantic["*.readonly:typescript"].for, "Read-only TypeScript symbols.");
   assert.match(updated.details.ui["retained.disabled"].for, /^UNREVIEWED:/);
-  assert.equal(updated.details.base["surface.extra"].for, "Shared surface extra color role.");
+  assert.equal(updated.details.variables["surface.extra"].for, "Shared surface extra color role.");
   assert.deepEqual(
     updated.tokens.syntax.map((rule) => rule.id),
     ["string", "string-2", "string-3", "rule-4"],
@@ -447,7 +446,7 @@ test("default details cover nested roles, disabled tokens, new reference keys, a
   await buildProdThemes({ root });
 });
 
-for (const section of ["base", "ui", "semantic", "syntax", "syntax ID", "description", "disabled"]) {
+for (const section of ["variables", "ui", "semantic", "syntax", "syntax ID", "description", "disabled"]) {
   test(`default builds reject missing ${section} documentation before writing outputs`, async (t) => {
     /** Complete default fixture with a successful output snapshot. */
     const root = await createBuildProject(t);
@@ -474,7 +473,7 @@ for (const section of ["base", "ui", "semantic", "syntax", "syntax ID", "descrip
       );
       await writeFile(join(root, "src/themes/prod/default/details/ui.jsonc"), "{}");
     } else {
-      await writeFile(join(root, `src/themes/prod/default/details/${themeSectionFiles[section]}.jsonc`), "{}");
+      await writeFile(join(root, `src/themes/prod/default/details/${section}.jsonc`), "{}");
     }
 
     await assert.rejects(buildProdThemes({ root }), /missing property details|require an id|for: expected a nonempty/);

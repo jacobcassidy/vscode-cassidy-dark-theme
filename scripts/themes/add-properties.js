@@ -12,7 +12,7 @@ import { applyEdits, createScanner, modify, SyntaxKind } from "jsonc-parser";
 // eslint-disable-next-line import-x/default
 import prettier from "prettier";
 import { object, parseJsonc } from "../lib/jsonc-validation.js";
-import { discoverTargets, readOptional, readTargetInput, themeSectionFiles } from "../lib/theme-source-inputs.js";
+import { discoverTargets, readOptional, readTargetInput, themeSections } from "../lib/theme-source-inputs.js";
 
 /** Repository root inferred from this module's location. */
 const defaultRoot = fileURLToPath(new URL("../../", import.meta.url));
@@ -125,17 +125,17 @@ function insertProperties(input, keys, values) {
 }
 
 /**
- * Collect nested base descriptors under their flat documentation paths.
- * @param group - Base group or leaf color descriptor.
- * @param [path] - Current dotted base path.
- * @returns Base documentation keys and their source descriptors.
+ * Collect nested internal color descriptors under their flat documentation paths.
+ * @param group - Variable group or leaf color descriptor.
+ * @param [path] - Current dotted variable path.
+ * @returns Variable documentation keys and their source descriptors.
  */
-function baseEntries(group, path = "") {
-  object(group, `base.${path}`);
+function variableEntries(group, path = "") {
+  object(group, `variables.${path}`);
 
   if (Object.hasOwn(group, "color")) return [[path, group]];
 
-  return Object.entries(group).flatMap(([key, value]) => baseEntries(value, path ? `${path}.${key}` : key));
+  return Object.entries(group).flatMap(([key, value]) => variableEntries(value, path ? `${path}.${key}` : key));
 }
 
 /**
@@ -213,12 +213,12 @@ async function addDefaultDetails(root, target, updates) {
 
   object(reference, referencePath);
 
-  for (const [section, file] of Object.entries(themeSectionFiles)) {
+  for (const section of themeSections) {
     /** Original or already prepared token section, including newly added placeholders. */
-    let input = await readTargetInput(root, target, `tokens/${file}.jsonc`);
+    let input = await readTargetInput(root, target, `tokens/${section}.jsonc`);
 
     /** Earlier update for the matching default token file, if it has additions. */
-    const pending = updates.find((update) => update.path === `${target.directory}/tokens/${file}.jsonc`);
+    const pending = updates.find((update) => update.path === `${target.directory}/tokens/${section}.jsonc`);
 
     if (pending?.source) {
       input = { ...parseJsonc(pending.source, input.label), source: pending.source, label: input.label };
@@ -242,14 +242,14 @@ async function addDefaultDetails(root, target, updates) {
 
     /** Flat property/descriptor pairs using the same keys as theme compilation. */
     const entries =
-      section === "base"
-        ? baseEntries(input.value)
+      section === "variables"
+        ? variableEntries(input.value)
         : section === "syntax"
           ? input.value.map((rule) => [rule.id, rule])
           : Object.entries(input.value);
 
     /** Existing documentation, whose reviewed descriptions and relationships are retained. */
-    const details = await readTargetInput(root, target, `details/${file}.jsonc`);
+    const details = await readTargetInput(root, target, `details/${section}.jsonc`);
 
     object(details.value, details.label);
 
@@ -272,7 +272,7 @@ async function addDefaultDetails(root, target, updates) {
       /** Reviewed purpose, or an explicit review marker for a previously unknown property. */
       const description =
         reference[section]?.[key]?.for ??
-        (section === "base"
+        (section === "variables"
           ? `Shared ${key.split(".").join(" ")} color role.`
           : section === "syntax"
             ? `TextMate rule ${definition.name || key} targeting ${[definition.scope ?? []].flat().join(", ") || "no explicit scope selectors"}.`
@@ -300,8 +300,8 @@ async function addDefaultDetails(root, target, updates) {
 
     updates.push({
       theme: "prod/default",
-      section: `details/${file}`,
-      path: `${target.directory}/details/${file}.jsonc`,
+      section: `details/${section}`,
+      path: `${target.directory}/details/${section}.jsonc`,
       added,
       source: added.length ? insertProperties(edited, Object.keys(values), values) : undefined,
     });

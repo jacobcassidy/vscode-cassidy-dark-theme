@@ -30,12 +30,12 @@ test("forward and cross-section aliases preserve alpha replacement and exact sel
   /** Authored sections with forward aliases and independent formatting. */
   const tokens = createTokens();
 
-  tokens.base.text = {
+  tokens.variables.text = {
     first: { color: "semantic.function.defaultLibrary", alpha: 0.1 },
-    second: { color: "base.text.first", alpha: 0.2 },
-    opaque: { color: "base.text.second", alpha: 1 },
-    empty: { color: "base.text.second", alpha: 0 },
-    inherited: { color: "base.text.second" },
+    second: { color: "variables.text.first", alpha: 0.2 },
+    opaque: { color: "variables.text.second", alpha: 1 },
+    empty: { color: "variables.text.second", alpha: 0 },
+    inherited: { color: "variables.text.second" },
   };
   tokens.semantic["function.defaultLibrary"] = { color: "ui.editor.foreground" };
   tokens.semantic["*.async:javascript"] = { color: "palette.blue.400" };
@@ -45,11 +45,11 @@ test("forward and cross-section aliases preserve alpha replacement and exact sel
   /** Resolved values indexed by aliases and compiled selectors. */
   const result = compile(tokens);
 
-  assert.equal(result.resolved.get("base.text.first"), "#f1dda51a");
-  assert.equal(result.resolved.get("base.text.second"), "#f1dda533");
-  assert.equal(result.resolved.get("base.text.opaque"), "#f1dda5");
-  assert.equal(result.resolved.get("base.text.empty"), "#f1dda500");
-  assert.equal(result.resolved.get("base.text.inherited"), "#f1dda533");
+  assert.equal(result.resolved.get("variables.text.first"), "#f1dda51a");
+  assert.equal(result.resolved.get("variables.text.second"), "#f1dda533");
+  assert.equal(result.resolved.get("variables.text.opaque"), "#f1dda5");
+  assert.equal(result.resolved.get("variables.text.empty"), "#f1dda500");
+  assert.equal(result.resolved.get("variables.text.inherited"), "#f1dda533");
   assert.equal(result.resolved.get("ui.wildcard"), palette.get("palette.blue.400").hex);
   assert.deepEqual(result.semanticTokenColors.at(-1).value, {
     bold: false,
@@ -136,7 +136,7 @@ test("disabled entries retain resolved styles and aliases while placeholders rem
 for (const disabledIndices of [[], [0], [1], [2], [0, 1], [1, 2], [0, 2], [0, 1, 2]]) {
   test(`active commas and disabled sections parse for disabled positions ${disabledIndices}`, () => {
     /** Three entries per section exercise every active/disabled combination. */
-    const tokens = { base: {}, ui: {}, semantic: {}, syntax: [] };
+    const tokens = { variables: {}, ui: {}, semantic: {}, syntax: [] };
 
     for (let index = 0; index < 3; index++) {
       /** Shared color and disabling choice for this entry position. */
@@ -211,20 +211,23 @@ test("retained styles reject unknown references, cycles, duplicate IDs, and inva
   tokens.syntax.push({ ...tokens.syntax[0] });
   assert.throws(() => compile(tokens), /duplicate token ID syntax.string/);
   tokens.syntax.pop();
-  tokens.base.surface = { nested: { one: { color: "palette.blue.400" } }, "nested.one": { color: "palette.blue.400" } };
-  assert.throws(() => compile(tokens), /duplicate token ID base.surface.nested.one/);
+  tokens.variables.surface = {
+    nested: { one: { color: "palette.blue.400" } },
+    "nested.one": { color: "palette.blue.400" },
+  };
+  assert.throws(() => compile(tokens), /duplicate token ID variables.surface.nested.one/);
 });
 
 test("token schemas validate selectors, flags, syntax backgrounds, and source-only fields", () => {
   for (const [section, value, pattern] of [
-    ["base", { unknown: {} }, /unknown field/],
-    ["base", { surface: { editor: { color: "palette.blue.400", disabled: false } } }, /unknown field disabled/],
+    ["variables", { unknown: {} }, /unknown field/],
+    ["variables", { surface: { editor: { color: "palette.blue.400", disabled: false } } }, /unknown field disabled/],
     [
-      "base",
+      "variables",
       { surface: { editor: { color: "palette.blue.400", disabledReason: "Unused." } } },
       /unknown field disabledReason/,
     ],
-    ["base", { surface: { "bad key": { color: "palette.blue.400" } } }, /invalid base token ID/],
+    ["variables", { surface: { "bad key": { color: "palette.blue.400" } } }, /invalid variable ID/],
     ["ui", { invalid: "#123456" }, /expected an object/],
     ["ui", { "bad key": { color: "palette.blue.400" } }, /invalid ui key/],
     ["ui", { bad: {} }, /requires styling/],
@@ -274,8 +277,8 @@ test("details enforce reviewed global replacements independently from aliases an
     assert.doesNotThrow(() => compile(tokens, details));
   }
 
-  details.base["surface.editor"] = { globallyOverriddenBy: ["editor.background"] };
-  assert.throws(() => compile(tokens, details), /base roles cannot be globallyOverriddenBy/);
+  details.variables["surface.editor"] = { globallyOverriddenBy: ["editor.background"] };
+  assert.throws(() => compile(tokens, details), /internal variables cannot be globallyOverriddenBy/);
 });
 
 test("details reject blank entries, malformed lists, unknown fields, wrappers, and absent syntax IDs", () => {
@@ -301,7 +304,7 @@ test("details reject blank entries, malformed lists, unknown fields, wrappers, a
     assert.throws(() => compile(createTokens(), details), /details.ui.editor.background/);
   }
 
-  for (const section of ["base", "ui", "semantic", "syntax"]) {
+  for (const section of ["variables", "ui", "semantic", "syntax"]) {
     /** Details keys must name effective authored entries in their own section. */
     const details = createDetails();
     details[section].missing = { for: "Absent entry." };
