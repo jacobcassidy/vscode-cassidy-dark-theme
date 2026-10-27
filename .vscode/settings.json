@@ -23,7 +23,8 @@
     },
     {
       "fileMatch": [
-        "/src/themes/*/*/tokens/syntax/definitions.jsonc"
+        "/src/themes/*/*/tokens/syntax/definitions.jsonc",
+        "/docs/references/examples/example-syntax.jsonc"
       ],
       "url": "./tooling/tokens/schemas/theme-syntax-definitions.schema.json"
     },

@@ -5,6 +5,7 @@ dist
 docs
 scripts
 tooling
+samples
 src
 tests
 
@@ -17,6 +18,7 @@ tests
 .shellcheckrc
 AGENTS.md
 azure-pipelines.yml
+azure-validation.yml
 eslint.config.js
 lefthook.yml
 prettier.config.js

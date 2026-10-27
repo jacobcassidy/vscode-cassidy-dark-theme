@@ -11,9 +11,7 @@ try {
 
   /** Successful synchronization and conditional editor reload requirement. */
   const result = await syncDevExtension();
-
   console.log(formatMessage(`Synced dev manifest: ${result.manifestPath}`, "success"));
-
   if (result.reloadRequired) logReloadReminder();
 } catch (error) {
   console.error(formatMessage(error.message, "error"));

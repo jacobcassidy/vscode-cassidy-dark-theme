@@ -12,13 +12,14 @@ import { parseJsonc } from "../../shared/jsonc.js";
  * @param source - Verified identity and frozen source-relative file bytes.
  * @param [signal] - Invocation cancellation signal.
  */
-export function extractSource(source, signal) {
+export async function extractSource(source, signal) {
   /** Parsed modules, resolved registrations, and explicit unresolved diagnostics. */
   const modules = new Map(),
     ui = new Map(),
     types = new Map(),
     modifiers = new Map(),
     scopes = new Map(),
+    scopeDescriptions = new Map(),
     warnings = [];
 
   /**
@@ -46,9 +47,14 @@ export function extractSource(source, signal) {
 
     /** AST nodes remain data; no upstream module is imported into this process. */
     const tree = ts.createSourceFile(path, source.files.get(path).toString(), ts.ScriptTarget.Latest, true);
+
+    /** Static declarations and imported bindings indexed for reference resolution. */
     const declarations = new Map(),
-      imports = new Map();
-    const result = { tree, declarations, imports };
+      imports = new Map(),
+      stars = [];
+
+    /** Parsed module with its static declaration and import indexes. */
+    const result = { tree, declarations, imports, stars };
 
     modules.set(path, result);
 
@@ -57,14 +63,16 @@ export function extractSource(source, signal) {
      * @param node - Current AST node.
      */
     function visit(node) {
-      if (ts.isVariableDeclaration(node) && ts.isIdentifier(node.name))
+      if (ts.isVariableDeclaration(node) && ts.isIdentifier(node.name) && node.parent?.parent?.parent === tree)
         declarations.set(node.name.text, node.initializer);
+
       if (ts.isImportDeclaration(node) && ts.isStringLiteral(node.moduleSpecifier)) {
         /** Relative dependency path belongs to the verified frozen input set. */
         const dependency = importPath(path, node.moduleSpecifier.text),
           clause = node.importClause;
 
         if (dependency && clause?.name) imports.set(clause.name.text, { path: dependency, name: "default" });
+
         if (dependency && clause?.namedBindings) {
           if (ts.isNamespaceImport(clause.namedBindings))
             imports.set(clause.namedBindings.name.text, { path: dependency });
@@ -78,7 +86,19 @@ export function extractSource(source, signal) {
         }
       }
 
+      if (
+        ts.isExportDeclaration(node) &&
+        !node.exportClause &&
+        node.moduleSpecifier &&
+        ts.isStringLiteral(node.moduleSpecifier)
+      ) {
+        /** Wildcard re-exports are resolved only through verified relative dependencies. */
+        const dependency = importPath(path, node.moduleSpecifier.text);
+        if (dependency) stars.push(dependency);
+      }
+
       if (ts.isExportAssignment(node)) declarations.set("default", node.expression);
+
       if (
         ts.isExportDeclaration(node) &&
         node.moduleSpecifier &&
@@ -104,6 +124,37 @@ export function extractSource(source, signal) {
   }
 
   /**
+   * Follow static imported/re-exported bindings through the frozen module index.
+   * @param path - Owning source-relative module.
+   * @param name - Exact declared or imported binding name.
+   * @param seen - Active reference chain used to reject cycles.
+   */
+  function reference(path, name, seen) {
+    /** Module/name identity bounds cyclic re-exports without executing source code. */
+    const key = `${path}:${name}`,
+      data = module(path),
+      binding = data.imports.get(name);
+
+    if (seen.includes(key) || seen.length > 40) return undefined;
+
+    if (data.declarations.has(name)) return evaluate(data.declarations.get(name), path, [...seen, key]);
+
+    if (binding?.name) return reference(binding.path, binding.name, [...seen, key]);
+
+    /** Conflicting wildcard exports stay unresolved instead of receiving arbitrary precedence. */
+    const values =
+      name === "default"
+        ? []
+        : data.stars
+            .map((dependency) => reference(dependency, name, [...seen, key]))
+            .filter((value) => value !== undefined);
+
+    return values.length && values.every((value) => JSON.stringify(value) === JSON.stringify(values[0]))
+      ? values[0]
+      : undefined;
+  }
+
+  /**
    * Evaluate only supported static AST expressions, bounded against cycles/deep nesting.
    * @param node - Static expression candidate.
    * @param path - Owning module path.
@@ -111,10 +162,15 @@ export function extractSource(source, signal) {
    */
   function evaluate(node, path, seen = []) {
     if (!node || seen.length > 40) return undefined;
+
     if (ts.isStringLiteralLike(node)) return node.text;
+
     if (ts.isNumericLiteral(node)) return Number(node.text);
+
     if (node.kind === ts.SyntaxKind.TrueKeyword) return true;
+
     if (node.kind === ts.SyntaxKind.FalseKeyword) return false;
+
     if (
       ts.isParenthesizedExpression(node) ||
       ts.isAsExpression(node) ||
@@ -122,29 +178,50 @@ export function extractSource(source, signal) {
       ts.isSatisfiesExpression(node)
     )
       return evaluate(node.expression, path, seen);
+
     if (ts.isIdentifier(node)) {
-      /** Reference identity prevents cycles spanning imported constants. */
-      const key = `${path}:${node.text}`,
-        binding = module(path).imports.get(node.text);
+      /** Lexical scopes prevent unrelated local bindings from masquerading as global registrations. */
+      let parent = node.parent;
 
-      if (seen.includes(key)) return undefined;
-      if (binding?.name)
-        return evaluate(module(binding.path).declarations.get(binding.name), binding.path, [...seen, key]);
+      while (parent && !ts.isSourceFile(parent)) {
+        if (ts.isBlock(parent) || ts.isModuleBlock(parent)) {
+          for (const statement of parent.statements) {
+            if (!ts.isVariableStatement(statement)) continue;
 
-      return evaluate(module(path).declarations.get(node.text), path, [...seen, key]);
+            for (const declaration of statement.declarationList.declarations) {
+              if (ts.isIdentifier(declaration.name) && declaration.name.text === node.text) {
+                /** Local reference identity also bounds initializer cycles. */
+                const key = `${path}:${declaration.pos}:${node.text}`;
+                return seen.includes(key) ? undefined : evaluate(declaration.initializer, path, [...seen, key]);
+              }
+            }
+          }
+        }
+
+        if (
+          ts.isFunctionLike(parent) &&
+          parent.parameters.some((parameter) => ts.isIdentifier(parameter.name) && parameter.name.text === node.text)
+        )
+          return undefined;
+
+        parent = parent.parent;
+      }
+
+      return reference(path, node.text, seen);
     }
 
     if (ts.isPropertyAccessExpression(node)) {
       /** Namespace-import member can be resolved without executing the imported module. */
       const binding = ts.isIdentifier(node.expression) && module(path).imports.get(node.expression.text);
 
-      if (binding && !binding.name)
-        return evaluate(module(binding.path).declarations.get(node.name.text), binding.path, [
-          ...seen,
-          `${path}:${node.getText()}`,
-        ]);
+      if (binding && !binding.name) return reference(binding.path, node.name.text, seen);
 
-      return evaluate(node.expression, path, seen)?.[node.name.text];
+      /** Localize2 exposes value/original on a statically known message. */
+      const value = evaluate(node.expression, path, seen);
+
+      return typeof value === "string" && ["value", "original"].includes(node.name.text)
+        ? value
+        : value?.[node.name.text];
     }
 
     if (ts.isObjectLiteralExpression(node)) {
@@ -159,11 +236,11 @@ export function extractSource(source, signal) {
     }
 
     if (ts.isArrayLiteralExpression(node)) return node.elements.map((element) => evaluate(element, path, seen));
+
     if (ts.isBinaryExpression(node) && node.operatorToken.kind === ts.SyntaxKind.PlusToken) {
       /** Concatenation is accepted only when both operands are static strings. */
       const left = evaluate(node.left, path, seen),
         right = evaluate(node.right, path, seen);
-
       return typeof left === "string" && typeof right === "string" ? left + right : undefined;
     }
 
@@ -174,9 +251,7 @@ export function extractSource(source, signal) {
       for (const span of node.templateSpans) {
         /** Static interpolated text or number. */
         const part = evaluate(span.expression, path, seen);
-
         if (!["string", "number"].includes(typeof part)) return undefined;
-
         value += part + span.literal.text;
       }
 
@@ -200,7 +275,6 @@ export function extractSource(source, signal) {
   function register(collection, id, description, path, deprecated = false) {
     if (typeof id !== "string" || !id.trim() || typeof description !== "string" || !description.trim()) {
       warnings.push(`${source.identity.id}:${path}: unresolved dynamic registration`);
-
       return;
     }
 
@@ -226,6 +300,7 @@ export function extractSource(source, signal) {
   }
 
   for (const [path, bytes] of source.files) {
+    await new Promise(setImmediate);
     signal?.throwIfAborted();
 
     if (/\.(?:ts|tsx|js)$/.test(path)) {
@@ -256,8 +331,10 @@ export function extractSource(source, signal) {
               path,
               Boolean(evaluate(node.arguments[4], path)),
             );
+
           if (name === "registerTokenType")
             register(types, evaluate(node.arguments[0], path), evaluate(node.arguments[1], path), path);
+
           if (name === "registerTokenModifier")
             register(modifiers, evaluate(node.arguments[0], path), evaluate(node.arguments[1], path), path);
         }
@@ -269,7 +346,11 @@ export function extractSource(source, signal) {
     } else if (/(?:^|\/)package\.json$/.test(path)) {
       /** Manifest contributions are parsed as data, with adjacent localization substitution. */
       const manifest = parseJsonc(bytes.toString(), path).value;
+
+      /** Verified adjacent localization bytes, when supplied by the contributor. */
       const translations = source.files.get(posix.join(dirname(path), "package.nls.json"));
+
+      /** Parsed localization messages available for static manifest substitution. */
       const messages = translations ? parseJsonc(translations.toString(), path).value : {};
 
       /**
@@ -281,8 +362,10 @@ export function extractSource(source, signal) {
       }
 
       for (const color of manifest.contributes?.colors ?? []) register(ui, color.id, message(color.description), path);
+
       for (const type of manifest.contributes?.semanticTokenTypes ?? [])
         register(types, type.id, message(type.description), path);
+
       for (const modifier of manifest.contributes?.semanticTokenModifiers ?? [])
         register(modifiers, modifier.id, message(modifier.description), path);
     } else if (/\.(?:json|jsonc)$/.test(path) && /(?:syntaxes\/|tmLanguage)/.test(path)) {
@@ -292,11 +375,12 @@ export function extractSource(source, signal) {
       /**
        * Collect exact grammar names/coverage from static JSON structures.
        * @param value - Current grammar node.
+       * @param [root] - Whether this is the grammar root with a human-readable name.
        */
-      function grammarScopes(value) {
+      function grammarScopes(value, root = false) {
         if (!value || typeof value !== "object") return;
 
-        for (const key of ["scopeName", "name", "contentName"]) {
+        for (const key of root ? ["scopeName"] : ["name", "contentName"]) {
           if (typeof value[key] === "string" && value[key].trim())
             scopes.set(value[key], {
               selector: value[key],
@@ -316,11 +400,14 @@ export function extractSource(source, signal) {
         for (const child of Object.values(value)) grammarScopes(child);
       }
 
-      grammarScopes(grammar);
+      if (typeof grammar.scopeName === "string" && typeof grammar.name === "string" && grammar.name.trim())
+        scopeDescriptions.set(grammar.scopeName, grammar.name);
+
+      grammarScopes(grammar, true);
     }
   }
 
-  return { identity: source.identity, ui, types, modifiers, scopes, warnings };
+  return { identity: source.identity, ui, types, modifiers, scopes, scopeDescriptions, warnings };
 }
 
 /**
@@ -333,7 +420,11 @@ export function semanticDescription(selector, types, modifiers) {
   /** Exact type/modifier sequence, retaining language qualifiers as context. */
   const [bare, language] = selector.split(":"),
     [type, ...suffixes] = bare.split(".");
+
+  /** Registered semantic type description, or the wildcard type description. */
   const base = type === "*" ? { description: "Symbols of any semantic token type." } : types.get(type);
+
+  /** Ordered modifier registrations used to describe the exact selector. */
   const records = suffixes.map((modifier) => modifiers.get(modifier));
 
   if (!base || records.some((record) => !record)) return undefined;
@@ -350,6 +441,10 @@ export function semanticDescription(selector, types, modifiers) {
       ...records.map((record) => record.description),
       ...(language ? [`Language: ${language}.`] : []),
     ].join(" "),
-    category: [base, ...records].some((record) => record.category === "nonStandard") ? "nonStandard" : origin.category,
+    category: [base, ...records].some((record) => record.category === "nonStandard")
+      ? "nonStandard"
+      : [base, ...records].some((record) => record.category === "sourceCode")
+        ? "sourceCode"
+        : origin.category,
   };
 }

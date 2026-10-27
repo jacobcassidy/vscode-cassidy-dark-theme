@@ -2,7 +2,7 @@
 // Upstream inputs last processed: VS Code 1.143.1
 // Stable commit: unknown (historical source tag; commit not recorded)
 // Supplemental main commit: 1184ad4d45794110deb6b897ea83b15aac44ed89
-// Local syntax input: default/reference authored rules; original scope order preserved.
+// Local syntax input: src/themes/prod/default/tokens/syntax/definitions.jsonc (migrated reference; historical revision unknown).
 /*
 MIT License
 

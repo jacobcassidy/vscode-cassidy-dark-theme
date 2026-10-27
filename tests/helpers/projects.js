@@ -85,6 +85,7 @@ export async function readThemeParts(directory) {
     } else {
       /** Section group and name associated with this authored input. */
       const [group, section, kind] = name.split("/");
+
       parts[kind === "details" ? "details" : group][section] = JSON.parse(
         JSON.stringify(decode({ value, label: name }, section, kind).value),
       );
@@ -105,6 +106,7 @@ export async function createBuildProject(t) {
   const root = await mkdtemp(join(tmpdir(), "cassidy-build-"));
 
   t.after(() => rm(root, { recursive: true, force: true }));
+
   /** Complete default inputs required by all full-theme fixture builds. */
   const inputs = {
     metadata: { name: "Fixture", type: "dark", semanticHighlighting: true },
@@ -123,7 +125,7 @@ export async function createBuildProject(t) {
     },
   };
 
-  for (const directory of ["palette", "tokens", "details"]) {
+  for (const directory of ["palette", "tokens"]) {
     await mkdir(join(root, "src/themes/prod/default", directory), { recursive: true });
   }
 
@@ -292,6 +294,8 @@ function fixtureSource(path, source) {
 
   /** Family context and fixture-only placeholder wrapper. */
   const [, family, kind] = match;
+
+  /** Parsed compact fixture data before encoding the supported final source shape. */
   const value = parsed.value;
 
   if (family === "variables" || categories.some((category) => Object.hasOwn(value, category))) return source;
@@ -320,7 +324,6 @@ function fixtureSource(path, source) {
       path.includes("/token-data/") && kind === "definitions"
         ? { color: "#0ff", colorReason: "UNREVIEWED: Added from a token template; choose an intentional color." }
         : record;
-
     output = editSource(output, recordPath(family, family === "syntax" ? "standard" : "nonStandard", id), candidate);
   }
 

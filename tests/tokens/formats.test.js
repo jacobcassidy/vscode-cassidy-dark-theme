@@ -41,6 +41,8 @@ test("UI parent/child records both survive and canonical duplicates retain exact
   const value = categorized("standard", {
     testing: { iconFailed: { description: "Parent.", retired: { description: "Child." } } },
   });
+
+  /** Normalized family records with canonical identities and source origins. */
   const decoded = decode({ value, label: "fixture.jsonc" }, "ui", "details");
 
   assert.deepEqual([...decoded.records.keys()], ["testing.iconFailed", "testing.iconFailed.retired"]);
@@ -49,6 +51,7 @@ test("UI parent/child records both survive and canonical duplicates retain exact
     () => parseFormat(JSON.stringify(value, null, 2), "fixture.jsonc", "ui", "details"),
     /fixture.jsonc:\d+:\d+.*duplicate canonical.*testing.iconFailed.*first at/,
   );
+
   assert.throws(
     () =>
       decode(
@@ -58,6 +61,7 @@ test("UI parent/child records both survive and canonical duplicates retain exact
       ),
     /reserved record field\/child-name collision/,
   );
+
   assert.throws(() => semanticPath("variable.default"), /reserved unmodified selector/);
 });
 
@@ -112,26 +116,32 @@ test("independent exact authorities reject disabled standard impostors and defin
     join(root, "src/token-data/ui/definitions.jsonc"),
     JSON.stringify(categorized("standard", { editor: { background: { color: "#0ff", colorReason: "Placeholder." } } })),
   );
+
   await writeFixture(
     join(root, "src/themes/prod/default/tokens/ui/definitions.jsonc"),
     JSON.stringify(
       categorized("standard", { widget: { unknownBackground: { disabled: true, disabledReason: "Retained." } } }),
     ),
   );
+
   await assert.rejects(
     prepareBuild({ root }),
     /widget.unknownBackground.*standard.*nonStandard.*src\/token-data\/ui\/definitions.jsonc.*no exact standard definition membership/,
   );
+
   await writeFixture(
     join(root, "src/token-data/ui/details.jsonc"),
     JSON.stringify(categorized("nonStandard", { editor: { background: { description: "Conflict." } } })),
   );
+
   await assert.rejects(loadTokenData({ root }), /editor.background.*conflicting category.*expected standard/);
 });
 
 test("scope evidence is immutable, exact, independent of IDs, and rejects contributor conflicts", async (t) => {
   /** Reviewed scope has a concrete immutable contributor identity. */
   const root = await createBuildProject(t);
+
+  /** Explicit immutable contributor/scope evidence independent from the candidate rule. */
   const evidence = {
     selector: "extension.special",
     category: "nonStandard",
@@ -152,6 +162,8 @@ test("scope evidence is immutable, exact, independent of IDs, and rejects contri
 
   /** Same ID has independent scope-based categories across themes. */
   const snapshot = await loadTokenData({ root });
+
+  /** Normalized definitions retained independently from matching documentation. */
   const definitions = decode(
     {
       value: {
@@ -162,11 +174,15 @@ test("scope evidence is immutable, exact, independent of IDs, and rejects contri
     "syntax",
     "definitions",
   );
+
+  /** Normalized documentation records retained separately from styling. */
   const details = decode(
     { value: categorized("nonStandard", { string: { description: "Mixed rule." } }) },
     "syntax",
     "details",
   );
+
+  /** Independently supplied effective definitions and matching details. */
   const families = {
     definitions: { ui: { records: new Map() }, semantic: { records: new Map() }, syntax: definitions },
     details: { ui: { records: new Map() }, semantic: { records: new Map() }, syntax: details },
@@ -187,6 +203,7 @@ test("scope evidence is immutable, exact, independent of IDs, and rejects contri
       }),
     ),
   );
+
   await assert.rejects(loadTokenData({ root }), /Conflicting scope evidence.*extension.special.*reference.*other/);
 });
 
@@ -205,10 +222,16 @@ test("all checked-in authored/shared token files satisfy their associated local 
     /** Schema role is selected independently from file contents. */
     const [, family, kind] = match,
       shared = path.startsWith("token-data/");
+
+    /** Local schema role selected from the final family filename. */
     const schemaName = `${family === "variables" ? "" : shared ? "shared-" : "theme-"}${family}-${kind}`;
+
+    /** Parsed local editor schema, requiring no remote resolution. */
     const schema = JSON.parse(
       await readFile(new URL(`../../tooling/tokens/schemas/${schemaName}.schema.json`, import.meta.url)),
     );
+
+    /** Normalized family records with canonical identities and source origins. */
     const decoded = parseFormat(
       await readFile(new URL(`../../src/${path}`, import.meta.url), "utf8"),
       path,
@@ -216,8 +239,9 @@ test("all checked-in authored/shared token files satisfy their associated local 
       kind,
       { shared },
     );
-    const validate = ajv.compile(schema);
 
+    /** Compiled local schema validator used alongside the source codec. */
+    const validate = ajv.compile(schema);
     assert.equal(validate(decoded.input.value), true, `${path}: ${JSON.stringify(validate.errors)}`);
   }
 
@@ -240,6 +264,7 @@ test("classification projection ignores documentation/history/placeholders/key o
     join(root, "src/token-data/ui/details.jsonc"),
     '{"fixture.foreground":{"description":"New wording.","descriptionBasedOn":"1.2.3","modified-desc":true,"use":"When the fixture is visible."}}',
   );
+
   assert.equal((await loadTokenData({ root })).projection, original);
   await writeFixture(
     join(root, "src/token-data/ui/details.jsonc"),
@@ -249,5 +274,6 @@ test("classification projection ignores documentation/history/placeholders/key o
       }),
     ),
   );
+
   assert.notEqual((await loadTokenData({ root })).projection, original);
 });

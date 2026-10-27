@@ -47,7 +47,19 @@ async function scheduler(t, overrides = {}) {
       extensionDirectory: join(root, "extension"),
       debounceMs: 10,
       recoveryMs: 1000,
-      logger: { log: (message) => logs.push(message), error: (message) => errors.push(message) },
+      logger: {
+        /**
+         * Capture watcher progress and notify local observation barriers.
+         * @param message - Diagnostic or progress message to capture.
+         */
+        log: (message) => logs.push(message),
+
+        /**
+         * Capture visible watcher failure diagnostics.
+         * @param message - Diagnostic or progress message to capture.
+         */
+        error: (message) => errors.push(message),
+      },
     },
     {
       /**
@@ -60,6 +72,7 @@ async function scheduler(t, overrides = {}) {
         /** Retained native handle records shutdown and supports error events. */
         const emitter = new EventEmitter();
 
+        assert.equal(typeof options.recursive, "boolean");
         listeners.set(path, listener);
 
         /** Mark this subscription closed without emitting additional source events. */
@@ -69,6 +82,7 @@ async function scheduler(t, overrides = {}) {
 
         return emitter;
       },
+
       /**
        * Register an explicit fake timer, never a wall-clock wait.
        * @param callback - Timer callback.
@@ -78,25 +92,50 @@ async function scheduler(t, overrides = {}) {
         timers.set(++timerId, { callback, ms });
         return timerId;
       },
+
       /**
        * Cancel the exact queued fake timer.
        * @param id - Timer identity.
        */
       clearTimeout: (id) => timers.delete(id),
+
+      /**
+       * Observe the controlled external writer state without mutation.
+       */
       observeWriter: async () => ({ ...state }),
+
+      /**
+       * Provide a distinct authored-input projection for simulated source events.
+       */
       inputProjection: async () => String(++projectionReads),
+
+      /**
+       * Supply a controlled shared snapshot or persistent recovery failure.
+       */
       loadTokenData: async () => {
         calls.push("load");
         return { ...current };
       },
+
+      /**
+       * Prepare a controlled generation behind the public scheduler boundary.
+       */
       prepareBuild: async () => {
         calls.push("prepare");
         return {};
       },
+
+      /**
+       * Return the controlled applied artifact summary.
+       */
       applyBuild: async () => {
         calls.push("apply");
         return { targets: [{ group: "prod" }, { group: "dev" }], changed: [], removed: [] };
       },
+
+      /**
+       * Simulate current preview synchronization or a retryable failure.
+       */
       syncDevExtension: async () => {
         calls.push("sync");
         return { reloadRequired: false };
@@ -117,6 +156,7 @@ async function scheduler(t, overrides = {}) {
     errors,
     logs,
     timers,
+
     /**
      * Drive a subscribed native event.
      * @param path - Source-root-relative filename.
@@ -125,6 +165,7 @@ async function scheduler(t, overrides = {}) {
     notify(path, directory = join(root, "src")) {
       listeners.get(directory)("change", path);
     },
+
     /**
      * Run currently queued timers of one delay, then settle asynchronous work.
      * @param ms - Timer delay selected by the test.
@@ -133,7 +174,6 @@ async function scheduler(t, overrides = {}) {
     async tick(ms, idle = true) {
       for (const [id, timer] of [...timers]) {
         if (timer.ms !== ms) continue;
-
         timers.delete(id);
         await timer.callback();
       }
@@ -141,6 +181,7 @@ async function scheduler(t, overrides = {}) {
       if (idle) await controller.whenIdle();
       else await settle();
     },
+
     /** Return the number of closed native subscriptions. */
     closedCount() {
       return closed;
@@ -151,7 +192,6 @@ async function scheduler(t, overrides = {}) {
 test("valid shared description/version/usage changes load once and perform zero compilation/application/sync", async (t) => {
   /** Initial build establishes an accepted classification projection. */
   const project = await scheduler(t);
-
   project.calls.length = 0;
   project.notify("token-data/ui/details.jsonc");
   project.notify("token-data/semantic/details.jsonc");
@@ -193,11 +233,12 @@ test("blocked recovery observations are read-only, deduplicated, and resume one 
 
   /** Explicit snapshots become readable only after recovery clears external state. */
   const project = await scheduler(t, {
+    /**
+     * Supply a controlled shared snapshot or persistent recovery failure.
+     */
     loadTokenData: async () => {
       loads++;
-
       if (blocked) throw Object.assign(new Error("Incomplete generation fixture"), { code: "INCOMPLETE_GENERATION" });
-
       return { projection: "accepted" };
     },
   });
@@ -231,11 +272,12 @@ test("preview-only retry skips preparation, application, and shared reload; sour
 
   /** Injected sync failure keeps generated artifacts outside rollback. */
   const project = await scheduler(t, {
+    /**
+     * Simulate current preview synchronization or a retryable failure.
+     */
     syncDevExtension: async () => {
       syncs++;
-
       if (failPreview) throw new Error("Preview path temporarily unavailable");
-
       return { reloadRequired: false };
     },
   });
@@ -273,6 +315,9 @@ test("edits arriving during preparation coalesce into one later pass with no ove
 
   /** Public preparation boundary is held without any private call-sequence mocks. */
   const project = await scheduler(t, {
+    /**
+     * Prepare a controlled generation behind the public scheduler boundary.
+     */
     prepareBuild: async () => {
       prepareCount++;
       active++;
@@ -304,9 +349,55 @@ test("edits arriving during preparation coalesce into one later pass with no ove
   assert.equal(maximum, 1);
 });
 
+test("snapshot events arriving during synchronization retain one serialized preview-only pass", async (t) => {
+  /** Hold a synchronization while another snapshot change and its debounce timer arrive. */
+  let syncs = 0,
+    release,
+    entered;
+
+  /** Explicit barrier identifies the active second synchronization. */
+  const enteredSecond = new Promise((resolve) => {
+    entered = resolve;
+  });
+
+  t.after(() => release?.());
+
+  /** Real scheduler receives snapshot events through its preview subscription. */
+  const project = await scheduler(t, {
+    /** Synchronize once per consumed snapshot generation, holding the second pass. */
+    async syncDevExtension() {
+      syncs++;
+
+      if (syncs === 2) {
+        entered();
+        await new Promise((resolve) => {
+          release = resolve;
+        });
+      }
+
+      return { reloadRequired: false };
+    },
+  });
+
+  project.calls.length = 0;
+  project.notify("snapshots/first.json", join(project.root, "preview"));
+  await project.tick(10, false);
+  await enteredSecond;
+  project.notify("snapshots/second.json", join(project.root, "preview"));
+  await project.tick(10, false);
+  assert.equal(syncs, 2);
+  release();
+  await project.controller.whenIdle();
+  assert.equal(syncs, 3);
+  assert.deepEqual(project.calls, []);
+});
+
 test("shutdown cancels blocked-state observation and closes every subscription without late resumption", async (t) => {
   /** Initial contention creates only one pending bounded observation. */
   const project = await scheduler(t, {
+    /**
+     * Supply a controlled shared snapshot or persistent recovery failure.
+     */
     loadTokenData: async () => {
       throw Object.assign(new Error("Writer busy"), { code: "WRITER_BUSY" });
     },

@@ -1,10 +1,11 @@
 /**
  * JSONC authoring edits.
- * @file Insert nested records with canonical paths while retaining existing source spans and comments.
+ * @file Insert nested records with canonical paths while retaining existing source spans, child records, and comments.
  */
 
-import { applyEdits, modify } from "jsonc-parser";
-import { semanticPath, categories } from "../tokens/formats.js";
+import { applyEdits, modify, findNodeAtLocation, getNodeValue } from "jsonc-parser";
+import { parseJsonc } from "../shared/jsonc.js";
+import { semanticPath, categories, detailFields } from "../tokens/formats.js";
 
 /**
  * Construct an explicit empty family file, preserving independent suppression semantics.
@@ -27,26 +28,79 @@ export function emptyFamily(family, kind) {
  */
 export function recordPath(family, category, id) {
   if (family === "variables") return [id];
-
   return [category, ...(family === "ui" ? id.split(".") : family === "semantic" ? semanticPath(id) : [id])];
 }
 
 /**
- * Edit one nested record without reserializing surrounding authored sources.
+ * Edit one exact property, sorting newly created ancestors by their own segment names.
  * @param source - Original JSONC text.
  * @param path - Canonical syntax-tree path.
- * @param value - Replacement value.
+ * @param value - Replacement value, or undefined to remove an existing property.
  */
 export function editSource(source, path, value) {
-  return applyEdits(
-    source,
-    modify(source, path, value, {
-      getInsertionIndex: (properties) => {
-        /** First property sorting after this insertion, or the final position. */
-        const index = properties.findIndex((property) => property > path.at(-1));
+  /**
+   * Apply one property edit without reserializing neighboring source spans.
+   * @param location - Exact partial or complete JSON path.
+   * @param content - New property value.
+   */
+  function edit(location, content) {
+    source = applyEdits(
+      source,
+      modify(source, location, content, {
+        /**
+         * Place a new property before its first lexically later neighbor.
+         * @param properties - Existing property names in authored order.
+         */
+        getInsertionIndex(properties) {
+          /** Insertion point for this exact path segment. */
+          const index = properties.findIndex((property) => property > location.at(-1));
+          return index === -1 ? properties.length : index;
+        },
+      }),
+    );
+  }
 
-        return index === -1 ? properties.length : index;
-      },
-    }),
-  );
+  if (value !== undefined) {
+    for (let length = 1; length < path.length; length++) {
+      /** New ancestor gets its own ordering decision, independently of the final leaf key. */
+      const ancestor = path.slice(0, length);
+      if (!findNodeAtLocation(parseJsonc(source, "prepared source").tree, ancestor)) edit(ancestor, {});
+    }
+  }
+
+  edit(path, value);
+
+  return source;
+}
+
+/**
+ * Refresh only documentation fields, preserving parent/child UI branches and existing interior comments.
+ * @param source - Original categorized details source.
+ * @param path - Exact canonical record location.
+ * @param candidate - Prepared detail fields without nested child records.
+ */
+export function editDetailRecord(source, path, candidate) {
+  /** Existing node may be both a documentation record and a branch. */
+  const node = findNodeAtLocation(parseJsonc(source, "prepared details").tree, path);
+
+  if (!node) return editSource(source, path, candidate);
+
+  /** Current node retains unrelated children and source spans. */
+  const existing = getNodeValue(node);
+
+  for (const field of [...detailFields, "modified-desc", "scopeEvidence"]) {
+    if (JSON.stringify(existing[field]) === JSON.stringify(candidate[field])) continue;
+
+    if (
+      existing[field] &&
+      typeof existing[field] === "object" &&
+      !Array.isArray(existing[field]) &&
+      field !== "scopeEvidence"
+    )
+      throw new Error(`${path.join(".")}.${field}: reserved detail field/child-name collision`);
+
+    source = editSource(source, [...path, field], candidate[field]);
+  }
+
+  return source;
 }

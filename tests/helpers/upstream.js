@@ -27,6 +27,7 @@ export async function createUpstream(t, { kind = "core", git = kind === "core" }
   await cp(new URL(`../fixtures/upstream/${kind}/`, import.meta.url), directory, { recursive: true });
 
   if (kind === "core") await writeFile(join(directory, "package.json"), '{"name":"vscode-fixture"}');
+
   if (!git) return { directory };
 
   await run("git", ["init", "--quiet"], { cwd: directory });
@@ -50,6 +51,5 @@ export async function createUpstream(t, { kind = "core", git = kind === "core" }
 
   /** Full commit identity is independently obtained from Git. */
   const revision = (await run("git", ["rev-parse", "HEAD"], { cwd: directory })).stdout.trim();
-
   return { directory, revision };
 }

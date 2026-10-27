@@ -37,6 +37,7 @@ test("forward and cross-section aliases preserve alpha replacement and exact sel
     empty: { color: "variables.text.second", alpha: 0 },
     inherited: { color: "variables.text.second" },
   };
+
   tokens.semantic["function.defaultLibrary"] = { color: "ui.editor.foreground" };
   tokens.semantic["*.async:javascript"] = { color: "palette.blue.400" };
   tokens.ui.wildcard = { color: "semantic.*.async:javascript" };
@@ -57,6 +58,7 @@ test("forward and cross-section aliases preserve alpha replacement and exact sel
     underline: false,
     strikethrough: true,
   });
+
   assert.deepEqual(result.tokenColors[0].value.scope, ["second", "first"]);
   assert.equal(result.tokenColors[0].value.settings.background, "#242424");
 });
@@ -71,12 +73,14 @@ test("disabled entries retain resolved styles and aliases while placeholders rem
     retained: { color: "#1234", colorReason: "Literal rationale.", disabled: true, disabledReason: "Use fallback." },
     last: { disabled: true, disabledReason: "Last explanation." },
   };
+
   tokens.semantic = {
     first: { disabled: true, disabledReason: "Semantic placeholder." },
     active: { color: "syntax.retained", bold: false },
     middle: { italic: true, disabled: true, disabledReason: "Formatting disabled." },
     last: { color: "ui.retained", disabled: true, disabledReason: "Semantic fallback." },
   };
+
   tokens.syntax = [
     {
       id: "placeholder",
@@ -118,6 +122,7 @@ test("disabled entries retain resolved styles and aliases while placeholders rem
   assert.deepEqual(theme.semanticTokenColors, {
     active: { foreground: palette.get("palette.blue.400").hex, bold: false },
   });
+
   assert.deepEqual(theme.tokenColors, [{ name: "Active", scope: "active", settings: { foreground: "#1234" } }]);
   assert.match(formatted, /\/\/ "first": null \/\/ First explanation\./);
   assert.match(formatted, /\/\/ "retained": "#1234" \/\/ Use fallback\./);
@@ -215,6 +220,7 @@ test("retained styles reject unknown references, cycles, duplicate IDs, and inva
     nested: { one: { color: "palette.blue.400" } },
     "nested.one": { color: "palette.blue.400" },
   };
+
   assert.throws(() => compile(tokens), /duplicate token ID variables.surface.nested.one/);
 });
 
@@ -261,6 +267,7 @@ test("details enforce reviewed global replacements independently from aliases an
     inherits: ["unknown.upstream"],
     overrides: ["component.color"],
   };
+
   assert.doesNotThrow(() => compile(tokens, details));
 
   for (const section of ["ui", "semantic", "syntax"]) {

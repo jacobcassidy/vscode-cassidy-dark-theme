@@ -125,7 +125,6 @@ export function generatePalette(config) {
         tone === "400-muted"
           ? colors.get(`palette.${name}.400`).resolved.c / 2
           : Math.max(0, base + config.chroma.strength * (family.lightness - l));
-
       add(`palette.${name}.${tone}`, { l, c, h: family.hue }, tone === "400-muted" ? 1 : config.chroma.gamutFraction);
     }
   }

@@ -33,6 +33,7 @@ try {
       const path = args[++index];
 
       if (!path || path.startsWith("--")) throw new Error(`${flag} requires a source directory`);
+
       if (flag === "--extension-source") options.extensionSources.push(path);
       else options[flag === "--vscode-source" ? "vscodeSource" : "vscodeMainSource"] = path;
     } else throw new Error(`Unknown updater option: ${flag}`);
@@ -51,6 +52,7 @@ try {
   );
 
   for (const warning of result.warnings) console.warn(formatMessage(warning, "info"));
+
   for (const proposal of result.proposals)
     console.log(formatMessage(`Review proposal: ${JSON.stringify(proposal)}`, "action"));
 } catch (error) {

@@ -41,10 +41,11 @@ export function validateSourceConfig(config) {
   }
 
   if (!Number.isInteger(config.retrieval.attempts)) throw new Error("retrieval.attempts must be an integer");
+
   if (!Array.isArray(config.coverageExceptions)) throw new Error("coverageExceptions must be an array");
 
   if (config.lastSuccessful !== undefined) {
-    fields(config.lastSuccessful, ["resolution", "coverage", "acceptedCoverage"], "lastSuccessful");
+    fields(config.lastSuccessful, ["resolution", "coverage", "acceptedCoverage", "localSyntax"], "lastSuccessful");
     fields(config.lastSuccessful.resolution, ["version", "tag", "inputs"], "lastSuccessful.resolution");
 
     /** Recorded release metadata never substitutes an ambiguous branch/tag for immutable source identities. */
@@ -55,8 +56,19 @@ export function validateSourceConfig(config) {
       resolution.tag?.replace(/^v/, "") !== resolution.version
     )
       throw new Error("Malformed recorded stable release version/tag");
+
     if (!Array.isArray(resolution.inputs) || !resolution.inputs.length || resolution.inputs[0].id !== "vscode-stable")
       throw new Error("Recorded source inputs must begin with vscode-stable");
+
+    if (config.lastSuccessful.localSyntax !== undefined) {
+      fields(config.lastSuccessful.localSyntax, ["path", "revision"], "lastSuccessful.localSyntax");
+
+      if (
+        config.lastSuccessful.localSyntax.path !== "src/themes/prod/default/tokens/syntax/definitions.jsonc" ||
+        !/^sha256:[a-f0-9]{64}$/.test(config.lastSuccessful.localSyntax.revision)
+      )
+        throw new Error("Malformed immutable local syntax identity");
+    }
 
     /** Input IDs must remain unique and immutable across replay. */
     const ids = new Set();
@@ -74,6 +86,7 @@ export function validateSourceConfig(config) {
         )
       )
         throw new Error(`Malformed recorded immutable source identity: ${identity.id}`);
+
       if (identity.kind === "extension" && (typeof identity.contributor !== "string" || !identity.contributor.trim()))
         throw new Error(`Recorded extension contributor is missing: ${identity.id}`);
 
@@ -82,6 +95,7 @@ export function validateSourceConfig(config) {
 
     if (!Array.isArray(config.lastSuccessful.coverage) || !Array.isArray(config.lastSuccessful.acceptedCoverage))
       throw new Error("Recorded coverage and acceptance evidence must be arrays");
+
     if (config.lastSuccessful.coverage.length !== resolution.inputs.length)
       throw new Error("Recorded coverage does not cover every source input");
 
@@ -119,7 +133,6 @@ export function retryDelay(value, now) {
 
   /** Seconds or HTTP date, normalized to nonnegative milliseconds. */
   const result = /^\d+(?:\.\d+)?$/.test(value) ? Number(value) * 1000 : Date.parse(value) - now;
-
   return Number.isFinite(result) && result >= 0 ? result : undefined;
 }
 
@@ -132,6 +145,7 @@ export function retryDelay(value, now) {
  * @param [options.now] - Clock in milliseconds.
  * @param [options.wait] - Cancellable backoff operation.
  * @param [options.random] - Jitter source.
+ * @param [options.runGit] - Bounded Git process executor for deterministic transport tests.
  */
 export function createRetrieval({
   policy,
@@ -140,6 +154,7 @@ export function createRetrieval({
   now = Date.now,
   wait = delay,
   random = Math.random,
+  runGit = execute,
 }) {
   validateSourceConfig({
     policy: "latest-stable",
@@ -158,9 +173,7 @@ export function createRetrieval({
 
     /** Remaining invocation milliseconds. */
     const available = policy.totalMs - (now() - started);
-
     if (available <= 0) throw new Error("Retrieval total budget exhausted");
-
     return available;
   }
 
@@ -231,17 +244,38 @@ export function createRetrieval({
    * @param cwd - Source/cache working directory.
    */
   async function git(args, cwd) {
-    /** Git process deadline never exceeds the remaining invocation budget. */
-    const result = await execute("git", args, {
-      cwd,
-      signal,
-      timeout: Math.min(policy.requestMs, remaining()),
-      maxBuffer: 64 * 1024 * 1024,
-    });
+    for (let attempt = 1; attempt <= policy.attempts; attempt++) {
+      try {
+        /** Git process deadline never exceeds the remaining invocation budget. */
+        const result = await runGit("git", args, {
+          cwd,
+          signal,
+          timeout: Math.min(policy.requestMs, remaining()),
+          maxBuffer: 64 * 1024 * 1024,
+        });
 
-    remaining();
+        remaining();
 
-    return result.stdout;
+        return result.stdout;
+      } catch (error) {
+        signal?.throwIfAborted();
+
+        /** Only idempotent network fetch failures qualify for retry; local/integrity failures remain fatal. */
+        const transient =
+          args[0] === "fetch" &&
+          (error.killed ||
+            /Could not resolve host|Failed to connect|Connection (?:reset|timed out)|remote end hung up|RPC failed|HTTP.*(?:408|429|5\d\d)/i.test(
+              error.stderr ?? error.message,
+            ));
+
+        if (!transient || attempt === policy.attempts)
+          throw new Error(`Git ${args.join(" ")} failed after ${attempt} attempt(s): ${error.message}`, {
+            cause: error,
+          });
+
+        await pause(Math.min(1000 * 2 ** (attempt - 1), 5000) + Math.floor(random() * 100));
+      }
+    }
   }
 
   /**
@@ -250,7 +284,6 @@ export function createRetrieval({
    */
   async function pause(ms) {
     if (ms >= remaining()) throw new Error("Cache publication wait exceeds retrieval total budget");
-
     await wait(ms, undefined, { signal });
   }
 
@@ -265,21 +298,25 @@ export function createRetrieval({
 export async function resolveLatest(config, retrieval) {
   /** Official repository API base. */
   const base = `https://api.github.com/repos/${config.repository}`;
+
+  /** Latest published release metadata returned by the official repository API. */
   const release = await retrieval.request(`${base}/releases/latest`);
 
   if (
-    release.draft ||
-    release.prerelease ||
+    release.draft !== false ||
+    release.prerelease !== false ||
     typeof release.tag_name !== "string" ||
-    !/^v?\d+\.\d+\.\d+$/.test(release.tag_name)
+    !/^v?(?:0|[1-9]\d*)\.(?:0|[1-9]\d*)\.(?:0|[1-9]\d*)$/.test(release.tag_name)
   )
     throw new Error("Latest release metadata does not identify a published stable VS Code release");
 
   /** Tag object may point at an annotated tag rather than a commit. */
   let object = (await retrieval.request(`${base}/git/ref/tags/${encodeURIComponent(release.tag_name)}`)).object;
 
-  for (let depth = 0; object?.type === "tag" && depth < 8; depth++)
+  for (let depth = 0; object?.type === "tag" && depth < 8; depth++) {
+    if (!/^[a-f0-9]{40}$/.test(object.sha)) throw new Error("Annotated release tag has an invalid immutable identity");
     object = (await retrieval.request(`${base}/git/tags/${object.sha}`)).object;
+  }
 
   if (object?.type !== "commit" || !/^[a-f0-9]{40}$/.test(object.sha))
     throw new Error("Stable release tag did not resolve to a full commit");
@@ -338,11 +375,11 @@ async function sourceFiles(directory, kind) {
       const path = relative ? `${relative}/${entry.name}` : entry.name;
 
       if ([".git", "node_modules", "test", "tests", "fixtures", "out", "dist"].includes(entry.name)) continue;
+
       if (entry.isDirectory()) {
         if (kind !== "core" || relative || ["src", "extensions"].includes(entry.name)) await visit(path);
       } else if (relevant(path, kind)) {
         if (!entry.isFile()) throw new Error(`Relevant source must be a regular file: ${path}`);
-
         files.set(path, await readFile(join(directory, path)));
       }
     }
@@ -350,7 +387,7 @@ async function sourceFiles(directory, kind) {
 
   await visit("");
 
-  return new Map([...files].sort(([left], [right]) => left.localeCompare(right, "en")));
+  return new Map([...files].sort(([left], [right]) => (left < right ? -1 : left > right ? 1 : 0)));
 }
 
 /**
@@ -372,12 +409,13 @@ function contentRevision(files) {
 export async function verifySource(directory, identity, retrieval) {
   /** Relevant source dependencies frozen before extraction. */
   const files = await sourceFiles(directory, identity.kind);
+
+  /** Deterministic digest of all frozen extraction dependencies. */
   const digest = contentRevision(files);
 
   /** Existing repository marker distinguishes dirty Git inputs from content-addressed contributors. */
   const git = await lstat(join(directory, ".git")).catch((error) => {
     if (error.code === "ENOENT") return undefined;
-
     throw error;
   });
 
@@ -387,7 +425,11 @@ export async function verifySource(directory, identity, retrieval) {
   if (git) {
     /** Requested revision must exist; HEAD equality alone never proves input integrity. */
     const commit = (await retrieval.git(["rev-parse", `${revision ?? "HEAD"}^{commit}`], directory)).trim();
+
+    /** Git tree rows from the exact requested immutable commit. */
     const tracked = await retrieval.git(["ls-tree", "-rz", "--full-tree", commit], directory);
+
+    /** Relevant tracked Git blob identities indexed by exact source-relative path. */
     const expected = new Map(
       tracked
         .split("\0")
@@ -409,6 +451,7 @@ export async function verifySource(directory, identity, retrieval) {
 
       if (expected.get(path)?.[0] !== "100644" && expected.get(path)?.[0] !== "100755")
         throw new Error(`Relevant Git entry type differs: ${path}`);
+
       if (expected.get(path)?.[2] !== blob)
         throw new Error(`Relevant Git source content differs from ${commit}: ${path}`);
     }
@@ -420,7 +463,6 @@ export async function verifySource(directory, identity, retrieval) {
   } else {
     if (identity.kind === "core") throw new Error(`Core source requires verified Git history: ${directory}`);
     if (revision && revision !== digest) throw new Error(`Content manifest mismatch for ${identity.id}`);
-
     revision = digest;
   }
 
@@ -480,6 +522,8 @@ export async function obtainSource({ root, identity, retrieval, supplied, replay
   async function completed(directory) {
     /** Completion metadata itself never substitutes for verifying relevant Git blobs. */
     const record = JSON.parse(await readFile(join(directory, ".complete.json"), "utf8"));
+
+    /** Original or prepared source data retained for this operation. */
     const source = await verifySource(directory, identity, retrieval);
 
     if (record.revision !== identity.revision || record.digest !== source.digest)
@@ -519,6 +563,7 @@ export async function obtainSource({ root, identity, retrieval, supplied, replay
       join(staging, ".complete.json"),
       JSON.stringify({ revision: identity.revision, digest: source.digest }),
     );
+
     retrieval.remaining();
 
     while (true) {
@@ -531,19 +576,16 @@ export async function obtainSource({ root, identity, retrieval, supplied, replay
           } catch {
             /** Destination fingerprint is checked under the short publication guard. */
             const expected = await capturePaths([destination]);
-
             await assertFresh(expected);
             retrieval.remaining();
             await mkdir(dirname(destination), { recursive: true });
             await rm(destination, { recursive: true, force: true });
             await rename(staging, destination);
-
             return completed(destination);
           }
         });
       } catch (error) {
         if (error.code !== "WRITER_BUSY") throw error;
-
         await retrieval.pause(50);
       }
     }

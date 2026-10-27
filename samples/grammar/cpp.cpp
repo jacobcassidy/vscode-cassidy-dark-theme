@@ -1,6 +1,6 @@
 // C++20 highlighting sample for Cassidy Dark Preview; inspect as source.
 // Standard-library-only translation unit; no execution required.
-// Check with: clang++ -std=c++20 -fsyntax-only docs/grammar-samples/cpp.cpp
+// Check with: clang++ -std=c++20 -fsyntax-only samples/grammar/cpp.cpp
 #include <algorithm>
 #include <array>
 #include <atomic>

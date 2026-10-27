@@ -20,37 +20,17 @@
               "type": "string",
               "pattern": "\\S"
             },
-            "alpha": {
-              "type": "number",
-              "minimum": 0,
-              "maximum": 1
-            },
             "colorReason": {
               "type": "string",
               "pattern": "\\S"
-            },
-            "disabled": {
-              "type": "boolean"
-            },
-            "disabledReason": {
-              "type": "string",
-              "pattern": "\\S"
-            },
-            "bold": {
-              "type": "boolean"
-            },
-            "italic": {
-              "type": "boolean"
-            },
-            "underline": {
-              "type": "boolean"
-            },
-            "strikethrough": {
-              "type": "boolean"
             }
           },
           "additionalProperties": false,
-          "minProperties": 1
+          "minProperties": 1,
+          "required": [
+            "color",
+            "colorReason"
+          ]
         }
       }
     },
@@ -71,37 +51,17 @@
               "type": "string",
               "pattern": "\\S"
             },
-            "alpha": {
-              "type": "number",
-              "minimum": 0,
-              "maximum": 1
-            },
             "colorReason": {
               "type": "string",
               "pattern": "\\S"
-            },
-            "disabled": {
-              "type": "boolean"
-            },
-            "disabledReason": {
-              "type": "string",
-              "pattern": "\\S"
-            },
-            "bold": {
-              "type": "boolean"
-            },
-            "italic": {
-              "type": "boolean"
-            },
-            "underline": {
-              "type": "boolean"
-            },
-            "strikethrough": {
-              "type": "boolean"
             }
           },
           "additionalProperties": false,
-          "minProperties": 1
+          "minProperties": 1,
+          "required": [
+            "color",
+            "colorReason"
+          ]
         }
       }
     },
@@ -122,33 +82,9 @@
               "type": "string",
               "pattern": "\\S"
             },
-            "alpha": {
-              "type": "number",
-              "minimum": 0,
-              "maximum": 1
-            },
             "colorReason": {
               "type": "string",
               "pattern": "\\S"
-            },
-            "disabled": {
-              "type": "boolean"
-            },
-            "disabledReason": {
-              "type": "string",
-              "pattern": "\\S"
-            },
-            "bold": {
-              "type": "boolean"
-            },
-            "italic": {
-              "type": "boolean"
-            },
-            "underline": {
-              "type": "boolean"
-            },
-            "strikethrough": {
-              "type": "boolean"
             },
             "use": {
               "type": "string",
@@ -156,7 +92,11 @@
             }
           },
           "additionalProperties": false,
-          "minProperties": 1
+          "minProperties": 1,
+          "required": [
+            "color",
+            "colorReason"
+          ]
         }
       }
     },
@@ -177,37 +117,17 @@
               "type": "string",
               "pattern": "\\S"
             },
-            "alpha": {
-              "type": "number",
-              "minimum": 0,
-              "maximum": 1
-            },
             "colorReason": {
               "type": "string",
               "pattern": "\\S"
-            },
-            "disabled": {
-              "type": "boolean"
-            },
-            "disabledReason": {
-              "type": "string",
-              "pattern": "\\S"
-            },
-            "bold": {
-              "type": "boolean"
-            },
-            "italic": {
-              "type": "boolean"
-            },
-            "underline": {
-              "type": "boolean"
-            },
-            "strikethrough": {
-              "type": "boolean"
             }
           },
           "additionalProperties": false,
-          "minProperties": 1
+          "minProperties": 1,
+          "required": [
+            "color",
+            "colorReason"
+          ]
         }
       }
     }

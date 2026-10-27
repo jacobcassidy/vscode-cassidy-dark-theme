@@ -16,7 +16,7 @@ import { fields, number } from "./jsonc.js";
  * @param color.h - OKLCH hue angle in degrees.
  * @returns Linear-light red, green, and blue channels.
  */
-export function linearRgb({ l: L, c: C, h: H }) {
+function linearRgb({ l: L, c: C, h: H }) {
   /** OKLab red/green axis derived from chroma and hue. */
   const a = C * Math.cos((H * Math.PI) / 180);
 
@@ -95,7 +95,6 @@ export function validateOklch(color, label) {
   number(color.l, 0, 1, `${label}.l`);
   number(color.c, 0, Number.MAX_VALUE, `${label}.c`);
   number(color.h, 0, 360, `${label}.h`);
-
   if (color.h === 360) throw new Error(`${label}.h: use 0 instead of 360`);
 }
 
@@ -170,7 +169,6 @@ export function contrastRatio(foreground, background) {
 
   /** Luminances ordered from darker to lighter for the contrast formula. */
   const [low, high] = luminances.sort((a, b) => a - b);
-
   return (high + 0.05) / (low + 0.05);
 }
 
@@ -212,7 +210,6 @@ export function fromHex(hex) {
   const [r, g, b] = [1, 3, 5].map((offset) => {
     /** Encoded channel normalized to the zero-to-one range. */
     const value = Number.parseInt(normalized.slice(offset, offset + 2), 16) / 255;
-
     return value <= 0.04045 ? value / 12.92 : ((value + 0.055) / 1.055) ** 2.4;
   });
 

@@ -35,6 +35,8 @@ async function project(t) {
   /** Independent theme project, upstream source, and explicit tracking policy. */
   const root = await createBuildProject(t),
     upstream = await createUpstream(t);
+
+  /** Validated extraction policy and last successful replay history. */
   const config = {
     policy: "latest-stable",
     repository: "microsoft/vscode",
@@ -52,6 +54,9 @@ async function project(t) {
       root,
       vscodeSource: upstream.directory,
       services: {
+        /**
+         * Return the explicit immutable release fixture without contacting upstream.
+         */
         resolveLatest: async () => ({
           version: "1.2.3",
           tag: "1.2.3",
@@ -96,24 +101,35 @@ test("AST extraction resolves imported constants/localization and contributor ma
   /** Real Git source proof is independent from the AST parser. */
   const upstream = await createUpstream(t),
     retrieval = createRetrieval({ policy });
+
+  /** Original or prepared source data retained for this operation. */
   const source = await verifySource(
     upstream.directory,
     { id: "vscode-stable", kind: "core", revision: upstream.revision },
     retrieval,
   );
-  const core = extractSource(source);
+
+  /** Core registration results obtained through the TypeScript AST. */
+  const core = await extractSource(source);
 
   assert.equal(core.ui.get("editor.background").description, "Upstream editor background.");
   assert.equal(core.types.get("function").description, "Upstream functions.");
+  assert.ok(core.warnings.some((warning) => warning.includes("unresolved dynamic registration")));
 
   /** A non-Git extension gets contributor identity plus a deterministic content manifest. */
   const extension = await createUpstream(t, { kind: "extension" });
+
+  /** Verified contributor source and deterministic immutable manifest. */
   const verified = await verifySource(extension.directory, { id: "extension-1", kind: "extension" }, retrieval);
-  const extracted = extractSource(verified);
+
+  /** Static registrations and scope evidence from verified source bytes. */
+  const extracted = await extractSource(verified);
 
   assert.match(verified.identity.revision, /^sha256:[a-f0-9]{64}$/);
   assert.equal(extracted.ui.get("extension.foreground").description, "Extension foreground.");
   assert.equal(extracted.scopes.get("extension.special").extensionId, "fixture.extension");
+  assert.equal(extracted.scopes.has("Fixture language"), false);
+  assert.equal(extracted.scopeDescriptions.get("source.fixture"), "Fixture language");
   assert.equal((await verifySource(extension.directory, verified.identity, retrieval)).digest, verified.digest);
   await writeFile(join(extension.directory, "package.nls.json"), '{"color.description":"Changed."}');
   await assert.rejects(assertSourceFresh(verified), /changed after verification/);
@@ -124,6 +140,8 @@ test("relevant Git edits fail despite matching HEAD, while unrelated files do no
   /** Immutable fixture commit with separately mutable working tree. */
   const upstream = await createUpstream(t),
     retrieval = createRetrieval({ policy });
+
+  /** Exact source identity used independently from its current working-tree contents. */
   const identity = { id: "vscode-stable", kind: "core", revision: upstream.revision };
 
   await writeFile(join(upstream.directory, "notes.txt"), "Unrelated.");
@@ -138,6 +156,8 @@ test("relevant Git edits fail despite matching HEAD, while unrelated files do no
 test("online refresh always discovers latest, no-op/replay preserves bytes, and checks never call discovery", async (t) => {
   /** Default fixture includes actual theme-local text, which refreshes cannot import or change. */
   const { root, options } = await project(t);
+
+  /** Theme-local documentation path and original bytes protected from shared refresh. */
   const themePath = join(root, "src/themes/prod/default/tokens/ui/details.jsonc"),
     themeBefore = await readFile(themePath, "utf8");
 
@@ -184,20 +204,24 @@ test("protected shared wording and usage survive refresh; removing protection pe
     join(root, "src/token-data/ui/details.jsonc"),
     '{"editor.background":{"description":"Manual shared wording.","modified-desc":true,"descriptionBasedOn":"1.0.0","use":"When the fixture provider is active."}}',
   );
+
   await updateTokenDetails(options);
   assert.equal(
     (await loadTokenData({ root })).details.ui.value["editor.background"].description,
     "Manual shared wording.",
   );
+
   await writeFixture(
     join(root, "src/token-data/ui/details.jsonc"),
     '{"editor.background":{"description":"Manual shared wording.","modified-desc":false,"descriptionBasedOn":"1.0.0","use":"When the fixture provider is active."}}',
   );
+
   await updateTokenDetails(options);
   assert.equal(
     (await loadTokenData({ root })).details.ui.value["editor.background"].description,
     "Upstream editor background.",
   );
+
   assert.match((await loadTokenData({ root })).details.ui.value["editor.background"].use, /provider/);
 });
 
@@ -209,6 +233,8 @@ test("partial updater replacement rolls back details, headers, and source resolu
 
   /** Complete pre-failure affected set is compared byte-for-byte after rollback. */
   const paths = ["ui/details.jsonc", "semantic/details.jsonc", "syntax/details.jsonc", "upstream-sources.jsonc"];
+
+  /** Original filesystem state retained for mutation or restoration assertions. */
   const before = await Promise.all(paths.map((path) => readFile(join(root, "src/token-data", path), "utf8")));
 
   options.services.resolveLatest = async () => ({
@@ -222,6 +248,7 @@ test("partial updater replacement rolls back details, headers, and source resolu
       },
     ],
   });
+
   options.services.operations = {
     /**
      * Fail a later detail write after the earlier file has been replaced.
@@ -230,7 +257,6 @@ test("partial updater replacement rolls back details, headers, and source resolu
      */
     replace: async (path, source) => {
       if (path.includes("semantic/details")) throw new Error("injected updater failure");
-
       await writeFile(path, source);
     },
   };
@@ -245,7 +271,11 @@ test("partial updater replacement rolls back details, headers, and source resolu
 test("cache publication verifies completed entries, reuses concurrent results, and replay never repairs corruption", async (t) => {
   /** Actual local Git contents are copied into owned staging, with no network calls. */
   const { root, upstream } = await project(t);
+
+  /** Exact source identity used independently from its current working-tree contents. */
   const identity = { id: "vscode-stable", kind: "core", revision: upstream.revision };
+
+  /** Finite retrieval context shared by discovery, verification, and downloads. */
   const retrieval = createRetrieval({ policy });
 
   /** Injectable population operation proves only unique staging is populated. */
@@ -280,7 +310,11 @@ test("coverage exceptions authorize exact empty transitions and exact-identity r
     modifiers: [],
     scopes: [],
   };
+
+  /** Current exact source identity and extraction coverage for transition validation. */
   const current = { ...old, identity: { ...old.identity, revision: "b".repeat(40) }, ui: [], types: [] };
+
+  /** Exact reviewed exception for this active occurrence or transition. */
   const exception = {
     id: "review-1",
     inputId: old.identity.id,
@@ -314,8 +348,14 @@ test("coverage exceptions authorize exact empty transitions and exact-identity r
 test("cancellation during shared application restores the complete previous generation", async (t) => {
   /** Cancellation is triggered at a deterministic operation boundary, not a wall-clock timeout. */
   const { root, options } = await project(t);
+
+  /** Explicit invocation cancellation controller for deterministic failure injection. */
   const cancellation = new AbortController();
+
+  /** Relevant file paths or package entries retained for deterministic assertions. */
   const paths = ["ui/details.jsonc", "semantic/details.jsonc", "syntax/details.jsonc", "upstream-sources.jsonc"];
+
+  /** Original filesystem state retained for mutation or restoration assertions. */
   const before = await Promise.all(paths.map((path) => readFile(join(root, "src/token-data", path), "utf8")));
 
   options.signal = cancellation.signal;
@@ -336,4 +376,29 @@ test("cancellation during shared application restores the complete previous gene
     await Promise.all(paths.map((path) => readFile(join(root, "src/token-data", path), "utf8"))),
     before,
   );
+});
+
+test("refreshing a UI parent preserves unchanged child records, child history, interior comments, and definitions", async (t) => {
+  /** Parent text changes while the child has already-established unchanged wording/basis. */
+  const { root, options } = await project(t);
+
+  await writeFixture(
+    join(root, "src/token-data/ui/details.jsonc"),
+    '{"standard":{},"sourceCode":{},"nonStandard":{"testing":{"iconFailed":{"description":"Old parent.","retired":{/* Child review stays here. */"description":"Child purpose remains.","descriptionBasedOn":"1.2.3"}}}},"deprecated":{}}',
+  );
+
+  /** Definition inventory/header bytes never advance during a details-only refresh. */
+  const definitionPath = join(root, "src/token-data/ui/definitions.jsonc"),
+    before = await readFile(definitionPath, "utf8");
+
+  await updateTokenDetails(options);
+
+  /** Normalized records must retain both the parent and child after field-only edits. */
+  const snapshot = await loadTokenData({ root });
+
+  assert.equal(snapshot.details.ui.value["testing.iconFailed"].description, "New parent purpose.");
+  assert.equal(snapshot.details.ui.value["testing.iconFailed.retired"].description, "Child purpose remains.");
+  assert.equal(snapshot.details.ui.value["testing.iconFailed.retired"].descriptionBasedOn, "1.2.3");
+  assert.match(snapshot.details.ui.input.source, /Child review stays here/);
+  assert.equal(await readFile(definitionPath, "utf8"), before);
 });

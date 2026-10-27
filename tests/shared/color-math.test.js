@@ -15,7 +15,6 @@ test("known sRGB/OKLCH conversions and neutral endpoints", () => {
 
   /** OKLCH representation of the reference red used by conversion assertions. */
   const red = fromHex("#ff0000");
-
   assert.ok(Math.abs(red.l - 0.627955) < 0.000001);
   assert.ok(Math.abs(red.c - 0.257683) < 0.000001);
   assert.ok(Math.abs(red.h - 29.234) < 0.001);

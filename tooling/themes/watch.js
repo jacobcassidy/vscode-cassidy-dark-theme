@@ -25,6 +25,7 @@ function sourceEvent(filename) {
   const path = filename.toString().replaceAll("\\", "/");
 
   if (/\/(?:\.theme-build-[^/]+|palette\/(?:generated(?:\/|$)|default-palette\.txt$))/.test(path)) return undefined;
+
   if (
     tokenDataPaths.some((file) => {
       /** Source-relative shared file, including ancestor directory events. */ const relative = file.slice(4);
@@ -79,6 +80,7 @@ export function watchThemes(
   let sourceDirty = true,
     sharedDirty = false,
     manifestDirty = false,
+    previewDirty = false,
     pendingPreview = false,
     failed = false;
 
@@ -117,10 +119,10 @@ export function watchThemes(
         const states = await Promise.all([services.observeWriter(root), services.observeWriter(extensionDirectory)]);
 
         if (stopping) return;
+
         if (states.some((state) => state.busy || state.marker)) {
           blocked = true;
           observeRecovery();
-
           return;
         }
 
@@ -154,18 +156,26 @@ export function watchThemes(
     /** Consume current work while later events remain queued independently. */
     const source = sourceDirty,
       shared = sharedDirty,
-      manifest = manifestDirty;
+      manifest = manifestDirty,
+      preview = previewDirty;
 
     sourceDirty = false;
     sharedDirty = false;
     manifestDirty = false;
+    previewDirty = false;
+
+    if (preview) pendingPreview = true;
 
     try {
       await services.requireStable(root);
 
       /** A stable shared snapshot is loaded once per pass requiring a reload. */
       const current = !snapshot || shared ? await services.loadTokenData({ root }) : snapshot;
+
+      /** Whether normalized membership or immutable scope evidence has changed. */
       const classificationChanged = !snapshot || current.projection !== snapshot.projection;
+
+      /** Whether the root manifest differs from this watcher generation. */
       const manifestChanged = manifest && (await readOptional(join(root, "package.json"))) !== lastManifest;
 
       /** Native generated-directory events do not invalidate unchanged authored inputs. */
@@ -176,8 +186,9 @@ export function watchThemes(
 
         /** Complete combined preparation precedes every output write. */
         const prepared = await services.prepareBuild({ root, snapshot: current });
-        const result = await services.applyBuild(prepared);
 
+        /** Completed operation result retained for subsequent validation. */
+        const result = await services.applyBuild(prepared);
         snapshot = current;
         lastManifest = await readOptional(join(root, "package.json"));
         failed = false;
@@ -190,10 +201,8 @@ export function watchThemes(
         try {
           /** Preview-only retries use already successful generated artifacts and no compiler/palette work. */
           const preview = await services.syncDevExtension({ root, extensionDirectory });
-
           pendingPreview = false;
           logger.log(formatMessage(`[watch] Synced dev manifest: ${preview.manifestPath}`, "success"));
-
           if (preview.reloadRequired) logReloadReminder(logger);
         } catch (error) {
           report(
@@ -202,6 +211,7 @@ export function watchThemes(
               { cause: error },
             ),
           );
+
           observeRecovery();
 
           return;
@@ -223,7 +233,6 @@ export function watchThemes(
       if (error.code === "STALE_INPUT") {
         sharedDirty = true;
         schedule("source");
-
         return;
       }
 
@@ -233,6 +242,8 @@ export function watchThemes(
       }
 
       report(error);
+    } finally {
+      refreshWatchers();
     }
   }
 
@@ -258,12 +269,18 @@ export function watchThemes(
 
   /** Start one coalesced pass only when no other pass or blocking writer is active. */
   function startBuild() {
-    if (stopping || blocked || running || (!sourceDirty && !sharedDirty && !manifestDirty && !pendingPreview)) return;
+    if (
+      stopping ||
+      blocked ||
+      running ||
+      (!sourceDirty && !sharedDirty && !manifestDirty && !previewDirty && !pendingPreview)
+    )
+      return;
 
     running = build().finally(() => {
       running = undefined;
-
-      if (!stopping && !blocked && !timer && (sourceDirty || sharedDirty || manifestDirty)) startBuild();
+      if (!stopping && !blocked && !timer && (sourceDirty || sharedDirty || manifestDirty || previewDirty))
+        startBuild();
     });
   }
 
@@ -273,10 +290,14 @@ export function watchThemes(
    */
   function schedule(kind) {
     if (stopping) return;
+
     if (kind === "source") sourceDirty = true;
+
     if (kind === "shared") sharedDirty = true;
+
     if (kind === "manifest") manifestDirty = true;
-    if (kind === "preview") pendingPreview = true;
+
+    if (kind === "preview") previewDirty = true;
 
     services.clearTimeout(timer);
     timer = services.setTimeout(() => {
@@ -292,12 +313,10 @@ export function watchThemes(
   function close() {
     if (!stopping) {
       stopping = true;
-      sourceDirty = sharedDirty = manifestDirty = pendingPreview = false;
+      sourceDirty = sharedDirty = manifestDirty = previewDirty = pendingPreview = false;
       services.clearTimeout(timer);
       stopObserving();
-
-      for (const watcher of watchers) watcher.close();
-
+      for (const entry of watchers) entry.watcher.close();
       void Promise.resolve(running).then(() => resolveClosed(failure));
     }
 
@@ -305,21 +324,57 @@ export function watchThemes(
   }
 
   /**
-   * Attach one native subscription and register its error handler immediately.
-   * @param path - Subscription directory.
-   * @param recursive - Whether nested source events are required.
-   * @param listener - Event filter/scheduler.
+   * Open one native handle and ignore late errors from handles already replaced/closed.
+   * @param path - Native subscription root.
+   * @param recursive - Whether child subscriptions are required.
+   * @param listener - Filtered input event callback.
    */
-  function addWatcher(path, recursive, listener) {
-    /** Retained watcher participates in complete shutdown. */
+  function openWatcher(path, recursive, listener) {
+    /** New native handle is attached before a replaced handle is closed. */
     const watcher = services.watch(path, { recursive }, listener);
 
-    watchers.push(watcher);
     watcher.on("error", (error) => {
+      if (stopping || !watchers.some((entry) => entry.watcher === watcher)) return;
       failure = error;
       logger.error(formatMessage(`[watch] File watcher failed: ${error.message}`, "error"));
       void close();
     });
+
+    return watcher;
+  }
+
+  /**
+   * Retain a native subscription so recursive file-inode bindings can be refreshed after replacement saves.
+   * @param path - Subscription directory.
+   * @param recursive - Whether nested inputs are required.
+   * @param listener - Filtered event callback.
+   */
+  function addWatcher(path, recursive, listener) {
+    watchers.push({ path, recursive, listener, watcher: openWatcher(path, recursive, listener) });
+  }
+
+  /** Rebind recursive native file watches after each pass, including malformed replacement recovery. */
+  function refreshWatchers() {
+    // Linux recursive fs.watch can retain the replaced inode and miss later in-place edits.
+    // Fake scheduler subscriptions have no inode state and intentionally retain their explicit handles.
+    if (stopping || services.watch !== watchDirectory) return;
+
+    try {
+      for (const entry of watchers) {
+        if (!entry.recursive) continue;
+
+        /** Attach replacement coverage first so there is no deliberate unwatched interval. */
+        const next = openWatcher(entry.path, entry.recursive, entry.listener),
+          previous = entry.watcher;
+
+        entry.watcher = next;
+        previous.close();
+      }
+    } catch (error) {
+      failure = error;
+      logger.error(formatMessage(`[watch] File watcher failed: ${error.message}`, "error"));
+      void close();
+    }
   }
 
   try {
@@ -327,12 +382,13 @@ export function watchThemes(
     addWatcher(join(root, "src"), true, (_event, filename) => {
       /** Source filter returns only relevant theme or exact shared-data dependencies. */
       const kind = sourceEvent(filename);
-
       if (kind) schedule(kind);
     });
+
     addWatcher(root, false, (_event, filename) => {
       if (!filename || filename.toString() === "package.json") schedule("manifest");
     });
+
     addWatcher(join(root, "preview"), true, (_event, filename) => {
       /** Generated preview themes are deliberately excluded from recursive input events. */
       const path = filename?.toString().replaceAll("\\", "/");
@@ -341,14 +397,14 @@ export function watchThemes(
         schedule("preview");
     });
   } catch (error) {
-    for (const watcher of watchers) watcher.close();
-
+    for (const entry of watchers) entry.watcher.close();
     throw error;
   }
 
   logger.log(
     `${formatMessage("[watch] Watching theme sources, shared token data, package.json, and snapshots.", "info")} ${formatMessage("Press Ctrl+C to stop.", "action")}`,
   );
+
   startBuild();
 
   /** Wait for serialized work already started, including passes queued during that work. */

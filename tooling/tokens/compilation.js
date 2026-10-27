@@ -204,6 +204,7 @@ export function compileTokens(tokens, details, palette, requireDetails = false) 
         [...colorFields, ...disablingFields, ...(section === "semantic" ? formattingFields : [])],
         label,
       );
+
       validateColor(definition, label);
       validateDisabling(definition, label);
 
@@ -323,7 +324,6 @@ export function compileTokens(tokens, details, palette, requireDetails = false) 
         formattingFields.filter((flag) => Object.hasOwn(definition, flag)).map((flag) => [flag, definition[flag]]),
       ),
     };
-
     compiled.semanticTokenColors.push({ key, value: Object.keys(style).length ? style : null, definition });
   }
 

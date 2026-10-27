@@ -4,13 +4,14 @@
  */
 
 import { findNodeAtLocation } from "jsonc-parser";
+import { validateHex } from "../shared/color-math.js";
 import { fields, object, parseJsonc } from "../shared/jsonc.js";
 
 /** Accepted roots, in canonical serialization order. */
 export const categories = ["standard", "sourceCode", "nonStandard", "deprecated"];
 
 /** Styling descriptors accepted before family-specific compiler validation. */
-export const definitionFields = [
+const definitionFields = [
   "color",
   "alpha",
   "colorReason",
@@ -59,6 +60,7 @@ export function semanticPath(id) {
     (language !== undefined && !/^[a-z][\w+-]*$/i.test(language))
   )
     throw new Error(`Invalid semantic selector ${id}`);
+
   if (modifiers.join(".") === "default")
     throw new Error(`Semantic modifier "default" collides with the reserved unmodified selector: ${id}`);
 
@@ -90,7 +92,7 @@ export function semanticId(type, suffix) {
  * @param [options.shared] - Whether shared-only fields are permitted.
  * @param [options.family] - Record family.
  */
-export function validateDetail(value, category, label, { shared = false, family } = {}) {
+function validateDetail(value, category, label, { shared = false, family } = {}) {
   fields(
     value,
     [
@@ -102,9 +104,15 @@ export function validateDetail(value, category, label, { shared = false, family 
   );
 
   if (!Object.keys(value).length) throw new Error(`${label}: omit empty details`);
+
+  if (family === "variables" && Object.hasOwn(value, "globallyOverriddenBy"))
+    throw new Error(`${label}: internal variables cannot be globallyOverriddenBy`);
+
   if (Object.hasOwn(value, "description")) nonempty(value.description, `${label}.description`);
+
   if (Object.hasOwn(value, "modified-desc") && typeof value["modified-desc"] !== "boolean")
     throw new Error(`${label}.modified-desc must be a boolean`);
+
   if (value["modified-desc"] === true) nonempty(value.description, `${label}: protected description`);
 
   for (const key of ["descriptionAddedIn", "descriptionUpdatedIn", "descriptionBasedOn"]) {
@@ -119,19 +127,20 @@ export function validateDetail(value, category, label, { shared = false, family 
     /** Numeric version tuples compared by release component. */
     const added = value.descriptionAddedIn.split(".").map(Number),
       updated = value.descriptionUpdatedIn.split(".").map(Number);
-    const difference = updated.map((part, index) => part - added[index]).find((part) => part !== 0);
 
+    /** First unequal numeric release component, used to reject reversed history. */
+    const difference = updated.map((part, index) => part - added[index]).find((part) => part !== 0);
     if (difference < 0) throw new Error(`${label}.descriptionUpdatedIn precedes descriptionAddedIn`);
   }
 
   if (Object.hasOwn(value, "use")) {
     if (category !== "nonStandard") throw new Error(`${label}.use is allowed only on nonStandard records`);
-
     nonempty(value.use, `${label}.use`);
   }
 
   for (const key of ["inherits", "overrides", "globallyOverriddenBy"]) {
     if (!Object.hasOwn(value, key)) continue;
+
     if (
       !Array.isArray(value[key]) ||
       !value[key].length ||
@@ -149,9 +158,7 @@ export function validateDetail(value, category, label, { shared = false, family 
 export function normalizeHistory(record) {
   /** Copy leaves without mutating checked-in input objects. */
   const result = { ...record };
-
   if (result.descriptionUpdatedIn === result.descriptionAddedIn) delete result.descriptionUpdatedIn;
-
   return result;
 }
 
@@ -178,16 +185,32 @@ export function decode(input, family, kind, { shared = false } = {}) {
   /** Normalized compiler maps or globally ordered syntax rules. */
   const value = family === "syntax" && kind === "definitions" ? [] : Object.create(null);
 
+  /** Line-start offsets support precise diagnostics without repeatedly scanning whole files. */
+  const lineStarts = [0, ...[...(input.source ?? "").matchAll(/\n/g)].map((match) => match.index + 1)];
+
   /**
    * Produce an exact syntax-tree diagnostic location.
    * @param path - JSON property/index path.
    */
   function location(path) {
-    /** Syntax node and preceding source lines, when source positions are available. */
-    const node = input.tree && findNodeAtLocation(input.tree, path),
-      lines = input.source?.slice(0, node?.offset ?? 0).split("\n");
+    /** Syntax node and binary-searched line containing its offset. */
+    const node = input.tree && findNodeAtLocation(input.tree, path);
 
-    return `${input.label ?? input.path ?? family}${lines && node ? `:${lines.length}:${lines.at(-1).length + 1}` : ""}: ${path.join(".")}`;
+    if (!node || !input.source) return `${input.label ?? input.path ?? family}: ${path.join(".")}`;
+
+    /** Search bounds over monotonically increasing line offsets. */
+    let low = 0,
+      high = lineStarts.length;
+
+    while (low + 1 < high) {
+      /** Midpoint either precedes or follows the requested source node. */
+      const middle = Math.floor((low + high) / 2);
+
+      if (lineStarts[middle] <= node.offset) low = middle;
+      else high = middle;
+    }
+
+    return `${input.label ?? input.path ?? family}:${low + 1}:${node.offset - lineStarts[low] + 1}: ${path.join(".")}`;
   }
 
   /**
@@ -203,7 +226,15 @@ export function decode(input, family, kind, { shared = false } = {}) {
 
     if (records.has(id))
       throw new Error(`${label}: duplicate canonical ${family} ID "${id}"; first at ${records.get(id).label}`);
+
     if (kind === "details") validateDetail(record, category, label, { shared, family });
+
+    if (shared && kind === "definitions") {
+      fields(record, ["color", "colorReason", "use"], label);
+      validateHex(record.color, `${label}.color`);
+      nonempty(record.colorReason, `${label}.colorReason`);
+    }
+
     if (kind === "definitions" && Object.hasOwn(record, "use")) {
       if (!shared || category !== "nonStandard" || !["ui", "semantic"].includes(family))
         throw new Error(`${label}.use is shared nonStandard generator documentation only`);
@@ -212,12 +243,16 @@ export function decode(input, family, kind, { shared = false } = {}) {
     }
 
     records.set(id, { id, value: record, category, path, label, inputPath: input.path });
+
     if (!(family === "syntax" && kind === "definitions")) value[id] = record;
   }
 
   object(input.value, input.label ?? family);
 
   if (family === "variables") {
+    if (kind === "definitions")
+      fields(input.value, ["surface", "text", "diagnostic", "diff"], input.label ?? "variables");
+
     if (kind === "details") {
       for (const [id, record] of Object.entries(input.value)) register(id, record, undefined, [id]);
     } else {
@@ -228,9 +263,7 @@ export function decode(input, family, kind, { shared = false } = {}) {
        */
       function variables(node, path) {
         object(node, location(path));
-
         if (Object.hasOwn(node, "color")) return register(path.join("."), node, undefined, path);
-
         for (const [key, child] of Object.entries(node)) variables(child, [...path, key]);
       }
 
@@ -272,6 +305,7 @@ export function decode(input, family, kind, { shared = false } = {}) {
 
         if (!Number.isInteger(rule.order) || rule.order < 0)
           throw new Error(`${location(path)}: syntax order must be a nonnegative integer`);
+
         if (value.some((entry) => entry.order === rule.order))
           throw new Error(`${location(path)}: duplicate syntax order ${rule.order}`);
 
@@ -297,6 +331,7 @@ export function decode(input, family, kind, { shared = false } = {}) {
               : [...detailFields, ...(shared ? ["modified-desc"] : [])],
             location([category, type, suffix]),
           );
+
           register(semanticId(type, suffix), record, category, [category, type, suffix]);
         }
       }
@@ -330,13 +365,13 @@ export function decode(input, family, kind, { shared = false } = {}) {
 
         if (Object.keys(record).length) {
           if (!path.length) throw new Error(`${location([category])}: record fields belong on a token, not a category`);
-
           register(path.join("."), record, category, [category, ...path]);
         }
 
         for (const [key, child] of Object.entries(node)) {
           if (allowed.includes(key)) {
             if (child === null || typeof child !== "object" || Array.isArray(child)) continue;
+
             if (Object.keys(record).length)
               throw new Error(`${location([category, ...path, key])}: reserved record field/child-name collision`);
           }
@@ -354,7 +389,6 @@ export function decode(input, family, kind, { shared = false } = {}) {
 
   if (family === "syntax" && kind === "definitions") {
     value.sort((left, right) => left.order - right.order);
-
     return { value: value.map((entry) => entry.definition), records, input };
   }
 

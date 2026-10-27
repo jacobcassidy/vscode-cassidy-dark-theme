@@ -5,9 +5,7 @@
 
 import { join } from "node:path";
 import { findNodeAtLocation, getNodeValue } from "jsonc-parser";
-// Prettier's generated entry point hides its default export from the import resolver.
-// eslint-disable-next-line import-x/default
-import prettier from "prettier";
+import { formatSource } from "../shared/formatting.js";
 import { parseJsonc } from "../shared/jsonc.js";
 import { defaultThemeDirectory, familyPath, repositoryRoot, themeSections } from "../shared/paths.js";
 import { applyArtifacts, capturePaths, withGuards } from "../shared/transactions.js";
@@ -15,24 +13,10 @@ import { discoverTargets, readTargetInput } from "../themes/inputs.js";
 import { prepareBuild } from "../themes/build.js";
 import { decode, normalizeHistory, scopeList } from "../tokens/formats.js";
 import { loadTokenData } from "../tokens/data/load.js";
-import { editSource, recordPath } from "./source-edits.js";
+import { editSource, recordPath, editDetailRecord, emptyFamily } from "./source-edits.js";
 
 /** Default explicit authoring selection; edit this allowlist to change command defaults. */
 const includedThemes = ["prod/default", "dev/test"];
-
-/**
- * Format one authored JSONC candidate with local repository settings.
- * @param root - Checkout or fixture root.
- * @param path - Repository-relative source filename.
- * @param source - Prepared complete source.
- */
-export async function formatSource(root, path, source) {
-  /** Absolute formatter path and resolved local configuration. */
-  const filepath = join(root, path),
-    options = await prettier.resolveConfig(filepath);
-
-  return prettier.format(source, { ...options, filepath, parser: "jsonc" });
-}
 
 /**
  * Read an existing detail leaf without losing authored fields or accepting malformed JSONC.
@@ -43,7 +27,6 @@ function detailAt(source, path) {
   /** Parsed candidate and exact leaf node. */
   const parsed = parseJsonc(source, "prepared details"),
     node = findNodeAtLocation(parsed.tree, path);
-
   return node ? getNodeValue(node) : undefined;
 }
 
@@ -59,7 +42,11 @@ function detailAt(source, path) {
 export async function prepareProperties({ root, themes, overrides = new Map(), additionalTargets = [], snapshot }) {
   /** Selected targets, shared data, and source/destination fingerprints. */
   const targets = [...(await discoverTargets(root)), ...additionalTargets];
+
+  /** Discovered targets indexed by their exact group/name identifiers. */
   const indexed = new Map(targets.map((target) => [`${target.group}/${target.name}`, target]));
+
+  /** Pre-application fingerprints used to reject stale inputs. */
   const expected = await capturePaths([join(root, "src"), join(root, "package.json")]);
 
   if (!Array.isArray(themes) || themes.some((theme) => !indexed.has(theme)))
@@ -87,7 +74,11 @@ export async function prepareProperties({ root, themes, overrides = new Map(), a
     for (const family of themeSections) {
       /** Definitions are normalized before any source edits or documentation generation. */
       let input = await readTargetInput(root, target, familyPath(family, "definitions"), output);
+
+      /** Comment-preserving definition candidate edited only in memory. */
       let source = input.source;
+
+      /** Normalized family records with canonical identities and source origins. */
       let decoded = decode(input, family, "definitions");
 
       /** Canonical IDs newly added to this family. */
@@ -119,6 +110,8 @@ export async function prepareProperties({ root, themes, overrides = new Map(), a
               .toLowerCase()
               .replace(/[^a-z0-9]+/g, "-")
               .replace(/^-|-$/g, "");
+
+            /** Valid readable syntax ID stem, including numeric-name fallback. */
             const prefix = /^[a-z]/.test(stem) ? stem : `rule-${stem || rule.order + 1}`;
 
             /** Collision-free ID without changing scope/order/style. */
@@ -147,20 +140,53 @@ export async function prepareProperties({ root, themes, overrides = new Map(), a
 
       /** Independently inherited documentation source, preserved with syntax-tree edits. */
       const details = await readTargetInput(root, target, familyPath(family, "details"), output);
+
+      /** Target-local destination for the independently inherited detail family. */
       const detailPath = `${target.directory}/${familyPath(family, "details")}`;
+
+      /** Canonical IDs whose missing documentation is completed by this candidate. */
       const completed = [];
 
-      source = details.source;
+      /** Inherited syntax wording is reusable only for matching effective scope profiles and IDs. */
+      const inherited = family === "syntax" && details.fallback ? decode(details, family, "details") : undefined;
+
+      /** A replacement syntax profile must not inherit unrelated reference purposes. */
+      const rebuild =
+        inherited &&
+        ([...inherited.records.keys()].some((id) => !decoded.records.has(id)) ||
+          [...decoded.records].some(
+            ([id, record]) =>
+              JSON.stringify(scopeList(record.value)) !== JSON.stringify(snapshot.referenceScopes.get(id)),
+          ));
+
+      source = rebuild ? JSON.stringify(emptyFamily(family, "details")) : details.source;
 
       for (const [id, record] of decoded.records) {
         /** Exact nested target record and any reusable shared documentation. */
         const path = recordPath(family, record.category, id);
-        const existing = detailAt(source, path);
+
+        /** Current detail leaf retained before any source-preserving edits. */
+        const present = detailAt(source, path);
+
+        /** Reusable shared documentation for this exact canonical ID. */
         const shared = snapshot.details[family]?.records.get(id)?.value;
+
+        /** Whether this syntax rule matches the ordered reference scope coverage. */
         const matching =
           family !== "syntax" ||
           JSON.stringify(scopeList(record.value)) === JSON.stringify(snapshot.referenceScopes.get(id));
+
+        /** Preserve inherited authored wording only when it still describes this exact rule profile. */
+        const existing =
+          present ??
+          (rebuild && matching && inherited.records.get(id)?.category === record.category
+            ? inherited.records.get(id).value
+            : undefined);
+
+        /** Shared wording/history eligible for copying under matching scope coverage. */
         const reusable = matching ? shared : undefined;
+
+        /** Optional shared-definition usage context, separate from styling. */
         const definitionUse = snapshot.definitions[family]?.records.get(id)?.value.use;
 
         if (reusable?.use && definitionUse && reusable.use !== definitionUse)
@@ -169,14 +195,24 @@ export async function prepareProperties({ root, themes, overrides = new Map(), a
         /** Preserve authored wording/history/relationships; fill only missing purposes. */
         let candidate = existing ? { ...existing } : {};
 
+        if (candidate.description !== undefined && typeof candidate.description !== "string")
+          throw new Error(`${detailPath}:${path.join(".")}.description: expected a string`);
+
+        if (candidate.use !== undefined && (typeof candidate.use !== "string" || !candidate.use.trim()))
+          throw new Error(`${detailPath}:${path.join(".")}.use: expected a nonempty string`);
+
         if (typeof candidate.description !== "string" || !candidate.description.trim()) {
           candidate = {
-            ...candidate,
             ...(reusable
               ? Object.fromEntries(
-                  Object.entries(reusable).filter(([key]) => !["modified-desc", "scopeEvidence"].includes(key)),
+                  Object.entries(reusable).filter(([key]) =>
+                    ["description", "descriptionAddedIn", "descriptionUpdatedIn", "descriptionBasedOn", "use"].includes(
+                      key,
+                    ),
+                  ),
                 )
               : {}),
+            ...candidate,
             description:
               reusable?.description ??
               (family === "variables"
@@ -192,8 +228,8 @@ export async function prepareProperties({ root, themes, overrides = new Map(), a
 
         candidate = normalizeHistory(candidate);
 
-        if (JSON.stringify(candidate) !== JSON.stringify(existing)) {
-          source = editSource(source, path, candidate);
+        if (!present || JSON.stringify(candidate) !== JSON.stringify(existing)) {
+          source = editDetailRecord(source, path, candidate);
           completed.push(id);
         }
       }
@@ -215,13 +251,21 @@ export async function prepareProperties({ root, themes, overrides = new Map(), a
  * @param [options] - Authoring command options.
  * @param [options.root] - Checkout or isolated fixture root.
  * @param [options.themes] - Explicit selected group/name IDs.
+ * @param [options.operations] - Narrow filesystem adapter for controlled application failures.
  */
-export async function addThemeProperties({ root = repositoryRoot, themes = includedThemes } = {}) {
+export async function addThemeProperties({ root = repositoryRoot, themes = includedThemes, operations } = {}) {
   /** Completely validated source candidate generation. */
   const prepared = await prepareProperties({ root, themes });
 
   await withGuards([root], async ([owner]) =>
-    applyArtifacts({ root, ...prepared, owner, recovery: "npm run add:properties -- --recover=verify-restored" }),
+    applyArtifacts({
+      root,
+      ...prepared,
+      owner,
+      operations,
+      operation: "add-properties",
+      recovery: "npm run add:properties -- --recover=verify-restored",
+    }),
   );
 
   return prepared.updates;

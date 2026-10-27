@@ -39,8 +39,10 @@ function scopeIndex(details) {
 
       if (!categories.includes(evidence.category))
         throw new Error(`${record.label}: invalid scope evidence category ${evidence.category}`);
+
       if (!/^(?:[a-f0-9]{40}|sha256:[a-f0-9]{64})$/.test(evidence.revision))
         throw new Error(`${record.label}: scope evidence requires an immutable revision`);
+
       if (
         evidence.path.startsWith("/") ||
         evidence.path.includes("\\") ||
@@ -88,7 +90,11 @@ function scopeIndex(details) {
 export async function loadTokenData({ root = repositoryRoot, recovery = false } = {}) {
   /** Stable boundary and fingerprints prevent a multi-file partial snapshot. */
   const generation = recovery ? undefined : await requireStable(root);
+
+  /** Pre-application fingerprints used to reject stale inputs. */
   const expected = await capturePaths(tokenDataPaths.map((path) => join(root, path)));
+
+  /** Normalized definitions retained independently from matching documentation. */
   const definitions = {},
     details = {};
 
@@ -96,9 +102,12 @@ export async function loadTokenData({ root = repositoryRoot, recovery = false } 
     /** Family and file role taken only from the centralized inventory. */
     const [, , family, filename] = path.split("/"),
       kind = filename.replace(".jsonc", "");
-    const source = await readFile(join(root, path), "utf8");
-    const decoded = parseFormat(source, path, family, kind, { shared: true });
 
+    /** Original or prepared source data retained for this operation. */
+    const source = await readFile(join(root, path), "utf8");
+
+    /** Normalized family records with canonical identities and source origins. */
+    const decoded = parseFormat(source, path, family, kind, { shared: true });
     (kind === "definitions" ? definitions : details)[family] = decoded;
   }
 
@@ -106,6 +115,11 @@ export async function loadTokenData({ root = repositoryRoot, recovery = false } 
     for (const [id, detail] of details[family].records) {
       /** Definition inventory controls supported membership; details cannot override it. */
       const definition = definitions[family].records.get(id);
+
+      if (detail.category === "standard" && !definition)
+        throw new Error(
+          `${detail.label}: ${family} token "${id}" has no exact standard definition in ${definitions[family].input.path}`,
+        );
 
       if (definition?.value.use && detail.value.use && definition.value.use !== detail.value.use)
         throw new Error(
@@ -121,6 +135,8 @@ export async function loadTokenData({ root = repositoryRoot, recovery = false } 
 
   /** Scope-based evidence and normalized membership projection used by watcher invalidation. */
   const scopes = scopeIndex(details.syntax);
+
+  /** Canonical membership/evidence projection used for watcher invalidation. */
   const projection = canonicalJson({
     definitions: Object.fromEntries(
       Object.entries(definitions).map(([family, data]) => [

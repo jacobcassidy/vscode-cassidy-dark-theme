@@ -5,5 +5,6 @@
       "name": "extension.special",
       "match": "fixture"
     }
-  ]
+  ],
+  "name": "Fixture language"
 }

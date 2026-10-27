@@ -38,15 +38,6 @@
           "type": "string",
           "pattern": "\\S"
         }
-      },
-      "globallyOverriddenBy": {
-        "type": "array",
-        "minItems": 1,
-        "uniqueItems": true,
-        "items": {
-          "type": "string",
-          "pattern": "\\S"
-        }
       }
     },
     "additionalProperties": false,

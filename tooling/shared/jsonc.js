@@ -71,14 +71,12 @@ export function parseJsonc(text, label) {
   function fail(message, offset) {
     /** Source lines preceding an error offset, used to calculate its position. */
     const before = text.slice(0, offset).split("\n");
-
     throw new Error(`${label}:${before.length}:${before.at(-1).length + 1}: ${message}`);
   }
 
   if (errors.length) {
     /** First parser diagnostic reported to the caller. */
     const error = errors[0];
-
     fail(printParseErrorCode(error.error), error.offset);
   }
 

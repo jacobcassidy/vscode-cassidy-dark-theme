@@ -1,0 +1,26 @@
+# Validation only: no publication tasks, service connections, or release credentials.
+trigger:
+  - main
+pr:
+  - main
+
+strategy:
+  matrix:
+    macOS:
+      image: macOS-latest
+    Linux:
+      image: ubuntu-latest
+
+pool:
+  vmImage: $(image)
+
+steps:
+  - checkout: self
+  - task: NodeTool@0
+    displayName: Use repository Node.js 24
+    inputs:
+      versionSpec: 24.x
+  - script: npm ci
+    displayName: Install locked dependencies
+  - script: npm run check
+    displayName: Validate sources, audits, native workflows, and package inventory

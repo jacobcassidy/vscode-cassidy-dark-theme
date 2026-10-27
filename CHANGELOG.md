@@ -6,6 +6,12 @@ All notable changes to this project are documented in this file.
 
 ### Changed
 
+- Grouped theme definitions/details by family, adopted categorized nested token sources, and separated shared inventory/documentation under `src/token-data/` without changing theme styling or syntax precedence.
+- Moved preview assets to `preview/`, palette settings to `palette/config.jsonc`, language probes to `samples/grammar/`, reusable code to `tooling/`, and behavioral suites into recursive responsibility directories.
+- Prepared combined build artifacts before application, added coordinated writers and explicit interrupted-generation verification, and enabled compilation-free preview retries and watcher recovery resumption.
+- Added explicit verified upstream description updates with protected/versioned wording, immutable replay, coverage review, bounded retrieval, and informational category/scope proposals.
+- Consolidated the development guide and added local schemas plus read-only documentation/legacy audits.
+
 - Renamed internal color aliases from `base.*` to `variables.*`, aligning references, validation, and documentation with `variables.jsonc` while preserving generated theme colors.
 
 - Corrected property purpose catalog paths after moving `lookups/` out of `references/`.

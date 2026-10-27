@@ -51,10 +51,19 @@ test(
       debounceMs: 5,
       recoveryMs: 20,
       logger: {
+        /**
+         * Capture watcher progress and notify local observation barriers.
+         * @param [message] - Diagnostic or progress message to capture.
+         */
         log: (message = "") => {
           logs.push(message);
           events.emit("update");
         },
+
+        /**
+         * Capture visible watcher failure diagnostics.
+         * @param message - Diagnostic or progress message to capture.
+         */
         error: (message) => {
           errors.push(message);
           events.emit("update");

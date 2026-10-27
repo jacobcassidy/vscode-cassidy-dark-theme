@@ -1,7 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "Variables definitions",
-  "$ref": "#/definitions/branch",
   "definitions": {
     "branch": {
       "type": "object",
@@ -33,7 +32,130 @@
             "$ref": "#/definitions/branch"
           }
         ]
+      },
+      "propertyNames": {
+        "pattern": "^[a-zA-Z][a-zA-Z0-9-]*(\\.[a-zA-Z0-9-]+)*$"
       }
     }
-  }
+  },
+  "type": "object",
+  "properties": {
+    "surface": {
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "color": {
+              "type": "string",
+              "pattern": "\\S"
+            },
+            "alpha": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "colorReason": {
+              "type": "string",
+              "pattern": "\\S"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "color"
+          ]
+        },
+        {
+          "$ref": "#/definitions/branch"
+        }
+      ]
+    },
+    "text": {
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "color": {
+              "type": "string",
+              "pattern": "\\S"
+            },
+            "alpha": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "colorReason": {
+              "type": "string",
+              "pattern": "\\S"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "color"
+          ]
+        },
+        {
+          "$ref": "#/definitions/branch"
+        }
+      ]
+    },
+    "diagnostic": {
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "color": {
+              "type": "string",
+              "pattern": "\\S"
+            },
+            "alpha": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "colorReason": {
+              "type": "string",
+              "pattern": "\\S"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "color"
+          ]
+        },
+        {
+          "$ref": "#/definitions/branch"
+        }
+      ]
+    },
+    "diff": {
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "color": {
+              "type": "string",
+              "pattern": "\\S"
+            },
+            "alpha": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "colorReason": {
+              "type": "string",
+              "pattern": "\\S"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "color"
+          ]
+        },
+        {
+          "$ref": "#/definitions/branch"
+        }
+      ]
+    }
+  },
+  "additionalProperties": false
 }

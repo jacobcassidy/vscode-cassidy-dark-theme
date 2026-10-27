@@ -23,6 +23,8 @@ async function probe(t, args) {
   const child = fork(new URL("../fixtures/process/writer.js", import.meta.url), args, {
     stdio: ["ignore", "pipe", "pipe", "ipc"],
   });
+
+  /** Captured subprocess error output used to diagnose early failures. */
   const errors = [];
 
   child.stderr.on("data", (chunk) => errors.push(chunk.toString()));
@@ -37,7 +39,6 @@ async function probe(t, args) {
       throw new Error(`Probe exited ${code}: ${errors.join("")}`);
     }),
   ]);
-
   return { child, ready, errors };
 }
 
@@ -63,6 +64,8 @@ test("a dead process guard can be reclaimed without clearing interrupted-generat
   /** Child exits while still owning the application marker and guard. */
   const root = await createBuildProject(t),
     { child } = await probe(t, ["abandon", root]);
+
+  /** Child exit barrier installed before releasing the process. */
   const exited = once(child, "exit");
 
   child.send("exit");
@@ -78,7 +81,11 @@ test("competing native cache publishers expose only verified completed entries a
   /** Independent process staging is held before either process may publish. */
   const root = await createBuildProject(t),
     upstream = await createUpstream(t);
+
+  /** First independent publisher held at its owned staging barrier. */
   const first = await probe(t, ["cache", root, upstream.directory, upstream.revision]);
+
+  /** Second independent publisher held at its separate staging barrier. */
   const second = await probe(t, ["cache", root, upstream.directory, upstream.revision]);
 
   assert.notEqual(first.ready.staging, second.ready.staging);
@@ -101,6 +108,7 @@ test("competing native cache publishers expose only verified completed entries a
     (await completed).map(([code]) => code),
     [0, 0],
   );
+
   assert.deepEqual(first.errors, []);
   assert.deepEqual(second.errors, []);
   assert.equal(

@@ -27,6 +27,7 @@ if (mode === "guard") {
       join(owner.directory, "incomplete.json"),
       JSON.stringify({ id: "process-interrupted", pid: process.pid, before }),
     );
+
     process.send({ ready: true, directory: owner.directory });
     await once(process, "message");
     process.exit(0);
@@ -36,6 +37,7 @@ if (mode === "guard") {
     root: resource,
     identity: { id: "vscode-stable", kind: "core", revision },
     retrieval: createRetrieval({ policy: { requestMs: 30000, attempts: 3, totalMs: 300000 } }),
+
     /**
      * Hold completed source staging before publication until the parent releases the barrier.
      * @param path - This process's unique owned staging directory.
@@ -46,6 +48,7 @@ if (mode === "guard") {
       await once(process, "message");
     },
   });
+
   process.send({ finished: true });
 } else throw new Error(`Unknown process probe: ${mode}`);
 

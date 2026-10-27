@@ -10,15 +10,17 @@ import { repositoryRoot, paletteInputPath, familyPath } from "../shared/paths.js
 import { applyArtifacts, withGuards } from "../shared/transactions.js";
 import { discoverTargets, readTargetInput, validateThemeName, themeUiType } from "../themes/inputs.js";
 import { emptyFamily } from "./source-edits.js";
-import { formatSource, prepareProperties } from "./add-properties.js";
+import { prepareProperties } from "./add-properties.js";
+import { formatSource } from "../shared/formatting.js";
 
 /**
  * Create a single prod/dev theme without modifying existing themes or the default allowlist.
  * @param [options] - Theme creation options.
  * @param [options.root] - Checkout or isolated root.
  * @param options.theme - Explicit prod/name or dev/name.
+ * @param [options.operations] - Narrow filesystem adapter for controlled application-failure tests.
  */
-export async function addTheme({ root = repositoryRoot, theme } = {}) {
+export async function addTheme({ root = repositoryRoot, theme, operations } = {}) {
   if (typeof theme !== "string" || !/^(?:prod|dev)\/[^/]+$/.test(theme))
     throw new Error("Theme must be prod/name or dev/name");
 
@@ -35,7 +37,6 @@ export async function addTheme({ root = repositoryRoot, theme } = {}) {
 
   try {
     await lstat(join(root, directory));
-
     throw new Error(`Theme destination already exists: ${directory}`);
   } catch (error) {
     if (error.code !== "ENOENT") throw error;
@@ -43,7 +44,11 @@ export async function addTheme({ root = repositoryRoot, theme } = {}) {
 
   /** Default metadata is copied through source edits, preserving comments and unrelated fields. */
   const baseline = targets.find((target) => target.group === "prod" && target.name === "default");
+
+  /** Default metadata source retained with its comments and unrelated fields. */
   const metadata = await readTargetInput(root, baseline, "metadata.jsonc");
+
+  /** Target-derived human-readable suffix for named previews. */
   const previewName = name
     .split("-")
     .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
@@ -59,6 +64,10 @@ export async function addTheme({ root = repositoryRoot, theme } = {}) {
       applyEdits(
         metadata.source,
         modify(metadata.source, ["previewName"], previewName, {
+          /**
+           * Choose an insertion position while retaining existing property order.
+           * @param properties - Existing property names in their authored order.
+           */
           getInsertionIndex: (properties) => properties.indexOf("name") + 1,
         }),
       ),
@@ -67,6 +76,8 @@ export async function addTheme({ root = repositoryRoot, theme } = {}) {
       ["definitions", "details"].map((kind) => [familyPath(family, kind), JSON.stringify(emptyFamily(family, kind))]),
     ),
   ]);
+
+  /** Prepared source candidates keyed by final repository-relative filenames. */
   const overrides = new Map();
 
   for (const [relative, source] of files) {
@@ -81,10 +92,19 @@ export async function addTheme({ root = repositoryRoot, theme } = {}) {
     reportDirectory: `${directory}/palette/generated`,
     output: `${group === "prod" ? "themes" : "preview/themes"}/cassidy-dark-color-theme-${name}.json`,
   };
+
+  /** Fully validated preparation retained for checking or coordinated application. */
   const prepared = await prepareProperties({ root, themes: [theme], overrides, additionalTargets: [target] });
 
   await withGuards([root], async ([owner]) =>
-    applyArtifacts({ root, ...prepared, owner, recovery: "npm run add:theme -- --recover=verify-restored" }),
+    applyArtifacts({
+      root,
+      ...prepared,
+      owner,
+      operations,
+      operation: "add-theme",
+      recovery: "npm run add:theme -- --recover=verify-restored",
+    }),
   );
 
   return {

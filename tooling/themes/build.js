@@ -3,10 +3,15 @@
  * @file Assemble theme inputs, resolve colors, generate reports, and write or check build outputs.
  */
 
-import { defaultThemeDirectory, paletteInputPath, themeSections, themeInputPaths } from "../shared/paths.js";
+import {
+  repositoryRoot,
+  defaultThemeDirectory,
+  paletteInputPath,
+  themeSections,
+  themeInputPaths,
+} from "../shared/paths.js";
 import { readFile, lstat } from "node:fs/promises";
 import { join } from "node:path";
-import { fileURLToPath } from "node:url";
 import { applyEdits, modify } from "jsonc-parser";
 // Prettier's generated entry point hides its default export from the import resolver.
 // eslint-disable-next-line import-x/default
@@ -20,6 +25,7 @@ import {
   observeWriter,
   verifyRestored,
   applyArtifacts,
+  validateDestination,
   assertFresh,
   capturePaths,
   requireStable,
@@ -27,8 +33,8 @@ import {
 } from "../shared/transactions.js";
 import { decode } from "../tokens/formats.js";
 import { loadTokenData } from "../tokens/data/load.js";
-import { validateCategories } from "../tokens/category-validation.js";
-import { contrastRatio } from "../shared/color-math.js";
+import { validateCategories, validateReferenceScopes } from "../tokens/category-validation.js";
+import { paletteReports } from "../palette/reports.js";
 import {
   discoverTargets,
   listDirectories,
@@ -39,18 +45,17 @@ import {
   themeUiType,
 } from "./inputs.js";
 
-/** Repository root inferred from the build module’s location. */
-const defaultRoot = fileURLToPath(new URL("../../", import.meta.url));
-
 /**
  * Load independent whole-file inputs and compile one target’s effective token sections.
- * @param root - Repository or isolated project root directory.
  * @param target - Discovered target and source paths.
  * @param palette - Generated palette records for this target.
  * @param command - Rebuild command included in the output notice.
+ * @param readInput - Pass-local cached input reader.
+ * @param snapshot - Injected checked-in classification snapshot.
+ * @param operations - Narrow compiler/palette adapters.
  * @returns Compiled theme JSONC with all input labels attached to diagnostics.
  */
-async function readCompiledTheme(root, target, palette, command, readInput, snapshot) {
+async function readCompiledTheme(target, palette, command, readInput, snapshot, operations) {
   /** Effective authored inputs indexed by their independent relative paths. */
   const inputs = new Map();
 
@@ -75,12 +80,14 @@ async function readCompiledTheme(root, target, palette, command, readInput, snap
       details[section] = families.details[section].value;
     }
 
-    if (target.directory === defaultThemeDirectory)
+    if (target.directory === defaultThemeDirectory) {
+      validateReferenceScopes(snapshot, families.definitions.syntax);
       snapshot.referenceScopes = new Map(
         tokens.syntax
           .filter((rule) => rule.id)
           .map((rule) => [rule.id, rule.scope === undefined ? [] : [rule.scope].flat()]),
       );
+    }
 
     validateCategories(families, snapshot, `${target.group}/${target.name}`);
 
@@ -92,7 +99,7 @@ async function readCompiledTheme(root, target, palette, command, readInput, snap
 
     return renderTheme(
       metadata.value,
-      compileTokens(tokens, details, palette, target.directory === defaultThemeDirectory),
+      (operations.compileTokens ?? compileTokens)(tokens, details, palette, target.directory === defaultThemeDirectory),
       command,
     );
   } catch (error) {
@@ -156,182 +163,6 @@ function validateTheme(theme) {
 }
 
 /**
- * Format an OKLCH measurement with stable precision for generated reports.
- *
- * @param color - Color components or value used by this conversion or grammar probe.
- */
-function oklch(color) {
-  return `oklch(${(color.l * 100).toFixed(3)}% ${color.c.toFixed(6)} ${color.h.toFixed(3)})`;
-}
-
-/**
- * Escape text for use in generated SVG text and attribute values.
- *
- * @param text - Text to escape for SVG text nodes and attribute values.
- */
-function xml(text) {
-  return text.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll('"', "&quot;");
-}
-
-/**
- * Create palette JSON measurements, Markdown contrast tables, and SVG swatches with provenance.
- *
- * @param palette - Generated palette records keyed by primitive identifier.
- * @param target - Discovered theme target and its source/output locations.
- * @param input - Parsed input and its source metadata, or the value used by a grammar probe.
- * @param notice - Rebuild command embedded in the generated-file notice.
- * @returns Generated report source indexed by output path.
- */
-function reports(palette, target, input, notice) {
-  /** Output directory for the target’s generated palette reports. */
-  const directory = target.reportDirectory;
-
-  /** Source path, target, fallback status, and rebuild command recorded in reports. */
-  const provenance = {
-    target: `${target.group}/${target.name}`,
-    source: input.path,
-    fallback: input.fallback,
-    rebuild: notice,
-  };
-
-  /** Serializable palette measurements rounded to stable report precision. */
-  const primitives = Object.fromEntries(
-    [...palette].map(([id, color]) => [
-      id,
-      {
-        ...color,
-        target: Object.fromEntries(Object.entries(color.target).map(([key, value]) => [key, Number(value.toFixed(6))])),
-        resolved: Object.fromEntries(
-          Object.entries(color.resolved).map(([key, value]) => [key, Number(value.toFixed(6))]),
-        ),
-        exported: Object.fromEntries(
-          Object.entries(color.exported).map(([key, value]) => [key, Number(value.toFixed(6))]),
-        ),
-      },
-    ]),
-  );
-
-  /** Markdown rows comparing tone 600 colors against the report foreground. */
-  const contrastRows = [...palette]
-    .filter(([id]) => id.split(".")[1] !== "gray" && id.endsWith(".600"))
-    .map(([id, color]) => {
-      /** Foreground/background contrast, or null when compositing is required. */
-      const ratio = contrastRatio("#f8f8f8", color.hex);
-      return `| \`${id}\` | \`${color.hex}\` | ${ratio === null ? "Needs backdrop" : `${ratio.toFixed(2)}:1`} |`;
-    });
-
-  /** Generated palette reference and contrast report. */
-  const markdown = [
-    "# Generated palette",
-    "",
-    `Generated by \`${notice}\` for \`${provenance.target}\`. Source: \`${input.path}\`${input.fallback ? " (default fallback)" : ""}. Edit the palette source and rebuild.`,
-    "",
-    "![Palette swatches](palette.svg)",
-    "",
-    "## Tone 600 contrast",
-    "",
-    "Foreground: `#f8f8f8`. Ratios use [WCAG relative luminance](https://www.w3.org/TR/WCAG22/#dfn-relative-luminance) from the exported sRGB hex values, rounded to two decimal places. Translucent backgrounds need a backdrop before their contrast can be calculated.",
-    "",
-    "| Token | Background | Contrast with #f8f8f8 |",
-    "| --- | --- | --- |",
-    ...contrastRows,
-    "",
-    "## Full palette",
-    "",
-    "Target is the requested color; resolved includes gamut limits or overrides; exported is measured from the rounded hex.",
-    "",
-    "| Token | Target OKLCH | Resolved OKLCH | Hex | Exported OKLCH | Color reason |",
-    "| --- | --- | --- | --- | --- | --- |",
-    ...[...palette].map(
-      ([id, color]) =>
-        `| \`${id}\` | ${oklch(color.target)} | ${oklch(color.resolved)} | \`${color.hex}\` | ${oklch(color.exported)} | ${(color.colorReason ?? "").replaceAll("|", "\\|").replaceAll(/\r?\n/g, " ")} |`,
-    ),
-    "",
-  ].join("\n");
-
-  /** Palette hex values grouped by family and tone for SVG rendering. */
-  const families = new Map();
-
-  for (const [id, color] of palette) {
-    /** Family and tone segments extracted from a palette identifier. */
-    const [, family, tone] = id.split(".");
-    if (!families.has(family)) families.set(family, new Map());
-    families.get(family).set(tone, color.hex);
-  }
-
-  /** Non-neutral families rendered as labeled SVG rows. */
-  const chromatic = [...families].filter(([family]) => family !== "gray");
-
-  /** Neutral tone/hex pairs rendered below the chromatic families. */
-  const gray = [...(families.get("gray") ?? [])];
-
-  /** Number of five-column rows required for neutral swatches. */
-  const grayRows = Math.ceil(gray.length / 5);
-
-  /** SVG canvas height calculated from the number of palette rows. */
-  const height = 74 + chromatic.length * 76 + (grayRows ? 38 + grayRows * 76 : 0);
-
-  /** SVG source fragments accumulated before joining the final report. */
-  const svg = [
-    `<svg xmlns="http://www.w3.org/2000/svg" width="760" height="${height}" viewBox="0 0 760 ${height}" role="img" aria-labelledby="title description">`,
-    '<title id="title">Cassidy Dark generated palette</title>',
-    `<!-- Generated by ${notice} for ${provenance.target}. Source: ${input.path}${input.fallback ? " (default fallback)" : ""}. -->`,
-    '<desc id="description">Rows show each color family with tones 300, 400, 500, 600, and 400-muted, followed by neutral swatches. Every swatch includes its hex value.</desc>',
-    `<rect width="760" height="${height}" fill="#242424"/>`,
-    '<g font-family="monospace" font-size="13" fill="#f8f8f8">',
-    '<text x="20" y="28">Cassidy Dark · Generated palette</text>',
-  ];
-
-  for (const [index, tone] of ["300", "400", "500", "600", "400-muted"].entries()) {
-    svg.push(`<text x="${132 + index * 122}" y="55">${tone}</text>`);
-  }
-
-  for (const [row, [name, colors]] of chromatic.entries()) {
-    /** Vertical coordinate of the current SVG swatch row. */
-    const y = 70 + row * 76;
-
-    svg.push(`<text x="20" y="${y + 24}">${xml(name)}</text>`);
-
-    for (const [column, tone] of ["300", "400", "500", "600", "400-muted"].entries()) {
-      /** Horizontal coordinate of the current SVG swatch. */
-      const x = 132 + column * 122;
-
-      /** Resolved hex color for the current reference or swatch. */
-      const hex = colors.get(tone);
-
-      svg.push(
-        `<rect x="${x}" y="${y}" width="108" height="38" rx="3" fill="${hex}"/><text x="${x}" y="${y + 57}">${hex}</text>`,
-      );
-    }
-  }
-
-  /** Vertical starting position of the neutral section. */
-  const start = 86 + chromatic.length * 76;
-
-  if (gray.length) svg.push(`<text x="20" y="${start}">Neutrals</text>`);
-
-  for (const [index, [tone, hex]] of gray.entries()) {
-    /** Horizontal coordinate of the current SVG swatch. */
-    const x = 20 + (index % 5) * 146;
-
-    /** Vertical coordinate of the current SVG swatch row. */
-    const y = start + 16 + Math.floor(index / 5) * 76;
-
-    svg.push(
-      `<rect x="${x}" y="${y}" width="132" height="32" rx="3" fill="${hex}"/><text x="${x}" y="${y + 49}">${xml(tone)} ${hex}</text>`,
-    );
-  }
-
-  svg.push("</g></svg>\n");
-
-  return new Map([
-    [`${directory}/palette.json`, `${JSON.stringify({ generated: provenance, primitives }, null, 2)}\n`],
-    [`${directory}/palette.md`, markdown],
-    [`${directory}/palette.svg`, svg.join("\n")],
-  ]);
-}
-
-/**
  * Apply repository formatting to generated text, preserving SVG and using JSONC for theme files.
  *
  * @param root - Repository or isolated project root directory.
@@ -355,12 +186,14 @@ async function formatted(root, path, source) {
 /**
  * Resolve one target’s palette and optional theme into validated, in-memory output candidates.
  *
- * @param root - Repository or isolated project root directory.
  * @param target - Discovered theme target and its source/output locations.
  * @param paletteOnly - Whether to generate palette reports without compiling token sections.
  * @param [defaultPalette] - Already validated default palette available to other themes.
+ * @param readInput - Pass-local cached input reader.
+ * @param snapshot - Shared classification snapshot.
+ * @param operations - Narrow compiler/palette adapters.
  */
-async function prepareTarget(root, target, paletteOnly, defaultPalette, readInput, snapshot) {
+async function prepareTarget(target, paletteOnly, defaultPalette, readInput, snapshot, operations) {
   /** Required target-local configuration selecting a custom or default palette. */
   const input = await readInput(target, paletteInputPath);
 
@@ -385,7 +218,7 @@ async function prepareTarget(root, target, paletteOnly, defaultPalette, readInpu
       /** Complete generation settings, excluding the optional explicit false selection flag. */
       const config = { ...input.value };
       delete config.useDefaultPalette;
-      palette = generatePalette(config);
+      palette = (operations.generatePalette ?? generatePalette)(config);
     }
   } catch (error) {
     throw new Error(`${input.label}: ${error.message}`, { cause: error });
@@ -403,7 +236,7 @@ async function prepareTarget(root, target, paletteOnly, defaultPalette, readInpu
         ],
         [target.reportDirectory, null],
       ])
-    : reports(palette, target, input, target.group === "prod" ? "npm run build:palette" : command);
+    : paletteReports(palette, target, input, target.group === "prod" ? "npm run build:palette" : command);
 
   if (!input.value.useDefaultPalette) {
     output.set(`${target.directory}/palette/default-palette.txt`, null);
@@ -415,7 +248,7 @@ async function prepareTarget(root, target, paletteOnly, defaultPalette, readInpu
 
   if (!paletteOnly) {
     /** Generated JSONC after validating effective tokens, details, and cross-section aliases. */
-    const rendered = await readCompiledTheme(root, target, palette, command, readInput, snapshot);
+    const rendered = await readCompiledTheme(target, palette, command, readInput, snapshot, operations);
     output.set(target.output, rendered);
     metadata = parseJsonc(rendered, target.output).value;
   }
@@ -524,7 +357,6 @@ async function staleOutputs(root, targets, group, paletteOnly) {
 
       if (firstLine === header) {
         removable.push(path);
-
         continue;
       }
     }
@@ -557,15 +389,15 @@ async function artifactExists(path) {
 }
 
 /**
- * Format and validate all output candidates before checking or atomically replacing changed files.
+ * Format and validate each output candidate once during preparation.
  *
  * @param root - Repository or isolated project root directory.
  * @param output - Output path-to-source map, with null marking obsolete files or palette directories for removal.
- * @param check - Whether to report stale artifacts without writing files.
- * @param command - Rebuild command included in stale-output diagnostics.
  */
-async function checkOutputs(root, output, check, command) {
+async function prepareOutputs(root, output) {
   for (const [path, source] of output) {
+    await validateDestination(root, path);
+
     if (source === null) continue;
 
     /** Formatted generated source ready for validation and comparison. */
@@ -577,7 +409,15 @@ async function checkOutputs(root, output, check, command) {
 
     output.set(path, text);
   }
+}
 
+/**
+ * Compare completely prepared bytes without formatting or mutating the candidate map.
+ * @param root - Repository or isolated project root.
+ * @param output - Prepared output bytes, with null marking removals.
+ * @param command - Rebuild command included in stale-output diagnostics.
+ */
+async function checkOutputs(root, output, command) {
   /** Generated output paths whose contents differ from the prepared result. */
   const changed = [];
 
@@ -587,7 +427,7 @@ async function checkOutputs(root, output, check, command) {
     if (text === null ? existing : existing !== text) changed.push(path);
   }
 
-  if (check && changed.length) {
+  if (changed.length) {
     /** Scheduled removals described without changing the filesystem in check mode. */
     const removed = changed.filter((path) => output.get(path) === null);
 
@@ -595,8 +435,6 @@ async function checkOutputs(root, output, check, command) {
       `Generated output is missing or stale: ${changed.join(", ")}.${removed.length ? ` Pending removals: ${removed.join(", ")}.` : ""} Run ${command}.`,
     );
   }
-
-  if (check) return changed;
 
   return changed;
 }
@@ -610,14 +448,16 @@ async function checkOutputs(root, output, check, command) {
  * @param [options.additionalTargets] - Validated targets being scaffolded.
  * @param [options.snapshot] - Already loaded shared snapshot for generator/watch reuse.
  * @param [options.recoveryOwner] - Explicit restoration-verification guard ownership.
+ * @param [options.operations] - Narrow compilation/loading/palette adapters for operation-count verification.
  */
 export async function prepareBuild({
-  root = defaultRoot,
+  root = repositoryRoot,
   mode = "all",
   overrides = new Map(),
   additionalTargets = [],
   snapshot,
   recoveryOwner,
+  operations = {},
 } = {}) {
   if (!["all", "prod", "dev", "palette"].includes(mode)) throw new Error(`Unknown build mode: ${mode}`);
 
@@ -626,19 +466,31 @@ export async function prepareBuild({
 
   if (recoveryOwner && (await observeWriter(root)).owner?.token !== recoveryOwner.token)
     throw new Error("Recovery preparation requires the owning checkout guard");
+
+  /** Pre-application fingerprints used to reject stale inputs. */
   const expected = await capturePaths([
     join(root, "src"),
     join(root, "package.json"),
     join(root, "themes"),
     join(root, "preview"),
   ]);
+
+  /** Discovered source targets, including any prepared but unapplied scaffold. */
   const targets = [...(await discoverTargets(root)), ...additionalTargets];
-  snapshot ??= mode === "palette" ? undefined : await loadTokenData({ root, recovery: Boolean(recoveryOwner) });
+
+  snapshot ??=
+    mode === "palette"
+      ? undefined
+      : await (operations.loadTokenData ?? loadTokenData)({ root, recovery: Boolean(recoveryOwner) });
 
   if (snapshot?.expected) await assertFresh(snapshot.expected);
 
+  /** Required production default supplying independent fallback inputs. */
   const defaultTarget = targets.find((target) => target.directory === defaultThemeDirectory);
-  const cache = new Map();
+
+  /** Pass-local target and file caches, including observed absence. */
+  const cache = new Map(),
+    fileCache = new Map();
 
   /**
    * Reuse independently inherited parsed files throughout this pass.
@@ -648,15 +500,17 @@ export async function prepareBuild({
   async function readInput(target, path) {
     /** Target/path cache identity includes fallback diagnostics. */
     const key = `${target.directory}/${path}`;
-
-    if (!cache.has(key)) cache.set(key, readTargetInput(root, target, path, overrides));
-
+    if (!cache.has(key)) cache.set(key, readTargetInput(root, target, path, overrides, fileCache));
     return cache.get(key);
   }
 
   /** Default work is shared by prod and dev targets in a combined pass. */
   const paletteOnly = mode === "palette";
-  const baseline = await prepareTarget(root, defaultTarget, paletteOnly, undefined, readInput, snapshot);
+
+  /** Prepared default palette/theme work reused by selected target groups. */
+  const baseline = await prepareTarget(defaultTarget, paletteOnly, undefined, readInput, snapshot, operations);
+
+  /** Selected prepared targets and their combined artifact map. */
   const selected = [],
     output = new Map();
 
@@ -667,7 +521,7 @@ export async function prepareBuild({
     const prepared =
       target === defaultTarget
         ? baseline
-        : await prepareTarget(root, target, paletteOnly, baseline.palette, readInput, snapshot);
+        : await prepareTarget(target, paletteOnly, baseline.palette, readInput, snapshot, operations);
 
     selected.push(prepared);
 
@@ -687,7 +541,7 @@ export async function prepareBuild({
     for (const path of await staleOutputs(root, selected, group, paletteOnly)) output.set(path, null);
   }
 
-  await checkOutputs(root, output, false, "npm run build");
+  await prepareOutputs(root, output);
   await assertFresh(expected);
 
   if (snapshot?.expected) await assertFresh(snapshot.expected);
@@ -716,7 +570,7 @@ export async function applyBuild(prepared, { check = false, operations } = {}) {
 
   /** Changed paths returned by comparison or coordinated application. */
   const changed = check
-    ? await checkOutputs(root, output, true, "npm run build")
+    ? await checkOutputs(root, output, "npm run build")
     : await withGuards([root], async ([owner]) => applyArtifacts({ root, output, expected, owner, operations }));
 
   return {
@@ -737,32 +591,8 @@ export async function applyBuild(prepared, { check = false, operations } = {}) {
  * Prepare and apply a selected build pass without preview side effects.
  * @param [options] - Build options including root, mode, and check.
  */
-export async function buildThemes(options = {}) {
+async function buildThemes(options = {}) {
   return applyBuild(await prepareBuild(options), options);
-}
-
-/**
- * Build the production group through the common prepared workflow.
- * @param [options] - Build options including paletteOnly.
- */
-export async function buildProdThemes(options = {}) {
-  return buildThemes({ ...options, mode: options.paletteOnly ? "palette" : "prod" });
-}
-
-/**
- * Build the development group through the common prepared workflow.
- * @param [options] - Build options.
- */
-export async function buildDevThemeSummary(options = {}) {
-  return buildThemes({ ...options, mode: "dev" });
-}
-
-/**
- * Return development target summaries for existing programmatic consumers.
- * @param [options] - Build options.
- */
-export async function buildDevThemes(options = {}) {
-  return (await buildDevThemeSummary(options)).targets;
 }
 
 /**
@@ -808,7 +638,7 @@ function logSummary(summary, targets, changedFiles, removedFiles, hasFollowingSu
  * @returns Preview synchronization result, or undefined for checks and palette-only builds.
  */
 export async function runBuild({
-  root = defaultRoot,
+  root = repositoryRoot,
   extensionDirectory,
   mode = "all",
   check = false,
@@ -859,7 +689,7 @@ export async function runBuild({
  * @param [options.root] - Checkout or fixture root.
  * @param [options.operation] - build, add-properties, or add-theme.
  */
-export async function verifyBuildRestored({ root = defaultRoot, operation = "build" } = {}) {
+export async function verifyBuildRestored({ root = repositoryRoot, operation = "build" } = {}) {
   return verifyRestored(
     root,
     async (_marker, owner) => {

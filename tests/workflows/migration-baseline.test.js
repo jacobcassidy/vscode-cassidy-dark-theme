@@ -6,6 +6,7 @@
 import { paletteInputPath, themeSections } from "../../tooling/shared/paths.js";
 import assert from "node:assert/strict";
 import test from "node:test";
+import { createScanner, SyntaxKind } from "jsonc-parser";
 import { readFile } from "node:fs/promises";
 import { createHash } from "node:crypto";
 import { fileURLToPath } from "node:url";
@@ -20,6 +21,27 @@ const root = fileURLToPath(new URL("../../", import.meta.url));
 
 /** Frozen records captured with the original implementation, before changing readers. */
 const baseline = JSON.parse(await readFile(new URL("../fixtures/migration-baseline/baseline.json", import.meta.url)));
+
+/**
+ * Extract comment text independently from the new codec, retaining repeated occurrences.
+ * @param source - Original or migrated JSONC source.
+ */
+function comments(source) {
+  /** Lexical scanner ignores comment-like strings inside authored values. */
+  const scanner = createScanner(source, false),
+    result = [];
+
+  while (scanner.scan() !== SyntaxKind.EOF) {
+    if ([SyntaxKind.LineCommentTrivia, SyntaxKind.BlockCommentTrivia].includes(scanner.getToken()))
+      result.push(
+        source
+          .slice(scanner.getTokenOffset(), scanner.getTokenOffset() + scanner.getTokenLength())
+          .replace(/\s+/g, " "),
+      );
+  }
+
+  return result.sort();
+}
 
 test("all discovered targets retain independently captured styling, documentation, and fallback ownership", async () => {
   /** Current targets, compared with the complete original inventory. */
@@ -54,10 +76,14 @@ test("all discovered targets retain independently captured styling, documentatio
         );
 
         assert.equal(input.fallback, expected.inputs[`${group}/${family}.jsonc`].fallback);
+        assert.deepEqual(comments(input.source), comments(expected.inputs[`${group}/${family}.jsonc`].source));
+
         /** Independently frozen records permit only the specified detail-field rename. */
         const original = JSON.parse(
           JSON.stringify(expected.inputs[`${group}/${family}.jsonc`].value).replaceAll('"for":', '"description":'),
         );
+
+        /** Normalized family records with canonical identities and source origins. */
         const decoded = decode(input, family, group === "tokens" ? "definitions" : "details");
 
         assert.deepEqual(JSON.parse(JSON.stringify(decoded.value)), original);

@@ -33,12 +33,14 @@
     "@eslint/compat": "^2.1.1",
     "@eslint/js": "^10.0.1",
     "@vscode/vsce": "^4.0.0",
+    "acorn": "^8.19.0",
     "ajv": "^8.20.0",
     "eslint": "^10.13.0",
     "eslint-plugin-import-x": "^4.17.1",
     "globals": "^17.13.0",
     "jsonc-parser": "^3.3.1",
     "lefthook": "^2.2.2",
+    "markdown-it": "^15.0.3",
     "markdownlint-cli2": "^0.24.0",
     "prettier": "^3.9.10",
     "prettier-plugin-multiline-arrays": "^4.1.11",
@@ -71,8 +73,8 @@
     "build:dev": "node scripts/themes/build.js --dev",
     "build:palette": "node scripts/themes/build.js --palette-only",
     "build:prod": "node scripts/themes/build.js",
-    "check": "npm run check:generated && npm run check:prettier && npm run lint && npm run check:theme && npm test",
-    "check:generated": "node scripts/themes/build.js --check && node scripts/themes/build.js --dev --check",
+    "check": "npm run check:generated && npm run check:docs && npm run check:legacy && npm run check:prettier && npm run lint && npm run check:theme && npm test",
+    "check:generated": "node scripts/themes/build.js --all --check",
     "check:prettier": "prettier . --check",
     "check:theme": "node scripts/themes/check.js",
     "format": "prettier . --write",
@@ -87,6 +89,8 @@
     "test": "node --test \"tests/**/*.test.js\"",
     "update:token-details": "node scripts/token-data/update-token-details.js",
     "sync:preview": "node scripts/preview/sync.js",
-    "watch": "node scripts/themes/watch.js"
+    "watch": "node scripts/themes/watch.js",
+    "check:docs": "node scripts/docs/check.js",
+    "check:legacy": "node scripts/maintenance/check-legacy.js"
   }
 }

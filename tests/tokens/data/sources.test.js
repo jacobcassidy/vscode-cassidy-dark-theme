@@ -18,6 +18,10 @@ function response(status, value, headers = {}) {
     ok: status >= 200 && status < 300,
     status,
     headers: new Headers(headers),
+
+    /**
+     * Return the controlled response body for the metadata transport fixture.
+     */
     text: async () => JSON.stringify(value),
   };
 }
@@ -33,7 +37,14 @@ for (const release of [
 ]) {
   test(`latest resolution rejects invalid/unpublished release ${JSON.stringify(release)}`, async () => {
     /** Metadata response never authorizes an old successful resolution fallback. */
-    const retrieval = createRetrieval({ policy, fetch: async () => response(200, release) });
+    const retrieval = createRetrieval({
+      policy,
+
+      /**
+       * Return a controlled metadata response or transport failure without networking.
+       */
+      fetch: async () => response(200, release),
+    });
 
     await assert.rejects(
       resolveLatest({ repository: "microsoft/vscode", supplementalMain: true }, retrieval),
@@ -47,15 +58,20 @@ test("latest release and annotated tag/main revisions resolve afresh on every in
   const urls = [],
     stable = "a".repeat(40),
     main = "b".repeat(40);
+
+  /** Finite retrieval context shared by discovery, verification, and downloads. */
   const retrieval = createRetrieval({
     policy,
+
+    /**
+     * Return a controlled metadata response or transport failure without networking.
+     * @param url - Requested metadata URL.
+     */
     fetch: async (url) => {
       urls.push(url);
-
       if (url.endsWith("releases/latest")) return response(200, { tag_name: "1.2.3", draft: false, prerelease: false });
       if (url.includes("git/ref/tags")) return response(200, { object: { type: "tag", sha: "c".repeat(40) } });
       if (url.includes("git/tags")) return response(200, { object: { type: "commit", sha: stable } });
-
       return response(200, { object: { type: "commit", sha: main } });
     },
   });
@@ -66,6 +82,7 @@ test("latest release and annotated tag/main revisions resolve afresh on every in
     ),
     [stable, main],
   );
+
   await resolveLatest({ repository: "microsoft/vscode", supplementalMain: true }, retrieval);
   assert.equal(urls.filter((url) => url.endsWith("releases/latest")).length, 2);
 });
@@ -78,17 +95,35 @@ for (const status of [408, 429, 500, 503]) {
 
     /** Recorded waits are evidence of bounded backoff and server-delay handling. */
     const waits = [];
+
+    /** Finite retrieval context shared by discovery, verification, and downloads. */
     const retrieval = createRetrieval({
       policy,
+
+      /**
+       * Read the deterministic retrieval clock.
+       */
       now: () => now,
+
+      /**
+       * Return deterministic jitter for bounded retry assertions.
+       */
       random: () => 0,
+
+      /**
+       * Advance the injected retrieval clock without a wall-clock wait.
+       * @param ms - Requested delay in milliseconds.
+       */
       wait: async (ms) => {
         waits.push(ms);
         now += ms;
       },
+
+      /**
+       * Return a controlled metadata response or transport failure without networking.
+       */
       fetch: async () => {
         attempts++;
-
         return attempts < 3 ? response(status, {}, { "retry-after": "0.01" }) : response(200, { success: true });
       },
     });
@@ -107,6 +142,10 @@ for (const status of [401, 403, 404]) {
     /** Transport returns a permanent failure every time. */
     const retrieval = createRetrieval({
       policy,
+
+      /**
+       * Return a controlled metadata response or transport failure without networking.
+       */
       fetch: async () => {
         attempts++;
         return response(status, {});
@@ -126,11 +165,28 @@ test("retry exhaustion, total budget, invalid policies, and cancellation have fi
   /** Transport errors are transient but never authorize unbounded retries. */
   const retrieval = createRetrieval({
     policy: { ...policy, totalMs: 10000 },
+
+    /**
+     * Read the deterministic retrieval clock.
+     */
     now: () => now,
+
+    /**
+     * Return deterministic jitter for bounded retry assertions.
+     */
     random: () => 0,
+
+    /**
+     * Advance the injected retrieval clock without a wall-clock wait.
+     * @param ms - Requested delay in milliseconds.
+     */
     wait: async (ms) => {
       now += ms;
     },
+
+    /**
+     * Return a controlled metadata response or transport failure without networking.
+     */
     fetch: async () => {
       attempts++;
       throw new TypeError("network failure");
@@ -141,7 +197,14 @@ test("retry exhaustion, total budget, invalid policies, and cancellation have fi
   assert.equal(attempts, 3);
 
   /** An excessive Retry-After cannot exceed the shared total budget. */
-  const limited = createRetrieval({ policy, fetch: async () => response(429, {}, { "retry-after": "99" }) });
+  const limited = createRetrieval({
+    policy,
+
+    /**
+     * Return a controlled metadata response or transport failure without networking.
+     */
+    fetch: async () => response(429, {}, { "retry-after": "99" }),
+  });
 
   await assert.rejects(limited.request("https://fixture.invalid/limited"), /exceeds remaining total budget/);
 
@@ -150,9 +213,15 @@ test("retry exhaustion, total budget, invalid policies, and cancellation have fi
 
   /** User cancellation aborts immediately without entering another retry. */
   const cancellation = new AbortController();
+
+  /** Retrieval context connected to the explicit cancellation signal. */
   const cancelled = createRetrieval({
     policy,
     signal: cancellation.signal,
+
+    /**
+     * Return a controlled metadata response or transport failure without networking.
+     */
     fetch: async () => {
       cancellation.abort(new Error("cancelled by fixture"));
       throw new Error("aborted");
@@ -162,4 +231,41 @@ test("retry exhaustion, total budget, invalid policies, and cancellation have fi
   await assert.rejects(cancelled.request("https://fixture.invalid/cancelled"), /cancelled by fixture/);
   assert.equal(retryDelay("garbage", 0), undefined);
   assert.equal(retryDelay("1.5", 0), 1500);
+});
+
+test("idempotent Git downloads use bounded transient retries without retrying missing revisions", async () => {
+  /** Controlled subprocess outcomes avoid network traffic and real timeout waits. */
+  let attempts = 0;
+
+  /** Git transport retries delegate to the same finite invocation context. */
+  const retrieval = createRetrieval({
+    policy: { ...policy, totalMs: 10000 },
+
+    /** Provide deterministic retry jitter. */
+    random: () => 0,
+
+    /** Advance no wall-clock time while testing bounded Git retry counts. */
+    wait: async () => {},
+
+    /** Simulate transient connection failure followed by a verified fetch completion. */
+    runGit: async () => {
+      attempts++;
+      if (attempts < 3) throw Object.assign(new Error("Connection reset"), { stderr: "Connection reset" });
+      return { stdout: "complete" };
+    },
+  });
+
+  assert.equal(await retrieval.git(["fetch", "origin", "a".repeat(40)], "."), "complete");
+  assert.equal(attempts, 3);
+
+  /** A missing required revision is fatal and never turns into an old-source fallback. */
+  const missing = createRetrieval({
+    policy,
+
+    /** Simulate a fatal missing revision without a transport retry. */
+    runGit: async () => {
+      throw new Error("couldn't find remote ref");
+    },
+  });
+  await assert.rejects(missing.git(["fetch", "origin", "b".repeat(40)], "."), /after 1 attempt/);
 });

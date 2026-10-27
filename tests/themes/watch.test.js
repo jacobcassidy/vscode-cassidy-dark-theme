@@ -118,6 +118,7 @@ test("watch builds both groups on startup and syncs linked dev theme registratio
       "\u001b[35mRun Developer: Reload Window in VS Code, then select a Cassidy Dark Preview theme.\u001b[0m",
     ),
   );
+
   assert.equal(manifest.name, "cassidy-dark-dev");
   assert.deepEqual(
     manifest.contributes.themes.map(({ label, _watch }) => [label, _watch]),
@@ -126,10 +127,12 @@ test("watch builds both groups on startup and syncs linked dev theme registratio
       ["Dev Fixture Preview (Sample)", true],
     ],
   );
+
   assert.equal(
     await realpath(join(project.extensionDirectory, "preview")),
     await realpath(join(project.root, "preview")),
   );
+
   await project.controller.close();
 });
 
@@ -143,13 +146,21 @@ test("watch rebuilds prod and inherited dev colors and follows repeated replacem
   /** Other documented UI properties retained during each replacement save. */
   const tokens = parse(await readFile(input, "utf8"));
 
-  for (const color of ["#123456", "#abcdef"]) {
+  for (const [color, replacement] of [
+    ["#123456", true],
+    ["#abcdef", true],
+    ["#334455", false],
+  ]) {
     /** Build count recorded before or during a simulated source change. */
     const count = project.builds();
 
     tokens.nonStandard.editor.background = { color, colorReason: "Replacement save preview." };
-    await writeFile(`${input}.tmp`, JSON.stringify(tokens));
-    await rename(`${input}.tmp`, input);
+
+    if (replacement) {
+      await writeFile(`${input}.tmp`, JSON.stringify(tokens));
+      await rename(`${input}.tmp`, input);
+    } else await writeFile(input, JSON.stringify(tokens));
+
     await waitFor(() => project.builds() > count);
 
     for (const path of [
@@ -176,12 +187,13 @@ test("watch rebuilds dev overrides, refreshes metadata registrations, and preser
   const count = project.builds();
 
   await mkdir(join(project.root, "src/themes/dev/sample/tokens"));
-  await mkdir(join(project.root, "src/themes/dev/sample/details"));
+
   await writeFile(join(project.root, "src/themes/dev/sample/tokens/ui/details.jsonc"), "{}");
   await writeFile(
     join(project.root, "src/themes/dev/sample/tokens/ui/definitions.jsonc"),
     '{"editor.background":{"color":"#010203","colorReason":"Dev preview background."}}',
   );
+
   await writeFile(join(project.root, "src/themes/dev/sample/metadata.jsonc"), '{"name":"Renamed","type":"light"}');
   await waitFor(() => project.builds() > count);
 
@@ -205,6 +217,7 @@ test("watch rebuilds dev overrides, refreshes metadata registrations, and preser
     join(project.root, "src/themes/dev/sample/metadata.jsonc"),
     '{"name":"Renamed","type":"light","previewName":"Live Experiment"}',
   );
+
   await waitFor(() => project.builds() > beforePreviewRename);
 
   /** Refreshed manifest confirming a preview-name-only edit changes registration. */
@@ -228,7 +241,6 @@ test("watch discovers a dev source tree created after startup", async (t) => {
 
   /** New target records its explicit default-palette choice instead of duplicating reports. */
   const note = await readFile(join(project.root, "src/themes/dev/new/palette/default-palette.txt"), "utf8");
-
   assert.match(note, /dev\/new.*default palette is being used/);
   assert.deepEqual(project.errors, []);
   await project.controller.close();
@@ -277,7 +289,6 @@ test("watch ignores generated output changes and unrelated source directories", 
 
   /** Build count recorded before or during a simulated source change. */
   const count = project.builds();
-
   await writeFile(join(project.root, "preview/themes/cassidy-dark-color-theme-sample.json"), "// Edited output\n");
   await writeFile(join(project.root, "src/themes/dev/sample/palette/default-palette.txt"), "Edited report\n");
   await mkdir(join(project.root, "src/unrelated"));
@@ -313,6 +324,7 @@ test("watch removes a deleted dev target's generated output and refreshes regist
       (line) => line.includes("Built 1 prod and 0 dev themes") && line.includes("1 generated output removed"),
     ),
   );
+
   assert.deepEqual(project.errors, []);
   await project.controller.close();
 });
@@ -334,6 +346,7 @@ test("watch detects snapshot registration changes and keeps content-only edits l
     `${path}.tmp`,
     '{"name":"Snapshot","type":"dark","colors":{"editor.background":"#123456"},"tokenColors":[]}',
   );
+
   await rename(`${path}.tmp`, path);
   await waitFor(() => project.logs.filter((line) => line.includes("Synced dev manifest")).length > count);
   assert.equal(project.reminders(), 2);
@@ -354,14 +367,17 @@ test("watch detects manifest replacement saves without rebuilding indefinitely",
   /** Source manifest whose registration identity changes independently of theme metadata. */
   const manifest = JSON.parse(await readFile(path, "utf8"));
 
+  /** A preview-only event can notice new registrations before the root manifest event triggers its build. */
+  const beforeManifestEdit = project.builds();
+
   manifest.contributes.themes[0].id = "updated-preview-id";
   await writeFile(`${path}.tmp`, JSON.stringify(manifest));
   await rename(`${path}.tmp`, path);
-  await waitFor(() => project.reminders() === 2);
+  await waitFor(() => project.reminders() === 2 && project.builds() > beforeManifestEdit);
+  await project.controller.whenIdle();
 
   /** Completed build count used to ensure unchanged manifest events settle. */
   const count = project.builds();
-
   await writeFile(path, await readFile(path, "utf8"));
   await delay(150);
   assert.equal(project.builds(), count);

@@ -129,30 +129,45 @@ export async function discoverTargets(root) {
  * @param target - Discovered theme target and its source/output locations.
  * @param relative - Path relative to the theme source or fixture root.
  * @param [overrides] - Prepared source candidates, keyed by repository-relative path.
+ * @param [fileCache] - Pass-local raw/parsed file cache, including absent local overrides.
  * @returns Parsed input with source, diagnostic label, path, and fallback status.
  */
-export async function readTargetInput(root, target, relative, overrides = new Map()) {
+export async function readTargetInput(root, target, relative, overrides = new Map(), fileCache = new Map()) {
+  /**
+   * Reuse file bytes and absence observations throughout a stable preparation pass.
+   * @param path - Repository-relative independent input.
+   */
+  async function readSource(path) {
+    if (overrides.has(path)) return overrides.get(path);
+    if (!fileCache.has(path)) fileCache.set(path, readOptional(join(root, path)));
+    return fileCache.get(path);
+  }
+
   /** Requested input path within the target’s own source tree. */
   const ownPath = `${target.directory}/${relative}`;
 
   /** Target-local source text, when that input exists. */
-  const own = overrides.has(ownPath) ? overrides.get(ownPath) : await readOptional(join(root, ownPath));
+  const own = await readSource(ownPath);
 
   /** Effective input path after selecting the whole-file fallback. */
   const path = own === undefined && relative !== paletteInputPath ? `${defaultThemeDirectory}/${relative}` : ownPath;
 
   /** Effective source text from the target or required default input. */
-  const source = own ?? (overrides.has(path) ? overrides.get(path) : await readOptional(join(root, path)));
+  const source = own ?? (await readSource(path));
 
   /** Whether this input was loaded from the default theme. */
   const fallback = path !== ownPath;
 
   /** Target and input path context included in validation errors. */
   const label = `${target.group}/${target.name}: ${path}${fallback ? " (default fallback)" : ""}`;
+
   if (source === undefined) throw new Error(`${label}: missing required theme input`);
 
   /** Parsed input value and its source syntax tree. */
-  const parsed = parseJsonc(source, label);
+  const parsed = fileCache.get(`parsed:${path}`) ?? parseJsonc(source, label);
+
+  fileCache.set(`parsed:${path}`, parsed);
+
   return { ...parsed, source, path, label, fallback };
 }
 
@@ -198,7 +213,6 @@ export function prodThemeContribution(target, metadata) {
 
   /** Display label exposed in the production theme picker. */
   const label = target.name === "default" ? metadata.name : `${metadata.name} (${name})`;
-
   return { label, uiTheme: themeUiType(metadata, target.directory), path: `./${target.output}` };
 }
 

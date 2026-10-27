@@ -14,7 +14,7 @@ import {
 } from "../shared/transactions.js";
 import { homedir } from "node:os";
 import { dirname, join, resolve } from "node:path";
-import { fileURLToPath } from "node:url";
+import { repositoryRoot } from "../shared/paths.js";
 import { canonicalJson } from "../shared/serialization.js";
 import { formatMessage } from "../shared/terminal-output.js";
 import { parseJsonc } from "../shared/jsonc.js";
@@ -68,7 +68,7 @@ export function logReloadReminder(logger = console) {
  * @returns Generated manifest path and whether the applied preview changes require a window reload.
  */
 export async function syncDevExtension({
-  root = fileURLToPath(new URL("../../", import.meta.url)),
+  root = repositoryRoot,
   extensionDirectory = join(homedir(), ".vscode/extensions/jacobcassidy.cassidy-dark-dev"),
 } = {}) {
   await requireStable(root);
@@ -122,7 +122,6 @@ export async function syncDevExtension({
           suffix === undefined
             ? `${theme.label} Preview`
             : `${metadata.name} Preview (${metadata.previewName?.trim() ?? suffix})`;
-
         return { ...theme, label, _watch: true };
       }),
     )),
@@ -219,15 +218,22 @@ export async function syncDevExtension({
     /** Whether registrations or repaired preview assets require VS Code to reload. */
     let reloadRequired = previewRegistrations(previous) !== previewRegistrations(current);
 
+    /** Former asset directory recognized only for checkout-owned migration repair. */
+    const formerName = "dev-extension";
+
+    /** Canonical former source also identifies dangling checkout-owned links. */
+    const formerSource = await canonicalPath(join(root, formerName));
+
     /** Former asset entry may be repaired only when owned by this checkout. */
-    const formerLink = join(extensionDirectory, "dev-extension");
+    const formerLink = join(extensionDirectory, formerName);
+
+    /** Existing former asset entry inspected without following a dangling link. */
     const formerInfo = await statIfPresent(formerLink);
 
     if (formerInfo) {
       if (
         !formerInfo.isSymbolicLink() ||
-        (await canonicalPath(resolve(dirname(formerLink), await readlink(formerLink)))) !==
-          (await canonicalPath(join(root, "dev-extension")))
+        (await canonicalPath(resolve(dirname(formerLink), await readlink(formerLink)))) !== formerSource
       )
         throw new Error(`Unrelated former preview asset entry is protected: ${formerLink}`);
 
@@ -258,8 +264,19 @@ export async function syncDevExtension({
       if (!linkInfo) {
         await symlink(sourceDirectory, link, "dir");
         reloadRequired = true;
-      } else if (!linkInfo.isSymbolicLink() || (await realpath(link)) !== sourceRealPath) {
-        throw new Error(`Expected a symlink to ${sourceDirectory}: ${link}`);
+      } else {
+        /** Resolve link text without requiring the former target to exist. */
+        const linkedSource = linkInfo.isSymbolicLink()
+          ? await canonicalPath(resolve(dirname(link), await readlink(link)))
+          : null;
+
+        if (directory === "preview" && linkedSource === formerSource) {
+          await rm(link);
+          await symlink(sourceDirectory, link, "dir");
+          reloadRequired = true;
+        } else if (linkedSource !== sourceRealPath) {
+          throw new Error(`Expected a symlink to ${sourceDirectory}: ${link}`);
+        }
       }
     }
 
@@ -271,6 +288,7 @@ export async function syncDevExtension({
   /** Verify incomplete checkout state while retaining our own root guard. */
   async function requireStablePreview() {
     // Input freshness covers completed generations; interrupted markers remain fatal.
+
     /** Existing writer state, observed without releasing destination ownership. */
     const { marker } = await observeWriter(root);
 
@@ -292,7 +310,6 @@ async function statIfPresent(path) {
     return await lstat(path);
   } catch (error) {
     if (error.code !== "ENOENT") throw error;
-
     return null;
   }
 }

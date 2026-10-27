@@ -4,7 +4,7 @@
  */
 
 import { createHash, randomUUID } from "node:crypto";
-import { lstat, readFile, readlink, readdir, realpath, mkdir, writeFile, rename, rm } from "node:fs/promises";
+import { lstat, readFile, readlink, readdir, realpath, mkdir, writeFile, rename, rm, rmdir } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { dirname, join, resolve } from "node:path";
 
@@ -19,6 +19,7 @@ export async function fingerprint(path) {
     const info = await lstat(path);
 
     if (info.isSymbolicLink()) return { type: "link", target: await readlink(path) };
+
     if (info.isFile())
       return {
         type: "file",
@@ -26,6 +27,7 @@ export async function fingerprint(path) {
           .update(await readFile(path))
           .digest("hex"),
       };
+
     if (!info.isDirectory()) throw new Error(`Unsupported filesystem entry: ${path}`);
 
     /** Sorted immediate entries, including nested entry types. */
@@ -36,7 +38,6 @@ export async function fingerprint(path) {
     return { type: "directory", children };
   } catch (error) {
     if (error.code === "ENOENT") return { type: "absent" };
-
     throw error;
   }
 }
@@ -59,7 +60,6 @@ export async function canonicalPath(path) {
     return await realpath(path);
   } catch (error) {
     if (error.code !== "ENOENT") throw error;
-
     return join(await canonicalPath(dirname(resolve(path))), resolve(path).split(/[\\/]/).at(-1));
   }
 }
@@ -87,7 +87,6 @@ async function readState(path) {
     return JSON.parse(await readFile(path, "utf8"));
   } catch (error) {
     if (error.code === "ENOENT") return undefined;
-
     throw new Error(`Invalid writer state ${path}: ${error.message}`, { cause: error });
   }
 }
@@ -101,10 +100,37 @@ function alive(pid) {
 
   try {
     process.kill(pid, 0);
-
     return true;
   } catch (error) {
     return error.code !== "ESRCH";
+  }
+}
+
+/**
+ * Read an atomically published guard owner without accepting partial or ambiguous metadata.
+ * @param guard - Resource guard directory.
+ */
+async function readGuardOwner(guard) {
+  try {
+    /** Every published guard contains one immutable, uniquely named owner record. */
+    const files = await readdir(guard);
+
+    if (!files.length) return undefined;
+
+    if (files.length !== 1 || !/^owner-[a-f0-9-]+\.json$/.test(files[0]))
+      throw new Error(`Malformed guard ownership: ${guard}`);
+
+    /** A concurrent completed release may remove the observed owner before this read. */
+    const owner = await readState(join(guard, files[0]));
+
+    if (!owner) return undefined;
+
+    if (`owner-${owner.token}.json` !== files[0]) throw new Error(`Mismatched guard ownership token: ${guard}`);
+
+    return { ...owner, filename: files[0] };
+  } catch (error) {
+    if (error.code === "ENOENT") return undefined;
+    throw error;
   }
 }
 
@@ -118,11 +144,10 @@ export async function observeWriter(resource) {
 
   /** Guard owner, interrupted operation, and completed generation. */
   const [owner, marker, generation] = await Promise.all([
-    readState(join(directory, "guard", "owner.json")),
+    readGuardOwner(join(directory, "guard")),
     readState(join(directory, "incomplete.json")),
     readState(join(directory, "generation.json")),
   ]);
-
   return { owner, marker, generation, busy: owner ? alive(owner.pid) : false };
 }
 
@@ -156,72 +181,106 @@ export async function requireStable(resource) {
  * @param operation - Guarded asynchronous operation receiving ownership.
  */
 export async function withGuards(resources, operation) {
-  /** Owned guards retained for reverse-order release. */
+  /** Owned guards are released in reverse canonical resource order. */
   const owned = [];
+
+  /** Operation outcome is retained so release failures never hide an application error. */
+  let result, operationError;
 
   try {
     for (const resource of [...new Set(await Promise.all(resources.map(canonicalPath)))].sort()) {
-      /** Resource-specific external coordination directory. */
-      const directory = await statePath(resource);
-
-      await mkdir(directory, { recursive: true });
-
-      /** Atomic directory reservation and unguessable release identity. */
-      const guard = join(directory, "guard"),
+      /** Resource-specific metadata remains outside the checkout and source caches. */
+      const directory = await statePath(resource),
         token = randomUUID();
 
+      /** Atomic public guard directory and this process's unique immutable owner filename. */
+      const guard = join(directory, "guard"),
+        filename = `owner-${token}.json`;
+
+      /** Private populated reservation, never mistaken for an active application. */
+      const staging = join(directory, `.guard-${token}`);
+
+      await mkdir(staging, { recursive: true });
+
       try {
-        await mkdir(guard);
-      } catch (error) {
-        if (error.code !== "EEXIST") throw error;
-
-        /** Serial abandonment inspection prevents competing reapers from removing a replacement guard. */
-        const reaper = join(directory, "reaper");
+        // Publishing a populated directory eliminates an ownerless guard acquisition window.
+        await writeFile(join(staging, filename), JSON.stringify({ pid: process.pid, token }), { flag: "wx" });
 
         try {
-          await mkdir(reaper);
-        } catch (failure) {
-          throw Object.assign(
-            new Error(`Writer ownership is being checked for ${resource}; retry.`, { cause: failure }),
-            { code: "WRITER_BUSY" },
-          );
-        }
+          await rename(staging, guard);
+        } catch (error) {
+          if (!["EEXIST", "ENOTEMPTY"].includes(error.code)) throw error;
 
-        try {
-          /** Re-read under the short abandonment reservation; age alone never authorizes removal. */
-          const owner = await readState(join(guard, "owner.json"));
+          /** Only a demonstrably dead immutable owner can be removed. */
+          const previous = await readGuardOwner(guard);
 
-          if (!owner || alive(owner.pid))
+          if (!previous || alive(previous.pid))
             throw Object.assign(new Error(`Writer busy for ${resource}; retry after the current writer finishes.`), {
               code: "WRITER_BUSY",
             });
 
-          await rm(guard, { recursive: true });
+          // Remove only that unique owner's record; a competing reaper cannot unlink a new owner's record.
+          await rm(join(guard, previous.filename), { force: true });
 
           try {
-            await mkdir(guard);
+            await rmdir(guard);
+          } catch (failure) {
+            if (!["ENOENT", "ENOTEMPTY", "EEXIST"].includes(failure.code)) throw failure;
+          }
+
+          try {
+            await rename(staging, guard);
           } catch (failure) {
             throw Object.assign(
               new Error(`Writer busy for ${resource}; another writer acquired the released guard.`, { cause: failure }),
               { code: "WRITER_BUSY" },
             );
           }
-        } finally {
-          await rm(reaper, { recursive: true });
         }
-      }
 
-      await writeFile(join(guard, "owner.json"), JSON.stringify({ pid: process.pid, token }));
-      owned.push({ resource, directory, guard, token });
+        owned.push({ resource, directory, guard, token, filename });
+      } finally {
+        await rm(staging, { recursive: true, force: true });
+      }
     }
 
-    return await operation(owned);
-  } finally {
-    for (const owner of owned.reverse()) {
-      if ((await readState(join(owner.guard, "owner.json")))?.token === owner.token)
-        await rm(owner.guard, { recursive: true });
+    result = await operation(owned);
+  } catch (error) {
+    operationError = error;
+  }
+
+  /** Release every owned resource, reporting cleanup failures alongside the original outcome. */
+  const releaseErrors = [];
+
+  for (const owner of owned.reverse()) {
+    try {
+      if ((await readGuardOwner(owner.guard))?.token !== owner.token) continue;
+
+      await rm(join(owner.guard, owner.filename), { force: true });
+
+      try {
+        await rmdir(owner.guard);
+      } catch (error) {
+        if (!["ENOENT", "ENOTEMPTY", "EEXIST"].includes(error.code))
+          releaseErrors.push(`${owner.guard}: ${error.message}`);
+      }
+    } catch (error) {
+      releaseErrors.push(`${owner.guard}: ${error.message}`);
     }
   }
+
+  if (releaseErrors.length)
+    throw Object.assign(
+      new Error(
+        `${operationError ? `${operationError.message}; ` : ""}guard release failed: ${releaseErrors.join("; ")}`,
+        { cause: operationError },
+      ),
+      { code: operationError?.code ?? "WRITER_BUSY" },
+    );
+
+  if (operationError) throw operationError;
+
+  return result;
 }
 
 /**
@@ -231,9 +290,7 @@ export async function withGuards(resources, operation) {
 export async function capturePaths(paths) {
   /** Dependency fingerprints indexed by absolute path. */
   const result = {};
-
   for (const path of paths) result[path] = await fingerprint(path);
-
   return result;
 }
 
@@ -255,7 +312,7 @@ export async function assertFresh(expected) {
  * @param root - Canonical checkout root.
  * @param path - Root-relative destination path.
  */
-async function safeDestination(root, path) {
+export async function validateDestination(root, path) {
   if (path.startsWith("/") || path.split(/[\\/]/).includes("..")) throw new Error(`Unsafe artifact path: ${path}`);
 
   /** Current entry checked from the root through the destination. */
@@ -264,10 +321,12 @@ async function safeDestination(root, path) {
   for (const segment of path.split("/")) {
     current = join(current, segment);
 
-    /** Entry metadata, including dangling links. */
-    const entry = await fingerprint(current);
-
-    if (entry.type === "link") throw new Error(`Artifact path must not be a symlink: ${current}`);
+    /** Entry metadata, including dangling links, without recursively reading ancestor directories. */
+    const entry = await lstat(current).catch((error) => {
+      if (error.code === "ENOENT") return undefined;
+      throw error;
+    });
+    if (entry?.isSymbolicLink()) throw new Error(`Artifact path must not be a symlink: ${current}`);
   }
 }
 
@@ -297,16 +356,13 @@ async function replaceFile(path, bytes) {
 async function backup(path) {
   /** Snapshot entry type. */
   const entry = await fingerprint(path);
-
   if (entry.type === "link") throw new Error(`Artifact path must not be a symlink: ${path}`);
   if (entry.type === "file") return { type: "file", bytes: await readFile(path) };
   if (entry.type === "absent") return entry;
 
   /** Nested directory backup, preserving every owned file. */
   const children = {};
-
   for (const name of Object.keys(entry.children)) children[name] = await backup(join(path, name));
-
   return { type: "directory", children };
 }
 
@@ -318,9 +374,7 @@ async function backup(path) {
 async function restore(path, entry) {
   if (entry.type === "absent") return rm(path, { recursive: true, force: true });
   if (entry.type === "file") return replaceFile(path, entry.bytes);
-
   await mkdir(path, { recursive: true });
-
   for (const [name, child] of Object.entries(entry.children)) await restore(join(path, name), child);
 }
 
@@ -348,6 +402,8 @@ export async function applyArtifacts({
   signal,
   operation = "build",
 }) {
+  root = await canonicalPath(root);
+
   /** Current interrupted operation must never be silently certified by another writer. */
   const previous = await readState(join(owner.directory, "incomplete.json"));
 
@@ -363,8 +419,11 @@ export async function applyArtifacts({
     saved = new Map(),
     before = {};
 
+  /** Missing parent directories are part of a new artifact generation, including theme reservations. */
+  const createdDirectories = new Set();
+
   for (const [path, text] of output) {
-    await safeDestination(root, path);
+    await validateDestination(root, path);
 
     /** Current destination type/bytes must agree with the complete prepared candidate. */
     const entry = await fingerprint(join(root, path));
@@ -377,6 +436,23 @@ export async function applyArtifacts({
         : entry.type === "file" && (await readFile(join(root, path), "utf8")) === text
     )
       continue;
+
+    if (text !== null) {
+      /** Parent traversal stops at the existing checkout root and records only absent entries. */
+      let parent = dirname(join(root, path));
+
+      while (parent !== root && parent.startsWith(`${root}/`)) {
+        /** Missing parents must also be absent after a complete rollback/restoration verification. */
+        const parentEntry = await fingerprint(parent);
+
+        if (parentEntry.type === "absent") {
+          createdDirectories.add(parent);
+          before[parent] = parentEntry;
+        }
+
+        parent = dirname(parent);
+      }
+    }
 
     changed.push(path);
     saved.set(path, await backup(join(root, path)));
@@ -433,12 +509,24 @@ export async function applyArtifacts({
       }
     }
 
+    for (const directory of [...createdDirectories].sort((left, right) => right.length - left.length)) {
+      try {
+        await rmdir(directory);
+      } catch (failure) {
+        if (failure.code !== "ENOENT")
+          failures.push(`${directory}: directory restoration failed; newer contents preserved: ${failure.message}`);
+      }
+    }
+
     if (!failures.length && !previous) await rm(join(owner.directory, "incomplete.json"));
     else if (previous) await replaceFile(join(owner.directory, "incomplete.json"), JSON.stringify(previous));
 
-    throw new Error(
-      `${error.message}${failures.length ? `; rollback incomplete: ${failures.join("; ")}` : "; prior artifacts restored"}`,
-      { cause: error },
+    throw Object.assign(
+      new Error(
+        `${error.message}${failures.length ? `; rollback incomplete: ${failures.join("; ")}` : "; prior artifacts restored"}`,
+        { cause: error },
+      ),
+      { code: failures.length || previous ? "INCOMPLETE_GENERATION" : error.code },
     );
   }
 }

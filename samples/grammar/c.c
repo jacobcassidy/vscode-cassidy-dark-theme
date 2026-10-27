@@ -1,6 +1,6 @@
 /* C17 highlighting sample for Cassidy Dark Preview; inspect as source.
  * Standard-library-only translation unit; no main function or execution needed.
- * Check with: clang -std=c17 -fsyntax-only docs/grammar-samples/c.c
+ * Check with: clang -std=c17 -fsyntax-only samples/grammar/c.c
  */
 #include <assert.h>
 #include <complex.h>

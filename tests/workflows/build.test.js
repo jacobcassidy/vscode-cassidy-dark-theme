@@ -3,12 +3,13 @@
  * @file Verify command-level builds synchronize previews and report reloads without changing validation behavior.
  */
 
+import { buildProduction as buildProdThemes, buildDevelopment as buildDevThemes } from "../helpers/builds.js";
 import assert from "node:assert/strict";
 import { access, mkdir, readFile, rm, symlink } from "node:fs/promises";
 import { writeFixture as writeFile, createBuildProject, writeDefaultPaletteConfig } from "../helpers/projects.js";
 import { join } from "node:path";
 import test from "node:test";
-import { buildDevThemes, buildProdThemes, runBuild } from "../../tooling/themes/build.js";
+import { runBuild } from "../../tooling/themes/build.js";
 
 /** Exact terminal instruction, including the requested magenta color and reset. */
 const reminder =
@@ -63,6 +64,7 @@ for (const mode of ["all", "prod", "dev"]) {
       JSON.parse(await readFile(first.manifestPath, "utf8")).contributes.themes.length,
       mode === "prod" ? 1 : 2,
     );
+
     project.logs.length = 0;
     assert.equal((await runBuild({ ...project, mode })).reloadRequired, false);
     assert.ok(!project.logs.includes(reminder));
@@ -111,7 +113,6 @@ test("checks, palette-only builds, and low-level builds do not install the previ
 test("combined builds skip sync and reminders when the development build fails", async (t) => {
   /** Isolated workflow with an invalid development metadata input. */
   const project = await createWorkflow(t);
-
   await writeFile(join(project.root, "src/themes/dev/sample/metadata.jsonc"), "{");
   await assert.rejects(runBuild(project), /metadata/);
   await assert.rejects(access(project.extensionDirectory), { code: "ENOENT" });
@@ -121,7 +122,6 @@ test("combined builds skip sync and reminders when the development build fails",
 test("build reports missing production outputs and sync failures without a reload reminder", async (t) => {
   /** Isolated workflow used to verify command error propagation. */
   const project = await createWorkflow(t);
-
   await assert.rejects(runBuild({ ...project, mode: "dev" }), /Missing generated themes directory.*Run npm run build/);
   assert.ok(!project.logs.includes(reminder));
   await buildProdThemes(project);
@@ -150,9 +150,7 @@ for (const mode of ["all", "prod", "dev"]) {
 
     /** Orphaned generated path that no remaining target can include in its own summary. */
     const path = `${group === "prod" ? "themes" : "preview/themes"}/cassidy-dark-color-theme-${name}.json`;
-
     if (group === "prod") await writeDefaultPaletteConfig(source);
-
     await runBuild(project);
     await rm(source, { recursive: true });
     project.logs.length = 0;

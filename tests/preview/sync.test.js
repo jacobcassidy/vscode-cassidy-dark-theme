@@ -9,7 +9,7 @@ import { writeFixture as writeFile, createPreviewProject } from "../helpers/proj
 import { join } from "node:path";
 import test from "node:test";
 import { syncDevExtension } from "../../tooling/preview/sync.js";
-import { checkThemes } from "../../tooling/themes/check.js";
+import { checkGeneratedThemes as checkThemes } from "../../tooling/themes/generated-validation.js";
 
 test("dev extension sync is repeatable and refreshes themes without modifying the source manifest", async (t) => {
   /** Isolated preview/source fixture with cleanup registered by the test. */
@@ -61,7 +61,6 @@ test("dev extension sync is repeatable and refreshes themes without modifying th
 test("dev extension sync refuses a linked extension directory", async (t) => {
   /** Isolated preview/source fixture with cleanup registered by the test. */
   const project = await createPreviewProject(t);
-
   await symlink(project.root, project.extensionDirectory, "dir");
   await assert.rejects(syncDevExtension(project), /folder must be a regular directory/);
 });
@@ -72,7 +71,6 @@ test("dev extension sync refuses a linked manifest without overwriting its targe
 
   /** Original source text or assembled theme template used by the assertion. */
   const source = await readFile(join(project.root, "package.json"), "utf8");
-
   await mkdir(project.extensionDirectory);
   await symlink(join(project.root, "package.json"), join(project.extensionDirectory, "package.json"));
   await assert.rejects(syncDevExtension(project), /manifest is a symlink/);
@@ -111,10 +109,12 @@ test("dev extension sync includes all prod themes, derives dev theme types, and 
     uiTheme: "hc-black",
     path: "themes/alternate.json",
   });
+
   await writeFile(
     join(project.root, "themes/alternate.json"),
     '{"name":"Alternate","type":"hc","colors":{},"tokenColors":[]}',
   );
+
   await writeFile(join(project.root, "package.json"), JSON.stringify(manifest));
   await writeFile(
     join(project.root, "preview/themes/cassidy-dark-color-theme-test.json"),
@@ -149,6 +149,7 @@ test("dev extension sync includes all prod themes, derives dev theme types, and 
       ["Cassidy Dark Snapshot (z-old)", "vs-dark"],
     ],
   );
+
   assert.equal(await readFile(join(project.root, "package.json"), "utf8"), source);
 });
 
@@ -161,6 +162,7 @@ test("preview names override existing suffixes without changing default or publi
     uiTheme: "hc-light",
     path: "themes/named.json",
   });
+
   await writeFile(join(project.root, "package.json"), JSON.stringify(project.manifest));
 
   for (const [path, name, type, previewName] of [
@@ -187,6 +189,7 @@ test("preview names override existing suffixes without changing default or publi
       ["Cassidy Dark Snapshot (Baseline 1.3)", "vs-dark"],
     ],
   );
+
   assert.equal(await readFile(join(project.root, "package.json"), "utf8"), source);
   assert.equal(await checkThemes(project.root), 4);
 });
@@ -211,12 +214,13 @@ for (const path of [
           tokenColors: [],
         }),
       );
+
       await assert.rejects(syncDevExtension(project), (error) => {
         assert.ok(error.message.includes(path));
         assert.match(error.message, /previewName must be a nonempty string/);
-
         return true;
       });
+
       await assert.rejects(checkThemes(project.root), /previewName must be a nonempty string/);
     }
   });
@@ -264,6 +268,7 @@ test("preview reload detection ignores formatting, ordering, unrelated fields, a
   previous.contributes.themes = previous.contributes.themes
     .reverse()
     .map((theme) => Object.fromEntries(Object.entries(theme).reverse()));
+
   await writeFile(manifestPath, JSON.stringify(previous));
   assert.equal((await syncDevExtension(project)).reloadRequired, false);
   project.manifest.description = "Updated package description";
@@ -304,7 +309,6 @@ for (const [key, value] of [
 
     /** Previous registration changed independently of generated theme contents. */
     const previous = JSON.parse(await readFile(manifestPath, "utf8"));
-
     previous.contributes.themes[0][key] = value;
     await writeFile(manifestPath, JSON.stringify(previous));
     assert.equal((await syncDevExtension(project)).reloadRequired, true);
@@ -349,6 +353,7 @@ test("preview reload detection follows snapshot additions, metadata changes, and
     path,
     JSON.stringify({ name: "Cassidy Dark", type: "light", previewName: "Renamed", colors: {}, tokenColors: [] }),
   );
+
   assert.equal((await syncDevExtension(project)).reloadRequired, true);
   assert.equal((await syncDevExtension(project)).reloadRequired, false);
   await rm(path);
@@ -358,9 +363,9 @@ test("preview reload detection follows snapshot additions, metadata changes, and
 test("preview migration repairs only checkout-owned former links, including dangling links", async (t) => {
   /** Isolated preview project with no former directory remaining. */
   const { root, extensionDirectory } = await createPreviewProject(t);
-
   await mkdir(extensionDirectory, { recursive: true });
   await symlink(join(root, "dev-extension"), join(extensionDirectory, "dev-extension"), "dir");
+  await symlink(join(root, "dev-extension"), join(extensionDirectory, "preview"), "dir");
   assert.equal((await syncDevExtension({ root, extensionDirectory })).reloadRequired, true);
   assert.equal(await realpath(join(extensionDirectory, "preview")), await realpath(join(root, "preview")));
   await assert.rejects(lstat(join(extensionDirectory, "dev-extension")), { code: "ENOENT" });

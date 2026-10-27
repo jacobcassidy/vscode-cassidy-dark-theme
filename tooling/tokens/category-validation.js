@@ -10,14 +10,16 @@ import { scopeList } from "./formats.js";
  * @param rule - Effective rule in this theme.
  * @param snapshot - Local classification snapshot.
  */
-export function syntaxCategory(rule, snapshot) {
+function syntaxCategory(rule, snapshot) {
   /** Evidence categories covering this rule's actual scope expressions. */
   const known = scopeList(rule)
     .map((scope) => snapshot.scopes.get(scope)?.evidence.category)
     .filter(Boolean);
 
   if (known.includes("nonStandard")) return "nonStandard";
+
   if (known.includes("deprecated")) return "deprecated";
+
   if (known.includes("sourceCode")) return "sourceCode";
 
   return "standard";
@@ -37,8 +39,12 @@ export function validateCategories(families, snapshot, target) {
         family === "syntax"
           ? undefined
           : (snapshot.definitions[family].records.get(record.id) ?? snapshot.details[family].records.get(record.id));
+
+      /** Expected family-specific category supplied by the accepted authority. */
       const expected =
         family === "syntax" ? syntaxCategory(record.value, snapshot) : (authority?.category ?? "nonStandard");
+
+      /** Whether the exact canonical ID has standard definition membership. */
       const standard =
         family !== "syntax" && snapshot.definitions[family].records.get(record.id)?.category === "standard";
 
@@ -74,5 +80,30 @@ export function validateCategories(families, snapshot, target) {
           );
       }
     }
+  }
+}
+
+/**
+ * Validate accepted shared evidence against the actual default/reference rule coverage.
+ * @param snapshot - Checked-in classification snapshot.
+ * @param reference - Decoded default/reference syntax definitions.
+ */
+export function validateReferenceScopes(snapshot, reference) {
+  for (const [id, record] of snapshot.details.syntax.records) {
+    if (!record.value.scopeEvidence) continue;
+
+    /** Reference identity and ordered scope coverage come from actual authored definitions. */
+    const definition = reference.records.get(id);
+
+    if (!definition) throw new Error(`${record.label}: scopeEvidence has no default/reference syntax rule "${id}"`);
+
+    if (
+      JSON.stringify(record.value.scopeEvidence.scopes.map((item) => item.selector)) !==
+      JSON.stringify(scopeList(definition.value))
+    )
+      throw new Error(`${record.label}: scopeEvidence coverage for "${id}" does not match ${definition.label}`);
+
+    if (record.category !== syntaxCategory(definition.value, snapshot))
+      throw new Error(`${record.label}: reference category conflicts with its actual reviewed scope coverage`);
   }
 }
