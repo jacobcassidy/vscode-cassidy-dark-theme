@@ -4,13 +4,13 @@ set -euo pipefail
 cd "$(dirname "$0")/../../.."
 if [[ -z "${GH_TOKEN:-}" ]]; then
   printf '\033[31m%s\033[0m\n' "GH_TOKEN is required." >&2
-  printf '\033[36m%s\033[0m\n' "Set GH_TOKEN to a GitHub token with repository Contents write access." >&2
+  printf '\033[35m%s\033[0m\n' "Set GH_TOKEN to a GitHub token with repository Contents write access." >&2
   exit 1
 fi
 
 if [[ -z "${1:-}" ]]; then
   printf '\033[31m%s\033[0m\n' "A VSIX file path is required." >&2
-  printf '\033[36m%s\033[0m\n' "Usage: bash scripts/release/publish/create-github-release.sh /absolute/path/to/extension.vsix" >&2
+  printf '\033[35m%s\033[0m\n' "Usage: bash scripts/release/publish/create-github-release.sh /absolute/path/to/extension.vsix" >&2
   exit 1
 fi
 

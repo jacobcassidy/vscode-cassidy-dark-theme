@@ -59,7 +59,7 @@ function previewRegistrations(source) {
 }
 
 /**
- * Print the shared cyan instruction after a reload-requiring preview update.
+ * Print the shared magenta instruction after a reload-requiring preview update.
  * @param [logger] - Logger receiving the reminder.
  */
 export function logReloadReminder(logger = console) {
