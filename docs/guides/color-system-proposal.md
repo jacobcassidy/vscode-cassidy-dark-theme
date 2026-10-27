@@ -1,5 +1,23 @@
 # Cassidy Dark color system proposal
 
+## Table of contents
+
+- [Recommendation](#recommendation)
+- [Palette primitives](#palette-primitives)
+  - [Hue anchors and base colors](#hue-anchors-and-base-colors)
+  - [Choosing chroma from the anchors](#choosing-chroma-from-the-anchors)
+  - [Numbered tones and muted modifier](#numbered-tones-and-muted-modifier)
+- [Semantic tokens](#semantic-tokens)
+- [Export and gamut policy](#export-and-gamut-policy)
+- [Neutrals, overlays, and contrast](#neutrals-overlays-and-contrast)
+- [Theme build](#theme-build)
+  - [Source and output files](#source-and-output-files)
+  - [Color variables and template references](#color-variables-and-template-references)
+  - [Build behavior](#build-behavior)
+  - [Commands and release integration](#commands-and-release-integration)
+  - [Migration and verification](#migration-and-verification)
+- [Adoption sequence](#adoption-sequence)
+
 Status: the build and palette described here are implemented. The file paths and command examples below record the original design; [restructuring plan 1b](../plans/archive/restructure-1b-plan.md) and the development guide describe the current layout. Current commands are `npm run build` for both target groups, `npm run build:prod` for prod themes, and `npm run build:dev` for dev previews. Authoring inputs live in `src/`; the shipped theme and palette references are generated. The initial migration verified that every parsed theme value and original comment was preserved before the new palette was applied in a separate change. The [development guide](development-guide.md) describes the available commands, and the [generated palette](../../../src/themes/prod/default/palette/generated/palette.md) shows the current output.
 
 ## Recommendation
