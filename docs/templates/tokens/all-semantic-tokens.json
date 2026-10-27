@@ -3,7 +3,6 @@
   "name": "Semantic Tokens",
   "for": "Scripts generating src/themes/*/tokens/semantic.jsonc files",
   "semanticTokenColors": {
-    //-- STANDARD --
     "*.abstract": "#000",
     "*.async": "#000",
     "*.builtin": "#000",
@@ -59,7 +58,6 @@
     "typeParameter": "#000",
     "variable": "#000",
 
-    //-- STANDARD MODIFIERS --
     "variable.abstract": "#000",
     "variable.async": "#000",
     "variable.declaration": "#000",
@@ -71,7 +69,6 @@
     "variable.readonly": "#000",
     "variable.static": "#000",
 
-    //-- NON-STANDARD --
     "defaultLibrary": "#000"
   }
 }
