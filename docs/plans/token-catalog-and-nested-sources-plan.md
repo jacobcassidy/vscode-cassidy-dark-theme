@@ -1,0 +1,259 @@
+# Split token catalogs and adopt nested theme sources
+
+Status: planned. This document describes implementation work; it does not change the current source format.
+
+## Goals and current state
+
+Split the token purpose catalog, organize templates and lookups by token family, add a reproducible lookup updater, and migrate every authored UI and semantic token file to the categorized nesting demonstrated in `docs/references/examples/`.
+
+The current catalog is `docs/lookups/token-details.jsonc`. It contains 1,031 UI entries, 59 semantic entries, and 46 syntax entries. It has no base section. Current templates are `docs/templates/all-ui-tokens.json` and `docs/templates/all-semantic-tokens.json`, containing 1,002 UI properties and 65 semantic selectors respectively. The default theme contains 29 UI properties and two semantic selectors absent from those templates; eight template semantic selectors are absent from the default theme. Preserve these differences during the format migration.
+
+The UI and semantic examples already have category wrappers. Most authoring files, the compiler, and generators still expect flat keys. Catalog consumers and documentation also retain the former `docs/references/lookups/` path even though the files now live in `docs/lookups/`; update those consumers as part of this work.
+
+## Target paths
+
+```text
+docs/
+  lookups/
+    hex-opacity.md
+    tokens/
+      semantic-details.jsonc
+      syntax-details.jsonc
+      ui-details.jsonc
+  templates/
+    tokens/
+      semantic-template.jsonc
+      ui-template.jsonc
+  references/
+    examples/
+      example-semantic.jsonc
+      example-ui.jsonc
+```
+
+| Current path                              | Destination                                                       |
+| ----------------------------------------- | ----------------------------------------------------------------- |
+| `docs/lookups/token-details.jsonc`        | Split into the three `docs/lookups/tokens/*-details.jsonc` files. |
+| `docs/templates/all-semantic-tokens.json` | `docs/templates/tokens/semantic-template.jsonc`                   |
+| `docs/templates/all-ui-tokens.json`       | `docs/templates/tokens/ui-template.jsonc`                         |
+| `docs/lookups/hex-opacity.md`             | Keep its current path.                                            |
+
+Use JSONC comments for file purpose, upstream provenance, and required license notices. Remove the VS Code color-theme `$schema` and theme metadata wrappers from templates because the new grouped authoring structure is a repository format. These files will have only category objects at the root. Do not add a syntax template: syntax rules continue to come from authored theme definitions.
+
+## Classification and file structures
+
+All five catalog/template files use the same ordered root categories: `standard`, `source`, `non-standard`, and `deprecated`. Keep unused categories as empty objects so the allowed structure is explicit. UI and semantic theme files and their matching details use those categories too.
+
+| Category       | Meaning                                                                                                                                                 |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `standard`     | Properties or selectors supported by the pinned published schema or standard token type/modifier definitions.                                           |
+| `source`       | Properties or selectors verified in the pinned core source registrations but absent from the corresponding published schema or standard definition set. |
+| `non-standard` | Extension-owned, provider-defined, or repository-defined entries. Unverified custom entries stay here with a review marker.                             |
+| `deprecated`   | Entries explicitly documented as retired, removed, or deprecated. Absence from a template or a source snapshot alone does not establish deprecation.    |
+
+Seed classification from the existing template section comments and examples, then reconcile it against pinned registration evidence. Record any deliberate category corrections in the migration report. Category membership belongs to the canonical token ID, independently of its color, enabled state, or field names. Reject duplicate IDs across categories rather than letting category order select a winner.
+
+### UI files
+
+`ui-template.jsonc` contains categorized, nested VS Code UI IDs. Split dotted IDs into component objects, following `example-ui.jsonc`. Template leaves contain the existing generator placeholder descriptor: `color: "#0ff"` and its `UNREVIEWED` color reason. Existing template hex values are discovery placeholders, not theme styling to copy during migration.
+
+`ui-details.jsonc` uses identical category/path nesting, with purpose records instead of styling records:
+
+```jsonc
+{
+  "standard": {
+    "actionBar": {
+      "toggledBackground": { "for": "Extracted registration description." },
+    },
+  },
+  "source": {
+    "agentsMobileDiff": {
+      "addedForeground": { "for": "Extracted source registration description." },
+    },
+  },
+  "non-standard": {
+    "gitblame": {
+      "inlineMessage": {
+        "for": "Inline blame annotation text.",
+        "source": "Jacob Cassidy",
+      },
+    },
+  },
+  "deprecated": {},
+}
+```
+
+Verify the illustrated classification against the pinned inputs during implementation. Keep all 29 existing authored UI IDs absent from the template in the lookup inventory, and classify them using their existing evidence. Do not add them to the template automatically or delete them from themes.
+
+Support nodes that are both a token and a branch, as already demonstrated by `testing.iconFailed` and `testing.iconFailed.retired`: descriptor fields remain on the parent and `retired` remains a child object. Collect both tokens. Apply the same rule to a purpose record with its own `for` field and nested children. Detect ambiguity between reserved record fields and child names explicitly.
+
+### Semantic files
+
+`semantic-template.jsonc` and `semantic-details.jsonc` use the category, token type, and selector suffix structure shown in `example-semantic.jsonc`:
+
+```jsonc
+{
+  "standard": {
+    "*": {
+      "abstract": { "for": "Extracted abstract modifier description." },
+      "deprecated": { "for": "Extracted deprecated modifier description." },
+    },
+    "parameter": {
+      "default": { "for": "Extracted parameter token description." },
+    },
+  },
+  "source": {},
+  "non-standard": {
+    "parameter": {
+      "readwrite": {
+        "for": "Provider-specific read/write parameter styling.",
+        "source": "Jacob Cassidy",
+      },
+    },
+  },
+  "deprecated": {},
+}
+```
+
+Template leaves use placeholder styling descriptors; lookup leaves use detail records. In a theme, `parameter.default` retains the existing configured descriptor, such as `color: "syntax.parameter"`. It compiles to the selector `parameter`, not `parameter.default`.
+
+Selector encoding must preserve the existing selector language:
+
+- `*.abstract` becomes `"*": { "abstract": record }`.
+- `parameter` becomes `"parameter": { "default": record }`.
+- `parameter.readwrite` becomes `"parameter": { "readwrite": record }`.
+- Combined modifiers remain a single suffix key: `*.builtin.deprecated` becomes `"*": { "builtin.deprecated": record }`. Modifier combinations are selectors, not modifier inheritance.
+- Put a language qualifier on the type key: `variable.readonly:typescript` becomes `"variable:typescript": { "readonly": record }`; `variable:typescript` uses its `default` child. Preserve modifier order and exact language spelling when reconstructing selectors.
+- Reserve the child name `default` for an unmodified selector. Fail migration with a specific diagnostic if an actual modifier named `default` creates an ambiguity; the current inventory has no such collision. Document this reservation.
+
+A selector containing the modifier `deprecated`, such as `*.deprecated`, belongs to its normal category; it does not become a retired selector. Resolve classifications of provider-specific names such as `builtin`, `arrow`, and `readwrite` from their registration evidence. Preserve all 65 template selectors and all 59 authored selectors; retain `function.defaultLibrary` and `parameter.readwrite` even though they are absent from the current template.
+
+### Syntax details
+
+`syntax-details.jsonc` uses category objects containing exact, stable syntax rule IDs, rather than splitting rule IDs or TextMate scope expressions:
+
+```jsonc
+{
+  "standard": {},
+  "source": {},
+  "non-standard": {
+    "bold": {
+      "for": "Bold formatting for Markdown bold spans.",
+      "source": "Jacob Cassidy",
+    },
+  },
+  "deprecated": {},
+}
+```
+
+All 46 current syntax IDs are repository-defined authoring rules, so their initial category is `non-standard`, including rules that target conventional TextMate scopes. Add entries to other categories only when their identity and origin justify it. A disabled rule stays in its existing category; disabled styling does not establish deprecation.
+
+Keep `src/themes/*/*/tokens/syntax.jsonc` as an ordered array and keep source `details/syntax.jsonc` indexed by exact IDs. Neither supplied formatting example replaces the syntax array contract. Preserve rule order, scope order, IDs, names, formatting-only rules, backgrounds, and disabled definitions. Base roles remain in their existing nested format, with purpose details derived from those definitions; metadata and palette formats continue to use their current schemas.
+
+## Detail source overrides
+
+Add an optional `source` string to lookup detail records and authored `details/*.jsonc` records, including base and syntax details. It accepts a nonempty attribution label, such as a developer name. It is metadata and never becomes a theme color field or emitted VS Code setting.
+
+- An explicit `source` means the accompanying authored `for` description overrides the default extracted description. Preserve both on refresh. Require a nonempty `for`; a source label alone cannot define an override.
+- With no explicit `source`, UI and semantic purposes come from extracted registration descriptions. Syntax purposes come from extracted local rule/scope descriptions, supplemented by grammar contribution descriptions where available.
+- Keep default extraction provenance, pinned revisions, review date, and upstream license in the catalog headers. Do not write the default upstream label into every entry: an explicit entry-level `source` is the override signal.
+- The root category named `source` and a leaf's attribution field named `source` have independent meanings. Validate their object/string types at their respective paths.
+- Treat `source` as attribution, not a URL, executable command, or instruction to fetch a developer's account.
+- Existing reviewed wording that must remain an override needs an explicit, accurate origin. Do not attribute existing work to a named developer without evidence. During migration, use an accurate repository origin such as `Cassidy Dark catalog` for retained local catalog wording when appropriate.
+- Existing theme-specific details keep their descriptions and relationships. Copy the catalog's `for` and explicit `source` when adding a new detail entry; preserve an existing source override and existing reviewed fields.
+
+Catalog overrides are authoritative for the lookup updater. Also import explicitly attributed overrides from `prod/default/details/`; if both locations specify conflicting overrides for one token, fail with both paths and require reconciliation. Dev-theme attribution stays local to that theme and does not silently replace the shared catalog.
+
+## Lookup updater and extraction
+
+Add `scripts/themes/update-token-details.js` and the package command:
+
+```json
+{
+  "update:token-details": "node scripts/themes/update-token-details.js"
+}
+```
+
+Add shared extraction code in `scripts/lib/token-detail-extraction.js` and an explicit source configuration, for example `scripts/themes/token-detail-sources.jsonc`, recording the existing stable VS Code snapshot `1.143.1` and supplemental main revision `1184ad4d45794110deb6b897ea83b15aac44ed89`. Verify that these revisions are available during implementation; changing a pin is a documented source update, not an automatic switch to latest.
+
+The updater will:
+
+1. Read and validate both categorized templates, all three lookups, and authored token/detail inventories. Refresh the union of template IDs, existing lookup IDs, and authored IDs without expanding templates or pruning lookup entries implicitly.
+2. Honor explicit source overrides before considering extracted descriptions. Validate all override conflicts before writing.
+3. Extract UI registration descriptions from pinned `registerColor` calls and contributed color definitions. Extract semantic type/modifier descriptions from registry declarations and extension contributions. Use the stable registration first and the pinned main registration for verified additions absent from stable.
+4. Parse TypeScript structurally, using a TypeScript AST parser and an explicit development dependency/lockfile update. Resolve supported static strings, localization message forms, and referenced constants; report unresolved dynamic expressions. Read extension manifests as data. Never execute upstream modules to obtain descriptions.
+5. Derive descriptions for semantic combinations from the extracted type/modifier definitions without claiming unsupported provider behavior. Extract local syntax rule names, ordered scopes, and available descriptive comments for source-derived syntax purposes. Preserve explicitly attributed authored syntax purposes.
+6. Retain reviewed descriptions for unresolved existing tokens and report the missing extraction evidence. New unresolved tokens receive a nonempty `UNREVIEWED` purpose and a warning; do not manufacture reviewed descriptions. An existing reviewed entry retained because extraction is unavailable remains visibly reported for review, rather than gaining an invented author attribution.
+7. Reconcile evidence-backed category changes, preserving descriptions, overrides, relationships where present, provenance, and upstream license notices. Absence upstream never causes automatic deletion or deprecation.
+8. Prepare, validate, and format all three candidate catalogs before replacing any destination. Write changed files only, stage replacements, and restore prior files on a commit failure. Repeated runs with identical inputs must leave files and timestamps unchanged.
+9. Report counts and changed paths using established colors: yellow headings, blue information and paths, green additions/success, bright yellow warnings, red errors, magenta required actions and important messages. A catalog refresh alone requires no VS Code reload.
+
+Source retrieval and modes:
+
+- Default update uses pinned sources from an ignored `.cache/token-details/` directory, fetching those exact revisions when the cache is missing. Record revisions and required extraction inputs so a result can be reproduced.
+- Accept `--vscode-source <path>` and `--vscode-main-source <path>` to use local matching checkouts, with revision validation. Optional extension source roots provide developer/extension registration descriptions that are absent from core.
+- `--offline` forbids downloads and gives an actionable error when required sources are missing.
+- `--check` performs the same refresh in memory and reports drift without writing lookups or cache files; it requires existing cached or explicitly supplied source snapshots. Keep a clean checkout's ordinary build and aggregate checks independent of this upstream cache.
+- Fetch, pin validation, parse, or formatting failures abort before any catalog write. Unknown individual IDs produce review warnings as described above, rather than disguising an extraction failure as a successful reviewed description.
+- Builds, `add:theme`, `add:properties`, and watch consume checked-in lookups/templates locally. They do not trigger upstream downloads or modify catalogs as a side effect.
+
+## Shared format handling and source migration
+
+Add `scripts/lib/token-formats.js` to validate and normalize the new structures. It supplies consistent category ordering, canonical ID construction, nested record traversal, and diagnostics for templates, lookups, source tokens, and source details.
+
+Normalize UI and semantic inputs to the compiler's existing canonical IDs before alias collection, details validation, and rendering. Strip category wrappers, UI grouping objects, and semantic `default` markers from emitted IDs. Keep aliases such as `ui.activityBar.foreground`, `semantic.function`, and `syntax.parameter` stable, along with relationship references in details.
+
+Recognize records using the schema for the relevant file, including formatting-only or disabled entries without a color. A node can hold record fields and descendants; traverse both. Reject unknown scalar fields, invalid child structures, duplicate normalized IDs, and reserved-field collisions with diagnostics containing the authored path and canonical ID.
+
+Perform the migration with a repeatable, one-time utility that inventories and stages the complete selected set before writes:
+
+1. Split the current catalog without losing any of its 1,136 entries or its provenance and license. Translate flat purpose IDs into the new nesting and seed category membership from the audited inventory.
+2. Move and reshape both templates, preserving their token inventories. Add the four category objects and style-descriptor leaves. Any token additions or removals require a separate, explicit decision.
+3. Migrate every existing local `tokens/ui.jsonc` and `tokens/semantic.jsonc` in prod/default, dev/test, dev/beta, and dev/reviewer. Discover targets through the existing discovery API rather than hardcoding those names.
+4. Migrate corresponding local `details/ui.jsonc` and `details/semantic.jsonc` to matching category/path nesting. Preserve all `for`, attribution, `inherits`, `overrides`, and `globallyOverriddenBy` values and their array order.
+5. Preserve JSONC comments by using syntax-tree spans and attaching comments to their original token records during reparenting. Retain disabled definitions, configured colors, alpha, reasons, formatting flags, key case, and deliberate ordering. Never reconstruct authored files solely by parsing and stringifying their values.
+6. Keep omitted files omitted and local empty sections empty. Preserve independent whole-file fallback for tokens and details; do not materialize inherited files. An empty categorized input continues to suppress local definitions just as `{}` does today.
+7. Inventory unknown and custom IDs and classify them explicitly rather than dropping them. Keep existing theme membership unchanged; migration does not run `add:properties` to populate every theme from expanded catalogs.
+8. Refresh both examples to the same codec and classification rules. Document the compound semantic suffix/language conventions and UI parent/child case in the examples or adjacent guide.
+9. Switch all active readers and generators together. Remove obsolete flat-format paths once committed sources and fixtures are migrated; no permanent dual-format guessing in the compiler.
+
+Source changes that only reparent tokens must preserve rendering order as well as values. Capture the current emitted UI/semantic order; where grouping necessarily changes object order, document and review that ordering difference while proving styling equality. Preserve syntax order exactly, since it affects precedence. No category, attribution, or authoring-only grouping field appears in generated theme JSON.
+
+## Scripts, tests, and documentation affected
+
+- `scripts/themes/add-properties.js`: replace the obsolete combined catalog path with the split lookups; read categorized templates; add missing entries at nested paths; keep existing review and comment-preservation behavior; propagate explicit attribution when filling details; keep syntax ID generation and base-purpose derivation.
+- `scripts/themes/add-theme.js`: scaffold categorized UI/semantic token and detail objects, populate from the renamed templates, and retain metadata copying, whole-file fallback, rollback, terminal colors, and build command guidance.
+- `scripts/lib/theme-compilation.js`: normalize nested tokens/details before validation and emission; accept the new `source` detail field; retain all color, alias, disabled-entry, and relationship contracts.
+- `scripts/lib/theme-source-inputs.js`, `scripts/themes/build.js`, and `scripts/themes/check.js`: use the shared reader wherever they inspect source shapes. Preserve target discovery, independent fallback, selected-group cleanup, check-mode immutability, and preview registration behavior.
+- `scripts/themes/watch.js`: ensure the nested source migration is handled through normal source events. Templates and lookups remain explicit generator inputs rather than runtime build dependencies; catalog-only changes need no automatic rebuild or reload. Actual registration changes still use the existing conditional reminder.
+- `package.json` and lockfile: add the updater command, extraction dependency where needed, and any necessary validation integration. Ordinary `npm run check` validates checked-in schemas and coverage offline; upstream refresh checking remains an explicit updater command with pinned inputs.
+- `tests/test-projects.js` and existing compilation, validation, property, setup, build, workflow, and watch tests: migrate fixtures and source-path assertions. Keep tests that verify behavior rather than reproducing the nesting implementation.
+- `README.md`, `docs/guides/token-details.md`, and `docs/guides/development-guide.md`: document the file tree, categories, nested authoring, attribution overrides, updater flags/source prerequisites, template-versus-lookup responsibilities, and generator workflow.
+- `docs/guides/workbench-color-audit.md`: update active provenance instructions and links to the new catalogs. Preserve historical audit claims with their pinned versions.
+- `CHANGELOG.md`: record the completed format/catalog migration during implementation. Plans and historical changelog entries remain historical; repair broken links when relocating active resources without rewriting past behavior.
+- Search the whole repository for retired catalog/template paths, former names, and flat-format instructions. Update active prose, code, fixture paths, editor configuration, and any packaging/workflow references found. Verify `hex-opacity.md` links still target `docs/lookups/hex-opacity.md`.
+
+Every authored JavaScript module follows `AGENTS.md` header, declaration JSDoc, parameter documentation, and spacing requirements.
+
+## Implementation sequence
+
+- [ ] Capture canonical token, purpose, alias, scope-order, and generated-output inventories for every current theme; record the template/catalog membership differences.
+- [ ] Implement the shared format codec and detail `source` validation; cover ambiguous UI nodes, selectors, and duplicate IDs.
+- [ ] Implement pinned description extraction and the lookup updater, using fixture snapshots for reproducible behavior checks.
+- [ ] Prepare categorized templates and split lookup candidates, including explicit attribution handling and a classification report.
+- [ ] Update compiler, catalog readers, generators, and their fixtures; migrate all local source and detail files in the same integrated change.
+- [ ] Refresh examples, active documentation, commands, and path references; retain reviewed provenance and required license notices.
+- [ ] Compare normalized inventories and generated themes against the baseline; investigate every missing ID, changed configured style, or changed syntax order.
+- [ ] Run the relevant focused tests, then `npm run check`; verify a build and preview sync in an isolated extension destination.
+- [ ] Commit the completed implementation, generated changes where applicable, and completion documentation using the repository's commit style.
+
+## Acceptance checks
+
+1. All requested destination files exist and active consumers use their new paths; the old combined catalog and old templates have been removed after successful migration.
+2. All lookup/template files have validated category roots and correct per-family record shapes. No canonical token is duplicated or silently omitted, including the 29 UI and two semantic source-only entries.
+3. Every theme retains its authored token membership, configured styling, reasons, flags, IDs, and independent fallback behavior. Syntax rule and scope order are identical. Normalized aliases and relationship strings remain stable.
+4. UI parent/child tokens both survive; unmodified and compound wildcard semantic selectors and language-qualified selectors reconstruct exactly; `*.deprecated` is not misclassified as a retired selector.
+5. The lookup updater uses extracted descriptions by default and preserves explicit developer/source overrides. Conflicts, incomplete extraction, missing pins, and malformed inputs produce accurate diagnostics and leave files intact on fatal errors.
+6. Extraction and merge behavior is covered with local fixture sources: registration strings/localization forms, stable/main precedence, explicit overrides, unknown IDs, and failure-before-write behavior. Routine tests do not require network access.
+7. Repeated updater and generator runs are idempotent. Updater `--check` and build check modes make no writes. Catalog refreshes never manufacture a reload requirement.
+8. Generated themes have the same active styling and disabled definitions as the baseline, with exact syntax ordering. Any harmless UI/semantic serialization-order changes are reviewed explicitly rather than hidden by a broad snapshot update.
+9. Relevant focused tests and the aggregate checks pass, examples match the live authoring schema, documentation links resolve, and all completed changes are committed.
