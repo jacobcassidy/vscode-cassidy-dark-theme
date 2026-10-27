@@ -83,7 +83,11 @@ async function readCompiledTheme(root, target, palette, command) {
     object(metadata.value, metadata.label);
     themeUiType(metadata.value, metadata.label);
 
-    return renderTheme(metadata.value, compileTokens(tokens, details, palette), command);
+    return renderTheme(
+      metadata.value,
+      compileTokens(tokens, details, palette, target.directory === defaultThemeDirectory),
+      command,
+    );
   } catch (error) {
     throw new Error(`${[...inputs.values()].map((input) => input.label).join("; ")}: ${error.message}`, {
       cause: error,

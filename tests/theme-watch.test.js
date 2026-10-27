@@ -131,13 +131,16 @@ test("watch rebuilds prod and inherited dev colors and follows repeated replacem
   /** Production UI input rewritten to simulate replacement saves. */
   const input = join(project.root, "src/themes/prod/default/tokens/ui.jsonc");
 
+  /** Other documented UI properties retained during each replacement save. */
+  const tokens = parse(await readFile(input, "utf8"));
+
   for (const color of ["#123456", "#abcdef"]) {
     /** Build count recorded before or during a simulated source change. */
     const count = project.builds();
 
     await writeFile(
       `${input}.tmp`,
-      JSON.stringify({ "editor.background": { color, colorReason: "Replacement save preview." } }),
+      JSON.stringify({ ...tokens, "editor.background": { color, colorReason: "Replacement save preview." } }),
     );
     await rename(`${input}.tmp`, input);
     await waitFor(() => project.builds() > count);
@@ -166,6 +169,8 @@ test("watch rebuilds dev overrides, refreshes metadata registrations, and preser
   const count = project.builds();
 
   await mkdir(join(project.root, "src/themes/dev/sample/tokens"));
+  await mkdir(join(project.root, "src/themes/dev/sample/details"));
+  await writeFile(join(project.root, "src/themes/dev/sample/details/ui.jsonc"), "{}");
   await writeFile(
     join(project.root, "src/themes/dev/sample/tokens/ui.jsonc"),
     '{"editor.background":{"color":"#010203","colorReason":"Dev preview background."}}',

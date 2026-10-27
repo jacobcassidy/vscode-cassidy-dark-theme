@@ -8,7 +8,8 @@
       //*** MARKDOWN ***
       "markup.bold.markdown"
     ],
-    "fontStyle": "bold"
+    "fontStyle": "bold",
+    "id": "bold"
   },
   {
     "name": "ITALIC",
@@ -28,7 +29,8 @@
       "keyword.operator.type.annotation.ts",
       "support.type.primitive.ts"
     ],
-    "fontStyle": "italic"
+    "fontStyle": "italic",
+    "id": "italic"
   },
   {
     "name": "BOLD ITALIC",
@@ -36,7 +38,8 @@
       //*** MARKDOWN ***
       "markup.bold.markdown markup.italic.markdown"
     ],
-    "fontStyle": "bold italic"
+    "fontStyle": "bold italic",
+    "id": "bold-italic"
   },
   // {
   //   "name": "NORMAL",
@@ -49,7 +52,8 @@
       //*** MARKDOWN ***
       "markup.strikethrough.markdown"
     ],
-    "fontStyle": "strikethrough"
+    "fontStyle": "strikethrough",
+    "id": "strikethrough"
   },
 
   //--------------------------------------------------------------------------
@@ -449,7 +453,8 @@
     "name": "RED 500",
     "scope": [
       //*** DEFAULT ***
-    ]
+    ],
+    "id": "red-500"
   },
 
   {
@@ -491,35 +496,40 @@
     "scope": [
       "source.dockerfile string"
     ],
-    "color": "syntax.support"
+    "color": "syntax.support",
+    "id": "dockerfile-gray-white"
   },
   {
     "name": "[DOCKERFILE] - CYAN 400",
     "scope": [
       "source.dockerfile keyword.other.special-method"
     ],
-    "color": "syntax.function"
+    "color": "syntax.function",
+    "id": "dockerfile-cyan-400"
   },
   {
     "name": "[DOCKERFILE] - GREEN 400",
     "scope": [
       "source.dockerfile entity.name"
     ],
-    "color": "syntax.property"
+    "color": "syntax.property",
+    "id": "dockerfile-green-400"
   },
   {
     "name": "[DOCKERFILE] - ORANGE 400",
     "scope": [
       "source.dockerfile constant.other.option"
     ],
-    "color": "syntax.parameter"
+    "color": "syntax.parameter",
+    "id": "dockerfile-orange-400"
   },
   {
     "name": "[DOCKERFILE] - RED 400",
     "scope": [
       "punctuation.separator.statement.and.shell.dockerfile"
     ],
-    "color": "syntax.keyword"
+    "color": "syntax.keyword",
+    "id": "dockerfile-red-400"
   },
 
   //--------------------------------------------------------------------------
@@ -531,14 +541,16 @@
     "scope": [
       "source.nginx"
     ],
-    "color": "syntax.text"
+    "color": "syntax.text",
+    "id": "nginx-gray-light-oklch-82"
   },
   {
     "name": "GRAY MEDIUM (OKLCH 66%) [PUNCTUATION]",
     "scope": [
       "source.nginx constant.character"
     ],
-    "color": "syntax.punctuation"
+    "color": "syntax.punctuation",
+    "id": "gray-medium-oklch-66-punctuation"
   },
 
   {
@@ -546,21 +558,24 @@
     "scope": [
       "source.nginx constant.language.module"
     ],
-    "color": "syntax.storageType"
+    "color": "syntax.storageType",
+    "id": "nginx-blue-400"
   },
   {
     "name": "[NGINX] - CYAN 400",
     "scope": [
       "source.nginx constant.language"
     ],
-    "color": "syntax.function"
+    "color": "syntax.function",
+    "id": "nginx-cyan-400"
   },
   {
     "name": "[NGINX] - RED 400",
     "scope": [
       "source.nginx constant.language.directive.module.main"
     ],
-    "color": "syntax.keyword"
+    "color": "syntax.keyword",
+    "id": "nginx-red-400"
   },
 
   //--------------------------------------------------------------------------
@@ -572,7 +587,8 @@
     "scope": [
       "code.log support" // For "Output Colorizer" extension
     ],
-    "color": "syntax.support"
+    "color": "syntax.support",
+    "id": "gray-white-oklch-98"
   },
 
   {
@@ -580,7 +596,8 @@
     "scope": [
       "code.log invalid"
     ],
-    "color": "syntax.keyword"
+    "color": "syntax.keyword",
+    "id": "red-400"
   },
 
   //--------------------------------------------------------------------------
@@ -593,21 +610,24 @@
       "comment.rainbow4",
       "invalid.rainbow10"
     ],
-    "fontStyle": ""
+    "fontStyle": "",
+    "id": "normal"
   },
   {
     "name": "GRAY WHITE (OKLCH 98%)",
     "scope": [
       "markup.bold.rainbow9"
     ],
-    "color": "syntax.support"
+    "color": "syntax.support",
+    "id": "gray-white-oklch-98-2"
   },
   {
     "name": "GRAY LIGHT (OKLCH 82%)",
     "scope": [
       "comment.rainbow4"
     ],
-    "color": "syntax.text"
+    "color": "syntax.text",
+    "id": "gray-light-oklch-82"
   },
 
   {
@@ -615,55 +635,63 @@
     "scope": [
       "constant.numeric.rainbow7"
     ],
-    "color": "syntax.storageType"
+    "color": "syntax.storageType",
+    "id": "blue-400"
   },
   {
     "name": "CYAN 400",
     "scope": [
       "rainbow1"
     ],
-    "color": "syntax.function"
+    "color": "syntax.function",
+    "id": "cyan-400"
   },
   {
     "name": "GREEN 400",
     "scope": [
       "string.rainbow5"
     ],
-    "color": "syntax.property"
+    "color": "syntax.property",
+    "id": "green-400"
   },
   {
     "name": "ORANGE 400",
     "scope": [
       "variable.parameter.rainbow6"
     ],
-    "color": "syntax.parameter"
+    "color": "syntax.parameter",
+    "id": "orange-400"
   },
   {
     "name": "PINK 400",
     "scope": [
       "entity.name.type.rainbow8"
     ],
-    "color": "syntax.variable"
+    "color": "syntax.variable",
+    "id": "pink-400"
   },
   {
     "name": "PURPLE 400",
     "scope": [
       "entity.name.function.rainbow3"
     ],
-    "color": "syntax.constant"
+    "color": "syntax.constant",
+    "id": "purple-400"
   },
   {
     "name": "RED 400",
     "scope": [
       "invalid.rainbow10"
     ],
-    "color": "syntax.keyword"
+    "color": "syntax.keyword",
+    "id": "red-400-2"
   },
   {
     "name": "YELLOW 400",
     "scope": [
       "keyword.rainbow2"
     ],
-    "color": "syntax.string"
+    "color": "syntax.string",
+    "id": "yellow-400"
   }
 ]

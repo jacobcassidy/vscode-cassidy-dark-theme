@@ -6,6 +6,7 @@ All notable changes to this project are documented in this file.
 
 ### Changed
 
+- Required matching purpose details for every `prod/default` token, extended `add:properties` to fill all four detail files and assign missing syntax IDs, and documented the remaining UI, semantic, and syntax entries using an offline source-reviewed catalog.
 - Made `npm run package:vsix` run the full `npm run check` before invoking the Bash packaging script.
 - Renamed `dev:sync` to `sync`; run `npm run sync` to build both theme groups and refresh the dev preview extension.
 - Required an explicit `palette/palette-config.jsonc` in every source theme, with `useDefaultPalette: true` selecting the default palette.

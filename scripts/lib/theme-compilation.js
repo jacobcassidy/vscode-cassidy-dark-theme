@@ -66,12 +66,23 @@ function validateDisabling(definition, label) {
  * Validate details against the effective authored entries, independent of color references.
  * @param details - Details objects indexed by section and documentation key.
  * @param entries - Effective token definitions indexed by section and documentation key.
+ * @param requireDetails - Whether every authored entry must have a purpose description.
  */
-function validateDetails(details, entries) {
+function validateDetails(details, entries, requireDetails) {
   fields(details, ["base", "ui", "semantic", "syntax"], "details");
 
   for (const [section, definitions] of Object.entries(entries)) {
     object(details[section], `details.${section}`);
+
+    if (requireDetails) {
+      for (const key of definitions.keys()) {
+        if (!Object.hasOwn(details[section], key)) {
+          throw new Error(`details.${section}.${key}: missing property details; run npm run add:properties`);
+        }
+
+        nonempty(details[section][key]?.for, `details.${section}.${key}.for`);
+      }
+    }
 
     for (const [key, value] of Object.entries(details[section])) {
       /** Details location used for all structural and relationship diagnostics. */
@@ -112,9 +123,10 @@ function validateDetails(details, entries) {
  * @param tokens - Complete base, UI, semantic, and syntax token sections.
  * @param details - Complete corresponding details sections.
  * @param palette - Generated palette records keyed by primitive identifier.
+ * @param [requireDetails] - Require matching purpose details and IDs for every syntax rule in the default theme.
  * @returns Resolved aliases and ordered compiled entries for each emitted section.
  */
-export function compileTokens(tokens, details, palette) {
+export function compileTokens(tokens, details, palette, requireDetails = false) {
   fields(tokens, ["base", "ui", "semantic", "syntax"], "tokens");
   fields(tokens.base, ["surface", "text", "diagnostic", "diff"], "tokens.base");
   object(tokens.ui, "tokens.ui");
@@ -251,10 +263,12 @@ export function compileTokens(tokens, details, palette) {
       }
 
       register("syntax", rule.id, rule);
+    } else if (requireDetails) {
+      throw new Error(`${label}: default syntax rules require an id for property details; run npm run add:properties`);
     }
   }
 
-  validateDetails(details, entries);
+  validateDetails(details, entries, requireDetails);
 
   /**
    * Resolve a descriptor and replace, rather than multiply, inherited alpha.

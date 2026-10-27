@@ -10,7 +10,7 @@ import test from "node:test";
 import { addThemeProperties } from "../scripts/themes/add-properties.js";
 import { buildProdThemes } from "../scripts/themes/build.js";
 import { parseJsonc } from "../scripts/lib/jsonc-validation.js";
-import { createBuildProject, writeDefaultPaletteConfig } from "./test-projects.js";
+import { createBuildProject, readBuildOutputs, readThemeParts, writeDefaultPaletteConfig } from "./test-projects.js";
 
 /**
  * Write a reference using deliberately irrelevant values and metadata.
@@ -43,6 +43,10 @@ async function createPropertyProject(t) {
   await writeDefaultPaletteConfig(join(root, "src/themes/dev/test"));
   await writeReference(root, { "new.background": "#f0f" }, { "*.readonly:typescript": "#f00" });
   await writeFile(join(root, ".prettierrc.json"), JSON.stringify({ printWidth: 1, trailingComma: "none" }));
+
+  for (const section of ["base", "ui", "semantic", "syntax"]) {
+    await writeFile(join(root, `src/themes/prod/default/details/${section}.jsonc`), "{}");
+  }
 
   return root;
 }
@@ -161,7 +165,7 @@ test("missing UI and semantic properties are inserted alphabetically while value
   assert.match(semantic.source, /\/\/ Variable leading explanation\.\s+"variable"/);
   assert.match(semantic.source, /}, \/\/ Variable inline explanation\.\s+"zebra"/);
 
-  for (const update of result) {
+  for (const update of result.filter((update) => ["ui", "semantic"].includes(update.section))) {
     assert.equal(update.added.length, 3);
 
     for (const key of update.added) {
@@ -235,11 +239,13 @@ test("the initial allowlist updates both themes from their original effective in
   const result = await addThemeProperties({ root });
 
   assert.deepEqual(
-    result.map((update) => update.theme),
+    result.filter((update) => ["ui", "semantic"].includes(update.section)).map((update) => update.theme),
     ["prod/default", "prod/default", "dev/test", "dev/test"],
   );
 
-  assert.ok(result.every((update) => update.added.length === 1));
+  assert.ok(
+    result.filter((update) => ["ui", "semantic"].includes(update.section)).every((update) => update.added.length === 1),
+  );
   assert.deepEqual(
     (await readSection(root, "dev/test", "ui")).value,
     (await readSection(root, "prod/default", "ui")).value,
@@ -290,6 +296,14 @@ test("unknown targets and malformed references or later source inputs fail befor
     "source",
     "source shape",
     "source duplicates",
+    "details",
+    "details shape",
+    "details duplicates",
+    "catalog",
+    "catalog shape",
+    "catalog entry",
+    "syntax shape",
+    "syntax IDs",
   ]) {
     await t.test(failure, async (t) => {
       /** Complete project with an intentionally invalid input for this scenario. */
@@ -313,6 +327,27 @@ test("unknown targets and malformed references or later source inputs fail befor
         );
       }
 
+      if (failure.startsWith("details")) {
+        await writeFile(
+          join(root, "src/themes/prod/default/details/syntax.jsonc"),
+          failure === "details" ? "{" : failure === "details shape" ? "[]" : '{"string":{},"string":{}}',
+        );
+      }
+
+      if (failure.startsWith("catalog")) {
+        await writeFile(
+          join(root, "docs/references/theme-property-details.jsonc"),
+          failure === "catalog" ? "{" : failure === "catalog shape" ? "[]" : '{"ui":{"new.background":[]}}',
+        );
+      }
+
+      if (failure.startsWith("syntax")) {
+        await writeFile(
+          join(root, "src/themes/prod/default/tokens/syntax.jsonc"),
+          failure === "syntax shape" ? "[null]" : '[{"id":"string"},{"id":"string"}]',
+        );
+      }
+
       /** Snapshot after introducing invalid input but before invoking the updater. */
       const before = await snapshot(root);
 
@@ -324,3 +359,124 @@ test("unknown targets and malformed references or later source inputs fail befor
     });
   }
 });
+
+test("default details cover nested roles, disabled tokens, new reference keys, and every syntax rule", async (t) => {
+  /** Fixture with existing details, missing descriptions, and unnamed syntax rules. */
+  const root = await createPropertyProject(t);
+
+  /** Original token values retained for assertions about styling and rule order. */
+  const parts = await readThemeParts(join(root, "src/themes/prod/default"));
+
+  parts.tokens.base.surface.extra = { color: "palette.gray.900" };
+  parts.tokens.ui["retained.disabled"] = { disabled: true, disabledReason: "Use the default styling." };
+  parts.tokens.syntax.push(
+    { name: "String", scope: "string.one", fontStyle: "bold" },
+    { name: "String", scope: ["string.two"], disabled: true, disabledReason: "Disabled rule." },
+    { fontStyle: "italic" },
+  );
+
+  for (const section of ["base", "ui", "syntax"]) {
+    await writeFile(
+      join(root, `src/themes/prod/default/tokens/${section}.jsonc`),
+      JSON.stringify(parts.tokens[section]),
+    );
+  }
+
+  await writeFile(
+    join(root, "src/themes/prod/default/details/ui.jsonc"),
+    `{
+      // Reviewed description and relationships must survive.
+      "editor.background": {"for":"Keep this reviewed usage.","inherits":["upstream.surface"]},
+      "editor.foreground": {"inherits":["upstream.text"]} // Keep the inline explanation.
+    }`,
+  );
+  await writeFile(
+    join(root, "docs/references/theme-property-details.jsonc"),
+    JSON.stringify({
+      ui: {
+        "editor.background": { for: "Do not overwrite the reviewed usage." },
+        "editor.foreground": { for: "Reviewed editor text purpose." },
+        "new.background": { for: "Reviewed new widget background." },
+      },
+      semantic: { "*.readonly:typescript": { for: "Read-only TypeScript symbols." } },
+    }),
+  );
+
+  await addThemeProperties({ root, themes: ["prod/default"] });
+
+  /** Complete source snapshot after token additions and detail generation. */
+  const updated = await readThemeParts(join(root, "src/themes/prod/default"));
+
+  assert.deepEqual(updated.details.ui["editor.background"], {
+    for: "Keep this reviewed usage.",
+    inherits: ["upstream.surface"],
+  });
+  assert.deepEqual(updated.details.ui["editor.foreground"], {
+    for: "Reviewed editor text purpose.",
+    inherits: ["upstream.text"],
+  });
+  assert.equal(updated.details.ui["new.background"].for, "Reviewed new widget background.");
+  assert.equal(updated.details.semantic["*.readonly:typescript"].for, "Read-only TypeScript symbols.");
+  assert.match(updated.details.ui["retained.disabled"].for, /^UNREVIEWED:/);
+  assert.equal(updated.details.base["surface.extra"].for, "Shared surface extra color role.");
+  assert.deepEqual(
+    updated.tokens.syntax.map((rule) => rule.id),
+    ["string", "string-2", "string-3", "rule-4"],
+  );
+  assert.deepEqual(
+    updated.tokens.syntax.map((rule) => ({ ...rule, id: undefined })),
+    parts.tokens.syntax.map((rule) => ({ ...rule, id: undefined })),
+  );
+
+  for (const rule of updated.tokens.syntax) {
+    assert.ok(updated.details.syntax[rule.id].for.trim());
+  }
+
+  /** Comment-bearing detail text after insertion and updates to existing entries. */
+  const source = await readFile(join(root, "src/themes/prod/default/details/ui.jsonc"), "utf8");
+
+  assert.match(source, /\/\/ Reviewed description and relationships must survive\./);
+  assert.match(source, /\/\/ Keep the inline explanation\./);
+
+  /** No input files or timestamps should change after a complete run. */
+  const before = await snapshot(root);
+
+  assert.ok((await addThemeProperties({ root, themes: ["prod/default"] })).every((update) => !update.added.length));
+  assert.deepEqual(await snapshot(root), before);
+  await buildProdThemes({ root });
+});
+
+for (const section of ["base", "ui", "semantic", "syntax", "syntax ID", "description", "disabled"]) {
+  test(`default builds reject missing ${section} documentation before writing outputs`, async (t) => {
+    /** Complete default fixture with a successful output snapshot. */
+    const root = await createBuildProject(t);
+
+    await buildProdThemes({ root });
+
+    /** Last successful artifacts must remain intact when documentation validation fails. */
+    const before = await readBuildOutputs(root);
+
+    if (section === "syntax ID") {
+      await writeFile(
+        join(root, "src/themes/prod/default/tokens/syntax.jsonc"),
+        '[{"scope":"string","color":"palette.yellow.400"}]',
+      );
+    } else if (section === "description") {
+      await writeFile(
+        join(root, "src/themes/prod/default/details/base.jsonc"),
+        '{"surface.editor":{"inherits":["upstream.background"]}}',
+      );
+    } else if (section === "disabled") {
+      await writeFile(
+        join(root, "src/themes/prod/default/tokens/ui.jsonc"),
+        '{"editor.background":{"disabled":true,"disabledReason":"Default background."}}',
+      );
+      await writeFile(join(root, "src/themes/prod/default/details/ui.jsonc"), "{}");
+    } else {
+      await writeFile(join(root, `src/themes/prod/default/details/${section}.jsonc`), "{}");
+    }
+
+    await assert.rejects(buildProdThemes({ root }), /missing property details|require an id|for: expected a nonempty/);
+    assert.deepEqual(await readBuildOutputs(root), before);
+  });
+}

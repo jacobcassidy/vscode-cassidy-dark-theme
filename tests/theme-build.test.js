@@ -122,7 +122,7 @@ test("failed prod validation leaves all previous outputs intact and palette-only
 
   await writeFile(
     join(root, "src/themes/prod/default/tokens/base.jsonc"),
-    '{"surface":{"unused":{"color":"missing.color"}}}',
+    '{"surface":{"editor":{"color":"missing.color"}}}',
   );
   await assert.rejects(buildProdThemes({ root }), /Unknown reference/);
 
@@ -162,6 +162,9 @@ for (const section of ["ui", "semantic", "syntax"]) {
     /** Default definitions copied as a complete file into the dev target. */
     const tokens = createTokens()[section];
 
+    /** Complete default documentation retained when testing a relationship change. */
+    const defaultDetails = (await readThemeParts(join(root, "src/themes/prod/default"))).details[section];
+
     /** Definition corresponding to the reviewed assertion. */
     const definition = section === "syntax" ? tokens[0] : tokens[key];
 
@@ -173,7 +176,10 @@ for (const section of ["ui", "semantic", "syntax"]) {
     await mkdir(join(directory, "details"));
     await writeFile(
       join(root, `src/themes/prod/default/details/${section}.jsonc`),
-      JSON.stringify({ [key]: { globallyOverriddenBy: ["reviewed.replacement"] } }),
+      JSON.stringify({
+        ...defaultDetails,
+        [key]: { ...defaultDetails[key], globallyOverriddenBy: ["reviewed.replacement"] },
+      }),
     );
     await writeFile(join(directory, `tokens/${section}.jsonc`), JSON.stringify(tokens));
 
@@ -200,7 +206,7 @@ for (const section of ["ui", "semantic", "syntax"]) {
       JSON.stringify({ [key]: { globallyOverriddenBy: ["different.replacement"] } }),
     );
     await rm(join(directory, `tokens/${section}.jsonc`));
-    await writeFile(join(root, `src/themes/prod/default/details/${section}.jsonc`), "{}");
+    await writeFile(join(root, `src/themes/prod/default/details/${section}.jsonc`), JSON.stringify(defaultDetails));
     await writeFile(
       join(root, `src/themes/prod/default/tokens/${section}.jsonc`),
       JSON.stringify(createTokens()[section]),
@@ -226,7 +232,7 @@ test("empty details suppress fallback and supplied details must match whole-file
   await mkdir(join(directory, "details"));
   await writeFile(
     join(root, "src/themes/prod/default/details/ui.jsonc"),
-    '{"editor.background":{"for":"Default background."}}',
+    '{"editor.background":{"for":"Default background."},"editor.foreground":{"for":"Default foreground."}}',
   );
   await writeFile(join(directory, "tokens/ui.jsonc"), "{}");
   await assert.rejects(buildDevThemes({ root }), /unknown authored entry/);
@@ -238,7 +244,7 @@ test("empty details suppress fallback and supplied details must match whole-file
 
   await writeFile(
     join(root, "src/themes/prod/default/details/ui.jsonc"),
-    '{"editor.background":{"for":"Changed default documentation."}}',
+    '{"editor.background":{"for":"Changed default documentation."},"editor.foreground":{"for":"Default foreground."}}',
   );
   await buildDevThemes({ root, check: true });
   assert.deepEqual(await readBuildOutputs(root), before);
@@ -339,6 +345,8 @@ test("dev targets use independent complete palettes and token sections and isola
   tokens.syntax[0].colorReason = "Test exception";
   await mkdir(join(devThemeDirectory, "palette"), { recursive: true });
   await mkdir(join(devThemeDirectory, "tokens"));
+  await mkdir(join(devThemeDirectory, "details"));
+  await writeFile(join(devThemeDirectory, "details/ui.jsonc"), "{}");
   await writeFile(join(devThemeDirectory, "palette/palette-config.jsonc"), JSON.stringify(input));
   await writeFile(join(devThemeDirectory, "tokens/base.jsonc"), JSON.stringify(tokens.base));
   await writeFile(
@@ -643,6 +651,12 @@ for (const [path, contents, pattern] of [
     await writeDefaultPaletteConfig(devThemeDirectory);
     await mkdir(join(devThemeDirectory, path, ".."), { recursive: true });
     await writeFile(join(devThemeDirectory, path), contents);
+
+    if (path === "tokens/base.jsonc") {
+      await mkdir(join(devThemeDirectory, "details"), { recursive: true });
+      await writeFile(join(devThemeDirectory, "details/base.jsonc"), "{}");
+    }
+
     await assert.rejects(buildDevThemes({ root }), pattern);
     await assert.rejects(readFile(join(root, "dev-extension/themes/cassidy-dark-color-theme-sample.json")), {
       code: "ENOENT",
@@ -656,6 +670,8 @@ test("a supplied dev UI mapping replaces the whole file while omitted files inhe
 
   await writeDefaultPaletteConfig(join(root, "src/themes/dev/sample"));
   await mkdir(join(root, "src/themes/dev/sample/tokens"), { recursive: true });
+  await mkdir(join(root, "src/themes/dev/sample/details"), { recursive: true });
+  await writeFile(join(root, "src/themes/dev/sample/details/ui.jsonc"), "{}");
   await writeFile(
     join(root, "src/themes/dev/sample/tokens/ui.jsonc"),
     '{"editor.background":{"color":"#010203","colorReason":"Preview background."}}',
@@ -683,6 +699,8 @@ for (const group of ["prod", "dev"]) {
 
     await writeDefaultPaletteConfig(target);
     await mkdir(join(target, "tokens"), { recursive: true });
+    await mkdir(join(target, "details"), { recursive: true });
+    await writeFile(join(target, "details/base.jsonc"), "{}");
     await build({ root });
 
     /** Output snapshot or file metadata retained before the operation under test. */

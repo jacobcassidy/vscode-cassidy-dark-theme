@@ -1,17 +1,17 @@
 /**
  * Missing theme properties.
- * @file Add unreviewed UI and semantic entries from the reference to explicitly included theme sources.
+ * @file Add missing UI and semantic tokens and complete matching documentation for the production default.
  */
 
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
-import { applyEdits, createScanner, SyntaxKind } from "jsonc-parser";
+import { applyEdits, createScanner, modify, SyntaxKind } from "jsonc-parser";
 // Prettier's generated entry point hides its default export from the import resolver.
 // eslint-disable-next-line import-x/default
 import prettier from "prettier";
 import { object, parseJsonc } from "../lib/jsonc-validation.js";
-import { discoverTargets, readTargetInput } from "../lib/theme-source-inputs.js";
+import { discoverTargets, readOptional, readTargetInput } from "../lib/theme-source-inputs.js";
 
 /** Repository root inferred from this module's location. */
 const defaultRoot = fileURLToPath(new URL("../../", import.meta.url));
@@ -35,9 +35,10 @@ const placeholder = {
  * Insert missing keys while retaining comments attached to neighboring entries.
  * @param input - Parsed JSONC source, including its syntax tree and original text.
  * @param keys - Missing property names to insert in case-sensitive lexical order.
+ * @param [values] - Values indexed by property name; defaults to unreviewed color placeholders.
  * @returns Updated JSONC text, ready for repository formatting.
  */
-function insertProperties(input, keys) {
+function insertProperties(input, keys, values) {
   /** Existing properties in their authored order. */
   const properties = input.tree.children ?? [];
 
@@ -100,8 +101,10 @@ function insertProperties(input, keys) {
       }
     }
 
-    /** Serialized placeholder entries, without disturbing existing value text. */
-    const entries = names.map((name) => `${JSON.stringify(name)}: ${JSON.stringify(placeholder)}`).join(",\n");
+    /** Serialized additions, without disturbing existing value text. */
+    const entries = names
+      .map((name) => `${JSON.stringify(name)}: ${JSON.stringify(values ? values[name] : placeholder)}`)
+      .join(",\n");
 
     /** Text placed at the selected boundary, including its separator and line breaks. */
     let content = `${newline ? "" : "\n"}${entries}${index < properties.length ? "," : ""}\n`;
@@ -118,6 +121,190 @@ function insertProperties(input, keys) {
   }
 
   return applyEdits(input.source, edits);
+}
+
+/**
+ * Collect nested base descriptors under their flat documentation paths.
+ * @param group - Base group or leaf color descriptor.
+ * @param [path] - Current dotted base path.
+ * @returns Base documentation keys and their source descriptors.
+ */
+function baseEntries(group, path = "") {
+  object(group, `base.${path}`);
+
+  if (Object.hasOwn(group, "color")) return [[path, group]];
+
+  return Object.entries(group).flatMap(([key, value]) => baseEntries(value, path ? `${path}.${key}` : key));
+}
+
+/**
+ * Give undocumented syntax rules persistent, unique IDs without changing rule order or scopes.
+ * @param input - Parsed syntax array and its original JSONC text.
+ * @returns Updated parsed input and newly assigned IDs.
+ */
+function identifySyntax(input) {
+  if (!Array.isArray(input.value)) throw new Error(`${input.label}: expected a syntax array`);
+
+  /** Existing IDs reserved before choosing names for unnamed rules. */
+  const ids = new Set();
+
+  for (const [index, rule] of input.value.entries()) {
+    object(rule, `${input.label}[${index}]`);
+
+    if (!Object.hasOwn(rule, "id")) continue;
+
+    if (typeof rule.id !== "string" || !/^[a-z][a-z0-9.-]*$/i.test(rule.id) || ids.has(rule.id)) {
+      throw new Error(`${input.label}[${index}]: invalid or duplicate syntax ID ${rule.id}`);
+    }
+
+    ids.add(rule.id);
+  }
+
+  /** Newly assigned IDs reported alongside the syntax source update. */
+  const added = [];
+
+  /** Comment-preserving source edits applied in rule order. */
+  let source = input.source;
+
+  for (const [index, rule] of input.value.entries()) {
+    if (Object.hasOwn(rule, "id")) continue;
+
+    /** Readable base ID derived from the rule name, with a stable numeric fallback. */
+    const stem =
+      typeof rule.name === "string"
+        ? rule.name
+            .toLowerCase()
+            .replace(/[^a-z0-9]+/g, "-")
+            .replace(/^-|-$/g, "")
+        : "";
+
+    /** Valid identifier prefix, including names that begin with a digit. */
+    const prefix = /^[a-z]/.test(stem) ? stem : `rule-${stem || index + 1}`;
+
+    /** Unique ID selected without changing any existing alias. */
+    let id = prefix;
+
+    for (let suffix = 2; ids.has(id); suffix++) id = `${prefix}-${suffix}`;
+
+    ids.add(id);
+    added.push(id);
+    source = applyEdits(source, modify(source, [index, "id"], id, {}));
+  }
+
+  return { input: { ...parseJsonc(source, input.label), source, label: input.label }, added };
+}
+
+/**
+ * Prepare complete default documentation after all reference token additions are known.
+ * @param root - Repository or isolated fixture root.
+ * @param target - Production default source target.
+ * @param updates - Prepared token and detail updates; no files have been written yet.
+ */
+async function addDefaultDetails(root, target, updates) {
+  /** Offline descriptions reviewed against the pinned VS Code source snapshots. */
+  const referencePath = "docs/references/theme-property-details.jsonc";
+
+  /** Optional catalog text; isolated fixtures and new custom IDs may have no reviewed descriptions. */
+  const referenceSource = await readOptional(join(root, referencePath));
+
+  /** Descriptions grouped by token section. */
+  const reference = referenceSource === undefined ? {} : parseJsonc(referenceSource, referencePath).value;
+
+  object(reference, referencePath);
+
+  for (const section of ["base", "ui", "semantic", "syntax"]) {
+    /** Original or already prepared token section, including newly added placeholders. */
+    let input = await readTargetInput(root, target, `tokens/${section}.jsonc`);
+
+    /** Earlier update for the matching default token file, if it has additions. */
+    const pending = updates.find((update) => update.path === `${target.directory}/tokens/${section}.jsonc`);
+
+    if (pending?.source) {
+      input = { ...parseJsonc(pending.source, input.label), source: pending.source, label: input.label };
+    }
+
+    if (section === "syntax") {
+      /** Syntax input with documentation IDs assigned to every rule. */
+      const identified = identifySyntax(input);
+
+      input = identified.input;
+      updates.push({
+        theme: "prod/default",
+        section,
+        path: `${target.directory}/tokens/syntax.jsonc`,
+        added: identified.added,
+        source: identified.added.length ? input.source : undefined,
+      });
+    } else {
+      object(input.value, input.label);
+    }
+
+    /** Flat property/descriptor pairs using the same keys as theme compilation. */
+    const entries =
+      section === "base"
+        ? baseEntries(input.value)
+        : section === "syntax"
+          ? input.value.map((rule) => [rule.id, rule])
+          : Object.entries(input.value);
+
+    /** Existing documentation, whose reviewed descriptions and relationships are retained. */
+    const details = await readTargetInput(root, target, `details/${section}.jsonc`);
+
+    object(details.value, details.label);
+
+    /** New detail objects indexed by their exact documentation key. */
+    const values = {};
+
+    /** Insertions needed for completely missing entries. */
+    const added = [];
+
+    /** JSONC text also used to fill an existing entry that lacks a purpose description. */
+    let source = details.source;
+
+    if (Object.hasOwn(reference, section)) object(reference[section], `${referencePath}.${section}`);
+
+    for (const [key, definition] of entries) {
+      if (Object.hasOwn(reference[section] ?? {}, key)) {
+        object(reference[section][key], `${referencePath}.${section}.${key}`);
+      }
+
+      /** Reviewed purpose, or an explicit review marker for a previously unknown property. */
+      const description =
+        reference[section]?.[key]?.for ??
+        (section === "base"
+          ? `Shared ${key.split(".").join(" ")} color role.`
+          : section === "syntax"
+            ? `TextMate rule ${definition.name || key} targeting ${[definition.scope ?? []].flat().join(", ") || "no explicit scope selectors"}.`
+            : `UNREVIEWED: Describe the purpose of ${section} property ${key}.`);
+
+      if (typeof description !== "string" || !description.trim()) {
+        throw new Error(`${referencePath}.${section}.${key}.for: expected a nonempty description`);
+      }
+
+      if (!Object.hasOwn(details.value, key)) {
+        values[key] = { for: description };
+        added.push(key);
+      } else {
+        object(details.value[key], `${details.label}.${key}`);
+
+        if (typeof details.value[key].for !== "string" || !details.value[key].for.trim()) {
+          source = applyEdits(source, modify(source, [key, "for"], description, {}));
+          added.push(key);
+        }
+      }
+    }
+
+    /** Reparsed positions after any edits to existing detail objects. */
+    const edited = { ...parseJsonc(source, details.label), source };
+
+    updates.push({
+      theme: "prod/default",
+      section: `details/${section}`,
+      path: `${target.directory}/details/${section}.jsonc`,
+      added,
+      source: added.length ? insertProperties(edited, Object.keys(values), values) : undefined,
+    });
+  }
 }
 
 /**
@@ -168,22 +355,28 @@ export async function addThemeProperties({ root = defaultRoot, themes = included
       /** Destination always within the selected theme's own source directory. */
       const path = `${target.directory}/tokens/${section}.jsonc`;
 
-      /** Formatted candidate, generated only when this section has additions. */
-      let source;
-
-      if (added.length) {
-        /** Absolute path used to resolve the repository's formatter settings. */
-        const filepath = join(root, path);
-
-        /** Repository formatting configuration for the source destination. */
-        const options = await prettier.resolveConfig(filepath);
-
-        source = await prettier.format(insertProperties(input, added), { ...options, filepath, parser: "jsonc" });
-        parseJsonc(source, path);
-      }
+      /** Comment-preserving candidate, formatted after every input has been validated. */
+      const source = added.length ? insertProperties(input, added) : undefined;
 
       updates.push({ theme, section, path, added, source });
     }
+  }
+
+  if (themes.includes("prod/default")) {
+    await addDefaultDetails(root, targets.get("prod/default"), updates);
+  }
+
+  for (const update of updates) {
+    if (!update.added.length) continue;
+
+    /** Destination path used to resolve repository formatting for every prepared change. */
+    const filepath = join(root, update.path);
+
+    /** Formatting settings shared by token and documentation sources. */
+    const options = await prettier.resolveConfig(filepath);
+
+    update.source = await prettier.format(update.source, { ...options, filepath, parser: "jsonc" });
+    parseJsonc(update.source, update.path);
   }
 
   for (const update of updates) {

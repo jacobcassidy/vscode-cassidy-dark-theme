@@ -105,7 +105,18 @@ export async function createBuildProject(t) {
   const inputs = {
     metadata: { name: "Fixture", type: "dark", semanticHighlighting: true },
     tokens: createTokens(),
-    details: createDetails(),
+    details: {
+      base: { "surface.editor": { for: "Shared editor surface." } },
+      ui: {
+        "editor.background": { for: "Editor background." },
+        "editor.foreground": { for: "Editor foreground." },
+      },
+      semantic: {
+        variable: { for: "Semantic variables." },
+        function: { for: "Semantic functions." },
+      },
+      syntax: { string: { for: "Ordered string scopes." } },
+    },
   };
 
   for (const directory of ["palette", "tokens", "details"]) {
