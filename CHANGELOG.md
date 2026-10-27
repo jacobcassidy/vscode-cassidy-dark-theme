@@ -6,6 +6,7 @@ All notable changes to this project are documented in this file.
 
 ### Changed
 
+- Colored the preview theme reload reminder magenta in sync output.
 - Made `add:theme` copy default metadata into each new theme and add a target-derived `previewName` while preserving the other fields and JSONC comments.
 - Renamed the development extension and its live theme labels to Cassidy Dark Preview, and added optional `previewName` metadata overrides for named preview and static snapshot suffixes while preserving published labels and the default preview label.
 - Allowed recognized palette settings alongside `useDefaultPalette: true`, retaining them for later custom generation, and added explicit theme arguments to `add:properties`.

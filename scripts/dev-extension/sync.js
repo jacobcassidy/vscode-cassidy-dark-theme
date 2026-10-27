@@ -187,5 +187,5 @@ async function statIfPresent(path) {
 
 if (import.meta.main) {
   console.log(`Synced dev manifest: ${await syncDevExtension()}`);
-  console.log("Run Developer: Reload Window in VS Code, then select a Cassidy Dark Preview theme.");
+  console.log("\u001b[35mRun Developer: Reload Window in VS Code, then select a Cassidy Dark Preview theme.\u001b[0m");
 }
