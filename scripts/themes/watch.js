@@ -57,7 +57,9 @@ function isThemeSource(filename) {
   /** Watcher event path normalized to forward slashes. */
   const path = filename.toString().replaceAll("\\", "/");
 
-  if (/\/palette\/generated(?:\/|$)/.test(path)) return false;
+  if (/\/palette\/(?:generated(?:\/|$)|default-palette\.txt$)/.test(path)) return false;
+
+  if (/\/\.theme-build-[^/]+(?:\/|$)/.test(path)) return false;
 
   return ["prod", "dev"].some((group) => {
     /** Theme-source directory inside the current prod or dev group. */

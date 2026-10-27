@@ -171,7 +171,11 @@ export async function readBuildOutputs(root) {
 
       if (entry.isDirectory()) {
         await visit(path);
-      } else if (!path.startsWith("src/") || path.includes("/palette/generated/")) {
+      } else if (
+        !path.startsWith("src/") ||
+        path.includes("/palette/generated/") ||
+        path.endsWith("/palette/default-palette.txt")
+      ) {
         files.set(path, await readFile(join(root, path), "utf8"));
       }
     }

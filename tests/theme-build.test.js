@@ -410,7 +410,7 @@ test("explicit default palettes produce only a note and follow changes without r
   const result = await buildDevThemes({ root });
 
   /** Note explaining why per-theme palette measurements and swatches are omitted. */
-  const notePath = join(directory, "palette/generated/default.txt");
+  const notePath = join(directory, "palette/default-palette.txt");
 
   /** Original note must remain unchanged when default palette values change. */
   const note = await readFile(notePath, "utf8");
@@ -419,7 +419,7 @@ test("explicit default palettes produce only a note and follow changes without r
   assert.equal(result[0].changed.length, 2);
   assert.match(note, /No palette is generated.*default palette is being used/);
   assert.match(note, /src\/themes\/prod\/default\/palette\/palette-config.jsonc/);
-  assert.deepEqual(await readdir(join(directory, "palette/generated")), ["default.txt"]);
+  await assert.rejects(readdir(join(directory, "palette/generated")), { code: "ENOENT" });
 
   for (const [path, text] of prodOutputs) assert.equal(await readFile(join(root, path), "utf8"), text);
 
@@ -464,12 +464,13 @@ for (const group of ["prod", "dev"]) {
   });
 }
 
-for (const [group, paletteOnly] of [
-  ["prod", false],
-  ["dev", false],
-  ["prod", true],
+for (const [group, paletteOnly, useDefaultPalette] of [
+  ["prod", false, false],
+  ["dev", false, undefined],
+  ["prod", true, false],
+  ["prod", true, undefined],
 ]) {
-  test(`${group} palette modes replace reports and notes safely with paletteOnly=${paletteOnly}`, async (t) => {
+  test(`${group} palette modes replace directories and notes with paletteOnly=${paletteOnly}, useDefaultPalette=${useDefaultPalette}`, async (t) => {
     /** Project and theme that initially select the default palette explicitly. */
     const root = await createBuildProject(t);
 
@@ -484,19 +485,26 @@ for (const [group, paletteOnly] of [
 
     await writeDefaultPaletteConfig(directory);
     await build({ root, paletteOnly });
-    assert.deepEqual(await readdir(generated), ["default.txt"]);
+    await assert.rejects(readdir(generated), { code: "ENOENT" });
 
-    /** Read-only checks must leave the old note in place until the build succeeds. */
+    // Also exercise upgrading the previous layout while switching to a custom palette.
+    await mkdir(generated);
+    await writeFile(join(generated, "default.txt"), "Legacy default-palette note\n");
+
+    /** Read-only checks must leave both notes in place until the build succeeds. */
     const beforeCustom = await readBuildOutputs(root);
 
-    await writeFile(
-      join(directory, "palette/palette-config.jsonc"),
-      JSON.stringify({ useDefaultPalette: false, ...createPaletteConfig() }),
-    );
+    /** Full settings exercise both an explicit false flag and an omitted flag. */
+    const config = createPaletteConfig();
+
+    if (useDefaultPalette !== undefined) config.useDefaultPalette = useDefaultPalette;
+
+    await writeFile(join(directory, "palette/palette-config.jsonc"), JSON.stringify(config));
     await assert.rejects(build({ root, paletteOnly, check: true }), /missing or stale/);
     assert.deepEqual(await readBuildOutputs(root), beforeCustom);
     await build({ root, paletteOnly });
     assert.deepEqual(await readdir(generated), ["palette.json", "palette.md", "palette.svg"]);
+    await assert.rejects(readFile(join(directory, "palette/default-palette.txt")), { code: "ENOENT" });
     await build({ root, paletteOnly, check: true });
 
     /** Custom reports must survive validation failure in a later target before any cleanup runs. */
@@ -514,14 +522,54 @@ for (const [group, paletteOnly] of [
     await assert.rejects(build({ root, paletteOnly, check: true }), /missing or stale/);
     assert.deepEqual(await readBuildOutputs(root), beforeDefault);
     await build({ root, paletteOnly });
-    assert.deepEqual(await readdir(generated), ["default.txt"]);
+    await assert.rejects(readdir(generated), { code: "ENOENT" });
     await build({ root, paletteOnly, check: true });
 
-    await writeFile(join(generated, "default.txt"), "Outdated note\n");
-    await assert.rejects(build({ root, paletteOnly, check: true }), /default.txt/);
-    assert.equal(await readFile(join(generated, "default.txt"), "utf8"), "Outdated note\n");
+    await writeFile(join(directory, "palette/default-palette.txt"), "Outdated note\n");
+    await assert.rejects(build({ root, paletteOnly, check: true }), /default-palette\.txt/);
+    assert.equal(await readFile(join(directory, "palette/default-palette.txt"), "utf8"), "Outdated note\n");
     await build({ root, paletteOnly });
-    assert.match(await readFile(join(generated, "default.txt"), "utf8"), /default palette is being used/);
+    assert.match(
+      await readFile(join(directory, "palette/default-palette.txt"), "utf8"),
+      /default palette is being used/,
+    );
+  });
+}
+
+for (const contents of ["empty", "nested legacy artifacts"]) {
+  test(`default palettes remove a generated directory containing ${contents}`, async (t) => {
+    /** Fixture with the current default-palette note already generated. */
+    const root = await createBuildProject(t);
+
+    /** Dev source directory selecting the default palette. */
+    const directory = join(root, "src/themes/dev/sample");
+
+    /** Obsolete directory must be removed in full, even when it is empty. */
+    const generated = join(directory, "palette/generated");
+
+    await writeDefaultPaletteConfig(directory);
+    await buildDevThemes({ root });
+    await mkdir(generated);
+
+    if (contents !== "empty") {
+      await mkdir(join(generated, "nested"));
+      await writeFile(join(generated, "nested/old.txt"), "Old generated artifact\n");
+      await writeFile(join(generated, "default.txt"), "Old default-palette note\n");
+    }
+
+    /** Read-only checks must retain the directory and every obsolete file. */
+    const before = await readBuildOutputs(root);
+
+    await assert.rejects(buildDevThemes({ root, check: true }), /sample\/palette\/generated/);
+    assert.deepEqual(await readBuildOutputs(root), before);
+    assert.ok(Array.isArray(await readdir(generated)));
+    await buildDevThemes({ root });
+    await assert.rejects(readdir(generated), { code: "ENOENT" });
+    assert.match(
+      await readFile(join(directory, "palette/default-palette.txt"), "utf8"),
+      /default palette is being used/,
+    );
+    await buildDevThemes({ root, check: true });
   });
 }
 
@@ -547,7 +595,7 @@ for (const [config, pattern] of [
     await writeDefaultPaletteConfig(directory);
     await writeFile(join(directory, "palette/palette-config.jsonc"), JSON.stringify(config));
     await assert.rejects(buildDevThemes({ root }), pattern);
-    await assert.rejects(readFile(join(directory, "palette/generated/default.txt")), { code: "ENOENT" });
+    await assert.rejects(readFile(join(directory, "palette/default-palette.txt")), { code: "ENOENT" });
   });
 }
 

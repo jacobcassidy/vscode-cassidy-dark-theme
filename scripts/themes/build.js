@@ -3,7 +3,7 @@
  * @file Assemble theme inputs, resolve colors, generate reports, and write or check build outputs.
  */
 
-import { readFile, mkdir, mkdtemp, rename, rm, writeFile } from "node:fs/promises";
+import { readFile, lstat, mkdir, mkdtemp, rename, rm, writeFile } from "node:fs/promises";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { applyEdits, modify } from "jsonc-parser";
@@ -383,18 +383,21 @@ async function prepareTarget(root, target, paletteOnly, defaultPalette) {
   /** Rebuild command used in generated notices and stale-output errors. */
   const command = target.group === "prod" ? "npm run build:prod" : "npm run build:dev";
 
-  /** In-memory artifacts; null values schedule removal of obsolete palette files. */
+  /** In-memory artifacts; null values schedule removal of obsolete palette files or directories. */
   const output = input.value.useDefaultPalette
     ? new Map([
         [
-          `${target.reportDirectory}/default.txt`,
+          `${target.directory}/palette/default-palette.txt`,
           `No palette is generated for ${target.group}/${target.name} because the default palette is being used.\nDefault palette configuration: ${defaultThemeDirectory}/${paletteInputPath}\nGenerated default palette: ${defaultThemeDirectory}/palette/generated/\n`,
         ],
-        ...["json", "md", "svg"].map((extension) => [`${target.reportDirectory}/palette.${extension}`, null]),
+        [target.reportDirectory, null],
       ])
     : reports(palette, target, input, target.group === "prod" ? "npm run build:palette" : command);
 
-  if (!input.value.useDefaultPalette) output.set(`${target.reportDirectory}/default.txt`, null);
+  if (!input.value.useDefaultPalette) {
+    output.set(`${target.directory}/palette/default-palette.txt`, null);
+    output.set(`${target.reportDirectory}/default.txt`, null);
+  }
 
   /** Resolved theme metadata used to build manifest registrations. */
   let metadata;
@@ -484,7 +487,14 @@ async function staleOutputs(root, targets, group, paletteOnly) {
   }
 
   /** Existing output paths that no current selected target owns. */
-  const stale = actual.filter((path) => !expected.has(path));
+  const stale = actual.filter(
+    (path) =>
+      !expected.has(path) &&
+      !selected.some(
+        (target) =>
+          target.outputs.get(target.reportDirectory) === null && path.startsWith(`${target.reportDirectory}/`),
+      ),
+  );
 
   if (stale.length) {
     throw new Error(
@@ -494,10 +504,25 @@ async function staleOutputs(root, targets, group, paletteOnly) {
 }
 
 /**
+ * Check whether an artifact exists, including empty directories and dangling symlinks.
+ * @param path - Absolute artifact path to inspect without following symlinks.
+ * @returns Whether the path exists.
+ */
+async function artifactExists(path) {
+  try {
+    await lstat(path);
+    return true;
+  } catch (error) {
+    if (error.code === "ENOENT") return false;
+    throw error;
+  }
+}
+
+/**
  * Format and validate all output candidates before checking or atomically replacing changed files.
  *
  * @param root - Repository or isolated project root directory.
- * @param output - Output path-to-source map, with null marking obsolete palette files for removal.
+ * @param output - Output path-to-source map, with null marking obsolete palette files or directories for removal.
  * @param check - Whether to report stale artifacts without writing files.
  * @param command - Rebuild command included in stale-output diagnostics.
  */
@@ -519,9 +544,9 @@ async function stageOutputs(root, output, check, command) {
   const changed = [];
 
   for (const [path, text] of output) {
-    /** Existing artifact contents, read before any replacement or removal. */
-    const existing = await readOptional(join(root, path));
-    if (text === null ? existing !== undefined : existing !== text) changed.push(path);
+    /** Existence of scheduled removals or contents of files to replace, checked before any writes. */
+    const existing = text === null ? await artifactExists(join(root, path)) : await readOptional(join(root, path));
+    if (text === null ? existing : existing !== text) changed.push(path);
   }
 
   if (check && changed.length) {
@@ -535,7 +560,7 @@ async function stageOutputs(root, output, check, command) {
     const destination = join(root, path);
 
     if (output.get(path) === null) {
-      await rm(destination);
+      await rm(destination, { recursive: true });
       continue;
     }
 

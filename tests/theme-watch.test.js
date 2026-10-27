@@ -200,7 +200,7 @@ test("watch discovers a dev source tree created after startup", async (t) => {
   await waitFor(() => project.builds() > count);
 
   /** New target records its explicit default-palette choice instead of duplicating reports. */
-  const note = await readFile(join(project.root, "src/themes/dev/new/palette/generated/default.txt"), "utf8");
+  const note = await readFile(join(project.root, "src/themes/dev/new/palette/default-palette.txt"), "utf8");
 
   assert.match(note, /dev\/new.*default palette is being used/);
   assert.deepEqual(project.errors, []);
@@ -255,7 +255,7 @@ test("watch ignores generated output changes and unrelated source directories", 
     join(project.root, "dev-extension/themes/cassidy-dark-color-theme-sample.json"),
     "// Edited output\n",
   );
-  await writeFile(join(project.root, "src/themes/dev/sample/palette/generated/default.txt"), "Edited report\n");
+  await writeFile(join(project.root, "src/themes/dev/sample/palette/default-palette.txt"), "Edited report\n");
   await mkdir(join(project.root, "src/unrelated"));
   await writeFile(join(project.root, "src/unrelated/input.jsonc"), "{}");
   await delay(150);
@@ -399,6 +399,10 @@ test("watch debounces burst saves and ignores paths outside both source trees", 
   scheduler.notify("change", "themes/dev/test/palette/generated/palette.json");
   scheduler.notify("rename", "themes/dev/test/palette/generated");
   scheduler.notify("change", "themes\\dev\\test\\palette\\generated\\palette.md");
+  scheduler.notify("change", "themes/dev/test/palette/default-palette.txt");
+  scheduler.notify("change", "themes\\dev\\test\\palette\\default-palette.txt");
+  scheduler.notify("rename", "themes/dev/test/palette/.theme-build-example");
+  scheduler.notify("change", "themes/dev/test/palette/.theme-build-example/output");
   await delay(60);
   assert.equal(scheduler.builds(), 1);
   for (let index = 0; index < 10; index++) scheduler.notify("change", "themes/dev/test/tokens/ui.jsonc");
