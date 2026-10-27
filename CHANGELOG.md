@@ -6,6 +6,7 @@ All notable changes to this project are documented in this file.
 
 ### Changed
 
+- Made `add:theme` copy default metadata into each new theme and add a target-derived `previewName` while preserving the other fields and JSONC comments.
 - Renamed the development extension and its live theme labels to Cassidy Dark Preview, and added optional `previewName` metadata overrides for named preview and static snapshot suffixes while preserving published labels and the default preview label.
 - Allowed recognized palette settings alongside `useDefaultPalette: true`, retaining them for later custom generation, and added explicit theme arguments to `add:properties`.
 - Required matching purpose details for every `prod/default` token, extended `add:properties` to fill all four detail files and assign missing syntax IDs, and documented the remaining UI, semantic, and syntax entries using an offline source-reviewed catalog.
@@ -66,7 +67,7 @@ All notable changes to this project are documented in this file.
 
 ### Added
 
-- Added `npm run add:theme -- <prod/name|dev/name>` to create five minimal source files, populate all reference UI and semantic properties through `add:properties`, and inherit the remaining default inputs.
+- Added `npm run add:theme -- <prod/name|dev/name>` to create six minimal source files, populate all reference UI and semantic properties through `add:properties`, and inherit the remaining default inputs.
 - Added `npm run add:properties` with an editable theme allowlist, alphabetical insertion of missing UI and semantic properties, and `#0ff` placeholders marked `UNREVIEWED`.
 - Moved generated palette reports into each source theme’s `colors/generated-palette/` directory.
 - Added JSX, TSX, Bash, Zsh, SQL, C, C++, C#, Vue, and Svelte grammar samples with mixed-language syntax, shell expansions, queries, preprocessor directives, templates, attributes, and framework-specific constructs.

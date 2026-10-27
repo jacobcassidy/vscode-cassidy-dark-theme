@@ -204,17 +204,18 @@ Vue and Svelte samples require their respective VS Code language extensions for 
 
 ### Editing theme inputs
 
-Create a new source theme with `npm run add:theme -- dev/my-theme` or `npm run add:theme -- prod/my-theme`. Names follow the existing lowercase directory rules and must be unique across both groups. The command rejects existing destinations and creates exactly five authored files:
+Create a new source theme with `npm run add:theme -- dev/my-theme` or `npm run add:theme -- prod/my-theme`. Names follow the existing lowercase directory rules and must be unique across both groups. The command rejects existing destinations and creates exactly six authored files:
 
-| File                           | Initial contents                                                                           |
-| ------------------------------ | ------------------------------------------------------------------------------------------ |
-| `palette/palette-config.jsonc` | Only `{ "useDefaultPalette": true }`.                                                      |
-| `tokens/ui.jsonc`              | All reference workbench properties as `#0ff` placeholders with `UNREVIEWED` color reasons. |
-| `tokens/semantic.jsonc`        | All reference semantic selectors using the same placeholders.                              |
-| `details/ui.jsonc`             | `{}` to suppress default UI documentation fallback.                                        |
-| `details/semantic.jsonc`       | `{}` to suppress default semantic documentation fallback.                                  |
+| File                           | Initial contents                                                                                |
+| ------------------------------ | ----------------------------------------------------------------------------------------------- |
+| `metadata.jsonc`               | Default metadata copied with a target-derived `previewName`, such as `My Theme` for `my-theme`. |
+| `palette/palette-config.jsonc` | Only `{ "useDefaultPalette": true }`.                                                           |
+| `tokens/ui.jsonc`              | All reference workbench properties as `#0ff` placeholders with `UNREVIEWED` color reasons.      |
+| `tokens/semantic.jsonc`        | All reference semantic selectors using the same placeholders.                                   |
+| `details/ui.jsonc`             | `{}` to suppress default UI documentation fallback.                                             |
+| `details/semantic.jsonc`       | `{}` to suppress default semantic documentation fallback.                                       |
 
-Setup calls the existing `add:properties` implementation for only the new target. Metadata, base tokens, syntax tokens, and their corresponding details inherit the default theme. The command lists the created files and property counts, then prints the appropriate build command; it does not build, sync, or edit the property command's default allowlist. Failed setup removes only the newly created theme directory. Add a local metadata file later to customize its name or type.
+Setup calls the existing `add:properties` implementation for only the new target. Local metadata preserves the default fields and JSONC comments while setting `previewName` from the target name, overriding any default preview name. Base tokens, syntax tokens, and their corresponding details inherit the default theme. The command lists the created files and property counts, then prints the appropriate build command; it does not build, sync, or edit the property command's default allowlist. Failed setup removes only the newly created theme directory. Edit the generated metadata file to customize its name, preview name, or type.
 
 Run `npm run add:properties -- dev/my-theme` later to add newly referenced properties to that theme. Supply multiple `prod/name` or `dev/name` arguments to update several targets. With no arguments, the command uses its existing editable allowlist. Review the `UNREVIEWED` colors before building or syncing the theme for use.
 

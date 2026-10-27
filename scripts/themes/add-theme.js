@@ -6,6 +6,7 @@
 import { lstat, mkdir, rm, writeFile } from "node:fs/promises";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
+import { applyEdits, modify } from "jsonc-parser";
 // Prettier's generated entry point hides its default export from the import resolver.
 // eslint-disable-next-line import-x/default
 import prettier from "prettier";
@@ -14,8 +15,10 @@ import {
   paletteInputPath,
   readTargetInput,
   themeInputPaths,
+  themeUiType,
   validateThemeName,
 } from "../lib/theme-source-inputs.js";
+import { object } from "../lib/jsonc-validation.js";
 import { addThemeProperties, readPropertyReference } from "./add-properties.js";
 
 /** Repository root inferred from this module's location. */
@@ -63,32 +66,56 @@ export async function addTheme({ root = defaultRoot, theme } = {}) {
   /** Required default target supplying all omitted inputs. */
   const baseline = targets.find((target) => target.group === "prod" && target.name === "default");
 
+  /** Validated default input snapshots, including the metadata copied into the new theme. */
+  const inputs = new Map();
+
   for (const path of [paletteInputPath, ...themeInputPaths]) {
-    await readTargetInput(root, baseline, path);
+    inputs.set(path, await readTargetInput(root, baseline, path));
   }
 
   await readPropertyReference(root);
 
+  /** Default metadata source retained so its JSONC comments and fields survive copying. */
+  const metadata = inputs.get("metadata.jsonc");
+
+  object(metadata.value, metadata.label);
+  themeUiType(metadata.value, metadata.label);
+
+  /** Initial preview label using the same capitalization as theme picker suffixes. */
+  const previewName = name
+    .split("-")
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(" ");
+
+  /** Local metadata with the target preview name added after name or replacing an existing value. */
+  const metadataSource = applyEdits(
+    metadata.source,
+    modify(metadata.source, ["previewName"], previewName, {
+      getInsertionIndex: (properties) => properties.indexOf("name") + 1,
+    }),
+  );
+
   /** Minimal local sources; empty details prevent incompatible documentation fallback. */
   const sources = new Map([
-    [paletteInputPath, { useDefaultPalette: true }],
-    ["tokens/ui.jsonc", {}],
-    ["tokens/semantic.jsonc", {}],
-    ["details/ui.jsonc", {}],
-    ["details/semantic.jsonc", {}],
+    [paletteInputPath, '{"useDefaultPalette":true}'],
+    ["metadata.jsonc", metadataSource],
+    ["tokens/ui.jsonc", "{}"],
+    ["tokens/semantic.jsonc", "{}"],
+    ["details/ui.jsonc", "{}"],
+    ["details/semantic.jsonc", "{}"],
   ]);
 
   /** Formatted source files prepared before the destination is reserved. */
   const files = new Map();
 
-  for (const [path, value] of sources) {
+  for (const [path, source] of sources) {
     /** Absolute file path used to resolve repository formatting settings. */
     const filepath = join(destination, path);
 
     /** Formatting configuration for this authored source. */
     const options = await prettier.resolveConfig(filepath);
 
-    files.set(path, await prettier.format(JSON.stringify(value), { ...options, filepath, parser: "jsonc" }));
+    files.set(path, await prettier.format(source, { ...options, filepath, parser: "jsonc" }));
   }
 
   await mkdir(dirname(destination), { recursive: true });

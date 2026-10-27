@@ -57,7 +57,7 @@ async function snapshot(root) {
 }
 
 for (const group of ["dev", "prod"]) {
-  test(`new ${group} themes contain exactly five inputs and build with complete reference properties`, async (t) => {
+  test(`new ${group} themes contain exactly six inputs and build with complete reference properties`, async (t) => {
     /** Complete fixture with a deliberately different reference and default token set. */
     const root = await createSetupProject(t);
 
@@ -65,14 +65,15 @@ for (const group of ["dev", "prod"]) {
     const before = await snapshot(root);
 
     /** Setup summary containing only the requested target and its created sources. */
-    const result = await addTheme({ root, theme: `${group}/sample` });
+    const result = await addTheme({ root, theme: `${group}/my-theme` });
 
     /** Source prefix used to distinguish the new files from existing defaults. */
-    const prefix = `src/themes/${group}/sample/`;
+    const prefix = `src/themes/${group}/my-theme/`;
 
     assert.deepEqual(result.files.map((path) => path.slice(prefix.length)).sort(), [
       "details/semantic.jsonc",
       "details/ui.jsonc",
+      "metadata.jsonc",
       "palette/palette-config.jsonc",
       "tokens/semantic.jsonc",
       "tokens/ui.jsonc",
@@ -81,9 +82,9 @@ for (const group of ["dev", "prod"]) {
       (await snapshot(root)).filter(([path]) => !path.startsWith(prefix)),
       before,
     );
-    assert.equal((await snapshot(root)).length, before.length + 5);
+    assert.equal((await snapshot(root)).length, before.length + 6);
     assert.equal(result.command, `npm run build:${group}`);
-    assert.ok(result.updates.every((update) => update.theme === `${group}/sample` && update.added.length === 2));
+    assert.ok(result.updates.every((update) => update.theme === `${group}/my-theme` && update.added.length === 2));
 
     for (const [path, keys] of [
       ["tokens/ui.jsonc", ["a.foreground", "z.background"]],
@@ -91,6 +92,7 @@ for (const group of ["dev", "prod"]) {
       ["details/ui.jsonc", []],
       ["details/semantic.jsonc", []],
       ["palette/palette-config.jsonc", ["useDefaultPalette"]],
+      ["metadata.jsonc", ["name", "previewName", "type", "semanticHighlighting"]],
     ]) {
       /** Parsed scaffold source checked for exact keys and placeholder behavior. */
       const value = parseJsonc(await readFile(join(root, prefix, path), "utf8"), path).value;
@@ -105,13 +107,15 @@ for (const group of ["dev", "prod"]) {
       }
 
       if (path.startsWith("palette/")) assert.equal(value.useDefaultPalette, true);
+
+      if (path === "metadata.jsonc") assert.equal(value.previewName, "My Theme");
     }
 
     /** A populated theme must not change when properties are added again. */
     const complete = await snapshot(root);
 
     assert.ok(
-      (await addThemeProperties({ root, themes: [`${group}/sample`] })).every((update) => !update.added.length),
+      (await addThemeProperties({ root, themes: [`${group}/my-theme`] })).every((update) => !update.added.length),
     );
     assert.deepEqual(await snapshot(root), complete);
 
@@ -123,16 +127,60 @@ for (const group of ["dev", "prod"]) {
       await buildDevThemes({ root, check: true });
     }
 
-    /** Built theme confirms placeholder styling and inherited metadata and syntax. */
-    const outputPath = `${group === "prod" ? "themes" : "dev-extension/themes"}/cassidy-dark-color-theme-sample.json`;
+    /** Built theme confirms placeholder styling, copied metadata, and inherited syntax. */
+    const outputPath = `${group === "prod" ? "themes" : "dev-extension/themes"}/cassidy-dark-color-theme-my-theme.json`;
 
     /** Generated JSONC with base and syntax aliases resolved against the default palette. */
     const output = parseJsonc(await readFile(join(root, outputPath), "utf8"), outputPath).value;
 
     assert.equal(output.name, "Fixture");
+    assert.equal(output.previewName, "My Theme");
     assert.equal(output.colors["a.foreground"], "#0ff");
     assert.equal(output.semanticTokenColors.enum.foreground, "#0ff");
     assert.equal(output.tokenColors.length, 1);
+  });
+}
+
+for (const existingPreviewName of [false, true]) {
+  test(`metadata copying preserves default fields and comments with existing previewName=${existingPreviewName}`, async (t) => {
+    /** Default metadata source with comments and an optional preview name to replace. */
+    const root = await createSetupProject(t);
+
+    /** Default source path must remain untouched while creating a local metadata file. */
+    const path = join(root, "src/themes/prod/default/metadata.jsonc");
+
+    /** Custom fixture metadata exercises fields beyond the minimal required name and type. */
+    const source = `// Default metadata header.
+{
+  "$schema": "vscode://schemas/color-theme",
+  "name": "Fixture", // Keep this identity comment.
+  ${existingPreviewName ? '"previewName": "Default Preview", // Keep this preview comment.' : ""}
+  "type": "dark",
+  "author": "Fixture Author",
+  "version": "test-version",
+  "semanticHighlighting": false
+}
+`;
+
+    await writeFile(path, source);
+    await addTheme({ root, theme: "dev/local-preview" });
+
+    /** Copied metadata source retaining comments alongside its edited preview name. */
+    const copied = await readFile(join(root, "src/themes/dev/local-preview/metadata.jsonc"), "utf8");
+
+    /** Parsed metadata compared with the complete default, overriding only previewName. */
+    const metadata = parseJsonc(copied, "local metadata").value;
+
+    assert.deepEqual(
+      { ...metadata },
+      { ...parseJsonc(source, "default metadata").value, previewName: "Local Preview" },
+    );
+    assert.match(copied, /\/\/ Default metadata header\./);
+    assert.match(copied, /\/\/ Keep this identity comment\./);
+
+    if (existingPreviewName) assert.match(copied, /\/\/ Keep this preview comment\./);
+
+    assert.equal(await readFile(path, "utf8"), source);
   });
 }
 
