@@ -16,7 +16,15 @@ import { formatMessage } from "../shared/terminal-output.js";
 import { fields, object, parseJsonc } from "../shared/jsonc.js";
 import { generatePalette } from "../palette/generation.js";
 import { compileTokens, renderTheme } from "../tokens/compilation.js";
-import { applyArtifacts, assertFresh, capturePaths, requireStable, withGuards } from "../shared/transactions.js";
+import {
+  observeWriter,
+  verifyRestored,
+  applyArtifacts,
+  assertFresh,
+  capturePaths,
+  requireStable,
+  withGuards,
+} from "../shared/transactions.js";
 import { decode } from "../tokens/formats.js";
 import { loadTokenData } from "../tokens/data/load.js";
 import { validateCategories } from "../tokens/category-validation.js";
@@ -601,6 +609,7 @@ async function checkOutputs(root, output, check, command) {
  * @param [options.overrides] - Prepared authored source candidates.
  * @param [options.additionalTargets] - Validated targets being scaffolded.
  * @param [options.snapshot] - Already loaded shared snapshot for generator/watch reuse.
+ * @param [options.recoveryOwner] - Explicit restoration-verification guard ownership.
  */
 export async function prepareBuild({
   root = defaultRoot,
@@ -608,11 +617,15 @@ export async function prepareBuild({
   overrides = new Map(),
   additionalTargets = [],
   snapshot,
+  recoveryOwner,
 } = {}) {
   if (!["all", "prod", "dev", "palette"].includes(mode)) throw new Error(`Unknown build mode: ${mode}`);
 
   /** Read-only boundary check and complete dependency fingerprints. */
-  const generation = await requireStable(root);
+  const generation = recoveryOwner ? undefined : await requireStable(root);
+
+  if (recoveryOwner && (await observeWriter(root)).owner?.token !== recoveryOwner.token)
+    throw new Error("Recovery preparation requires the owning checkout guard");
   const expected = await capturePaths([
     join(root, "src"),
     join(root, "package.json"),
@@ -620,7 +633,7 @@ export async function prepareBuild({
     join(root, "preview"),
   ]);
   const targets = [...(await discoverTargets(root)), ...additionalTargets];
-  snapshot ??= mode === "palette" ? undefined : await loadTokenData({ root });
+  snapshot ??= mode === "palette" ? undefined : await loadTokenData({ root, recovery: Boolean(recoveryOwner) });
 
   const defaultTarget = targets.find((target) => target.directory === defaultThemeDirectory);
   const cache = new Map();
@@ -675,7 +688,7 @@ export async function prepareBuild({
   await checkOutputs(root, output, false, "npm run build");
   await assertFresh(expected);
 
-  if (JSON.stringify(await requireStable(root)) !== JSON.stringify(generation))
+  if (!recoveryOwner && JSON.stringify(await requireStable(root)) !== JSON.stringify(generation))
     throw Object.assign(new Error("Stale application generation; retry the build."), { code: "STALE_INPUT" });
 
   return { root, mode, output, expected, selected, palette: baseline.palette };
@@ -691,6 +704,11 @@ export async function prepareBuild({
 export async function applyBuild(prepared, { check = false, operations } = {}) {
   /** Validated immutable preparation data. */
   const { root, output, expected, selected, palette } = prepared;
+
+  if (check) {
+    await requireStable(root);
+    await assertFresh(expected);
+  }
 
   /** Changed paths returned by comparison or coordinated application. */
   const changed = check
@@ -829,4 +847,20 @@ export async function runBuild({
   if (preview.reloadRequired) logReloadReminder(logger);
 
   return preview;
+}
+
+/**
+ * Verify an exactly restored build or generator generation without replacing outputs.
+ * @param [options] - Owning workflow verification options.
+ * @param [options.root] - Checkout or fixture root.
+ * @param [options.operation] - build, add-properties, or add-theme.
+ */
+export async function verifyBuildRestored({ root = defaultRoot, operation = "build" } = {}) {
+  return verifyRestored(
+    root,
+    async (_marker, owner) => {
+      await prepareBuild({ root, recoveryOwner: owner });
+    },
+    operation,
+  );
 }

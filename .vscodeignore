@@ -20,3 +20,4 @@ azure-pipelines.yml
 eslint.config.js
 lefthook.yml
 prettier.config.js
+.cache

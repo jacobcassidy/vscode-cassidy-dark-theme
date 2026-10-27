@@ -175,21 +175,40 @@ export async function withGuards(resources, operation) {
       } catch (error) {
         if (error.code !== "EEXIST") throw error;
 
-        /** Existing owner must be demonstrably dead before abandonment repair. */
-        const owner = await readState(join(guard, "owner.json"));
+        /** Serial abandonment inspection prevents competing reapers from removing a replacement guard. */
+        const reaper = join(directory, "reaper");
 
-        if (!owner || alive(owner.pid))
-          throw Object.assign(new Error(`Writer busy for ${resource}; retry after the current writer finishes.`), {
-            code: "WRITER_BUSY",
-          });
+        try {
+          await mkdir(reaper);
+        } catch (failure) {
+          throw Object.assign(
+            new Error(`Writer ownership is being checked for ${resource}; retry.`, { cause: failure }),
+            { code: "WRITER_BUSY" },
+          );
+        }
 
-        // Renaming the dead guard prevents its removal from touching a replacement owner.
-        /** Isolated abandoned directory removed without clearing incomplete state. */
-        const abandoned = `${guard}.abandoned-${token}`;
+        try {
+          /** Re-read under the short abandonment reservation; age alone never authorizes removal. */
+          const owner = await readState(join(guard, "owner.json"));
 
-        await rename(guard, abandoned);
-        await rm(abandoned, { recursive: true });
-        await mkdir(guard);
+          if (!owner || alive(owner.pid))
+            throw Object.assign(new Error(`Writer busy for ${resource}; retry after the current writer finishes.`), {
+              code: "WRITER_BUSY",
+            });
+
+          await rm(guard, { recursive: true });
+
+          try {
+            await mkdir(guard);
+          } catch (failure) {
+            throw Object.assign(
+              new Error(`Writer busy for ${resource}; another writer acquired the released guard.`, { cause: failure }),
+              { code: "WRITER_BUSY" },
+            );
+          }
+        } finally {
+          await rm(reaper, { recursive: true });
+        }
       }
 
       await writeFile(join(guard, "owner.json"), JSON.stringify({ pid: process.pid, token }));
@@ -315,6 +334,8 @@ async function restore(path, entry) {
  * @param [options.recovery] - Explicit restored-set verification command.
  * @param [options.operations] - Replacement/removal overrides used by failure tests.
  * @param [options.allowRecovery] - Exact interrupted-marker identity accepted by fresh explicit recovery.
+ * @param [options.signal] - Orderly invocation cancellation signal.
+ * @param [options.operation] - Owning workflow used for exact restoration instructions.
  */
 export async function applyArtifacts({
   root,
@@ -324,6 +345,8 @@ export async function applyArtifacts({
   recovery = "npm run build -- --recover=verify-restored",
   operations = {},
   allowRecovery,
+  signal,
+  operation = "build",
 }) {
   /** Current interrupted operation must never be silently certified by another writer. */
   const previous = await readState(join(owner.directory, "incomplete.json"));
@@ -346,6 +369,8 @@ export async function applyArtifacts({
     /** Current destination type/bytes must agree with the complete prepared candidate. */
     const entry = await fingerprint(join(root, path));
 
+    before[join(root, path)] = entry;
+
     if (
       text === null
         ? entry.type === "absent"
@@ -354,14 +379,13 @@ export async function applyArtifacts({
       continue;
 
     changed.push(path);
-    before[join(root, path)] = entry;
     saved.set(path, await backup(join(root, path)));
   }
 
   if (!changed.length && !previous) return [];
 
   /** Persistent detection marker has verification metadata, never crash-replay backups. */
-  const marker = { id: randomUUID(), pid: process.pid, before, recovery };
+  const marker = { id: randomUUID(), pid: process.pid, before, recovery, operation };
 
   await replaceFile(join(owner.directory, "incomplete.json"), JSON.stringify(marker));
 
@@ -370,14 +394,24 @@ export async function applyArtifacts({
 
   try {
     for (const path of changed) {
+      signal?.throwIfAborted();
       await assertFresh({ [join(root, path)]: before[join(root, path)] });
+
+      /** Intended generation, computed from candidate bytes rather than a potentially newer editor save. */
+      const intended =
+        output.get(path) === null
+          ? { type: "absent" }
+          : { type: "file", hash: createHash("sha256").update(output.get(path)).digest("hex") };
+
+      applied.set(path, intended);
 
       if (output.get(path) === null) await (operations.remove ?? rm)(join(root, path), { recursive: true });
       else await (operations.replace ?? replaceFile)(join(root, path), output.get(path));
 
-      applied.set(path, await fingerprint(join(root, path)));
+      await assertFresh({ [join(root, path)]: intended });
     }
 
+    signal?.throwIfAborted();
     await replaceFile(join(owner.directory, "generation.json"), JSON.stringify(marker.id));
     await rm(join(owner.directory, "incomplete.json"));
 
@@ -388,6 +422,8 @@ export async function applyArtifacts({
 
     for (const [path, expectedEntry] of [...applied].reverse()) {
       try {
+        if (same(await fingerprint(join(root, path)), before[join(root, path)])) continue;
+
         if (!same(await fingerprint(join(root, path)), expectedEntry))
           throw new Error(`newer edit preserved: ${path}`, { cause: error });
 
@@ -410,9 +446,10 @@ export async function applyArtifacts({
 /**
  * Verify the complete pre-application set under the normal guard, then clear only that marker.
  * @param resource - Owning checkout root.
- * @param validate - Local read-only contract validation, with recovery-only loading.
+ * @param validate - Local read-only contract validation, receiving marker and guard ownership.
+ * @param [operation] - Required owning workflow identity.
  */
-export async function verifyRestored(resource, validate) {
+export async function verifyRestored(resource, validate, operation) {
   return withGuards([resource], async ([owner]) => {
     /** Retained marker must include the complete verification set. */
     const marker = await readState(join(owner.directory, "incomplete.json"));
@@ -420,8 +457,13 @@ export async function verifyRestored(resource, validate) {
     if (!marker || !marker.id || !Object.keys(marker.before ?? {}).length)
       throw new Error("No complete interrupted-generation verification metadata is available.");
 
+    if (operation && marker.operation !== operation)
+      throw new Error(
+        `Interrupted generation belongs to ${marker.operation ?? "an unknown workflow"}; use its owning recovery command`,
+      );
+
     await assertFresh(marker.before);
-    await validate();
+    await validate(marker, owner);
     await assertFresh(marker.before);
     await rm(join(owner.directory, "incomplete.json"));
   });

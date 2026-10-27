@@ -15,27 +15,10 @@ import {
 import { homedir } from "node:os";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
+import { canonicalJson } from "../shared/serialization.js";
 import { formatMessage } from "../shared/terminal-output.js";
 import { parseJsonc } from "../shared/jsonc.js";
 import { listFiles, readOptional, themeUiType } from "../themes/inputs.js";
-
-/**
- * Serialize JSON with stable object-key ordering, retaining array order.
- * @param value - JSON value to normalize for semantic comparison.
- * @returns Canonical JSON text.
- */
-function canonicalJson(value) {
-  if (Array.isArray(value)) return `[${value.map(canonicalJson).join(",")}]`;
-
-  if (value !== null && typeof value === "object") {
-    return `{${Object.keys(value)
-      .sort()
-      .map((key) => `${JSON.stringify(key)}:${canonicalJson(value[key])}`)
-      .join(",")}}`;
-  }
-
-  return JSON.stringify(value);
-}
 
 /**
  * Compare preview identity and registrations independently of formatting and ordering.

@@ -7,3 +7,4 @@
 /docs/TODO.md
 dist/
 node_modules
+.cache/

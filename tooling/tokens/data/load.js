@@ -3,6 +3,7 @@
  * @file Load one checked-in classification snapshot without extraction, upstream configuration, parser, or network dependencies.
  */
 
+import { canonicalJson } from "../../shared/serialization.js";
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 import { parseFormat, categories, nonempty } from "../formats.js";
@@ -57,10 +58,21 @@ function scopeIndex(details) {
       /** Previously reviewed selector context, if any. */
       const previous = index.get(evidence.selector);
 
-      if (previous && JSON.stringify(previous.evidence) !== JSON.stringify(evidence))
+      if (
+        previous &&
+        canonicalJson([
+          previous.evidence.category,
+          previous.evidence.extensionId ?? null,
+          previous.evidence.providerId ?? null,
+        ]) !== canonicalJson([evidence.category, evidence.extensionId ?? null, evidence.providerId ?? null])
+      )
         throw new Error(`Conflicting scope evidence for "${evidence.selector}": ${previous.label} and ${record.label}`);
 
-      index.set(evidence.selector, { evidence, label: record.label });
+      index.set(evidence.selector, {
+        evidence,
+        label: record.label,
+        provenance: [...(previous?.provenance ?? []), evidence],
+      });
     }
   }
 
@@ -95,6 +107,11 @@ export async function loadTokenData({ root = repositoryRoot, recovery = false } 
       /** Definition inventory controls supported membership; details cannot override it. */
       const definition = definitions[family].records.get(id);
 
+      if (definition?.value.use && detail.value.use && definition.value.use !== detail.value.use)
+        throw new Error(
+          `${detail.label}: conflicting shared usage for ${family} token "${id}"; authority ${definition.label}`,
+        );
+
       if (definition && definition.category !== detail.category)
         throw new Error(
           `${detail.label}: ${family} token "${id}" has conflicting category ${detail.category}; expected ${definition.category} from ${definition.label}`,
@@ -104,7 +121,7 @@ export async function loadTokenData({ root = repositoryRoot, recovery = false } 
 
   /** Scope-based evidence and normalized membership projection used by watcher invalidation. */
   const scopes = scopeIndex(details.syntax);
-  const projection = JSON.stringify({
+  const projection = canonicalJson({
     definitions: Object.fromEntries(
       Object.entries(definitions).map(([family, data]) => [
         family,
@@ -117,7 +134,11 @@ export async function loadTokenData({ root = repositoryRoot, recovery = false } 
         [...data.records].map(([id, record]) => [id, record.category]).sort(),
       ]),
     ),
-    scopes: [...scopes].map(([selector, record]) => [selector, record.evidence]).sort(),
+    scopes: [...scopes].map(([selector, record]) => [selector, record.provenance]).sort(),
+    referenceEvidence: [...details.syntax.records]
+      .filter(([, record]) => record.value.scopeEvidence)
+      .map(([id, record]) => [id, record.value.scopeEvidence])
+      .sort(),
   });
 
   await assertFresh(expected);

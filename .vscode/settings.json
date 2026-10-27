@@ -88,6 +88,12 @@
         "/docs/references/examples/example-semantic.jsonc"
       ],
       "url": "./tooling/tokens/schemas/theme-semantic-definitions.schema.json"
+    },
+    {
+      "fileMatch": [
+        "/src/token-data/upstream-sources.jsonc"
+      ],
+      "url": "./tooling/tokens/schemas/upstream-sources.schema.json"
     }
   ]
 }
