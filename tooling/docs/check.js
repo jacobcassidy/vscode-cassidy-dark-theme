@@ -16,7 +16,6 @@ const maintained = [
   "src/token-data/README.md",
   "docs/guides/development-guide.md",
   "docs/references/hex-opacity.md",
-  "docs/references/refactor-2b/checkpoints.md",
 ];
 
 /**

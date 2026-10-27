@@ -76,8 +76,7 @@ export async function checkLegacy({ root = repositoryRoot, configuration = confi
       path.startsWith("preview/snapshots/") ||
       path === "CHANGELOG.md" ||
       path.startsWith("docs/references/comparisons/") ||
-      path.startsWith("docs/references/palettes/") ||
-      path === "docs/references/refactor-2b/checkpoints.md";
+      path.startsWith("docs/references/palettes/");
 
     /** Whether this owned file belongs in the executable module graph. */
     const executable =

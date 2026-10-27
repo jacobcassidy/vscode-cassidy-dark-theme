@@ -48,7 +48,7 @@ The production default at `src/themes/prod/default/` supplies **independent whol
 
 Every target explicitly supplies `palette/config.jsonc`. Set `useDefaultPalette: true` to use the default palette; otherwise provide complete custom settings. Shared definitions provide inventory/categories/placeholders; shared details provide reusable documentation. Builds validate those authorities without importing their styling or descriptions into themes. Shared syntax has no definition inventory, and shared variables do not exist.
 
-Generated production themes stay in `themes/`. Reports stay beside each theme's palette. Preserved snapshots are historical bytes, independent from generated preview themes. [Shared-data ownership](../../src/token-data/README.md), [schemas](../../tooling/tokens/schemas/), and the [migration evidence](../references/refactor-2b/checkpoints.md) provide focused references.
+Generated production themes stay in `themes/`. Reports stay beside each theme's palette. Preserved snapshots are historical bytes, independent from generated preview themes. [Shared-data ownership](../../src/token-data/README.md) and [schemas](../../tooling/tokens/schemas/) provide focused references.
 
 ## Editing palettes
 
