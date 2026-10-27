@@ -3,6 +3,7 @@
  * @file Create a default-backed theme with complete UI and semantic property placeholders.
  */
 
+import { paletteInputPath, themeInputPaths } from "../shared/paths.js";
 import { lstat, mkdir, rm, writeFile } from "node:fs/promises";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -10,14 +11,7 @@ import { applyEdits, modify } from "jsonc-parser";
 // Prettier's generated entry point hides its default export from the import resolver.
 // eslint-disable-next-line import-x/default
 import prettier from "prettier";
-import {
-  discoverTargets,
-  paletteInputPath,
-  readTargetInput,
-  themeInputPaths,
-  themeUiType,
-  validateThemeName,
-} from "../themes/inputs.js";
+import { discoverTargets, readTargetInput, themeUiType, validateThemeName } from "../themes/inputs.js";
 import { object } from "../shared/jsonc.js";
 import { addThemeProperties, readPropertyReference } from "./add-properties.js";
 
@@ -99,10 +93,10 @@ export async function addTheme({ root = defaultRoot, theme } = {}) {
   const sources = new Map([
     [paletteInputPath, '{"useDefaultPalette":true}'],
     ["metadata.jsonc", metadataSource],
-    ["tokens/ui.jsonc", "{}"],
-    ["tokens/semantic.jsonc", "{}"],
-    ["details/ui.jsonc", "{}"],
-    ["details/semantic.jsonc", "{}"],
+    ["tokens/ui/definitions.jsonc", "{}"],
+    ["tokens/semantic/definitions.jsonc", "{}"],
+    ["tokens/ui/details.jsonc", "{}"],
+    ["tokens/semantic/details.jsonc", "{}"],
   ]);
 
   /** Formatted source files prepared before the destination is reserved. */

@@ -3,13 +3,14 @@
  * @file Compare every effective theme against frozen pre-refactor styling and authored records.
  */
 
+import { paletteInputPath, themeSections } from "../../tooling/shared/paths.js";
 import assert from "node:assert/strict";
 import test from "node:test";
 import { readFile } from "node:fs/promises";
 import { createHash } from "node:crypto";
 import { fileURLToPath } from "node:url";
 import { join } from "node:path";
-import { discoverTargets, readTargetInput, paletteInputPath, themeSections } from "../../tooling/themes/inputs.js";
+import { discoverTargets, readTargetInput } from "../../tooling/themes/inputs.js";
 import { generatePalette } from "../../tooling/palette/generation.js";
 import { compileTokens } from "../../tooling/tokens/compilation.js";
 
@@ -45,7 +46,11 @@ test("all discovered targets retain independently captured styling, documentatio
         ["details", details],
       ]) {
         /** Current independently selected effective file. */
-        const input = await readTargetInput(root, target, `${group}/${family}.jsonc`);
+        const input = await readTargetInput(
+          root,
+          target,
+          `tokens/${family}/${group === "tokens" ? "definitions" : "details"}.jsonc`,
+        );
 
         assert.equal(input.fallback, expected.inputs[`${group}/${family}.jsonc`].fallback);
         assert.deepEqual(JSON.parse(JSON.stringify(input.value)), expected.inputs[`${group}/${family}.jsonc`].value);
@@ -72,7 +77,7 @@ test("preserved snapshot bytes match their independent hashes", async () => {
   for (const [path, hash] of Object.entries(baseline.snapshots)) {
     assert.equal(
       createHash("sha256")
-        .update(await readFile(join(root, path)))
+        .update(await readFile(join(root, path.replace("dev-extension/static-snapshots/", "preview/snapshots/"))))
         .digest("hex"),
       hash,
       path,

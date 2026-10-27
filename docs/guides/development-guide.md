@@ -42,7 +42,7 @@ Run the commands in this guide from the repository root unless stated otherwise.
 | [`docs/guides/`](./)                                            | Development guides and reference material.                                                                      |
 | [`docs/plans/`](../plans/)                                      | Implementation plans, including the completed [restructuring plan 1b](../plans/archive/restructure-1b-plan.md). |
 | [`scripts/themes/`](../../../scripts/themes/)                   | Builds and checks prod and dev palettes/themes.                                                                 |
-| [`scripts/dev-extension/`](../../../scripts/dev-extension/)     | Creates and refreshes the dev preview extension's manifest and asset links.                                     |
+| [`scripts/preview/`](../../../scripts/preview/)                 | Creates and refreshes the dev preview extension's manifest and asset links.                                     |
 | [`scripts/lib/`](../../../scripts/lib/)                         | Shared color calculations, palette generation and token compilation, JSONC parsing, and target discovery.       |
 | [`scripts/release/`](../../../scripts/release/)                 | VSIX packaging, release notes, pipeline submission, and GitHub publishing.                                      |
 | [`tests/`](../../../tests/)                                     | Automated tests and isolated fixtures.                                                                          |
@@ -52,7 +52,7 @@ Run the commands in this guide from the repository root unless stated otherwise.
 | [`.vscodeignore`](../../../.vscodeignore)                       | VSIX exclusions.                                                                                                |
 | [`CHANGELOG.md`](../../../CHANGELOG.md)                         | Versioned release notes used for GitHub releases.                                                               |
 
-`dev-extension/themes/` contains generated dev themes loaded by the local extension. `dev-extension/static-snapshots/` contains fixed comparison themes that are not regenerated.
+`preview/themes/` contains generated dev themes loaded by the local extension. `preview/snapshots/` contains fixed comparison themes that are not regenerated.
 
 Shared modules in `scripts/lib/` are named for their responsibilities:
 
@@ -92,13 +92,13 @@ The repository uses ES modules (`"type": "module"`). Its npm dependencies suppor
 npm run build
 ```
 
-This command builds prod targets followed by dev targets, then syncs previews once after both groups succeed. The individual `build:prod` and `build:dev` commands also sync previews after building their selected group. The internal module [`scripts/dev-extension/sync.js`](../../../scripts/dev-extension/sync.js) creates or refreshes a separate extension directory at:
+This command builds prod targets followed by dev targets, then syncs previews once after both groups succeed. The individual `build:prod` and `build:dev` commands also sync previews after building their selected group. The internal module [`scripts/preview/sync.js`](../../../scripts/preview/sync.js) creates or refreshes a separate extension directory at:
 
 ```text
 ~/.vscode/extensions/jacobcassidy.cassidy-dark-dev/
 ```
 
-The script writes a generated `package.json` there with the name `cassidy-dark-dev` and display name **Cassidy Dark Preview**, and removes the published manifest's `__metadata`. It links the checkout's `themes/`, `dev-extension/`, and `images/` directories into that extension directory. The checkout's `dev-extension/themes/` and `dev-extension/static-snapshots/` directories therefore provide the local extension's generated themes and fixed comparison themes. The source manifest stays in the checkout; the generated dev manifest is a separate file.
+The script writes a generated `package.json` there with the name `cassidy-dark-dev` and display name **Cassidy Dark Preview**, and removes the published manifest's `__metadata`. It links the checkout's `themes/`, `preview/`, and `images/` directories into that extension directory. The checkout's `preview/themes/` and `preview/snapshots/` directories therefore provide the local extension's generated themes and fixed comparison themes. The source manifest stays in the checkout; the generated dev manifest is a separate file.
 
 The dev manifest registers:
 
@@ -144,7 +144,7 @@ For safety, the sync script refuses to use a symlink for the dev extension direc
 npm run watch
 ```
 
-[`scripts/themes/watch.js`](../../../scripts/themes/watch.js) builds prod themes, builds dev themes, and syncs the dev extension on startup. It then watches `src/themes/prod/`, `src/themes/dev/`, root `package.json`, and JSON files in `dev-extension/static-snapshots/`, repeating those steps when inputs change. You do not need to run a build first. Prod defaults are watched because dev themes inherit omitted input files. Creating a dev source tree after startup is supported.
+[`scripts/themes/watch.js`](../../../scripts/themes/watch.js) builds prod themes, builds dev themes, and syncs the dev extension on startup. It then watches `src/themes/prod/`, `src/themes/dev/`, root `package.json`, and JSON files in `preview/snapshots/`, repeating those steps when inputs change. You do not need to run a build first. Prod defaults are watched because dev themes inherit omitted input files. Creating a dev source tree after startup is supported.
 
 After the initial setup, run **Developer: Reload Window** and select a **Cassidy Dark Preview** theme. Saving source inputs rebuilds the generated JSON; the extension's `_watch: true` entries tell VS Code to reload the selected theme's colors. The command prints another reload reminder when theme registrations change, such as after adding a theme or changing its metadata name or type. Reload VS Code to pick up those registration changes.
 
@@ -210,14 +210,14 @@ Vue and Svelte samples require their respective VS Code language extensions for 
 
 Create a new source theme with `npm run add:theme -- dev/my-theme` or `npm run add:theme -- prod/my-theme`. Names follow the existing lowercase directory rules and must be unique across both groups. The command rejects existing destinations and creates exactly six authored files:
 
-| File                           | Initial contents                                                                                |
-| ------------------------------ | ----------------------------------------------------------------------------------------------- |
-| `metadata.jsonc`               | Default metadata copied with a target-derived `previewName`, such as `My Theme` for `my-theme`. |
-| `palette/palette-config.jsonc` | Only `{ "useDefaultPalette": true }`.                                                           |
-| `tokens/ui.jsonc`              | All reference workbench properties as `#0ff` placeholders with `UNREVIEWED` color reasons.      |
-| `tokens/semantic.jsonc`        | All reference semantic selectors using the same placeholders.                                   |
-| `details/ui.jsonc`             | `{}` to suppress default UI documentation fallback.                                             |
-| `details/semantic.jsonc`       | `{}` to suppress default semantic documentation fallback.                                       |
+| File                                | Initial contents                                                                                |
+| ----------------------------------- | ----------------------------------------------------------------------------------------------- |
+| `metadata.jsonc`                    | Default metadata copied with a target-derived `previewName`, such as `My Theme` for `my-theme`. |
+| `palette/config.jsonc`              | Only `{ "useDefaultPalette": true }`.                                                           |
+| `tokens/ui/definitions.jsonc`       | All reference workbench properties as `#0ff` placeholders with `UNREVIEWED` color reasons.      |
+| `tokens/semantic/definitions.jsonc` | All reference semantic selectors using the same placeholders.                                   |
+| `tokens/ui/details.jsonc`           | `{}` to suppress default UI documentation fallback.                                             |
+| `tokens/semantic/details.jsonc`     | `{}` to suppress default semantic documentation fallback.                                       |
 
 Setup calls the existing `add:properties` implementation for only the new target. Local metadata preserves the default fields and JSONC comments while setting `previewName` from the target name, overriding any default preview name. Base tokens, syntax tokens, and their corresponding details inherit the default theme. The command lists the created files and property counts, then prints the appropriate build command; it does not build, sync, or edit the property command's default allowlist. Failed setup removes only the newly created theme directory. Edit the generated metadata file to customize its name, preview name, or type.
 
@@ -227,12 +227,12 @@ The prod default under `src/themes/prod/default/` requires ten authored files:
 
 | Relative input path                            | Purpose                                                                                                                              |
 | ---------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
-| `palette/palette-config.jsonc`                 | Required palette selection: `useDefaultPalette: true` or complete generation settings with documented overrides.                     |
+| `palette/config.jsonc`                         | Required palette selection: `useDefaultPalette: true` or complete generation settings with documented overrides.                     |
 | `metadata.jsonc`                               | Root properties such as `$schema`, `name`, `type`, `author`, and `semanticHighlighting`.                                             |
-| `tokens/variables.jsonc`                       | Nested `surface`, `text`, `diagnostic`, and `diff` roles exposing `variables.*` aliases without emitting entries.                    |
-| `tokens/ui.jsonc`                              | Flat VS Code settings with color descriptors, compiled into `colors`.                                                                |
-| `tokens/semantic.jsonc`                        | Exact semantic selectors with color descriptors and/or boolean formatting flags.                                                     |
-| `tokens/syntax.jsonc`                          | Ordered TextMate rules with names, scopes, optional IDs, direct color descriptors, `fontStyle`, and optional background descriptors. |
+| `tokens/variables/definitions.jsonc`           | Nested `surface`, `text`, `diagnostic`, and `diff` roles exposing `variables.*` aliases without emitting entries.                    |
+| `tokens/ui/definitions.jsonc`                  | Flat VS Code settings with color descriptors, compiled into `colors`.                                                                |
+| `tokens/semantic/definitions.jsonc`            | Exact semantic selectors with color descriptors and/or boolean formatting flags.                                                     |
+| `tokens/syntax/definitions.jsonc`              | Ordered TextMate rules with names, scopes, optional IDs, direct color descriptors, `fontStyle`, and optional background descriptors. |
 | `details/{variables,ui,semantic,syntax}.jsonc` | Four independent documentation files keyed by effective authored entries, including disabled entries.                                |
 
 Use `color` for a direct palette or token alias, such as `palette.yellow.400`, `variables.diagnostic.error.foreground`, or `syntax.string`. Literal hex colors require `colorReason`; optional `alpha` replaces inherited opacity. UI and semantic entries expose `ui.<key>` and `semantic.<selector>` aliases; a syntax rule with an `id` exposes its foreground as `syntax.<id>`. Forward and cross-section aliases work because all named colors are collected before resolution. Dotted and wildcard semantic selectors remain exact flat keys.
@@ -241,7 +241,7 @@ See [tokens and details](token-details.md) for the schemas, independent relation
 
 #### Selecting a palette
 
-Every theme must provide its own `palette/palette-config.jsonc`; missing palette files fail validation. To use the palette generated by `src/themes/prod/default/`, the complete configuration is:
+Every theme must provide its own `palette/config.jsonc`; missing palette files fail validation. To use the palette generated by `src/themes/prod/default/`, the complete configuration is:
 
 ```jsonc
 {
@@ -255,7 +255,7 @@ To generate an independent palette, provide the full `chroma`, `families`, `neut
 
 #### Palette overrides
 
-Use the top-level `overrides` object in `palette/palette-config.jsonc` to replace a generated palette primitive with a documented color. For example, replace the existing `"overrides": {}` property with this entry, keeping the other configuration properties:
+Use the top-level `overrides` object in `palette/config.jsonc` to replace a generated palette primitive with a documented color. For example, replace the existing `"overrides": {}` property with this entry, keeping the other configuration properties:
 
 ```jsonc
 "overrides": {
@@ -276,29 +276,29 @@ Run `npm run build:palette` to update prod palette reports, `npm run build:prod`
 
 Add a directory under `src/themes/prod/<name>/` for a shipped theme, or `src/themes/dev/<name>/` for a dev preview. Theme directory names must be lowercase, begin with a letter, and use only letters, digits, periods, and hyphens. Consecutive periods and trailing periods are rejected. Names must be unique across both source groups even though reports are grouped separately.
 
-Every theme requires `palette/palette-config.jsonc`, selecting either the default palette explicitly or its own complete palette settings. The other nine input files are optional outside the prod default. An omitted metadata, token, or details file uses the file at the same relative path in the default directory. A supplied file replaces that entire file; individual missing keys are not merged or inherited. Empty text or invalid supplied files fail validation. Empty object sections and empty syntax arrays are valid replacements; use `{}` details files to suppress documentation fallback. Missing or invalid default inputs also fail, even when building dev themes. There is no inheritance chain through other named themes.
+Every theme requires `palette/config.jsonc`, selecting either the default palette explicitly or its own complete palette settings. The other nine input files are optional outside the prod default. An omitted metadata, token, or details file uses the file at the same relative path in the default directory. A supplied file replaces that entire file; individual missing keys are not merged or inherited. Empty text or invalid supplied files fail validation. Empty object sections and empty syntax arrays are valid replacements; use `{}` details files to suppress documentation fallback. Missing or invalid default inputs also fail, even when building dev themes. There is no inheritance chain through other named themes.
 
 For example, to try a different yellow palette locally:
 
 1. Create `src/themes/dev/yellow-test/palette/`.
-2. Copy the complete default `palette/palette-config.jsonc` into it and change the yellow parameters.
+2. Copy the complete default `palette/config.jsonc` into it and change the yellow parameters.
 3. Omit `metadata.jsonc`, `tokens/`, and `details/` to inherit the default versions.
-4. Run `npm run build:dev` to generate `dev-extension/themes/cassidy-dark-color-theme-yellow-test.json` and `src/themes/dev/yellow-test/palette/generated/palette.{json,md,svg}`.
+4. Run `npm run build:dev` to generate `preview/themes/cassidy-dark-color-theme-yellow-test.json` and `src/themes/dev/yellow-test/palette/generated/palette.{json,md,svg}`.
 5. Run `npm run build` and select **Cassidy Dark Preview (Yellow Test)** in VS Code.
 
 Inherited token sections resolve against the dev palette. Supplied token sections replace their counterparts entirely, so include every alias required by the other effective sections. Inherited details must match those effective authored entries; supply a corresponding details file when keys or syntax IDs change. Copy the complete default files as a starting point. Changes to a default file affect every target inheriting it.
 
-A target containing only `palette/palette-config.jsonc` with `useDefaultPalette: true` uses the default palette and inherits all other inputs. Add a complete `metadata.jsonc` to customize its name and type. Metadata is also replaced as a whole file. Supported types are `dark`, `light`, `hc`, and `hcLight`, mapped to `vs-dark`, `vs`, `hc-black`, and `hc-light`. Prod labels use the resolved metadata name and add the target name for non-default targets. Only the existing default prod theme is included by this restructuring; no example high-contrast theme is created.
+A target containing only `palette/config.jsonc` with `useDefaultPalette: true` uses the default palette and inherits all other inputs. Add a complete `metadata.jsonc` to customize its name and type. Metadata is also replaced as a whole file. Supported types are `dark`, `light`, `hc`, and `hcLight`, mapped to `vs-dark`, `vs`, `hc-black`, and `hc-light`. Prod labels use the resolved metadata name and add the target name for non-default targets. Only the existing default prod theme is included by this restructuring; no example high-contrast theme is created.
 
 ### Building and checking outputs
 
 `npm run build:palette` builds reports for all prod targets without requiring tokens, details, metadata, or the manifest. `npm run build:prod` generates all prod themes and reports and synchronizes `package.json` theme contributions while preserving unrelated fields. `npm run build:dev` builds all dev themes and their reports without changing prod outputs or the source manifest. Both commands then sync the preview extension. `npm run build` builds both groups and syncs previews once; if either build fails, synchronization does not run. Palette-only and check modes do not sync previews.
 
-Independently generated palettes have reports under `src/themes/<prod or dev>/<theme name>/palette/generated/` as `palette.json`, `palette.md`, and `palette.svg`. JSON records measurements and source provenance; Markdown embeds the sibling swatch sheet. Themes selecting `useDefaultPalette: true` have a `palette/default-palette.txt` note and no `palette/generated/` directory; they use the default theme’s palette and reports. Reports and archived documents are never used to discover source themes. Historical themes under `dev-extension/static-snapshots/` and documentation under `docs/references/palettes/` are excluded from regeneration.
+Independently generated palettes have reports under `src/themes/<prod or dev>/<theme name>/palette/generated/` as `palette.json`, `palette.md`, and `palette.svg`. JSON records measurements and source provenance; Markdown embeds the sibling swatch sheet. Themes selecting `useDefaultPalette: true` have a `palette/default-palette.txt` note and no `palette/generated/` directory; they use the default theme’s palette and reports. Reports and archived documents are never used to discover source themes. Historical themes under `preview/snapshots/` and documentation under `docs/references/palettes/` are excluded from regeneration.
 
 The builder rejects duplicate JSONC keys, invalid settings, malformed details, missing references, alias cycles, and references to entries without configured colors. Details do not affect styling; reviewed global replacements enforce explicit disabling. Generated output preserves rule and scope order and only deliberate disabled-entry comments; ordinary source comments are omitted. All selected targets are validated and formatted before any destination is replaced. Builds write only changed files and remove verified obsolete outputs. Commit source and generated changes together; no automatic watch process runs.
 
-`check:generated` renders prod and dev outputs in memory and compares them with committed files, including prod manifest entries. It never writes files. Missing, stale, or obsolete outputs fail with diagnostics. Builds automatically remove `palette/generated/` when selecting the default palette, or recreate that directory and remove `palette/default-palette.txt` when generating a custom palette. `check:generated` reports those pending removals without deleting files. After removing or renaming a complete source theme directory, its palette reports disappear or move with it. A normal theme build automatically removes obsolete regular JSON files directly in `themes/` or `dev-extension/themes/` only when the first line exactly matches `// Generated by npm run build:prod. Edit the corresponding inputs and rebuild.` or the corresponding `build:dev` notice for that directory. An optional UTF-8 BOM and CRLF line endings are accepted. This notice establishes ownership even if the generated body was edited; edit source inputs to retain changes. Missing, altered, or wrong-group notices retain the existing stale-output error. New outputs must pass validation and formatting before cleanup runs. Palette-only builds do not clean up theme JSON, and archives, static snapshots, nested folders, and symlinks are excluded from this cleanup. Build and watch summaries include removal counts and blue indented paths marked `(removed)`. Check mode reports pending removals without performing them.
+`check:generated` renders prod and dev outputs in memory and compares them with committed files, including prod manifest entries. It never writes files. Missing, stale, or obsolete outputs fail with diagnostics. Builds automatically remove `palette/generated/` when selecting the default palette, or recreate that directory and remove `palette/default-palette.txt` when generating a custom palette. `check:generated` reports those pending removals without deleting files. After removing or renaming a complete source theme directory, its palette reports disappear or move with it. A normal theme build automatically removes obsolete regular JSON files directly in `themes/` or `preview/themes/` only when the first line exactly matches `// Generated by npm run build:prod. Edit the corresponding inputs and rebuild.` or the corresponding `build:dev` notice for that directory. An optional UTF-8 BOM and CRLF line endings are accepted. This notice establishes ownership even if the generated body was edited; edit source inputs to retain changes. Missing, altered, or wrong-group notices retain the existing stale-output error. New outputs must pass validation and formatting before cleanup runs. Palette-only builds do not clean up theme JSON, and archives, static snapshots, nested folders, and symlinks are excluded from this cleanup. Build and watch summaries include removal counts and blue indented paths marked `(removed)`. Check mode reports pending removals without performing them.
 
 The editor settings in `.vscode/` recommend Prettier, ESLint, Markdown linting, and color inspection tools. Prettier formats on save, using two-space indentation and the repository configuration.
 
@@ -340,7 +340,7 @@ The tests cover palette math, token aliases and alpha, file-level fallback and r
 | `tests/theme-build.test.js`       | JSONC parsing, token compilation, authored theme contrast, reports, fallback, registrations, and build output checks.       |
 | `tests/theme-validation.test.js`  | Generated theme structure, manifest assets, registrations, and matching theme types.                                        |
 | `tests/theme-watch.test.js`       | Source watching, queued builds, error recovery, automatic stale-theme cleanup, registration refresh, and graceful shutdown. |
-| `tests/dev-extension.test.js`     | Dev preview extension synchronization, theme picker entries, and symlink protections.                                       |
+| `tests/preview.test.js`           | Dev preview extension synchronization, theme picker entries, and symlink protections.                                       |
 | `tests/test-projects.js`          | Reusable sample inputs and temporary project setup, output snapshots, and cleanup.                                          |
 
 `createBuildProject` returns a temporary source project's root directory. `createPreviewProject` returns the project and extension destination paths, sample manifest, and generated theme text for validation and preview tests. Both project builders register cleanup with the test context.

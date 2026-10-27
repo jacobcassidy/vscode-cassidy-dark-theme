@@ -5,7 +5,8 @@
 
 import assert from "node:assert/strict";
 import { execFile } from "node:child_process";
-import { cp, mkdir, readFile, readdir, stat, symlink, writeFile } from "node:fs/promises";
+import { cp, mkdir, readFile, readdir, stat, symlink } from "node:fs/promises";
+import { writeFixture as writeFile, createBuildProject, readBuildOutputs } from "../helpers/projects.js";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { promisify } from "node:util";
@@ -14,7 +15,6 @@ import { addTheme } from "../../tooling/generators/add-theme.js";
 import { addThemeProperties } from "../../tooling/generators/add-properties.js";
 import { buildDevThemes, buildProdThemes } from "../../tooling/themes/build.js";
 import { parseJsonc } from "../../tooling/shared/jsonc.js";
-import { createBuildProject, readBuildOutputs } from "../helpers/projects.js";
 
 /** Asynchronous child-process runner used to exercise the actual CLI entry points. */
 const run = promisify(execFile);
@@ -74,14 +74,17 @@ for (const group of ["dev", "prod"]) {
     /** Source prefix used to distinguish the new files from existing defaults. */
     const prefix = `src/themes/${group}/my-theme/`;
 
-    assert.deepEqual(result.files.map((path) => path.slice(prefix.length)).sort(), [
-      "details/semantic.jsonc",
-      "details/ui.jsonc",
-      "metadata.jsonc",
-      "palette/palette-config.jsonc",
-      "tokens/semantic.jsonc",
-      "tokens/ui.jsonc",
-    ]);
+    assert.deepEqual(
+      result.files.map((path) => path.slice(prefix.length)).sort(),
+      [
+        "tokens/semantic/details.jsonc",
+        "tokens/ui/details.jsonc",
+        "metadata.jsonc",
+        "palette/config.jsonc",
+        "tokens/semantic/definitions.jsonc",
+        "tokens/ui/definitions.jsonc",
+      ].sort(),
+    );
     assert.deepEqual(
       (await snapshot(root)).filter(([path]) => !path.startsWith(prefix)),
       before,
@@ -91,11 +94,11 @@ for (const group of ["dev", "prod"]) {
     assert.ok(result.updates.every((update) => update.theme === `${group}/my-theme` && update.added.length === 2));
 
     for (const [path, keys] of [
-      ["tokens/ui.jsonc", ["a.foreground", "z.background"]],
-      ["tokens/semantic.jsonc", ["*.readonly", "enum"]],
-      ["details/ui.jsonc", []],
-      ["details/semantic.jsonc", []],
-      ["palette/palette-config.jsonc", ["useDefaultPalette"]],
+      ["tokens/ui/definitions.jsonc", ["a.foreground", "z.background"]],
+      ["tokens/semantic/definitions.jsonc", ["*.readonly", "enum"]],
+      ["tokens/ui/details.jsonc", []],
+      ["tokens/semantic/details.jsonc", []],
+      ["palette/config.jsonc", ["useDefaultPalette"]],
       ["metadata.jsonc", ["name", "previewName", "type", "semanticHighlighting"]],
     ]) {
       /** Parsed scaffold source checked for exact keys and placeholder behavior. */
@@ -103,7 +106,7 @@ for (const group of ["dev", "prod"]) {
 
       assert.deepEqual(Object.keys(value), keys);
 
-      if (path.startsWith("tokens/")) {
+      if (path.endsWith("/definitions.jsonc")) {
         for (const definition of Object.values(value)) {
           assert.equal(definition.color, "#0ff");
           assert.match(definition.colorReason, /^UNREVIEWED:/);
@@ -132,7 +135,7 @@ for (const group of ["dev", "prod"]) {
     }
 
     /** Built theme confirms placeholder styling, copied metadata, and inherited syntax. */
-    const outputPath = `${group === "prod" ? "themes" : "dev-extension/themes"}/cassidy-dark-color-theme-my-theme.json`;
+    const outputPath = `${group === "prod" ? "themes" : "preview/themes"}/cassidy-dark-color-theme-my-theme.json`;
 
     /** Generated JSONC with variable and syntax aliases resolved against the default palette. */
     const output = parseJsonc(await readFile(join(root, outputPath), "utf8"), outputPath).value;

@@ -3,24 +3,10 @@
  * @file Discover theme targets, load default-backed inputs, and validate registration metadata.
  */
 
+import { defaultThemeDirectory, paletteInputPath } from "../shared/paths.js";
 import { readFile, readdir } from "node:fs/promises";
 import { join } from "node:path";
 import { parseJsonc } from "../shared/jsonc.js";
-
-/** Required default source directory used for whole-file input fallback. */
-export const defaultThemeDirectory = "src/themes/prod/default";
-
-/** Palette configuration required explicitly in every theme directory. */
-export const paletteInputPath = "palette/palette-config.jsonc";
-
-/** Authored token and documentation sections in compilation order. */
-export const themeSections = ["variables", "ui", "semantic", "syntax"];
-
-/** Required metadata, consolidated token sections, and independent documentation inputs. */
-export const themeInputPaths = [
-  "metadata.jsonc",
-  ...themeSections.flatMap((file) => [`tokens/${file}.jsonc`, `details/${file}.jsonc`]),
-];
 
 /** Mapping from authored theme types to VS Code UI theme identifiers. */
 const themeTypes = new Map([
@@ -122,7 +108,7 @@ export async function discoverTargets(root) {
         name,
         directory: `${directory}/${name}`,
         reportDirectory: `${directory}/${name}/palette/generated`,
-        output: `${group === "prod" ? "themes" : "dev-extension/themes"}/cassidy-dark-color-theme${group === "prod" && name === "default" ? "" : `-${name}`}.json`,
+        output: `${group === "prod" ? "themes" : "preview/themes"}/cassidy-dark-color-theme${group === "prod" && name === "default" ? "" : `-${name}`}.json`,
       });
     }
   }

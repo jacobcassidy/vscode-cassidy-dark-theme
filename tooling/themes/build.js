@@ -3,6 +3,7 @@
  * @file Assemble theme inputs, resolve colors, generate reports, and write or check build outputs.
  */
 
+import { defaultThemeDirectory, paletteInputPath, themeSections, themeInputPaths } from "../shared/paths.js";
 import { readFile, lstat } from "node:fs/promises";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -19,15 +20,11 @@ import { applyArtifacts, assertFresh, capturePaths, requireStable, withGuards } 
 import { contrastRatio } from "../shared/color-math.js";
 import {
   discoverTargets,
-  defaultThemeDirectory,
   listDirectories,
   listFiles,
   readOptional,
   readTargetInput,
-  paletteInputPath,
   prodThemeContribution,
-  themeInputPaths,
-  themeSections,
   themeUiType,
 } from "./inputs.js";
 
@@ -58,8 +55,8 @@ async function readCompiledTheme(root, target, palette, command, readInput) {
     const details = {};
 
     for (const section of themeSections) {
-      tokens[section] = inputs.get(`tokens/${section}.jsonc`).value;
-      details[section] = inputs.get(`details/${section}.jsonc`).value;
+      tokens[section] = inputs.get(`tokens/${section}/definitions.jsonc`).value;
+      details[section] = inputs.get(`tokens/${section}/details.jsonc`).value;
     }
 
     /** Effective metadata validated before compilation and registration. */
@@ -326,7 +323,7 @@ async function formatted(root, path, source) {
   const options = await prettier.resolveConfig(filepath);
 
   /** Whether this output needs JSONC theme formatting. */
-  const theme = path.startsWith("themes/") || path.startsWith("dev-extension/themes/");
+  const theme = path.startsWith("themes/") || path.startsWith("preview/themes/");
   return prettier.format(source, { ...options, filepath, ...(theme ? { parser: "jsonc" } : {}) });
 }
 
@@ -459,7 +456,7 @@ async function staleOutputs(root, targets, group, paletteOnly) {
   const actual = [];
 
   /** Generated theme directory belonging to the selected build group. */
-  const themeDirectory = group === "prod" ? "themes" : "dev-extension/themes";
+  const themeDirectory = group === "prod" ? "themes" : "preview/themes";
 
   if (!paletteOnly) {
     for (const file of await listFiles(join(root, themeDirectory))) {
@@ -549,7 +546,7 @@ async function checkOutputs(root, output, check, command) {
     /** Formatted generated source ready for validation and comparison. */
     const text = await formatted(root, path, source);
 
-    if (path.startsWith("themes/") || path.startsWith("dev-extension/themes/")) {
+    if (path.startsWith("themes/") || path.startsWith("preview/themes/")) {
       validateTheme(parseJsonc(text, path).value);
     }
 
@@ -594,7 +591,7 @@ export async function prepareBuild({ root = defaultRoot, mode = "all" } = {}) {
     join(root, "src"),
     join(root, "package.json"),
     join(root, "themes"),
-    join(root, "dev-extension"),
+    join(root, "preview"),
   ]);
   const targets = await discoverTargets(root);
   const defaultTarget = targets.find((target) => target.directory === defaultThemeDirectory);

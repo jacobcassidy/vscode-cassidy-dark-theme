@@ -218,7 +218,7 @@ The build uses these paths:
 
 | Path                                   | Purpose                                                                                                          |
 | -------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
-| `palette/palette-config.jsonc`         | Authored hue/lightness parameters, optional base chroma, neutrals, and documented primitive overrides            |
+| `palette/config.jsonc`                 | Authored hue/lightness parameters, optional base chroma, neutrals, and documented primitive overrides            |
 | `src/tokens.jsonc`                     | Semantic aliases and explicit alpha values for overlays                                                          |
 | `src/theme/base.jsonc`                 | Theme root properties such as schema, name, type, and author                                                     |
 | `src/theme/colors.jsonc`               | Workbench and editor UI color mappings                                                                           |
@@ -227,7 +227,7 @@ The build uses these paths:
 | `scripts/build/build-theme.js`         | Parameter validation, palette generation, alias resolution, template substitution, and output comparison/writing |
 | `themes/cassidy-dark-color-theme.json` | Committed generated theme; edit the source files after migration                                                 |
 
-`npm run build:palette` generates `palette.json`, `palette.md`, and `palette.svg` under each prod theme’s `palette/generated/` directory. JSON includes requested, resolved, and exported OKLCH values, hex values, and color reasons. The Markdown report includes the swatch sheet. This command needs only `palette/palette-config.jsonc`; `npm run build:prod` generates those same reports and the resolved theme together.
+`npm run build:palette` generates `palette.json`, `palette.md`, and `palette.svg` under each prod theme’s `palette/generated/` directory. JSON includes requested, resolved, and exported OKLCH values, hex values, and color reasons. The Markdown report includes the swatch sheet. This command needs only `palette/config.jsonc`; `npm run build:prod` generates those same reports and the resolved theme together.
 
 The dependency flow is:
 
@@ -237,11 +237,11 @@ palette parameters → gamut-mapped primitives → semantic aliases
 theme template ───────────────────────────────────→ resolved theme
 ```
 
-Keep generated development themes in `dev-extension/themes/` separate from static comparison themes in `dev-extension/static-snapshots/`. Do not infer mappings by globally replacing matching hex strings: two uses of the same hex can have different semantic roles.
+Keep generated development themes in `preview/themes/` separate from static comparison themes in `preview/snapshots/`. Do not infer mappings by globally replacing matching hex strings: two uses of the same hex can have different semantic roles.
 
 ### Color variables and template references
 
-An excerpt from `palette/palette-config.jsonc` could look like this. Each family generates tones `300`, `400`, `500`, and `600`, plus `400-muted`, using the shared chroma settings and its optional `baseChroma` anchor. This example includes all eight families and a subset of the neutrals. Neutral lightness values use the 0–1 scale, zero chroma, and a conventional hue of zero.
+An excerpt from `palette/config.jsonc` could look like this. Each family generates tones `300`, `400`, `500`, and `600`, plus `400-muted`, using the shared chroma settings and its optional `baseChroma` anchor. This example includes all eight families and a subset of the neutrals. Neutral lightness values use the 0–1 scale, zero chroma, and a conventional hue of zero.
 
 ```jsonc
 {

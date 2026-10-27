@@ -4,18 +4,19 @@
  */
 
 import assert from "node:assert/strict";
-import { mkdir, readFile, readdir, rm, stat, writeFile } from "node:fs/promises";
-import { join } from "node:path";
-import test from "node:test";
-import { addThemeProperties } from "../../tooling/generators/add-properties.js";
-import { buildProdThemes } from "../../tooling/themes/build.js";
-import { parseJsonc } from "../../tooling/shared/jsonc.js";
+import { mkdir, readFile, readdir, rm, stat } from "node:fs/promises";
 import {
+  writeFixture as writeFile,
   createBuildProject,
   readBuildOutputs,
   readThemeParts,
   writeDefaultPaletteConfig,
 } from "../helpers/projects.js";
+import { join } from "node:path";
+import test from "node:test";
+import { addThemeProperties } from "../../tooling/generators/add-properties.js";
+import { buildProdThemes } from "../../tooling/themes/build.js";
+import { parseJsonc } from "../../tooling/shared/jsonc.js";
 
 /**
  * Write a reference using deliberately irrelevant values and metadata.
@@ -50,7 +51,7 @@ async function createPropertyProject(t) {
   await writeFile(join(root, ".prettierrc.json"), JSON.stringify({ printWidth: 1, trailingComma: "none" }));
 
   for (const section of ["variables", "ui", "semantic", "syntax"]) {
-    await writeFile(join(root, `src/themes/prod/default/details/${section}.jsonc`), "{}");
+    await writeFile(join(root, `src/themes/prod/default/tokens/${section}/details.jsonc`), "{}");
   }
 
   return root;
@@ -65,7 +66,7 @@ async function createPropertyProject(t) {
  */
 async function readSection(root, theme, section) {
   /** Source path used in diagnostics and file reads. */
-  const path = join(root, `src/themes/${theme}/tokens/${section}.jsonc`);
+  const path = join(root, `src/themes/${theme}/tokens/${section}/definitions.jsonc`);
 
   /** Source text retained for comment and unchanged-file assertions. */
   const source = await readFile(path, "utf8");
@@ -111,7 +112,7 @@ test("missing UI and semantic properties are inserted alphabetically while value
   );
 
   await writeFile(
-    join(root, "src/themes/prod/default/tokens/ui.jsonc"),
+    join(root, "src/themes/prod/default/tokens/ui/definitions.jsonc"),
     `{
   // Beta leading explanation.
   "beta.foreground": {"color": "palette.gray.900"}, // Beta inline explanation.
@@ -123,7 +124,7 @@ test("missing UI and semantic properties are inserted alphabetically while value
   );
 
   await writeFile(
-    join(root, "src/themes/prod/default/tokens/semantic.jsonc"),
+    join(root, "src/themes/prod/default/tokens/semantic/definitions.jsonc"),
     `{
   // Class leading explanation.
   "class": {"bold": true}, /* Class inline explanation. */
@@ -270,7 +271,7 @@ test("insertion handles empty objects, compact objects, trailing commas, and tra
       const root = await createPropertyProject(t);
 
       await writeReference(root, {}, { zebra: "#f00", alpha: "#f00" });
-      await writeFile(join(root, "src/themes/prod/default/tokens/semantic.jsonc"), source);
+      await writeFile(join(root, "src/themes/prod/default/tokens/semantic/definitions.jsonc"), source);
       await addThemeProperties({ root, themes: ["prod/default"] });
 
       /** Parsed and formatted section after insertion. */
@@ -327,14 +328,14 @@ test("unknown targets and malformed references or later source inputs fail befor
 
       if (failure.startsWith("source")) {
         await writeFile(
-          join(root, "src/themes/prod/default/tokens/semantic.jsonc"),
+          join(root, "src/themes/prod/default/tokens/semantic/definitions.jsonc"),
           failure === "source" ? "{" : failure === "source shape" ? "[]" : '{"class":{},"class":{}}',
         );
       }
 
       if (failure.startsWith("details")) {
         await writeFile(
-          join(root, "src/themes/prod/default/details/syntax.jsonc"),
+          join(root, "src/themes/prod/default/tokens/syntax/details.jsonc"),
           failure === "details" ? "{" : failure === "details shape" ? "[]" : '{"string":{},"string":{}}',
         );
       }
@@ -348,7 +349,7 @@ test("unknown targets and malformed references or later source inputs fail befor
 
       if (failure.startsWith("syntax")) {
         await writeFile(
-          join(root, "src/themes/prod/default/tokens/syntax.jsonc"),
+          join(root, "src/themes/prod/default/tokens/syntax/definitions.jsonc"),
           failure === "syntax shape" ? "[null]" : '[{"id":"string"},{"id":"string"}]',
         );
       }
@@ -382,13 +383,13 @@ test("default details cover nested roles, disabled tokens, new reference keys, a
 
   for (const section of ["variables", "ui", "syntax"]) {
     await writeFile(
-      join(root, `src/themes/prod/default/tokens/${section}.jsonc`),
+      join(root, `src/themes/prod/default/tokens/${section}/definitions.jsonc`),
       JSON.stringify(parts.tokens[section]),
     );
   }
 
   await writeFile(
-    join(root, "src/themes/prod/default/details/ui.jsonc"),
+    join(root, "src/themes/prod/default/tokens/ui/details.jsonc"),
     `{
       // Reviewed description and relationships must survive.
       "editor.background": {"for":"Keep this reviewed usage.","inherits":["upstream.surface"]},
@@ -438,7 +439,7 @@ test("default details cover nested roles, disabled tokens, new reference keys, a
   }
 
   /** Comment-bearing detail text after insertion and updates to existing entries. */
-  const source = await readFile(join(root, "src/themes/prod/default/details/ui.jsonc"), "utf8");
+  const source = await readFile(join(root, "src/themes/prod/default/tokens/ui/details.jsonc"), "utf8");
 
   assert.match(source, /\/\/ Reviewed description and relationships must survive\./);
   assert.match(source, /\/\/ Keep the inline explanation\./);
@@ -463,22 +464,22 @@ for (const section of ["variables", "ui", "semantic", "syntax", "syntax ID", "de
 
     if (section === "syntax ID") {
       await writeFile(
-        join(root, "src/themes/prod/default/tokens/syntax.jsonc"),
+        join(root, "src/themes/prod/default/tokens/syntax/definitions.jsonc"),
         '[{"scope":"string","color":"palette.yellow.400"}]',
       );
     } else if (section === "description") {
       await writeFile(
-        join(root, "src/themes/prod/default/details/variables.jsonc"),
+        join(root, "src/themes/prod/default/tokens/variables/details.jsonc"),
         '{"surface.editor":{"inherits":["upstream.background"]}}',
       );
     } else if (section === "disabled") {
       await writeFile(
-        join(root, "src/themes/prod/default/tokens/ui.jsonc"),
+        join(root, "src/themes/prod/default/tokens/ui/definitions.jsonc"),
         '{"editor.background":{"disabled":true,"disabledReason":"Default background."}}',
       );
-      await writeFile(join(root, "src/themes/prod/default/details/ui.jsonc"), "{}");
+      await writeFile(join(root, "src/themes/prod/default/tokens/ui/details.jsonc"), "{}");
     } else {
-      await writeFile(join(root, `src/themes/prod/default/details/${section}.jsonc`), "{}");
+      await writeFile(join(root, `src/themes/prod/default/tokens/${section}/details.jsonc`), "{}");
     }
 
     await assert.rejects(buildProdThemes({ root }), /missing property details|require an id|for: expected a nonempty/);

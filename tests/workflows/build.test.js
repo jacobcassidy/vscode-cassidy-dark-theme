@@ -4,11 +4,11 @@
  */
 
 import assert from "node:assert/strict";
-import { access, mkdir, readFile, rm, symlink, writeFile } from "node:fs/promises";
+import { access, mkdir, readFile, rm, symlink } from "node:fs/promises";
+import { writeFixture as writeFile, createBuildProject, writeDefaultPaletteConfig } from "../helpers/projects.js";
 import { join } from "node:path";
 import test from "node:test";
 import { buildDevThemes, buildProdThemes, runBuild } from "../../tooling/themes/build.js";
-import { createBuildProject, writeDefaultPaletteConfig } from "../helpers/projects.js";
 
 /** Exact terminal instruction, including the requested magenta color and reset. */
 const reminder =
@@ -79,7 +79,7 @@ for (const mode of ["all", "prod", "dev"]) {
     assert.equal(project.logs.filter((line) => line === reminder).length, 1);
 
     /** Ordinary color edit that the preview theme file watcher can load live. */
-    const input = join(project.root, "src/themes/prod/default/tokens/ui.jsonc");
+    const input = join(project.root, "src/themes/prod/default/tokens/ui/definitions.jsonc");
 
     /** Existing documented properties retained while updating one color. */
     const tokens = JSON.parse(await readFile(input, "utf8"));
@@ -149,7 +149,7 @@ for (const mode of ["all", "prod", "dev"]) {
     const source = join(project.root, `src/themes/${group}/${name}`);
 
     /** Orphaned generated path that no remaining target can include in its own summary. */
-    const path = `${group === "prod" ? "themes" : "dev-extension/themes"}/cassidy-dark-color-theme-${name}.json`;
+    const path = `${group === "prod" ? "themes" : "preview/themes"}/cassidy-dark-color-theme-${name}.json`;
 
     if (group === "prod") await writeDefaultPaletteConfig(source);
 

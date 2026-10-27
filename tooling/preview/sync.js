@@ -3,10 +3,17 @@
  * @file Build a separate preview manifest and link checkout assets into the local development extension.
  */
 
-import { readFile, writeFile, mkdir, lstat, realpath, symlink } from "node:fs/promises";
-import { assertFresh, capturePaths, requireStable, withGuards, observeWriter } from "../shared/transactions.js";
+import { readFile, writeFile, mkdir, lstat, realpath, symlink, readlink, rm } from "node:fs/promises";
+import {
+  canonicalPath,
+  assertFresh,
+  capturePaths,
+  requireStable,
+  withGuards,
+  observeWriter,
+} from "../shared/transactions.js";
 import { homedir } from "node:os";
-import { join } from "node:path";
+import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { formatMessage } from "../shared/terminal-output.js";
 import { parseJsonc } from "../shared/jsonc.js";
@@ -87,7 +94,7 @@ export async function syncDevExtension({
   const expected = await capturePaths([
     join(root, "package.json"),
     join(root, "themes"),
-    join(root, "dev-extension"),
+    join(root, "preview"),
     extensionDirectory,
   ]);
 
@@ -103,9 +110,7 @@ export async function syncDevExtension({
   delete manifest.__metadata;
 
   /** Generated development theme filenames to register for preview. */
-  const generatedThemes = (await listFiles(join(root, "dev-extension/themes"))).filter((file) =>
-    file.endsWith(".json"),
-  );
+  const generatedThemes = (await listFiles(join(root, "preview/themes"))).filter((file) => file.endsWith(".json"));
 
   manifest.contributes ??= {};
   manifest.contributes.themes = [
@@ -149,7 +154,7 @@ export async function syncDevExtension({
           .join(" ");
 
         /** Checkout-relative theme path used by the preview registration. */
-        const path = `dev-extension/themes/${file}`;
+        const path = `preview/themes/${file}`;
 
         /** Parsed theme metadata used for preview labels and UI types. */
         const metadata = parseJsonc(await readFile(join(root, path), "utf8"), path).value;
@@ -160,17 +165,17 @@ export async function syncDevExtension({
         return {
           label: `${metadata.name} Preview (${metadata.previewName?.trim() ?? name})`,
           uiTheme,
-          path: `./dev-extension/themes/${file}`,
+          path: `./preview/themes/${file}`,
           _watch: true,
         };
       }),
     )),
     ...(await Promise.all(
-      (await listFiles(join(root, "dev-extension/static-snapshots")))
+      (await listFiles(join(root, "preview/snapshots")))
         .filter((file) => file.endsWith(".json"))
         .map(async (file) => {
           /** Checkout-relative theme path used by the preview registration. */
-          const path = `dev-extension/static-snapshots/${file}`;
+          const path = `preview/snapshots/${file}`;
 
           /** Parsed theme metadata used for preview labels and UI types. */
           const metadata = parseJsonc(await readFile(join(root, path), "utf8"), path).value;
@@ -210,7 +215,7 @@ export async function syncDevExtension({
       throw new Error(`Dev extension folder must be a regular directory: ${extensionDirectory}`);
     }
 
-    await mkdir(join(root, "dev-extension"), { recursive: true });
+    await mkdir(join(root, "preview"), { recursive: true });
     await mkdir(extensionDirectory, { recursive: true });
 
     // Refuse to overwrite the source through a linked dev manifest.
@@ -231,8 +236,24 @@ export async function syncDevExtension({
     /** Whether registrations or repaired preview assets require VS Code to reload. */
     let reloadRequired = previewRegistrations(previous) !== previewRegistrations(current);
 
+    /** Former asset entry may be repaired only when owned by this checkout. */
+    const formerLink = join(extensionDirectory, "dev-extension");
+    const formerInfo = await statIfPresent(formerLink);
+
+    if (formerInfo) {
+      if (
+        !formerInfo.isSymbolicLink() ||
+        (await canonicalPath(resolve(dirname(formerLink), await readlink(formerLink)))) !==
+          (await canonicalPath(join(root, "dev-extension")))
+      )
+        throw new Error(`Unrelated former preview asset entry is protected: ${formerLink}`);
+
+      await rm(formerLink);
+      reloadRequired = true;
+    }
+
     // Link assets directly to the checkout so edits appear without copying files.
-    for (const directory of ["themes", "dev-extension", "images"]) {
+    for (const directory of ["themes", "preview", "images"]) {
       /** Checkout asset directory to expose through the preview extension. */
       const sourceDirectory = join(root, directory);
 

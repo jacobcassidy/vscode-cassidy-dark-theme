@@ -5,9 +5,14 @@
 
 import assert from "node:assert/strict";
 import test from "node:test";
-import { readFile, writeFile, rename } from "node:fs/promises";
+import { readFile, rename } from "node:fs/promises";
+import {
+  writeFixture as writeFile,
+  createBuildProject,
+  readBuildOutputs,
+  writeDefaultPaletteConfig,
+} from "../helpers/projects.js";
 import { join } from "node:path";
-import { createBuildProject, readBuildOutputs, writeDefaultPaletteConfig } from "../helpers/projects.js";
 import { prepareBuild, applyBuild, buildThemes } from "../../tooling/themes/build.js";
 import {
   withGuards,
@@ -132,7 +137,7 @@ test("prepared dependencies and destinations reject outside changes before write
   const root = await createBuildProject(t);
   const prepared = await prepareBuild({ root, mode: "prod" });
 
-  await writeFile(join(root, "src/themes/prod/default/tokens/ui.jsonc"), "{}");
+  await writeFile(join(root, "src/themes/prod/default/tokens/ui/definitions.jsonc"), "{}");
   await assert.rejects(applyBuild(prepared), /Stale prepared input/);
   await assert.rejects(readFile(join(root, "themes/cassidy-dark-color-theme.json")), { code: "ENOENT" });
 });

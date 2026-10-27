@@ -10,23 +10,23 @@
 | 4   | [Source review](#source-review)                                         |
 | 5   | [Verified examples and corrections](#verified-examples-and-corrections) |
 
-Each theme under `src/themes/{prod,dev}/<name>/` has consolidated styling in `tokens/` and independent documentation in `details/`. Both directories contain `variables.jsonc`, `ui.jsonc`, `semantic.jsonc`, and `syntax.jsonc`. The default theme supplies every file. Every target requires an explicit `palette/palette-config.jsonc`; `{ "useDefaultPalette": true }` selects the default palette. Other targets inherit omitted token, details, and metadata files independently; supplying `{}` in a details file suppresses its documentation fallback. Details are validated against the effective authored tokens, including disabled entries. Editing documentation alone leaves generated files unchanged.
+Each theme under `src/themes/{prod,dev}/<name>/` has consolidated styling in `tokens/` and independent documentation in `details/`. Both directories contain `variables.jsonc`, `ui.jsonc`, `semantic.jsonc`, and `syntax.jsonc`. The default theme supplies every file. Every target requires an explicit `palette/config.jsonc`; `{ "useDefaultPalette": true }` selects the default palette. Other targets inherit omitted token, details, and metadata files independently; supplying `{}` in a details file suppresses its documentation fallback. Details are validated against the effective authored tokens, including disabled entries. Editing documentation alone leaves generated files unchanged.
 
 ## Token definitions and aliases
 
-| File                     | Structure and output                                                                                                                                                                                                                                                                                                                     |
-| ------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `tokens/variables.jsonc` | Internal color variables grouped by `surface`, `text`, `diagnostic`, and `diff` expose `variables.*` aliases without emitting theme entries.                                                                                                                                                                                             |
-| `tokens/ui.jsonc`        | Flat VS Code setting keys define color descriptors and expose `ui.<key>` aliases. Entries compile into `colors`.                                                                                                                                                                                                                         |
-| `tokens/semantic.jsonc`  | Exact selectors, including `function.defaultLibrary` and `*.readonly`, define color and/or boolean `bold`, `italic`, `underline`, and `strikethrough` flags. Entries compile into style objects in `semanticTokenColors`.                                                                                                                |
-| `tokens/syntax.jsonc`    | An ordered array retains names, scopes, and precedence. Rules use color descriptor fields directly alongside `fontStyle`; optional `background` holds its own color descriptor. A unique `id` exposes the foreground as `syntax.<id>` and identifies the rule in details; it is required in `prod/default` and optional in other themes. |
+| File                                 | Structure and output                                                                                                                                                                                                                                                                                                                     |
+| ------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `tokens/variables/definitions.jsonc` | Internal color variables grouped by `surface`, `text`, `diagnostic`, and `diff` expose `variables.*` aliases without emitting theme entries.                                                                                                                                                                                             |
+| `tokens/ui/definitions.jsonc`        | Flat VS Code setting keys define color descriptors and expose `ui.<key>` aliases. Entries compile into `colors`.                                                                                                                                                                                                                         |
+| `tokens/semantic/definitions.jsonc`  | Exact selectors, including `function.defaultLibrary` and `*.readonly`, define color and/or boolean `bold`, `italic`, `underline`, and `strikethrough` flags. Entries compile into style objects in `semanticTokenColors`.                                                                                                                |
+| `tokens/syntax/definitions.jsonc`    | An ordered array retains names, scopes, and precedence. Rules use color descriptor fields directly alongside `fontStyle`; optional `background` holds its own color descriptor. A unique `id` exposes the foreground as `syntax.<id>` and identifies the rule in details; it is required in `prod/default` and optional in other themes. |
 
-Color descriptors contain `color`, optional `alpha`, and optional `colorReason`. A color references a generated palette primitive or another token alias directly, without braces. Every literal hex color requires a nonempty `colorReason`. Every palette override in `palette/palette-config.jsonc` also requires `colorReason`, which appears in generated palette records and the report's **Color reason** column. Whenever supplied, `colorReason` must be a nonempty string, including for reference colors and disabled styles.
+Color descriptors contain `color`, optional `alpha`, and optional `colorReason`. A color references a generated palette primitive or another token alias directly, without braces. Every literal hex color requires a nonempty `colorReason`. Every palette override in `palette/config.jsonc` also requires `colorReason`, which appears in generated palette records and the report's **Color reason** column. Whenever supplied, `colorReason` must be a nonempty string, including for reference colors and disabled styles.
 
 For example, these two files define an alias chain:
 
 ```jsonc
-// tokens/variables.jsonc
+// tokens/variables/definitions.jsonc
 {
   "diagnostic": {
     "error": {
@@ -37,7 +37,7 @@ For example, these two files define an alias chain:
 ```
 
 ```jsonc
-// tokens/ui.jsonc
+// tokens/ui/definitions.jsonc
 {
   "errorForeground": { "color": "variables.diagnostic.error.foreground" },
 }
@@ -52,7 +52,7 @@ Formatting-only semantic entries are supported, including explicit `false` flags
 Details files are flat objects keyed by variable paths such as `diagnostic.error.foreground`, exact UI or semantic keys, or syntax IDs. There is no `details` wrapper:
 
 ```jsonc
-// details/ui.jsonc
+// tokens/ui/details.jsonc
 {
   "activityBar.dropBorder": {
     "for": "Activity bar drag and drop indicators.",

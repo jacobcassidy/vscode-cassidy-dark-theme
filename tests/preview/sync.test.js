@@ -4,12 +4,12 @@
  */
 
 import assert from "node:assert/strict";
-import { mkdir, readFile, realpath, rm, stat, symlink, writeFile } from "node:fs/promises";
+import { lstat, mkdir, readFile, realpath, rm, stat, symlink } from "node:fs/promises";
+import { writeFixture as writeFile, createPreviewProject } from "../helpers/projects.js";
 import { join } from "node:path";
 import test from "node:test";
 import { syncDevExtension } from "../../tooling/preview/sync.js";
 import { checkThemes } from "../../tooling/themes/check.js";
-import { createPreviewProject } from "../helpers/projects.js";
 
 test("dev extension sync is repeatable and refreshes themes without modifying the source manifest", async (t) => {
   /** Isolated preview/source fixture with cleanup registered by the test. */
@@ -40,14 +40,14 @@ test("dev extension sync is repeatable and refreshes themes without modifying th
     ["Cassidy Dark Preview", "Cassidy Dark Preview (Test)"],
   );
 
-  for (const directory of ["themes", "dev-extension", "images"]) {
+  for (const directory of ["themes", "preview", "images"]) {
     assert.equal(
       await realpath(join(project.extensionDirectory, directory)),
       await realpath(join(project.root, directory)),
     );
   }
 
-  await writeFile(join(project.root, "dev-extension/themes/cassidy-dark-color-theme-new.json"), project.theme);
+  await writeFile(join(project.root, "preview/themes/cassidy-dark-color-theme-new.json"), project.theme);
   assert.equal((await syncDevExtension(project)).reloadRequired, true);
 
   /** Preview manifest reloaded after synchronization. */
@@ -117,12 +117,12 @@ test("dev extension sync includes all prod themes, derives dev theme types, and 
   );
   await writeFile(join(project.root, "package.json"), JSON.stringify(manifest));
   await writeFile(
-    join(project.root, "dev-extension/themes/cassidy-dark-color-theme-test.json"),
+    join(project.root, "preview/themes/cassidy-dark-color-theme-test.json"),
     '{"name":"Cassidy Dark","type":"light","colors":{},"tokenColors":[]}',
   );
 
   for (const name of ["z-old", "a-old"]) {
-    await writeFile(join(project.root, `dev-extension/static-snapshots/${name}.json`), project.theme);
+    await writeFile(join(project.root, `preview/snapshots/${name}.json`), project.theme);
   }
 
   /** Original source text or assembled theme template used by the assertion. */
@@ -166,8 +166,8 @@ test("preview names override existing suffixes without changing default or publi
   for (const [path, name, type, previewName] of [
     ["themes/theme.json", "Cassidy Dark", "dark", "Ignored Default"],
     ["themes/named.json", "Custom", "hcLight", "  Release Candidate  "],
-    ["dev-extension/themes/cassidy-dark-color-theme-test.json", "Experiment", "light", "Mixed CASE"],
-    ["dev-extension/static-snapshots/cassidy-dark-color-theme-old.json", "Cassidy Dark", "dark", "Baseline 1.3"],
+    ["preview/themes/cassidy-dark-color-theme-test.json", "Experiment", "light", "Mixed CASE"],
+    ["preview/snapshots/cassidy-dark-color-theme-old.json", "Cassidy Dark", "dark", "Baseline 1.3"],
   ]) {
     await writeFile(join(project.root, path), JSON.stringify({ name, type, previewName, colors: {}, tokenColors: [] }));
   }
@@ -193,8 +193,8 @@ test("preview names override existing suffixes without changing default or publi
 
 for (const path of [
   "themes/theme.json",
-  "dev-extension/themes/cassidy-dark-color-theme-test.json",
-  "dev-extension/static-snapshots/old.json",
+  "preview/themes/cassidy-dark-color-theme-test.json",
+  "preview/snapshots/old.json",
 ]) {
   test(`preview name validation reports invalid values in ${path}`, async (t) => {
     /** Isolated preview project containing the metadata under validation. */
@@ -222,7 +222,7 @@ for (const path of [
   });
 }
 
-for (const directory of ["themes", "static-snapshots"]) {
+for (const directory of ["themes", "snapshots"]) {
   test(`preview names cannot create duplicate labels in ${directory}`, async (t) => {
     /** Isolated project whose two distinct files resolve to the same preview label. */
     const project = await createPreviewProject(t);
@@ -235,7 +235,7 @@ for (const directory of ["themes", "static-snapshots"]) {
 
     for (const name of ["first", "second"]) {
       await writeFile(
-        join(project.root, `dev-extension/${directory}/${name}.json`),
+        join(project.root, `preview/${directory}/${name}.json`),
         JSON.stringify({
           name: "Cassidy Dark",
           type: "dark",
@@ -270,7 +270,7 @@ test("preview reload detection ignores formatting, ordering, unrelated fields, a
   project.manifest.devDependencies = { fixture: "1.0.0" };
   await writeFile(join(project.root, "package.json"), JSON.stringify(project.manifest));
 
-  for (const path of ["themes/theme.json", "dev-extension/themes/cassidy-dark-color-theme-test.json"]) {
+  for (const path of ["themes/theme.json", "preview/themes/cassidy-dark-color-theme-test.json"]) {
     await writeFile(
       join(project.root, path),
       JSON.stringify({
@@ -328,7 +328,7 @@ test("preview reload detection covers invalid manifests and repaired asset links
   await rm(manifestPath);
   assert.equal((await syncDevExtension(project)).reloadRequired, true);
 
-  for (const directory of ["themes", "dev-extension", "images"]) {
+  for (const directory of ["themes", "preview", "images"]) {
     await rm(join(project.extensionDirectory, directory));
     assert.equal((await syncDevExtension(project)).reloadRequired, true);
     assert.equal((await syncDevExtension(project)).reloadRequired, false);
@@ -340,7 +340,7 @@ test("preview reload detection follows snapshot additions, metadata changes, and
   const project = await createPreviewProject(t);
 
   /** New snapshot path used to test registration lifecycle changes. */
-  const path = join(project.root, "dev-extension/static-snapshots/baseline.json");
+  const path = join(project.root, "preview/snapshots/baseline.json");
 
   await syncDevExtension(project);
   await writeFile(path, project.theme);
@@ -353,4 +353,15 @@ test("preview reload detection follows snapshot additions, metadata changes, and
   assert.equal((await syncDevExtension(project)).reloadRequired, false);
   await rm(path);
   assert.equal((await syncDevExtension(project)).reloadRequired, true);
+});
+
+test("preview migration repairs only checkout-owned former links, including dangling links", async (t) => {
+  /** Isolated preview project with no former directory remaining. */
+  const { root, extensionDirectory } = await createPreviewProject(t);
+
+  await mkdir(extensionDirectory, { recursive: true });
+  await symlink(join(root, "dev-extension"), join(extensionDirectory, "dev-extension"), "dir");
+  assert.equal((await syncDevExtension({ root, extensionDirectory })).reloadRequired, true);
+  assert.equal(await realpath(join(extensionDirectory, "preview")), await realpath(join(root, "preview")));
+  await assert.rejects(lstat(join(extensionDirectory, "dev-extension")), { code: "ENOENT" });
 });

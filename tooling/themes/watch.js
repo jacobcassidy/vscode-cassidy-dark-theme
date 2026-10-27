@@ -136,6 +136,12 @@ export function watchThemes(
 
       if (preview.reloadRequired) logReloadReminder(logger);
     } catch (error) {
+      if (error.code === "STALE_INPUT") {
+        schedule();
+
+        return;
+      }
+
       /** Failed build message retained for diagnostic styling. */
       const message = `[watch] ${error.message}`;
 
@@ -211,19 +217,18 @@ export function watchThemes(
 
   try {
     // Keep the optional preview tree available for snapshot watching on first use.
-    mkdirSync(join(root, "dev-extension"), { recursive: true });
+    mkdirSync(join(root, "preview"), { recursive: true });
     addWatcher(join(root, "src"), true, (_event, filename) => {
       if (isThemeSource(filename)) schedule();
     });
     addWatcher(root, false, (_event, filename) => {
       if (!filename || filename.toString() === "package.json") schedule(true);
     });
-    addWatcher(join(root, "dev-extension"), true, (_event, filename) => {
+    addWatcher(join(root, "preview"), true, (_event, filename) => {
       /** Preview-tree event normalized independently of the platform. */
       const path = filename?.toString().replaceAll("\\", "/");
 
-      if (!path || path === "static-snapshots" || (path.startsWith("static-snapshots/") && path.endsWith(".json")))
-        schedule();
+      if (!path || path === "snapshots" || (path.startsWith("snapshots/") && path.endsWith(".json"))) schedule();
     });
   } catch (error) {
     for (const watcher of watchers) watcher.close();

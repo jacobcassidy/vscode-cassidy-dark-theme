@@ -4,11 +4,11 @@
  */
 
 import assert from "node:assert/strict";
-import { writeFile } from "node:fs/promises";
+import {} from "node:fs/promises";
+import { writeFixture as writeFile, createPreviewProject } from "../helpers/projects.js";
 import { join } from "node:path";
 import test from "node:test";
 import { checkThemes } from "../../tooling/themes/check.js";
-import { createPreviewProject } from "../helpers/projects.js";
 
 test("theme validation accepts JSONC in both prod and dev themes", async (t) => {
   /** Temporary source project root for this test scenario. */
@@ -21,7 +21,7 @@ test("theme validation rejects malformed dev JSONC", async (t) => {
   /** Temporary source project root for this test scenario. */
   const { root } = await createPreviewProject(t);
 
-  await writeFile(join(root, "dev-extension/themes/cassidy-dark-color-theme-test.json"), '{ "colors": ');
+  await writeFile(join(root, "preview/themes/cassidy-dark-color-theme-test.json"), '{ "colors": ');
   await assert.rejects(checkThemes(root), /invalid JSONC/);
 });
 
@@ -75,7 +75,7 @@ test("theme validation keeps dev themes out of prod registrations", async (t) =>
   /** Fixture paths and source values used by the validation scenario. */
   const { root, manifest } = await createPreviewProject(t);
 
-  manifest.contributes.themes[0].path = "dev-extension/themes/cassidy-dark-color-theme-test.json";
+  manifest.contributes.themes[0].path = "preview/themes/cassidy-dark-color-theme-test.json";
   await writeFile(join(root, "package.json"), JSON.stringify(manifest));
   await assert.rejects(checkThemes(root), /Invalid or duplicate prod theme path/);
 });

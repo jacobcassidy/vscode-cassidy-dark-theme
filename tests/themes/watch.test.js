@@ -5,7 +5,13 @@
 
 import assert from "node:assert/strict";
 import { EventEmitter } from "node:events";
-import { mkdir, readFile, realpath, rename, rm, writeFile } from "node:fs/promises";
+import { mkdir, readFile, realpath, rename, rm } from "node:fs/promises";
+import {
+  writeFixture as writeFile,
+  createBuildProject,
+  createPreviewProject,
+  writeDefaultPaletteConfig,
+} from "../helpers/projects.js";
 import { join } from "node:path";
 import { setTimeout as delay } from "node:timers/promises";
 import test from "node:test";
@@ -13,7 +19,6 @@ import { stripVTControlCharacters } from "node:util";
 import { parse } from "jsonc-parser";
 import { syncDevExtension } from "../../tooling/preview/sync.js";
 import { watchThemes } from "../../tooling/themes/watch.js";
-import { createBuildProject, createPreviewProject, writeDefaultPaletteConfig } from "../helpers/projects.js";
 
 /**
  * Poll an asynchronous condition until it succeeds or the watcher test deadline expires.
@@ -86,8 +91,7 @@ async function createWatchProject(t, { dev = true } = {}) {
   /** Isolated preview extension destination for native watcher tests. */
   const extensionDirectory = join(root, "extension");
 
-  for (const directory of ["images", "dev-extension/static-snapshots"])
-    await mkdir(join(root, directory), { recursive: true });
+  for (const directory of ["images", "preview/snapshots"]) await mkdir(join(root, directory), { recursive: true });
 
   if (dev) {
     await writeDefaultPaletteConfig(join(root, "src/themes/dev/sample"));
@@ -130,8 +134,8 @@ test("watch builds both groups on startup and syncs linked dev theme registratio
     ],
   );
   assert.equal(
-    await realpath(join(project.extensionDirectory, "dev-extension")),
-    await realpath(join(project.root, "dev-extension")),
+    await realpath(join(project.extensionDirectory, "preview")),
+    await realpath(join(project.root, "preview")),
   );
   await project.controller.close();
 });
@@ -141,7 +145,7 @@ test("watch rebuilds prod and inherited dev colors and follows repeated replacem
   const project = await createWatchProject(t);
 
   /** Production UI input rewritten to simulate replacement saves. */
-  const input = join(project.root, "src/themes/prod/default/tokens/ui.jsonc");
+  const input = join(project.root, "src/themes/prod/default/tokens/ui/definitions.jsonc");
 
   /** Other documented UI properties retained during each replacement save. */
   const tokens = parse(await readFile(input, "utf8"));
@@ -159,7 +163,7 @@ test("watch rebuilds prod and inherited dev colors and follows repeated replacem
 
     for (const path of [
       "themes/cassidy-dark-color-theme.json",
-      "dev-extension/themes/cassidy-dark-color-theme-sample.json",
+      "preview/themes/cassidy-dark-color-theme-sample.json",
     ]) {
       assert.equal(parse(await readFile(join(project.root, path), "utf8")).colors["editor.background"], color);
     }
@@ -182,18 +186,16 @@ test("watch rebuilds dev overrides, refreshes metadata registrations, and preser
 
   await mkdir(join(project.root, "src/themes/dev/sample/tokens"));
   await mkdir(join(project.root, "src/themes/dev/sample/details"));
-  await writeFile(join(project.root, "src/themes/dev/sample/details/ui.jsonc"), "{}");
+  await writeFile(join(project.root, "src/themes/dev/sample/tokens/ui/details.jsonc"), "{}");
   await writeFile(
-    join(project.root, "src/themes/dev/sample/tokens/ui.jsonc"),
+    join(project.root, "src/themes/dev/sample/tokens/ui/definitions.jsonc"),
     '{"editor.background":{"color":"#010203","colorReason":"Dev preview background."}}',
   );
   await writeFile(join(project.root, "src/themes/dev/sample/metadata.jsonc"), '{"name":"Renamed","type":"light"}');
   await waitFor(() => project.builds() > count);
 
   /** Parsed development output inspected after a source change. */
-  const dev = parse(
-    await readFile(join(project.root, "dev-extension/themes/cassidy-dark-color-theme-sample.json"), "utf8"),
-  );
+  const dev = parse(await readFile(join(project.root, "preview/themes/cassidy-dark-color-theme-sample.json"), "utf8"));
 
   /** Preview manifest contents used for registration or preservation assertions. */
   const manifest = JSON.parse(await readFile(join(project.extensionDirectory, "package.json"), "utf8"));
@@ -285,10 +287,7 @@ test("watch ignores generated output changes and unrelated source directories", 
   /** Build count recorded before or during a simulated source change. */
   const count = project.builds();
 
-  await writeFile(
-    join(project.root, "dev-extension/themes/cassidy-dark-color-theme-sample.json"),
-    "// Edited output\n",
-  );
+  await writeFile(join(project.root, "preview/themes/cassidy-dark-color-theme-sample.json"), "// Edited output\n");
   await writeFile(join(project.root, "src/themes/dev/sample/palette/default-palette.txt"), "Edited report\n");
   await mkdir(join(project.root, "src/unrelated"));
   await writeFile(join(project.root, "src/unrelated/input.jsonc"), "{}");
@@ -306,7 +305,7 @@ test("watch removes a deleted dev target's generated output and refreshes regist
   const count = project.builds();
 
   /** Generated development theme that becomes stale when its source is removed. */
-  const path = "dev-extension/themes/cassidy-dark-color-theme-sample.json";
+  const path = "preview/themes/cassidy-dark-color-theme-sample.json";
 
   await rm(join(project.root, "src/themes/dev/sample"), { recursive: true });
   await waitFor(() => project.builds() > count);
@@ -436,7 +435,7 @@ test("watch debounces burst saves and ignores paths outside both source trees", 
   const scheduler = createScheduler(t, project);
   await scheduler.controller.ready;
   scheduler.notify("change", "unrelated/input.jsonc");
-  scheduler.notify("change", "../dev-extension/themes/generated.json");
+  scheduler.notify("change", "../preview/themes/generated.json");
   scheduler.notify("change", "themes/dev/test/palette/generated/palette.json");
   scheduler.notify("rename", "themes/dev/test/palette/generated");
   scheduler.notify("change", "themes\\dev\\test\\palette\\generated\\palette.md");
@@ -446,7 +445,7 @@ test("watch debounces burst saves and ignores paths outside both source trees", 
   scheduler.notify("change", "themes/dev/test/palette/.theme-build-example/output");
   await delay(60);
   assert.equal(scheduler.builds(), 1);
-  for (let index = 0; index < 10; index++) scheduler.notify("change", "themes/dev/test/tokens/ui.jsonc");
+  for (let index = 0; index < 10; index++) scheduler.notify("change", "themes/dev/test/tokens/ui/definitions.jsonc");
   await waitFor(() => scheduler.builds() === 2);
   await delay(60);
   assert.deepEqual(scheduler.calls, ["prod", "dev", "sync", "prod", "dev", "sync"]);
@@ -488,7 +487,7 @@ test("watch queues edits during a build without overlapping passes", async (t) =
   });
 
   await scheduler.controller.ready;
-  scheduler.notify("change", "themes/prod/default/tokens/ui.jsonc");
+  scheduler.notify("change", "themes/prod/default/tokens/ui/definitions.jsonc");
   await entered.promise;
   scheduler.notify("change", "themes/dev/test/metadata.jsonc");
   await delay(60);
@@ -638,7 +637,7 @@ test("watch detects snapshot registration changes and keeps content-only edits l
   const project = await createWatchProject(t);
 
   /** Snapshot registered, renamed, edited, and removed during this watch session. */
-  const path = join(project.root, "dev-extension/static-snapshots/baseline.json");
+  const path = join(project.root, "preview/snapshots/baseline.json");
 
   await writeFile(path, '{"name":"Snapshot","type":"dark","colors":{},"tokenColors":[]}');
   await waitFor(() => project.reminders() === 2);
@@ -700,11 +699,11 @@ test("watch filters root and preview output events while accepting snapshot inpu
   await scheduler.controller.ready;
   scheduler.notify("change", "README.md", project.root);
   scheduler.notify("change", "package.json", project.root);
-  scheduler.notify("change", "themes/generated.json", join(project.root, "dev-extension"));
-  scheduler.notify("change", "static-snapshots/README.md", join(project.root, "dev-extension"));
+  scheduler.notify("change", "themes/generated.json", join(project.root, "preview"));
+  scheduler.notify("change", "snapshots/README.md", join(project.root, "preview"));
   await delay(60);
   assert.equal(scheduler.builds(), 1);
-  scheduler.notify("change", "static-snapshots\\baseline.json", join(project.root, "dev-extension"));
+  scheduler.notify("change", "snapshots\\baseline.json", join(project.root, "preview"));
   await waitFor(() => scheduler.builds() === 2);
   assert.equal(scheduler.reminders(), 1);
 });

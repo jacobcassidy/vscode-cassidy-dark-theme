@@ -3,6 +3,7 @@
  * @file Add missing UI and semantic tokens and complete matching documentation for the production default.
  */
 
+import { themeSections } from "../shared/paths.js";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -11,7 +12,7 @@ import { applyEdits, createScanner, modify, SyntaxKind } from "jsonc-parser";
 // eslint-disable-next-line import-x/default
 import prettier from "prettier";
 import { object, parseJsonc } from "../shared/jsonc.js";
-import { discoverTargets, readOptional, readTargetInput, themeSections } from "../themes/inputs.js";
+import { discoverTargets, readOptional, readTargetInput } from "../themes/inputs.js";
 
 /** Repository root inferred from this module's location. */
 const defaultRoot = fileURLToPath(new URL("../../", import.meta.url));
@@ -214,10 +215,10 @@ async function addDefaultDetails(root, target, updates) {
 
   for (const section of themeSections) {
     /** Original or already prepared token section, including newly added placeholders. */
-    let input = await readTargetInput(root, target, `tokens/${section}.jsonc`);
+    let input = await readTargetInput(root, target, `tokens/${section}/definitions.jsonc`);
 
     /** Earlier update for the matching default token file, if it has additions. */
-    const pending = updates.find((update) => update.path === `${target.directory}/tokens/${section}.jsonc`);
+    const pending = updates.find((update) => update.path === `${target.directory}/tokens/${section}/definitions.jsonc`);
 
     if (pending?.source) {
       input = { ...parseJsonc(pending.source, input.label), source: pending.source, label: input.label };
@@ -231,7 +232,7 @@ async function addDefaultDetails(root, target, updates) {
       updates.push({
         theme: "prod/default",
         section,
-        path: `${target.directory}/tokens/syntax.jsonc`,
+        path: `${target.directory}/tokens/syntax/definitions.jsonc`,
         added: identified.added,
         source: identified.added.length ? input.source : undefined,
       });
@@ -248,7 +249,7 @@ async function addDefaultDetails(root, target, updates) {
           : Object.entries(input.value);
 
     /** Existing documentation, whose reviewed descriptions and relationships are retained. */
-    const details = await readTargetInput(root, target, `details/${section}.jsonc`);
+    const details = await readTargetInput(root, target, `tokens/${section}/details.jsonc`);
 
     object(details.value, details.label);
 
@@ -300,7 +301,7 @@ async function addDefaultDetails(root, target, updates) {
     updates.push({
       theme: "prod/default",
       section: `details/${section}`,
-      path: `${target.directory}/details/${section}.jsonc`,
+      path: `${target.directory}/tokens/${section}/details.jsonc`,
       added,
       source: added.length ? insertProperties(edited, Object.keys(values), values) : undefined,
     });
@@ -363,7 +364,7 @@ export async function addThemeProperties({ root = defaultRoot, themes = included
       const target = targets.get(theme);
 
       /** Effective source snapshot, read before any selected target is changed. */
-      const input = await readTargetInput(root, target, `tokens/${section}.jsonc`);
+      const input = await readTargetInput(root, target, `tokens/${section}/definitions.jsonc`);
 
       object(input.value, input.label);
 
@@ -373,7 +374,7 @@ export async function addThemeProperties({ root = defaultRoot, themes = included
         .sort();
 
       /** Destination always within the selected theme's own source directory. */
-      const path = `${target.directory}/tokens/${section}.jsonc`;
+      const path = `${target.directory}/tokens/${section}/definitions.jsonc`;
 
       /** Comment-preserving candidate, formatted after every input has been validated. */
       const source = added.length ? insertProperties(input, added) : undefined;

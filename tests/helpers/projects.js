@@ -3,12 +3,12 @@
  * @file Create isolated theme and extension fixtures and read their generated outputs for assertions.
  */
 
+import { themeInputPaths } from "../../tooling/shared/paths.js";
 import { mkdir, mkdtemp, readFile, readdir, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
-import { join } from "node:path";
+import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { parseJsonc } from "../../tooling/shared/jsonc.js";
-import { themeInputPaths } from "../../tooling/themes/inputs.js";
 
 /** Create a small palette configuration with chromatic families and neutral endpoints. */
 export function createPaletteConfig() {
@@ -26,7 +26,7 @@ export function createPaletteConfig() {
  */
 export async function writeDefaultPaletteConfig(directory) {
   await mkdir(join(directory, "palette"), { recursive: true });
-  await writeFile(join(directory, "palette/palette-config.jsonc"), '{"useDefaultPalette":true}\n');
+  await writeFile(join(directory, "palette/config.jsonc"), '{"useDefaultPalette":true}\n');
 }
 
 /** Required default source paths without the JSONC filename extension. */
@@ -82,8 +82,8 @@ export async function readThemeParts(directory) {
       parts.metadata = JSON.parse(JSON.stringify(value));
     } else {
       /** Section group and name associated with this authored input. */
-      const [group, section] = name.split("/");
-      parts[group][section] = JSON.parse(JSON.stringify(value));
+      const [group, section, kind] = name.split("/");
+      parts[kind === "details" ? "details" : group][section] = JSON.parse(JSON.stringify(value));
     }
   }
 
@@ -123,18 +123,16 @@ export async function createBuildProject(t) {
     await mkdir(join(root, "src/themes/prod/default", directory), { recursive: true });
   }
 
-  await writeFile(
-    join(root, "src/themes/prod/default/palette/palette-config.jsonc"),
-    JSON.stringify(createPaletteConfig()),
-  );
+  await writeFile(join(root, "src/themes/prod/default/palette/config.jsonc"), JSON.stringify(createPaletteConfig()));
 
   for (const name of themePartNames) {
     /** Group and section used to select the fixture input. */
-    const [group, section] = name.split("/");
+    const [group, section, kind] = name.split("/");
 
+    await mkdir(join(root, "src/themes/prod/default", name, ".."), { recursive: true });
     await writeFile(
       join(root, "src/themes/prod/default", `${name}.jsonc`),
-      JSON.stringify(section ? inputs[group][section] : inputs[group]),
+      JSON.stringify(section ? inputs[kind === "details" ? "details" : group][section] : inputs[group]),
     );
   }
 
@@ -192,7 +190,7 @@ export async function readBuildOutputs(root) {
     }
   }
 
-  for (const directory of ["themes", "dev-extension/themes", "src/themes", "docs/references/palettes"])
+  for (const directory of ["themes", "preview/themes", "src/themes", "docs/references/palettes"])
     await visit(directory);
 
   return files;
@@ -229,7 +227,7 @@ export async function createPreviewProject(t) {
     __metadata: { id: "installed-extension" },
   };
 
-  for (const path of ["themes", "dev-extension/themes", "dev-extension/static-snapshots", "images"]) {
+  for (const path of ["themes", "preview/themes", "preview/snapshots", "images"]) {
     await mkdir(join(root, path), { recursive: true });
   }
 
@@ -239,8 +237,19 @@ export async function createPreviewProject(t) {
 
   await writeFile(join(root, "package.json"), JSON.stringify(manifest));
   await writeFile(join(root, "themes/theme.json"), theme);
-  await writeFile(join(root, "dev-extension/themes/cassidy-dark-color-theme-test.json"), theme);
+  await writeFile(join(root, "preview/themes/cassidy-dark-color-theme-test.json"), theme);
   await writeFile(join(root, "images/icon.png"), "fixture");
 
   return { root, extensionDirectory, manifest, theme };
+}
+
+/**
+ * Write fixture text after creating its parent directories.
+ * @param path - Fixture destination.
+ * @param source - Complete fixture source.
+ * @param [options] - Standard filesystem write options.
+ */
+export async function writeFixture(path, source, options) {
+  await mkdir(dirname(path), { recursive: true });
+  await writeFile(path, source, options);
 }

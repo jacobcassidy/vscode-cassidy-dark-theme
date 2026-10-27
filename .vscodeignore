@@ -1,6 +1,6 @@
 # Directories to ignore
 .vscode
-dev-extension
+preview
 dist
 docs
 scripts
