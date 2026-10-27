@@ -3,7 +3,8 @@
   "name": "Cassidy Dark",
   "type": "dark",
   "author": "Jacob Cassidy",
-  "version": "1.4-beta-from-vsc-settings",
+  "previewName": "v1.4 Beta VSCS",
+  "description": "Local VSC Settings overrides to v1.2 Prod",
   "semanticHighlighting": true,
   "colors": {
     // -----------------------------------------------------------------------
