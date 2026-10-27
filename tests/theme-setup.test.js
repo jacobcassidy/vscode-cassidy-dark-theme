@@ -28,10 +28,14 @@ async function createSetupProject(t) {
   /** Complete default theme and source root. */
   const root = await createBuildProject(t);
 
-  await mkdir(join(root, "docs/references"), { recursive: true });
+  await mkdir(join(root, "docs/templates"), { recursive: true });
   await writeFile(
-    join(root, "docs/references/all-theme-properties.json"),
-    '// Reference colors are intentionally irrelevant.\n{"colors":{"z.background":"#f00","a.foreground":"#f00"},"semanticTokenColors":{"enum":"#f00","*.readonly":"#f00"}}',
+    join(root, "docs/templates/all-ui-tokens.json"),
+    '// Template colors are intentionally irrelevant.\n{"colors":{"z.background":"#f00","a.foreground":"#f00"}}',
+  );
+  await writeFile(
+    join(root, "docs/templates/all-semantic-tokens.json"),
+    '// Template colors are intentionally irrelevant.\n{"semanticTokenColors":{"enum":"#f00","*.readonly":"#f00"}}',
   );
   await writeFile(join(root, ".prettierrc.json"), '{"printWidth":1,"trailingComma":"none"}');
 
@@ -217,7 +221,7 @@ test("malformed reference input is rejected before a theme directory is created"
   /** Fixture with a reference that cannot be used to populate token properties. */
   const root = await createSetupProject(t);
 
-  await writeFile(join(root, "docs/references/all-theme-properties.json"), '{"colors":[],"semanticTokenColors":{}}');
+  await writeFile(join(root, "docs/templates/all-ui-tokens.json"), '{"colors":[]}');
 
   /** Snapshot captured after intentionally invalidating the reference. */
   const before = await snapshot(root);
@@ -282,10 +286,8 @@ test("CLI setup and explicit property targets work without changing the configur
   await assert.rejects(run(process.execPath, [setupScript, "dev/extra", "dev/another"]), /Usage:/);
 
   await addTheme({ root, theme: "prod/second" });
-  await writeFile(
-    join(root, "docs/references/all-theme-properties.json"),
-    '{"colors":{"new.background":"#f00"},"semanticTokenColors":{"newType":"#f00"}}',
-  );
+  await writeFile(join(root, "docs/templates/all-ui-tokens.json"), '{"colors":{"new.background":"#f00"}}');
+  await writeFile(join(root, "docs/templates/all-semantic-tokens.json"), '{"semanticTokenColors":{"newType":"#f00"}}');
 
   /** Existing default files must remain untouched by explicit CLI selections. */
   const before = await snapshot(join(root, "src/themes/prod/default"));

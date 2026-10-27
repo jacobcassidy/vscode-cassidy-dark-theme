@@ -19,15 +19,14 @@ import { createBuildProject, readBuildOutputs, readThemeParts, writeDefaultPalet
  * @param semanticTokenColors - Semantic reference keys and values.
  */
 async function writeReference(root, colors, semanticTokenColors) {
-  await mkdir(join(root, "docs/references"), { recursive: true });
+  await mkdir(join(root, "docs/templates"), { recursive: true });
   await writeFile(
-    join(root, "docs/references/all-theme-properties.json"),
-    `// Reference comments must be accepted.\n${JSON.stringify({
-      name: "Do not copy reference metadata",
-      colors,
-      semanticTokenColors,
-      tokenColors: [{ scope: "do.not.copy", settings: { foreground: "#f00" } }],
-    })}\n`,
+    join(root, "docs/templates/all-ui-tokens.json"),
+    `// Template comments must be accepted.\n${JSON.stringify({ colors })}\n`,
+  );
+  await writeFile(
+    join(root, "docs/templates/all-semantic-tokens.json"),
+    `// Template comments must be accepted.\n${JSON.stringify({ semanticTokenColors })}\n`,
   );
 }
 
@@ -171,7 +170,7 @@ test("missing UI and semantic properties are inserted alphabetically while value
     for (const key of update.added) {
       assert.deepEqual((update.section === "ui" ? ui : semantic).value[key], {
         color: "#0ff",
-        colorReason: "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color.",
+        colorReason: "UNREVIEWED: Added from a token template; choose an intentional color.",
       });
     }
   }
@@ -311,12 +310,12 @@ test("unknown targets and malformed references or later source inputs fail befor
 
       if (failure.startsWith("reference")) {
         await writeFile(
-          join(root, "docs/references/all-theme-properties.json"),
+          join(root, "docs/templates/all-ui-tokens.json"),
           failure === "reference"
             ? "{"
             : failure === "reference shape"
-              ? '{"colors":[],"semanticTokenColors":{}}'
-              : '{"colors":{"a":"#f00","a":"#0ff"},"semanticTokenColors":{}}',
+              ? '{"colors":[]}'
+              : '{"colors":{"a":"#f00","a":"#0ff"}}',
         );
       }
 

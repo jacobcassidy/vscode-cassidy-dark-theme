@@ -29,7 +29,7 @@ const sections = [
 /** Recognizable styling retained until an added entry has been reviewed. */
 const placeholder = {
   color: "#0ff",
-  colorReason: "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color.",
+  colorReason: "UNREVIEWED: Added from a token template; choose an intentional color.",
 };
 
 /**
@@ -309,24 +309,32 @@ async function addDefaultDetails(root, target, updates) {
 }
 
 /**
- * Read and validate the UI and semantic reference shared by property addition and theme setup.
+ * Read and validate the UI and semantic token templates used for property discovery.
  * @param root - Repository or isolated fixture root.
- * @returns Reference object containing validated colors and semanticTokenColors sections.
+ * @returns Combined object containing validated colors and semanticTokenColors sections.
  */
 export async function readPropertyReference(root) {
-  /** Reference path shared by UI and semantic property discovery. */
-  const path = "docs/references/all-theme-properties.json";
+  /** UI token template path used for workbench property discovery. */
+  const uiPath = "docs/templates/all-ui-tokens.json";
 
-  /** Comment-bearing reference, parsed with duplicate-key validation. */
-  const reference = parseJsonc(await readFile(join(root, path), "utf8"), path).value;
+  /** Semantic token template path used for selector discovery. */
+  const semanticPath = "docs/templates/all-semantic-tokens.json";
 
-  object(reference, path);
+  /** Parsed UI token template, with duplicate-key validation. */
+  const uiTemplate = parseJsonc(await readFile(join(root, uiPath), "utf8"), uiPath).value;
 
-  for (const [section] of sections) {
-    object(reference[section], `${path}.${section}`);
-  }
+  /** Parsed semantic token template, with duplicate-key validation. */
+  const semanticTemplate = parseJsonc(await readFile(join(root, semanticPath), "utf8"), semanticPath).value;
 
-  return reference;
+  object(uiTemplate, uiPath);
+  object(uiTemplate.colors, `${uiPath}.colors`);
+  object(semanticTemplate, semanticPath);
+  object(semanticTemplate.semanticTokenColors, `${semanticPath}.semanticTokenColors`);
+
+  return {
+    colors: uiTemplate.colors,
+    semanticTokenColors: semanticTemplate.semanticTokenColors,
+  };
 }
 
 /**
