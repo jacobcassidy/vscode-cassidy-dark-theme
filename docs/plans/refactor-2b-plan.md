@@ -160,6 +160,24 @@ Apply these interfaces:
 
 Remove the VS Code color-theme schema/metadata wrappers from shared definitions. Keep root content as the family data shape, with file purpose, pinned upstream provenance, review information, and required license notices in JSONC comments. Preserve the Microsoft license wherever extracted descriptions require it. Associate repository JSON Schemas through editor configuration rather than adding a `$schema` property to category-only roots.
 
+### Shared file provenance headers
+
+Every shared `definitions.jsonc` and `details.jsonc` begins with a JSONC comment header identifying its purpose and the upstream inputs last processed for that file. Record the stable VS Code version and exact commit, plus the supplemental main commit when consulted. Preserve required license notices within the opening comments. The final header line, after provenance and license text and before the root object, must explain how to invoke the updater from the repository root:
+
+```jsonc
+// Shared UI token definitions: inventory, categories, and generator placeholders.
+// Upstream inputs last processed: VS Code <stable-version>
+// Stable commit: <full-commit>
+// Supplemental main commit: <full-commit>
+// Updater (run from the repository root): npm run update:token-details
+```
+
+The example omits license text for brevity; required notices must remain before the final updater line. Use a purpose appropriate to each file. Preserve evidenced historical versions during migration, mark unknown revisions explicitly rather than inventing them, and identify local syntax inputs where applicable. Omit an upstream commit line when that source was not consulted. These headers describe file-level processing provenance, not a claim that every protected or unresolved description was extracted from that version.
+
+Advance a file's provenance only after that file is successfully refreshed or explicitly verified against those inputs. A details-only refresh must not advance definition-file headers. The final updater line on definitions points to the command that refreshes descriptions and reports inventory differences; it does not imply that the command rewrites definitions. Stage refreshed headers with their file contents and successful resolution record, preserve them on failure, and make no-op runs leave content/timestamps unchanged. Keep provenance in comments rather than adding root metadata fields or prefixes to canonical IDs.
+
+### Shared inventory and categories
+
 Shared definitions and shared details intentionally have different inventories. Definition files control supported inventory and generator placeholders. Detail refreshes do not expand definitions, prune entries, or overwrite theme-specific documentation implicitly.
 
 UI, semantic, and syntax definitions/details use root categories in this order: `standard`, `sourceCode`, `nonStandard`, `deprecated`. Keep empty category objects, except syntax definition categories, which each contain a `rules` array. Variables retain their existing nested role definitions and corresponding canonical-path detail map without these category wrappers.
@@ -427,7 +445,7 @@ Updater behavior:
 5. Derive semantic combination descriptions from the extracted type/modifier definitions without inventing provider behavior. Extract local syntax names, ordered scopes, descriptive comments, and available grammar descriptions; preserve protected syntax wording. Derive internal-variable purposes locally through the authoring generator without introducing shared variable data.
 6. For unresolved existing IDs, retain reviewed text and report missing evidence. For unresolved new IDs, add a nonempty `UNREVIEWED` description and warn. Never convert an extraction failure into fabricated reviewed text or automatically set `modified-desc: true`.
 7. Reconcile evidenced category changes, preserving relationships where present, protected descriptions, flags, usage, provenance, and licenses. Do not infer retirement from absence. Require reconciliation for category/context conflicts before applying any candidate.
-8. Format and validate all three shared detail candidates and the updated `upstream-sources.jsonc` resolution record before applying replacements. Stage them as one set with rollback on application failure, advancing the last successful resolution only when the entire refresh succeeds. Write changed files only and leave unrelated themes/definitions untouched. Repeated identical input leaves content and timestamps unchanged; review dates change only when the recorded source/review inputs actually change. Do not write a new wall-clock timestamp solely because another latest-version check ran.
+8. Format and validate all three shared detail candidates, their explicit provenance headers ending with the updater command, and the updated `upstream-sources.jsonc` resolution record before applying replacements. Stage them as one set with rollback on application failure, advancing the last successful resolution only when the entire refresh succeeds. Write changed files only and leave unrelated themes/definitions and their headers untouched. Repeated identical input leaves content and timestamps unchanged; review dates change only when the recorded source/review inputs actually change. Do not write a new wall-clock timestamp solely because another latest-version check ran.
 9. Report counts and changed paths using existing terminal colors: yellow headings, blue information/paths, green additions/success, bright yellow warnings, red errors, magenta actions/important notices, and default text for uncategorized output. Refreshing shared details does not itself require a reload.
 
 Retrieval and modes:
@@ -467,7 +485,7 @@ Move `docs/grammar-samples/` as one set to `samples/grammar/`. Describe them as 
 
 Keep usage guides in `docs/guides/` and automated test inputs in `tests/fixtures/`. Grammar samples require no execution, and optional language-toolchain checks remain outside `npm run check`. Update README links, guide tables/commands, `.prettierignore`'s Svelte entry, editor/formatter/linter rules, and source comments using the old sample location.
 
-Move `hex-opacity.md` directly to `docs/references/hex-opacity.md` and repair active references. Keep active examples under `docs/references/examples/`. Update README, development/token guides, workbench audit instructions, command/path tables, and examples for the final paths, four categories, exact selectors, syntax order, `description`, protection flags, and usage context. Document ownership, command flags, latest-stable tracking, recorded source revisions, offline/check replay semantics, `upstream-sources.jsonc`, and validation-versus-generator roles in `src/token-data/README.md`.
+Move `hex-opacity.md` directly to `docs/references/hex-opacity.md` and repair active references. Keep active examples under `docs/references/examples/`. Update README, development/token guides, workbench audit instructions, command/path tables, and examples for the final paths, four categories, exact selectors, syntax order, `description`, protection flags, and usage context. Document ownership, command flags, latest-stable tracking, recorded source revisions, per-file provenance headers and their final updater-command line, offline/check replay semantics, `upstream-sources.jsonc`, and validation-versus-generator roles in `src/token-data/README.md`.
 
 Audit imports, npm scripts, test discovery, CI/release workflows, generated notices, editor settings, hooks, caches, and packaging consumers. Preserve release behavior, snapshot contents, and historical plans/changelog claims while applying the explicit preview path migrations. Repair historical links if a moved active target would break them without rewriting historical behavior.
 
@@ -506,3 +524,4 @@ Migration tooling/tests themselves use local fixtures and injectable roots. Test
 10. Shared category or definition/detail membership changes trigger category validation; valid shared description-only changes update the snapshot without compilation/writes/sync/reload. Errors remain visible and corrected source/data edits retry through the serialized watcher.
 11. Editor schema associations match actual source shapes, examples, and validator contracts. Samples exist under `samples/grammar/`, with adjacent working TS configuration, updated active links, and preserved highlighting probes.
 12. Every stage has a passing checkpoint and commit; final aggregate checks, idempotence, isolated preview behavior, and VSIX contents are verified. UI/semantic serialization-order changes, if unavoidable, are explicitly reviewed while styling equality and exact syntax precedence remain required.
+13. Every shared definition/detail file has a purpose/provenance comment header whose last line is `// Updater (run from the repository root): npm run update:token-details`. Headers preserve required licenses and identify evidenced source versions/commits without fabricating unknown history. Verify detail-header advancement with successful refreshes, unchanged definition headers during details-only refreshes, preservation on failure/check, and unchanged reruns. No header metadata becomes a root token field or emitted theme data.
