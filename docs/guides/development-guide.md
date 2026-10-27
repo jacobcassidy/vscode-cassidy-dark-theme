@@ -130,7 +130,7 @@ Rebuild after changing palette, token, details, or metadata inputs. The generate
 
 After changing manifest metadata or adding or removing theme files, run `npm run build` or let the watcher refresh the preview registrations. Follow the reload reminder when one is printed.
 
-Script messages use red for errors, bright yellow for warnings, blue for information, green for success and additions, yellow for required user actions, cyan for headings, and magenta for other important notices. File details and other default text retain the terminal's default color.
+Script messages use red for errors, bright yellow for warnings, blue for information, green for success and additions, yellow for required user actions, cyan for headings, and magenta for other important notices. Indented relative file paths use magenta; other default text retains the terminal's default color.
 
 Build and watch print the same yellow reminder after initial preview installation, registration changes (including names, IDs, paths, types, and theme additions or removals), or repair of missing asset links: **Run Developer: Reload Window in VS Code, then select a Cassidy Dark Preview theme.** Unchanged runs, ordinary live theme edits, unrelated package metadata, and registration formatting or ordering changes do not print it. The reminder appears once per applied change; the scripts cannot observe whether VS Code has actually been reloaded. There is no separate `npm run sync` command.
 

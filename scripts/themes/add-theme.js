@@ -153,7 +153,7 @@ if (import.meta.main) {
 
     console.log(formatMessage(`Created ${result.theme}:`, "success"));
 
-    for (const path of result.files) console.log(`  ${path}`);
+    for (const path of result.files) console.log(formatMessage(`  ${path}`, "important"));
 
     for (const update of result.updates)
       console.log(formatMessage(`${update.section}: added ${update.added.length} properties`, "success"));
