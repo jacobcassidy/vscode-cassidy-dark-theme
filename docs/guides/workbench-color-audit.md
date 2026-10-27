@@ -10,8 +10,8 @@
 | 4   | [Source registrations versus documentation and schema](#source-registrations-versus-documentation-and-schema) |                                                                                                                 |
 | 5   | [Deprecated IDs already in the reference](#deprecated-ids-already-in-the-reference)                           |                                                                                                                 |
 | 6   | [Reference IDs absent from both source snapshots](#reference-ids-absent-from-both-source-snapshots)           |                                                                                                                 |
-|     | 6.1                                                                                                           | [Entries outside the remoteHub and gitblame namespaces](#entries-outside-the-remotehub-and-gitblame-namespaces) |
-|     | 6.2                                                                                                           | [Entries requiring separate extension verification](#entries-requiring-separate-extension-verification)         |
+| 6.1 |                                                                                                               | [Entries outside the remoteHub and gitblame namespaces](#entries-outside-the-remotehub-and-gitblame-namespaces) |
+| 6.2 |                                                                                                               | [Entries requiring separate extension verification](#entries-requiring-separate-extension-verification)         |
 | 7   | [Method and limits](#method-and-limits)                                                                       |                                                                                                                 |
 
 Reviewed on 2026-10-24 against [`all-workbench-settings-clean.json`](all-workbench-settings-clean.json). The annotated [`all-workbench-settings.json`](all-workbench-settings.json) has exactly the same color IDs, so these findings apply to both files.

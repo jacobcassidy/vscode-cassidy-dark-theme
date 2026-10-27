@@ -6,18 +6,18 @@
 | --- | ------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
 | 1   | [Recommendation](#recommendation)                                   |                                                                                     |
 | 2   | [Palette primitives](#palette-primitives)                           |                                                                                     |
-|     | 2.1                                                                 | [Hue anchors and base colors](#hue-anchors-and-base-colors)                         |
-|     | 2.2                                                                 | [Choosing chroma from the anchors](#choosing-chroma-from-the-anchors)               |
-|     | 2.3                                                                 | [Numbered tones and muted modifier](#numbered-tones-and-muted-modifier)             |
+| 2.1 |                                                                     | [Hue anchors and base colors](#hue-anchors-and-base-colors)                         |
+| 2.2 |                                                                     | [Choosing chroma from the anchors](#choosing-chroma-from-the-anchors)               |
+| 2.3 |                                                                     | [Numbered tones and muted modifier](#numbered-tones-and-muted-modifier)             |
 | 3   | [Semantic tokens](#semantic-tokens)                                 |                                                                                     |
 | 4   | [Export and gamut policy](#export-and-gamut-policy)                 |                                                                                     |
 | 5   | [Neutrals, overlays, and contrast](#neutrals-overlays-and-contrast) |                                                                                     |
 | 6   | [Theme build](#theme-build)                                         |                                                                                     |
-|     | 6.1                                                                 | [Source and output files](#source-and-output-files)                                 |
-|     | 6.2                                                                 | [Color variables and template references](#color-variables-and-template-references) |
-|     | 6.3                                                                 | [Build behavior](#build-behavior)                                                   |
-|     | 6.4                                                                 | [Commands and release integration](#commands-and-release-integration)               |
-|     | 6.5                                                                 | [Migration and verification](#migration-and-verification)                           |
+| 6.1 |                                                                     | [Source and output files](#source-and-output-files)                                 |
+| 6.2 |                                                                     | [Color variables and template references](#color-variables-and-template-references) |
+| 6.3 |                                                                     | [Build behavior](#build-behavior)                                                   |
+| 6.4 |                                                                     | [Commands and release integration](#commands-and-release-integration)               |
+| 6.5 |                                                                     | [Migration and verification](#migration-and-verification)                           |
 | 7   | [Adoption sequence](#adoption-sequence)                             |                                                                                     |
 
 Status: the build and palette described here are implemented. The file paths and command examples below record the original design; [restructuring plan 1b](../plans/archive/restructure-1b-plan.md) and the development guide describe the current layout. Current commands are `npm run build` for both target groups, `npm run build:prod` for prod themes, and `npm run build:dev` for dev previews. Authoring inputs live in `src/`; the shipped theme and palette references are generated. The initial migration verified that every parsed theme value and original comment was preserved before the new palette was applied in a separate change. The [development guide](development-guide.md) describes the available commands, and the [generated palette](../../../src/themes/prod/default/palette/generated/palette.md) shows the current output.
