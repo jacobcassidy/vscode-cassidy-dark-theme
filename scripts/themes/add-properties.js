@@ -12,7 +12,7 @@ import { applyEdits, createScanner, modify, SyntaxKind } from "jsonc-parser";
 // eslint-disable-next-line import-x/default
 import prettier from "prettier";
 import { object, parseJsonc } from "../lib/jsonc-validation.js";
-import { discoverTargets, readOptional, readTargetInput } from "../lib/theme-source-inputs.js";
+import { discoverTargets, readOptional, readTargetInput, themeSectionFiles } from "../lib/theme-source-inputs.js";
 
 /** Repository root inferred from this module's location. */
 const defaultRoot = fileURLToPath(new URL("../../", import.meta.url));
@@ -203,7 +203,7 @@ function identifySyntax(input) {
  */
 async function addDefaultDetails(root, target, updates) {
   /** Offline descriptions reviewed against the pinned VS Code source snapshots. */
-  const referencePath = "docs/references/lookups/token-details.jsonc";
+  const referencePath = "docs/lookups/token-details.jsonc";
 
   /** Optional catalog text; isolated fixtures and new custom IDs may have no reviewed descriptions. */
   const referenceSource = await readOptional(join(root, referencePath));
@@ -213,12 +213,12 @@ async function addDefaultDetails(root, target, updates) {
 
   object(reference, referencePath);
 
-  for (const section of ["base", "ui", "semantic", "syntax"]) {
+  for (const [section, file] of Object.entries(themeSectionFiles)) {
     /** Original or already prepared token section, including newly added placeholders. */
-    let input = await readTargetInput(root, target, `tokens/${section}.jsonc`);
+    let input = await readTargetInput(root, target, `tokens/${file}.jsonc`);
 
     /** Earlier update for the matching default token file, if it has additions. */
-    const pending = updates.find((update) => update.path === `${target.directory}/tokens/${section}.jsonc`);
+    const pending = updates.find((update) => update.path === `${target.directory}/tokens/${file}.jsonc`);
 
     if (pending?.source) {
       input = { ...parseJsonc(pending.source, input.label), source: pending.source, label: input.label };
@@ -249,7 +249,7 @@ async function addDefaultDetails(root, target, updates) {
           : Object.entries(input.value);
 
     /** Existing documentation, whose reviewed descriptions and relationships are retained. */
-    const details = await readTargetInput(root, target, `details/${section}.jsonc`);
+    const details = await readTargetInput(root, target, `details/${file}.jsonc`);
 
     object(details.value, details.label);
 
@@ -300,8 +300,8 @@ async function addDefaultDetails(root, target, updates) {
 
     updates.push({
       theme: "prod/default",
-      section: `details/${section}`,
-      path: `${target.directory}/details/${section}.jsonc`,
+      section: `details/${file}`,
+      path: `${target.directory}/details/${file}.jsonc`,
       added,
       source: added.length ? insertProperties(edited, Object.keys(values), values) : undefined,
     });

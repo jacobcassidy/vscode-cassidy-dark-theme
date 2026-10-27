@@ -13,10 +13,13 @@ export const defaultThemeDirectory = "src/themes/prod/default";
 /** Palette configuration required explicitly in every theme directory. */
 export const paletteInputPath = "palette/palette-config.jsonc";
 
+/** Source filenames for compilation sections; shared base aliases are authored as internal variables. */
+export const themeSectionFiles = { base: "variables", ui: "ui", semantic: "semantic", syntax: "syntax" };
+
 /** Required metadata, consolidated token sections, and independent documentation inputs. */
 export const themeInputPaths = [
   "metadata.jsonc",
-  ...["base", "ui", "semantic", "syntax"].flatMap((section) => [`tokens/${section}.jsonc`, `details/${section}.jsonc`]),
+  ...Object.values(themeSectionFiles).flatMap((file) => [`tokens/${file}.jsonc`, `details/${file}.jsonc`]),
 ];
 
 /** Mapping from authored theme types to VS Code UI theme identifiers. */

@@ -6,6 +6,9 @@ All notable changes to this project are documented in this file.
 
 ### Changed
 
+- Corrected property purpose catalog paths after moving `lookups/` out of `references/`.
+- Renamed `tokens/base.jsonc` and `details/base.jsonc` to `variables.jsonc` to clarify their internal color-variable role, preserving `base.*` aliases and generated theme output.
+
 - Made theme builds and watch automatically remove stale theme JSON files with the matching generated header after validation, report removed paths and counts, and refresh preview registrations. Kept check mode read-only and preserved stale-output errors for unrecognized files.
 - Changed terminal heading messages from cyan to yellow.
 - Changed filename messages from terminal yellow to terminal blue.

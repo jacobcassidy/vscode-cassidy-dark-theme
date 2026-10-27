@@ -225,15 +225,15 @@ Run `npm run add:properties -- dev/my-theme` later to add newly referenced prope
 
 The prod default under `src/themes/prod/default/` requires ten authored files:
 
-| Relative input path                       | Purpose                                                                                                                              |
-| ----------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
-| `palette/palette-config.jsonc`            | Required palette selection: `useDefaultPalette: true` or complete generation settings with documented overrides.                     |
-| `metadata.jsonc`                          | Root properties such as `$schema`, `name`, `type`, `author`, and `semanticHighlighting`.                                             |
-| `tokens/base.jsonc`                       | Nested `surface`, `text`, `diagnostic`, and `diff` roles exposing `base.*` aliases without emitting entries.                         |
-| `tokens/ui.jsonc`                         | Flat VS Code settings with color descriptors, compiled into `colors`.                                                                |
-| `tokens/semantic.jsonc`                   | Exact semantic selectors with color descriptors and/or boolean formatting flags.                                                     |
-| `tokens/syntax.jsonc`                     | Ordered TextMate rules with names, scopes, optional IDs, direct color descriptors, `fontStyle`, and optional background descriptors. |
-| `details/{base,ui,semantic,syntax}.jsonc` | Four independent documentation files keyed by effective authored entries, including disabled entries.                                |
+| Relative input path                            | Purpose                                                                                                                              |
+| ---------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| `palette/palette-config.jsonc`                 | Required palette selection: `useDefaultPalette: true` or complete generation settings with documented overrides.                     |
+| `metadata.jsonc`                               | Root properties such as `$schema`, `name`, `type`, `author`, and `semanticHighlighting`.                                             |
+| `tokens/variables.jsonc`                       | Nested `surface`, `text`, `diagnostic`, and `diff` roles exposing `base.*` aliases without emitting entries.                         |
+| `tokens/ui.jsonc`                              | Flat VS Code settings with color descriptors, compiled into `colors`.                                                                |
+| `tokens/semantic.jsonc`                        | Exact semantic selectors with color descriptors and/or boolean formatting flags.                                                     |
+| `tokens/syntax.jsonc`                          | Ordered TextMate rules with names, scopes, optional IDs, direct color descriptors, `fontStyle`, and optional background descriptors. |
+| `details/{variables,ui,semantic,syntax}.jsonc` | Four independent documentation files keyed by effective authored entries, including disabled entries.                                |
 
 Use `color` for a direct palette or token alias, such as `palette.yellow.400`, `base.diagnostic.error.foreground`, or `syntax.string`. Literal hex colors require `colorReason`; optional `alpha` replaces inherited opacity. UI and semantic entries expose `ui.<key>` and `semantic.<selector>` aliases; a syntax rule with an `id` exposes its foreground as `syntax.<id>`. Forward and cross-section aliases work because all named colors are collected before resolution. Dotted and wildcard semantic selectors remain exact flat keys.
 

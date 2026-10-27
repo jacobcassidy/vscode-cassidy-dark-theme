@@ -172,7 +172,7 @@ test("failed prod validation leaves all previous outputs intact and palette-only
   );
 
   await writeFile(
-    join(root, "src/themes/prod/default/tokens/base.jsonc"),
+    join(root, "src/themes/prod/default/tokens/variables.jsonc"),
     '{"surface":{"editor":{"color":"missing.color"}}}',
   );
   await assert.rejects(buildProdThemes({ root }), /Unknown reference/);
@@ -195,7 +195,7 @@ test("editing prod token details leaves all generated artifacts unchanged", asyn
   await buildProdThemes({ root });
 
   await writeFile(
-    join(root, "src/themes/prod/default/details/base.jsonc"),
+    join(root, "src/themes/prod/default/details/variables.jsonc"),
     JSON.stringify({ "surface.editor": { for: "Editor background." } }),
   );
   assert.deepEqual((await buildProdThemes({ root, check: true })).changed, []);
@@ -399,7 +399,7 @@ test("dev targets use independent complete palettes and token sections and isola
   await mkdir(join(devThemeDirectory, "details"));
   await writeFile(join(devThemeDirectory, "details/ui.jsonc"), "{}");
   await writeFile(join(devThemeDirectory, "palette/palette-config.jsonc"), JSON.stringify(input));
-  await writeFile(join(devThemeDirectory, "tokens/base.jsonc"), JSON.stringify(tokens.base));
+  await writeFile(join(devThemeDirectory, "tokens/variables.jsonc"), JSON.stringify(tokens.base));
   await writeFile(
     join(devThemeDirectory, "tokens/ui.jsonc"),
     '{"editor.background":{"color":"#010203","colorReason":"Preview background."}}',
@@ -712,7 +712,7 @@ test("the default theme cannot select its own palette as a fallback", async (t) 
 for (const [path, contents, pattern] of [
   ["palette/palette-config.jsonc", '{"families":{"yellow":{"hue":95}}}', /palette.chroma/],
   [
-    "tokens/base.jsonc",
+    "tokens/variables.jsonc",
     "{}",
     /Unknown reference:.*base.surface.editor/,
   ],
@@ -723,7 +723,7 @@ for (const [path, contents, pattern] of [
   ["palette/palette-config.jsonc", "", /ValueExpected/],
   ["palette/palette-config.jsonc", '{"chroma":', /ValueExpected/],
   [
-    "tokens/base.jsonc",
+    "tokens/variables.jsonc",
     '{"surface":{"one":{"color":"base.surface.two"},"two":{"color":"base.surface.one"}}}',
     /Token cycle/,
   ],
@@ -739,9 +739,9 @@ for (const [path, contents, pattern] of [
     await mkdir(join(devThemeDirectory, path, ".."), { recursive: true });
     await writeFile(join(devThemeDirectory, path), contents);
 
-    if (path === "tokens/base.jsonc") {
+    if (path === "tokens/variables.jsonc") {
       await mkdir(join(devThemeDirectory, "details"), { recursive: true });
-      await writeFile(join(devThemeDirectory, "details/base.jsonc"), "{}");
+      await writeFile(join(devThemeDirectory, "details/variables.jsonc"), "{}");
     }
 
     await assert.rejects(buildDevThemes({ root }), pattern);
@@ -787,7 +787,7 @@ for (const group of ["prod", "dev"]) {
     await writeDefaultPaletteConfig(target);
     await mkdir(join(target, "tokens"), { recursive: true });
     await mkdir(join(target, "details"), { recursive: true });
-    await writeFile(join(target, "details/base.jsonc"), "{}");
+    await writeFile(join(target, "details/variables.jsonc"), "{}");
     await build({ root });
 
     /** Output snapshot or file metadata retained before the operation under test. */
@@ -797,7 +797,7 @@ for (const group of ["prod", "dev"]) {
     const config = createPaletteConfig();
     config.families.yellow.hue = 95;
     await writeFile(join(root, "src/themes/prod/default/palette/palette-config.jsonc"), JSON.stringify(config));
-    await writeFile(join(target, "tokens/base.jsonc"), '{"surface":{"unused":{"color":"unknown.color"}}}');
+    await writeFile(join(target, "tokens/variables.jsonc"), '{"surface":{"unused":{"color":"unknown.color"}}}');
     await assert.rejects(build({ root }), /Unknown reference/);
     assert.deepEqual(await readBuildOutputs(root), before);
   });

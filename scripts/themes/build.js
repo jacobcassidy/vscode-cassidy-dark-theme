@@ -26,6 +26,7 @@ import {
   paletteInputPath,
   prodThemeContribution,
   themeInputPaths,
+  themeSectionFiles,
   themeUiType,
 } from "../lib/theme-source-inputs.js";
 
@@ -55,9 +56,9 @@ async function readCompiledTheme(root, target, palette, command) {
     /** Independently inherited documentation sections. */
     const details = {};
 
-    for (const section of ["base", "ui", "semantic", "syntax"]) {
-      tokens[section] = inputs.get(`tokens/${section}.jsonc`).value;
-      details[section] = inputs.get(`details/${section}.jsonc`).value;
+    for (const [section, file] of Object.entries(themeSectionFiles)) {
+      tokens[section] = inputs.get(`tokens/${file}.jsonc`).value;
+      details[section] = inputs.get(`details/${file}.jsonc`).value;
     }
 
     /** Effective metadata validated before compilation and registration. */

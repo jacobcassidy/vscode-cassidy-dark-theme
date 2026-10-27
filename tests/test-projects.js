@@ -8,7 +8,7 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { parseJsonc } from "../scripts/lib/jsonc-validation.js";
-import { themeInputPaths } from "../scripts/lib/theme-source-inputs.js";
+import { themeInputPaths, themeSectionFiles } from "../scripts/lib/theme-source-inputs.js";
 
 /** Create a small palette configuration with chromatic families and neutral endpoints. */
 export function createPaletteConfig() {
@@ -83,7 +83,7 @@ export async function readThemeParts(directory) {
     } else {
       /** Section group and name associated with this authored input. */
       const [group, section] = name.split("/");
-      parts[group][section] = JSON.parse(JSON.stringify(value));
+      parts[group][section === themeSectionFiles.base ? "base" : section] = JSON.parse(JSON.stringify(value));
     }
   }
 
@@ -134,7 +134,7 @@ export async function createBuildProject(t) {
 
     await writeFile(
       join(root, "src/themes/prod/default", `${name}.jsonc`),
-      JSON.stringify(section ? inputs[group][section] : inputs[group]),
+      JSON.stringify(section ? inputs[group][section === themeSectionFiles.base ? "base" : section] : inputs[group]),
     );
   }
 
