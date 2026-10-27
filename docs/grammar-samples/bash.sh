@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Bash 4+ highlighting sample; inspect as source with Cassidy Dark Dev.
+# Bash 4+ highlighting sample; inspect as source with Cassidy Dark Preview.
 # Definitions only: no functions are called. Validate syntax with bash -n.
 # Covers quoting, expansion, arrays, tests, arithmetic, flow, and redirections.
 

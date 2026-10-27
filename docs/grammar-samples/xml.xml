@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<!-- XML highlighting sample; inspect as source with Cassidy Dark Dev.
+<!-- XML highlighting sample; inspect as source with Cassidy Dark Preview.
      Internal DTD, namespaces, attributes, entities, CDATA, and processing instructions.
      Stylesheet and schema URIs are illustrative; external resolution is unnecessary. -->
 <?xml-stylesheet type="text/xsl" href="https://example.com/theme.xsl"?>

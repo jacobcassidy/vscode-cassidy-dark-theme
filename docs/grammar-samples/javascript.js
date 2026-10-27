@@ -4,7 +4,7 @@
  * JavaScript grammar samples.
  * @file Provide ES module, literal, JSDoc, class, operator, and async syntax probes for theme inspection.
  *
- * Open in VS Code with language mode JavaScript and a Cassidy Dark Dev theme.
+ * Open in VS Code with language mode JavaScript and a Cassidy Dark Preview theme.
  * Use Developer: Inspect Editor Tokens and Scopes on declarations and usages.
  * Compare semantic highlighting enabled and disabled to inspect both layers.
  * JSX, TypeScript annotations, and proposal-only decorators need other grammars.

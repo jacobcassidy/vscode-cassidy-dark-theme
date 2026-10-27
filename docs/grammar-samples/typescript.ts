@@ -1,6 +1,6 @@
 /**
  * Modern TypeScript highlighting sample; no execution required.
- * Open in VS Code with language mode TypeScript and a Cassidy Dark Dev theme.
+ * Open in VS Code with language mode TypeScript and a Cassidy Dark Preview theme.
  * Use Developer: Inspect Editor Tokens and Scopes on declarations and usages.
  * Compare semantic highlighting enabled and disabled to inspect both layers.
  *

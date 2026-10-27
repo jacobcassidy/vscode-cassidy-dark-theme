@@ -1,4 +1,4 @@
-<!-- Svelte 5 highlighting sample for Cassidy Dark Dev; inspect as source.
+<!-- Svelte 5 highlighting sample for Cassidy Dark Preview; inspect as source.
      Svelte tooling supplies markup scopes; Svelte is not a repo dependency.
      References: https://svelte.dev/docs/svelte/$state and https://svelte.dev/docs/svelte/snippet -->
 <script lang="ts">

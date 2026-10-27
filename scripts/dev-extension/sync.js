@@ -29,7 +29,7 @@ export async function syncDevExtension({
   const manifest = JSON.parse(await readFile(join(root, "package.json"), "utf8"));
 
   manifest.name = "cassidy-dark-dev";
-  manifest.displayName = "Cassidy Dark Dev";
+  manifest.displayName = "Cassidy Dark Preview";
   // Do not inherit the published extension identity.
   delete manifest.__metadata;
 
@@ -49,7 +49,19 @@ export async function syncDevExtension({
           throw new Error(`${theme.path}: manifest uiTheme does not match theme type ${metadata.type}`);
         }
 
-        return { ...theme, label: `${theme.label} Dev`, _watch: true };
+        /** Existing target suffix, absent for the default production theme. */
+        const suffix =
+          theme.label.startsWith(`${metadata.name} (`) && theme.label.endsWith(")")
+            ? theme.label.slice(metadata.name.length + 2, -1)
+            : undefined;
+
+        /** Preview label preserving the base name and any existing target suffix. */
+        const label =
+          suffix === undefined
+            ? `${theme.label} Preview`
+            : `${metadata.name} Preview (${metadata.previewName?.trim() ?? suffix})`;
+
+        return { ...theme, label, _watch: true };
       }),
     )),
     ...(await Promise.all(
@@ -68,9 +80,12 @@ export async function syncDevExtension({
         /** Parsed theme metadata used for preview labels and UI types. */
         const metadata = parseJsonc(await readFile(join(root, path), "utf8"), path).value;
 
+        /** VS Code theme type after validating the optional preview name. */
+        const uiTheme = themeUiType(metadata, path);
+
         return {
-          label: `${metadata.name} Dev (${name})`,
-          uiTheme: themeUiType(metadata, path),
+          label: `${metadata.name} Preview (${metadata.previewName?.trim() ?? name})`,
+          uiTheme,
           path: `./dev-extension/themes/${file}`,
           _watch: true,
         };
@@ -86,9 +101,16 @@ export async function syncDevExtension({
           /** Parsed theme metadata used for preview labels and UI types. */
           const metadata = parseJsonc(await readFile(join(root, path), "utf8"), path).value;
 
+          /** VS Code theme type after validating the optional preview name. */
+          const uiTheme = themeUiType(metadata, path);
+
+          /** Snapshot suffix preserving the filename unless an override is supplied. */
+          const name =
+            metadata.previewName?.trim() ?? file.replace(/^cassidy-dark-color-theme-/, "").replace(/\.json$/, "");
+
           return {
-            label: `Cassidy Dark Snapshot (${file.replace(/^cassidy-dark-color-theme-/, "").replace(/\.json$/, "")})`,
-            uiTheme: themeUiType(metadata, path),
+            label: `Cassidy Dark Snapshot (${name})`,
+            uiTheme,
             path: `./${path}`,
             _watch: true,
           };
@@ -165,5 +187,5 @@ async function statIfPresent(path) {
 
 if (import.meta.main) {
   console.log(`Synced dev manifest: ${await syncDevExtension()}`);
-  console.log("Run Developer: Reload Window in VS Code, then select a Cassidy Dark Dev theme.");
+  console.log("Run Developer: Reload Window in VS Code, then select a Cassidy Dark Preview theme.");
 }

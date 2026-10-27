@@ -1,4 +1,4 @@
-// Package grammarsamples contains Go 1.23+ source probes for Cassidy Dark Dev.
+// Package grammarsamples contains Go 1.23+ source probes for Cassidy Dark Preview.
 // Inspect declarations and usages with Developer: Inspect Editor Tokens and Scopes.
 // Compare semantic highlighting enabled and disabled with Go language tooling.
 // This standalone file uses only the standard library; execution is unnecessary.

@@ -113,8 +113,8 @@ test("watch builds both groups on startup and syncs linked dev theme registratio
   assert.deepEqual(
     manifest.contributes.themes.map(({ label, _watch }) => [label, _watch]),
     [
-      ["Fixture Dev", true],
-      ["Dev Fixture Dev (Sample)", true],
+      ["Fixture Preview", true],
+      ["Dev Fixture Preview (Sample)", true],
     ],
   );
   assert.equal(
@@ -188,10 +188,27 @@ test("watch rebuilds dev overrides, refreshes metadata registrations, and preser
 
   assert.equal(dev.colors["editor.background"], "#010203");
   assert.equal(dev.type, "light");
-  assert.equal(manifest.contributes.themes[1].label, "Renamed Dev (Sample)");
+  assert.equal(manifest.contributes.themes[1].label, "Renamed Preview (Sample)");
   assert.equal(manifest.contributes.themes[1].uiTheme, "vs");
   assert.equal(await readFile(join(project.root, "themes/cassidy-dark-color-theme.json"), "utf8"), prod);
   assert.equal(project.reminders(), 2);
+
+  /** Build count before changing only the preview suffix metadata. */
+  const beforePreviewRename = project.builds();
+
+  await writeFile(
+    join(project.root, "src/themes/dev/sample/metadata.jsonc"),
+    '{"name":"Renamed","type":"light","previewName":"Live Experiment"}',
+  );
+  await waitFor(() => project.builds() > beforePreviewRename);
+
+  /** Refreshed manifest confirming a preview-name-only edit changes registration. */
+  const renamed = JSON.parse(await readFile(join(project.extensionDirectory, "package.json"), "utf8"));
+
+  assert.equal(renamed.contributes.themes[1].label, "Renamed Preview (Live Experiment)");
+  assert.equal(renamed.contributes.themes[1].uiTheme, "vs");
+  assert.equal(project.reminders(), 3);
+  assert.deepEqual(project.errors, []);
   await project.controller.close();
 });
 

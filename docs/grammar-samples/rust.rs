@@ -1,4 +1,4 @@
-//! Rust 1.77+ (edition 2021) highlighting sample for Cassidy Dark Dev.
+//! Rust 1.77+ (edition 2021) highlighting sample for Cassidy Dark Preview.
 //!
 //! Inspect declarations and usages with Developer: Inspect Editor Tokens and Scopes.
 //! Compare semantic highlighting enabled and disabled with rust-analyzer installed.

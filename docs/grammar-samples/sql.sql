@@ -1,4 +1,4 @@
--- SQLite 3.38+ highlighting sample for Cassidy Dark Dev; inspect as source.
+-- SQLite 3.38+ highlighting sample for Cassidy Dark Preview; inspect as source.
 -- Optional validation: sqlite3 :memory: < docs/grammar-samples/sql.sql
 -- All objects are temporary to the in-memory connection; the transaction rolls back.
 /* Block comment: SELECT "identifiers", 'strings', and punctuation stay comments. */

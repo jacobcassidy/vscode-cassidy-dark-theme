@@ -1,4 +1,4 @@
-# TOML 1.0 highlighting sample; inspect as source with Cassidy Dark Dev.
+# TOML 1.0 highlighting sample; inspect as source with Cassidy Dark Preview.
 # Keys, strings, number bases, dates, tables, inline tables, and arrays of tables.
 title = "Cassidy Dark"
 bare_key = "Underscores"

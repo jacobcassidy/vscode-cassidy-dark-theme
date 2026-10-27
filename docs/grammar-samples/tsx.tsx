@@ -1,5 +1,5 @@
 /**
- * TypeScript + JSX highlighting sample for Cassidy Dark Dev.
+ * TypeScript + JSX highlighting sample for Cassidy Dark Preview.
  * A minimal local JSX contract avoids React dependencies; no execution required.
  * Inspect type arguments, component names, props, expressions, and markup scopes.
  */

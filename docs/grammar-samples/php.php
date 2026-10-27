@@ -2,7 +2,7 @@
 
 /**
  * PHP 8.2+ highlighting sample; no execution required.
- * Open in VS Code with language mode PHP and a Cassidy Dark Dev theme.
+ * Open in VS Code with language mode PHP and a Cassidy Dark Preview theme.
  * Use Developer: Inspect Editor Tokens and Scopes on declarations and usages.
  * Compare semantic highlighting enabled and disabled to inspect both layers.
  * Scope names depend on the installed PHP grammar and language tooling.

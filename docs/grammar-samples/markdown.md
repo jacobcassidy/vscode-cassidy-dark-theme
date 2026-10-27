@@ -9,7 +9,7 @@ tags: [syntax, highlighting]
 
 # Markdown token gallery
 
-Inspect this source in VS Code with Cassidy Dark Dev. Preview rendering and extension support vary; the goal is to compare token scopes in the editor.
+Inspect this source in VS Code with Cassidy Dark Preview. Preview rendering and extension support vary; the goal is to compare token scopes in the editor.
 
 ## ATX heading level two
 

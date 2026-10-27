@@ -108,6 +108,54 @@ test("prod theme build is deterministic, checks every artifact without writing, 
   assert.equal(await readFile(themePath, "utf8"), output);
 });
 
+test("preview names survive generation and whole-file metadata fallback without changing prod labels", async (t) => {
+  /** Temporary project used to build default, named production, and development themes. */
+  const root = await createBuildProject(t);
+
+  await writeFile(
+    join(root, "src/themes/prod/default/metadata.jsonc"),
+    '{"name":"Fixture","type":"dark","previewName":"Default Preview"}',
+  );
+  await writeDefaultPaletteConfig(join(root, "src/themes/prod/named"));
+  await writeDefaultPaletteConfig(join(root, "src/themes/dev/sample"));
+  await buildProdThemes({ root });
+  await buildDevThemes({ root });
+
+  for (const path of [
+    "themes/cassidy-dark-color-theme.json",
+    "themes/cassidy-dark-color-theme-named.json",
+    "dev-extension/themes/cassidy-dark-color-theme-sample.json",
+  ]) {
+    assert.equal(parse(await readFile(join(root, path), "utf8")).previewName, "Default Preview");
+  }
+
+  /** Production registrations retain target-derived labels despite preview overrides. */
+  const manifest = JSON.parse(await readFile(join(root, "package.json"), "utf8"));
+
+  assert.deepEqual(
+    manifest.contributes.themes.map(({ label }) => label),
+    ["Fixture", "Fixture (Named)"],
+  );
+  await writeFile(join(root, "src/themes/dev/sample/metadata.jsonc"), '{"name":"Custom","type":"light"}');
+  await buildDevThemes({ root });
+  assert.equal(
+    parse(await readFile(join(root, "dev-extension/themes/cassidy-dark-color-theme-sample.json"), "utf8")).previewName,
+    undefined,
+  );
+
+  for (const previewName of [null, false, 42, {}, [], "", " \t\n "]) {
+    await writeFile(
+      join(root, "src/themes/dev/sample/metadata.jsonc"),
+      JSON.stringify({
+        name: "Custom",
+        type: "light",
+        previewName,
+      }),
+    );
+    await assert.rejects(buildDevThemes({ root }), /metadata.jsonc.*previewName must be a nonempty string/);
+  }
+});
+
 test("failed prod validation leaves all previous outputs intact and palette-only mode needs no template", async (t) => {
   /** Temporary source project root for this test scenario. */
   const root = await createBuildProject(t);

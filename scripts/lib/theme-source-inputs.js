@@ -165,15 +165,22 @@ export async function readTargetInput(root, target, relative) {
 }
 
 /**
- * Validate a theme’s display name and type and return the corresponding VS Code UI type.
+ * Validate theme names and type and return the corresponding VS Code UI type.
  *
- * @param metadata - Theme display metadata, including its name and type.
+ * @param metadata - Theme display metadata, including its name, optional previewName, and type.
  * @param label - Human-readable context included in validation diagnostics.
  * @returns The VS Code uiTheme value corresponding to the declared type.
  */
 export function themeUiType(metadata, label) {
   if (typeof metadata.name !== "string" || !metadata.name.trim()) {
     throw new Error(`${label}: theme name must be a nonempty string`);
+  }
+
+  if (
+    Object.hasOwn(metadata, "previewName") &&
+    (typeof metadata.previewName !== "string" || !metadata.previewName.trim())
+  ) {
+    throw new Error(`${label}: previewName must be a nonempty string`);
   }
 
   if (!themeTypes.has(metadata.type)) {

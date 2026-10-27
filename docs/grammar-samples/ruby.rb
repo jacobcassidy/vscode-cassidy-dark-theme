@@ -2,7 +2,7 @@
 # encoding: UTF-8
 # frozen_string_literal: true
 
-# Ruby 3.2+ highlighting sample; inspect as source with Cassidy Dark Dev.
+# Ruby 3.2+ highlighting sample; inspect as source with Cassidy Dark Preview.
 # No execution required. Semantic scopes depend on installed Ruby tooling.
 # Covers literals, interpolation, regexes, classes, patterns, blocks, and flow.
 

@@ -6,6 +6,7 @@ All notable changes to this project are documented in this file.
 
 ### Changed
 
+- Renamed the development extension and its live theme labels to Cassidy Dark Preview, and added optional `previewName` metadata overrides for named preview and static snapshot suffixes while preserving published labels and the default preview label.
 - Allowed recognized palette settings alongside `useDefaultPalette: true`, retaining them for later custom generation, and added explicit theme arguments to `add:properties`.
 - Required matching purpose details for every `prod/default` token, extended `add:properties` to fill all four detail files and assign missing syntax IDs, and documented the remaining UI, semantic, and syntax entries using an offline source-reviewed catalog.
 - Made `npm run package:vsix` run the full `npm run check` before invoking the Bash packaging script.

@@ -1,6 +1,6 @@
 %YAML 1.2
 ---
-# YAML highlighting sample; inspect as source with Cassidy Dark Dev.
+# YAML highlighting sample; inspect as source with Cassidy Dark Preview.
 # Directives, documents, scalars, tags, anchors, aliases, and collection styles.
 title: Cassidy Dark
 plain: Text with Unicode café 日本語 🚀

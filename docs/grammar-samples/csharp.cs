@@ -1,4 +1,4 @@
-// C# 12 / .NET 8 highlighting sample for Cassidy Dark Dev; inspect as source.
+// C# 12 / .NET 8 highlighting sample for Cassidy Dark Preview; inspect as source.
 // Standard library only; source probes do not require execution.
 #nullable enable
 using System;

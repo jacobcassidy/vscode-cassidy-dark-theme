@@ -1,5 +1,5 @@
 #!/usr/bin/env zsh
-# Zsh 5+ highlighting sample; inspect as source with Cassidy Dark Dev.
+# Zsh 5+ highlighting sample; inspect as source with Cassidy Dark Preview.
 # Function definitions only; use zsh -n to check without execution.
 # Some scopes depend on the installed shell grammar and its Zsh support.
 

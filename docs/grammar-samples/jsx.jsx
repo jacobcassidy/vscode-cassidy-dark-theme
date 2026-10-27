@@ -1,5 +1,5 @@
 /**
- * JSX highlighting sample for Cassidy Dark Dev; inspect as source.
+ * JSX highlighting sample for Cassidy Dark Preview; inspect as source.
  * Framework-independent components demonstrate JSX without installing React.
  * This file is excluded from the samples-only TypeScript check.
  */

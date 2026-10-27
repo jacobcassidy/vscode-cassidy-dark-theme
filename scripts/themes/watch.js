@@ -155,7 +155,7 @@ export function watchThemes(
       if (themeRegistrations(previous) !== themeRegistrations(current)) {
         logger.log(
           styled(
-            "[watch] Theme registrations changed. Run Developer: Reload Window, then select a Dev theme.",
+            "[watch] Theme registrations changed. Run Developer: Reload Window, then select a Preview theme.",
             styles.orange,
           ),
         );

@@ -1,4 +1,4 @@
-<!-- Vue 3.4+ highlighting sample for Cassidy Dark Dev; inspect as source.
+<!-- Vue 3.4+ highlighting sample for Cassidy Dark Preview; inspect as source.
      Vue language tooling supplies template scopes; Vue is not a repo dependency.
      Reference: https://vuejs.org/api/sfc-script-setup.html -->
 <script setup lang="ts">

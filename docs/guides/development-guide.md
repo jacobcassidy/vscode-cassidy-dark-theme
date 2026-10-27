@@ -98,17 +98,33 @@ This command runs `npm run build`, which runs `build:prod` for prod targets foll
 ~/.vscode/extensions/jacobcassidy.cassidy-dark-dev/
 ```
 
-The script writes a generated `package.json` there with the name `cassidy-dark-dev` and display name **Cassidy Dark Dev**, and removes the published manifest's `__metadata`. It links the checkout's `themes/`, `dev-extension/`, and `images/` directories into that extension directory. The checkout's `dev-extension/themes/` and `dev-extension/static-snapshots/` directories therefore provide the local extension's generated themes and fixed comparison themes. The source manifest stays in the checkout; the generated dev manifest is a separate file.
+The script writes a generated `package.json` there with the name `cassidy-dark-dev` and display name **Cassidy Dark Preview**, and removes the published manifest's `__metadata`. It links the checkout's `themes/`, `dev-extension/`, and `images/` directories into that extension directory. The checkout's `dev-extension/themes/` and `dev-extension/static-snapshots/` directories therefore provide the local extension's generated themes and fixed comparison themes. The source manifest stays in the checkout; the generated dev manifest is a separate file.
 
 The dev manifest registers:
 
-- Every prod theme, including the default as **Cassidy Dark Dev**. Additional prod labels include their target names.
-- Every generated dev theme, such as **Cassidy Dark Dev (Test)** and **Cassidy Dark Dev (V1.3)**.
+- Every prod theme, including the default as **Cassidy Dark Preview**. Additional prod labels include their target names.
+- Every generated dev theme, such as **Cassidy Dark Preview (Test)** and **Cassidy Dark Preview (V1.3)**.
 - Every historical comparison with a **Cassidy Dark Snapshot (...)** label.
+
+An optional `previewName` in a source theme's `metadata.jsonc` overrides the parenthetical name in its development-extension registration:
+
+```jsonc
+{
+  "name": "Cassidy Dark",
+  "type": "dark",
+  "previewName": "My Experiment",
+}
+```
+
+A named prod or dev theme with this metadata appears as **Cassidy Dark Preview (My Experiment)**. Without `previewName`, named themes keep their target-derived suffixes. The default prod theme remains **Cassidy Dark Preview**, even if its metadata includes `previewName`; the property only overrides existing parentheses. Custom metadata base names are preserved, and published theme labels do not use `previewName`.
+
+Static snapshot JSON files also accept `previewName` at the top level, producing labels such as **Cassidy Dark Snapshot (Baseline 1.3)**. Without it, snapshots keep their filename-derived suffixes. A supplied value must be a nonempty string after trimming; surrounding whitespace is removed for display and capitalization is preserved. Duplicate preview labels are rejected.
+
+The build preserves `previewName` in generated theme files. It follows the existing whole-file metadata inheritance: a missing metadata file inherits the default file, while an authored metadata file replaces it completely. Editing a source `previewName` while watching updates the registration and prints a reload reminder. After editing a static snapshot, restart the watcher or run `npm run sync`, then reload VS Code.
 
 Theme types are read from generated metadata and mapped to the matching VS Code `uiTheme`. The synchronization script reads prod files to register them but writes only the separate dev extension manifest and asset links. It does not build themes or edit prod inputs.
 
-Run **Developer: Reload Window** in VS Code, then open **Preferences: Color Theme** and select a Cassidy Dark Dev theme. The dev identity allows it to coexist with the Marketplace extension.
+Run **Developer: Reload Window** in VS Code, then open **Preferences: Color Theme** and select a Cassidy Dark Preview theme. The dev identity allows it to coexist with the Marketplace extension.
 
 Rebuild after changing palette, token, details, or metadata inputs. The generated theme is linked directly into the dev extension. Theme entries include `_watch: true`; reload the VS Code window if an edit is not reflected. Open the files in `docs/grammar-samples/` and representative files from other languages to inspect highlighting. **Developer: Inspect Editor Tokens and Scopes** helps identify which TextMate or semantic token rules apply.
 
@@ -126,7 +142,7 @@ npm run watch
 
 [`scripts/themes/watch.js`](../../../scripts/themes/watch.js) builds prod themes, builds dev themes, and syncs the dev extension on startup. It then watches `src/themes/prod/` and `src/themes/dev/` recursively and repeats those steps when you save source changes. You do not need to run `sync` first. Prod defaults are watched because dev themes inherit omitted input files. Creating a dev source tree after startup is supported.
 
-After the initial setup, run **Developer: Reload Window** and select a **Cassidy Dark Dev** theme. Saving source inputs rebuilds the generated JSON; the extension's `_watch: true` entries tell VS Code to reload the selected theme's colors. The command prints another reload reminder when theme registrations change, such as after adding a theme or changing its metadata name or type. Reload VS Code to pick up those registration changes.
+After the initial setup, run **Developer: Reload Window** and select a **Cassidy Dark Preview** theme. Saving source inputs rebuilds the generated JSON; the extension's `_watch: true` entries tell VS Code to reload the selected theme's colors. The command prints another reload reminder when theme registrations change, such as after adding a theme or changing its metadata name or type. Reload VS Code to pick up those registration changes.
 
 The watcher groups saves within 150 ms and runs one build at a time. Edits received during a build queue another pass. Generated themes and the dev manifest are outside the watched source trees. The watcher explicitly ignores each `palette/generated/` directory, the `palette/default-palette.txt` note, and temporary build directories, including creation and removal events, to prevent rebuild loops. Validation or sync errors are printed, remaining steps for that cycle are skipped, and watching continues so the next source edit can retry.
 
@@ -263,7 +279,7 @@ For example, to try a different yellow palette locally:
 2. Copy the complete default `palette/palette-config.jsonc` into it and change the yellow parameters.
 3. Omit `metadata.jsonc`, `tokens/`, and `details/` to inherit the default versions.
 4. Run `npm run build:dev` to generate `dev-extension/themes/cassidy-dark-color-theme-yellow-test.json` and `src/themes/dev/yellow-test/palette/generated/palette.{json,md,svg}`.
-5. Run `npm run sync` and select **Cassidy Dark Dev (Yellow Test)** in VS Code.
+5. Run `npm run sync` and select **Cassidy Dark Preview (Yellow Test)** in VS Code.
 
 Inherited token sections resolve against the dev palette. Supplied token sections replace their counterparts entirely, so include every alias required by the other effective sections. Inherited details must match those effective authored entries; supply a corresponding details file when keys or syntax IDs change. Copy the complete default files as a starting point. Changes to a default file affect every target inheriting it.
 

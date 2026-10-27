@@ -3,7 +3,7 @@
 
 r"""Python 3.12+ highlighting sample; no execution required.
 
-Open in VS Code with language mode Python and a Cassidy Dark Dev theme.
+Open in VS Code with language mode Python and a Cassidy Dark Preview theme.
 Use Developer: Inspect Editor Tokens and Scopes on declarations and usages.
 Compare semantic highlighting enabled and disabled; Python semantic tokens
 depend on the installed Python language tooling.
