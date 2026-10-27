@@ -94,11 +94,11 @@ docs/
 themes/
 preview/
   themes/
-  static-snapshots/
+  snapshots/
 images/
 ```
 
-Keep production outputs, images, and each theme’s palette reports in their current locations. Rename `dev-extension/` to `preview/`, retaining `themes/` for generated dev themes and `static-snapshots/` for fixed comparison themes.
+Keep production outputs, images, and each theme’s palette reports in their current locations. Rename `dev-extension/` to `preview/`, retaining `themes/` for generated dev themes and renaming `static-snapshots/` to `snapshots/` for fixed comparison themes.
 
 Both prod and dev themes use the illustrated family layout. Move each theme's `tokens/<family>.jsonc` to `tokens/<family>/definitions.jsonc` and `details/<family>.jsonc` to `tokens/<family>/details.jsonc`, for `variables`, `ui`, `semantic`, and `syntax`. Remove the old theme-level `details/` directory after migration.
 
@@ -170,7 +170,7 @@ Keep active guides and examples current. Preserve archived plans and historical 
 
 ## Preview assets
 
-Move `dev-extension/themes/` to `preview/themes/` and `dev-extension/static-snapshots/` to `preview/static-snapshots/`, including their adjacent README files. Preserve theme filenames, snapshot bytes, extension identity, picker labels, and production registrations. Keep `src/themes/dev/` as the authoring location; its generated outputs move to `preview/themes/`.
+Move `dev-extension/themes/` to `preview/themes/` and `dev-extension/static-snapshots/` to `preview/snapshots/`, including their adjacent README files. Preserve theme filenames, snapshot bytes, extension identity, picker labels, and production registrations. Keep `src/themes/dev/` as the authoring location; its generated outputs move to `preview/themes/`.
 
 `preview/` contains assets used by the Cassidy Dark Preview extension, while `tooling/preview/` contains synchronization and registration code. Update generated output paths, stale-output cleanup, formatter path handling, theme validation, preview registrations, watcher inputs, test fixtures, and active documentation to use the new asset paths. Refresh the generated extension's asset links and manifest paths while preserving existing symlink protections and the separate generated manifest location. Continue excluding preview assets from the production VSIX by replacing the old `dev-extension/` exclusion with `preview/`.
 
@@ -189,14 +189,14 @@ Update the README, development guide links and sample tables, `.prettierignore`'
 3. **Group theme inputs by family.** Move existing local token and details files to their paired family paths, preserving contents and omitted files. Update input discovery, compiler loading, scaffolding, property addition, updater source inventories, and test fixtures together. Preserve alias names and independent per-file fallback.
 4. **Implement the upcoming token-data migration at the final paths.** Move shared inputs directly into `src/token-data/`, using `definitions.jsonc` for UI and semantic starter definitions and `details.jsonc` for shared descriptions, avoiding the proposed intermediate `docs/` destinations. Update generator readers, category authority paths, watcher subscriptions, updater inputs, and fixtures to those exact filenames. Group format handling, validation, and compilation under `tooling/tokens/`, loading/extraction/refresh under its `data/` subdirectory, and theme authoring under `tooling/generators/`. Apply the token-catalog plan's categorized authoring format to the theme files at their new family paths.
 5. **Align tests with responsibilities.** Move shared project builders into `tests/helpers/`, place upstream extraction samples in `tests/fixtures/`, and update test discovery for nested suites. Group palette generation/report tests under `tests/palette/`, color math tests under `tests/shared/color-math.test.js`, and shared token-data operation tests under `tests/tokens/data/`. Verify independent definition/details fallback in both directions, explicit empty details, omitted local files, required default files, and generator output paths.
-6. **Rename preview assets.** Move `dev-extension/` to `preview/` with its existing `themes/` and `static-snapshots/` subdirectories. Update output paths, cleanup and validation, formatter handling, registrations, generated asset links, watchers, fixtures, documentation, and VSIX exclusions together. Verify preview synchronization in an isolated extension destination, preserving extension identity, labels, and snapshot bytes.
+6. **Rename preview assets.** Move `dev-extension/` to `preview/`, retaining `themes/` and renaming `static-snapshots/` to `snapshots/`. Update output paths, cleanup and validation, formatter handling, registrations, generated asset links, watchers, fixtures, documentation, and VSIX exclusions together. Verify preview synchronization in an isolated extension destination, preserving extension identity, labels, and snapshot bytes.
 7. **Move grammar samples.** Move `docs/grammar-samples/` into `samples/grammar/` with its adjacent `tsconfig.json`. Update active guide/README links, embedded paths and validation commands, and formatter/linter/editor configuration. Verify that the TypeScript configuration and sibling imports still resolve in the new directory.
 8. **Update all consumers.** Audit active links, npm scripts, imports, watcher subscriptions, formatting/lint configuration, packaging exclusions, and generated-file notices. Exclude `tooling/`, `preview/`, and `samples/` from the VSIX and ignore the upstream cache.
 9. **Verify and commit completed stages.** Run focused tests and `npm run check`; confirm repeatable builds, read-only checks, isolated preview synchronization, and VSIX contents.
 
 Acceptance requires unchanged theme appearance and exact syntax precedence; preserved comments, descriptions, and fallback behavior; actionable category diagnostics; watcher recovery after token-data corrections; and no upstream downloads during ordinary builds or tests. Verify consistent `definitions.jsonc`/`details.jsonc` filenames across shared data and theme families, retaining details-only shared syntax data. Shared category edits must trigger validation without populating theme inputs, shared placeholder colors must never replace authored styling during builds, and palette-only builds must not require token data.
 
-Generated dev themes and fixed snapshots must be available under `preview/`, with working generated extension links and registrations. Verify builds, stale-output cleanup, read-only checks, and watcher behavior at the renamed paths, unchanged snapshot bytes and picker labels, and exclusion of preview assets from the VSIX.
+Generated dev themes must be available under `preview/themes/` and fixed snapshots under `preview/snapshots/`, with working generated extension links and registrations. Verify builds, stale-output cleanup, read-only checks, and watcher behavior at the renamed paths, unchanged snapshot bytes and picker labels, and exclusion of preview assets from the VSIX.
 
 All visual highlighting samples must be available under `samples/grammar/`, with working active documentation links and adjacent TypeScript configuration. Preserve their language probes and sibling imports, update all active references to the old sample path, and verify that the VSIX excludes the relocated samples.
 
