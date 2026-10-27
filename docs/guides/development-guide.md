@@ -89,10 +89,10 @@ The repository uses ES modules (`"type": "module"`). Its npm dependencies suppor
 ### Create and refresh the dev extension
 
 ```bash
-npm run sync
+npm run build
 ```
 
-This command runs `npm run build`, which runs `build:prod` for prod targets followed by `build:dev` for dev targets. Then [`scripts/dev-extension/sync.js`](../../../scripts/dev-extension/sync.js) creates or refreshes a separate extension directory at:
+This command builds prod targets followed by dev targets, then syncs previews once after both groups succeed. The individual `build:prod` and `build:dev` commands also sync previews after building their selected group. The internal module [`scripts/dev-extension/sync.js`](../../../scripts/dev-extension/sync.js) creates or refreshes a separate extension directory at:
 
 ```text
 ~/.vscode/extensions/jacobcassidy.cassidy-dark-dev/
@@ -120,17 +120,19 @@ A named prod or dev theme with this metadata appears as **Cassidy Dark Preview (
 
 Static snapshot JSON files also accept `previewName` at the top level, producing labels such as **Cassidy Dark Snapshot (Baseline 1.3)**. Without it, snapshots keep their filename-derived suffixes. A supplied value must be a nonempty string after trimming; surrounding whitespace is removed for display and capitalization is preserved. Duplicate preview labels are rejected.
 
-The build preserves `previewName` in generated theme files. It follows the existing whole-file metadata inheritance: a missing metadata file inherits the default file, while an authored metadata file replaces it completely. Editing a source `previewName` while watching updates the registration and prints a reload reminder. After editing a static snapshot, restart the watcher or run `npm run sync`, then reload VS Code.
+The build preserves `previewName` in generated theme files. It follows the existing whole-file metadata inheritance: a missing metadata file inherits the default file, while an authored metadata file replaces it completely. Editing a source `previewName` while watching updates the registration and prints a reload reminder. Static snapshot changes are also synced while watching; otherwise run `npm run build`. Follow the reload reminder when registration metadata changes.
 
 Theme types are read from generated metadata and mapped to the matching VS Code `uiTheme`. The synchronization script reads prod files to register them but writes only the separate dev extension manifest and asset links. It does not build themes or edit prod inputs.
 
 Run **Developer: Reload Window** in VS Code, then open **Preferences: Color Theme** and select a Cassidy Dark Preview theme. The dev identity allows it to coexist with the Marketplace extension.
 
-Rebuild after changing palette, token, details, or metadata inputs. The generated theme is linked directly into the dev extension. Theme entries include `_watch: true`; reload the VS Code window if an edit is not reflected. Open the files in `docs/grammar-samples/` and representative files from other languages to inspect highlighting. **Developer: Inspect Editor Tokens and Scopes** helps identify which TextMate or semantic token rules apply.
+Rebuild after changing palette, token, details, or metadata inputs. The generated theme is linked directly into the dev extension. Theme entries include `_watch: true`, allowing VS Code to update the selected theme live after ordinary color, token, and semantic highlighting edits. Open the files in `docs/grammar-samples/` and representative files from other languages to inspect highlighting. **Developer: Inspect Editor Tokens and Scopes** helps identify which TextMate or semantic token rules apply.
 
-After changing manifest metadata or adding or removing dev theme files, run `npm run sync` again to refresh the dev manifest and reload VS Code.
+After changing manifest metadata or adding or removing theme files, run `npm run build` or let the watcher refresh the preview registrations. Follow the reload reminder when one is printed.
 
-The command prints a reload reminder after synchronization. Importing the sync module does not install or change an extension. The function accepts an alternate repository root and extension directory for isolated testing. `sync` exits after synchronization; use `npm run watch` for continuous rebuilding and preview synchronization. The CLI defaults to the standard `~/.vscode/extensions` location; it does not discover custom extension directories or alternate VS Code editions.
+Build and watch print the same magenta reminder after initial preview installation, registration changes (including names, IDs, paths, types, and theme additions or removals), or repair of missing asset links: **Run Developer: Reload Window in VS Code, then select a Cassidy Dark Preview theme.** Unchanged runs, ordinary live theme edits, unrelated package metadata, and registration formatting or ordering changes do not print it. The reminder appears once per applied change; the scripts cannot observe whether VS Code has actually been reloaded. There is no separate `npm run sync` command.
+
+Importing the build or sync modules does not install or change an extension. Low-level build functions remain independent of preview syncing. The command workflow and sync function accept alternate repository roots and extension directories for isolated testing. `build` exits after synchronization; use `npm run watch` for continuous rebuilding and preview synchronization. Palette-only builds and `--check` modes never sync previews. The CLI defaults to the standard `~/.vscode/extensions` location; it does not discover custom extension directories or alternate VS Code editions. Individual theme builds use the other group's existing generated files; if a required prod file is missing, run `npm run build` first.
 
 For safety, the sync script refuses to use a symlink for the dev extension directory or its generated manifest. Existing asset links must point to this checkout. If the checkout moves, inspect and repair those dev links before running setup again.
 
@@ -140,17 +142,17 @@ For safety, the sync script refuses to use a symlink for the dev extension direc
 npm run watch
 ```
 
-[`scripts/themes/watch.js`](../../../scripts/themes/watch.js) builds prod themes, builds dev themes, and syncs the dev extension on startup. It then watches `src/themes/prod/` and `src/themes/dev/` recursively and repeats those steps when you save source changes. You do not need to run `sync` first. Prod defaults are watched because dev themes inherit omitted input files. Creating a dev source tree after startup is supported.
+[`scripts/themes/watch.js`](../../../scripts/themes/watch.js) builds prod themes, builds dev themes, and syncs the dev extension on startup. It then watches `src/themes/prod/`, `src/themes/dev/`, root `package.json`, and JSON files in `dev-extension/static-snapshots/`, repeating those steps when inputs change. You do not need to run a build first. Prod defaults are watched because dev themes inherit omitted input files. Creating a dev source tree after startup is supported.
 
 After the initial setup, run **Developer: Reload Window** and select a **Cassidy Dark Preview** theme. Saving source inputs rebuilds the generated JSON; the extension's `_watch: true` entries tell VS Code to reload the selected theme's colors. The command prints another reload reminder when theme registrations change, such as after adding a theme or changing its metadata name or type. Reload VS Code to pick up those registration changes.
 
-The watcher groups saves within 150 ms and runs one build at a time. Edits received during a build queue another pass. Generated themes and the dev manifest are outside the watched source trees. The watcher explicitly ignores each `palette/generated/` directory, the `palette/default-palette.txt` note, and temporary build directories, including creation and removal events, to prevent rebuild loops. Validation or sync errors are printed, remaining steps for that cycle are skipped, and watching continues so the next source edit can retry.
+The watcher groups saves within 150 ms and runs one build at a time. Edits received during a build queue another pass. Generated themes and the dev manifest are excluded from accepted input events. Root manifest events are compared with the last successfully processed contents so the build's own manifest writes do not cause repeated builds. The watcher explicitly ignores each `palette/generated/` directory, the `palette/default-palette.txt` note, and temporary build directories, including creation and removal events, to prevent rebuild loops. Validation or sync errors are printed, remaining steps for that cycle are skipped, and watching continues so the next source edit can retry.
 
 Press **Ctrl+C** to stop. Shutdown closes the file watcher and cancels pending rebuilds while allowing an active build and sync cycle to finish. A native file-watcher failure prints an error and stops the command with a failing exit status.
 
-Restart the command after changing build scripts, formatter configuration, root manifest metadata, or historical snapshots. After deliberately removing or renaming a target, explicitly remove its obsolete generated theme and palette report files, then save a theme source again or restart the command. Existing stale-output checks remain active; the watcher does not delete generated files automatically.
+Restart the command after changing build scripts or formatter configuration. Root manifest metadata and historical snapshot changes are detected automatically. After deliberately removing or renaming a target, explicitly remove its obsolete generated theme and palette report files, then save a theme source again or restart the command. Existing stale-output checks remain active; the watcher does not delete generated files automatically.
 
-The watcher uses Node.js 24's native file watching without an additional dependency. Its `watchThemes()` function accepts alternate repository and extension directories for isolated use and returns `ready` (the first cycle's completion), `close()` (graceful shutdown), and `closed` (shutdown completion, carrying a native watcher error if one occurred). Importing the module does not start watching or install an extension. Like `sync`, the CLI uses the standard VS Code extensions directory.
+The watcher uses Node.js 24's native file watching without an additional dependency. Its `watchThemes()` function accepts alternate repository and extension directories for isolated use and returns `ready` (the first cycle's completion), `close()` (graceful shutdown), and `closed` (shutdown completion, carrying a native watcher error if one occurred). Importing the module does not start watching or install an extension. Like `build`, the CLI uses the standard VS Code extensions directory.
 
 ### Syntax samples
 
@@ -280,7 +282,7 @@ For example, to try a different yellow palette locally:
 2. Copy the complete default `palette/palette-config.jsonc` into it and change the yellow parameters.
 3. Omit `metadata.jsonc`, `tokens/`, and `details/` to inherit the default versions.
 4. Run `npm run build:dev` to generate `dev-extension/themes/cassidy-dark-color-theme-yellow-test.json` and `src/themes/dev/yellow-test/palette/generated/palette.{json,md,svg}`.
-5. Run `npm run sync` and select **Cassidy Dark Preview (Yellow Test)** in VS Code.
+5. Run `npm run build` and select **Cassidy Dark Preview (Yellow Test)** in VS Code.
 
 Inherited token sections resolve against the dev palette. Supplied token sections replace their counterparts entirely, so include every alias required by the other effective sections. Inherited details must match those effective authored entries; supply a corresponding details file when keys or syntax IDs change. Copy the complete default files as a starting point. Changes to a default file affect every target inheriting it.
 
@@ -288,7 +290,7 @@ A target containing only `palette/palette-config.jsonc` with `useDefaultPalette:
 
 ### Building and checking outputs
 
-`npm run build:palette` builds reports for all prod targets without requiring tokens, details, metadata, or the manifest. `npm run build:prod` generates all prod themes and reports and synchronizes `package.json` theme contributions while preserving unrelated fields. `npm run build:dev` builds all dev themes and their reports without changing prod outputs or the source manifest. `npm run build` runs `build:prod` followed by `build:dev`; if the prod build fails, the dev build does not run.
+`npm run build:palette` builds reports for all prod targets without requiring tokens, details, metadata, or the manifest. `npm run build:prod` generates all prod themes and reports and synchronizes `package.json` theme contributions while preserving unrelated fields. `npm run build:dev` builds all dev themes and their reports without changing prod outputs or the source manifest. Both commands then sync the preview extension. `npm run build` builds both groups and syncs previews once; if either build fails, synchronization does not run. Palette-only and check modes do not sync previews.
 
 Independently generated palettes have reports under `src/themes/<prod or dev>/<theme name>/palette/generated/` as `palette.json`, `palette.md`, and `palette.svg`. JSON records measurements and source provenance; Markdown embeds the sibling swatch sheet. Themes selecting `useDefaultPalette: true` have a `palette/default-palette.txt` note and no `palette/generated/` directory; they use the default theme’s palette and reports. Reports and archived documents are never used to discover source themes. Historical themes under `dev-extension/static-snapshots/` and documentation under `docs/references/palettes/` are excluded from regeneration.
 
@@ -301,12 +303,11 @@ The editor settings in `.vscode/` recommend Prettier, ESLint, Markdown linting, 
 | Command                   | Behavior                                                                                                 |
 | ------------------------- | -------------------------------------------------------------------------------------------------------- |
 | `npm run check`           | Check generated output, formatting, Markdown and JavaScript linting, theme validation, and tests.        |
-| `npm run build`           | Generate prod and dev themes and their palette reports.                                                  |
+| `npm run build`           | Generate prod/dev themes and reports, then sync the preview extension.                                   |
 | `npm run build:palette`   | Generate palette reports for all prod themes without tokens, details, or metadata.                       |
-| `npm run build:prod`      | Generate prod themes/reports and synchronize prod manifest entries.                                      |
-| `npm run build:dev`       | Generate dev themes and their palette reports.                                                           |
+| `npm run build:prod`      | Generate prod themes/reports, synchronize prod manifest entries, and sync previews.                      |
+| `npm run build:dev`       | Generate dev themes and reports, then sync previews.                                                     |
 | `npm run watch`           | Continuously rebuild both groups and sync the dev preview extension on source changes.                   |
-| `npm run sync`            | Build both groups and refresh the dev preview extension.                                                 |
 | `npm run check:generated` | Fail on stale or missing generated artifacts without rewriting files.                                    |
 | `npm run check:prettier`  | Check Prettier formatting across the repository.                                                         |
 | `npm run format`          | Rewrite files using Prettier.                                                                            |
@@ -330,6 +331,7 @@ The tests cover palette math, token aliases and alpha, file-level fallback and r
 
 | File                              | Responsibility                                                                                                        |
 | --------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
+| `tests/build-workflow.test.js`    | Command-level preview syncing, conditional reload reminders, and validation isolation.                                |
 | `tests/colors.test.js`            | Color conversions, hex export, luminance, and contrast.                                                               |
 | `tests/palette.test.js`           | Palette anchors, tone generation, gamut limits, overrides, and parameter validation.                                  |
 | `tests/theme-compilation.test.js` | Token aliases, selectors, opacity, explanations, disabled comments, and details validation.                           |

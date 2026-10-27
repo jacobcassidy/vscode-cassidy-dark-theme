@@ -4,7 +4,7 @@
  */
 
 import assert from "node:assert/strict";
-import { mkdir, readFile, realpath, symlink, writeFile } from "node:fs/promises";
+import { mkdir, readFile, realpath, rm, stat, symlink, writeFile } from "node:fs/promises";
 import { join } from "node:path";
 import test from "node:test";
 import { syncDevExtension } from "../scripts/dev-extension/sync.js";
@@ -19,9 +19,15 @@ test("dev extension sync is repeatable and refreshes themes without modifying th
   const source = await readFile(join(project.root, "package.json"), "utf8");
 
   /** Destination manifest or source target path used by this scenario. */
-  const target = await syncDevExtension(project);
+  const { manifestPath: target, reloadRequired } = await syncDevExtension(project);
 
-  await syncDevExtension(project);
+  assert.equal(reloadRequired, true);
+
+  /** Initial manifest timestamp used to verify that unchanged syncs do not write it. */
+  const before = await stat(target);
+
+  assert.equal((await syncDevExtension(project)).reloadRequired, false);
+  assert.equal((await stat(target)).mtimeMs, before.mtimeMs);
 
   /** Manifest fixture parsed before mutation or synchronization. */
   const manifest = JSON.parse(await readFile(target, "utf8"));
@@ -42,7 +48,7 @@ test("dev extension sync is repeatable and refreshes themes without modifying th
   }
 
   await writeFile(join(project.root, "dev-extension/themes/cassidy-dark-color-theme-new.json"), project.theme);
-  await syncDevExtension(project);
+  assert.equal((await syncDevExtension(project)).reloadRequired, true);
 
   /** Preview manifest reloaded after synchronization. */
   const refreshed = JSON.parse(await readFile(target, "utf8"));
@@ -123,7 +129,7 @@ test("dev extension sync includes all prod themes, derives dev theme types, and 
   const source = await readFile(join(project.root, "package.json"), "utf8");
 
   /** Destination manifest or source target path used by this scenario. */
-  const target = await syncDevExtension(project);
+  const { manifestPath: target } = await syncDevExtension(project);
 
   /** Generated preview manifest inspected for registration metadata. */
   const preview = JSON.parse(await readFile(target, "utf8"));
@@ -170,7 +176,7 @@ test("preview names override existing suffixes without changing default or publi
   const source = await readFile(join(project.root, "package.json"), "utf8");
 
   /** Generated preview manifest with overrides applied only to existing suffixes. */
-  const manifest = JSON.parse(await readFile(await syncDevExtension(project), "utf8"));
+  const manifest = JSON.parse(await readFile((await syncDevExtension(project)).manifestPath, "utf8"));
 
   assert.deepEqual(
     manifest.contributes.themes.map(({ label, uiTheme }) => [label, uiTheme]),
@@ -222,7 +228,7 @@ for (const directory of ["themes", "static-snapshots"]) {
     const project = await createPreviewProject(t);
 
     /** Previously valid manifest that a rejected synchronization must preserve. */
-    const target = await syncDevExtension(project);
+    const { manifestPath: target } = await syncDevExtension(project);
 
     /** Original preview manifest contents retained before introducing a collision. */
     const before = await readFile(target, "utf8");
@@ -244,3 +250,107 @@ for (const directory of ["themes", "static-snapshots"]) {
     assert.equal(await readFile(target, "utf8"), before);
   });
 }
+
+test("preview reload detection ignores formatting, ordering, unrelated fields, and live content edits", async (t) => {
+  /** Isolated preview project used to distinguish registration changes from live updates. */
+  const project = await createPreviewProject(t);
+
+  /** Initial preview manifest used to reorder semantically equivalent registrations. */
+  const { manifestPath } = await syncDevExtension(project);
+
+  /** Existing preview registrations rewritten with reversed array and key ordering. */
+  const previous = JSON.parse(await readFile(manifestPath, "utf8"));
+
+  previous.contributes.themes = previous.contributes.themes
+    .reverse()
+    .map((theme) => Object.fromEntries(Object.entries(theme).reverse()));
+  await writeFile(manifestPath, JSON.stringify(previous));
+  assert.equal((await syncDevExtension(project)).reloadRequired, false);
+  project.manifest.description = "Updated package description";
+  project.manifest.devDependencies = { fixture: "1.0.0" };
+  await writeFile(join(project.root, "package.json"), JSON.stringify(project.manifest));
+
+  for (const path of ["themes/theme.json", "dev-extension/themes/cassidy-dark-color-theme-test.json"]) {
+    await writeFile(
+      join(project.root, path),
+      JSON.stringify({
+        name: "Cassidy Dark",
+        type: "dark",
+        semanticHighlighting: false,
+        colors: { "editor.background": "#123456" },
+        tokenColors: [{ scope: "string", settings: { foreground: "#abcdef" } }],
+        semanticTokenColors: { variable: "#abcdef" },
+      }),
+    );
+  }
+
+  assert.equal((await syncDevExtension(project)).reloadRequired, false);
+  assert.equal(JSON.parse(await readFile(manifestPath, "utf8")).description, project.manifest.description);
+});
+
+for (const [key, value] of [
+  ["id", "old-id"],
+  ["label", "Old Preview"],
+  ["path", "themes/old.json"],
+  ["uiTheme", "vs"],
+  ["_watch", false],
+]) {
+  test(`preview reload detection notices changed registration ${key}`, async (t) => {
+    /** Preview project used to test one changed registration field. */
+    const project = await createPreviewProject(t);
+
+    /** Generated preview manifest that simulates the previously installed registration. */
+    const { manifestPath } = await syncDevExtension(project);
+
+    /** Previous registration changed independently of generated theme contents. */
+    const previous = JSON.parse(await readFile(manifestPath, "utf8"));
+
+    previous.contributes.themes[0][key] = value;
+    await writeFile(manifestPath, JSON.stringify(previous));
+    assert.equal((await syncDevExtension(project)).reloadRequired, true);
+    assert.equal((await syncDevExtension(project)).reloadRequired, false);
+  });
+}
+
+test("preview reload detection covers invalid manifests and repaired asset links", async (t) => {
+  /** Preview installation used to exercise missing and malformed state. */
+  const project = await createPreviewProject(t);
+
+  /** Generated manifest path replaced with missing or invalid input below. */
+  const { manifestPath } = await syncDevExtension(project);
+
+  for (const source of ["", "{", "null", "{}", '{"contributes":{"themes":[null]}}']) {
+    await writeFile(manifestPath, source);
+    assert.equal((await syncDevExtension(project)).reloadRequired, true);
+    assert.equal((await syncDevExtension(project)).reloadRequired, false);
+  }
+
+  await rm(manifestPath);
+  assert.equal((await syncDevExtension(project)).reloadRequired, true);
+
+  for (const directory of ["themes", "dev-extension", "images"]) {
+    await rm(join(project.extensionDirectory, directory));
+    assert.equal((await syncDevExtension(project)).reloadRequired, true);
+    assert.equal((await syncDevExtension(project)).reloadRequired, false);
+  }
+});
+
+test("preview reload detection follows snapshot additions, metadata changes, and removals", async (t) => {
+  /** Preview project whose snapshot registration is updated over repeated syncs. */
+  const project = await createPreviewProject(t);
+
+  /** New snapshot path used to test registration lifecycle changes. */
+  const path = join(project.root, "dev-extension/static-snapshots/baseline.json");
+
+  await syncDevExtension(project);
+  await writeFile(path, project.theme);
+  assert.equal((await syncDevExtension(project)).reloadRequired, true);
+  await writeFile(
+    path,
+    JSON.stringify({ name: "Cassidy Dark", type: "light", previewName: "Renamed", colors: {}, tokenColors: [] }),
+  );
+  assert.equal((await syncDevExtension(project)).reloadRequired, true);
+  assert.equal((await syncDevExtension(project)).reloadRequired, false);
+  await rm(path);
+  assert.equal((await syncDevExtension(project)).reloadRequired, true);
+});

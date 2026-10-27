@@ -35,11 +35,15 @@ function captureLogs() {
   /** Captured normal watcher messages. */
   const logs = [];
 
+  /** Unmodified terminal output retained for ANSI color assertions. */
+  const rawLogs = [];
+
   /** Captured watcher error messages. */
   const errors = [];
 
   return {
     logs,
+    rawLogs,
     errors,
     logger: {
       /**
@@ -47,7 +51,10 @@ function captureLogs() {
        *
        * @param message - Diagnostic or log message to record.
        */
-      log: (message = "") => logs.push(stripVTControlCharacters(message)),
+      log: (message = "") => {
+        rawLogs.push(message);
+        logs.push(stripVTControlCharacters(message));
+      },
 
       /**
        * Capture a watcher error message for later assertions.
@@ -60,8 +67,8 @@ function captureLogs() {
     /** Count completed-build messages in the captured watcher log. */
     builds: () => logs.filter((message) => message.startsWith("[watch] Built ")).length,
 
-    /** Count registration-change messages that request a VS Code reload. */
-    reminders: () => logs.filter((message) => message.includes("registrations changed")).length,
+    /** Count shared reminders that request a VS Code reload. */
+    reminders: () => logs.filter((message) => message.includes("Run Developer: Reload Window in VS Code")).length,
   };
 }
 
@@ -109,6 +116,11 @@ test("watch builds both groups on startup and syncs linked dev theme registratio
 
   assert.ok(project.builds() >= 1);
   assert.equal(project.reminders(), 1);
+  assert.ok(
+    project.rawLogs.includes(
+      "\u001b[35mRun Developer: Reload Window in VS Code, then select a Cassidy Dark Preview theme.\u001b[0m",
+    ),
+  );
   assert.equal(manifest.name, "cassidy-dark-dev");
   assert.deepEqual(
     manifest.contributes.themes.map(({ label, _watch }) => [label, _watch]),
@@ -333,11 +345,11 @@ function createScheduler(t, project, overrides = {}) {
   /** Captured messages and counters for the current watcher. */
   const output = captureLogs();
 
-  /** Captured native-watcher callback used to inject file events. */
-  let notify;
+  /** Native-watcher callbacks indexed by watched directory for simulated file events. */
+  const listeners = new Map();
 
-  /** Whether the stubbed native watcher has received close. */
-  let didClose = false;
+  /** Watched directories whose native watcher has received close. */
+  const closedPaths = [];
 
   /** Watcher lifecycle handle registered for test cleanup. */
   const controller = watchThemes(
@@ -346,19 +358,20 @@ function createScheduler(t, project, overrides = {}) {
       /**
        * Capture the watcher callback and return an event emitter with controllable shutdown.
        *
-       * @param _path - Unused watched-directory argument in the test double.
+       * @param path - Watched directory used to select the simulated event listener.
        * @param _options - Unused native-watcher options in the test double.
        * @param listener - Native file-event callback captured for simulated source changes.
        */
-      watch: (_path, _options, listener) => {
-        notify = listener;
+      watch: (path, _options, listener) => {
+        listeners.set(path, listener);
+
+        /** Independent watcher emitter for this directory. */
+        const watcher = path === join(project.root, "src") ? events : new EventEmitter();
 
         /** Mark the stubbed native watcher closed when scheduler cleanup runs. */
-        events.close = () => {
-          didClose = true;
-        };
+        watcher.close = () => closedPaths.push(path);
 
-        return events;
+        return watcher;
       },
 
       /**
@@ -385,7 +398,7 @@ function createScheduler(t, project, overrides = {}) {
        * Record or control preview synchronization for the current scheduler scenario.
        *
        * @param options - Options passed to this operation.
-       * @returns Path to the generated development extension manifest.
+       * @returns Preview manifest path and reload requirement.
        */
       syncDevExtension: async (options) => {
         calls.push("sync");
@@ -401,10 +414,17 @@ function createScheduler(t, project, overrides = {}) {
     controller,
     events,
     calls,
-    notify,
 
-    /** Report whether the stubbed native watcher has been closed. */
-    didClose: () => didClose,
+    /**
+     * Deliver a synthetic event to the source or registration watcher.
+     * @param event - Native event type.
+     * @param filename - Path relative to the selected watched directory.
+     * @param [directory] - Watched directory; defaults to the source tree.
+     */
+    notify: (event, filename, directory = join(project.root, "src")) => listeners.get(directory)(event, filename),
+
+    /** Report whether every stubbed native watcher has been closed. */
+    didClose: () => closedPaths.length === listeners.size,
     ...output,
   };
 }
@@ -534,7 +554,7 @@ for (const stage of ["prod", "dev", "sync"]) {
        * Record or control preview synchronization for the current scheduler scenario.
        *
        * @param options - Options passed to this operation.
-       * @returns Path to the generated development extension manifest.
+       * @returns Preview manifest path and reload requirement.
        */
       syncDevExtension: async (options) => {
         calls.push("sync");
@@ -612,4 +632,80 @@ test("watch reports native watcher failures and closes cleanly", async (t) => {
   assert.equal(await scheduler.controller.closed, error);
   assert.equal(scheduler.didClose(), true);
   assert.match(scheduler.errors[0], /File watcher failed/);
+});
+
+test("watch detects snapshot registration changes and keeps content-only edits live", async (t) => {
+  /** Native watcher fixture with an initially empty snapshot directory. */
+  const project = await createWatchProject(t);
+
+  /** Snapshot registered, renamed, edited, and removed during this watch session. */
+  const path = join(project.root, "dev-extension/static-snapshots/baseline.json");
+
+  await writeFile(path, '{"name":"Snapshot","type":"dark","colors":{},"tokenColors":[]}');
+  await waitFor(() => project.reminders() === 2);
+
+  /** Successful-build count before a color-only snapshot replacement. */
+  const count = project.builds();
+
+  await writeFile(
+    `${path}.tmp`,
+    '{"name":"Snapshot","type":"dark","colors":{"editor.background":"#123456"},"tokenColors":[]}',
+  );
+  await rename(`${path}.tmp`, path);
+  await waitFor(() => project.builds() > count);
+  assert.equal(project.reminders(), 2);
+  await writeFile(path, '{"name":"Snapshot","type":"light","previewName":"Renamed","colors":{},"tokenColors":[]}');
+  await waitFor(() => project.reminders() === 3);
+  await rm(path);
+  await waitFor(() => project.reminders() === 4);
+  assert.deepEqual(project.errors, []);
+});
+
+test("watch detects manifest replacement saves without rebuilding indefinitely", async (t) => {
+  /** Native watcher fixture used to verify root manifest inputs and write filtering. */
+  const project = await createWatchProject(t);
+
+  /** Root manifest path observed through its parent to support atomic replacements. */
+  const path = join(project.root, "package.json");
+
+  /** Source manifest whose registration identity changes independently of theme metadata. */
+  const manifest = JSON.parse(await readFile(path, "utf8"));
+
+  manifest.contributes.themes[0].id = "updated-preview-id";
+  await writeFile(`${path}.tmp`, JSON.stringify(manifest));
+  await rename(`${path}.tmp`, path);
+  await waitFor(() => project.reminders() === 2);
+
+  /** Completed build count used to ensure unchanged manifest events settle. */
+  const count = project.builds();
+
+  await writeFile(path, await readFile(path, "utf8"));
+  await delay(150);
+  assert.equal(project.builds(), count);
+  manifest.description = "Unrelated package metadata";
+  await writeFile(path, JSON.stringify(manifest));
+  await waitFor(() => project.builds() > count);
+  assert.equal(project.reminders(), 2);
+  await delay(150);
+  assert.equal(project.builds(), count + 1);
+  assert.deepEqual(project.errors, []);
+});
+
+test("watch filters root and preview output events while accepting snapshot inputs", async (t) => {
+  /** Preview fixture for deterministic event filtering assertions. */
+  const project = await createPreviewProject(t);
+
+  /** Watch scheduler with separately addressable native watcher callbacks. */
+  const scheduler = createScheduler(t, project);
+
+  await scheduler.controller.ready;
+  scheduler.notify("change", "README.md", project.root);
+  scheduler.notify("change", "package.json", project.root);
+  scheduler.notify("change", "themes/generated.json", join(project.root, "dev-extension"));
+  scheduler.notify("change", "static-snapshots/README.md", join(project.root, "dev-extension"));
+  await delay(60);
+  assert.equal(scheduler.builds(), 1);
+  scheduler.notify("change", "static-snapshots\\baseline.json", join(project.root, "dev-extension"));
+  await waitFor(() => scheduler.builds() === 2);
+  assert.equal(scheduler.reminders(), 1);
 });

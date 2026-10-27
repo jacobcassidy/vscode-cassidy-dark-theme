@@ -10,6 +10,7 @@ import { applyEdits, modify } from "jsonc-parser";
 // Prettier's generated entry point hides its default export from the import resolver.
 // eslint-disable-next-line import-x/default
 import prettier from "prettier";
+import { logReloadReminder, syncDevExtension } from "../dev-extension/sync.js";
 import { fields, object, parseJsonc } from "../lib/jsonc-validation.js";
 import { generatePalette } from "../lib/palette-generation.js";
 import { compileTokens, renderTheme } from "../lib/theme-compilation.js";
@@ -677,24 +678,96 @@ export async function buildDevThemes({ root = defaultRoot, check = false } = {})
  * @param targets - Theme targets and their changed output paths.
  * @param changedFiles - All changed output paths counted in the summary.
  * @param hasFollowingSummary - Whether another build summary follows this one.
+ * @param logger - Logger receiving build progress and generated paths.
  */
-function logSummary(summary, targets, changedFiles, hasFollowingSummary) {
-  console.log(styled(summary, styles.green));
+function logSummary(summary, targets, changedFiles, hasFollowingSummary, logger) {
+  logger.log(styled(summary, styles.green));
 
   /** Changed output paths assigned to a specific theme target. */
   const assigned = new Set(targets.flatMap((target) => target.changed));
 
   for (const target of targets) {
     for (const path of target.changed) {
-      console.log(path === target.output ? styled(`  ${path}`, styles.green) : `  ${path}`);
+      logger.log(path === target.output ? styled(`  ${path}`, styles.green) : `  ${path}`);
     }
   }
 
   for (const path of changedFiles) {
-    if (!assigned.has(path)) console.log(`  ${path}`);
+    if (!assigned.has(path)) logger.log(`  ${path}`);
   }
 
-  if (hasFollowingSummary) console.log();
+  if (hasFollowingSummary) logger.log();
+}
+
+/**
+ * Run a command-line build workflow and synchronize previews after successful theme builds.
+ * @param [options] - Build selection and isolated preview options.
+ * @param [options.root] - Repository or fixture root; defaults to this checkout.
+ * @param [options.extensionDirectory] - Preview destination; defaults to the standard VS Code extension directory.
+ * @param [options.mode] - Build selection: all, prod, dev, or palette.
+ * @param [options.check] - Whether to validate generated outputs without synchronizing previews.
+ * @param [options.logger] - Logger receiving progress, changed paths, and reload reminders.
+ * @returns Preview synchronization result, or undefined for checks and palette-only builds.
+ */
+export async function runBuild({
+  root = defaultRoot,
+  extensionDirectory,
+  mode = "all",
+  check = false,
+  logger = console,
+} = {}) {
+  if (!["all", "prod", "dev", "palette"].includes(mode)) throw new Error(`Unknown build mode: ${mode}`);
+
+  if (mode === "all") logger.log();
+
+  if (mode !== "dev") {
+    logger.log(
+      styled(
+        `${check ? "Checking" : "Building"} ${mode === "palette" ? "palette reports" : "prod themes"}...`,
+        styles.yellow,
+      ),
+    );
+
+    /** Production outputs generated before optional development builds. */
+    const prod = await buildProdThemes({ root, check, paletteOnly: mode === "palette" });
+
+    logSummary(
+      `${check ? "Validated" : "Built"} ${prod.targets.length} prod themes; ${prod.changed.length} generated files updated.`,
+      prod.targets,
+      prod.changed,
+      mode === "all",
+      logger,
+    );
+  }
+
+  if (mode === "all" || mode === "dev") {
+    logger.log(styled(`${check ? "Checking" : "Building"} dev themes...`, styles.yellow));
+
+    /** Development outputs generated for the selected workflow. */
+    const targets = await buildDevThemes({ root, check });
+
+    /** Changed artifacts aggregated across development targets. */
+    const changedFiles = targets.flatMap((target) => target.changed);
+
+    logSummary(
+      `${check ? "Validated" : "Built"} ${targets.length} dev themes; ${changedFiles.length} generated files updated.`,
+      targets,
+      changedFiles,
+      false,
+      logger,
+    );
+  }
+
+  if (check || mode === "palette") return;
+
+  /** Applied preview changes and their reload requirement. */
+  const preview = await syncDevExtension({ root, extensionDirectory });
+
+  logger.log(`Synced dev manifest: ${preview.manifestPath}`);
+
+  if (preview.reloadRequired) logReloadReminder(logger);
+
+  return preview;
 }
 
 if (import.meta.main) {
@@ -702,93 +775,23 @@ if (import.meta.main) {
     /** Command-line options validated before selecting a build mode. */
     const flags = process.argv.slice(2);
 
-    /** Whether to build prod and dev targets in sequence in one process. */
-    const all = flags.includes("--all");
-
     if (
       flags.some((flag) => !["--check", "--palette-only", "--dev", "--all"].includes(flag)) ||
-      (flags.includes("--dev") && flags.includes("--palette-only")) ||
-      (all && (flags.includes("--dev") || flags.includes("--palette-only")))
+      flags.filter((flag) => ["--all", "--dev", "--palette-only"].includes(flag)).length > 1
     ) {
       throw new Error("Usage: node scripts/themes/build.js [--check] [--palette-only | --dev | --all]");
     }
 
-    if (all) {
-      /** Whether to check artifacts without writing them. */
-      const check = flags.includes("--check");
-
-      console.log();
-      console.log(styled(`${check ? "Checking" : "Building"} prod themes...`, styles.yellow));
-
-      /** Production build result with per-target paths and aggregate changed paths. */
-      const prod = await buildProdThemes({ check });
-
-      logSummary(
-        `${check ? "Validated" : "Built"} ${prod.targets.length} prod themes; ${prod.changed.length} generated files updated.`,
-        prod.targets,
-        prod.changed,
-        true,
-      );
-
-      console.log(styled(`${check ? "Checking" : "Building"} dev themes...`, styles.yellow));
-
-      /** Development target summaries returned to the command-line entry point. */
-      const targets = await buildDevThemes({ check });
-
-      /** Changed generated paths from all development targets. */
-      const changedFiles = targets.flatMap((target) => target.changed);
-
-      logSummary(
-        `${check ? "Validated" : "Built"} ${targets.length} dev themes; ${changedFiles.length} generated files updated.`,
-        targets,
-        changedFiles,
-        false,
-      );
-    } else if (flags.includes("--dev")) {
-      /** Whether to check artifacts without writing them. */
-      const check = flags.includes("--check");
-
-      console.log(styled(`${check ? "Checking" : "Building"} dev themes...`, styles.yellow));
-
-      /** Development target summaries returned to the command-line entry point. */
-      const targets = await buildDevThemes({ check });
-
-      /** Changed generated paths from all development targets. */
-      const changedFiles = targets.flatMap((target) => target.changed);
-
-      logSummary(
-        `${check ? "Validated" : "Built"} ${targets.length} dev themes; ${changedFiles.length} generated files updated.`,
-        targets,
-        changedFiles,
-        false,
-      );
-    } else {
-      /** Whether to build palette reports independently of theme inputs. */
-      const paletteOnly = flags.includes("--palette-only");
-
-      /** Whether to check artifacts without writing them. */
-      const check = flags.includes("--check");
-
-      console.log(
-        styled(
-          `${check ? "Checking" : "Building"} ${paletteOnly ? "palette reports" : "prod themes"}...`,
-          styles.yellow,
-        ),
-      );
-
-      /** Completed build summary for the selected command or target group. */
-      const result = await buildProdThemes({
-        check,
-        paletteOnly,
-      });
-
-      logSummary(
-        `${check ? "Validated" : "Built"} ${result.targets.length} prod themes; ${result.changed.length} generated files updated.`,
-        result.targets,
-        result.changed,
-        false,
-      );
-    }
+    await runBuild({
+      mode: flags.includes("--all")
+        ? "all"
+        : flags.includes("--dev")
+          ? "dev"
+          : flags.includes("--palette-only")
+            ? "palette"
+            : "prod",
+      check: flags.includes("--check"),
+    });
   } catch (error) {
     console.error(styled(error.message, styles.red));
     process.exitCode = 1;

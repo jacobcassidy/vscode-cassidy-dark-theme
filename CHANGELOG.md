@@ -6,6 +6,7 @@ All notable changes to this project are documented in this file.
 
 ### Changed
 
+- Made all theme build commands sync the preview extension, removed the redundant `sync` command, and shared a magenta reload reminder triggered only by preview registration or asset setup changes. Extended watch coverage to the root manifest and static snapshots while keeping ordinary live theme edits and unchanged runs quiet.
 - Colored the preview theme reload reminder magenta in sync output.
 - Made `add:theme` copy default metadata into each new theme and add a target-derived `previewName` while preserving the other fields and JSONC comments.
 - Renamed the development extension and its live theme labels to Cassidy Dark Preview, and added optional `previewName` metadata overrides for named preview and static snapshot suffixes while preserving published labels and the default preview label.

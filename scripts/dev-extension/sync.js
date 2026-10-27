@@ -8,7 +8,62 @@ import { homedir } from "node:os";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { parseJsonc } from "../lib/jsonc-validation.js";
-import { listFiles, themeUiType } from "../lib/theme-source-inputs.js";
+import { listFiles, readOptional, themeUiType } from "../lib/theme-source-inputs.js";
+
+/**
+ * Serialize JSON with stable object-key ordering, retaining array order.
+ * @param value - JSON value to normalize for semantic comparison.
+ * @returns Canonical JSON text.
+ */
+function canonicalJson(value) {
+  if (Array.isArray(value)) return `[${value.map(canonicalJson).join(",")}]`;
+
+  if (value !== null && typeof value === "object") {
+    return `{${Object.keys(value)
+      .sort()
+      .map((key) => `${JSON.stringify(key)}:${canonicalJson(value[key])}`)
+      .join(",")}}`;
+  }
+
+  return JSON.stringify(value);
+}
+
+/**
+ * Compare preview identity and registrations independently of formatting and ordering.
+ * @param source - Existing or generated preview manifest JSON text.
+ * @returns Stable registration snapshot, or undefined for an absent or invalid manifest.
+ */
+function previewRegistrations(source) {
+  try {
+    /** Parsed preview manifest whose registrations determine reload requirements. */
+    const manifest = JSON.parse(source);
+
+    if (!Array.isArray(manifest.contributes?.themes)) return undefined;
+
+    if (
+      manifest.contributes.themes.some(
+        (theme) => !theme || typeof theme.path !== "string" || typeof theme.uiTheme !== "string",
+      )
+    )
+      return undefined;
+
+    return canonicalJson({
+      name: manifest.name,
+      publisher: manifest.publisher ?? null,
+      themes: manifest.contributes.themes.map(canonicalJson).sort(),
+    });
+  } catch {
+    return undefined;
+  }
+}
+
+/**
+ * Print the shared magenta instruction after a reload-requiring preview update.
+ * @param [logger] - Logger receiving the reminder.
+ */
+export function logReloadReminder(logger = console) {
+  logger.log("\u001b[35mRun Developer: Reload Window in VS Code, then select a Cassidy Dark Preview theme.\u001b[0m");
+}
 
 /**
  * Refresh the preview manifest and asset links without overwriting source files.
@@ -16,7 +71,7 @@ import { listFiles, themeUiType } from "../lib/theme-source-inputs.js";
  * @param [options] - Options passed to this operation.
  * @param [options.root] - Repository or fixture root; defaults to this checkout.
  * @param [options.extensionDirectory] - Separate preview extension directory; defaults to the local VS Code extension path.
- * @returns Path to the generated development extension manifest.
+ * @returns Generated manifest path and whether the applied preview changes require a window reload.
  */
 export async function syncDevExtension({
   root = fileURLToPath(new URL("../../", import.meta.url)),
@@ -42,8 +97,13 @@ export async function syncDevExtension({
   manifest.contributes.themes = [
     ...(await Promise.all(
       (manifest.contributes.themes ?? []).map(async (theme) => {
-        /** Parsed theme metadata used for preview labels and UI types. */
-        const metadata = parseJsonc(await readFile(join(root, theme.path), "utf8"), theme.path).value;
+        /** Generated production theme text required for preview registration. */
+        const source = await readOptional(join(root, theme.path));
+
+        if (source === undefined) throw new Error(`Missing generated theme ${theme.path}. Run npm run build.`);
+
+        /** Generated production metadata used to derive the preview registration. */
+        const metadata = parseJsonc(source, theme.path).value;
 
         if (theme.uiTheme !== themeUiType(metadata, theme.path)) {
           throw new Error(`${theme.path}: manifest uiTheme does not match theme type ${metadata.type}`);
@@ -132,6 +192,7 @@ export async function syncDevExtension({
     throw new Error(`Dev extension folder must be a regular directory: ${extensionDirectory}`);
   }
 
+  await mkdir(join(root, "dev-extension"), { recursive: true });
   await mkdir(extensionDirectory, { recursive: true });
 
   // Refuse to overwrite the source through a linked dev manifest.
@@ -143,13 +204,28 @@ export async function syncDevExtension({
     throw new Error(`Dev manifest is a symlink; replace it with a regular file: ${target}`);
   }
 
+  /** Previous preview manifest retained for change detection and write avoidance. */
+  const previous = await readOptional(target);
+
+  /** New preview manifest text, including unrelated source metadata updates. */
+  const current = `${JSON.stringify(manifest, null, 2)}\n`;
+
+  /** Whether registrations or repaired preview assets require VS Code to reload. */
+  let reloadRequired = previewRegistrations(previous) !== previewRegistrations(current);
+
   // Link assets directly to the checkout so edits appear without copying files.
   for (const directory of ["themes", "dev-extension", "images"]) {
     /** Checkout asset directory to expose through the preview extension. */
     const sourceDirectory = join(root, directory);
 
     /** Canonical checkout path expected behind an existing asset link. */
-    const sourceRealPath = await realpath(sourceDirectory);
+    const sourceRealPath = await realpath(sourceDirectory).catch((error) => {
+      if (error.code === "ENOENT" && directory === "themes") {
+        throw new Error("Missing generated themes directory. Run npm run build.", { cause: error });
+      }
+
+      throw error;
+    });
 
     /** Destination asset-link path inside the development extension. */
     const link = join(extensionDirectory, directory);
@@ -159,14 +235,15 @@ export async function syncDevExtension({
 
     if (!linkInfo) {
       await symlink(sourceDirectory, link, "dir");
+      reloadRequired = true;
     } else if (!linkInfo.isSymbolicLink() || (await realpath(link)) !== sourceRealPath) {
       throw new Error(`Expected a symlink to ${sourceDirectory}: ${link}`);
     }
   }
 
-  await writeFile(target, `${JSON.stringify(manifest, null, 2)}\n`);
+  if (previous !== current) await writeFile(target, current);
 
-  return target;
+  return { manifestPath: target, reloadRequired };
 }
 
 /**
@@ -183,9 +260,4 @@ async function statIfPresent(path) {
 
     return null;
   }
-}
-
-if (import.meta.main) {
-  console.log(`Synced dev manifest: ${await syncDevExtension()}`);
-  console.log("\u001b[35mRun Developer: Reload Window in VS Code, then select a Cassidy Dark Preview theme.\u001b[0m");
 }
