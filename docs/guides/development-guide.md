@@ -65,7 +65,7 @@ The repository uses ES modules (`"type": "module"`). Its npm dependencies suppor
 ### Create and refresh the dev extension
 
 ```bash
-npm run dev:sync
+npm run sync
 ```
 
 This command runs `npm run build`, which runs `build:prod` for prod targets followed by `build:dev` for dev targets. Then [`scripts/dev-extension/sync.js`](../../../scripts/dev-extension/sync.js) creates or refreshes a separate extension directory at:
@@ -88,9 +88,9 @@ Run **Developer: Reload Window** in VS Code, then open **Preferences: Color Them
 
 Rebuild after changing palette, token, details, or metadata inputs. The generated theme is linked directly into the dev extension. Theme entries include `_watch: true`; reload the VS Code window if an edit is not reflected. Open the files in `docs/grammar-samples/` and representative files from other languages to inspect highlighting. **Developer: Inspect Editor Tokens and Scopes** helps identify which TextMate or semantic token rules apply.
 
-After changing manifest metadata or adding or removing dev theme files, run `npm run dev:sync` again to refresh the dev manifest and reload VS Code.
+After changing manifest metadata or adding or removing dev theme files, run `npm run sync` again to refresh the dev manifest and reload VS Code.
 
-The command prints a reload reminder after synchronization. Importing the sync module does not install or change an extension. The function accepts an alternate repository root and extension directory for isolated testing. `dev:sync` exits after synchronization; use `npm run watch` for continuous rebuilding and preview synchronization. The CLI defaults to the standard `~/.vscode/extensions` location; it does not discover custom extension directories or alternate VS Code editions.
+The command prints a reload reminder after synchronization. Importing the sync module does not install or change an extension. The function accepts an alternate repository root and extension directory for isolated testing. `sync` exits after synchronization; use `npm run watch` for continuous rebuilding and preview synchronization. The CLI defaults to the standard `~/.vscode/extensions` location; it does not discover custom extension directories or alternate VS Code editions.
 
 For safety, the sync script refuses to use a symlink for the dev extension directory or its generated manifest. Existing asset links must point to this checkout. If the checkout moves, inspect and repair those dev links before running setup again.
 
@@ -100,7 +100,7 @@ For safety, the sync script refuses to use a symlink for the dev extension direc
 npm run watch
 ```
 
-[`scripts/themes/watch.js`](../../../scripts/themes/watch.js) builds prod themes, builds dev themes, and syncs the dev extension on startup. It then watches `src/themes/prod/` and `src/themes/dev/` recursively and repeats those steps when you save source changes. You do not need to run `dev:sync` first. Prod defaults are watched because dev themes inherit omitted input files. Creating a dev source tree after startup is supported.
+[`scripts/themes/watch.js`](../../../scripts/themes/watch.js) builds prod themes, builds dev themes, and syncs the dev extension on startup. It then watches `src/themes/prod/` and `src/themes/dev/` recursively and repeats those steps when you save source changes. You do not need to run `sync` first. Prod defaults are watched because dev themes inherit omitted input files. Creating a dev source tree after startup is supported.
 
 After the initial setup, run **Developer: Reload Window** and select a **Cassidy Dark Dev** theme. Saving source inputs rebuilds the generated JSON; the extension's `_watch: true` entries tell VS Code to reload the selected theme's colors. The command prints another reload reminder when theme registrations change, such as after adding a theme or changing its metadata name or type. Reload VS Code to pick up those registration changes.
 
@@ -110,7 +110,7 @@ Press **Ctrl+C** to stop. Shutdown closes the file watcher and cancels pending r
 
 Restart the command after changing build scripts, formatter configuration, root manifest metadata, or historical snapshots. After deliberately removing or renaming a target, explicitly remove its obsolete generated theme and palette report files, then save a theme source again or restart the command. Existing stale-output checks remain active; the watcher does not delete generated files automatically.
 
-The watcher uses Node.js 24's native file watching without an additional dependency. Its `watchThemes()` function accepts alternate repository and extension directories for isolated use and returns `ready` (the first cycle's completion), `close()` (graceful shutdown), and `closed` (shutdown completion, carrying a native watcher error if one occurred). Importing the module does not start watching or install an extension. Like `dev:sync`, the CLI uses the standard VS Code extensions directory.
+The watcher uses Node.js 24's native file watching without an additional dependency. Its `watchThemes()` function accepts alternate repository and extension directories for isolated use and returns `ready` (the first cycle's completion), `close()` (graceful shutdown), and `closed` (shutdown completion, carrying a native watcher error if one occurred). Importing the module does not start watching or install an extension. Like `sync`, the CLI uses the standard VS Code extensions directory.
 
 ### Syntax samples
 
@@ -225,7 +225,7 @@ For example, to try a different yellow palette locally:
 2. Copy the complete default `palette/palette-config.jsonc` into it and change the yellow parameters.
 3. Omit `metadata.jsonc`, `tokens/`, and `details/` to inherit the default versions.
 4. Run `npm run build:dev` to generate `dev-extension/themes/cassidy-dark-color-theme-yellow-test.json` and `src/themes/dev/yellow-test/palette/generated/palette.{json,md,svg}`.
-5. Run `npm run dev:sync` and select **Cassidy Dark Dev (Yellow Test)** in VS Code.
+5. Run `npm run sync` and select **Cassidy Dark Dev (Yellow Test)** in VS Code.
 
 Inherited token sections resolve against the dev palette. Supplied token sections replace their counterparts entirely, so include every alias required by the other effective sections. Inherited details must match those effective authored entries; supply a corresponding details file when keys or syntax IDs change. Copy the complete default files as a starting point. Changes to a default file affect every target inheriting it.
 
@@ -251,7 +251,7 @@ The editor settings in `.vscode/` recommend Prettier, ESLint, Markdown linting, 
 | `npm run build:prod`      | Generate prod themes/reports and synchronize prod manifest entries.                                      |
 | `npm run build:dev`       | Generate dev themes and their palette reports.                                                           |
 | `npm run watch`           | Continuously rebuild both groups and sync the dev preview extension on source changes.                   |
-| `npm run dev:sync`        | Build both groups and refresh the dev preview extension.                                                 |
+| `npm run sync`            | Build both groups and refresh the dev preview extension.                                                 |
 | `npm run check:generated` | Fail on stale or missing generated artifacts without rewriting files.                                    |
 | `npm run check:prettier`  | Check Prettier formatting across the repository.                                                         |
 | `npm run format`          | Rewrite files using Prettier.                                                                            |

@@ -71,7 +71,6 @@
     "check:generated": "node scripts/themes/build.js --check && node scripts/themes/build.js --dev --check",
     "check:prettier": "prettier . --check",
     "check:theme": "node scripts/themes/check.js",
-    "dev:sync": "npm run build && node scripts/dev-extension/sync.js",
     "format": "prettier . --write",
     "lint": "npm run lint:md && npm run lint:es",
     "lint:es": "eslint",
@@ -81,6 +80,7 @@
     "package:vsix": "bash scripts/release/package-vsix.sh",
     "release:github-recover": "bash scripts/release/publish/create-github-release.sh",
     "release:publish": "bash scripts/release/publish/run-azure-pipeline.sh",
+    "sync": "npm run build && node scripts/dev-extension/sync.js",
     "test": "node --test \"tests/*.test.js\"",
     "watch": "node scripts/themes/watch.js"
   }
