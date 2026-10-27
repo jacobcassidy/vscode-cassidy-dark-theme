@@ -75,7 +75,7 @@ tests/
   fixtures/
 
 samples/
-  syntax/
+  grammar/
     tsconfig.json
     <language samples>
 
@@ -158,9 +158,9 @@ src/token-data/ → optional generators → authored theme inputs
 
 Keep active guides and examples current. Preserve archived plans and historical comparisons, repairing links where necessary.
 
-## Syntax samples
+## Grammar samples
 
-Move `docs/grammar-samples/` to `samples/syntax/`. These files provide programming, markup, stylesheet, configuration, and log examples for visually inspecting TextMate and semantic highlighting in VS Code. Keep the guides for using them in `docs/guides/` and automated test inputs in `tests/fixtures/`.
+Move `docs/grammar-samples/` to `samples/grammar/`. Describe them in the guide as language samples for inspecting highlighting. These files provide programming, markup, stylesheet, configuration, and log examples for visually inspecting TextMate and semantic highlighting in VS Code. Keep the guides for using them in `docs/guides/` and automated test inputs in `tests/fixtures/`.
 
 Move the sample files together, keeping `tsconfig.json` beside the TypeScript, TSX, and JavaScript samples so VS Code continues discovering the configuration and resolving sibling imports. Preserve sample syntax, comments, and highlighting probes; update embedded paths and example validation commands to the new location. The sample programs remain visual inspection inputs, with their optional language-toolchain checks separate from `npm run check`.
 
@@ -173,12 +173,12 @@ Update the README, development guide links and sample tables, `.prettierignore`'
 3. **Group theme inputs by family.** Move existing local token and details files to their paired family paths, preserving contents and omitted files. Update input discovery, compiler loading, scaffolding, property addition, updater source inventories, and test fixtures together. Preserve alias names and independent per-file fallback.
 4. **Implement the upcoming token-data migration at the final paths.** Move shared inputs directly into `src/token-data/`, using `definitions.jsonc` for UI and semantic starter definitions and `details.jsonc` for shared descriptions, avoiding the proposed intermediate `docs/` destinations. Update generator readers, category authority paths, watcher subscriptions, updater inputs, and fixtures to those exact filenames. Use `tooling/token-data/` for loading/extraction/refresh and `tooling/generators/` for theme authoring. Apply the token-catalog plan's categorized authoring format to the theme files at their new family paths.
 5. **Align tests with responsibilities.** Move shared project builders into `tests/helpers/`, place upstream extraction samples in `tests/fixtures/`, and update test discovery for nested suites. Group palette generation/report tests under `tests/palette/` and color math tests under `tests/shared/color-math.test.js`. Verify independent definition/details fallback in both directions, explicit empty details, omitted local files, required default files, and generator output paths.
-6. **Move syntax samples.** Move `docs/grammar-samples/` into `samples/syntax/` with its adjacent `tsconfig.json`. Update active guide/README links, embedded paths and validation commands, and formatter/linter/editor configuration. Verify that the TypeScript configuration and sibling imports still resolve in the new directory.
+6. **Move grammar samples.** Move `docs/grammar-samples/` into `samples/grammar/` with its adjacent `tsconfig.json`. Update active guide/README links, embedded paths and validation commands, and formatter/linter/editor configuration. Verify that the TypeScript configuration and sibling imports still resolve in the new directory.
 7. **Update all consumers.** Audit active links, npm scripts, imports, watcher subscriptions, formatting/lint configuration, packaging exclusions, and generated-file notices. Exclude `tooling/` and `samples/` from the VSIX and ignore the upstream cache.
 8. **Verify and commit completed stages.** Run focused tests and `npm run check`; confirm repeatable builds, read-only checks, isolated preview synchronization, and VSIX contents.
 
 Acceptance requires unchanged theme appearance and exact syntax precedence; preserved comments, descriptions, and fallback behavior; actionable category diagnostics; watcher recovery after token-data corrections; and no upstream downloads during ordinary builds or tests. Verify consistent `definitions.jsonc`/`details.jsonc` filenames across shared data and theme families, retaining details-only shared syntax data. Shared category edits must trigger validation without populating theme inputs, shared placeholder colors must never replace authored styling during builds, and palette-only builds must not require token data.
 
-All visual highlighting samples must be available under `samples/syntax/`, with working active documentation links and adjacent TypeScript configuration. Preserve their language probes and sibling imports, update all active references to the old sample path, and verify that the VSIX excludes the relocated samples.
+All visual highlighting samples must be available under `samples/grammar/`, with working active documentation links and adjacent TypeScript configuration. Preserve their language probes and sibling imports, update all active references to the old sample path, and verify that the VSIX excludes the relocated samples.
 
 Defaults: retain JavaScript ES modules, existing commands, current theme directories, generated-output locations, and release behavior. Keep this an organization and format migration; do not introduce new styling or consolidate theme-local documentation into shared token data.
