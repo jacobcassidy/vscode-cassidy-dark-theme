@@ -6,12 +6,4399 @@
         "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
       }
     },
-    "actionSessionView": {
+    "activeSessionView": {
       "background": {
         "color": "#0ff",
         "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
       },
       "foreground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      }
+    },
+    "activityBar": {
+      "activeBackground": {
+        "color": "palette.gray.875"
+      },
+      "activeBorder": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "activeFocusBorder": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "background": {
+        "color": "palette.gray.825"
+      },
+      "border": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "dropBorder": {
+        "color": "palette.gray.white",
+        "alpha": 0.5019607843137255
+      },
+      "foreground": {
+        "color": "palette.yellow.400"
+      },
+      "inactiveForeground": {
+        "color": "palette.gray.500"
+      }
+    },
+    "activityBarBadge": {
+      "background": {
+        "color": "palette.yellow.400"
+      },
+      "foreground": {
+        "color": "palette.gray.1000"
+      }
+    },
+    "activityBarTop": {
+      "activeBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "activeBorder": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "background": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "dropBorder": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "foreground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "inactiveForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      }
+    },
+    "activityErrorBadge": {
+      "background": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "foreground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      }
+    },
+    "activityWarningBadge": {
+      "background": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "foreground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      }
+    },
+    "agentFeedbackEditorWidget": {
+      "background": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "border": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      }
+    },
+    "agentFeedbackInputWidget": {
+      "border": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      }
+    },
+    "agentSessionReadIndicator": {
+      "foreground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      }
+    },
+    "agentSessionSelectedBadge": {
+      "border": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      }
+    },
+    "agentSessionSelectedUnfocusedBadge": {
+      "border": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      }
+    },
+    "agentStatusIndicator": {
+      "background": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      }
+    },
+    "agents": {
+      "background": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      }
+    },
+    "agentsBadge": {
+      "background": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "foreground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      }
+    },
+    "agentsBottomPanel": {
+      "border": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      }
+    },
+    "agentsCard": {
+      "border": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      }
+    },
+    "agentsChatInput": {
+      "background": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "border": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "focusBorder": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "foreground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "placeholderForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      }
+    },
+    "agentsDetail": {
+      "background": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      }
+    },
+    "agentsGradient": {
+      "tintColor": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      }
+    },
+    "agentsNewSessionButton": {
+      "background": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "border": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "foreground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "hoverBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      }
+    },
+    "agentsPanel": {
+      "background": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "border": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "foreground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      }
+    },
+    "agentsUnreadBadge": {
+      "background": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "foreground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      }
+    },
+    "agentsUpdateButton": {
+      "downloadedBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "downloadingBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      }
+    },
+    "agentsVoice": {
+      "speakingBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "speakingForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      }
+    },
+    "badge": {
+      "background": {
+        "color": "palette.gray.700"
+      },
+      "foreground": {
+        "color": "palette.gray.000"
+      }
+    },
+    "banner": {
+      "background": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "foreground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "iconForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      }
+    },
+    "breadcrumb": {
+      "activeSelectionForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "background": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "focusForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "foreground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      }
+    },
+    "breadcrumbPicker": {
+      "background": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      }
+    },
+    "browser": {
+      "border": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      }
+    },
+    "button": {
+      "background": {
+        "color": "#1c6bc4",
+        "colorReason": "Primary button fill uses L53/H255 with gamut headroom, allowing its lighter blue 600 hover state to retain at least 4.5:1 contrast with the button text."
+      },
+      "border": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "foreground": {
+        "color": "palette.gray.000"
+      },
+      "hoverBackground": {
+        "color": "palette.blue.600"
+      },
+      "secondaryBackground": {
+        "color": "palette.gray.700"
+      },
+      "secondaryBorder": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "secondaryForeground": {
+        "color": "palette.gray.000"
+      },
+      "secondaryHoverBackground": {
+        "color": "palette.gray.650"
+      },
+      "separator": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      }
+    },
+    "chart": {
+      "axis": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "guide": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "line": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      }
+    },
+    "charts": {
+      "blue": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "foreground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "green": {
+        "color": "palette.green.400"
+      },
+      "lines": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "orange": {
+        "color": "palette.orange.400"
+      },
+      "purple": {
+        "color": "palette.purple.400"
+      },
+      "red": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "yellow": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      }
+    },
+    "chat": {
+      "avatarBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "avatarForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "checkpointSeparator": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "dictationActiveMicGlow": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "editedFileForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "findMatchBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "findMatchHighlightBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "inputWorkingBorderColor1": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "linesAddedForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "linesRemovedForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "mcpCompatibilityWarningForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "requestBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "requestBorder": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "requestBubbleBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "requestBubbleHoverBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "requestCodeBorder": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "sessionStateIndicator": {
+        "inProgressBorder": {
+          "color": "#0ff",
+          "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+        },
+        "needsInputBorder": {
+          "color": "#0ff",
+          "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+        },
+        "unvisitedBorder": {
+          "color": "#0ff",
+          "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+        }
+      },
+      "slashCommandBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "slashCommandForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "statusBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "thinkingShimmer": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "voiceGlowBaseColor": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "voiceListeningGlow": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "voiceSpeakingGlow": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "workingProgressInsidersIconForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "workingProgressStableIconForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      }
+    },
+    "checkbox": {
+      "background": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "border": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "disabled": {
+        "background": {
+          "color": "#0ff",
+          "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+        },
+        "foreground": {
+          "color": "#0ff",
+          "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+        }
+      },
+      "foreground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "selectBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "selectBorder": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      }
+    },
+    "commandCenter": {
+      "activeBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "activeBorder": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "activeForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "background": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "border": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "debuggingBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "foreground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "inactiveBorder": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "inactiveForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      }
+    },
+    "commentsView": {
+      "resolvedIcon": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "unresolvedIcon": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      }
+    },
+    "contrastActiveBorder": {
+      "color": "#0ff",
+      "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+    },
+    "contrastBorder": {
+      "color": "#0ff",
+      "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+    },
+    "debugConsole": {
+      "errorForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "infoForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "sourceForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "warningForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      }
+    },
+    "debugConsoleInputIcon": {
+      "foreground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      }
+    },
+    "debugExceptionWidget": {
+      "background": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "border": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      }
+    },
+    "debugIcon": {
+      "breakpointCurrentStackframeForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "breakpointDisabledForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "breakpointForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "breakpointStackframeForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "breakpointUnverifiedForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "continueForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "disconnectForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "pauseForeground": {
+        "color": "palette.blue.400"
+      },
+      "restartForeground": {
+        "color": "palette.green.400"
+      },
+      "startForeground": {
+        "color": "palette.green.400"
+      },
+      "stepBackForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "stepIntoForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "stepOutForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "stepOverForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "stopForeground": {
+        "color": "palette.red.400"
+      }
+    },
+    "debugTokenExpression": {
+      "boolean": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "error": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "name": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "number": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "string": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "type": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "value": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      }
+    },
+    "debugToolBar": {
+      "background": {
+        "color": "palette.gray.800"
+      },
+      "border": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      }
+    },
+    "debugView": {
+      "exceptionLabelBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "exceptionLabelForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "stateLabelBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "stateLabelForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "valueChangedHighlight": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      }
+    },
+    "descriptionForeground": {
+      "color": "#0ff",
+      "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+    },
+    "diffEditor": {
+      "border": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "diagonalFill": {
+        "color": "palette.gray.700"
+      },
+      "insertedLineBackground": {
+        "color": "base.diff.added.foreground",
+        "alpha": 0.10196078431372549
+      },
+      "insertedTextBackground": {
+        "color": "base.diff.added.foreground",
+        "alpha": 0.2
+      },
+      "insertedTextBorder": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "move": {
+        "border": {
+          "color": "#0ff",
+          "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+        }
+      },
+      "moveActive": {
+        "border": {
+          "color": "#0ff",
+          "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+        }
+      },
+      "removedLineBackground": {
+        "color": "base.diff.removed.foreground",
+        "alpha": 0.10196078431372549
+      },
+      "removedTextBackground": {
+        "color": "base.diff.removed.foreground",
+        "alpha": 0.2
+      },
+      "removedTextBorder": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "unchangedCodeBackground": {
+        "color": "palette.blue.400",
+        "alpha": 0.050980392156862744
+      },
+      "unchangedRegionBackground": {
+        "color": "palette.blue.400",
+        "alpha": 0.050980392156862744
+      },
+      "unchangedRegionForeground": {
+        "color": "palette.gray.400"
+      },
+      "unchangedRegionShadow": {
+        "color": "palette.gray.black",
+        "alpha": 0.2
+      }
+    },
+    "diffEditorGutter": {
+      "insertedLineBackground": {
+        "color": "base.diff.added.foreground",
+        "alpha": 0.10196078431372549
+      },
+      "removedLineBackground": {
+        "color": "base.diff.removed.foreground",
+        "alpha": 0.10196078431372549
+      }
+    },
+    "diffEditorOverview": {
+      "insertedForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "removedForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      }
+    },
+    "disabledForeground": {
+      "color": "palette.gray.white",
+      "alpha": 0.2
+    },
+    "dropdown": {
+      "background": {
+        "color": "palette.gray.800"
+      },
+      "border": {
+        "color": "palette.gray.700"
+      },
+      "foreground": {
+        "color": "palette.gray.200"
+      },
+      "listBackground": {
+        "color": "palette.gray.825"
+      }
+    },
+    "editor": {
+      "background": {
+        "color": "base.surface.editor"
+      },
+      "border": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "compositionBorder": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "findMatchBackground": {
+        "color": "palette.purple.600",
+        "alpha": 0.9019607843137255
+      },
+      "findMatchBorder": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "findMatchForeground": {
+        "color": "palette.purple.500",
+        "alpha": 0.9019607843137255
+      },
+      "findMatchHighlightBackground": {
+        "color": "palette.purple.600",
+        "alpha": 0.45098039215686275
+      },
+      "findMatchHighlightBorder": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "findMatchHighlightForeground": {
+        "color": "palette.gray.white",
+        "alpha": 0.9019607843137255
+      },
+      "findRangeHighlightBackground": {
+        "color": "palette.gray.white",
+        "alpha": 0.10196078431372549
+      },
+      "findRangeHighlightBorder": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "focusedStackFrameHighlightBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "foldBackground": {
+        "color": "palette.blue.400",
+        "alpha": 0.14901960784313725
+      },
+      "foldPlaceholderForeground": {
+        "color": "palette.gray.400"
+      },
+      "foreground": {
+        "color": "base.text.default"
+      },
+      "hoverHighlightBackground": {
+        "color": "palette.gray.white",
+        "alpha": 0.10196078431372549
+      },
+      "inactiveLineHighlightBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "inactiveSelectionBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "inlineValuesBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "inlineValuesForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "lineHighlightBackground": {
+        "color": "palette.gray.975"
+      },
+      "lineHighlightBorder": {
+        "color": "palette.gray.975"
+      },
+      "linkedEditingBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "placeholder": {
+        "foreground": {
+          "color": "#0ff",
+          "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+        }
+      },
+      "rangeHighlightBackground": {
+        "color": "palette.gray.white",
+        "alpha": 0.10196078431372549
+      },
+      "rangeHighlightBorder": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "selectionBackground": {
+        "color": "palette.blue.600",
+        "alpha": 0.5019607843137255
+      },
+      "selectionForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "selectionHighlightBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "selectionHighlightBorder": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "snippetFinalTabstopHighlightBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "snippetFinalTabstopHighlightBorder": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "snippetTabstopHighlightBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "snippetTabstopHighlightBorder": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "stackFrameHighlightBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "symbolHighlightBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "symbolHighlightBorder": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "wordHighlightBackground": {
+        "color": "palette.gray.500",
+        "alpha": 0.5019607843137255
+      },
+      "wordHighlightBorder": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "wordHighlightStrongBackground": {
+        "color": "palette.pink.400",
+        "alpha": 0.4
+      },
+      "wordHighlightStrongBorder": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "wordHighlightTextBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "wordHighlightTextBorder": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      }
+    },
+    "editorActionList": {
+      "background": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "focusBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "focusForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "foreground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      }
+    },
+    "editorBracketHighlight": {
+      "foreground1": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "foreground2": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "foreground3": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "foreground4": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "foreground5": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "foreground6": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "unexpectedBracket": {
+        "foreground": {
+          "color": "#0ff",
+          "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+        }
+      }
+    },
+    "editorBracketMatch": {
+      "background": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "border": {
+        "color": "palette.gray.600"
+      },
+      "foreground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      }
+    },
+    "editorBracketPairGuide": {
+      "activeBackground1": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "activeBackground2": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "activeBackground3": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "activeBackground4": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "activeBackground5": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "activeBackground6": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "background1": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "background2": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "background3": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "background4": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "background5": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "background6": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      }
+    },
+    "editorCodeLens": {
+      "foreground": {
+        "color": "palette.yellow.500"
+      }
+    },
+    "editorCommentsWidget": {
+      "rangeActiveBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "rangeBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "replyInputBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "resolvedBorder": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "unresolvedBorder": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      }
+    },
+    "editorCursor": {
+      "background": {
+        "color": "palette.gray.800"
+      },
+      "foreground": {
+        "color": "palette.gray.400"
+      }
+    },
+    "editorError": {
+      "background": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "border": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "foreground": {
+        "color": "base.diagnostic.error.foreground"
+      }
+    },
+    "editorGhostText": {
+      "background": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "border": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "foreground": {
+        "color": "palette.blue.500"
+      }
+    },
+    "editorGroup": {
+      "border": {
+        "color": "palette.gray.black",
+        "alpha": 0.5019607843137255
+      },
+      "dropBackground": {
+        "color": "palette.gray.400",
+        "alpha": 0.5019607843137255
+      },
+      "dropIntoPromptBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "dropIntoPromptBorder": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "dropIntoPromptForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "emptyBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "focusedEmptyBorder": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      }
+    },
+    "editorGroupHeader": {
+      "border": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "connectedTabsBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "noTabsBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "tabsBackground": {
+        "color": "palette.gray.850"
+      },
+      "tabsBorder": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      }
+    },
+    "editorGutter": {
+      "addedBackground": {
+        "color": "palette.green.400",
+        "alpha": 0.7490196078431373
+      },
+      "addedSecondaryBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "background": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "commentDraftGlyphForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "commentGlyphForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "commentRangeForeground": {
+        "color": "palette.gray.800"
+      },
+      "commentUnresolvedGlyphForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "deletedBackground": {
+        "color": "palette.red.400",
+        "alpha": 0.7490196078431373
+      },
+      "deletedSecondaryBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "foldingControlForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "itemBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "itemGlyphForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "modifiedBackground": {
+        "color": "palette.yellow.400",
+        "alpha": 0.7490196078431373
+      },
+      "modifiedSecondaryBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      }
+    },
+    "editorHint": {
+      "border": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "foreground": {
+        "color": "palette.blue.400"
+      }
+    },
+    "editorHoverWidget": {
+      "background": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "border": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "foreground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "highlightForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "statusBarBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      }
+    },
+    "editorIndentGuide": {
+      "activeBackground1": {
+        "color": "palette.gray.700"
+      },
+      "activeBackground2": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "activeBackground3": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "activeBackground4": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "activeBackground5": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "activeBackground6": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "background1": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "background2": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "background3": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "background4": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "background5": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "background6": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      }
+    },
+    "editorInfo": {
+      "background": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "border": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "foreground": {
+        "color": "palette.blue.400"
+      }
+    },
+    "editorInlayHint": {
+      "background": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "foreground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "parameterBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "parameterForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "typeBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "typeForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      }
+    },
+    "editorLightBulb": {
+      "foreground": {
+        "color": "palette.yellow.500"
+      }
+    },
+    "editorLightBulbAi": {
+      "foreground": {
+        "color": "palette.yellow.500"
+      }
+    },
+    "editorLightBulbAutoFix": {
+      "foreground": {
+        "color": "palette.blue.400"
+      }
+    },
+    "editorLineNumber": {
+      "activeForeground": {
+        "color": "palette.gray.200"
+      },
+      "dimmedForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "foreground": {
+        "color": "palette.gray.600"
+      }
+    },
+    "editorLink": {
+      "activeForeground": {
+        "color": "palette.yellow.400"
+      }
+    },
+    "editorMarkerNavigation": {
+      "background": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      }
+    },
+    "editorMarkerNavigationError": {
+      "background": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "headerBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      }
+    },
+    "editorMarkerNavigationInfo": {
+      "background": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "headerBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      }
+    },
+    "editorMarkerNavigationWarning": {
+      "background": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "headerBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      }
+    },
+    "editorMinimap": {
+      "inlineChatInserted": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      }
+    },
+    "editorMultiCursor": {
+      "primary": {
+        "background": {
+          "color": "#0ff",
+          "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+        },
+        "foreground": {
+          "color": "#0ff",
+          "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+        }
+      },
+      "secondary": {
+        "background": {
+          "color": "#0ff",
+          "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+        },
+        "foreground": {
+          "color": "#0ff",
+          "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+        }
+      }
+    },
+    "editorOverviewRuler": {
+      "addedForeground": {
+        "color": "palette.green.400",
+        "alpha": 0.7490196078431373
+      },
+      "background": {
+        "color": "palette.gray.black",
+        "alpha": 0.10196078431372549
+      },
+      "border": {
+        "color": "palette.gray.black",
+        "alpha": 0.10196078431372549
+      },
+      "bracketMatchForeground": {
+        "color": "palette.gray.600",
+        "alpha": 0.7490196078431373
+      },
+      "commentDraftForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "commentForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "commentUnresolvedForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "commonContentForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "currentContentForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "deletedForeground": {
+        "color": "palette.red.400",
+        "alpha": 0.7490196078431373
+      },
+      "errorForeground": {
+        "color": "palette.red.500",
+        "alpha": 0.7490196078431373
+      },
+      "findMatchForeground": {
+        "color": "palette.purple.600",
+        "alpha": 0.7490196078431373
+      },
+      "incomingContentForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "infoForeground": {
+        "color": "palette.blue.400",
+        "alpha": 0.7490196078431373
+      },
+      "inlineChatInserted": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "inlineChatRemoved": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "modifiedForeground": {
+        "color": "palette.yellow.400",
+        "alpha": 0.7490196078431373
+      },
+      "rangeHighlightForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "selectionHighlightForeground": {
+        "color": "palette.gray.500",
+        "alpha": 0.3803921568627451
+      },
+      "warningForeground": {
+        "color": "palette.orange.400",
+        "alpha": 0.7490196078431373
+      },
+      "wordHighlightForeground": {
+        "color": "palette.gray.500",
+        "alpha": 0.3803921568627451
+      },
+      "wordHighlightStrongForeground": {
+        "color": "palette.pink.400",
+        "alpha": 0.7490196078431373
+      },
+      "wordHighlightTextForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      }
+    },
+    "editorPane": {
+      "background": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      }
+    },
+    "editorRuler": {
+      "foreground": {
+        "color": "palette.orange.400",
+        "alpha": 0.10196078431372549
+      }
+    },
+    "editorStickyScroll": {
+      "background": {
+        "color": "palette.gray.875"
+      },
+      "border": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "shadow": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      }
+    },
+    "editorStickyScrollGutter": {
+      "background": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      }
+    },
+    "editorStickyScrollHover": {
+      "background": {
+        "color": "palette.gray.975"
+      }
+    },
+    "editorSuggestWidget": {
+      "background": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "border": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "focusHighlightForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "focusOutline": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "foreground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "highlightForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "selectedBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "selectedForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "selectedIconForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      }
+    },
+    "editorSuggestWidgetStatus": {
+      "foreground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      }
+    },
+    "editorUnicodeHighlight": {
+      "background": {
+        "color": "palette.orange.400",
+        "alpha": 0.25098039215686274
+      },
+      "border": {
+        "color": "palette.orange.400",
+        "alpha": 0.5019607843137255
+      }
+    },
+    "editorUnnecessaryCode": {
+      "border": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "opacity": {
+        "color": "#0009",
+        "colorReason": "-color--black at 60% opacity [overrides core black opacity]"
+      }
+    },
+    "editorWarning": {
+      "background": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "border": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "foreground": {
+        "color": "base.diagnostic.warning.foreground"
+      }
+    },
+    "editorWatermark": {
+      "foreground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      }
+    },
+    "editorWhitespace": {
+      "foreground": {
+        "color": "palette.gray.800"
+      }
+    },
+    "editorWidget": {
+      "background": {
+        "color": "palette.gray.825"
+      },
+      "border": {
+        "color": "palette.gray.white",
+        "alpha": 0.10196078431372549
+      },
+      "foreground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "resizeBorder": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      }
+    },
+    "editorWordWrapIndicator": {
+      "foreground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      }
+    },
+    "errorForeground": {
+      "color": "base.diagnostic.error.foreground"
+    },
+    "extensionBadge": {
+      "remoteBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "remoteForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      }
+    },
+    "extensionButton": {
+      "background": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "border": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "foreground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "hoverBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "prominentBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "prominentForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "prominentHoverBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "separator": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      }
+    },
+    "extensionIcon": {
+      "preReleaseForeground": {
+        "color": "palette.green.600",
+        "alpha": 0.9019607843137255
+      },
+      "privateForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "sponsorForeground": {
+        "color": "palette.pink.600",
+        "alpha": 0.9019607843137255
+      },
+      "starForeground": {
+        "color": "palette.orange.500",
+        "alpha": 0.9019607843137255
+      },
+      "verifiedForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      }
+    },
+    "focusBorder": {
+      "color": "palette.blue.500",
+      "alpha": 0.8
+    },
+    "foreground": {
+      "color": "palette.gray.200"
+    },
+    "git": {
+      "blame": {
+        "editorDecorationForeground": {
+          "color": "#0ff",
+          "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+        }
+      }
+    },
+    "gitDecoration": {
+      "addedResourceForeground": {
+        "color": "palette.green.500"
+      },
+      "conflictingResourceForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "deletedResourceForeground": {
+        "color": "palette.red.500"
+      },
+      "ignoredResourceForeground": {
+        "color": "palette.gray.450"
+      },
+      "modifiedResourceForeground": {
+        "color": "palette.yellow.400"
+      },
+      "renamedResourceForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "stageDeletedResourceForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "stageModifiedResourceForeground": {
+        "color": "palette.yellow.500"
+      },
+      "submoduleResourceForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "untrackedResourceForeground": {
+        "color": "palette.green.400"
+      }
+    },
+    "gitblame": {
+      "inlineMessage": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      }
+    },
+    "icon": {
+      "foreground": {
+        "color": "palette.gray.400"
+      }
+    },
+    "inactiveSessionView": {
+      "background": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "foreground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      }
+    },
+    "inlineChat": {
+      "background": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "border": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "foreground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "shadow": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      }
+    },
+    "inlineChatDiff": {
+      "inserted": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "removed": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      }
+    },
+    "inlineChatInput": {
+      "background": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "border": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "focusBorder": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "placeholderForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      }
+    },
+    "inlineEdit": {
+      "gutterIndicator": {
+        "background": {
+          "color": "#0ff",
+          "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+        },
+        "primaryBackground": {
+          "color": "#0ff",
+          "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+        },
+        "primaryBorder": {
+          "color": "#0ff",
+          "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+        },
+        "primaryForeground": {
+          "color": "#0ff",
+          "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+        },
+        "secondaryBackground": {
+          "color": "#0ff",
+          "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+        },
+        "secondaryBorder": {
+          "color": "#0ff",
+          "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+        },
+        "secondaryForeground": {
+          "color": "#0ff",
+          "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+        },
+        "successfulBackground": {
+          "color": "#0ff",
+          "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+        },
+        "successfulBorder": {
+          "color": "#0ff",
+          "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+        },
+        "successfulForeground": {
+          "color": "#0ff",
+          "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+        }
+      },
+      "modifiedBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "modifiedBorder": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "modifiedChangedLineBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "modifiedChangedTextBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "originalBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "originalBorder": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "originalChangedLineBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "originalChangedTextBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "tabWillAcceptModifiedBorder": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "tabWillAcceptOriginalBorder": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      }
+    },
+    "input": {
+      "background": {
+        "color": "palette.gray.800"
+      },
+      "border": {
+        "color": "palette.gray.700"
+      },
+      "foreground": {
+        "color": "palette.gray.000"
+      },
+      "placeholderForeground": {
+        "color": "palette.gray.500"
+      }
+    },
+    "inputOption": {
+      "activeBackground": {
+        "color": "palette.yellow.400",
+        "alpha": 0.25098039215686274
+      },
+      "activeBorder": {
+        "color": "palette.yellow.400",
+        "alpha": 0.25098039215686274
+      },
+      "activeForeground": {
+        "color": "palette.yellow.400"
+      },
+      "hoverBackground": {
+        "color": "palette.yellow.400",
+        "alpha": 0.25098039215686274
+      }
+    },
+    "inputValidation": {
+      "errorBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "errorBorder": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "errorForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "infoBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "infoBorder": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "infoForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "warningBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "warningBorder": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "warningForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      }
+    },
+    "interactive": {
+      "activeCodeBorder": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "inactiveCodeBorder": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      }
+    },
+    "keybindingLabel": {
+      "background": {
+        "color": "palette.gray.700"
+      },
+      "border": {
+        "color": "palette.gray.675"
+      },
+      "bottomBorder": {
+        "color": "palette.gray.650"
+      },
+      "foreground": {
+        "color": "palette.gray.200"
+      }
+    },
+    "keybindingTable": {
+      "headerBackground": {
+        "color": "palette.gray.800"
+      },
+      "rowsBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      }
+    },
+    "list": {
+      "activeSelectionBackground": {
+        "color": "palette.gray.white",
+        "alpha": 0.2
+      },
+      "activeSelectionForeground": {
+        "color": "palette.gray.000"
+      },
+      "activeSelectionIconForeground": {
+        "color": "palette.gray.000"
+      },
+      "deemphasizedForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "dropBackground": {
+        "color": "palette.gray.400",
+        "alpha": 0.25098039215686274
+      },
+      "dropBetweenBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "errorForeground": {
+        "color": "palette.red.500"
+      },
+      "filterMatchBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "filterMatchBorder": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "focusAndSelectionOutline": {
+        "color": "palette.gray.white",
+        "alpha": 0.2
+      },
+      "focusBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "focusForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "focusHighlightForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "focusOutline": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "highlightForeground": {
+        "color": "palette.blue.400"
+      },
+      "hoverBackground": {
+        "color": "palette.gray.white",
+        "alpha": 0.10196078431372549
+      },
+      "hoverForeground": {
+        "color": "palette.gray.000"
+      },
+      "inactiveFocusBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "inactiveFocusOutline": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "inactiveSelectionBackground": {
+        "color": "palette.gray.white",
+        "alpha": 0.050980392156862744
+      },
+      "inactiveSelectionForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "inactiveSelectionIconForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "invalidItemForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "warningForeground": {
+        "color": "palette.orange.400"
+      }
+    },
+    "listFilterWidget": {
+      "background": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "noMatchesOutline": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "outline": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "shadow": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      }
+    },
+    "markdownAlert": {
+      "caution": {
+        "foreground": {
+          "color": "#0ff",
+          "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+        }
+      },
+      "important": {
+        "foreground": {
+          "color": "#0ff",
+          "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+        }
+      },
+      "note": {
+        "foreground": {
+          "color": "#0ff",
+          "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+        }
+      },
+      "tip": {
+        "foreground": {
+          "color": "#0ff",
+          "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+        }
+      },
+      "warning": {
+        "foreground": {
+          "color": "#0ff",
+          "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+        }
+      }
+    },
+    "mcpIcon": {
+      "starForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      }
+    },
+    "menu": {
+      "background": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "border": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "foreground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "selectionBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "selectionBorder": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "selectionForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "separatorBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      }
+    },
+    "menubar": {
+      "selectionBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "selectionBorder": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "selectionForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      }
+    },
+    "merge": {
+      "border": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "commonContentBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "commonHeaderBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "currentContentBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "currentHeaderBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "incomingContentBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "incomingHeaderBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      }
+    },
+    "mergeEditor": {
+      "change": {
+        "background": {
+          "color": "#0ff",
+          "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+        },
+        "word": {
+          "background": {
+            "color": "#0ff",
+            "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+          }
+        }
+      },
+      "changeBase": {
+        "background": {
+          "color": "#0ff",
+          "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+        },
+        "word": {
+          "background": {
+            "color": "#0ff",
+            "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+          }
+        }
+      },
+      "conflict": {
+        "handled": {
+          "minimapOverViewRuler": {
+            "color": "#0ff",
+            "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+          }
+        },
+        "handledFocused": {
+          "border": {
+            "color": "#0ff",
+            "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+          }
+        },
+        "handledUnfocused": {
+          "border": {
+            "color": "#0ff",
+            "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+          }
+        },
+        "input1": {
+          "background": {
+            "color": "#0ff",
+            "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+          }
+        },
+        "input2": {
+          "background": {
+            "color": "#0ff",
+            "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+          }
+        },
+        "unhandled": {
+          "minimapOverViewRuler": {
+            "color": "#0ff",
+            "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+          }
+        },
+        "unhandledFocused": {
+          "border": {
+            "color": "#0ff",
+            "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+          }
+        },
+        "unhandledUnfocused": {
+          "border": {
+            "color": "#0ff",
+            "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+          }
+        }
+      },
+      "conflictingLines": {
+        "background": {
+          "color": "#0ff",
+          "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+        }
+      }
+    },
+    "minimap": {
+      "background": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "chatEditHighlight": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "errorHighlight": {
+        "color": "palette.red.500",
+        "alpha": 0.7490196078431373
+      },
+      "findMatchHighlight": {
+        "color": "palette.purple.600",
+        "alpha": 0.7490196078431373
+      },
+      "foregroundOpacity": {
+        "color": "palette.gray.black",
+        "alpha": 0.5019607843137255
+      },
+      "infoHighlight": {
+        "color": "palette.blue.400",
+        "alpha": 0.7490196078431373
+      },
+      "selectionHighlight": {
+        "color": "palette.blue.600",
+        "alpha": 0.3803921568627451
+      },
+      "selectionOccurrenceHighlight": {
+        "color": "palette.gray.500",
+        "alpha": 0.3803921568627451
+      },
+      "warningHighlight": {
+        "color": "palette.orange.400",
+        "alpha": 0.7490196078431373
+      }
+    },
+    "minimapGutter": {
+      "addedBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "deletedBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "modifiedBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      }
+    },
+    "minimapSlider": {
+      "activeBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "background": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "hoverBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      }
+    },
+    "modernActivityBar": {
+      "background": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "border": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "inactiveBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      }
+    },
+    "modernActivityBarItem": {
+      "activeBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "activeForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "hoverBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "hoverForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      }
+    },
+    "modernEditorTab": {
+      "activeActionBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "activeBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "activeForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "activeHoverActionBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "activeHoverBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "hoverActionBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "hoverBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "hoverForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "inactiveBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "selectedActionBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      }
+    },
+    "modernPanel": {
+      "border": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      }
+    },
+    "modernSash": {
+      "gripForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      }
+    },
+    "modernTab": {
+      "activeBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "activeForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "hoverBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "hoverForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      }
+    },
+    "modernUI": {
+      "inactiveShellBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "shellBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      }
+    },
+    "multiDiffEditor": {
+      "background": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "border": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "headerBackground": {
+        "color": "palette.gray.800"
+      }
+    },
+    "notebook": {
+      "cellBorderColor": {
+        "color": "palette.gray.white",
+        "alpha": 0.10196078431372549
+      },
+      "cellEditorBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "cellHoverBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "cellInsertionIndicator": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "cellStatusBarItemHoverBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "cellToolbarSeparator": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "editorBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "focusedCellBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "focusedCellBorder": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "focusedEditorBorder": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "inactiveFocusedCellBorder": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "inactiveSelectedCellBorder": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "outputContainerBackgroundColor": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "outputContainerBorderColor": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "selectedCellBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "selectedCellBorder": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "symbolHighlightBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      }
+    },
+    "notebookEditorOverviewRuler": {
+      "runningCellForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      }
+    },
+    "notebookScrollbarSlider": {
+      "activeBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "background": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "hoverBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      }
+    },
+    "notebookStatusErrorIcon": {
+      "foreground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      }
+    },
+    "notebookStatusRunningIcon": {
+      "foreground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      }
+    },
+    "notebookStatusSuccessIcon": {
+      "foreground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      }
+    },
+    "notificationCenter": {
+      "border": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      }
+    },
+    "notificationCenterHeader": {
+      "background": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "foreground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      }
+    },
+    "notificationLink": {
+      "foreground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      }
+    },
+    "notificationToast": {
+      "border": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      }
+    },
+    "notifications": {
+      "background": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "border": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "foreground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      }
+    },
+    "notificationsErrorIcon": {
+      "foreground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      }
+    },
+    "notificationsInfoIcon": {
+      "foreground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      }
+    },
+    "notificationsWarningIcon": {
+      "foreground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      }
+    },
+    "outputView": {
+      "background": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      }
+    },
+    "outputViewStickyScroll": {
+      "background": {
+        "color": "palette.gray.825"
+      }
+    },
+    "panel": {
+      "background": {
+        "color": "palette.gray.850"
+      },
+      "border": {
+        "color": "palette.gray.850"
+      },
+      "dropBorder": {
+        "color": "palette.gray.white",
+        "alpha": 0.5019607843137255
+      }
+    },
+    "panelInput": {
+      "border": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      }
+    },
+    "panelSection": {
+      "border": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "dropBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      }
+    },
+    "panelSectionHeader": {
+      "background": {
+        "color": "palette.gray.825"
+      },
+      "border": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "foreground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      }
+    },
+    "panelStickyScroll": {
+      "background": {
+        "color": "palette.gray.825"
+      },
+      "border": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "shadow": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      }
+    },
+    "panelTitle": {
+      "activeBorder": {
+        "color": "palette.gray.850"
+      },
+      "activeForeground": {
+        "color": "palette.yellow.400"
+      },
+      "border": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "inactiveForeground": {
+        "color": "palette.gray.500"
+      }
+    },
+    "panelTitleBadge": {
+      "background": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "foreground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      }
+    },
+    "peekView": {
+      "border": {
+        "color": "palette.blue.400",
+        "alpha": 0.25098039215686274
+      }
+    },
+    "peekViewEditor": {
+      "background": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "matchHighlightBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "matchHighlightBorder": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      }
+    },
+    "peekViewEditorGutter": {
+      "background": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      }
+    },
+    "peekViewEditorStickyScroll": {
+      "background": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      }
+    },
+    "peekViewEditorStickyScrollGutter": {
+      "background": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      }
+    },
+    "peekViewResult": {
+      "background": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "fileForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "lineForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "matchHighlightBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "selectionBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "selectionForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      }
+    },
+    "peekViewTitle": {
+      "background": {
+        "color": "palette.gray.825"
+      }
+    },
+    "peekViewTitleDescription": {
+      "foreground": {
+        "color": "palette.gray.white",
+        "alpha": 0.5019607843137255
+      }
+    },
+    "peekViewTitleLabel": {
+      "foreground": {
+        "color": "palette.gray.000"
+      }
+    },
+    "pickerGroup": {
+      "border": {
+        "color": "palette.gray.700"
+      },
+      "foreground": {
+        "color": "palette.gray.400"
+      }
+    },
+    "ports": {
+      "iconRunningProcessForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      }
+    },
+    "problemsErrorIcon": {
+      "foreground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      }
+    },
+    "problemsInfoIcon": {
+      "foreground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      }
+    },
+    "problemsWarningIcon": {
+      "foreground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      }
+    },
+    "profileBadge": {
+      "background": {
+        "color": "palette.gray.700"
+      },
+      "foreground": {
+        "color": "palette.gray.000"
+      }
+    },
+    "profiles": {
+      "sashBorder": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      }
+    },
+    "progressBar": {
+      "background": {
+        "color": "palette.green.500"
+      }
+    },
+    "quickInput": {
+      "background": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "foreground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      }
+    },
+    "quickInputList": {
+      "focusBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "focusForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "focusHighlightForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "focusIconForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      }
+    },
+    "quickInputTitle": {
+      "background": {
+        "color": "palette.gray.750"
+      }
+    },
+    "radio": {
+      "activeBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "activeBorder": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "activeForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "inactiveBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "inactiveBorder": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "inactiveForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "inactiveHoverBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      }
+    },
+    "remoteHub": {
+      "decorations": {
+        "addedForegroundColor": {
+          "color": "#0ff",
+          "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+        },
+        "conflictForegroundColor": {
+          "color": "#0ff",
+          "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+        },
+        "deletedForegroundColor": {
+          "color": "#0ff",
+          "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+        },
+        "ignoredResourceForeground": {
+          "color": "#0ff",
+          "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+        },
+        "incomingAddedForegroundColor": {
+          "color": "#0ff",
+          "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+        },
+        "incomingDeletedForegroundColor": {
+          "color": "#0ff",
+          "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+        },
+        "incomingModifiedForegroundColor": {
+          "color": "#0ff",
+          "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+        },
+        "incomingRenamedForegroundColor": {
+          "color": "#0ff",
+          "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+        },
+        "modifiedForegroundColor": {
+          "color": "#0ff",
+          "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+        },
+        "possibleConflictForegroundColor": {
+          "color": "#0ff",
+          "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+        },
+        "submoduleForegroundColor": {
+          "color": "#0ff",
+          "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+        },
+        "workspaceRepositoriesView": {
+          "hasUncommittedChangesForegroundColor": {
+            "color": "#0ff",
+            "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+          }
+        }
+      }
+    },
+    "sash": {
+      "hoverBorder": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      }
+    },
+    "scm": {
+      "historyGraph": {
+        "green": {
+          "color": "#0ff",
+          "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+        },
+        "historyItemGroupBase": {
+          "color": "#0ff",
+          "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+        },
+        "historyItemGroupHoverLabelForeground": {
+          "color": "#0ff",
+          "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+        },
+        "historyItemGroupLocal": {
+          "color": "#0ff",
+          "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+        },
+        "historyItemGroupRemote": {
+          "color": "#0ff",
+          "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+        },
+        "red": {
+          "color": "#0ff",
+          "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+        },
+        "yellow": {
+          "color": "#0ff",
+          "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+        }
+      },
+      "historyItemAdditionsForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "historyItemDeletionsForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "historyItemSelectedStatisticsBorder": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "historyItemStatisticsBorder": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      }
+    },
+    "scmGraph": {
+      "foreground1": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "foreground2": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "foreground3": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "foreground4": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "foreground5": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "historyItemBaseRefColor": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "historyItemGroupBase": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "historyItemGroupLocal": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "historyItemGroupRemote": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "historyItemHoverAdditionsForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "historyItemHoverDefaultLabelBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "historyItemHoverDefaultLabelForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "historyItemHoverDeletionsForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "historyItemHoverLabelForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "historyItemRefColor": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "historyItemRemoteRefColor": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      }
+    },
+    "scrollbar": {
+      "background": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "shadow": {
+        "color": "palette.gray.black",
+        "alpha": 0.4
+      }
+    },
+    "scrollbarSlider": {
+      "activeBackground": {
+        "color": "palette.gray.500",
+        "alpha": 0.7019607843137254
+      },
+      "background": {
+        "color": "palette.gray.500",
+        "alpha": 0.30196078431372547
+      },
+      "hoverBackground": {
+        "color": "palette.gray.500",
+        "alpha": 0.5019607843137255
+      }
+    },
+    "search": {
+      "resultsInfoForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      }
+    },
+    "searchEditor": {
+      "findMatchBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "findMatchBorder": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "textInputBorder": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      }
+    },
+    "selection": {
+      "background": {
+        "color": "palette.blue.600",
+        "alpha": 0.5019607843137255
+      }
+    },
+    "settings": {
+      "checkboxBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "checkboxBorder": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "checkboxForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "dropdownBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "dropdownBorder": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "dropdownForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "dropdownListBorder": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "focusedRowBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "focusedRowBorder": {
+        "color": "palette.gray.white",
+        "alpha": 0.2
+      },
+      "headerBorder": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "headerForeground": {
+        "color": "palette.gray.000"
+      },
+      "modifiedItemIndicator": {
+        "color": "palette.yellow.400"
+      },
+      "numberInputBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "numberInputBorder": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "numberInputForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "rowHoverBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "sashBorder": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "settingsHeaderHoverForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "textInputBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "textInputBorder": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "textInputForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      }
+    },
+    "sideBar": {
+      "background": {
+        "color": "palette.gray.875"
+      },
+      "border": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "dropBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "foreground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      }
+    },
+    "sideBarActivityBarTop": {
+      "border": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      }
+    },
+    "sideBarSectionHeader": {
+      "background": {
+        "color": "palette.gray.825"
+      },
+      "border": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "foreground": {
+        "color": "palette.gray.400"
+      }
+    },
+    "sideBarStickyScroll": {
+      "background": {
+        "color": "palette.gray.850"
+      },
+      "border": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "shadow": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      }
+    },
+    "sideBarTitle": {
+      "background": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "border": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "foreground": {
+        "color": "palette.gray.400"
+      }
+    },
+    "sideBySideEditor": {
+      "horizontalBorder": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "verticalBorder": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      }
+    },
+    "simpleFindWidget": {
+      "sashBorder": {
+        "color": "palette.gray.white",
+        "alpha": 0.050980392156862744
+      }
+    },
+    "statusBar": {
+      "background": {
+        "color": "palette.gray.800"
+      },
+      "border": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "debuggingBackground": {
+        "color": "palette.orange.600"
+      },
+      "debuggingBorder": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "debuggingForeground": {
+        "color": "palette.gray.1000"
+      },
+      "focusBorder": {
+        "color": "palette.gray.700"
+      },
+      "foreground": {
+        "color": "palette.gray.400"
+      },
+      "inactiveBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "noFolderBackground": {
+        "color": "palette.gray.925"
+      },
+      "noFolderBorder": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "noFolderForeground": {
+        "color": "palette.gray.500"
+      }
+    },
+    "statusBarItem": {
+      "activeBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "compactHoverBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "errorBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "errorForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "errorHoverBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "errorHoverForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "focusBorder": {
+        "color": "palette.yellow.400"
+      },
+      "hoverBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "hoverForeground": {
+        "color": "palette.gray.000"
+      },
+      "offlineBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "offlineForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "offlineHoverBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "offlineHoverForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "prominentBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "prominentForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "prominentHoverBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "prominentHoverForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "remoteBackground": {
+        "color": "palette.gray.white",
+        "alpha": 0.10196078431372549
+      },
+      "remoteForeground": {
+        "color": "palette.gray.000"
+      },
+      "remoteHoverBackground": {
+        "color": "palette.yellow.400"
+      },
+      "remoteHoverForeground": {
+        "color": "palette.gray.1000"
+      },
+      "warningBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "warningForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "warningHoverBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "warningHoverForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      }
+    },
+    "strongForeground": {
+      "color": "#0ff",
+      "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+    },
+    "surface": {
+      "background": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "border": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "foreground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      }
+    },
+    "symbolIcon": {
+      "arrayForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "booleanForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "classForeground": {
+        "color": "palette.orange.500"
+      },
+      "colorForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "constantForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "constructorForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "enumeratorForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "enumeratorMemberForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "eventForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "fieldForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "fileForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "folderForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "functionForeground": {
+        "color": "palette.purple.500"
+      },
+      "interfaceForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "keyForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "keywordForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "methodForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "moduleForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "namespaceForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "nullForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "numberForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "objectForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "operatorForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "packageForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "propertyForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "referenceForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "snippetForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "stringForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "structForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "textForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "typeParameterForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "unitForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "variableForeground": {
+        "color": "palette.blue.500"
+      }
+    },
+    "tab": {
+      "activeBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "activeBorder": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "activeBorderTop": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "activeForeground": {
+        "color": "palette.gray.000"
+      },
+      "activeModifiedBorder": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "border": {
+        "color": "palette.gray.black",
+        "alpha": 0.25098039215686274
+      },
+      "divider": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "dragAndDropBorder": {
+        "color": "palette.gray.white",
+        "alpha": 0.5019607843137255
+      },
+      "hoverBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "hoverBorder": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "hoverForeground": {
+        "color": "palette.gray.000"
+      },
+      "inactiveBackground": {
+        "color": "palette.gray.850"
+      },
+      "inactiveForeground": {
+        "color": "palette.gray.400"
+      },
+      "inactiveModifiedBorder": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "lastPinnedBorder": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "selectedBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "selectedBorderTop": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "selectedForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "unfocusedActiveBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "unfocusedActiveBorder": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "unfocusedActiveBorderTop": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "unfocusedActiveForeground": {
+        "color": "palette.gray.400"
+      },
+      "unfocusedActiveModifiedBorder": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "unfocusedHoverBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "unfocusedHoverBorder": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "unfocusedHoverForeground": {
+        "color": "palette.gray.400"
+      },
+      "unfocusedInactiveBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "unfocusedInactiveForeground": {
+        "color": "palette.gray.600"
+      },
+      "unfocusedInactiveModifiedBorder": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      }
+    },
+    "terminal": {
+      "ansiBlack": {
+        "color": "palette.gray.800"
+      },
+      "ansiBlue": {
+        "color": "palette.blue.400"
+      },
+      "ansiBrightBlack": {
+        "color": "palette.gray.600"
+      },
+      "ansiBrightBlue": {
+        "color": "palette.blue.500"
+      },
+      "ansiBrightCyan": {
+        "color": "palette.cyan.500"
+      },
+      "ansiBrightGreen": {
+        "color": "palette.green.500"
+      },
+      "ansiBrightMagenta": {
+        "color": "palette.purple.500"
+      },
+      "ansiBrightRed": {
+        "color": "palette.red.500"
+      },
+      "ansiBrightWhite": {
+        "color": "palette.gray.white"
+      },
+      "ansiBrightYellow": {
+        "color": "palette.yellow.500"
+      },
+      "ansiCyan": {
+        "color": "palette.cyan.400"
+      },
+      "ansiGreen": {
+        "color": "palette.green.400"
+      },
+      "ansiMagenta": {
+        "color": "palette.purple.400"
+      },
+      "ansiRed": {
+        "color": "palette.red.400"
+      },
+      "ansiWhite": {
+        "color": "palette.gray.000"
+      },
+      "ansiYellow": {
+        "color": "palette.yellow.400"
+      },
+      "background": {
+        "color": "palette.gray.900"
+      },
+      "border": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "dropBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "findMatchBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "findMatchBorder": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "findMatchHighlightBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "findMatchHighlightBorder": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "foreground": {
+        "color": "palette.gray.200"
+      },
+      "hoverHighlightBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "inactiveSelectionBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "initialHintForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "selectionBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "selectionForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "tab": {
+        "activeBorder": {
+          "color": "#0ff",
+          "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+        }
+      }
+    },
+    "terminalCommandDecoration": {
+      "defaultBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "errorBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "successBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      }
+    },
+    "terminalCommandGuide": {
+      "foreground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      }
+    },
+    "terminalCursor": {
+      "background": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "foreground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      }
+    },
+    "terminalOverviewRuler": {
+      "border": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "cursorForeground": {
+        "color": "palette.gray.400"
+      },
+      "findMatchForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      }
+    },
+    "terminalStickyScroll": {
+      "background": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "border": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      }
+    },
+    "terminalStickyScrollHover": {
+      "background": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      }
+    },
+    "terminalSymbolIcon": {
+      "aliasForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "argumentForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "branchForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "commitForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "fileForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "flagForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "folderForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "inlineSuggestionForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "methodForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "optionForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "optionValueForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "pullRequestDoneForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "pullRequestForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "remoteForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "stashForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "symbolText": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "symbolicLinkFileForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "symbolicLinkFolderForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "tagForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      }
+    },
+    "testing": {
+      "coverCountBadgeBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "coverCountBadgeForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "coveredBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "coveredBorder": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "coveredGutterBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "coveredMinimapBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "iconErrored": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color.",
+        "retired": {
+          "color": "#0ff",
+          "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+        }
+      },
+      "iconFailed": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color.",
+        "retired": {
+          "color": "#0ff",
+          "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+        }
+      },
+      "iconPassed": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color.",
+        "retired": {
+          "color": "#0ff",
+          "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+        }
+      },
+      "iconQueued": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color.",
+        "retired": {
+          "color": "#0ff",
+          "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+        }
+      },
+      "iconSkipped": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color.",
+        "retired": {
+          "color": "#0ff",
+          "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+        }
+      },
+      "iconUnset": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color.",
+        "retired": {
+          "color": "#0ff",
+          "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+        }
+      },
+      "message": {
+        "error": {
+          "badgeBackground": {
+            "color": "#0ff",
+            "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+          },
+          "badgeBorder": {
+            "color": "#0ff",
+            "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+          },
+          "badgeForeground": {
+            "color": "#0ff",
+            "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+          },
+          "decorationForeground": {
+            "color": "#0ff",
+            "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+          },
+          "lineBackground": {
+            "color": "#0ff",
+            "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+          }
+        },
+        "info": {
+          "decorationForeground": {
+            "color": "#0ff",
+            "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+          },
+          "lineBackground": {
+            "color": "#0ff",
+            "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+          }
+        }
+      },
+      "messagePeekBorder": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "messagePeekHeaderBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "peekBorder": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "peekHeaderBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "runAction": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "uncoveredBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "uncoveredBorder": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "uncoveredBranchBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "uncoveredGutterBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "uncoveredMinimapBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      }
+    },
+    "textBlockQuote": {
+      "background": {
+        "color": "palette.gray.800"
+      },
+      "border": {
+        "color": "palette.gray.600"
+      }
+    },
+    "textCodeBlock": {
+      "background": {
+        "color": "palette.gray.white",
+        "alpha": 0.14901960784313725
+      }
+    },
+    "textLink": {
+      "activeForeground": {
+        "color": "palette.yellow.400"
+      },
+      "foreground": {
+        "color": "palette.blue.400"
+      }
+    },
+    "textPreformat": {
+      "background": {
+        "color": "palette.gray.800"
+      },
+      "border": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "foreground": {
+        "color": "palette.yellow.500"
+      }
+    },
+    "textSeparator": {
+      "foreground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      }
+    },
+    "titleBar": {
+      "activeBackground": {
+        "color": "palette.gray.800"
+      },
+      "activeForeground": {
+        "color": "palette.gray.400"
+      },
+      "border": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "inactiveBackground": {
+        "color": "palette.gray.850"
+      },
+      "inactiveForeground": {
+        "color": "palette.gray.600"
+      }
+    },
+    "toolbar": {
+      "activeBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "hoverBackground": {
+        "color": "palette.gray.white",
+        "alpha": 0.10196078431372549
+      },
+      "hoverOutline": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      }
+    },
+    "tree": {
+      "inactiveIndentGuidesStroke": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "indentGuidesStroke": {
+        "color": "palette.gray.700"
+      },
+      "tableColumnsBorder": {
+        "color": "palette.gray.white",
+        "alpha": 0.10196078431372549
+      },
+      "tableOddRowsBackground": {
+        "color": "palette.gray.850"
+      }
+    },
+    "walkThrough": {
+      "embeddedEditorBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      }
+    },
+    "walkthrough": {
+      "stepTitle": {
+        "foreground": {
+          "color": "palette.gray.000"
+        }
+      }
+    },
+    "welcomePage": {
+      "background": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "progress": {
+        "background": {
+          "color": "palette.gray.825"
+        },
+        "foreground": {
+          "color": "palette.green.400"
+        }
+      },
+      "tileBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "tileBorder": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "tileHoverBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      }
+    },
+    "widget": {
+      "border": {
+        "color": "palette.gray.white",
+        "alpha": 0.050980392156862744
+      },
+      "shadow": {
+        "color": "palette.gray.black",
+        "alpha": 0.2
+      }
+    },
+    "window": {
+      "activeBorder": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "inactiveBorder": {
         "color": "#0ff",
         "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
       }
@@ -26,6 +4413,36 @@
       "deletedForeground": {
         "color": "#0ff",
         "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "modifiedForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      }
+    },
+    "agentsWindowGraphic": {
+      "orange": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      }
+    },
+    "chat": {
+      "fusionBadgeForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "fusionBadgeGradientEnd": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "fusionBadgeGradientStart": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      }
+    },
+    "editorOverviewRuler": {
+      "agentFeedbackForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
       }
     }
   },
@@ -38,6 +4455,48 @@
       "inputWorkingBorderColor3": {
         "color": "#0ff",
         "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      }
+    },
+    "editorActiveLineNumber": {
+      "foreground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      }
+    },
+    "editorIndentGuide": {
+      "activeBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "background": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      }
+    },
+    "modernActivityBar": {
+      "activeBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "activeForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "hoverBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "hoverForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      }
+    },
+    "quickInput": {
+      "list": {
+        "focusBackground": {
+          "color": "#0ff",
+          "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+        }
       }
     }
   }
