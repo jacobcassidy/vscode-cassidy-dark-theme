@@ -102,7 +102,6 @@ docs/
 
 themes/
 preview/
-  package.json
   themes/
   snapshots/
 images/
@@ -131,7 +130,7 @@ The theme families are `variables`, `ui`, `semantic`, and `syntax`; keep those f
 
 Move inputs directly to these paths. Do not implement the predecessor's intermediate `docs/lookups/tokens/`, `docs/templates/tokens/`, `*-template.jsonc`, or split `*-details.jsonc` destinations. Remove the old combined catalog, starter files, and theme-level `details/` directories only after all active consumers have migrated. Remove `docs/templates/` and `docs/lookups/` when empty.
 
-Keep `metadata.jsonc`, palette reports/notes, prod outputs under `themes/`, and images in their current locations. Every target requires an explicit `palette/config.jsonc`, retaining the current palette settings and `useDefaultPalette` behavior. Preview-generated themes live under `preview/themes/`, preserved snapshots under `preview/snapshots/`, and the generated preview manifest at `preview/package.json`. Definitions and details independently use existing whole-file prod-default fallback. Creating a family directory never materializes omitted files or changes fallback to apply to the whole family. Explicit empty inputs retain their existing suppression semantics after conversion to the applicable new schema.
+Keep `metadata.jsonc`, palette reports/notes, prod outputs under `themes/`, and images in their current locations. Every target requires an explicit `palette/config.jsonc`, retaining the current palette settings and `useDefaultPalette` behavior. Preview-generated themes live under `preview/themes/` and preserved snapshots under `preview/snapshots/`. The preview extension manifest continues to be generated directly in the installed extension directory, normally `~/.vscode/extensions/jacobcassidy.cassidy-dark-dev/package.json`, with an injectable destination for tests. Adapt the root production manifest there and link checkout assets as today; do not create a manifest in the checkout's `preview/` directory. Definitions and details independently use existing whole-file prod-default fallback. Creating a family directory never materializes omitted files or changes fallback to apply to the whole family. Explicit empty inputs retain their existing suppression semantics after conversion to the applicable new schema.
 
 Update preview output discovery, manifest contribution paths, asset links, watcher subscriptions, cleanup ownership checks, packaging/ignore rules, tests, and docs together. Preserve snapshot bytes, generated theme filenames/notices, extension identity, theme labels, and reload-detection behavior. Repair an existing installed preview link only after verifying that it points to this checkout's former directory; unrelated real paths or links remain protected. Update the palette input-path constant and every generator, fixture, palette-only command, and documentation example to use `palette/config.jsonc`.
 
@@ -466,7 +465,7 @@ Move `hex-opacity.md` directly to `docs/references/hex-opacity.md` and repair ac
 
 Audit imports, npm scripts, test discovery, CI/release workflows, generated notices, editor settings, hooks, caches, and packaging consumers. Preserve release behavior, snapshot contents, and historical plans/changelog claims while applying the explicit preview path migrations. Repair historical links if a moved active target would break them without rewriting historical behavior.
 
-Exclude `tooling/`, `samples/`, and `preview/` from the VSIX explicitly, replacing the former development-extension directory exclusion and preserving current exclusions for src/tests/docs/scripts and developer configuration. Update preview manifest ignore paths, and ignore the upstream cache. Add a meaningful package-content check that verifies required distributable assets and absence of development inputs; inspect the packaged file list in the final stage. Do not run live publication as verification.
+Exclude `tooling/`, `samples/`, and `preview/` from the VSIX explicitly, replacing the former development-extension directory exclusion and preserving current exclusions for src/tests/docs/scripts and developer configuration. Update any moved generated-asset ignore paths and ignore the upstream cache. Add a meaningful package-content check that verifies required distributable assets and absence of development inputs; inspect the packaged file list in the final stage. Do not run live publication as verification.
 
 Update `CHANGELOG.md` and active documentation when implementation is complete. This planning task itself changes no runtime code, theme sources, commands, or generated assets. Every authored JavaScript module, including scripts, fixtures, configuration, and samples, follows `AGENTS.md` documentation and spacing requirements.
 
