@@ -1,0 +1,234 @@
+{
+  "*.abstract": {
+    "color": "#0ff",
+    "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+  },
+  "*.async": {
+    "color": "#0ff",
+    "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+  },
+  "*.builtin": {
+    "color": "#0ff",
+    "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+  },
+  "*.callable": {
+    "color": "#0ff",
+    "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+  },
+  "*.classMember": {
+    "color": "#0ff",
+    "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+  },
+  "*.declaration": {
+    "color": "#0ff",
+    "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+  },
+  "*.decorator": {
+    "color": "#0ff",
+    "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+  },
+  "*.deprecated": {
+    "color": "#0ff",
+    "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+  },
+  "*.documentation": {
+    "color": "#0ff",
+    "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+  },
+  "*.escapeCharacter": {
+    "color": "#0ff",
+    "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+  },
+  "*.invalid": {
+    "color": "#0ff",
+    "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+  },
+  "*.keywordArgument": {
+    "color": "#0ff",
+    "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+  },
+  "*.library": {
+    "color": "#0ff",
+    "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+  },
+  "*.modification": {
+    "color": "#0ff",
+    "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+  },
+  "*.overridden": {
+    "color": "#0ff",
+    "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+  },
+  "*.readonly": {
+    "color": "#0ff",
+    "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+  },
+  "*.static": {
+    "color": "#0ff",
+    "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+  },
+  "*.typeHint": {
+    "color": "#0ff",
+    "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+  },
+  "*.typeHintComment": {
+    "color": "#0ff",
+    "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+  },
+  "arrow": {
+    "color": "#0ff",
+    "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+  },
+  "bracket": {
+    "color": "#0ff",
+    "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+  },
+  "builtinConstant": {
+    "color": "#0ff",
+    "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+  },
+  "class": {
+    "color": "#0ff",
+    "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+  },
+  "clsParameter": {
+    "color": "#0ff",
+    "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+  },
+  "colon": {
+    "color": "#0ff",
+    "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+  },
+  "comment": {
+    "color": "#0ff",
+    "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+  },
+  "curlybrace": {
+    "color": "#0ff",
+    "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+  },
+  "decorator": {
+    "color": "#0ff",
+    "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+  },
+  "defaultLibrary": {
+    "color": "#0ff",
+    "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+  },
+  "enum": {
+    "color": "#0ff",
+    "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+  },
+  "enumMember": {
+    "color": "#0ff",
+    "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+  },
+  "event": {
+    "color": "#0ff",
+    "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+  },
+  "function": {
+    "color": "#0ff",
+    "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+  },
+  "interface": {
+    "color": "#0ff",
+    "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+  },
+  "intrinsic": {
+    "color": "#0ff",
+    "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+  },
+  "keyword": {
+    "color": "#0ff",
+    "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+  },
+  "label": {
+    "color": "#0ff",
+    "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+  },
+  "macro": {
+    "color": "#0ff",
+    "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+  },
+  "magicFunction": {
+    "color": "#0ff",
+    "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+  },
+  "method": {
+    "color": "#0ff",
+    "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+  },
+  "module": {
+    "color": "#0ff",
+    "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+  },
+  "namespace": {
+    "color": "#0ff",
+    "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+  },
+  "number": {
+    "color": "#0ff",
+    "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+  },
+  "operator": {
+    "color": "#0ff",
+    "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+  },
+  "parameter": {
+    "color": "#0ff",
+    "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+  },
+  "parameter.readwrite": {
+    "color": "#0ff",
+    "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+  },
+  "parenthesis": {
+    "color": "#0ff",
+    "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+  },
+  "property": {
+    "color": "#0ff",
+    "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+  },
+  "regexp": {
+    "color": "#0ff",
+    "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+  },
+  "selfParameter": {
+    "color": "#0ff",
+    "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+  },
+  "semicolon": {
+    "color": "#0ff",
+    "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+  },
+  "string": {
+    "color": "#0ff",
+    "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+  },
+  "struct": {
+    "color": "#0ff",
+    "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+  },
+  "type": {
+    "color": "#0ff",
+    "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+  },
+  "typeParameter": {
+    "color": "#0ff",
+    "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+  },
+  "variable": {
+    "color": "#0ff",
+    "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+  },
+  "variable.defaultLibrary": {
+    "color": "#0ff",
+    "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+  },
+  "variable.definition": {
+    "color": "#0ff",
+    "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+  }
+}

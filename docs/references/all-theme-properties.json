@@ -991,7 +991,7 @@
     "window.activeBorder": "#f0f", // unneeded [base]
     "window.inactiveBorder": "#f0f", // unneeded [base]
 
-    // Not in scheme, but in source code according to AI:
+    //** SOURCE ** (In source, but missing from scheme, according to AI)//
     "agentsMobileDiff.addedForeground": "#00f",
     "agentsMobileDiff.deletedForeground": "#00f",
     "agentsMobileDiff.modifiedForeground": "#00f",
@@ -1000,37 +1000,6 @@
     "chat.fusionBadgeForeground": "#00f",
     "chat.fusionBadgeGradientEnd": "#00f",
     "chat.fusionBadgeGradientStart": "#00f",
-
-    //** NOT ALLOWED **//
-    "editorWatermark.foreground": "#00f", // [inherits `editor.foreground`] | example: text on empty vscode window
-    "gitblame.inlineMessage": "#00f",
-    "remoteHub.decorations.addedForegroundColor": "#00f",
-    "remoteHub.decorations.conflictForegroundColor": "#00f",
-    "remoteHub.decorations.deletedForegroundColor": "#00f",
-    "remoteHub.decorations.ignoredResourceForeground": "#00f",
-    "remoteHub.decorations.incomingAddedForegroundColor": "#00f",
-    "remoteHub.decorations.incomingDeletedForegroundColor": "#00f",
-    "remoteHub.decorations.incomingModifiedForegroundColor": "#00f",
-    "remoteHub.decorations.incomingRenamedForegroundColor": "#00f",
-    "remoteHub.decorations.modifiedForegroundColor": "#00f",
-    "remoteHub.decorations.possibleConflictForegroundColor": "#00f",
-    "remoteHub.decorations.submoduleForegroundColor": "#00f",
-    "remoteHub.decorations.workspaceRepositoriesView.hasUncommittedChangesForegroundColor": "#00f",
-    "scm.historyGraph.green": "#00f",
-    "scm.historyGraph.historyItemGroupBase": "#00f",
-    "scm.historyGraph.historyItemGroupHoverLabelForeground": "#00f",
-    "scm.historyGraph.historyItemGroupLocal": "#00f", // [inherits `charts.blue` || `editorInfo.foreground`] | example: Incoming/Outgoing first dot in source control sidebar
-    "scm.historyGraph.historyItemGroupRemote": "#00f", // [inherits `charts.purple"` || core #b180d7] | example: Incoming/Outgoing second dot in source control sidebar
-    "scm.historyGraph.red": "#00f",
-    "scm.historyGraph.yellow": "#00f",
-    "scm.historyItemAdditionsForeground": "#00f",
-    "scm.historyItemDeletionsForeground": "#00f",
-    "scm.historyItemSelectedStatisticsBorder": "#00f",
-    "scm.historyItemStatisticsBorder": "#00f", // [inherits dimmed `foreground`] | example: source control sidebar... local and remote icons
-    "scmGraph.historyItemGroupBase": "#00f", // [inherits `charts.orange`] | example: color of commits if from a different branch from the current one in the sidebar source control graph
-    "scmGraph.historyItemGroupLocal": "#00f", // [inherits `charts.blue` || `editorInfo.foreground`] | example: Incoming/Outgoing dot in source control sidebar
-    "scmGraph.historyItemGroupRemote": "#00f", // [inherits `charts.purple`] | example: Incoming/Outgoing dot in source control sidebar
-    "testing.message.error.decorationForeground": "#00f",
 
     //** DEPRECATED **//
     "chat.inputWorkingBorderColor2": "#0000ff99",
