@@ -6,6 +6,7 @@ All notable changes to this project are documented in this file.
 
 ### Changed
 
+- Changed terminal heading messages from cyan to yellow.
 - Changed filename messages from terminal yellow to terminal blue.
 - Swapped terminal colors for indented file paths and user actions: filenames now use yellow, and action messages use magenta.
 - Colored indented relative file paths magenta in theme setup, build, and watch output.
