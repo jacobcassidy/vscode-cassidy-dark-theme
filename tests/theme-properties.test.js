@@ -336,7 +336,7 @@ test("unknown targets and malformed references or later source inputs fail befor
 
       if (failure.startsWith("catalog")) {
         await writeFile(
-          join(root, "docs/references/theme-property-details.jsonc"),
+          join(root, "docs/references/token-details.jsonc"),
           failure === "catalog" ? "{" : failure === "catalog shape" ? "[]" : '{"ui":{"new.background":[]}}',
         );
       }
@@ -391,7 +391,7 @@ test("default details cover nested roles, disabled tokens, new reference keys, a
     }`,
   );
   await writeFile(
-    join(root, "docs/references/theme-property-details.jsonc"),
+    join(root, "docs/references/token-details.jsonc"),
     JSON.stringify({
       ui: {
         "editor.background": { for: "Do not overwrite the reviewed usage." },
