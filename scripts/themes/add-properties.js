@@ -308,6 +308,27 @@ async function addDefaultDetails(root, target, updates) {
 }
 
 /**
+ * Read and validate the UI and semantic reference shared by property addition and theme setup.
+ * @param root - Repository or isolated fixture root.
+ * @returns Reference object containing validated colors and semanticTokenColors sections.
+ */
+export async function readPropertyReference(root) {
+  /** Reference path shared by UI and semantic property discovery. */
+  const path = "docs/references/all-theme-properties.json";
+
+  /** Comment-bearing reference, parsed with duplicate-key validation. */
+  const reference = parseJsonc(await readFile(join(root, path), "utf8"), path).value;
+
+  object(reference, path);
+
+  for (const [section] of sections) {
+    object(reference[section], `${path}.${section}`);
+  }
+
+  return reference;
+}
+
+/**
  * Prepare every selected source update before writing any files.
  * @param [options] - Source root and explicit theme selection for this run.
  * @param [options.root] - Repository or isolated fixture root.
@@ -322,17 +343,8 @@ export async function addThemeProperties({ root = defaultRoot, themes = included
     throw new Error("Included themes must be an array of known group/name IDs such as prod/default or dev/test");
   }
 
-  /** Reference path shared by UI and semantic property discovery. */
-  const referencePath = "docs/references/all-theme-properties.json";
-
-  /** Comment-bearing reference, parsed with duplicate-key validation. */
-  const reference = parseJsonc(await readFile(join(root, referencePath), "utf8"), referencePath).value;
-
-  object(reference, referencePath);
-
-  for (const [section] of sections) {
-    object(reference[section], `${referencePath}.${section}`);
-  }
+  /** Validated reference keys used by both source sections. */
+  const reference = await readPropertyReference(root);
 
   /** Prepared updates, including summaries for sections that need no changes. */
   const updates = [];
@@ -391,7 +403,10 @@ export async function addThemeProperties({ root = defaultRoot, themes = included
 
 if (import.meta.main) {
   try {
-    for (const update of await addThemeProperties()) {
+    /** Explicit command-line targets, or the configured allowlist when no arguments are supplied. */
+    const themes = process.argv.slice(2);
+
+    for (const update of await addThemeProperties(themes.length ? { themes } : {})) {
       console.log(`${update.theme} ${update.section}: added ${update.added.length} properties (${update.path})`);
     }
   } catch (error) {

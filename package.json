@@ -64,6 +64,7 @@
   },
   "scripts": {
     "add:properties": "node scripts/themes/add-properties.js",
+    "add:theme": "node scripts/themes/add-theme.js",
     "build": "node scripts/themes/build.js --all",
     "build:dev": "node scripts/themes/build.js --dev",
     "build:palette": "node scripts/themes/build.js --palette-only",

@@ -80,6 +80,16 @@ export async function listFiles(path) {
 }
 
 /**
+ * Validate a theme directory name shared by creation and discovery.
+ * @param name - Lowercase theme name without its prod/dev group.
+ */
+export function validateThemeName(name) {
+  if (typeof name !== "string" || !/^[a-z][a-z0-9.-]*$/.test(name) || name.includes("..") || name.endsWith(".")) {
+    throw new Error(`Invalid theme name: ${name}`);
+  }
+}
+
+/**
  * Discover prod and dev targets with unique names and deterministic output locations.
  *
  * @param root - Repository or isolated project root directory.
@@ -97,9 +107,7 @@ export async function discoverTargets(root) {
     const directory = `src/themes/${group}`;
 
     for (const name of await listDirectories(join(root, directory), group === "dev")) {
-      if (!/^[a-z][a-z0-9.-]*$/.test(name) || name.includes("..") || name.endsWith(".")) {
-        throw new Error(`Invalid theme name: ${group}/${name}`);
-      }
+      validateThemeName(name);
 
       if (names.has(name)) {
         throw new Error(`Duplicate theme name ${name}: prod and dev theme names must be globally unique`);

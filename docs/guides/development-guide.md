@@ -188,6 +188,20 @@ Vue and Svelte samples require their respective VS Code language extensions for 
 
 ### Editing theme inputs
 
+Create a new source theme with `npm run add:theme -- dev/my-theme` or `npm run add:theme -- prod/my-theme`. Names follow the existing lowercase directory rules and must be unique across both groups. The command rejects existing destinations and creates exactly five authored files:
+
+| File                           | Initial contents                                                                           |
+| ------------------------------ | ------------------------------------------------------------------------------------------ |
+| `palette/palette-config.jsonc` | Only `{ "useDefaultPalette": true }`.                                                      |
+| `tokens/ui.jsonc`              | All reference workbench properties as `#0ff` placeholders with `UNREVIEWED` color reasons. |
+| `tokens/semantic.jsonc`        | All reference semantic selectors using the same placeholders.                              |
+| `details/ui.jsonc`             | `{}` to suppress default UI documentation fallback.                                        |
+| `details/semantic.jsonc`       | `{}` to suppress default semantic documentation fallback.                                  |
+
+Setup calls the existing `add:properties` implementation for only the new target. Metadata, base tokens, syntax tokens, and their corresponding details inherit the default theme. The command lists the created files and property counts, then prints the appropriate build command; it does not build, sync, or edit the property command's default allowlist. Failed setup removes only the newly created theme directory. Add a local metadata file later to customize its name or type.
+
+Run `npm run add:properties -- dev/my-theme` later to add newly referenced properties to that theme. Supply multiple `prod/name` or `dev/name` arguments to update several targets. With no arguments, the command uses its existing editable allowlist. Review the `UNREVIEWED` colors before building or syncing the theme for use.
+
 The prod default under `src/themes/prod/default/` requires ten authored files:
 
 | Relative input path                       | Purpose                                                                                                                              |
@@ -216,7 +230,7 @@ Every theme must provide its own `palette/palette-config.jsonc`; missing palette
 
 This theme resolves palette references against the default palette. Its `palette/default-palette.txt` note explains that no separate palette was generated and points to the default palette. Builds delete its entire `palette/generated/` directory when switching to this mode.
 
-To generate an independent palette, provide the full `chroma`, `families`, `neutrals`, and optional `overrides` settings, using the default config as a starting point. Omit `useDefaultPalette` or set it to `false`. The build recreates `palette/generated/`, generates the three palette reports, and removes any existing `palette/default-palette.txt` note. A `true` flag cannot be combined with generation settings or overrides. The default theme itself must always supply complete generation settings.
+To generate an independent palette, provide the full `chroma`, `families`, `neutrals`, and optional `overrides` settings, using the default config as a starting point. Omit `useDefaultPalette` or set it to `false`. The build recreates `palette/generated/`, generates the three palette reports, and removes any existing `palette/default-palette.txt` note. You can retain those recognized settings alongside `useDefaultPalette: true`; they are ignored while the default palette is selected and validated when custom generation is enabled. Unknown fields and non-boolean selection flags are rejected in either mode. The default theme itself must always supply complete generation settings.
 
 #### Palette overrides
 

@@ -6,6 +6,7 @@ All notable changes to this project are documented in this file.
 
 ### Changed
 
+- Allowed recognized palette settings alongside `useDefaultPalette: true`, retaining them for later custom generation, and added explicit theme arguments to `add:properties`.
 - Required matching purpose details for every `prod/default` token, extended `add:properties` to fill all four detail files and assign missing syntax IDs, and documented the remaining UI, semantic, and syntax entries using an offline source-reviewed catalog.
 - Made `npm run package:vsix` run the full `npm run check` before invoking the Bash packaging script.
 - Renamed `dev:sync` to `sync`; run `npm run sync` to build both theme groups and refresh the dev preview extension.
@@ -64,6 +65,7 @@ All notable changes to this project are documented in this file.
 
 ### Added
 
+- Added `npm run add:theme -- <prod/name|dev/name>` to create five minimal source files, populate all reference UI and semantic properties through `add:properties`, and inherit the remaining default inputs.
 - Added `npm run add:properties` with an editable theme allowlist, alphabetical insertion of missing UI and semantic properties, and `#0ff` placeholders marked `UNREVIEWED`.
 - Moved generated palette reports into each source theme’s `colors/generated-palette/` directory.
 - Added JSX, TSX, Bash, Zsh, SQL, C, C++, C#, Vue, and Svelte grammar samples with mixed-language syntax, shell expansions, queries, preprocessor directives, templates, attributes, and framework-specific constructs.

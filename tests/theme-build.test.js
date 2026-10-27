@@ -589,11 +589,9 @@ for (const [config, pattern] of [
   [{ useDefaultPalette: 1 }, /useDefaultPalette must be a boolean/],
   [{ useDefaultPalette: null }, /useDefaultPalette must be a boolean/],
   [{ useDefaultPalette: false }, /palette.chroma/],
-  [{ useDefaultPalette: true, overrides: {} }, /unknown field overrides/],
-  [{ useDefaultPalette: true, families: {} }, /unknown field families/],
   [{ useDefaultPalette: true, typo: true }, /unknown field typo/],
 ]) {
-  test(`palette selection rejects invalid or mixed configuration ${JSON.stringify(config)}`, async (t) => {
+  test(`palette selection rejects invalid configuration ${JSON.stringify(config)}`, async (t) => {
     /** Valid default project with a malformed target-local palette selection. */
     const root = await createBuildProject(t);
 
@@ -606,6 +604,44 @@ for (const [config, pattern] of [
     await assert.rejects(readFile(join(directory, "palette/default-palette.txt")), { code: "ENOENT" });
   });
 }
+
+test("default palette selection retains dormant settings until custom generation is enabled", async (t) => {
+  /** Valid default project with a target storing settings for a later custom palette. */
+  const root = await createBuildProject(t);
+
+  /** Target-local palette configuration that can switch between both modes. */
+  const path = join(root, "src/themes/dev/sample/palette/palette-config.jsonc");
+
+  /** Complete saved settings intentionally differ from the current default palette. */
+  const config = { useDefaultPalette: true, ...createPaletteConfig() };
+
+  config.families.yellow.hue = 95;
+  await writeDefaultPaletteConfig(join(root, "src/themes/dev/sample"));
+  await writeFile(path, JSON.stringify(config));
+
+  /** Default selection must resolve to the default palette rather than the saved settings. */
+  const selected = await buildDevThemes({ root });
+
+  assert.equal(selected[0].palette.get("palette.yellow.400").target.h, 90);
+  await assert.rejects(stat(join(root, "src/themes/dev/sample/palette/generated")), { code: "ENOENT" });
+
+  config.useDefaultPalette = false;
+  await writeFile(path, JSON.stringify(config));
+
+  /** Clearing the flag activates and validates the retained custom settings. */
+  const custom = await buildDevThemes({ root });
+
+  assert.equal(custom[0].palette.get("palette.yellow.400").target.h, 95);
+  await stat(join(root, "src/themes/dev/sample/palette/generated/palette.json"));
+
+  config.useDefaultPalette = true;
+  config.families = null;
+  await writeFile(path, JSON.stringify(config));
+  await buildDevThemes({ root });
+  config.useDefaultPalette = false;
+  await writeFile(path, JSON.stringify(config));
+  await assert.rejects(buildDevThemes({ root }), /families: expected an object/);
+});
 
 test("the default theme cannot select its own palette as a fallback", async (t) => {
   /** Existing default outputs must survive an invalid self-reference. */

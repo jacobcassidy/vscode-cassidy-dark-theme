@@ -368,7 +368,7 @@ async function prepareTarget(root, target, paletteOnly, defaultPalette) {
     }
 
     if (input.value.useDefaultPalette) {
-      fields(input.value, ["useDefaultPalette"], "palette");
+      fields(input.value, ["useDefaultPalette", "chroma", "families", "neutrals", "overrides"], "palette");
 
       if (!defaultPalette)
         throw new Error("The default theme must define its own palette; useDefaultPalette cannot reference itself");
