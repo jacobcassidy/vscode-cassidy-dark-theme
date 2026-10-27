@@ -1,0 +1,44 @@
+{
+  "scheme": {
+    "actionBar": {
+      "toggledBackground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      }
+    },
+    "actionSessionView": {
+      "background": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "foreground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      }
+    }
+  },
+  "source": {
+    "agentsMobileDiff": {
+      "addedForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "deletedForeground": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      }
+    }
+  },
+  "deprecated": {
+    "chat": {
+      "inputWorkingBorderColor2": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      },
+      "inputWorkingBorderColor3": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from all-theme-properties.json; choose an intentional color."
+      }
+    }
+  }
+}
