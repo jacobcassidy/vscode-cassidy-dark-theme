@@ -223,3 +223,31 @@ test("all checked-in authored/shared token files satisfy their associated local 
 
   assert.deepEqual(categories, ["standard", "sourceCode", "nonStandard", "deprecated"]);
 });
+
+test("classification projection ignores documentation/history/placeholders/key order and retains reference scope coverage", async (t) => {
+  /** Accepted membership is supplied independently of subsequent documentation changes. */
+  const root = await createBuildProject(t);
+
+  await writeFixture(
+    join(root, "src/token-data/ui/details.jsonc"),
+    '{"fixture.foreground":{"description":"Original."}}',
+  );
+
+  /** Original projection is compared after non-classification edits. */
+  const original = (await loadTokenData({ root })).projection;
+
+  await writeFixture(
+    join(root, "src/token-data/ui/details.jsonc"),
+    '{"fixture.foreground":{"description":"New wording.","descriptionBasedOn":"1.2.3","modified-desc":true,"use":"When the fixture is visible."}}',
+  );
+  assert.equal((await loadTokenData({ root })).projection, original);
+  await writeFixture(
+    join(root, "src/token-data/ui/details.jsonc"),
+    JSON.stringify(
+      categorized("sourceCode", {
+        fixture: { foreground: { description: "Same identity, different accepted membership." } },
+      }),
+    ),
+  );
+  assert.notEqual((await loadTokenData({ root })).projection, original);
+});

@@ -635,6 +635,8 @@ export async function prepareBuild({
   const targets = [...(await discoverTargets(root)), ...additionalTargets];
   snapshot ??= mode === "palette" ? undefined : await loadTokenData({ root, recovery: Boolean(recoveryOwner) });
 
+  if (snapshot?.expected) await assertFresh(snapshot.expected);
+
   const defaultTarget = targets.find((target) => target.directory === defaultThemeDirectory);
   const cache = new Map();
 
@@ -687,6 +689,8 @@ export async function prepareBuild({
 
   await checkOutputs(root, output, false, "npm run build");
   await assertFresh(expected);
+
+  if (snapshot?.expected) await assertFresh(snapshot.expected);
 
   if (!recoveryOwner && JSON.stringify(await requireStable(root)) !== JSON.stringify(generation))
     throw Object.assign(new Error("Stale application generation; retry the build."), { code: "STALE_INPUT" });

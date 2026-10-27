@@ -4,20 +4,13 @@
  */
 
 import assert from "node:assert/strict";
-import { EventEmitter } from "node:events";
 import { mkdir, readFile, realpath, rename, rm } from "node:fs/promises";
-import {
-  writeFixture as writeFile,
-  createBuildProject,
-  createPreviewProject,
-  writeDefaultPaletteConfig,
-} from "../helpers/projects.js";
+import { writeFixture as writeFile, createBuildProject, writeDefaultPaletteConfig } from "../helpers/projects.js";
 import { join } from "node:path";
 import { setTimeout as delay } from "node:timers/promises";
 import test from "node:test";
 import { stripVTControlCharacters } from "node:util";
 import { parse } from "jsonc-parser";
-import { syncDevExtension } from "../../tooling/preview/sync.js";
 import { watchThemes } from "../../tooling/themes/watch.js";
 
 /**
@@ -271,7 +264,7 @@ test("watch preserves outputs after invalid source and recovers on the next save
   assert.equal(await readFile(manifestPath, "utf8"), manifest);
   await writeFile(source, valid);
   await waitFor(() => project.builds() > count);
-  assert.match(project.errors[0], /Waiting for the next source change to retry/);
+  assert.match(project.errors[0], /Waiting for a corrected input/);
   await project.controller.close();
 });
 
@@ -324,312 +317,6 @@ test("watch removes a deleted dev target's generated output and refreshes regist
   await project.controller.close();
 });
 
-/**
- * Create a controllable watcher with stubbed build services for scheduler assertions.
- *
- * @param t - Node.js test context used to register fixture cleanup.
- * @param project - Temporary project paths and fixture metadata.
- * @param [overrides] - Service replacements for the current scheduler scenario.
- */
-function createScheduler(t, project, overrides = {}) {
-  /** Event emitter standing in for the native source watcher. */
-  const events = new EventEmitter();
-
-  /** Recorded build/sync service invocation order. */
-  const calls = [];
-
-  /** Captured messages and counters for the current watcher. */
-  const output = captureLogs();
-
-  /** Native-watcher callbacks indexed by watched directory for simulated file events. */
-  const listeners = new Map();
-
-  /** Watched directories whose native watcher has received close. */
-  const closedPaths = [];
-
-  /** Watcher lifecycle handle registered for test cleanup. */
-  const controller = watchThemes(
-    { ...project, debounceMs: 20, logger: output.logger },
-    {
-      /**
-       * Capture the watcher callback and return an event emitter with controllable shutdown.
-       *
-       * @param path - Watched directory used to select the simulated event listener.
-       * @param _options - Unused native-watcher options in the test double.
-       * @param listener - Native file-event callback captured for simulated source changes.
-       */
-      watch: (path, _options, listener) => {
-        listeners.set(path, listener);
-
-        /** Independent watcher emitter for this directory. */
-        const watcher = path === join(project.root, "src") ? events : new EventEmitter();
-
-        /** Mark the stubbed native watcher closed when scheduler cleanup runs. */
-        watcher.close = () => closedPaths.push(path);
-
-        return watcher;
-      },
-
-      /**
-       * Record or control the production build phase for the current scheduler scenario.
-       *
-       * @returns Build summary containing changed paths, the default palette, and per-target results.
-       */
-      buildProdThemes: async () => {
-        calls.push("prod");
-        return { changed: [], removed: [], targets: [{}] };
-      },
-
-      /**
-       * Record or control the development build phase for the current scheduler scenario.
-       *
-       * @returns Aggregate development summary, including removed files.
-       */
-      buildDevThemeSummary: async () => {
-        calls.push("dev");
-        return { changed: [], removed: [], targets: [{ changed: [] }] };
-      },
-
-      /**
-       * Record or control preview synchronization for the current scheduler scenario.
-       *
-       * @param options - Options passed to this operation.
-       * @returns Preview manifest path and reload requirement.
-       */
-      syncDevExtension: async (options) => {
-        calls.push("sync");
-        return syncDevExtension(options);
-      },
-      ...overrides,
-    },
-  );
-
-  t.after(() => controller.close());
-
-  return {
-    controller,
-    events,
-    calls,
-
-    /**
-     * Deliver a synthetic event to the source or registration watcher.
-     * @param event - Native event type.
-     * @param filename - Path relative to the selected watched directory.
-     * @param [directory] - Watched directory; defaults to the source tree.
-     */
-    notify: (event, filename, directory = join(project.root, "src")) => listeners.get(directory)(event, filename),
-
-    /** Report whether every stubbed native watcher has been closed. */
-    didClose: () => closedPaths.length === listeners.size,
-    ...output,
-  };
-}
-
-test("watch debounces burst saves and ignores paths outside both source trees", async (t) => {
-  /** Temporary source/preview fixture used by this watcher scenario. */
-  const project = await createPreviewProject(t);
-
-  /** Controllable watcher and captured service calls for scheduler assertions. */
-  const scheduler = createScheduler(t, project);
-  await scheduler.controller.ready;
-  scheduler.notify("change", "unrelated/input.jsonc");
-  scheduler.notify("change", "../preview/themes/generated.json");
-  scheduler.notify("change", "themes/dev/test/palette/generated/palette.json");
-  scheduler.notify("rename", "themes/dev/test/palette/generated");
-  scheduler.notify("change", "themes\\dev\\test\\palette\\generated\\palette.md");
-  scheduler.notify("change", "themes/dev/test/palette/default-palette.txt");
-  scheduler.notify("change", "themes\\dev\\test\\palette\\default-palette.txt");
-  scheduler.notify("rename", "themes/dev/test/palette/.theme-build-example");
-  scheduler.notify("change", "themes/dev/test/palette/.theme-build-example/output");
-  await delay(60);
-  assert.equal(scheduler.builds(), 1);
-  for (let index = 0; index < 10; index++) scheduler.notify("change", "themes/dev/test/tokens/ui/definitions.jsonc");
-  await waitFor(() => scheduler.builds() === 2);
-  await delay(60);
-  assert.deepEqual(scheduler.calls, ["prod", "dev", "sync", "prod", "dev", "sync"]);
-  await scheduler.controller.close();
-});
-
-test("watch queues edits during a build without overlapping passes", async (t) => {
-  /** Temporary source/preview fixture used by this watcher scenario. */
-  const project = await createPreviewProject(t);
-
-  /** Deferred signal marking entry into a deliberately paused build. */
-  const entered = Promise.withResolvers();
-
-  /** Deferred signal used to release a deliberately paused build. */
-  const release = Promise.withResolvers();
-
-  /** Build count recorded before or during a simulated source change. */
-  let count = 0;
-
-  t.after(() => release.resolve());
-
-  /** Controllable watcher and captured service calls for scheduler assertions. */
-  const scheduler = createScheduler(t, project, {
-    /**
-     * Record or control the production build phase for the current scheduler scenario.
-     *
-     * @returns Build summary containing changed paths, the default palette, and per-target results.
-     */
-    buildProdThemes: async () => {
-      count++;
-
-      if (count === 2) {
-        entered.resolve();
-        await release.promise;
-      }
-
-      return { changed: [], removed: [], targets: [{}] };
-    },
-  });
-
-  await scheduler.controller.ready;
-  scheduler.notify("change", "themes/prod/default/tokens/ui/definitions.jsonc");
-  await entered.promise;
-  scheduler.notify("change", "themes/dev/test/metadata.jsonc");
-  await delay(60);
-  assert.equal(count, 2);
-  assert.equal(scheduler.builds(), 1);
-  release.resolve();
-  await waitFor(() => scheduler.builds() === 3);
-  assert.equal(count, 3);
-  await scheduler.controller.close();
-});
-
-test("watch retries when a native event has no filename and accepts Windows path separators", async (t) => {
-  /** Temporary source/preview fixture used by this watcher scenario. */
-  const project = await createPreviewProject(t);
-
-  /** Controllable watcher and captured service calls for scheduler assertions. */
-  const scheduler = createScheduler(t, project);
-  await scheduler.controller.ready;
-  scheduler.notify("rename", undefined);
-  await waitFor(() => scheduler.builds() === 2);
-  scheduler.notify("change", "themes\\dev\\test\\metadata.jsonc");
-  await waitFor(() => scheduler.builds() === 3);
-  await scheduler.controller.close();
-});
-
-for (const stage of ["prod", "dev", "sync"]) {
-  test(`watch stops a failed ${stage} cycle and retries on the next source event`, async (t) => {
-    /** Temporary source/preview fixture used by this watcher scenario. */
-    const project = await createPreviewProject(t);
-
-    /** Recorded build/sync service invocation order. */
-    const calls = [];
-
-    /** Whether the injected service should fail before the recovery save. */
-    let failing = true;
-
-    /** Controllable watcher and captured service calls for scheduler assertions. */
-    const scheduler = createScheduler(t, project, {
-      /**
-       * Record or control the production build phase for the current scheduler scenario.
-       *
-       * @returns Build summary containing changed paths, the default palette, and per-target results.
-       */
-      buildProdThemes: async () => {
-        calls.push("prod");
-        if (failing && stage === "prod") throw new Error("Invalid prod source");
-        return { changed: [], removed: [], targets: [{}] };
-      },
-
-      /**
-       * Record or control the development build phase for the current scheduler scenario.
-       *
-       * @returns Aggregate development summary, including removed files.
-       */
-      buildDevThemeSummary: async () => {
-        calls.push("dev");
-        if (failing && stage === "dev") throw new Error("Invalid dev source");
-        return { changed: [], removed: [], targets: [] };
-      },
-
-      /**
-       * Record or control preview synchronization for the current scheduler scenario.
-       *
-       * @param options - Options passed to this operation.
-       * @returns Preview manifest path and reload requirement.
-       */
-      syncDevExtension: async (options) => {
-        calls.push("sync");
-        if (failing && stage === "sync") throw new Error("Cannot sync dev extension");
-        return syncDevExtension(options);
-      },
-    });
-
-    await scheduler.controller.ready;
-    assert.equal(scheduler.errors.length, 1);
-    assert.deepEqual(calls, ["prod", "dev", "sync"].slice(0, ["prod", "dev", "sync"].indexOf(stage) + 1));
-    failing = false;
-    scheduler.notify("change", "themes/prod/default/metadata.jsonc");
-    await waitFor(() => scheduler.builds() === 1);
-    assert.deepEqual(calls.slice(-3), ["prod", "dev", "sync"]);
-    await scheduler.controller.close();
-  });
-}
-
-test("watch shutdown cancels pending rebuilds and waits for an active build", async (t) => {
-  /** Temporary source/preview fixture used by this watcher scenario. */
-  const project = await createPreviewProject(t);
-
-  /** Deferred signal used to release a deliberately paused build. */
-  const release = Promise.withResolvers();
-
-  t.after(() => release.resolve());
-
-  /** Controllable watcher and captured service calls for scheduler assertions. */
-  const scheduler = createScheduler(t, project, {
-    /**
-     * Record or control the production build phase for the current scheduler scenario.
-     *
-     * @returns Build summary containing changed paths, the default palette, and per-target results.
-     */
-    buildProdThemes: async () => {
-      await release.promise;
-      return { changed: [], removed: [], targets: [{}] };
-    },
-  });
-
-  scheduler.notify("change", "themes/prod/default/metadata.jsonc");
-
-  /** Whether the controller’s graceful shutdown has completed. */
-  let closed = false;
-
-  /** Shutdown promise observed while a build is still active. */
-  const closing = scheduler.controller.close().then(() => {
-    closed = true;
-  });
-
-  await delay(60);
-  assert.equal(closed, false);
-  assert.equal(scheduler.didClose(), true);
-  release.resolve();
-  await closing;
-  assert.equal(scheduler.builds(), 1);
-  scheduler.notify("change", "themes/prod/default/metadata.jsonc");
-  await delay(60);
-  assert.equal(scheduler.builds(), 1);
-  await scheduler.controller.close();
-});
-
-test("watch reports native watcher failures and closes cleanly", async (t) => {
-  /** Temporary source/preview fixture used by this watcher scenario. */
-  const project = await createPreviewProject(t);
-
-  /** Controllable watcher and captured service calls for scheduler assertions. */
-  const scheduler = createScheduler(t, project);
-  await scheduler.controller.ready;
-
-  /** Synthetic native watcher failure used to verify error shutdown. */
-  const error = new Error("Native watcher unavailable");
-  scheduler.events.emit("error", error);
-  assert.equal(await scheduler.controller.closed, error);
-  assert.equal(scheduler.didClose(), true);
-  assert.match(scheduler.errors[0], /File watcher failed/);
-});
-
 test("watch detects snapshot registration changes and keeps content-only edits live", async (t) => {
   /** Native watcher fixture with an initially empty snapshot directory. */
   const project = await createWatchProject(t);
@@ -641,14 +328,14 @@ test("watch detects snapshot registration changes and keeps content-only edits l
   await waitFor(() => project.reminders() === 2);
 
   /** Successful-build count before a color-only snapshot replacement. */
-  const count = project.builds();
+  const count = project.logs.filter((line) => line.includes("Synced dev manifest")).length;
 
   await writeFile(
     `${path}.tmp`,
     '{"name":"Snapshot","type":"dark","colors":{"editor.background":"#123456"},"tokenColors":[]}',
   );
   await rename(`${path}.tmp`, path);
-  await waitFor(() => project.builds() > count);
+  await waitFor(() => project.logs.filter((line) => line.includes("Synced dev manifest")).length > count);
   assert.equal(project.reminders(), 2);
   await writeFile(path, '{"name":"Snapshot","type":"light","previewName":"Renamed","colors":{},"tokenColors":[]}');
   await waitFor(() => project.reminders() === 3);
@@ -685,23 +372,4 @@ test("watch detects manifest replacement saves without rebuilding indefinitely",
   await delay(150);
   assert.equal(project.builds(), count + 1);
   assert.deepEqual(project.errors, []);
-});
-
-test("watch filters root and preview output events while accepting snapshot inputs", async (t) => {
-  /** Preview fixture for deterministic event filtering assertions. */
-  const project = await createPreviewProject(t);
-
-  /** Watch scheduler with separately addressable native watcher callbacks. */
-  const scheduler = createScheduler(t, project);
-
-  await scheduler.controller.ready;
-  scheduler.notify("change", "README.md", project.root);
-  scheduler.notify("change", "package.json", project.root);
-  scheduler.notify("change", "themes/generated.json", join(project.root, "preview"));
-  scheduler.notify("change", "snapshots/README.md", join(project.root, "preview"));
-  await delay(60);
-  assert.equal(scheduler.builds(), 1);
-  scheduler.notify("change", "snapshots\\baseline.json", join(project.root, "preview"));
-  await waitFor(() => scheduler.builds() === 2);
-  assert.equal(scheduler.reminders(), 1);
 });

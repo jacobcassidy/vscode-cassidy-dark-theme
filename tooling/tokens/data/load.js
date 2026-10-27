@@ -134,7 +134,14 @@ export async function loadTokenData({ root = repositoryRoot, recovery = false } 
         [...data.records].map(([id, record]) => [id, record.category]).sort(),
       ]),
     ),
-    scopes: [...scopes].map(([selector, record]) => [selector, record.provenance]).sort(),
+    scopes: [...scopes]
+      .map(([selector, record]) => [
+        selector,
+        [...new Map(record.provenance.map((item) => [canonicalJson(item), item])).values()].sort((left, right) =>
+          canonicalJson(left).localeCompare(canonicalJson(right)),
+        ),
+      ])
+      .sort(),
     referenceEvidence: [...details.syntax.records]
       .filter(([, record]) => record.value.scopeEvidence)
       .map(([id, record]) => [id, record.value.scopeEvidence])

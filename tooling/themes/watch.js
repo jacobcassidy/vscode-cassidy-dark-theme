@@ -1,193 +1,300 @@
 /**
- * Theme source watcher.
- * @file Watch source changes and serialize debounced theme builds and development extension synchronization.
+ * Serialized theme watching.
+ * @file Validate stable shared snapshots, coalesce source work, retry preview-only failures, and resume after external recovery without source events.
  */
 
 import { mkdirSync, watch as watchDirectory } from "node:fs";
 import { homedir } from "node:os";
 import { join } from "node:path";
-import { fileURLToPath } from "node:url";
-import { buildDevThemeSummary, buildProdThemes } from "./build.js";
-import { logReloadReminder, syncDevExtension } from "../preview/sync.js";
+import { repositoryRoot, tokenDataPaths } from "../shared/paths.js";
 import { formatMessage } from "../shared/terminal-output.js";
-import { readOptional } from "./inputs.js";
+import { observeWriter, requireStable } from "../shared/transactions.js";
+import { readOptional, inputProjection } from "./inputs.js";
+import { prepareBuild, applyBuild } from "./build.js";
+import { loadTokenData } from "../tokens/data/load.js";
+import { logReloadReminder, syncDevExtension } from "../preview/sync.js";
 
 /**
- * Accept events in prod/dev source trees, including unknown filenames that require a rebuild.
- *
- * @param filename - Source path reported by the native watcher, when available.
+ * Classify source events while excluding generated artifacts and extraction-only configuration.
+ * @param filename - Native source-root event path.
  */
-function isThemeSource(filename) {
-  if (!filename) return true;
+function sourceEvent(filename) {
+  if (!filename) return "source";
 
-  /** Watcher event path normalized to forward slashes. */
+  /** Native event separators normalized independently from the host platform. */
   const path = filename.toString().replaceAll("\\", "/");
 
-  if (/\/palette\/(?:generated(?:\/|$)|default-palette\.txt$)/.test(path)) return false;
+  if (/\/(?:\.theme-build-[^/]+|palette\/(?:generated(?:\/|$)|default-palette\.txt$))/.test(path)) return undefined;
+  if (
+    tokenDataPaths.some((file) => {
+      /** Source-relative shared file, including ancestor directory events. */ const relative = file.slice(4);
+      return path === relative || relative.startsWith(`${path}/`);
+    })
+  )
+    return "shared";
 
-  if (/\/\.theme-build-[^/]+(?:\/|$)/.test(path)) return false;
-
-  return ["prod", "dev"].some((group) => {
-    /** Theme-source directory inside the current prod or dev group. */
-    const directory = `themes/${group}`;
-    return path === "themes" || path === directory || path.startsWith(`${directory}/`);
-  });
+  return ["themes", "themes/prod", "themes/dev"].some(
+    (directory) => path === directory || (directory !== "themes" && path.startsWith(`${directory}/`)),
+  )
+    ? "source"
+    : undefined;
 }
 
 /**
- * Watch theme sources and serialize builds; operations can be replaced in isolated scheduler tests.
- *
- * @param [options] - Options passed to this operation.
- * @param [options.root] - Repository or fixture root; defaults to this checkout.
- * @param [options.extensionDirectory] - Separate preview extension directory; defaults to the local VS Code extension path.
- * @param [options.debounceMs] - Delay used to coalesce source-save bursts before rebuilding.
- * @param [options.logger] - Logger receiving build progress, errors, and reload reminders.
- * @param [operations] - Optional watcher/build/sync replacements used by scheduler tests.
- * @returns Startup and shutdown promises plus a graceful close function.
+ * Watch source/registration inputs through one debounced scheduler with read-only recovery observation.
+ * @param [options] - Watcher configuration.
+ * @param [options.root] - Checkout or isolated project root.
+ * @param [options.extensionDirectory] - Isolated or installed preview destination.
+ * @param [options.debounceMs] - Save-burst coalescing delay.
+ * @param [options.recoveryMs] - Bounded external-state/preview retry observation interval.
+ * @param [options.logger] - Progress/error logger.
+ * @param [operations] - Narrow scheduler/workflow replacements for deterministic tests.
  */
 export function watchThemes(
   {
-    root = fileURLToPath(new URL("../../", import.meta.url)),
+    root = repositoryRoot,
     extensionDirectory = join(homedir(), ".vscode/extensions/jacobcassidy.cassidy-dark-dev"),
     debounceMs = 150,
+    recoveryMs = 1000,
     logger = console,
   } = {},
   operations = {},
 ) {
-  /** Native watcher and build/sync operations, including test replacements. */
-  const services = { watch: watchDirectory, buildProdThemes, buildDevThemeSummary, syncDevExtension, ...operations };
+  /** Workflow and timer operations are replaceable without mocking private call sequences. */
+  const services = {
+    watch: watchDirectory,
+    prepareBuild,
+    applyBuild,
+    loadTokenData,
+    syncDevExtension,
+    observeWriter,
+    requireStable,
+    inputProjection,
+    setTimeout,
+    clearTimeout,
+    ...operations,
+  };
 
-  /** Whether a source event has requested another build pass. */
-  let pending = true;
+  /** Pending work survives contention, malformed inputs, preview failure, and explicit recovery. */
+  let sourceDirty = true,
+    sharedDirty = false,
+    manifestDirty = false,
+    pendingPreview = false,
+    failed = false;
 
-  /** Whether a root manifest event needs comparison before rebuilding. */
-  let manifestPending = false;
+  /** Successful local snapshots and own-manifest event comparison. */
+  let snapshot, lastManifest, lastDiagnostic, lastSourceProjection, pendingSummary;
 
-  /** Source manifest already incorporated by the latest successful production build. */
-  let lastManifest;
+  /** Serialized build lifecycle, debounce timer, and bounded recovery observer. */
+  let running,
+    timer,
+    observer,
+    blocked = false,
+    stopping = false,
+    failure,
+    resolveClosed;
 
-  /** Pending debounce timeout, cleared when a save burst settles. */
-  let timer;
-
-  /** Promise for the currently active serialized build pass. */
-  let running;
-
-  /** Whether graceful shutdown has begun. */
-  let stopping = false;
-
-  /** Native watcher error returned when shutdown completes. */
-  let failure;
-
-  /** Resolver used to complete the shutdown promise. */
-  let resolveClosed;
-
-  /** Promise settled after watcher closure and any active build. */
+  /** Shutdown resolves only after all native watchers and in-flight work finish. */
   const closed = new Promise((resolve) => {
     resolveClosed = resolve;
   });
 
-  /** Run one prod/dev build and preview sync, reporting failures without stopping future retries. */
-  async function build() {
-    /** Whether this pass only needs to inspect a manifest event. */
-    const manifestOnly = !pending && manifestPending;
+  /** Cancel bounded observation when normal work resumes or shutdown begins. */
+  function stopObserving() {
+    services.clearTimeout(observer);
+    observer = undefined;
+  }
 
-    pending = false;
-    manifestPending = false;
+  /** Observe existing coordination metadata without loading or compiling a known incomplete generation. */
+  function observeRecovery() {
+    if (stopping || observer) return;
+
+    observer = services.setTimeout(async () => {
+      observer = undefined;
+
+      try {
+        /** Both checkout and installed destination can be held by another checkout's writer. */
+        const states = await Promise.all([services.observeWriter(root), services.observeWriter(extensionDirectory)]);
+
+        if (stopping) return;
+        if (states.some((state) => state.busy || state.marker)) {
+          blocked = true;
+          observeRecovery();
+
+          return;
+        }
+
+        blocked = false;
+
+        if (failed) sourceDirty = true;
+
+        startBuild();
+      } catch (error) {
+        report(error);
+        observeRecovery();
+      }
+    }, recoveryMs);
+  }
+
+  /**
+   * Report a persistent condition once while retaining visible failures and actionable retry guidance.
+   * @param error - Workflow or observation failure.
+   */
+  function report(error) {
+    if (lastDiagnostic === error.message) return;
+
+    lastDiagnostic = error.message;
+    logger.error(
+      `${formatMessage(`[watch] ${error.message}`, "error")}\n${formatMessage("[watch] Waiting for a corrected input, preview retry, or explicit recovery.", "info")}`,
+    );
+  }
+
+  /** Prepare/apply once, or refresh only shared documentation, or retry only preview synchronization. */
+  async function build() {
+    /** Consume current work while later events remain queued independently. */
+    const source = sourceDirty,
+      shared = sharedDirty,
+      manifest = manifestDirty;
+
+    sourceDirty = false;
+    sharedDirty = false;
+    manifestDirty = false;
 
     try {
-      if (manifestOnly && (await readOptional(join(root, "package.json"))) === lastManifest) return;
+      await services.requireStable(root);
 
-      logger.log(formatMessage("[watch] Building prod and dev themes...", "heading"));
+      /** A stable shared snapshot is loaded once per pass requiring a reload. */
+      const current = !snapshot || shared ? await services.loadTokenData({ root }) : snapshot;
+      const classificationChanged = !snapshot || current.projection !== snapshot.projection;
+      const manifestChanged = manifest && (await readOptional(join(root, "package.json"))) !== lastManifest;
 
-      /** Production build summary for this watcher cycle. */
-      const prod = await services.buildProdThemes({ root });
+      /** Native generated-directory events do not invalidate unchanged authored inputs. */
+      const sourceProjection = source ? await services.inputProjection(root) : lastSourceProjection;
 
-      /** Manifest generated by this production pass, used to ignore its own file events. */
-      const currentManifest = await readOptional(join(root, "package.json"));
+      if ((source && sourceProjection !== lastSourceProjection) || failed || classificationChanged || manifestChanged) {
+        logger.log(formatMessage("[watch] Building prod and dev themes...", "heading"));
 
-      /** Aggregate development results, including removed targets' generated files. */
-      const dev = await services.buildDevThemeSummary({ root });
+        /** Complete combined preparation precedes every output write. */
+        const prepared = await services.prepareBuild({ root, snapshot: current });
+        const result = await services.applyBuild(prepared);
 
-      /** Applied preview changes and their reload requirement. */
-      const preview = await services.syncDevExtension({ root, extensionDirectory });
+        snapshot = current;
+        lastManifest = await readOptional(join(root, "package.json"));
+        failed = false;
+        pendingPreview = true;
+        pendingSummary = result;
+        lastSourceProjection = sourceProjection;
+      } else snapshot = current;
 
-      lastManifest = currentManifest;
+      if (pendingPreview) {
+        try {
+          /** Preview-only retries use already successful generated artifacts and no compiler/palette work. */
+          const preview = await services.syncDevExtension({ root, extensionDirectory });
 
-      /** Total generated files changed across both build groups. */
-      const changed = prod.changed.length + dev.changed.length;
+          pendingPreview = false;
+          logger.log(formatMessage(`[watch] Synced dev manifest: ${preview.manifestPath}`, "success"));
 
-      /** Removed artifacts distinguished from newly generated or rewritten files. */
-      const removed = new Set([...prod.removed, ...dev.removed]);
+          if (preview.reloadRequired) logReloadReminder(logger);
+        } catch (error) {
+          report(
+            new Error(
+              `Build completed; preview synchronization failed: ${error.message}. Retry npm run sync:preview.`,
+              { cause: error },
+            ),
+          );
+          observeRecovery();
 
-      /** Changed generated paths already expressed relative to the repository root. */
-      const changedFiles = [...prod.changed, ...dev.changed];
+          return;
+        }
+      }
 
-      logger.log(
-        formatMessage(
-          `[watch] Built ${prod.targets.length} prod and ${dev.targets.length} dev themes; ${changed - removed.size} generated files updated${removed.size ? `; ${removed.size} generated output${removed.size === 1 ? "" : "s"} removed` : ""}.`,
-          "success",
-        ),
-      );
+      if (pendingSummary) {
+        reportSummary(pendingSummary);
+        pendingSummary = undefined;
+      }
 
-      for (const path of changedFiles)
-        logger.log(formatMessage(`  ${path}${removed.has(path) ? " (removed)" : ""}`, "file"));
-
-      logger.log();
-
-      if (preview.reloadRequired) logReloadReminder(logger);
+      lastDiagnostic = undefined;
+      blocked = false;
+      stopObserving();
     } catch (error) {
+      // Retain failed source work so unchanged classification cannot suppress a corrected retry.
+      failed = true;
+
       if (error.code === "STALE_INPUT") {
-        schedule();
+        sharedDirty = true;
+        schedule("source");
 
         return;
       }
 
-      /** Failed build message retained for diagnostic styling. */
-      const message = `[watch] ${error.message}`;
+      if (["WRITER_BUSY", "INCOMPLETE_GENERATION"].includes(error.code)) {
+        blocked = true;
+        observeRecovery();
+      }
 
-      logger.error(
-        `${formatMessage(message, "error")}\n${formatMessage("[watch] Waiting for the next source change to retry.", "info")}`,
-      );
+      report(error);
     }
   }
 
-  /** Start pending work only when no build is running and shutdown has not begun. */
+  /**
+   * Report a completed source generation after preview synchronization succeeds.
+   * @param result - Applied target/artifact summary.
+   */
+  function reportSummary(result) {
+    /** Counts and path reporting do not trigger an extra compilation or freshness pass. */
+    const prod = result.targets.filter((target) => target.group === "prod").length,
+      dev = result.targets.length - prod;
+
+    logger.log(
+      formatMessage(
+        `[watch] Built ${prod} prod and ${dev} dev themes; ${result.changed.length - result.removed.length} generated files updated${result.removed.length ? `; ${result.removed.length} generated output${result.removed.length === 1 ? "" : "s"} removed` : ""}.`,
+        "success",
+      ),
+    );
+
+    for (const path of result.changed)
+      logger.log(formatMessage(`  ${path}${result.removed.includes(path) ? " (removed)" : ""}`, "file"));
+  }
+
+  /** Start one coalesced pass only when no other pass or blocking writer is active. */
   function startBuild() {
-    if (stopping || running || (!pending && !manifestPending)) return;
+    if (stopping || blocked || running || (!sourceDirty && !sharedDirty && !manifestDirty && !pendingPreview)) return;
 
     running = build().finally(() => {
       running = undefined;
-      if ((pending || manifestPending) && !timer && !stopping) startBuild();
+
+      if (!stopping && !blocked && !timer && (sourceDirty || sharedDirty || manifestDirty)) startBuild();
     });
   }
 
   /**
-   * Coalesce an accepted input event without overlapping build cycles.
-   * @param [manifestOnly] - Whether only the root manifest needs checking for a real change.
+   * Coalesce an accepted event through the serialized scheduler.
+   * @param kind - source, shared, manifest, or preview work.
    */
-  function schedule(manifestOnly = false) {
+  function schedule(kind) {
     if (stopping) return;
+    if (kind === "source") sourceDirty = true;
+    if (kind === "shared") sharedDirty = true;
+    if (kind === "manifest") manifestDirty = true;
+    if (kind === "preview") pendingPreview = true;
 
-    if (manifestOnly) manifestPending = true;
-    else pending = true;
-
-    clearTimeout(timer);
-    timer = setTimeout(() => {
+    services.clearTimeout(timer);
+    timer = services.setTimeout(() => {
       timer = undefined;
       startBuild();
     }, debounceMs);
   }
 
-  /** Native watchers covering source trees and registration inputs without traversing dependencies. */
+  /** Native watcher handles are all closed, including partial startup failures. */
   const watchers = [];
 
-  /** Stop watching, cancel pending work, and resolve shutdown after any active build completes. */
+  /** Gracefully close watchers/timers and wait for the active pass without queuing more work. */
   function close() {
     if (!stopping) {
       stopping = true;
-      pending = false;
-      manifestPending = false;
-      clearTimeout(timer);
+      sourceDirty = sharedDirty = manifestDirty = pendingPreview = false;
+      services.clearTimeout(timer);
+      stopObserving();
 
       for (const watcher of watchers) watcher.close();
 
@@ -198,14 +305,14 @@ export function watchThemes(
   }
 
   /**
-   * Attach a watcher and register failure handling immediately.
-   * @param directory - Directory to watch.
-   * @param recursive - Whether to include nested files.
-   * @param listener - Callback filtering and scheduling native events.
+   * Attach one native subscription and register its error handler immediately.
+   * @param path - Subscription directory.
+   * @param recursive - Whether nested source events are required.
+   * @param listener - Event filter/scheduler.
    */
-  function addWatcher(directory, recursive, listener) {
-    /** Native watcher retained for complete shutdown. */
-    const watcher = services.watch(directory, { recursive }, listener);
+  function addWatcher(path, recursive, listener) {
+    /** Retained watcher participates in complete shutdown. */
+    const watcher = services.watch(path, { recursive }, listener);
 
     watchers.push(watcher);
     watcher.on("error", (error) => {
@@ -216,19 +323,22 @@ export function watchThemes(
   }
 
   try {
-    // Keep the optional preview tree available for snapshot watching on first use.
     mkdirSync(join(root, "preview"), { recursive: true });
     addWatcher(join(root, "src"), true, (_event, filename) => {
-      if (isThemeSource(filename)) schedule();
+      /** Source filter returns only relevant theme or exact shared-data dependencies. */
+      const kind = sourceEvent(filename);
+
+      if (kind) schedule(kind);
     });
     addWatcher(root, false, (_event, filename) => {
-      if (!filename || filename.toString() === "package.json") schedule(true);
+      if (!filename || filename.toString() === "package.json") schedule("manifest");
     });
     addWatcher(join(root, "preview"), true, (_event, filename) => {
-      /** Preview-tree event normalized independently of the platform. */
+      /** Generated preview themes are deliberately excluded from recursive input events. */
       const path = filename?.toString().replaceAll("\\", "/");
 
-      if (!path || path === "snapshots" || (path.startsWith("snapshots/") && path.endsWith(".json"))) schedule();
+      if (!path || path === "snapshots" || (path.startsWith("snapshots/") && path.endsWith(".json")))
+        schedule("preview");
     });
   } catch (error) {
     for (const watcher of watchers) watcher.close();
@@ -237,9 +347,14 @@ export function watchThemes(
   }
 
   logger.log(
-    `${formatMessage("[watch] Watching theme sources, package.json, and static snapshots.", "info")} ${formatMessage("Press Ctrl+C to stop.", "action")}`,
+    `${formatMessage("[watch] Watching theme sources, shared token data, package.json, and snapshots.", "info")} ${formatMessage("Press Ctrl+C to stop.", "action")}`,
   );
   startBuild();
 
-  return { ready: running, close, closed };
+  /** Wait for serialized work already started, including passes queued during that work. */
+  async function whenIdle() {
+    while (running) await running;
+  }
+
+  return { ready: running, close, closed, whenIdle };
 }

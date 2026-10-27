@@ -4,6 +4,8 @@
  */
 
 import { defaultThemeDirectory, paletteInputPath } from "../shared/paths.js";
+import { canonicalJson } from "../shared/serialization.js";
+import { fingerprint } from "../shared/transactions.js";
 import { readFile, readdir } from "node:fs/promises";
 import { join } from "node:path";
 import { parseJsonc } from "../shared/jsonc.js";
@@ -198,4 +200,35 @@ export function prodThemeContribution(target, metadata) {
   const label = target.name === "default" ? metadata.name : `${metadata.name} (${name})`;
 
   return { label, uiTheme: themeUiType(metadata, target.directory), path: `./${target.output}` };
+}
+
+/**
+ * Project authored theme bytes and directory membership while ignoring generated palette artifacts.
+ * @param root - Checkout or isolated root.
+ */
+export async function inputProjection(root) {
+  /** Fresh fingerprint tree is filtered in memory; observing never writes coordination state. */
+  const tree = await fingerprint(join(root, "src/themes"));
+
+  /**
+   * Exclude only owned generated artifacts and staging from watcher source dependencies.
+   * @param node - Entry fingerprint.
+   * @param path - Relative source directory.
+   */
+  function filter(node, path) {
+    if (node.type !== "directory") return;
+
+    for (const [name, child] of Object.entries(node.children)) {
+      if (
+        name.startsWith(".theme-build-") ||
+        (path.endsWith("/palette") && ["generated", "default-palette.txt"].includes(name))
+      )
+        delete node.children[name];
+      else filter(child, `${path}/${name}`);
+    }
+  }
+
+  filter(tree, "");
+
+  return canonicalJson(tree);
 }
