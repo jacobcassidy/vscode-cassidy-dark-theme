@@ -1,7 +1,7 @@
 {
   "$schema": "vscode://schemas/color-theme",
   "name": "Semantic Tokens",
-  "for": "Scripts generating src/themes/*/tokens/semantic.jsonc files",
+  "description": "For scripts generating src/themes/*/tokens/semantic.jsonc files",
   "semanticTokenColors": {
     // -- STANDARD --
     "*.abstract": "#000",

@@ -1,7 +1,7 @@
 {
   "$schema": "vscode://schemas/color-theme",
   "name": "UI Color Tokens",
-  "for": "Scripts generating src/themes/*/tokens/ui.jsonc files",
+  "description": "For scripts generating src/themes/*/tokens/ui.jsonc files",
   "colors": {
     // -- STANDARD --
     "actionBar.toggledBackground": "#000",
