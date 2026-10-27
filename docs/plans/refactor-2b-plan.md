@@ -1,10 +1,10 @@
 # Consolidate theme authoring, shared token data, and tooling
 
-Status: planned. This is the consolidated implementation specification for [refactor-2-plan.md](refactor-2-plan.md) and [token-catalog-and-nested-sources-plan.md](token-catalog-and-nested-sources-plan.md). Differences are resolved in favor of `refactor-2-plan.md`. Both predecessor files remain historical inputs; implement the destinations and contracts in this document directly.
+Status: planned. This is the consolidated implementation specification for [refactor-2-plan.md](archive/refactor-2-plan.md) and [token-catalog-and-nested-sources-plan.md](archive/token-catalog-and-nested-sources-plan.md). Original differences are resolved in favor of `refactor-2-plan.md`; subsequent naming revisions recorded here supersede both predecessors. Both predecessor files are archived historical inputs; implement the destinations and contracts in this document directly.
 
 ## Scope and retained behavior
 
-Keep the current prod/dev target directories, theme styling, generated-output locations, JavaScript ES modules, command names, and release behavior. Group each theme's definitions and details by token family; move shared authoring/validation data into `src/token-data/`; separate command wrappers from reusable tooling; adopt categorized nested tokens; and add pinned description extraction and category validation.
+Keep the current prod/dev target directories, theme styling, JavaScript ES modules, command names, and release behavior. Group each theme's definitions and details by token family; move shared authoring/validation data into `src/token-data/`; move preview assets to `preview/`; rename palette configuration to `palette/config.jsonc`; separate command wrappers from reusable tooling; adopt categorized nested tokens; and add pinned description extraction and category validation.
 
 Theme definitions and their effective palette supply styling. Shared definitions provide token inventory, category membership, and generator placeholders; shared details provide reusable documentation. Generators optionally copy those inputs into authored files. Builds consult shared classification data without copying shared styling or descriptions into themes.
 
@@ -32,6 +32,7 @@ src/
     dev/<name>/
       metadata.jsonc
       palette/
+        config.jsonc
       tokens/
         variables/
           definitions.jsonc
@@ -100,7 +101,10 @@ docs/
   plans/
 
 themes/
-dev-extension/
+preview/
+  package.json
+  themes/
+  snapshots/
 images/
 ```
 
@@ -118,12 +122,18 @@ images/
 | `docs/grammar-samples/`                                       | `samples/grammar/`                                    |
 | Reusable implementation in command scripts and `scripts/lib/` | The corresponding `tooling/` modules                  |
 | Shared test project helpers                                   | `tests/helpers/`                                      |
+| Each theme's `palette/palette-config.jsonc`                   | `palette/config.jsonc` in the same theme              |
+| `dev-extension/`                                              | `preview/`                                            |
+| `dev-extension/themes/`                                       | `preview/themes/`                                     |
+| `dev-extension/static-snapshots/`                             | `preview/snapshots/`                                  |
 
 The theme families are `variables`, `ui`, `semantic`, and `syntax`; keep those family directories as the final directory level. Internal variables remain theme-owned and expose `variables.*` aliases. Shared syntax data remains details-only: add neither shared syntax definitions nor a shared variables family.
 
 Move inputs directly to these paths. Do not implement the predecessor's intermediate `docs/lookups/tokens/`, `docs/templates/tokens/`, `*-template.jsonc`, or split `*-details.jsonc` destinations. Remove the old combined catalog, starter files, and theme-level `details/` directories only after all active consumers have migrated. Remove `docs/templates/` and `docs/lookups/` when empty.
 
-Keep `metadata.jsonc`, explicit per-target `palette/palette-config.jsonc`, palette reports/notes, prod outputs, preview outputs, static snapshots, and images in their current locations. Definitions and details independently use existing whole-file prod-default fallback. Creating a family directory never materializes omitted files or changes fallback to apply to the whole family. Explicit empty inputs retain their existing suppression semantics after conversion to the applicable new schema.
+Keep `metadata.jsonc`, palette reports/notes, prod outputs under `themes/`, and images in their current locations. Every target requires an explicit `palette/config.jsonc`, retaining the current palette settings and `useDefaultPalette` behavior. Preview-generated themes live under `preview/themes/`, preserved snapshots under `preview/snapshots/`, and the generated preview manifest at `preview/package.json`. Definitions and details independently use existing whole-file prod-default fallback. Creating a family directory never materializes omitted files or changes fallback to apply to the whole family. Explicit empty inputs retain their existing suppression semantics after conversion to the applicable new schema.
+
+Update preview output discovery, manifest contribution paths, asset links, watcher subscriptions, cleanup ownership checks, packaging/ignore rules, tests, and docs together. Preserve snapshot bytes, generated theme filenames/notices, extension identity, theme labels, and reload-detection behavior. Repair an existing installed preview link only after verifying that it points to this checkout's former directory; unrelated real paths or links remain protected. Update the palette input-path constant and every generator, fixture, palette-only command, and documentation example to use `palette/config.jsonc`.
 
 ## Tooling boundaries and dependency direction
 
@@ -153,14 +163,16 @@ Remove the VS Code color-theme schema/metadata wrappers from shared definitions.
 
 Shared definitions and shared details intentionally have different inventories. Definition files control supported inventory and generator placeholders. Detail refreshes do not expand definitions, prune entries, or overwrite theme-specific documentation implicitly.
 
-UI, semantic, and syntax definitions/details use root categories in this order: `standard`, `source`, `non-standard`, `deprecated`. Keep empty category objects, except syntax definition categories, which each contain a `rules` array. Variables retain their existing nested role definitions and corresponding canonical-path detail map without these category wrappers.
+UI, semantic, and syntax definitions/details use root categories in this order: `standard`, `sourceCode`, `nonStandard`, `deprecated`. Keep empty category objects, except syntax definition categories, which each contain a `rules` array. Variables retain their existing nested role definitions and corresponding canonical-path detail map without these category wrappers.
 
-| Category       | UI and semantic meaning                                                                                          |
-| -------------- | ---------------------------------------------------------------------------------------------------------------- |
-| `standard`     | Properties/selectors supported by the pinned published schema or standard type/modifier definitions.             |
-| `source`       | Verified pinned core registrations absent from the corresponding published schema or standard definition set.    |
-| `non-standard` | Extension-owned, provider-defined, or custom entries; unverified entries remain explicitly marked for review.    |
-| `deprecated`   | Explicitly retired, removed, or deprecated entries with evidence. Absence from a snapshot alone is insufficient. |
+Rename the legacy JSONC token-category keys `source` to `sourceCode` and `non-standard` to `nonStandard` in shared data, authored definitions/details, examples, schemas, and fixtures. Perform this at the category-root paths using the syntax tree; do not globally replace token ID segments, scope strings, descriptions, `sources.jsonc`, or extraction source options. Retain `modified-desc` exactly as named. Reject old/new category collisions with their paths during migration, and accept only the new category spellings after the source/reader cutover.
+
+| Category      | UI and semantic meaning                                                                                          |
+| ------------- | ---------------------------------------------------------------------------------------------------------------- |
+| `standard`    | Properties/selectors supported by the pinned published schema or standard type/modifier definitions.             |
+| `sourceCode`  | Verified pinned core registrations absent from the corresponding published schema or standard definition set.    |
+| `nonStandard` | Extension-owned, provider-defined, or custom entries; unverified entries remain explicitly marked for review.    |
+| `deprecated`  | Explicitly retired, removed, or deprecated entries with evidence. Absence from a snapshot alone is insufficient. |
 
 Use existing sections/examples as the classification seed, then reconcile them with pinned evidence and record corrections. Category membership belongs to the canonical token ID independently of its style or enabled state. Reject duplicate canonical IDs across categories. Syntax uses its family-specific category rules below.
 
@@ -182,8 +194,8 @@ A theme definition excerpt is:
       },
     },
   },
-  "source": {},
-  "non-standard": {},
+  "sourceCode": {},
+  "nonStandard": {},
   "deprecated": {},
 }
 ```
@@ -207,8 +219,8 @@ Shared and theme semantic files use category, token type, and suffix objects, fo
       "default": { "color": "syntax.parameter" },
     },
   },
-  "source": {},
-  "non-standard": {
+  "sourceCode": {},
+  "nonStandard": {
     "parameter": {
       "readwrite": {
         "color": "#0ff",
@@ -252,16 +264,16 @@ Source syntax definitions use the four category objects, each with a `rules` arr
       },
     ],
   },
-  "source": { "rules": [] },
-  "non-standard": { "rules": [] },
+  "sourceCode": { "rules": [] },
+  "nonStandard": { "rules": [] },
   "deprecated": { "rules": [] },
 }
 ```
 
-- Default existing and new rules to `standard`, including conventional TextMate scopes and ordinary grammar scopes. A repository-defined ID or a common scope also emitted by a third-party grammar does not itself make a rule non-standard.
-- Use `non-standard` for verified extension-specific scopes added or used by a particular extension. Seed the existing 46 IDs as standard, then move only verified extension-specific rules and record the evidence.
-- Reserve `source` for explicitly evidenced source-only core grammar scopes. Use `deprecated` for documented retired rules/scopes; disabled styling alone is insufficient.
-- A mixed rule with ordinary and extension-specific scopes remains one rule with the same ID, style, and scopes, classified as non-standard. Its `use` text identifies which scopes need the extension. Do not split or duplicate it merely to classify scopes.
+- Default existing and new rules to `standard`, including conventional TextMate scopes and ordinary grammar scopes. A repository-defined ID or a common scope also emitted by a third-party grammar does not itself make a rule nonStandard.
+- Use `nonStandard` for verified extension-specific scopes added or used by a particular extension. Seed the existing 46 IDs as standard, then move only verified extension-specific rules and record the evidence.
+- Reserve `sourceCode` for explicitly evidenced source-only core grammar scopes. Use `deprecated` for documented retired rules/scopes; disabled styling alone is insufficient.
+- A mixed rule with ordinary and extension-specific scopes remains one rule with the same ID, style, and scopes, classified as nonStandard. Its `use` text identifies which scopes need the extension. Do not split or duplicate it merely to classify scopes.
 - Assign `order` from the original array index during migration. Merge category arrays and sort globally by `order` before compiling. Require globally unique nonnegative integer orders and unique IDs within each effective syntax definition file; reject missing, fractional, negative, and duplicate orders.
 - Retain existing ID requirements: every default-theme rule needs an ID; other targets retain optional IDs, validating uniqueness when declared. Do not invent aliases or details targets for unnamed nondefault rules. Required ID assignment remains an explicit generator responsibility.
 - New generated rules append after the highest order unless an insertion is explicitly requested. Category/object ordering cannot change precedence. Strip `order` from emitted rules.
@@ -279,8 +291,8 @@ Rename every existing `for` field to `description` in shared details and all the
       "toggledBackground": { "description": "Extracted registration description." },
     },
   },
-  "source": {},
-  "non-standard": {
+  "sourceCode": {},
+  "nonStandard": {
     "gitblame": {
       "inlineMessage": {
         "description": "Inline blame annotation text.",
@@ -302,16 +314,16 @@ The example demonstrates metadata shape, not a verified extension registration. 
 - Preserve description text in the structural migration without automatically marking every migrated or unresolved entry protected. A preservation decision requires an explicit flag.
 - Preserve protected shared records. Import protected descriptions from `src/themes/prod/default/tokens/<family>/details.jsonc` when applicable; if both locations protect conflicting descriptions, fail with both paths before writes. Dev-theme protections remain local and cannot replace shared records.
 - With no protection, extract UI/semantic descriptions from registrations, syntax descriptions from local rule/scopes and available grammar descriptions, and variables descriptions from local role definitions. Variables have no shared detail file.
-- Do not introduce a per-entry `source` attribution property. Keep provenance, pins, license, and review information in file headers/configuration. The category named `source` remains supported.
+- Do not introduce a per-entry `source` attribution property. Keep provenance, pins, license, and review information in file headers/configuration. The category named `sourceCode` remains supported.
 
-### Optional non-standard usage context
+### Optional nonStandard usage context
 
-- Optional `use` is a nonempty string on individual non-standard UI, semantic, or syntax detail records. Allow it on non-standard shared UI/semantic definition leaves as generator documentation metadata. It does not belong on the category container or in theme styling descriptors.
+- Optional `use` is a nonempty string on individual nonStandard UI, semantic, or syntax detail records. Allow it on nonStandard shared UI/semantic definition leaves as generator documentation metadata. It does not belong on the category container or in theme styling descriptors.
 - Describe verified extension display name/ID, language/provider, and the relevant visible object or state. For example, `When Example Blame (example.blame) is installed and its inline blame annotation is visible beside an editor line.` This extension identity is illustrative.
 - `description` states purpose; `use` documents activation/display conditions. Installed extensions do not necessarily have their relevant UI or semantic provider active. For mixed syntax rules, identify the extension-specific scopes separately from ordinary ones.
 - Omit unknown usage context. Reject empty/whitespace strings, arrays, and other nonstrings. Preserve authored context regardless of `modified-desc`; that flag protects only descriptions. Fill missing context from extraction only when evidence establishes it.
 - Creating a detail record copies usage from shared details, or shared definitions if details have none. Preserve existing theme context and report conflicting shared values rather than silently replacing them.
-- Reclassification that would move `use` outside non-standard requires reconciliation before writes. Transfer shared-definition usage into generated details, excluding it from theme styling and emitted JSON.
+- Reclassification that would move `use` outside nonStandard requires reconciliation before writes. Transfer shared-definition usage into generated details, excluding it from theme styling and emitted JSON.
 
 No category, `description`, `modified-desc`, `use`, authoring `order`, or grouping object is emitted into a VS Code theme. Existing `colorReason`, `disabledReason`, aliases, and formatting retain their current roles.
 
@@ -331,21 +343,21 @@ Attach schemas using file associations so category-only roots need no extra sche
 
 Implement `tooling/tokens/category-validation.js` using the codec and an injected classification snapshot from `tooling/tokens/data/load.js`.
 
-| Family    | Membership and category authority                                                                                                                                  |
-| --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| UI        | `src/token-data/ui/definitions.jsonc`, supplemented by `src/token-data/ui/details.jsonc` for evidenced non-standard/source/deprecated IDs absent from definitions. |
-| Semantic  | `src/token-data/semantic/definitions.jsonc`, supplemented by its shared details with the same restrictions.                                                        |
-| Syntax    | `src/token-data/syntax/details.jsonc` plus evidence-backed syntax classifications; new rules default to standard and have no shared-definition allowlist.          |
-| Variables | Existing internal-role schema, aliases, and detail association; no shared category inventory.                                                                      |
+| Family    | Membership and category authority                                                                                                                                     |
+| --------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| UI        | `src/token-data/ui/definitions.jsonc`, supplemented by `src/token-data/ui/details.jsonc` for evidenced nonStandard/sourceCode/deprecated IDs absent from definitions. |
+| Semantic  | `src/token-data/semantic/definitions.jsonc`, supplemented by its shared details with the same restrictions.                                                           |
+| Syntax    | `src/token-data/syntax/details.jsonc` plus evidence-backed syntax classifications; new rules default to standard and have no shared-definition allowlist.             |
+| Variables | Existing internal-role schema, aliases, and detail association; no shared category inventory.                                                                         |
 
 Validation rules:
 
 1. A UI or semantic token placed in `standard` must have an exact, case-sensitive canonical ID/selector in its shared definition file's `standard` object. A shared detail record cannot make an absent definition standard. Presence under another category is insufficient.
 2. A token listed in shared definitions must use that category in its theme. A shared detail entry under a conflicting category fails shared-data validation rather than overriding the definition.
-3. For IDs absent from shared definitions, allow evidenced source/non-standard/deprecated membership from shared details. Unknown UI/semantic IDs may be authored only under non-standard, with existing ID/style/details rules. `use` does not grant standard membership.
+3. For IDs absent from shared definitions, allow evidenced sourceCode/nonStandard/deprecated membership from shared details. Unknown UI/semantic IDs may be authored only under nonStandard, with existing ID/style/details rules. `use` does not grant standard membership.
 4. Audit source-only IDs before enabling enforcement. Add a verified missing standard registration to shared definitions explicitly and record its evidence; never relabel a genuine standard token to bypass validation. This is the allowed inventory correction during migration; do not bulk-add unverified IDs or prune entries.
 5. Check disabled tokens, formatting-only selectors, exact compound/language-qualified selectors, and both members of a parent/child UI node. Check categories in matching theme details against their effective definitions too.
-6. Validate syntax categories, rule IDs where present, order metadata, and details association against shared syntax evidence. Standard is the default for new rules; require evidence for extension-specific/source/deprecated classification. Never check syntax scopes against a UI/semantic allowlist.
+6. Validate syntax categories, rule IDs where present, order metadata, and details association against shared syntax evidence. Standard is the default for new rules; require evidence for `nonStandard`, `sourceCode`, or `deprecated` classification. Never check syntax scopes against a UI/semantic allowlist.
 7. Resolve independent whole-file fallback before validation and report both the target and actual source file. Do not mask a category mismatch introduced by inheriting definitions or details independently.
 8. Missing, malformed, duplicate, or conflicting shared inputs fail with their exact path. Do not turn an unreadable file into an empty allowlist or silently skip enforcement. Palette-only builds remain independent of token data.
 
@@ -377,7 +389,7 @@ Expose preparation, checking, and application as coherent interfaces instead of 
 
 ## Watch invalidation and recovery
 
-Watch theme sources, the source manifest, snapshots, and the five exact shared definition/detail files at their final paths. Treat removal/recreation and file renames as dependency events. Keep existing generated-output/temp-directory filtering and serialized, debounced scheduling.
+Watch theme sources, the source manifest, `preview/snapshots/`, and the five exact shared definition/detail files at their final paths. Treat removal/recreation and file renames as dependency events. Filter `preview/themes/` and generated/temp directories to prevent rebuild loops; retain serialized, debounced scheduling.
 
 For each shared-data edit, reload and structurally validate one snapshot, then compare its normalized classification projection: family, exact canonical ID, category in shared definitions when present, and category in shared details when present. Keep definition membership distinct from detail-only membership: moving an ID between files can change its validity even if its category name is unchanged. Ignore description/protection/usage text, comments, key ordering, and generator placeholder styling in that projection.
 
@@ -434,10 +446,12 @@ Use a repeatable one-time migration utility with these guarantees:
 
 - Inventory all discovered prod/dev targets, all local and inherited files, normalized tokens/details, template-only/source-only IDs, and current emitted outputs before mutation. Do not hardcode the current default/test/beta/reviewer names or force local copies of inherited files.
 - Move theme inputs into their final family paths while retaining independent definitions/details fallback. Preserve local empty files using the new applicable shape, including categorized empty syntax arrays. Preserve internal variables' current nested role structure and `variables.*` aliases.
+- Rename every local palette config to `palette/config.jsonc` while preserving its contents and explicit-per-target requirement. Move preview assets to `preview/` and static snapshots to `preview/snapshots/` with snapshot bytes intact; update registrations, asset links, fixtures, cleanup paths, and watcher filters in the same checkpoint.
+- Rename token category roots from `source`/`non-standard` to `sourceCode`/`nonStandard` using JSONC syntax-tree paths, preserving attached comments. Update readers, schemas, examples, and fixtures together; reject collisions and legacy spellings after cutover without altering actual token IDs or extraction configuration.
 - Split shared details directly into final family paths, retaining every record, description, provenance header, and required license. Reshape shared definitions directly at their final paths, with only audited missing-standard corrections to inventory.
 - Reparent UI/semantic definitions and matching details using syntax-tree spans so comments stay attached to their records. Do not rebuild authored JSONC solely through parse/stringify. Preserve scope expressions, ordinary comment blocks, deliberate token order, and disabled definitions.
 - Rename `for` to `description` in every detail family, preserving text and relationships. Fail if conflicting old/new values would otherwise be discarded; collapse identical duplicates explicitly. Remove legacy field support and proposed per-entry attribution after all sources/fixtures have migrated.
-- Group syntax rules/details with standard as default and verified extension-specific rules as non-standard. Preserve mixed-scope rules and IDs, assign the original array index as `order`, and verify exact compiled precedence.
+- Group syntax rules/details with standard as default and verified extension-specific rules as nonStandard. Preserve mixed-scope rules and IDs, assign the original array index as `order`, and verify exact compiled precedence.
 - Reconcile categories against final shared definitions/details before enabling the validator. Do not run property addition as part of conversion or insert every missing starter entry into existing themes.
 - Refresh active UI/semantic examples and syntax-order documentation with the same codec. Retain omitted files, comments, aliases, colors/reasons, flags, relationships, and source membership.
 - Prepare and validate the entire selected migration set before replacements; support retry/no-op after a completed migration and restoration after application failures. After each stage's readers and fixtures have migrated, remove obsolete paths rather than retaining permanent dual-format guessing.
@@ -450,9 +464,9 @@ Keep usage guides in `docs/guides/` and automated test inputs in `tests/fixtures
 
 Move `hex-opacity.md` directly to `docs/references/hex-opacity.md` and repair active references. Keep active examples under `docs/references/examples/`. Update README, development/token guides, workbench audit instructions, command/path tables, and examples for the final paths, four categories, exact selectors, syntax order, `description`, protection flags, and usage context. Document ownership, command flags, source pins, and validation-versus-generator roles in `src/token-data/README.md`.
 
-Audit imports, npm scripts, test discovery, CI/release workflows, generated notices, editor settings, hooks, caches, and packaging consumers. Preserve release behavior, generated-output locations, static snapshots, and historical plans/changelog claims. Repair historical links if a moved active target would break them without rewriting historical behavior.
+Audit imports, npm scripts, test discovery, CI/release workflows, generated notices, editor settings, hooks, caches, and packaging consumers. Preserve release behavior, snapshot contents, and historical plans/changelog claims while applying the explicit preview path migrations. Repair historical links if a moved active target would break them without rewriting historical behavior.
 
-Exclude `tooling/` and `samples/` from the VSIX explicitly, preserving current exclusions for src/tests/docs/scripts and developer configuration. Ignore the upstream cache. Add a meaningful package-content check that verifies required distributable assets and absence of development inputs; inspect the packaged file list in the final stage. Do not run live publication as verification.
+Exclude `tooling/`, `samples/`, and `preview/` from the VSIX explicitly, replacing the former development-extension directory exclusion and preserving current exclusions for src/tests/docs/scripts and developer configuration. Update preview manifest ignore paths, and ignore the upstream cache. Add a meaningful package-content check that verifies required distributable assets and absence of development inputs; inspect the packaged file list in the final stage. Do not run live publication as verification.
 
 Update `CHANGELOG.md` and active documentation when implementation is complete. This planning task itself changes no runtime code, theme sources, commands, or generated assets. Every authored JavaScript module, including scripts, fixtures, configuration, and samples, follows `AGENTS.md` documentation and spacing requirements.
 
@@ -460,30 +474,30 @@ Update `CHANGELOG.md` and active documentation when implementation is complete. 
 
 Each stage must end with relevant passing checks and a commit using the repository's existing sentence-case imperative style. Keep integrated schema/source cutovers in one coherent stage; a committed checkpoint must build rather than requiring later repairs. Record completion and evidence in this checklist. Run the final aggregate suite once integrated, broadening/repeating tests only when subsequent changes or failures justify it.
 
-| Stage                               | Work                                                                                                                                                                                                                             | Gate before committing                                                                                                                                                                                                       |
-| ----------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 1. Baseline                         | Capture canonical token/detail/alias inventories, fallback ownership, scope/rule order, generated files, snapshot bytes, and current shared/authored membership differences.                                                     | Establish the current check results and reproducible output baseline; distinguish existing failures before migration.                                                                                                        |
-| 2. Tooling and artifact preparation | Move reusable implementation into final tooling boundaries, thin CLI wrappers, centralize paths, and introduce the prepare-once artifact interface without changing source formats.                                              | Focused CLI/build/check/preview tests; combined-build failure before writes; unchanged outputs and no script imports from tooling.                                                                                           |
-| 3. Theme file ownership             | Move local definitions/details into final theme family paths, preserving old data shapes temporarily for this checkpoint and updating readers/generators/fixtures together.                                                      | Independent fallback in both directions, omitted/empty files, alias stability, required defaults, and unchanged generated output.                                                                                            |
-| 4. Shared formats and validation    | Move shared data directly to final paths; implement codec/schemas, categories, detail fields, syntax ordering, and source category validation; migrate sources/examples and all affected readers and generator writers together. | Schema/codec agreement, inventory/text/comment preservation, generator compatibility with the new format, exact source errors, no missing/duplicate IDs, and normalized output/precedence comparison.                        |
-| 5. Extraction and generators        | Implement pinned retrieval/extraction/updater at final paths, protection and context merging, and final generator behavior.                                                                                                      | Local extraction fixtures, true/false/absent protection, conflicts, unknown IDs, no network during ordinary operations, no-write checks, and unchanged reruns.                                                               |
-| 6. Watch dependency handling        | Watch final shared-data paths; compare classification projections and preserve serial scheduling/recovery.                                                                                                                       | Category or definition/detail membership edits revalidate; description-only changes validate without compilation/writes; malformed edits and source/registry corrections recover; registration reminders remain conditional. |
-| 7. Samples and consumers            | Move grammar samples, finalize links/editor associations/formatting, updater documentation, test directory discovery, CI and VSIX exclusions.                                                                                    | Working sample configuration/relative imports, meaningful package-list checks, no active stale destinations, and preserved optional sample-check behavior.                                                                   |
-| 8. Final integrated acceptance      | Complete active docs/changelog, record reviewed inventory/category corrections and any harmless UI/semantic output-order changes, and retire obsolete inputs.                                                                    | Relevant remaining focused checks, `npm run check`, repeatable build/check, isolated preview sync, and package-content inspection. Commit completed implementation and generated changes.                                    |
+| Stage                               | Work                                                                                                                                                                                                                                                                | Gate before committing                                                                                                                                                                                                       |
+| ----------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 1. Baseline                         | Capture canonical token/detail/alias inventories, fallback ownership, scope/rule order, generated files, snapshot bytes, and current shared/authored membership differences.                                                                                        | Establish the current check results and reproducible output baseline; distinguish existing failures before migration.                                                                                                        |
+| 2. Tooling and artifact preparation | Move reusable implementation into final tooling boundaries, thin CLI wrappers, centralize paths, and introduce the prepare-once artifact interface without changing source formats.                                                                                 | Focused CLI/build/check/preview tests; combined-build failure before writes; unchanged outputs and no script imports from tooling.                                                                                           |
+| 3. Theme and preview paths          | Move local definitions/details into final family paths, rename palette configs to `palette/config.jsonc`, and move preview themes/snapshots to their final paths. Preserve old token data shapes temporarily and update readers/generators/fixtures/links together. | Independent fallback, omitted/empty files, explicit palette inputs, stable aliases/styling, preserved snapshot bytes, correct preview manifest paths, and safe checkout-owned link repair.                                   |
+| 4. Shared formats and validation    | Move shared data directly to final paths; implement codec/schemas, categories, detail fields, syntax ordering, and source category validation; migrate sources/examples and all affected readers and generator writers together.                                    | Schema/codec agreement, inventory/text/comment preservation, generator compatibility with the new format, exact source errors, no missing/duplicate IDs, and normalized output/precedence comparison.                        |
+| 5. Extraction and generators        | Implement pinned retrieval/extraction/updater at final paths, protection and context merging, and final generator behavior.                                                                                                                                         | Local extraction fixtures, true/false/absent protection, conflicts, unknown IDs, no network during ordinary operations, no-write checks, and unchanged reruns.                                                               |
+| 6. Watch dependency handling        | Watch final shared-data paths; compare classification projections and preserve serial scheduling/recovery.                                                                                                                                                          | Category or definition/detail membership edits revalidate; description-only changes validate without compilation/writes; malformed edits and source/registry corrections recover; registration reminders remain conditional. |
+| 7. Samples and consumers            | Move grammar samples, finalize links/editor associations/formatting, updater documentation, test directory discovery, CI and VSIX exclusions.                                                                                                                       | Working sample configuration/relative imports, meaningful package-list checks, no active stale destinations, and preserved optional sample-check behavior.                                                                   |
+| 8. Final integrated acceptance      | Complete active docs/changelog, record reviewed inventory/category corrections and any harmless UI/semantic output-order changes, and retire obsolete inputs.                                                                                                       | Relevant remaining focused checks, `npm run check`, repeatable build/check, isolated preview sync, and package-content inspection. Commit completed implementation and generated changes.                                    |
 
 Migration tooling/tests themselves use local fixtures and injectable roots. Test nested discovery explicitly so moving suites cannot silently drop coverage. Move shared project builders into `tests/helpers/`, color math tests into `tests/shared/`, palette tests into `tests/palette/`, shared-data tests into `tests/tokens/data/`, and CLI/workflow tests into their responsibility directories. Keep upstream fixture snapshots in `tests/fixtures/` and avoid tests that merely mirror implementation steps.
 
 ## Acceptance criteria
 
 1. This document's final paths are authoritative. Runtime readers, generators, updater, validators, fixtures, editor schemas, docs, and packaging use them; retired intermediate paths are not accepted as silent fallbacks.
-2. Theme families use paired `definitions.jsonc`/`details.jsonc` with independent whole-file fallback. Shared UI/semantic data uses those filenames, syntax shared data is details-only, and variables remain theme-owned.
+2. Theme families use paired `definitions.jsonc`/`details.jsonc` with independent whole-file fallback, and every target explicitly supplies `palette/config.jsonc`. Shared UI/semantic data uses the family filenames, syntax shared data is details-only, and variables remain theme-owned. Token-category roots are exactly `standard`, `sourceCode`, `nonStandard`, and `deprecated`; legacy category spellings fail after cutover.
 3. All canonical authored IDs/styles/aliases, description text during structural migration, comments, reviewed relationship arrays, omission/empty-file behavior, and static snapshot bytes are preserved. Any shared standard-inventory correction has recorded evidence.
 4. Nested UI parent/child records, exact semantic default/compound/language-qualified selectors, disabled definitions, and formatting-only records survive normalization. No authoring metadata appears in emitted themes.
-5. Syntax defaults to standard with verified extension-specific rules in non-standard; mixed-scope rules retain IDs/scopes. Globally unique order metadata preserves exact rule/scope precedence across categories, with no missing, fractional, negative, or duplicate orders.
+5. Syntax defaults to standard with verified extension-specific rules in nonStandard; mixed-scope rules retain IDs/scopes. Globally unique order metadata preserves exact rule/scope precedence across categories, with no missing, fractional, negative, or duplicate orders.
 6. UI/semantic standard membership is enforced against the exact family's shared definitions. Wrong placement, absent membership, malformed authorities, inherited category conflicts, and duplicate IDs fail before output/cleanup/manifest/preview mutation, naming the exact token, input location, expected/actual categories, authority, and reason.
-7. Detail records use `description`, optional boolean `modified-desc`, and optional non-standard `use`, with no per-entry source attribution. Extraction preserves protected text and independent usage context; false/absent protection permits extracted refresh. Invalid values and conflicting protections/context fail accurately.
+7. Detail records use `description`, optional boolean `modified-desc`, and optional nonStandard `use`, with no per-entry source attribution. Extraction preserves protected text and independent usage context; false/absent protection permits extracted refresh. Invalid values and conflicting protections/context fail accurately.
 8. Shared data loads locally once per pass; source retrieval/parser machinery is confined to explicit updater operations. Clean checkout builds/checks/tests and editor schemas need neither network nor a populated upstream cache.
-9. Combined builds prepare one validated artifact map before writes; check uses the same preparation without filesystem mutation or preview sync. Current stale-output ownership, cleanup boundaries, symlink protections, and palette-only independence are retained.
+9. Combined builds prepare one validated artifact map before writes; check uses the same preparation without filesystem mutation or preview sync. Generated preview themes use `preview/themes/`, snapshots use `preview/snapshots/` with bytes preserved, and registrations/asset links/watchers target those final paths. Current stale-output ownership, cleanup boundaries, symlink protections, and palette-only independence are retained; packaging excludes `preview/`.
 10. Shared category or definition/detail membership changes trigger category validation; valid shared description-only changes update the snapshot without compilation/writes/sync/reload. Errors remain visible and corrected source/data edits retry through the serialized watcher.
 11. Editor schema associations match actual source shapes, examples, and validator contracts. Samples exist under `samples/grammar/`, with adjacent working TS configuration, updated active links, and preserved highlighting probes.
 12. Every stage has a passing checkpoint and commit; final aggregate checks, idempotence, isolated preview behavior, and VSIX contents are verified. UI/semantic serialization-order changes, if unavoidable, are explicitly reviewed while styling equality and exact syntax precedence remain required.

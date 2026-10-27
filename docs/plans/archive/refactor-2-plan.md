@@ -1,5 +1,7 @@
 # Organize the project around sources, tooling, and commands
 
+Status: archived. Consolidated into [refactor-2b-plan.md](../refactor-2b-plan.md); use that plan for implementation.
+
 ## Summary
 
 Keep the current theme target directories, grouping each token family's definitions and details together within its theme. Give shared token data a source-owned home and separate reusable implementation from executable scripts.

@@ -1,6 +1,6 @@
 # Split token catalogs and adopt nested theme sources
 
-Status: planned. This document describes implementation work; it does not change the current source format.
+Status: archived. Consolidated into [refactor-2b-plan.md](../refactor-2b-plan.md); use that plan for implementation. This document records the earlier proposal.
 
 ## Goals and current state
 
