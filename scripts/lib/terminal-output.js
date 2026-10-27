@@ -10,7 +10,8 @@ const colors = {
   info: "\u001b[34m",
   success: "\u001b[32m",
   default: "",
-  action: "\u001b[33m",
+  action: "\u001b[35m",
+  file: "\u001b[33m",
   heading: "\u001b[36m",
   important: "\u001b[35m",
 };
@@ -18,7 +19,7 @@ const colors = {
 /**
  * Color a terminal message and reset the terminal afterward, leaving default text untouched.
  * @param {string} message - Text to display.
- * @param {"error" | "warning" | "info" | "success" | "default" | "action" | "heading" | "important"} [kind] - Message purpose determining its color.
+ * @param {"error" | "warning" | "info" | "success" | "default" | "action" | "file" | "heading" | "important"} [kind] - Message purpose determining its color.
  * @returns {string} Message with the appropriate terminal foreground color.
  */
 export function formatMessage(message, kind = "default") {

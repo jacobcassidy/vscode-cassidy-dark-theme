@@ -670,12 +670,12 @@ function logSummary(summary, targets, changedFiles, hasFollowingSummary, logger)
 
   for (const target of targets) {
     for (const path of target.changed) {
-      logger.log(formatMessage(`  ${path}`, "important"));
+      logger.log(formatMessage(`  ${path}`, "file"));
     }
   }
 
   for (const path of changedFiles) {
-    if (!assigned.has(path)) logger.log(formatMessage(`  ${path}`, "important"));
+    if (!assigned.has(path)) logger.log(formatMessage(`  ${path}`, "file"));
   }
 
   if (hasFollowingSummary) logger.log();

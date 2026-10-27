@@ -126,7 +126,7 @@ export function watchThemes(
         ),
       );
 
-      for (const path of changedFiles) logger.log(formatMessage(`  ${path}`, "important"));
+      for (const path of changedFiles) logger.log(formatMessage(`  ${path}`, "file"));
 
       logger.log();
 

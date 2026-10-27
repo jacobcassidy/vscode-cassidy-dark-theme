@@ -6,6 +6,7 @@ All notable changes to this project are documented in this file.
 
 ### Changed
 
+- Swapped terminal colors for indented file paths and user actions: filenames now use yellow, and action messages use magenta.
 - Colored indented relative file paths magenta in theme setup, build, and watch output.
 - Standardized script terminal colors: red errors, bright yellow warnings, blue information, green success and additions, yellow user actions, cyan headings, magenta important messages, and default-colored details.
 - Made all theme build commands sync the preview extension, removed the redundant `sync` command, and shared a magenta reload reminder triggered only by preview registration or asset setup changes. Extended watch coverage to the root manifest and static snapshots while keeping ordinary live theme edits and unchanged runs quiet.
