@@ -11,7 +11,7 @@ const colors = {
   success: "\u001b[32m",
   default: "",
   action: "\u001b[35m",
-  file: "\u001b[33m",
+  file: "\u001b[34m",
   heading: "\u001b[36m",
   important: "\u001b[35m",
 };
