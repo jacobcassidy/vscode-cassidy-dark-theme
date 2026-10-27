@@ -2,27 +2,27 @@
 
 ## Table of Contents
 
-| Section                                                          | Subsection                                                                        | Nested subsection                                 |
-| ---------------------------------------------------------------- | --------------------------------------------------------------------------------- | ------------------------------------------------- |
-| [1. Project structure](#project-structure)                       |                                                                                   |                                                   |
-| [2. Local setup and preview](#local-setup-and-preview)           |                                                                                   |                                                   |
-|                                                                  | [2.1 Create and refresh the dev extension](#create-and-refresh-the-dev-extension) |                                                   |
-|                                                                  | [2.2 Watch theme changes](#watch-theme-changes)                                   |                                                   |
-|                                                                  | [2.3 Syntax samples](#syntax-samples)                                             |                                                   |
-|                                                                  | [2.4 Editing theme inputs](#editing-theme-inputs)                                 |                                                   |
-|                                                                  |                                                                                   | [2.4.1 Selecting a palette](#selecting-a-palette) |
-|                                                                  |                                                                                   | [2.4.2 Palette overrides](#palette-overrides)     |
-|                                                                  | [2.5 Adding prod or dev themes](#adding-prod-or-dev-themes)                       |                                                   |
-|                                                                  | [2.6 Building and checking outputs](#building-and-checking-outputs)               |                                                   |
-|                                                                  | [2.7 Test organization](#test-organization)                                       |                                                   |
-| [3. Building the extension](#building-the-extension)             |                                                                                   |                                                   |
-| [4. Release configuration](#release-configuration)               |                                                                                   |                                                   |
-| [5. Publishing a release](#publishing-a-release)                 |                                                                                   |                                                   |
-|                                                                  | [5.1 Prepare the release commit](#prepare-the-release-commit)                     |                                                   |
-|                                                                  | [5.2 Start the pipeline](#start-the-pipeline)                                     |                                                   |
-|                                                                  | [5.3 Pipeline execution](#pipeline-execution)                                     |                                                   |
-|                                                                  | [5.4 GitHub release behavior](#github-release-behavior)                           |                                                   |
-| [6. Recovering a partial release](#recovering-a-partial-release) |                                                                                   |                                                   |
+| Ch  | Section                                                       | Subsection                                                                    | Nested subsection                           |
+| --- | ------------------------------------------------------------- | ----------------------------------------------------------------------------- | ------------------------------------------- |
+| 1   | [Project structure](#project-structure)                       |                                                                               |                                             |
+| 2   | [Local setup and preview](#local-setup-and-preview)           |                                                                               |                                             |
+|     | 2.1                                                           | [Create and refresh the dev extension](#create-and-refresh-the-dev-extension) |                                             |
+|     | 2.2                                                           | [Watch theme changes](#watch-theme-changes)                                   |                                             |
+|     | 2.3                                                           | [Syntax samples](#syntax-samples)                                             |                                             |
+|     | 2.4                                                           | [Editing theme inputs](#editing-theme-inputs)                                 |                                             |
+|     |                                                               | 2.4.1                                                                         | [Selecting a palette](#selecting-a-palette) |
+|     |                                                               | 2.4.2                                                                         | [Palette overrides](#palette-overrides)     |
+|     | 2.5                                                           | [Adding prod or dev themes](#adding-prod-or-dev-themes)                       |                                             |
+|     | 2.6                                                           | [Building and checking outputs](#building-and-checking-outputs)               |                                             |
+|     | 2.7                                                           | [Test organization](#test-organization)                                       |                                             |
+| 3   | [Building the extension](#building-the-extension)             |                                                                               |                                             |
+| 4   | [Release configuration](#release-configuration)               |                                                                               |                                             |
+| 5   | [Publishing a release](#publishing-a-release)                 |                                                                               |                                             |
+|     | 5.1                                                           | [Prepare the release commit](#prepare-the-release-commit)                     |                                             |
+|     | 5.2                                                           | [Start the pipeline](#start-the-pipeline)                                     |                                             |
+|     | 5.3                                                           | [Pipeline execution](#pipeline-execution)                                     |                                             |
+|     | 5.4                                                           | [GitHub release behavior](#github-release-behavior)                           |                                             |
+| 6   | [Recovering a partial release](#recovering-a-partial-release) |                                                                               |                                             |
 
 Cassidy Dark is a declarative Visual Studio Code color theme. VS Code loads a generated JSON-with-comments theme file. A Node.js build resolves palette inputs and consolidated tokens into that file; there is no extension runtime or bundler. The release build packages the generated theme and extension metadata into a `.vsix` archive.
 

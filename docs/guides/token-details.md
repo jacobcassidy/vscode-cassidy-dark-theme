@@ -2,13 +2,13 @@
 
 ## Table of Contents
 
-| Section                                                                    |
-| -------------------------------------------------------------------------- |
-| [1. Token definitions and aliases](#token-definitions-and-aliases)         |
-| [2. Separate documentation](#separate-documentation)                       |
-| [3. Disabled entries](#disabled-entries)                                   |
-| [4. Source review](#source-review)                                         |
-| [5. Verified examples and corrections](#verified-examples-and-corrections) |
+| Ch  | Section                                                                 |
+| --- | ----------------------------------------------------------------------- |
+| 1   | [Token definitions and aliases](#token-definitions-and-aliases)         |
+| 2   | [Separate documentation](#separate-documentation)                       |
+| 3   | [Disabled entries](#disabled-entries)                                   |
+| 4   | [Source review](#source-review)                                         |
+| 5   | [Verified examples and corrections](#verified-examples-and-corrections) |
 
 Each theme under `src/themes/{prod,dev}/<name>/` has consolidated styling in `tokens/` and independent documentation in `details/`. Both directories contain `base.jsonc`, `ui.jsonc`, `semantic.jsonc`, and `syntax.jsonc`. The default theme supplies every file. Every target requires an explicit `palette/palette-config.jsonc`; `{ "useDefaultPalette": true }` selects the default palette. Other targets inherit omitted token, details, and metadata files independently; supplying `{}` in a details file suppresses its documentation fallback. Details are validated against the effective authored tokens, including disabled entries. Editing documentation alone leaves generated files unchanged.
 
