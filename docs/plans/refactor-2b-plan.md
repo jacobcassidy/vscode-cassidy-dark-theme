@@ -1,6 +1,6 @@
 # Consolidate theme authoring, shared token data, and tooling
 
-Status: planned. This is the consolidated implementation specification for [refactor-2-plan.md](archive/refactor-2-plan.md) and [token-catalog-and-nested-sources-plan.md](archive/token-catalog-and-nested-sources-plan.md). Original differences are resolved in favor of `refactor-2-plan.md`; subsequent naming revisions recorded here supersede both predecessors. Both predecessor files are archived historical inputs; implement the destinations and contracts in this document directly.
+Status: implemented. See [checkpoint and final acceptance evidence](../references/refactor-2b/checkpoints.md). This is the consolidated implementation specification for [refactor-2-plan.md](archive/refactor-2-plan.md) and [token-catalog-and-nested-sources-plan.md](archive/token-catalog-and-nested-sources-plan.md). Original differences are resolved in favor of `refactor-2-plan.md`; subsequent naming revisions recorded here supersede both predecessors. Both predecessor files are archived historical inputs; the destinations and contracts in this document are implemented directly.
 
 ## Scope and retained behavior
 

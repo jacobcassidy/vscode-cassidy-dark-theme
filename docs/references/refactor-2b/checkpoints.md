@@ -61,3 +61,65 @@ Retired production-only group wrappers in favor of the single prepare/apply inte
 Integrated regressions additionally cover preserving parent/child detail records and attached comments, scope-variant generator documentation, interrupted new-directory cleanup and clean retry, static import barrels and lexical shadowing, grammar display-name handling, immutable local-syntax processing identity, bounded Git fetch retries, stale-file removal failure, and restoration failure. Guard ownership is published atomically with a unique owner filename, so reclaiming a dead owner cannot delete a competing new owner's metadata. Generated checks compare prepared bytes without a second formatting pass or candidate-map mutation. Snapshot events arriving during synchronization retain a later serialized preview-only pass instead of being overwritten by completion of the active sync. Owned former asset links are recognized from link text even when dangling; unrelated entries remain protected.
 
 The separate `azure-validation.yml` matrix runs Node 24, `npm ci`, and `npm run check` on macOS and Ubuntu without publication tasks, credentials, or installed-extension access. Existing release behavior and VS Code engine compatibility remain unchanged. Native Windows development tooling remains explicitly unverified and outside the required acceptance matrix.
+
+## Final integrated acceptance
+
+Completed on 2026-10-28 (Asia/Bangkok; 2026-10-27 UTC), at implementation commit `a0765da`. Earlier open notes above describe their checkpoint state; the final checks below close those items. The independent fixture remains unchanged from its initial capture, and `approved-differences.json` remains the separate review of category/inventory and harmless serialization/provenance changes.
+
+| Checkpoint                                                     | Commit    |
+| -------------------------------------------------------------- | --------- |
+| Independent baseline                                           | `751d873` |
+| Tooling and suite boundaries                                   | `acb7a87` |
+| Prepared artifacts, coordinated application, and recovery      | `0daa753` |
+| Theme/preview paths                                            | `a87a6f2` |
+| Categorized shared/theme formats and validation                | `d81d08d` |
+| Explicit extraction and immutable replay                       | `d92d99d` |
+| Watch dependency/recovery handling                             | `5ec9483` |
+| Samples, consumers, documentation, and integration regressions | `a0765da` |
+
+Both complete aggregate runs passed **236 tests, zero failures, zero cancellations, zero skips**, including the independent styling/comment/fallback/snapshot oracle, actual CLI fixtures, documentation/legacy audits, package inventory, deterministic scheduler/failure matrices, and native watcher/process/symlink/replacement/rollback suites. These runs used isolated projects and preview destinations, with no installed user extension or release credentials:
+
+| Platform | Environment and command                                                                                                                                                                                                                | Result                                         |
+| -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------- |
+| macOS    | macOS 26.7.1 (25G241), arm64, Node `v24.18.0`, npm `12.0.1`; `npm run check` with the locked installation and native filesystem access                                                                                                 | All aggregate checks passed; 236 tests passed. |
+| Linux    | Docker `node:24.18.0-bookworm`, digest `sha256:5711a0d445a1af54af9589066c646df387d1831a608226f4cd694fc59e745059`, aarch64, kernel `7.2.12-orbstack-00394-gbecdd6130068`, Node `v24.18.0`, npm `11.16.0`; `npm ci` then `npm run check` | All aggregate checks passed; 236 tests passed. |
+
+The Linux run mounted the checkout read-only, copied it without dependencies/Git/cache into an ephemeral container's native filesystem, installed the lockfile there, and removed the container after validation. macOS's sandbox does not provide usable native recursive watchers, so its required native tests ran outside that sandbox. Neither platform substitutes silent skips. The Linux run exposed Node's recursive watcher retaining a replaced file's inode; subscriptions now refresh after a pass, and the native replacement fixture also verifies the next in-place edit. Repeated macOS validation exposed a snapshot event arriving during sync; the new deterministic barrier test covers retained preview-only work. The native manifest fixture now waits for completed build work rather than assuming independent event streams arrive together.
+
+`npx tsc -p samples/grammar/tsconfig.json --noEmit` also passed as an optional sample-configuration check. The declaration-documentation audit and `git diff --check` passed. Ordinary `npm run check` does not execute grammar samples or access upstream sources.
+
+The baseline oracle reports identical compiled styling, disabled styles, aliases, syntax precedence, source ownership, and snapshot SHA-256 values for all four targets. Unchanged/check operation tests preserve artifact bytes and timestamps, load one shared snapshot per pass, compile each required target once, and reuse default palette work. Shared-documentation-only events perform no preparation/application/sync; preview-only retries and events perform no compilation. The retained historical descriptions have not been refreshed from the live network; updater acceptance uses verified local Git/content-addressed fixtures and deterministic retrieval adapters.
+
+### Timing evidence
+
+[Raw measurements and method](performance.json) retain every measured run. The final comparison reran historical `19c498c` and final `a0765da` workflows in separate temporary copies on the same macOS machine and Node version, using the current locked dependency installation for both. Their historical build/preview dependencies retain the original versions; audit-related dependency-position changes are disclosed in the raw evidence. Each steady-state scenario had one warm-up and three measurements. The four targets were `prod/default`, `dev/beta`, `dev/reviewer`, and `dev/test`.
+
+Combined and unchanged scenarios rebuild already generated targets, matching the original capture. Historical builds call the original prod then dev APIs; final builds prepare/apply one combined pass. Build/check timings exclude preview. Watch timings include source writing, a zero-millisecond debounce timer, real build/sync work, and an isolated preview destination. Native delivery is replaced with controlled subscription events for this timing comparison; the native platform tests above establish filesystem behavior independently. Milliseconds, median (range):
+
+| Scenario                         | Historical rerun                | Final                  |
+| -------------------------------- | ------------------------------- | ---------------------- |
+| Combined build                   | 116.02 (108.25–117.73)          | 184.64 (179.93–201.70) |
+| Unchanged build                  | 109.75 (106.04–122.26)          | 174.70 (173.88–177.90) |
+| Generated check                  | 105.85 (102.91–114.23)          | 169.88 (168.06–182.06) |
+| Watch styling edit               | 121.19 (117.35–183.46)          | 190.58 (173.99–231.52) |
+| Watch shared classification edit | Unsupported by original watcher | 194.77 (190.78–211.26) |
+| Watch shared description edit    | Unsupported by original watcher | 21.43 (18.90–22.10)    |
+
+First-build setup, excluded from these steady-state results, took 405.10 ms historically and 225.35 ms finally. Styling alternates an editor background palette alias; classification adds/removes an unused nonStandard UI definition branch; description edits an existing shared UI sentence. The new categorized validation and filesystem freshness/coordination checks increase steady-state full-pass cost. Documentation-only changes avoid that work. These are review measurements, not CI timing budgets; no persistent build cache was added.
+
+### Actual package inspection
+
+After aggregate validation, `bash scripts/release/package-vsix.sh /private/tmp/cassidy-dark-refactor-2b-validation.vsix` passed its generated check and created an actual local VSIX without publication. ZIP inspection found exactly 12 entries: two VSIX metadata files plus ten extension files (manifest, README, changelog, license, five images, and the production theme). No authored inputs, tooling, scripts, tests, grammar samples, preview assets, docs, caches, or validation configuration entered the archive. `package.json` matches the source manifest; the production theme bytes match the checked-in generated artifact. VSCE performs its existing Markdown link rewriting for packaged README/changelog content.
+
+The artifact is 539,852 bytes with SHA-256 `d7c6f848abbe4b6af3fb90133cd71d6bddefc9c4abadd2292abba601113591bc`. Identity remains `jacobcassidy.cassidy-dark`, version `1.2.1`, VS Code engine `^1.64.2`. No release version, publication pipeline behavior, Marketplace state, or GitHub release was changed.
+
+### Acceptance coverage
+
+| Acceptance criteria                            | Evidence                                                                                                                                                                                                                       |
+| ---------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| AC-01–AC-07, AC-11, AC-13–AC-14                | Final paths/codec/schemas, independent fallback/style/comment oracle, authority/selector/order/evidence matrices, and protected metadata/generator fixtures.                                                                   |
+| AC-08, AC-15, AC-20, AC-26–AC-31               | Static extraction, immutable source/cache verification, bounded transport/cancellation, exact coverage transitions/replay, coordinated updater replacement/recovery, and native competing publisher fixtures.                  |
+| AC-09–AC-10, AC-17, AC-21, AC-23–AC-25, AC-33  | Prepared operation counts, immutable check map, controlled replacement/removal/restoration failures, separate-process ownership, native/deterministic watch recovery and preview retry/coalescing, plus timing evidence above. |
+| AC-12, AC-16, AC-18–AC-19, AC-22, AC-32, AC-34 | Checkpoint commits, consolidated guide/samples, read-only audits, recursive suites/CLI fixtures, frozen baseline, actual VSIX inspection, and complete macOS/Linux runs above.                                                 |
+
+No temporary conversion utility, legacy reader/schema branch, unexplained unreachable production export, or persistent build cache remains in active tooling. Native Windows tooling remains outside this acceptance claim.
