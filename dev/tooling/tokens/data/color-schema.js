@@ -4,10 +4,11 @@
  */
 
 import { createHash } from "node:crypto";
-import { mkdir, mkdtemp, readFile, readdir, rm } from "node:fs/promises";
-import { join, dirname, resolve } from "node:path";
+import { mkdir, mkdtemp, open, readFile, readdir, rm } from "node:fs/promises";
+import { join, resolve } from "node:path";
 import { tmpdir } from "node:os";
-import { downloadAndUnzipVSCode, runTests } from "@vscode/test-electron";
+import { fork } from "node:child_process";
+import { fileURLToPath } from "node:url";
 import { canonicalJson } from "../../shared/serialization.js";
 import { semanticPath } from "../formats.js";
 
@@ -23,87 +24,78 @@ function digest(schemas) {
 }
 
 /**
- * Locate an official VS Code build's product metadata relative to its executable.
- * @param executable - Downloaded VS Code executable path.
+ * Run the schema-capture worker with library and VS Code output isolated in a log.
+ * @param options - Runtime process inputs.
+ * @param options.modulePath - Capture worker module to execute.
+ * @param options.args - Worker argument strings.
+ * @param options.logPath - File receiving both child output streams.
+ * @param [options.onProgress] - Stage updates received over IPC.
  */
-async function productFor(executable) {
-  /** Search both Linux and macOS bundle layouts without trusting an installed editor. */
-  let directory = dirname(executable);
+export async function runSchemaRuntime({ modulePath, args, logPath, onProgress }) {
+  /** Shared log descriptor captures even direct console writes from the runtime library. */
+  const log = await open(logPath, "w");
 
-  for (let depth = 0; depth < 6; depth++) {
-    for (const relative of ["resources/app/product.json", "Resources/app/product.json"]) {
-      try {
-        return JSON.parse(await readFile(join(directory, relative), "utf8"));
-      } catch (error) {
-        if (error.code !== "ENOENT") throw error;
-      }
-    }
+  try {
+    await new Promise((resolve, reject) => {
+      /** The capture process owns its console; only explicit stage messages reach the parent. */
+      const child = fork(modulePath, args, { execArgv: [], stdio: ["ignore", log.fd, log.fd, "ipc"] });
 
-    directory = dirname(directory);
+      child.on("message", (message) => {
+        if (typeof message?.stage === "string") onProgress?.(message.stage);
+      });
+      child.once("error", reject);
+      child.once("close", (code, signal) => {
+        if (code === 0) resolve();
+        else reject(new Error(`Capture process exited with ${signal ?? code}`));
+      });
+    });
+  } catch (error) {
+    throw new Error(`VS Code schema capture failed: ${error.message}. See ${logPath}`, { cause: error });
+  } finally {
+    await log.close();
   }
-
-  throw new Error(`VS Code product.json was not found beside ${executable}`);
 }
 
 /**
- * Capture registered schemas through the VS Code extension test host.
+ * Capture registered schemas through an isolated VS Code worker.
  * @param options - Pinned release and staging inputs.
- * @param options.root - Project root containing the capture helper.
+ * @param options.root - Project root containing the capture cache.
  * @param options.version - Stable release version.
  * @param options.commit - Exact stable source commit.
  * @param [options.onProgress] - Quiet-stage progress reporter.
  */
 async function captureRuntimeSchema({ root, version, commit, onProgress }) {
-  /** Ignored cache isolates downloaded builds, profiles, and transient capture output. */
+  /** Runtime logs and output remain in the ignored cache. */
   const cache = join(root, "dev/.cache/token-details/schema-runtime"),
     host = resolve(import.meta.dirname, "schema-host"),
-    output = join(cache, `capture-${version}.json`);
+    output = join(cache, `capture-${version}.json`),
+    logPath = join(cache, `capture-${version}.log`);
 
   await mkdir(cache, { recursive: true });
-  onProgress?.(`Downloading or reusing VS Code ${version} for schema capture`);
 
-  /** Official exact-version build already cached when the release has been processed before. */
-  const executable = await downloadAndUnzipVSCode({ version, cachePath: join(cache, "vscode") });
-
-  /** Release binary must match the immutable source revision used in the same invocation. */
-  const product = await productFor(executable);
-
-  if (product.commit !== commit)
-    throw new Error(`VS Code ${version} schema runtime commit ${product.commit} does not match ${commit}`);
-
-  onProgress?.(`Reading registered color schemas from VS Code ${version}`);
-
-  /** Short isolated profile paths avoid the platform's Unix-socket pathname limit. */
+  /** Short profile paths avoid the platform's Unix-socket pathname limit. */
   const profile = await mkdtemp(join(tmpdir(), "cassidy-schema-"));
 
   try {
+    onProgress?.(`Starting VS Code ${version} schema capture`);
     await rm(output, { force: true });
-    await runTests({
-      vscodeExecutablePath: executable,
-      extensionDevelopmentPath: host,
-      extensionTestsPath: join(host, "run.js"),
-      extensionTestsEnv: { CASSIDY_SCHEMA_OUTPUT: output },
-      cachePath: join(cache, "profiles"),
-      launchArgs: [
-        `--user-data-dir=${join(profile, "user")}`,
-        `--extensions-dir=${join(profile, "extensions")}`,
-        "--locale=en-US",
-        "--skip-welcome",
-        "--skip-release-notes",
-        "--new-window",
-      ],
+    await runSchemaRuntime({
+      modulePath: fileURLToPath(new URL("./schema-runtime.js", import.meta.url)),
+      args: [version, commit, cache, host, output, profile],
+      logPath,
+      onProgress,
     });
+
+    /** Validate the worker's result before returning it to bootstrap or refresh. */
+    const capture = JSON.parse(await readFile(output, "utf8"));
+
+    if (capture.version !== version)
+      throw new Error(`Captured VS Code version ${capture.version} does not match ${version}`);
+
+    return capture.schemas;
   } finally {
     await rm(profile, { recursive: true, force: true });
   }
-
-  /** The isolated test host confirms the runtime release as well as its captured schemas. */
-  const capture = JSON.parse(await readFile(output, "utf8"));
-
-  if (capture.version !== version)
-    throw new Error(`Captured VS Code version ${capture.version} does not match ${version}`);
-
-  return capture.schemas;
 }
 
 /**

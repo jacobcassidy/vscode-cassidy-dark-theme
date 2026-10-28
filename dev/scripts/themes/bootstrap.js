@@ -61,7 +61,16 @@ try {
   const extensionSources = [];
   const args = process.argv.slice(2);
 
+  /** Detailed extraction diagnostics are opt-in to keep normal bootstrap output concise. */
+  let debug = false;
+
   for (let index = 0; index < args.length; index++) {
+    if (args[index] === "--debug") {
+      debug = true;
+
+      continue;
+    }
+
     if (args[index] !== "--extension-source") throw new Error(`Unknown bootstrap option: ${args[index]}`);
     const path = args[++index];
     if (!path || path.startsWith("--")) throw new Error("--extension-source requires a directory");
@@ -77,7 +86,7 @@ try {
     }),
   );
   console.log(formatMessage(`Generated ${result.changed.length} source files. Run npm run build.`, "success"));
-  printWarnings(result.warnings);
+  if (debug) printWarnings(result.warnings);
 } catch (error) {
   console.error(formatMessage(error.message, "error"));
   process.exitCode = 1;

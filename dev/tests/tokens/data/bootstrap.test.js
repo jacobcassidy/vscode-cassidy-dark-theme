@@ -5,12 +5,69 @@
 
 import assert from "node:assert/strict";
 import test from "node:test";
-import { lstat, mkdir, mkdtemp, rm, symlink, writeFile } from "node:fs/promises";
+import { cp, lstat, mkdir, mkdtemp, rm, symlink, writeFile } from "node:fs/promises";
+import { execFile } from "node:child_process";
+import { promisify } from "node:util";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { bootstrapTokenData } from "../../../tooling/tokens/data/bootstrap.js";
 import { completeStarterTheme, starterTheme } from "../../../tooling/tokens/data/starter.js";
 import { parseFormat } from "../../../tooling/tokens/formats.js";
+
+test("bootstrap CLI shows unresolved registrations only with --debug", async (t) => {
+  /** Isolated CLI fixture supplies a fixed bootstrap result without upstream retrieval or writes. */
+  const root = await mkdtemp(join(tmpdir(), "cassidy-bootstrap-cli-"));
+
+  t.after(() => rm(root, { recursive: true, force: true }));
+
+  for (const directory of ["dev/scripts/themes", "dev/tooling/shared", "dev/tooling/tokens/data"])
+    await mkdir(join(root, directory), { recursive: true });
+
+  for (const path of [
+    "scripts/themes/bootstrap.js",
+    "tooling/shared/terminal-progress.js",
+    "tooling/shared/terminal-output.js",
+  ])
+    await cp(new URL(`../../../${path}`, import.meta.url), join(root, "dev", path));
+
+  await writeFile(join(root, "package.json"), '{"type":"module"}');
+  await writeFile(
+    join(root, "dev/tooling/shared/paths.js"),
+    `/**
+ * Bootstrap fixture paths.
+ * @file Supply the isolated CLI root.
+ */
+/** Fixed root unused by the stub bootstrap operation. */
+export const repositoryRoot = ".";
+`,
+  );
+  await writeFile(
+    join(root, "dev/tooling/tokens/data/bootstrap.js"),
+    `/**
+ * Bootstrap result fixture.
+ * @file Return deterministic unresolved registration diagnostics.
+ */
+/** Return the prepared diagnostic without accessing upstream data. */
+export async function bootstrapTokenData() {
+  return { changed: ["fixture"], warnings: ["vscode-stable\\tcolors.ts\\t10:3\\tregisterColor ID expression id: unresolved dynamic registration"] };
+}
+`,
+  );
+
+  /** Execute the actual command wrapper with stdout/stderr captured independently. */
+  const run = promisify(execFile);
+
+  for (const args of [[], ["--debug"]]) {
+    /** The command keeps ordinary stage feedback in both modes. */
+    const { stdout, stderr } = await run(process.execPath, [join(root, "dev/scripts/themes/bootstrap.js"), ...args]);
+
+    assert.match(stdout, /Generated 1 source files/);
+    assert.match(stderr, /Bootstrapping shared token data/);
+
+    if (args.length) assert.match(stderr, /vscode-stable:[\s\S]* {2}colors.ts:[\s\S]* {4}10:3: registerColor/);
+    else assert.doesNotMatch(stderr, /vscode-stable|unresolved dynamic registration/);
+  }
+});
 
 test("starter metadata retains the VS Code schema and package author", async (t) => {
   /** Minimal package fixture for an absent default theme. */

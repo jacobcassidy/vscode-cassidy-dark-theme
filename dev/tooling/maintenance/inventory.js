@@ -18,6 +18,12 @@ export const configurationRoots = [
 export const testInterfaces = [
   {
     path: "dev/tooling/tokens/data/color-schema.js",
+    symbol: "runSchemaRuntime",
+    consumer: "dev/tests/tokens/data/color-schema.test.js",
+    reason: "Actual child-process stdout/stderr isolation, IPC progress, and failure diagnostics.",
+  },
+  {
+    path: "dev/tooling/tokens/data/color-schema.js",
     symbol: "schemaRecords",
     consumer: "dev/tests/tokens/data/color-schema.test.js",
     reason: "Direct assertions for schema references and exact UI/semantic registry interpretation.",

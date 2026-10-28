@@ -5,10 +5,55 @@
 
 import assert from "node:assert/strict";
 import test from "node:test";
-import { mkdtemp, mkdir, writeFile, rm } from "node:fs/promises";
+import { mkdtemp, mkdir, readFile, writeFile, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
-import { colorSchemaReport, prepareColorSchema, schemaRecords } from "../../../tooling/tokens/data/color-schema.js";
+import {
+  colorSchemaReport,
+  prepareColorSchema,
+  runSchemaRuntime,
+  schemaRecords,
+} from "../../../tooling/tokens/data/color-schema.js";
+
+for (const code of [0, 7]) {
+  test(`schema runtime isolates console output and preserves diagnostics for exit ${code}`, async (t) => {
+    /** Real subprocess output verifies descriptor routing without launching VS Code. */
+    const root = await mkdtemp(join(tmpdir(), "cassidy-runtime-")),
+      modulePath = join(root, "runtime.cjs"),
+      logPath = join(root, "capture.log");
+
+    t.after(() => rm(root, { recursive: true, force: true }));
+    await writeFile(
+      modulePath,
+      `/**
+ * Capture worker fixture.
+ * @file Emit noisy runtime output and report progress over IPC.
+ */
+console.log("runtime stdout, including library exit messages");
+console.error("runtime stderr");
+process.send({ stage: "Reading registered color schemas" });
+process.exitCode = ${code};
+process.disconnect();
+`,
+    );
+
+    /** Only explicit IPC stages should reach the parent's progress callback. */
+    const stages = [];
+
+    /** Pending runtime operation retains its log even if the child fails. */
+    const operation = runSchemaRuntime({ modulePath, args: [], logPath, onProgress: (stage) => stages.push(stage) });
+
+    if (code === 0) await operation;
+    else
+      await assert.rejects(
+        operation,
+        (error) => error.message.includes(logPath) && /exited with 7/.test(error.message),
+      );
+
+    assert.deepEqual(stages, ["Reading registered color schemas"]);
+    assert.match(await readFile(logPath, "utf8"), /runtime stdout, including library exit messages\nruntime stderr/);
+  });
+}
 
 /** Exact stable release identity shared by the capture fixtures. */
 const resolution = {
