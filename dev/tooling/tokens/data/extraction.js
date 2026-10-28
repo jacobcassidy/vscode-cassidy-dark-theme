@@ -273,7 +273,7 @@ export async function extractSource(source, signal) {
    * @param [deprecated] - Explicit upstream retirement evidence.
    */
   function register(collection, id, description, path, deprecated = false) {
-    if (typeof id !== "string" || !id.trim() || typeof description !== "string" || !description.trim()) {
+    if (typeof id !== "string" || !id.trim()) {
       warnings.push(`${source.identity.id}:${path}: unresolved dynamic registration`);
       return;
     }
@@ -290,7 +290,7 @@ export async function extractSource(source, signal) {
 
     if (!collection.has(id))
       collection.set(id, {
-        description,
+        description: typeof description === "string" && description.trim() ? description : undefined,
         category,
         inputId: source.identity.id,
         revision: source.identity.revision,

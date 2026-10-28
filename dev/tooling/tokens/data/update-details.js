@@ -19,7 +19,7 @@ import {
   withGuards,
 } from "../../shared/transactions.js";
 import { discoverTargets, readTargetInput } from "../../themes/inputs.js";
-import { decode, normalizeHistory, scopeList } from "../formats.js";
+import { decode, normalizeHistory, scopeList, semanticPath } from "../formats.js";
 import { validateCategories, validateReferenceScopes } from "../category-validation.js";
 import { loadTokenData } from "./load.js";
 import {
@@ -435,6 +435,36 @@ export async function updateTokenDetails({
     }
   }
 
+  /** Verified extension contributors indexed by exact shared UI and semantic token IDs. */
+  const contributors = { ui: new Map(), semantic: new Map() };
+
+  for (const input of extracted) {
+    for (const [id, record] of input.ui) {
+      if (record.category !== "nonStandard" || !record.extensionId) continue;
+      contributors.ui.set(id, [...new Set([...(contributors.ui.get(id) ?? []), record.extensionId])].sort());
+    }
+  }
+
+  for (const id of new Set([
+    ...snapshot.details.semantic.records.keys(),
+    ...snapshot.definitions.semantic.records.keys(),
+    ...themes.flatMap((theme) => [...theme.families.definitions.semantic.records.keys()]),
+  ])) {
+    if (semanticDescription(id, merged.types, merged.modifiers)?.category !== "nonStandard") continue;
+    const [typeKey, modifierKey] = semanticPath(id);
+    const type = typeKey.split(":")[0];
+    const modifiers = modifierKey === "default" ? [] : modifierKey.split(".");
+    const sourceIds = extracted
+      .filter(
+        (input) =>
+          input.identity.kind === "extension" &&
+          (input.types.has(type) || modifiers.some((modifier) => input.modifiers.has(modifier))),
+      )
+      .map((input) => input.identity.contributor)
+      .filter(Boolean);
+    if (sourceIds.length) contributors.semantic.set(id, [...new Set(sourceIds)].sort());
+  }
+
   /** All three detail files and resolution metadata are applied as one affected set. */
   const output = new Map();
 
@@ -510,6 +540,8 @@ export async function updateTokenDetails({
         family === "syntax" ? undefined : description,
         resolution.version,
       );
+
+      if (category === "nonStandard" && contributors[family]?.has(id)) candidate.source = contributors[family].get(id);
 
       if (family === "syntax" && candidate["modified-desc"] !== true && description)
         candidate.description = description;

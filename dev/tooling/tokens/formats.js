@@ -29,6 +29,7 @@ export const detailFields = [
   "descriptionUpdatedIn",
   "descriptionBasedOn",
   "use",
+  "source",
   "inherits",
   "overrides",
   "globallyOverriddenBy",
@@ -135,6 +136,20 @@ function validateDetail(value, category, label, { shared = false, family } = {})
   if (Object.hasOwn(value, "use")) {
     if (category !== "nonStandard") throw new Error(`${label}.use is allowed only on nonStandard records`);
     nonempty(value.use, `${label}.use`);
+  }
+
+  if (Object.hasOwn(value, "source")) {
+    if (!shared || category !== "nonStandard" || !["ui", "semantic"].includes(family))
+      throw new Error(`${label}.source is allowed only on shared nonStandard UI and semantic details`);
+
+    if (
+      !Array.isArray(value.source) ||
+      !value.source.length ||
+      value.source.some((item) => typeof item !== "string" || !/^[\w-]+\.[\w.-]+$/.test(item)) ||
+      new Set(value.source).size !== value.source.length ||
+      [...value.source].sort().some((item, index) => item !== value.source[index])
+    )
+      throw new Error(`${label}.source must be a sorted, nonempty array of unique Publisher.extension IDs`);
   }
 
   for (const key of ["inherits", "overrides", "globallyOverriddenBy"]) {

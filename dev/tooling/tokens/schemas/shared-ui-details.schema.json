@@ -313,6 +313,15 @@
             "use": {
               "type": "string",
               "pattern": "\\S"
+            },
+            "source": {
+              "type": "array",
+              "minItems": 1,
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "pattern": "^[\\w-]+\\.[\\w.-]+$"
+              }
             }
           },
           "additionalProperties": {
@@ -363,6 +372,11 @@
             {
               "required": [
                 "use"
+              ]
+            },
+            {
+              "required": [
+                "source"
               ]
             }
           ]

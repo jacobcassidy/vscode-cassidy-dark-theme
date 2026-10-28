@@ -6,6 +6,7 @@ All notable changes to this project are documented in this file.
 
 ### Changed
 
+- Added a seedless shared-token bootstrap from verified VS Code and extension sources, with nonstandard source attribution and guarded all-file application.
 - Aligned semantic shared definitions with the flat category arrays in the previous semantic token reference, and flattened semantic selectors in theme definitions and details.
 - Moved development documentation, scripts, tests, tooling, samples, previews, and local packages under `dev/`; organized shared token inputs under `src/data/tokens/`. Existing preview installations must manually replace their stale `preview` asset symlink before syncing.
 
