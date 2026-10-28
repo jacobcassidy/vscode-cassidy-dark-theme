@@ -6,7 +6,6 @@
         "name": "Comments",
         "scope": "comment",
         "color": "variables.default.placeholder",
-        "colorReason": "Default bootstrap value. Review this selector before publication",
         "order": 0
       }
     ]

@@ -1021,10 +1021,6 @@ None.
 
 None.
 
-### Missing from generated inventory
-
-None.
-
 ## Semantic types
 
 Schema entries: 24.
@@ -1072,10 +1068,6 @@ None.
 
 None.
 
-### Missing from generated inventory
-
-None.
-
 ## Semantic modifiers
 
 Schema entries: 8.
@@ -1104,9 +1096,5 @@ None.
 None.
 
 ### Missing from all source extraction
-
-None.
-
-### Missing from generated inventory
 
 None.
