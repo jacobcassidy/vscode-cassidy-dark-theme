@@ -7,4 +7,4 @@
 /dev/TODO.md
 dev/packages/
 node_modules
-.cache/
+dev/.cache/

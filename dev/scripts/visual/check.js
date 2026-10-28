@@ -18,7 +18,7 @@ if (update.length > 1 || (update.length && update[0] !== "--update"))
 const image =
     "mcr.microsoft.com/playwright:v1.64.1-noble@sha256:47b510dd9230bf0b9bfc9b20102241e577ea7a99334ab4c3ca19f19770e9b8ea",
   root = process.cwd(),
-  cache = resolve(root, ".cache/visual"),
+  cache = resolve(root, "dev/.cache/visual"),
   baselines = resolve(root, "dev/tests/visual/baselines");
 
 for (const path of [cache, `${cache}/node_modules`, resolve(root, "node_modules"), baselines])
@@ -47,7 +47,7 @@ const args = [
   "--mount",
   `type=bind,src=${cache}/node_modules,dst=/workspace/node_modules`,
   "--mount",
-  `type=bind,src=${cache},dst=/workspace/.cache/visual`,
+  `type=bind,src=${cache},dst=/workspace/dev/.cache/visual`,
 ];
 
 if (update.length) args.push("--mount", `type=bind,src=${baselines},dst=/workspace/dev/tests/visual/baselines`);

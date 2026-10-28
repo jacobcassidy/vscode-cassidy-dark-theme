@@ -16,5 +16,5 @@ azure-validation.yml
 eslint.config.js
 lefthook.yml
 prettier.config.js
-.cache
+dev/.cache
 playwright.config.js

@@ -71,6 +71,7 @@
     ]
   },
   "scripts": {
+    "bootstrap": "node dev/scripts/themes/bootstrap.js",
     "build": "node dev/scripts/themes/build.js --all",
     "check": "npm run check:theme && npm run check:docs && npm run check:reachability && npm run check:prettier && npm run lint && npm test",
     "create": "node dev/scripts/themes/add-theme.js",
@@ -83,7 +84,6 @@
     "refresh": "node dev/scripts/token-data/update-token-details.js",
     "test": "node --test \"dev/tests/**/*.test.js\"",
     "watch": "node dev/scripts/themes/watch.js",
-    "bootstrap:tokens": "node dev/scripts/token-data/bootstrap.js",
     "build:dev": "node dev/scripts/themes/build.js --dev",
     "build:palette": "node dev/scripts/themes/build.js --palette-only",
     "build:prod": "node dev/scripts/themes/build.js",

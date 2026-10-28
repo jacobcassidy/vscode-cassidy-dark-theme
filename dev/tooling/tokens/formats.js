@@ -97,7 +97,7 @@ function validateDetail(value, category, label, { shared = false, family } = {})
     value,
     [
       ...detailFields,
-      ...(shared ? ["modified-desc"] : []),
+      ...(shared ? ["modified-desc", "classificationEvidence"] : []),
       ...(shared && family === "syntax" ? ["scopeEvidence"] : []),
     ],
     label,
@@ -114,6 +114,28 @@ function validateDetail(value, category, label, { shared = false, family } = {})
     throw new Error(`${label}.modified-desc must be a boolean`);
 
   if (value["modified-desc"] === true) nonempty(value.description, `${label}: protected description`);
+
+  if (Object.hasOwn(value, "classificationEvidence")) {
+    if (!shared || !["ui", "semantic"].includes(family) || !["sourceCode", "deprecated"].includes(category))
+      throw new Error(
+        `${label}.classificationEvidence is allowed only on shared sourceCode/deprecated UI or semantic details`,
+      );
+
+    fields(value.classificationEvidence, ["inputId", "revision", "path", "reason"], `${label}.classificationEvidence`);
+
+    for (const key of ["inputId", "revision", "path", "reason"])
+      nonempty(value.classificationEvidence[key], `${label}.classificationEvidence.${key}`);
+
+    if (!/^(?:[a-f0-9]{40}|sha256:[a-f0-9]{64})$/.test(value.classificationEvidence.revision))
+      throw new Error(`${label}.classificationEvidence.revision requires an immutable revision`);
+
+    if (
+      value.classificationEvidence.path.startsWith("/") ||
+      value.classificationEvidence.path.includes("\\") ||
+      value.classificationEvidence.path.split("/").some((part) => !part || [".", ".."].includes(part))
+    )
+      throw new Error(`${label}.classificationEvidence.path must be source-relative`);
+  }
 
   for (const key of ["descriptionAddedIn", "descriptionUpdatedIn", "descriptionBasedOn"]) {
     if (
@@ -342,7 +364,9 @@ export function decode(input, family, kind, { shared = false } = {}) {
           semanticPath(id);
           fields(
             record,
-            kind === "definitions" ? definitionFields : [...detailFields, ...(shared ? ["modified-desc"] : [])],
+            kind === "definitions"
+              ? definitionFields
+              : [...detailFields, ...(shared ? ["modified-desc", "classificationEvidence"] : [])],
             location([category, id]),
           );
           register(id, record, category, [category, id]);
@@ -381,7 +405,9 @@ export function decode(input, family, kind, { shared = false } = {}) {
 
       /** Record vocabulary distinguishes nested UI children from authoring fields. */
       const allowed =
-        kind === "definitions" ? definitionFields : [...detailFields, ...(shared ? ["modified-desc"] : [])];
+        kind === "definitions"
+          ? definitionFields
+          : [...detailFields, ...(shared ? ["modified-desc", "classificationEvidence"] : [])];
 
       /**
        * Collect parent records and continue into children rather than stopping at a descriptor.

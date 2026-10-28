@@ -27,7 +27,7 @@ steps:
   - script: |
       status=0
       npm run check:visual || status=$?
-      if [[ -f .cache/visual/report/index.html ]]; then
+      if [[ -f dev/.cache/visual/report/index.html ]]; then
         echo "##vso[task.setvariable variable=VisualReportAvailable]true"
       fi
       exit "$status"
@@ -37,5 +37,5 @@ steps:
     displayName: Upload visual comparison report
     condition: and(succeededOrFailed(), eq(variables['VisualReportAvailable'], 'true'))
     inputs:
-      targetPath: .cache/visual/report
+      targetPath: dev/.cache/visual/report
       artifact: visual-comparisons

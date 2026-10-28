@@ -34,7 +34,7 @@ test(
 
     await mkdir(join(root, "images"));
     await writeFile(
-      join(root, "src/data/tokens/upstream-sources.jsonc"),
+      join(root, "src/data/tokens/generated/upstream-sources.jsonc"),
       JSON.stringify({
         policy: "latest-stable",
         repository: "microsoft/vscode",
@@ -80,7 +80,7 @@ test(
 
     await withGuards([root], async ([owner]) => {
       /** Marker has no automatic replay data and does not modify source bytes. */
-      const before = await capturePaths(affected.map((path) => join(root, "src/data/tokens", path)));
+      const before = await capturePaths(affected.map((path) => join(root, "src/data/tokens/generated", path)));
 
       await writeFile(
         join(owner.directory, "incomplete.json"),

@@ -4,17 +4,27 @@
  */
 
 import { createHash } from "node:crypto";
-import { stat } from "node:fs/promises";
+import { lstat, readFile } from "node:fs/promises";
 import { isAbsolute, join, resolve } from "node:path";
 import { createRetrieval, obtainSource, resolveLatest, validateSourceConfig, verifySource } from "./sources.js";
 import { extractSource, semanticDescription } from "./extraction.js";
 import { discoverTargets, readTargetInput } from "../../themes/inputs.js";
-import { repositoryRoot } from "../../shared/paths.js";
-import { decode, semanticPath } from "../formats.js";
+import {
+  repositoryRoot,
+  generatedTokenDirectory,
+  defaultThemeDirectory,
+  manualTokenPaths,
+  familyPath,
+} from "../../shared/paths.js";
+import { decode, semanticPath, scopeList } from "../formats.js";
+import { validateCategories, validateReferenceScopes } from "../category-validation.js";
+import { loadTokenData } from "./load.js";
 import { applyArtifacts, assertFresh, capturePaths, observeWriter, withGuards } from "../../shared/transactions.js";
 import { parseJsonc } from "../../shared/jsonc.js";
 import { alphabetizeTokenData } from "./alphabetize.js";
 import { formatSource } from "../../shared/formatting.js";
+import { starterTheme } from "./starter.js";
+import { prepareColorSchema, colorSchemaReport } from "./color-schema.js";
 
 /**
  * Insert one dotted token ID into category data while preserving nested UI structure.
@@ -35,9 +45,43 @@ function insert(target, id, value) {
  * @param family - Shared token family.
  * @param kind - Generated file role.
  * @param value - Categorized records.
+ * @param resolution - Verified stable and supplemental commits.
  */
-function serialize(family, kind, value) {
-  return `// Shared ${family} token ${kind}: generated from verified sources.\n${JSON.stringify(value, null, 2)}\n`;
+function serialize(family, kind, value, resolution) {
+  /** Immutable source identities printed in every shared-data header. */
+  const stable = resolution.inputs.find((input) => input.id === "vscode-stable")?.revision,
+    main = resolution.inputs.find((input) => input.id === "vscode-main")?.revision;
+
+  return `// Shared ${family} token ${kind}: generated from verified sources.
+// Upstream inputs last processed: VS Code ${resolution.version}
+// Stable commit: ${stable}
+// Supplemental main commit: ${main}
+/*
+MIT License
+
+Copyright (c) 2015 - present Microsoft Corporation
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+*/
+// Updater (run from the repository root): npm run refresh
+${JSON.stringify(value, null, 2)}
+`;
 }
 
 /**
@@ -48,22 +92,47 @@ function serialize(family, kind, value) {
  * @param options.signal - Cancellation signal.
  * @param options.onProgress - Report the current stage before potentially slow work.
  */
-export async function bootstrapTokenData({ root = repositoryRoot, extensionSources = [], signal, onProgress }) {
+export async function bootstrapTokenData({
+  root = repositoryRoot,
+  extensionSources = [],
+  signal,
+  onProgress,
+  services = {},
+}) {
   onProgress?.("Checking bootstrap destinations and writer state");
+
+  try {
+    await lstat(join(root, generatedTokenDirectory));
+    throw new Error(
+      `Bootstrap destination exists: ${generatedTokenDirectory}; delete it manually before bootstrapping`,
+    );
+  } catch (error) {
+    if (error.code !== "ENOENT") throw error;
+  }
+
+  /** An absent default theme is prepared in memory and applied with generated sources. */
+  let preparedTheme = new Map();
+
+  try {
+    await lstat(join(root, defaultThemeDirectory));
+  } catch (error) {
+    if (error.code !== "ENOENT") throw error;
+    preparedTheme = await starterTheme(root);
+  }
 
   /** Shared files that must be absent before a clean bootstrap. */
   const paths = [
-    "src/data/tokens/ui/definitions.jsonc",
-    "src/data/tokens/ui/details.jsonc",
-    "src/data/tokens/semantic/definitions.jsonc",
-    "src/data/tokens/semantic/details.jsonc",
-    "src/data/tokens/syntax/details.jsonc",
-    "src/data/tokens/upstream-sources.jsonc",
+    "src/data/tokens/generated/ui/definitions.jsonc",
+    "src/data/tokens/generated/ui/details.jsonc",
+    "src/data/tokens/generated/semantic/definitions.jsonc",
+    "src/data/tokens/generated/semantic/details.jsonc",
+    "src/data/tokens/generated/syntax/details.jsonc",
+    "src/data/tokens/generated/upstream-sources.jsonc",
   ];
 
   for (const path of paths) {
     try {
-      await stat(join(root, path));
+      await lstat(join(root, path));
       throw new Error(`Bootstrap destination exists: ${path}; remove shared token data before bootstrapping`);
     } catch (error) {
       if (error.code !== "ENOENT") throw error;
@@ -104,6 +173,14 @@ export async function bootstrapTokenData({ root = repositoryRoot, extensionSourc
     extracted.push(await extractSource(source, signal));
   }
 
+  /** Runtime schema supplements registrations that static extraction cannot resolve. */
+  const schema = await prepareColorSchema({
+    root,
+    resolution,
+    onProgress,
+    capture: services.captureColorSchema,
+  });
+
   onProgress?.("Preparing shared token inventories and details");
 
   /** Source records grouped by family, retaining every extension contributor. */
@@ -120,21 +197,45 @@ export async function bootstrapTokenData({ root = repositoryRoot, extensionSourc
     for (const [id, record] of input.modifiers) if (!modifiers.has(id)) modifiers.set(id, record);
   }
 
+  for (const [family, target] of [
+    ["ui", ui],
+    ["types", types],
+    ["modifiers", modifiers],
+  ]) {
+    for (const [id, value] of schema.records[family]) {
+      if (typeof value.description !== "string" || !value.description.trim()) continue;
+
+      /** Stable runtime membership is independent evidence when source extraction missed a registration. */
+      const record = {
+        description: value.description,
+        category: value.deprecated ? "deprecated" : "standard",
+        inputId: "vscode-color-theme-schema",
+        revision: schema.snapshot.commit,
+        path: `vscode://schemas/${family === "ui" ? "workbench-colors" : "token-styling"}`,
+      };
+
+      if (family === "ui") {
+        if (!target.has(id) || target.get(id)[0].category !== "standard")
+          target.set(id, [record, ...(target.get(id) ?? [])]);
+      } else if (!target.has(id) || target.get(id).category !== "standard") target.set(id, record);
+    }
+  }
+
   /** Default theme syntax input establishes local syntax documentation and provenance. */
-  const targets = await discoverTargets(root);
+  const targets = await discoverTargets(root, { includeMissingDefault: preparedTheme.size > 0 });
   const defaultTarget = targets.find((target) => target.group === "prod" && target.name === "default");
-  const syntaxInput = await readTargetInput(root, defaultTarget, "tokens/syntax/definitions.jsonc");
+  const syntaxInput = await readTargetInput(root, defaultTarget, "tokens/syntax/definitions.jsonc", preparedTheme);
   const syntax = decode(syntaxInput, "syntax", "definitions");
 
   /** Load theme-owned semantic inventories and validate every source category. */
   const semanticIds = new Set();
   const themeUiIds = new Set();
   for (const target of targets) {
-    const uiInput = await readTargetInput(root, target, "tokens/ui/definitions.jsonc");
+    const uiInput = await readTargetInput(root, target, "tokens/ui/definitions.jsonc", preparedTheme);
     const uiData = decode(uiInput, "ui", "definitions");
     for (const record of uiData.records.values()) themeUiIds.add(record.id);
 
-    const input = await readTargetInput(root, target, "tokens/semantic/definitions.jsonc");
+    const input = await readTargetInput(root, target, "tokens/semantic/definitions.jsonc", preparedTheme);
     const data = decode(input, "semantic", "definitions");
     for (const record of data.records.values()) semanticIds.add(record.id);
   }
@@ -172,25 +273,22 @@ export async function bootstrapTokenData({ root = repositoryRoot, extensionSourc
     if (!Object.keys(groups).length) uiDefinitions[category] = [];
   }
 
-  for (const id of themeUiIds)
-    if (!ui.has(id)) throw new Error(`No verified VS Code or extension source for theme UI token ${id}`);
-
   for (const id of semanticIds) {
     const record = semanticDescription(id, types, modifiers);
-    if (!record) throw new Error(`Unable to classify semantic token ${id} from verified VS Code registrations`);
+    if (!record) continue;
     const category = record.category;
     if (!semanticDefinitions[category]) throw new Error(`Unknown semantic category for ${id}: ${category}`);
     semanticDefinitions[category].push(id);
     const [typeKey, modifierKey] = semanticPath(id);
     const type = typeKey.split(":")[0];
-    const modifiers = modifierKey === "default" ? [] : modifierKey.split(".");
+    const selectedModifiers = modifierKey === "default" ? [] : modifierKey.split(".");
     const sourceIds = [
       ...new Set(
         extracted
           .filter(
             (input) =>
               input.identity.kind === "extension" &&
-              (input.types.has(type) || modifiers.some((modifier) => input.modifiers.has(modifier))),
+              (input.types.has(type) || selectedModifiers.some((modifier) => input.modifiers.has(modifier))),
           )
           .map((input) => input.identity.contributor)
           .filter(Boolean),
@@ -205,13 +303,6 @@ export async function bootstrapTokenData({ root = repositoryRoot, extensionSourc
       throw new Error(`No verified extension source for nonstandard semantic token ${id}`);
   }
 
-  for (const target of targets) {
-    const input = await readTargetInput(root, target, "tokens/semantic/definitions.jsonc");
-    for (const record of decode(input, "semantic", "definitions").records.values())
-      if (!semanticIds.has(record.id))
-        throw new Error(`Semantic source coverage missing for ${target.group}/${target.name}: ${record.id}`);
-  }
-
   for (const record of syntax.records.values()) {
     const category = record.category;
     if (!syntaxDetails[category]) throw new Error(`Unknown syntax category for ${record.id}: ${category}`);
@@ -220,15 +311,15 @@ export async function bootstrapTokenData({ root = repositoryRoot, extensionSourc
 
   /** Each candidate is decoded before any destination is created. */
   const candidates = new Map([
-    [paths[0], alphabetizeTokenData(serialize("ui", "definitions", uiDefinitions), paths[0])],
-    [paths[1], alphabetizeTokenData(serialize("ui", "details", uiDetails), paths[1])],
-    [paths[2], alphabetizeTokenData(serialize("semantic", "definitions", semanticDefinitions), paths[2])],
-    [paths[3], alphabetizeTokenData(serialize("semantic", "details", semanticDetails), paths[3])],
-    [paths[4], alphabetizeTokenData(serialize("syntax", "details", syntaxDetails), paths[4])],
+    [paths[0], alphabetizeTokenData(serialize("ui", "definitions", uiDefinitions, resolution), paths[0])],
+    [paths[1], alphabetizeTokenData(serialize("ui", "details", uiDetails, resolution), paths[1])],
+    [paths[2], alphabetizeTokenData(serialize("semantic", "definitions", semanticDefinitions, resolution), paths[2])],
+    [paths[3], alphabetizeTokenData(serialize("semantic", "details", semanticDetails, resolution), paths[3])],
+    [paths[4], alphabetizeTokenData(serialize("syntax", "details", syntaxDetails, resolution), paths[4])],
   ]);
 
   for (const [path, source] of candidates) {
-    const family = path.split("/")[3];
+    const family = path.split("/").at(-2);
     decode(
       { ...parseJsonc(source, path), source, path, label: path },
       family,
@@ -236,6 +327,41 @@ export async function bootstrapTokenData({ root = repositoryRoot, extensionSourc
       { shared: true },
     );
     candidates.set(path, await formatSource(root, path, source));
+  }
+
+  /** Validate the effective generated/manual snapshot and all theme categories before any write. */
+  const snapshot = await loadTokenData({ root, overrides: candidates });
+
+  for (const [family, ids] of [
+    ["ui", themeUiIds],
+    ["semantic", semanticIds],
+  ]) {
+    for (const id of ids)
+      if (!snapshot.definitions[family].records.has(id))
+        throw new Error(`No verified or manual shared ${family} definition for theme token ${id}`);
+  }
+
+  for (const target of targets) {
+    /** Independently inherited theme files retain their actual origin labels. */
+    const families = { definitions: {}, details: {} };
+
+    for (const family of ["variables", "ui", "semantic", "syntax"]) {
+      for (const kind of ["definitions", "details"])
+        families[kind][family] = decode(
+          await readTargetInput(root, target, familyPath(family, kind), preparedTheme),
+          family,
+          kind,
+        );
+    }
+
+    if (target.group === "prod" && target.name === "default") {
+      validateReferenceScopes(snapshot, families.definitions.syntax);
+      snapshot.referenceScopes = new Map(
+        [...families.definitions.syntax.records].map(([id, record]) => [id, scopeList(record.value)]),
+      );
+    }
+
+    validateCategories(families, snapshot, `${target.group}/${target.name}`);
   }
 
   /** Successful immutable source record, including exact extraction coverage and local syntax identity. */
@@ -259,6 +385,11 @@ export async function bootstrapTokenData({ root = repositoryRoot, extensionSourc
         path: syntaxInput.path,
         revision: `sha256:${createHash("sha256").update(syntaxInput.source).digest("hex")}`,
       },
+      colorThemeSchema: {
+        path: schema.path,
+        revision: schema.snapshot.commit,
+        digest: schema.snapshot.digest,
+      },
     },
   };
   validateSourceConfig(config);
@@ -271,12 +402,34 @@ export async function bootstrapTokenData({ root = repositoryRoot, extensionSourc
     ),
   );
 
+  candidates.set(schema.path, schema.source);
+  candidates.set(schema.reportPath, await colorSchemaReport({ root, resolution, schema, extracted }));
+
+  /** Preserve an existing shared README, or create the root reference during bootstrap. */
+  const readmePath = "src/data/tokens/README.md";
+
+  try {
+    await readFile(join(root, readmePath), "utf8");
+  } catch (error) {
+    if (error.code !== "ENOENT") throw error;
+    candidates.set(
+      readmePath,
+      "# Shared token data\n\n`generated/` contains verified upstream records. `manual/` contains optional authored additions and documentation overrides. Run `npm run refresh` to update generated descriptions.\n",
+    );
+  }
+
+  for (const [path, source] of preparedTheme) candidates.set(path, await formatSource(root, path, source));
+
   /** Guarded all-file application after source and destination freshness checks. */
   onProgress?.("Validating and applying shared token files");
   const expected = await capturePaths([
     ...sources.map((source) => source.directory),
     ...targets.map((target) => join(root, target.directory)),
     ...paths.map((path) => join(root, path)),
+    ...manualTokenPaths.map((path) => join(root, path)),
+    ...[...preparedTheme.keys(), readmePath].map((path) => join(root, path)),
+    join(root, schema.path),
+    join(root, schema.reportPath),
   ]);
   await assertFresh(expected);
   await withGuards([root], async ([owner]) =>
@@ -286,7 +439,7 @@ export async function bootstrapTokenData({ root = repositoryRoot, extensionSourc
       expected,
       owner,
       operation: "token-bootstrap",
-      recovery: "npm run bootstrap:tokens -- --recover=verify-restored",
+      recovery: "Restore the complete source set, then rerun npm run bootstrap",
       signal,
     }),
   );

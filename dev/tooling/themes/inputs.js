@@ -84,9 +84,11 @@ export function validateThemeName(name) {
  * Discover prod and dev targets with unique names and deterministic output locations.
  *
  * @param root - Repository or isolated project root directory.
+ * @param [options] - Discovery options.
+ * @param [options.includeMissingDefault] - Include a default theme being prepared in memory.
  * @returns Validated prod and dev targets in deterministic order.
  */
-export async function discoverTargets(root) {
+export async function discoverTargets(root, { includeMissingDefault = false } = {}) {
   /** Validated theme targets discovered across both source groups. */
   const targets = [];
 
@@ -116,7 +118,15 @@ export async function discoverTargets(root) {
   }
 
   if (!targets.some((target) => target.group === "prod" && target.name === "default")) {
-    throw new Error(`Missing required default theme: ${defaultThemeDirectory}`);
+    if (!includeMissingDefault) throw new Error(`Missing required default theme: ${defaultThemeDirectory}`);
+
+    targets.unshift({
+      group: "prod",
+      name: "default",
+      directory: defaultThemeDirectory,
+      reportDirectory: `${defaultThemeDirectory}/palette/generated`,
+      output: "themes/cassidy-dark-color-theme.json",
+    });
   }
 
   return targets;

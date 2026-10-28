@@ -193,12 +193,12 @@ test("valid shared description/version/usage changes load once and perform zero 
   /** Initial build establishes an accepted classification projection. */
   const project = await scheduler(t);
   project.calls.length = 0;
-  project.notify("data/tokens/ui/details.jsonc");
-  project.notify("data/tokens/semantic/details.jsonc");
+  project.notify("data/tokens/generated/ui/details.jsonc");
+  project.notify("data/tokens/manual/semantic/details.jsonc");
   await project.tick(10);
   assert.deepEqual(project.calls, ["load"]);
   project.current.projection = "classification-or-scope-evidence-changed";
-  project.notify("data/tokens/syntax/details.jsonc");
+  project.notify("data/tokens/generated/syntax/details.jsonc");
   await project.tick(10);
   assert.deepEqual(project.calls, ["load", "load", "prepare", "apply", "sync"]);
 });
@@ -210,7 +210,7 @@ test("source filters exclude extraction configuration/generated files and accept
   project.calls.length = 0;
 
   for (const path of [
-    "data/tokens/upstream-sources.jsonc",
+    "data/tokens/generated/upstream-sources.jsonc",
     "themes/prod/default/palette/generated/palette.json",
     "themes/prod/default/palette/default-palette.txt",
     "themes/prod/default/.theme-build-owned",

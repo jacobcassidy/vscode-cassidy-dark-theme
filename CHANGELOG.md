@@ -6,6 +6,8 @@ All notable changes to this project are documented in this file.
 
 ### Changed
 
+- Added layered generated and manual shared token data, a single `bootstrap` command, and a neutral starter theme. Bootstrap and refresh capture the stable VS Code color theme schema and write versioned review reports under `dev/docs/refreshes/`.
+- Moved local caches under `dev/.cache/` and made builds, generators, and watchers validate the merged token snapshot.
 - Added a refresh completion message explaining that token proposals need review and that theme files are populated separately with `fill`.
 - Updated refresh fixtures and shared-token parsing for grouped UI name arrays and flat semantic selector arrays, preserving authored JSONC comments during description updates.
 - Show active tasks during quiet script operations, with terminal progress cleanup before results and failures.

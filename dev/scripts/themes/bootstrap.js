@@ -1,6 +1,6 @@
 /**
- * Shared token bootstrap command.
- * @file Parse explicit extension checkouts, run the clean token bootstrap, and report generated paths.
+ * Clean project bootstrap command.
+ * @file Parse verified extension checkouts, prepare a neutral default when needed, and report generated source paths.
  */
 
 import { bootstrapTokenData } from "../../tooling/tokens/data/bootstrap.js";
@@ -39,7 +39,7 @@ try {
       onProgress: update,
     }),
   );
-  console.log(formatMessage(`Generated ${result.changed.length} shared token files.`, "success"));
+  console.log(formatMessage(`Generated ${result.changed.length} source files. Run npm run build.`, "success"));
   for (const warning of result.warnings) console.warn(formatMessage(warning, "info"));
 } catch (error) {
   console.error(formatMessage(error.message, "error"));

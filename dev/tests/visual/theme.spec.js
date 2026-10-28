@@ -13,7 +13,7 @@ import { resolve, join } from "node:path";
 /** Pinned runtime and isolated instance paths. */
 const version = "1.143.1",
   root = process.cwd(),
-  cache = resolve(root, ".cache/visual"),
+  cache = resolve(root, "dev/.cache/visual"),
   instance = join(cache, "instance"),
   controlFile = join(instance, "control.json"),
   workspace = join(instance, "workspace");

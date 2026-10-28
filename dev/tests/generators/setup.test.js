@@ -25,12 +25,12 @@ for (const group of ["prod", "dev"]) {
     const root = await createBuildProject(t);
 
     await writeFixture(
-      join(root, "src/data/tokens/ui/definitions.jsonc"),
+      join(root, "src/data/tokens/generated/ui/definitions.jsonc"),
       '{"standard":[],"sourceCode":[],"nonStandard":{"a":["foreground"],"z":["background"]},"deprecated":[]}',
     );
 
     await writeFixture(
-      join(root, "src/data/tokens/semantic/definitions.jsonc"),
+      join(root, "src/data/tokens/generated/semantic/definitions.jsonc"),
       '{"standard":[],"sourceCode":[],"nonStandard":["*.readonly","enum"],"deprecated":[]}',
     );
 

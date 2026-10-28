@@ -31,7 +31,7 @@ test("nested property addition preserves styles, disabled entries, parent record
   const root = await createBuildProject(t);
 
   await writeFixture(
-    join(root, "src/data/tokens/ui/definitions.jsonc"),
+    join(root, "src/data/tokens/generated/ui/definitions.jsonc"),
     '{"standard":[],"sourceCode":[],"nonStandard":{"testing":["iconFailed"],"testing.iconFailed":["retired"],"zeta":["foreground"]},"deprecated":[]}',
   );
 
@@ -78,11 +78,11 @@ test("shared descriptions copy history and usage without shared flags, while the
   const root = await createBuildProject(t);
 
   await writeFixture(
-    join(root, "src/data/tokens/ui/definitions.jsonc"),
+    join(root, "src/data/tokens/generated/ui/definitions.jsonc"),
     '{"standard":[],"sourceCode":[],"nonStandard":{"new":["foreground"]},"deprecated":[]}',
   );
   await writeFixture(
-    join(root, "src/data/tokens/ui/details.jsonc"),
+    join(root, "src/data/tokens/generated/ui/details.jsonc"),
     '{"standard":{},"sourceCode":{},"nonStandard":{"new": {"foreground": {"description":"Shared purpose.","modified-desc":true,"descriptionAddedIn":"1.2.3","descriptionUpdatedIn":"1.2.3","descriptionBasedOn":"1.2.3","use":"When the verified fixture provider is active."}}},"deprecated":{}}',
   );
 
@@ -140,7 +140,7 @@ test("selected fallback targets receive local additions without modifying their 
   await writeDefaultPaletteConfig(join(root, "src/themes/dev/selected"));
   await writeDefaultPaletteConfig(join(root, "src/themes/dev/untouched"));
   await writeFixture(
-    join(root, "src/data/tokens/ui/definitions.jsonc"),
+    join(root, "src/data/tokens/generated/ui/definitions.jsonc"),
     '{"standard":[],"sourceCode":[],"nonStandard":{"new":["background"]},"deprecated":[]}',
   );
 
@@ -190,7 +190,7 @@ test("filling a missing purpose preserves interior comments and theme-reviewed r
   const root = await createBuildProject(t);
 
   await writeFixture(
-    join(root, "src/data/tokens/ui/details.jsonc"),
+    join(root, "src/data/tokens/generated/ui/details.jsonc"),
     '{"standard":{},"sourceCode":{},"nonStandard":{"editor": {"background": {"description":"Shared purpose.","inherits":["shared.review"]}}},"deprecated":{}}',
   );
 

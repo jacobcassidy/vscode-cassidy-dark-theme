@@ -23,14 +23,26 @@ export const themeInputPaths = [
   ...themeSections.flatMap((family) => [familyPath(family, "definitions"), familyPath(family, "details")]),
 ];
 
-/** Exact shared files consumed by normal builds and the watcher. */
-export const tokenDataPaths = [
-  "src/data/tokens/ui/definitions.jsonc",
-  "src/data/tokens/ui/details.jsonc",
-  "src/data/tokens/semantic/definitions.jsonc",
-  "src/data/tokens/semantic/details.jsonc",
-  "src/data/tokens/syntax/details.jsonc",
+/** Shared token layer root containing verified upstream output. */
+export const generatedTokenDirectory = "src/data/tokens/generated";
+
+/** Optional authored token layer root. */
+const manualTokenDirectory = "src/data/tokens/manual";
+
+/** Family files consumed from each shared token layer. */
+const tokenLayerFiles = [
+  "ui/definitions.jsonc",
+  "ui/details.jsonc",
+  "semantic/definitions.jsonc",
+  "semantic/details.jsonc",
+  "syntax/details.jsonc",
 ];
+
+/** Exact generated shared files required by normal builds and the watcher. */
+export const tokenDataPaths = tokenLayerFiles.map((path) => `${generatedTokenDirectory}/${path}`);
+
+/** Optional authored shared files observed by builds and the watcher. */
+export const manualTokenPaths = tokenLayerFiles.map((path) => `${manualTokenDirectory}/${path}`);
 
 /**
  * Identify one independently inherited family file.

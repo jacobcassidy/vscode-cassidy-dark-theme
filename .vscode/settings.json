@@ -16,7 +16,8 @@
     },
     {
       "fileMatch": [
-        "/src/data/tokens/semantic/definitions.jsonc"
+        "/src/data/tokens/generated/semantic/definitions.jsonc",
+        "/src/data/tokens/manual/semantic/definitions.jsonc"
       ],
       "url": "./dev/tooling/tokens/schemas/shared-semantic-definitions.schema.json"
     },
@@ -40,13 +41,15 @@
     },
     {
       "fileMatch": [
-        "/src/data/tokens/ui/definitions.jsonc"
+        "/src/data/tokens/generated/ui/definitions.jsonc",
+        "/src/data/tokens/manual/ui/definitions.jsonc"
       ],
       "url": "./dev/tooling/tokens/schemas/shared-ui-definitions.schema.json"
     },
     {
       "fileMatch": [
-        "/src/data/tokens/ui/details.jsonc"
+        "/src/data/tokens/generated/ui/details.jsonc",
+        "/src/data/tokens/manual/ui/details.jsonc"
       ],
       "url": "./dev/tooling/tokens/schemas/shared-ui-details.schema.json"
     },
@@ -58,7 +61,8 @@
     },
     {
       "fileMatch": [
-        "/src/data/tokens/syntax/details.jsonc"
+        "/src/data/tokens/generated/syntax/details.jsonc",
+        "/src/data/tokens/manual/syntax/details.jsonc"
       ],
       "url": "./dev/tooling/tokens/schemas/shared-syntax-details.schema.json"
     },
@@ -76,7 +80,8 @@
     },
     {
       "fileMatch": [
-        "/src/data/tokens/semantic/details.jsonc"
+        "/src/data/tokens/generated/semantic/details.jsonc",
+        "/src/data/tokens/manual/semantic/details.jsonc"
       ],
       "url": "./dev/tooling/tokens/schemas/shared-semantic-details.schema.json"
     },
@@ -88,7 +93,7 @@
     },
     {
       "fileMatch": [
-        "/src/data/tokens/upstream-sources.jsonc"
+        "/src/data/tokens/generated/upstream-sources.jsonc"
       ],
       "url": "./dev/tooling/tokens/schemas/upstream-sources.schema.json"
     }

@@ -386,7 +386,7 @@ test("prod palette reports include 600 contrast from final hex and flag transluc
   assert.match(await readFile(path, "utf8"), /`palette.blue.600`\s*\|\s*`#00000080`\s*\|\s*Needs backdrop/);
 });
 
-test("the authored palette keeps base syntax and colored control text readable", async () => {
+test("the neutral starter keeps editor, semantic, and comment text readable", async () => {
   /** Palette configuration parsed from authored inputs or created for this scenario. */
   const config = parseJsonc(
     await readFile(new URL("../../../src/themes/prod/default/palette/config.jsonc", import.meta.url), "utf8"),
@@ -402,17 +402,9 @@ test("the authored palette keeps base syntax and colored control text readable",
   /** Compiled default theme used for readability checks. */
   const theme = parse(renderTheme(parts.metadata, compileTokens(parts.tokens, parts.details, palette)));
 
-  for (const name of Object.keys(config.families)) {
-    assert.ok(contrastRatio(palette.get(`palette.${name}.400`).hex, theme.colors["editor.background"]) >= 4.5, name);
-  }
-
-  for (const [background, foreground] of [
-    ["button.background", "button.foreground"],
-    ["button.hoverBackground", "button.foreground"],
-    ["statusBar.debuggingBackground", "statusBar.debuggingForeground"],
-  ]) {
-    assert.ok(contrastRatio(theme.colors[foreground], theme.colors[background]) >= 4.5, background);
-  }
+  assert.ok(contrastRatio(theme.colors["editor.foreground"], theme.colors["editor.background"]) >= 4.5);
+  assert.ok(contrastRatio(theme.semanticTokenColors.variable.foreground, theme.colors["editor.background"]) >= 4.5);
+  assert.ok(contrastRatio(theme.tokenColors[0].settings.foreground, theme.colors["editor.background"]) >= 4.5);
 });
 
 test("dev targets use independent complete palettes and token sections and isolate outputs", async (t) => {

@@ -162,7 +162,7 @@ test("independent exact authorities reject disabled standard impostors and defin
   const root = await createBuildProject(t);
 
   await writeFixture(
-    join(root, "src/data/tokens/ui/definitions.jsonc"),
+    join(root, "src/data/tokens/generated/ui/definitions.jsonc"),
     JSON.stringify({ ...emptyFamily("ui", "definitions", true), standard: { editor: ["background"] } }),
   );
 
@@ -175,11 +175,11 @@ test("independent exact authorities reject disabled standard impostors and defin
 
   await assert.rejects(
     prepareBuild({ root }),
-    /widget.unknownBackground.*standard.*nonStandard.*src\/data\/tokens\/ui\/definitions.jsonc.*no exact standard definition membership/,
+    /widget.unknownBackground.*standard.*nonStandard.*src\/data\/tokens\/generated\/ui\/definitions.jsonc.*no exact standard definition membership/,
   );
 
   await writeFixture(
-    join(root, "src/data/tokens/ui/details.jsonc"),
+    join(root, "src/data/tokens/generated/ui/details.jsonc"),
     JSON.stringify(categorized("nonStandard", { editor: { background: { description: "Conflict." } } })),
   );
 
@@ -201,7 +201,7 @@ test("scope evidence is immutable, exact, independent of IDs, and rejects contri
   };
 
   await writeFixture(
-    join(root, "src/data/tokens/syntax/details.jsonc"),
+    join(root, "src/data/tokens/generated/syntax/details.jsonc"),
     JSON.stringify(
       categorized("nonStandard", {
         reference: { description: "Extension scope.", scopeEvidence: { scopes: [evidence] } },
@@ -241,7 +241,7 @@ test("scope evidence is immutable, exact, independent of IDs, and rejects contri
   definitions.records.get("string").value.scope = "unknown.compound scope";
   assert.throws(() => validateCategories(families, snapshot, "dev/extension"), /expected "standard"/);
   await writeFixture(
-    join(root, "src/data/tokens/syntax/details.jsonc"),
+    join(root, "src/data/tokens/generated/syntax/details.jsonc"),
     JSON.stringify(
       categorized("nonStandard", {
         reference: { description: "One.", scopeEvidence: { scopes: [evidence] } },
@@ -302,7 +302,7 @@ test("classification projection ignores documentation/history/key order and reta
   const root = await createBuildProject(t);
 
   await writeFixture(
-    join(root, "src/data/tokens/ui/details.jsonc"),
+    join(root, "src/data/tokens/generated/ui/details.jsonc"),
     '{"standard":{},"sourceCode":{},"nonStandard":{"fixture": {"foreground": {"description":"Original."}}},"deprecated":{}}',
   );
 
@@ -310,13 +310,13 @@ test("classification projection ignores documentation/history/key order and reta
   const original = (await loadTokenData({ root })).projection;
 
   await writeFixture(
-    join(root, "src/data/tokens/ui/details.jsonc"),
+    join(root, "src/data/tokens/generated/ui/details.jsonc"),
     '{"standard":{},"sourceCode":{},"nonStandard":{"fixture": {"foreground": {"description":"New wording.","descriptionBasedOn":"1.2.3","modified-desc":true,"use":"When the fixture is visible."}}},"deprecated":{}}',
   );
 
   assert.equal((await loadTokenData({ root })).projection, original);
   await writeFixture(
-    join(root, "src/data/tokens/ui/details.jsonc"),
+    join(root, "src/data/tokens/generated/ui/details.jsonc"),
     JSON.stringify(
       categorized("sourceCode", {
         fixture: { foreground: { description: "Same identity, different accepted membership." } },

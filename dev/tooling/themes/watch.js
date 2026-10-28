@@ -6,7 +6,7 @@
 import { mkdirSync, watch as watchDirectory } from "node:fs";
 import { homedir } from "node:os";
 import { join } from "node:path";
-import { repositoryRoot, tokenDataPaths } from "../shared/paths.js";
+import { repositoryRoot, tokenDataPaths, manualTokenPaths } from "../shared/paths.js";
 import { formatMessage } from "../shared/terminal-output.js";
 import { observeWriter, requireStable } from "../shared/transactions.js";
 import { readOptional, inputProjection } from "./inputs.js";
@@ -27,7 +27,7 @@ function sourceEvent(filename) {
   if (/\/(?:\.theme-build-[^/]+|palette\/(?:generated(?:\/|$)|default-palette\.txt$))/.test(path)) return undefined;
 
   if (
-    tokenDataPaths.some((file) => {
+    [...tokenDataPaths, ...manualTokenPaths].some((file) => {
       /** Source-relative shared file, including ancestor directory events. */ const relative = file.slice(4);
       return path === relative || relative.startsWith(`${path}/`);
     })

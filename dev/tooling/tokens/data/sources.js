@@ -45,7 +45,11 @@ export function validateSourceConfig(config) {
   if (!Array.isArray(config.coverageExceptions)) throw new Error("coverageExceptions must be an array");
 
   if (config.lastSuccessful !== undefined) {
-    fields(config.lastSuccessful, ["resolution", "coverage", "acceptedCoverage", "localSyntax"], "lastSuccessful");
+    fields(
+      config.lastSuccessful,
+      ["resolution", "coverage", "acceptedCoverage", "localSyntax", "colorThemeSchema"],
+      "lastSuccessful",
+    );
     fields(config.lastSuccessful.resolution, ["version", "tag", "inputs"], "lastSuccessful.resolution");
 
     /** Recorded release metadata never substitutes an ambiguous branch/tag for immutable source identities. */
@@ -67,6 +71,20 @@ export function validateSourceConfig(config) {
       !/^sha256:[a-f0-9]{64}$/.test(config.lastSuccessful.localSyntax.revision)
     )
       throw new Error("Malformed immutable local syntax identity");
+
+    if (config.lastSuccessful.colorThemeSchema) {
+      /** Stable schema provenance must belong to the same release as the source resolution. */
+      const schema = config.lastSuccessful.colorThemeSchema;
+
+      fields(schema, ["path", "revision", "digest"], "lastSuccessful.colorThemeSchema");
+
+      if (
+        schema.path !== `dev/docs/refreshes/vscode-color-theme-${resolution.version}.json` ||
+        schema.revision !== resolution.inputs[0].revision ||
+        !/^sha256:[a-f0-9]{64}$/.test(schema.digest)
+      )
+        throw new Error("Malformed immutable color theme schema identity");
+    }
 
     /** Input IDs must remain unique and immutable across replay. */
     const ids = new Set();
@@ -520,7 +538,7 @@ export async function obtainSource({ root, identity, retrieval, supplied, replay
   if (supplied) return verifySource(supplied, identity, retrieval);
 
   /** Exact-revision cache directory and its completed-entry proof. */
-  const destination = join(root, ".cache/token-details", identity.revision);
+  const destination = join(root, "dev/.cache/token-details", identity.revision);
 
   /**
    * Verify a completed cache entry without trusting directory presence.

@@ -1,0 +1,40 @@
+// Shared syntax token details: generated from verified sources.
+// Upstream inputs last processed: VS Code 1.143.1
+// Stable commit: e646868227c3e3a9e3f24277c8c7220be42c0be7
+// Supplemental main commit: ea8056df9f08fb7c452589213ec77fabbd3481b9
+// Local syntax input: src/themes/prod/default/tokens/syntax/definitions.jsonc
+// Local syntax revision: sha256:9896bb78ab6912afdf6097b350faff8ce6eb34f17da68f7399eb03d584323c9b
+/*
+MIT License
+
+Copyright (c) 2015 - present Microsoft Corporation
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+*/
+// Updater (run from the repository root): npm run refresh
+{
+  "standard": {
+    "comment": {
+      "description": "TextMate rule Comments targeting comment."
+    }
+  },
+  "sourceCode": {},
+  "nonStandard": {},
+  "deprecated": {}
+}

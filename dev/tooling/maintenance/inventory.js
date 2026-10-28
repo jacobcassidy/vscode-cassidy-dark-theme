@@ -10,10 +10,18 @@ export const configurationRoots = [
   "playwright.config.js",
   "dev/tests/visual/theme.spec.js",
   "dev/tests/visual/fixture-extension/extension.js",
+  "dev/tooling/tokens/data/schema-host/extension.js",
+  "dev/tooling/tokens/data/schema-host/run.js",
 ];
 
 /** Focused pure-contract/test interfaces retained with concrete current consumers. */
 export const testInterfaces = [
+  {
+    path: "dev/tooling/tokens/data/color-schema.js",
+    symbol: "schemaRecords",
+    consumer: "dev/tests/tokens/data/color-schema.test.js",
+    reason: "Direct assertions for schema references and exact UI/semantic registry interpretation.",
+  },
   {
     path: "dev/tooling/shared/color-math.js",
     symbol: "inGamut",

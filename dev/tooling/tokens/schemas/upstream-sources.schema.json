@@ -504,6 +504,29 @@
               "pattern": "^sha256:[a-f0-9]{64}$"
             }
           }
+        },
+        "colorThemeSchema": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "path",
+            "revision",
+            "digest"
+          ],
+          "properties": {
+            "path": {
+              "type": "string",
+              "pattern": "^dev/docs/refreshes/vscode-color-theme-[0-9]+\\.[0-9]+\\.[0-9]+\\.json$"
+            },
+            "revision": {
+              "type": "string",
+              "pattern": "^[a-f0-9]{40}$"
+            },
+            "digest": {
+              "type": "string",
+              "pattern": "^sha256:[a-f0-9]{64}$"
+            }
+          }
         }
       }
     }

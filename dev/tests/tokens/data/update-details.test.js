@@ -46,7 +46,27 @@ async function project(t) {
     coverageExceptions: [],
   };
 
-  await writeFixture(join(root, "src/data/tokens/upstream-sources.jsonc"), JSON.stringify(config));
+  await writeFixture(join(root, "src/data/tokens/generated/upstream-sources.jsonc"), JSON.stringify(config));
+
+  /**
+   * Return a deterministic built-in schema capture without starting a downloaded editor.
+   * @returns Minimal resolved virtual schema bundle.
+   */
+  async function captureColorSchema() {
+    return {
+      "color-theme": {
+        properties: {
+          colors: { $ref: "vscode://schemas/workbench-colors" },
+          semanticTokenColors: { $ref: "vscode://schemas/token-styling" },
+        },
+      },
+      "workbench-colors": { properties: { "editor.background": { description: "Fixture editor background." } } },
+      "token-styling": {
+        properties: { variable: { description: "Fixture variable." }, "*.readonly": { description: "Read-only." } },
+      },
+      "textmate-colors": { type: "array" },
+    };
+  }
 
   return {
     root,
@@ -55,6 +75,7 @@ async function project(t) {
       root,
       vscodeSource: upstream.directory,
       services: {
+        captureColorSchema,
         /**
          * Return the explicit immutable release fixture without contacting upstream.
          */
@@ -99,7 +120,7 @@ test("successful replay requires the recorded local syntax identity in both sche
   await updateTokenDetails(options);
 
   /** Successful recorded source configuration is checked independently by its editor schema. */
-  const path = join(root, "src/data/tokens/upstream-sources.jsonc"),
+  const path = join(root, "src/data/tokens/generated/upstream-sources.jsonc"),
     config = parseJsonc(await readFile(path, "utf8"), path).value;
 
   /** Local schema enforces the same replay identity requirement as the runtime reader. */
@@ -235,7 +256,7 @@ test("online refresh always discovers latest, no-op/replay preserves bytes, and 
     };
   };
 
-  assert.equal((await updateTokenDetails(options)).changed.length, 4);
+  assert.equal((await updateTokenDetails(options)).changed.length, 6);
   assert.equal((await updateTokenDetails(options)).changed.length, 0);
   assert.equal(discoveries, 2);
   assert.equal((await updateTokenDetails({ ...options, check: true })).changed.length, 0);
@@ -254,8 +275,8 @@ test("refresh reads grouped UI and flat semantic inventories without rewriting t
   const { root, options } = await project(t);
 
   /** Exact shared definition paths retain the current array-based source format. */
-  const uiPath = join(root, "src/data/tokens/ui/definitions.jsonc"),
-    semanticPath = join(root, "src/data/tokens/semantic/definitions.jsonc");
+  const uiPath = join(root, "src/data/tokens/generated/ui/definitions.jsonc"),
+    semanticPath = join(root, "src/data/tokens/generated/semantic/definitions.jsonc");
 
   await writeFixture(
     uiPath,
@@ -282,7 +303,7 @@ test("protected shared wording and usage survive refresh; removing protection pe
   const { root, options } = await project(t);
 
   await writeFixture(
-    join(root, "src/data/tokens/ui/details.jsonc"),
+    join(root, "src/data/tokens/generated/ui/details.jsonc"),
     '{"standard":{},"sourceCode":{},"nonStandard":{"editor": {"background": {"description":"Manual shared wording.","modified-desc":true,"descriptionBasedOn":"1.0.0","use":"When the fixture provider is active."}}},"deprecated":{}}',
   );
 
@@ -293,7 +314,7 @@ test("protected shared wording and usage survive refresh; removing protection pe
   );
 
   await writeFixture(
-    join(root, "src/data/tokens/ui/details.jsonc"),
+    join(root, "src/data/tokens/generated/ui/details.jsonc"),
     '{"standard":{},"sourceCode":{},"nonStandard":{"editor": {"background": {"description":"Manual shared wording.","modified-desc":false,"descriptionBasedOn":"1.0.0","use":"When the fixture provider is active."}}},"deprecated":{}}',
   );
 
@@ -316,7 +337,9 @@ test("partial updater replacement rolls back details, headers, and source resolu
   const paths = ["ui/details.jsonc", "semantic/details.jsonc", "syntax/details.jsonc", "upstream-sources.jsonc"];
 
   /** Original filesystem state retained for mutation or restoration assertions. */
-  const before = await Promise.all(paths.map((path) => readFile(join(root, "src/data/tokens", path), "utf8")));
+  const before = await Promise.all(
+    paths.map((path) => readFile(join(root, "src/data/tokens/generated", path), "utf8")),
+  );
 
   options.services.resolveLatest = async () => ({
     version: "1.2.4",
@@ -344,7 +367,7 @@ test("partial updater replacement rolls back details, headers, and source resolu
 
   await assert.rejects(updateTokenDetails(options), /injected updater failure.*prior artifacts restored/);
   assert.deepEqual(
-    await Promise.all(paths.map((path) => readFile(join(root, "src/data/tokens", path), "utf8"))),
+    await Promise.all(paths.map((path) => readFile(join(root, "src/data/tokens/generated", path), "utf8"))),
     before,
   );
 });
@@ -374,12 +397,12 @@ test("cache publication verifies completed entries, reuses concurrent results, a
   await obtainSource({ root, identity, retrieval, populate });
   await obtainSource({ root, identity, retrieval, populate });
   assert.equal(populations, 1);
-  await writeFile(join(root, ".cache/token-details", identity.revision, "src/constants.ts"), "broken");
+  await writeFile(join(root, "dev/.cache/token-details", identity.revision, "src/constants.ts"), "broken");
   await assert.rejects(obtainSource({ root, identity, retrieval, replay: true }), /corrupt recorded source/);
   assert.equal(populations, 1);
   await obtainSource({ root, identity, retrieval, populate });
   assert.equal(populations, 2);
-  assert.ok((await readdir(join(root, ".cache/token-details"))).every((name) => !name.includes("staging")));
+  assert.ok((await readdir(join(root, "dev/.cache/token-details"))).every((name) => !name.includes("staging")));
 });
 
 test("coverage exceptions authorize exact empty transitions and exact-identity replay, retaining their evidence", () => {
@@ -437,7 +460,9 @@ test("cancellation during shared application restores the complete previous gene
   const paths = ["ui/details.jsonc", "semantic/details.jsonc", "syntax/details.jsonc", "upstream-sources.jsonc"];
 
   /** Original filesystem state retained for mutation or restoration assertions. */
-  const before = await Promise.all(paths.map((path) => readFile(join(root, "src/data/tokens", path), "utf8")));
+  const before = await Promise.all(
+    paths.map((path) => readFile(join(root, "src/data/tokens/generated", path), "utf8")),
+  );
 
   options.signal = cancellation.signal;
   options.services.operations = {
@@ -454,7 +479,7 @@ test("cancellation during shared application restores the complete previous gene
 
   await assert.rejects(updateTokenDetails(options), /cancelled during application.*prior artifacts restored/);
   assert.deepEqual(
-    await Promise.all(paths.map((path) => readFile(join(root, "src/data/tokens", path), "utf8"))),
+    await Promise.all(paths.map((path) => readFile(join(root, "src/data/tokens/generated", path), "utf8"))),
     before,
   );
 });
@@ -464,12 +489,12 @@ test("refreshing a UI parent preserves unchanged child records, child history, i
   const { root, options } = await project(t);
 
   await writeFixture(
-    join(root, "src/data/tokens/ui/details.jsonc"),
+    join(root, "src/data/tokens/generated/ui/details.jsonc"),
     '{"standard":{},"sourceCode":{},"nonStandard":{"testing":{"iconFailed":{"description":"Old parent.","retired":{/* Child review stays here. */"description":"Child purpose remains.","descriptionBasedOn":"1.2.3"}}}},"deprecated":{}}',
   );
 
   /** Definition inventory/header bytes never advance during a details-only refresh. */
-  const definitionPath = join(root, "src/data/tokens/ui/definitions.jsonc"),
+  const definitionPath = join(root, "src/data/tokens/generated/ui/definitions.jsonc"),
     before = await readFile(definitionPath, "utf8");
 
   await updateTokenDetails(options);

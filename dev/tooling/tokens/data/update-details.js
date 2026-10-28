@@ -34,6 +34,7 @@ import { extractSource, semanticDescription } from "./extraction.js";
 import { editDetailRecord, recordPath } from "../../generators/source-edits.js";
 import { formatSource } from "../../shared/formatting.js";
 import { alphabetizeTokenData } from "./alphabetize.js";
+import { prepareColorSchema, colorSchemaReport } from "./color-schema.js";
 
 /**
  * Update description text history only for actual successful extraction.
@@ -290,7 +291,7 @@ export async function updateTokenDetails({
   if (recover && ![true, "verify-restored"].includes(recover)) throw new Error("Unknown recovery mode");
 
   /** Source policy must remain untouched on all failed/check invocations. */
-  const configPath = "src/data/tokens/upstream-sources.jsonc";
+  const configPath = "src/data/tokens/generated/upstream-sources.jsonc";
 
   if (recover === "verify-restored") {
     onProgress?.("Verifying restored token data");
@@ -309,7 +310,11 @@ export async function updateTokenDetails({
   onProgress?.("Validating local token data and theme inputs");
 
   /** Complete dependencies are captured before discovery/extraction, outside application guards. */
-  const expected = await capturePaths([join(root, "src"), join(root, "package.json")]);
+  const expected = await capturePaths([
+    join(root, "src"),
+    join(root, "package.json"),
+    join(root, "dev/docs/refreshes"),
+  ]);
 
   /** Existing external writer state observed without mutation. */
   const state = await observeWriter(root);
@@ -319,6 +324,9 @@ export async function updateTokenDetails({
 
   /** One validated checked-in shared classification/documentation snapshot. */
   const snapshot = await loadTokenData({ root, recovery: Boolean(recover) });
+
+  /** Refresh writes only verified generated data; merged authorities validate themes separately. */
+  const generated = snapshot.generated;
 
   /** Original extraction configuration bytes retained for source-preserving updates. */
   const configSource = await readFile(join(root, configPath), "utf8");
@@ -402,6 +410,15 @@ export async function updateTokenDetails({
     extracted.push(await (services.extractSource ?? extractSource)(source, signal));
   }
 
+  /** Exact stable runtime schema is replayed offline or captured when this release is new. */
+  const schema = await (services.prepareColorSchema ?? prepareColorSchema)({
+    root,
+    resolution,
+    replay,
+    capture: services.captureColorSchema,
+    onProgress,
+  });
+
   onProgress?.("Validating upstream extraction coverage");
 
   /** Successful coverage baselines and exact reviewed accepted outcomes form one resolution candidate. */
@@ -436,6 +453,25 @@ export async function updateTokenDetails({
     }
   }
 
+  for (const [family, target] of [
+    ["ui", merged.ui],
+    ["types", merged.types],
+    ["modifiers", merged.modifiers],
+  ]) {
+    for (const [id, value] of schema.records[family]) {
+      if (typeof value.description !== "string" || !value.description.trim()) continue;
+
+      if (!target.has(id) || target.get(id).category === "sourceCode")
+        target.set(id, {
+          description: value.description,
+          category: value.deprecated ? "deprecated" : "standard",
+          inputId: "vscode-color-theme-schema",
+          revision: schema.snapshot.commit,
+          path: `vscode://schemas/${family === "ui" ? "workbench-colors" : "token-styling"}`,
+        });
+    }
+  }
+
   /** Verified extension contributors indexed by exact shared UI and semantic token IDs. */
   const contributors = { ui: new Map(), semantic: new Map() };
 
@@ -447,8 +483,8 @@ export async function updateTokenDetails({
   }
 
   for (const id of new Set([
-    ...snapshot.details.semantic.records.keys(),
-    ...snapshot.definitions.semantic.records.keys(),
+    ...generated.details.semantic.records.keys(),
+    ...generated.definitions.semantic.records.keys(),
     ...themes.flatMap((theme) => [...theme.families.definitions.semantic.records.keys()]),
   ])) {
     if (semanticDescription(id, merged.types, merged.modifiers)?.category !== "nonStandard") continue;
@@ -473,22 +509,26 @@ export async function updateTokenDetails({
     onProgress?.(`Refreshing ${family} token descriptions`);
 
     /** Refresh the union without expanding definition inventories or changing accepted categories. */
-    const ids = new Set([
-      ...snapshot.details[family].records.keys(),
-      ...(snapshot.definitions[family]?.records.keys() ?? []),
-      ...themes.flatMap((theme) => (family === "syntax" ? [] : [...theme.families.definitions[family].records.keys()])),
-    ]);
+    const ids = new Set(
+      [
+        ...generated.details[family].records.keys(),
+        ...(generated.definitions[family]?.records.keys() ?? []),
+        ...themes.flatMap((theme) =>
+          family === "syntax" ? [] : [...theme.families.definitions[family].records.keys()],
+        ),
+      ].filter((id) => !snapshot.manual.definitions[family]?.records.has(id)),
+    );
 
     /** Originating shared detail file, including its original source and syntax tree. */
-    const input = snapshot.details[family].input;
+    const input = generated.details[family].input;
 
     /** Shared source text remains structurally/comment-preserved through individual leaf edits. */
     let source = input.source;
 
     for (const id of ids) {
       /** Existing accepted category and eligible extracted documentation. */
-      const existing = snapshot.details[family].records.get(id),
-        definition = snapshot.definitions[family]?.records.get(id);
+      const existing = generated.details[family].records.get(id),
+        definition = generated.definitions[family]?.records.get(id);
 
       /** Existing authored record supplying accepted membership for detail-only inventory. */
       const authored = themes
@@ -565,7 +605,7 @@ export async function updateTokenDetails({
           current: "absent",
           proposed: record.category,
           evidence: record,
-          affected: [input.path, snapshot.definitions[family].input.path],
+          affected: [input.path, generated.definitions[family].input.path],
         });
     }
 
@@ -603,19 +643,33 @@ export async function updateTokenDetails({
   }
 
   /** Successful source resolution advances only with its complete refreshed data generation. */
-  const successful = { resolution, coverage, acceptedCoverage, localSyntax };
+  const successful = {
+    resolution,
+    coverage,
+    acceptedCoverage,
+    localSyntax,
+    colorThemeSchema: {
+      path: schema.path,
+      revision: schema.snapshot.commit,
+      digest: schema.snapshot.digest,
+    },
+  };
 
   /** Source-preserving successful resolution and coverage candidate. */
   const updatedConfig = applyEdits(configSource, modify(configSource, ["lastSuccessful"], successful, {}));
 
   output.set(configPath, await formatSource(root, configPath, updatedConfig));
+  output.set(schema.path, schema.source);
+  output.set(schema.reportPath, await colorSchemaReport({ root, resolution, schema, extracted, generated }));
 
   onProgress?.("Validating refreshed files and checking source changes");
 
   // Validate the prepared shared files with the same local codec before application.
   for (const [path, source] of output) {
-    if (path === configPath) continue;
-    decode({ ...parseJsonc(source, path), source, path, label: path }, path.split("/")[3], "details", { shared: true });
+    if (path === configPath || !path.endsWith(".jsonc")) continue;
+    decode({ ...parseJsonc(source, path), source, path, label: path }, path.split("/").at(-2), "details", {
+      shared: true,
+    });
   }
 
   for (const source of sources) await (services.assertSourceFresh ?? assertSourceFresh)(source);
@@ -627,7 +681,15 @@ export async function updateTokenDetails({
   const changed = [];
 
   for (const [path, source] of output) {
-    if ((await readFile(join(root, path), "utf8")) !== source) changed.push(path);
+    let previous;
+
+    try {
+      previous = await readFile(join(root, path), "utf8");
+    } catch (error) {
+      if (error.code !== "ENOENT") throw error;
+    }
+
+    if (previous !== source) changed.push(path);
   }
 
   if (check) {

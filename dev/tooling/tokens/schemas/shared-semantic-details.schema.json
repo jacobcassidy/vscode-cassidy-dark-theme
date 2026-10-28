@@ -115,6 +115,34 @@
           },
           "modified-desc": {
             "type": "boolean"
+          },
+          "classificationEvidence": {
+            "type": "object",
+            "properties": {
+              "inputId": {
+                "type": "string",
+                "pattern": "\\S"
+              },
+              "revision": {
+                "type": "string",
+                "pattern": "^(?:[a-f0-9]{40}|sha256:[a-f0-9]{64})$"
+              },
+              "path": {
+                "type": "string",
+                "pattern": "\\S"
+              },
+              "reason": {
+                "type": "string",
+                "pattern": "\\S"
+              }
+            },
+            "required": [
+              "inputId",
+              "revision",
+              "path",
+              "reason"
+            ],
+            "additionalProperties": false
           }
         },
         "additionalProperties": false,
@@ -265,6 +293,34 @@
           },
           "modified-desc": {
             "type": "boolean"
+          },
+          "classificationEvidence": {
+            "type": "object",
+            "properties": {
+              "inputId": {
+                "type": "string",
+                "pattern": "\\S"
+              },
+              "revision": {
+                "type": "string",
+                "pattern": "^(?:[a-f0-9]{40}|sha256:[a-f0-9]{64})$"
+              },
+              "path": {
+                "type": "string",
+                "pattern": "\\S"
+              },
+              "reason": {
+                "type": "string",
+                "pattern": "\\S"
+              }
+            },
+            "required": [
+              "inputId",
+              "revision",
+              "path",
+              "reason"
+            ],
+            "additionalProperties": false
           }
         },
         "additionalProperties": false,

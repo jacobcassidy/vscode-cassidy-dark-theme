@@ -443,11 +443,14 @@ export async function applyArtifacts({
 
       while (parent !== root && parent.startsWith(`${root}/`)) {
         /** Missing parents must also be absent after a complete rollback/restoration verification. */
-        const parentEntry = await fingerprint(parent);
+        const parentEntry = await lstat(parent).catch((error) => {
+          if (error.code === "ENOENT") return undefined;
+          throw error;
+        });
 
-        if (parentEntry.type === "absent") {
+        if (!parentEntry) {
           createdDirectories.add(parent);
-          before[parent] = parentEntry;
+          before[parent] = { type: "absent" };
         }
 
         parent = dirname(parent);
