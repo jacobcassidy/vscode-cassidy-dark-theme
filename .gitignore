@@ -5,6 +5,6 @@
 *.vsix
 .vsixmanifest
 /dev/docs/TODO.md
-dev/dist/
+dev/packages/
 node_modules
 .cache/

@@ -42,7 +42,7 @@ dev/scripts/                 command wrappers and release helpers
 dev/tests/                   recursive behavioral suites and local fixtures
 themes/                  generated production themes
 dev/preview/{themes,snapshots}/
-dev/dist/                   local VSIX packages
+dev/packages/               local VSIX packages
 dev/samples/grammar/         visual language probes and adjacent tsconfig.json
 dev/docs/references/         maintained and historical reference artifacts
 ```
@@ -178,7 +178,7 @@ Use [preserved snapshots](../../preview/snapshots/) for historical comparisons. 
 
 ## Packaging, releases, and recovery
 
-Run `npm run package` for full local validation and VSIX creation. Local and pipeline packaging run the full checks once before creating the VSIX. It preserves production theme/image assets and excludes authored inputs, development files, and caches. Local VSIX output defaults to `dev/dist/`; CI can provide its artifact-staging path. Inspect the archive before release. Packaging performs no publication.
+Run `npm run package` for full local validation and VSIX creation. Local and pipeline packaging run the full checks once before creating the VSIX. It preserves production theme/image assets and excludes authored inputs, development files, and caches. Local VSIX output defaults to `dev/packages/`; CI can provide its artifact-staging path. Inspect the archive before release. Packaging performs no publication.
 
 Prepare the intended `package.json` version with aligned lockfile root metadata and a matching nonempty `## [VERSION] - YYYY-MM-DD` changelog section. Validate locally and inspect notes with `bash dev/scripts/release/publish/get-changelog-notes.sh`. Commit and push the intended release commit to remote `main` before explicitly submitting publication; local changes are not uploaded by the queue command.
 
