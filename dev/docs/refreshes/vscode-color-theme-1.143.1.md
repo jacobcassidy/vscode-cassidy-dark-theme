@@ -1074,29 +1074,7 @@ None.
 
 ### Missing from generated inventory
 
-- `class`
-- `comment`
-- `decorator`
-- `enum`
-- `enumMember`
-- `event`
-- `function`
-- `interface`
-- `keyword`
-- `label`
-- `macro`
-- `member`
-- `method`
-- `namespace`
-- `number`
-- `operator`
-- `parameter`
-- `property`
-- `regexp`
-- `string`
-- `struct`
-- `type`
-- `typeParameter`
+None.
 
 ## Semantic modifiers
 
@@ -1131,11 +1109,4 @@ None.
 
 ### Missing from generated inventory
 
-- `abstract`
-- `async`
-- `declaration`
-- `deprecated`
-- `documentation`
-- `modification`
-- `readonly`
-- `static`
+None.

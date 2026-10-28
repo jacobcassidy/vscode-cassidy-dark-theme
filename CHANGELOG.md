@@ -6,6 +6,7 @@ All notable changes to this project are documented in this file.
 
 ### Changed
 
+- Filled bootstrap's missing default theme with the full standard palette and matching definitions and details for every verified standard UI color and semantic type/modifier selector.
 - Added layered generated and manual shared token data, a single `bootstrap` command, and a neutral starter theme. Bootstrap and refresh capture the stable VS Code color theme schema and write versioned review reports under `dev/docs/refreshes/`.
 - Moved local caches under `dev/.cache/` and made builds, generators, and watchers validate the merged token snapshot.
 - Added a refresh completion message explaining that token proposals need review and that theme files are populated separately with `fill`.

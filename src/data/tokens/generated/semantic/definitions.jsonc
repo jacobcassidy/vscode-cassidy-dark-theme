@@ -28,9 +28,41 @@ SOFTWARE.
 // Updater (run from the repository root): npm run refresh
 {
   "standard": [
+    "*.abstract",
+    "*.async",
+    "*.declaration",
+    "*.deprecated",
+    "*.documentation",
+    "*.modification",
+    "*.readonly",
+    "*.static",
+    "class",
+    "comment",
+    "decorator",
+    "enum",
+    "enumMember",
+    "event",
+    "function",
+    "interface",
+    "keyword",
+    "label",
+    "macro",
+    "method",
+    "namespace",
+    "number",
+    "operator",
+    "parameter",
+    "property",
+    "regexp",
+    "string",
+    "struct",
+    "type",
+    "typeParameter",
     "variable"
   ],
   "sourceCode": [],
   "nonStandard": [],
-  "deprecated": []
+  "deprecated": [
+    "member"
+  ]
 }

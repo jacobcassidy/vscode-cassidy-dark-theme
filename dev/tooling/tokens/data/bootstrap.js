@@ -23,7 +23,7 @@ import { applyArtifacts, assertFresh, capturePaths, observeWriter, withGuards } 
 import { parseJsonc } from "../../shared/jsonc.js";
 import { alphabetizeTokenData } from "./alphabetize.js";
 import { formatSource } from "../../shared/formatting.js";
-import { starterTheme } from "./starter.js";
+import { completeStarterTheme, starterTheme } from "./starter.js";
 import { prepareColorSchema, colorSchemaReport } from "./color-schema.js";
 
 /**
@@ -203,11 +203,9 @@ export async function bootstrapTokenData({
     ["modifiers", modifiers],
   ]) {
     for (const [id, value] of schema.records[family]) {
-      if (typeof value.description !== "string" || !value.description.trim()) continue;
-
       /** Stable runtime membership is independent evidence when source extraction missed a registration. */
       const record = {
-        description: value.description,
+        description: value.description || `UNREVIEWED: Describe registered ${family} token ${id}.`,
         category: value.deprecated ? "deprecated" : "standard",
         inputId: "vscode-color-theme-schema",
         revision: schema.snapshot.commit,
@@ -215,9 +213,9 @@ export async function bootstrapTokenData({
       };
 
       if (family === "ui") {
-        if (!target.has(id) || target.get(id)[0].category !== "standard")
+        if (!target.has(id) || target.get(id)[0].category !== record.category)
           target.set(id, [record, ...(target.get(id) ?? [])]);
-      } else if (!target.has(id) || target.get(id).category !== "standard") target.set(id, record);
+      } else if (!target.has(id) || target.get(id).category !== record.category) target.set(id, record);
     }
   }
 
@@ -239,6 +237,10 @@ export async function bootstrapTokenData({
     const data = decode(input, "semantic", "definitions");
     for (const record of data.records.values()) semanticIds.add(record.id);
   }
+
+  /** Every stable registered semantic type and wildcard modifier is a default-theme selector candidate. */
+  for (const id of schema.records.types.keys()) semanticIds.add(id);
+  for (const id of schema.records.modifiers.keys()) semanticIds.add(`*.${id}`);
 
   /** Generated files and canonical category roots. */
   const uiDefinitions = Object.fromEntries(
@@ -331,6 +333,8 @@ export async function bootstrapTokenData({
 
   /** Validate the effective generated/manual snapshot and all theme categories before any write. */
   const snapshot = await loadTokenData({ root, overrides: candidates });
+
+  if (preparedTheme.size) completeStarterTheme(preparedTheme, snapshot);
 
   for (const [family, ids] of [
     ["ui", themeUiIds],

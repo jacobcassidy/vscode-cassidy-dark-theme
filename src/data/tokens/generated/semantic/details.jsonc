@@ -28,6 +28,126 @@ SOFTWARE.
 // Updater (run from the repository root): npm run refresh
 {
   "standard": {
+    "*.abstract": {
+      "description": "Symbols of any semantic token type. Style to use for symbols that are abstract.",
+      "descriptionBasedOn": "1.143.1"
+    },
+    "*.async": {
+      "description": "Symbols of any semantic token type. Style to use for symbols that are async.",
+      "descriptionBasedOn": "1.143.1"
+    },
+    "*.declaration": {
+      "description": "Symbols of any semantic token type. Style for all symbol declarations.",
+      "descriptionBasedOn": "1.143.1"
+    },
+    "*.deprecated": {
+      "description": "Symbols of any semantic token type. Style to use for symbols that are deprecated.",
+      "descriptionBasedOn": "1.143.1"
+    },
+    "*.documentation": {
+      "description": "Symbols of any semantic token type. Style to use for references in documentation.",
+      "descriptionBasedOn": "1.143.1"
+    },
+    "*.modification": {
+      "description": "Symbols of any semantic token type. Style to use for write accesses.",
+      "descriptionBasedOn": "1.143.1"
+    },
+    "*.readonly": {
+      "description": "Symbols of any semantic token type. Style to use for symbols that are read-only.",
+      "descriptionBasedOn": "1.143.1"
+    },
+    "*.static": {
+      "description": "Symbols of any semantic token type. Style to use for symbols that are static.",
+      "descriptionBasedOn": "1.143.1"
+    },
+    "class": {
+      "description": "Style for classes.",
+      "descriptionBasedOn": "1.143.1"
+    },
+    "comment": {
+      "description": "Style for comments.",
+      "descriptionBasedOn": "1.143.1"
+    },
+    "decorator": {
+      "description": "Style for decorators & annotations.",
+      "descriptionBasedOn": "1.143.1"
+    },
+    "enum": {
+      "description": "Style for enums.",
+      "descriptionBasedOn": "1.143.1"
+    },
+    "enumMember": {
+      "description": "Style for enum members.",
+      "descriptionBasedOn": "1.143.1"
+    },
+    "event": {
+      "description": "Style for events.",
+      "descriptionBasedOn": "1.143.1"
+    },
+    "function": {
+      "description": "Style for functions",
+      "descriptionBasedOn": "1.143.1"
+    },
+    "interface": {
+      "description": "Style for interfaces.",
+      "descriptionBasedOn": "1.143.1"
+    },
+    "keyword": {
+      "description": "Style for keywords.",
+      "descriptionBasedOn": "1.143.1"
+    },
+    "label": {
+      "description": "Style for labels. ",
+      "descriptionBasedOn": "1.143.1"
+    },
+    "macro": {
+      "description": "Style for macros.",
+      "descriptionBasedOn": "1.143.1"
+    },
+    "method": {
+      "description": "Style for method (member functions)",
+      "descriptionBasedOn": "1.143.1"
+    },
+    "namespace": {
+      "description": "Style for namespaces.",
+      "descriptionBasedOn": "1.143.1"
+    },
+    "number": {
+      "description": "Style for numbers.",
+      "descriptionBasedOn": "1.143.1"
+    },
+    "operator": {
+      "description": "Style for operators.",
+      "descriptionBasedOn": "1.143.1"
+    },
+    "parameter": {
+      "description": "Style for parameters.",
+      "descriptionBasedOn": "1.143.1"
+    },
+    "property": {
+      "description": "Style for properties.",
+      "descriptionBasedOn": "1.143.1"
+    },
+    "regexp": {
+      "description": "Style for expressions.",
+      "descriptionBasedOn": "1.143.1"
+    },
+    "string": {
+      "description": "Style for strings.",
+      "descriptionBasedOn": "1.143.1"
+    },
+    "struct": {
+      "description": "Style for structs.",
+      "descriptionBasedOn": "1.143.1"
+    },
+    "type": {
+      "description": "Style for types.",
+      "descriptionBasedOn": "1.143.1"
+    },
+    "typeParameter": {
+      "description": "Style for type parameters.",
+      "descriptionBasedOn": "1.143.1"
+    },
     "variable": {
       "description": "Style for variables.",
       "descriptionBasedOn": "1.143.1"
@@ -35,5 +155,10 @@ SOFTWARE.
   },
   "sourceCode": {},
   "nonStandard": {},
-  "deprecated": {}
+  "deprecated": {
+    "member": {
+      "description": "Style for member functions",
+      "descriptionBasedOn": "1.143.1"
+    }
+  }
 }
