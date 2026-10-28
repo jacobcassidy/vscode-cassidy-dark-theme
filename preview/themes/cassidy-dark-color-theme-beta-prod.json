@@ -2,7 +2,7 @@
 {
   "$schema": "vscode://schemas/color-theme",
   "name": "Cassidy Dark",
-  "previewName": "Reviewer",
+  "previewName": "Beta Prod",
   "type": "dark",
   "author": "Jacob Cassidy",
   "semanticHighlighting": true,
@@ -1000,35 +1000,6 @@
     "chat.fusionBadgeForeground": "#0ff",
     "chat.fusionBadgeGradientEnd": "#0ff",
     "chat.fusionBadgeGradientStart": "#0ff",
-    "editorWatermark.foreground": "#0ff",
-    "gitblame.inlineMessage": "#0ff",
-    "remoteHub.decorations.addedForegroundColor": "#0ff",
-    "remoteHub.decorations.conflictForegroundColor": "#0ff",
-    "remoteHub.decorations.deletedForegroundColor": "#0ff",
-    "remoteHub.decorations.ignoredResourceForeground": "#0ff",
-    "remoteHub.decorations.incomingAddedForegroundColor": "#0ff",
-    "remoteHub.decorations.incomingDeletedForegroundColor": "#0ff",
-    "remoteHub.decorations.incomingModifiedForegroundColor": "#0ff",
-    "remoteHub.decorations.incomingRenamedForegroundColor": "#0ff",
-    "remoteHub.decorations.modifiedForegroundColor": "#0ff",
-    "remoteHub.decorations.possibleConflictForegroundColor": "#0ff",
-    "remoteHub.decorations.submoduleForegroundColor": "#0ff",
-    "remoteHub.decorations.workspaceRepositoriesView.hasUncommittedChangesForegroundColor": "#0ff",
-    "scm.historyGraph.green": "#0ff",
-    "scm.historyGraph.historyItemGroupBase": "#0ff",
-    "scm.historyGraph.historyItemGroupHoverLabelForeground": "#0ff",
-    "scm.historyGraph.historyItemGroupLocal": "#0ff",
-    "scm.historyGraph.historyItemGroupRemote": "#0ff",
-    "scm.historyGraph.red": "#0ff",
-    "scm.historyGraph.yellow": "#0ff",
-    "scm.historyItemAdditionsForeground": "#0ff",
-    "scm.historyItemDeletionsForeground": "#0ff",
-    "scm.historyItemSelectedStatisticsBorder": "#0ff",
-    "scm.historyItemStatisticsBorder": "#0ff",
-    "scmGraph.historyItemGroupBase": "#0ff",
-    "scmGraph.historyItemGroupLocal": "#0ff",
-    "scmGraph.historyItemGroupRemote": "#0ff",
-    "testing.message.error.decorationForeground": "#0ff",
     "chat.voiceSpeakingGlow": "#0ff",
     "editorActiveLineNumber.foreground": "#0ff",
     "editorIndentGuide.activeBackground": "#0ff",
@@ -1085,6 +1056,9 @@
     "function": {
       "foreground": "#0ff"
     },
+    "function.defaultLibrary": {
+      "foreground": "#0ff"
+    },
     "interface": {
       "foreground": "#0ff"
     },
@@ -1127,6 +1101,15 @@
     "typeParameter": {
       "foreground": "#0ff"
     },
+    "variable.abstract": {
+      "foreground": "#0ff"
+    },
+    "variable.async": {
+      "foreground": "#0ff"
+    },
+    "variable.declaration": {
+      "foreground": "#0ff"
+    },
     "variable": {
       "foreground": "#0ff"
     },
@@ -1134,6 +1117,21 @@
       "foreground": "#0ff"
     },
     "variable.definition": {
+      "foreground": "#0ff"
+    },
+    "variable.deprecated": {
+      "foreground": "#0ff"
+    },
+    "variable.documentation": {
+      "foreground": "#0ff"
+    },
+    "variable.modification": {
+      "foreground": "#0ff"
+    },
+    "variable.readonly": {
+      "foreground": "#0ff"
+    },
+    "variable.static": {
       "foreground": "#0ff"
     },
     "*.builtin": {
@@ -1200,9 +1198,6 @@
       "foreground": "#0ff"
     },
     "module": {
-      "foreground": "#0ff"
-    },
-    "parameter.readwrite": {
       "foreground": "#0ff"
     },
     "parenthesis": {

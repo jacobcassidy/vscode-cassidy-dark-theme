@@ -1,0 +1,3 @@
+No palette is generated for dev/beta-prod because the default palette is being used.
+Default palette configuration: src/themes/prod/default/palette/config.jsonc
+Generated default palette: src/themes/prod/default/palette/generated/
