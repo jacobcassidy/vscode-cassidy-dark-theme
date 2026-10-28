@@ -68,6 +68,14 @@ try {
 
   for (const proposal of result.proposals)
     console.log(formatMessage(`Review proposal: ${JSON.stringify(proposal)}`, "action"));
+
+  if (!result.verifiedRestored)
+    console.log(
+      formatMessage(
+        "Refresh does not add new tokens to shared definitions or production/development themes. Review proposals, add accepted tokens to shared definitions, then run `npm run fill -- prod/default` with any other themes you want to update.",
+        "action",
+      ),
+    );
 } catch (error) {
   progress?.stop();
   console.error(formatMessage(error.message, "error"));
