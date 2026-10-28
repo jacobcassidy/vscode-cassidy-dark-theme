@@ -16,12 +16,21 @@ export async function starterTheme(root) {
   /** Project display name used for the default theme. */
   const manifest = JSON.parse(await readFile(join(root, "package.json"), "utf8"));
 
+  /** Optional package author retained in generated theme metadata. */
+  const author = typeof manifest.author === "string" ? manifest.author : manifest.author?.name;
+
   /** Stable source prefix for every prepared template. */
   const prefix = `${defaultThemeDirectory}/`;
 
   /** Small categorized source files with matching documentation. */
   const sources = {
-    "metadata.jsonc": { name: manifest.displayName || manifest.name, type: "dark", semanticHighlighting: true },
+    "metadata.jsonc": {
+      $schema: "vscode://schemas/color-theme",
+      name: manifest.displayName || manifest.name,
+      type: "dark",
+      ...(typeof author === "string" && author.trim() ? { author } : {}),
+      semanticHighlighting: true,
+    },
     "palette/config.jsonc": {
       chroma: { strength: 0.5, gamutFraction: 0.9 },
       families: { yellow: { hue: 90, lightness: 0.9, baseChroma: 0.075 }, blue: { hue: 255, lightness: 0.75 } },

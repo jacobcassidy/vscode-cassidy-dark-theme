@@ -9,6 +9,26 @@ import { lstat, mkdir, mkdtemp, rm, symlink, writeFile } from "node:fs/promises"
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { bootstrapTokenData } from "../../../tooling/tokens/data/bootstrap.js";
+import { starterTheme } from "../../../tooling/tokens/data/starter.js";
+
+test("starter metadata retains the VS Code schema and package author", async (t) => {
+  /** Minimal package fixture for an absent default theme. */
+  const root = await mkdtemp(join(tmpdir(), "cassidy-starter-"));
+
+  t.after(() => rm(root, { recursive: true, force: true }));
+  await writeFile(
+    join(root, "package.json"),
+    JSON.stringify({ name: "starter", displayName: "Starter Theme", author: { name: "Example Author" } }),
+  );
+
+  /** Prepared metadata must preserve editor schema tooling and package attribution. */
+  const sources = await starterTheme(root),
+    metadata = JSON.parse(sources.get("src/themes/prod/default/metadata.jsonc"));
+
+  assert.equal(metadata.$schema, "vscode://schemas/color-theme");
+  assert.equal(metadata.name, "Starter Theme");
+  assert.equal(metadata.author, "Example Author");
+});
 
 for (const kind of ["directory", "file", "symlink"]) {
   test(`bootstrap rejects an existing generated ${kind} before source retrieval`, async (t) => {
