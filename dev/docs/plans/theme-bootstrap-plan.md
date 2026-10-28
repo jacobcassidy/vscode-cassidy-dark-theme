@@ -1,31 +1,45 @@
-# Add a clean-project bootstrap command
+# Bootstrap a theme with generated and manual token layers
 
 ## Summary
 
-Add `npm run bootstrap` to create a small, neutral `src/themes/prod/default` theme and verified shared token data under `src/data/tokens/`. It will work when both directories are absent. If either directory exists, including as an empty directory or symlink, it will stop before writing and tell the user which directories to delete manually.
+Add `npm run bootstrap` to create verified token data in `src/data/tokens/generated/` and a small, neutral `src/themes/prod/default/` theme when the default theme is missing. Optional authored data in `src/data/tokens/manual/` survives bootstrap and refresh. Builds use one validated snapshot merged from both layers.
 
-## Implementation
+Bootstrap requires `generated/` to be absent. An existing directory, partial directory, file, or symlink at that path blocks all writes with manual-deletion guidance. An existing `manual/` layer or default theme is preserved and validated; bootstrap creates the default theme only when absent. Refresh updates existing generated data. This plan covers clean bootstrap and layer-aware tooling; migration of the old shared files into the two layers is a separate task. The overlapping bootstrap and layer-shape instructions in `manual-token-separation-plan.md` are superseded by this plan.
 
-- Bundle starter theme templates outside `src/`. Create metadata named from `package.json` (`displayName`, falling back to `name`), a valid neutral palette, paired token definitions and details, editor background and foreground colors, one semantic variable, and one syntax comment rule.
-- Complete the unfinished upstream token generation as an internal stage of `bootstrap`, retaining only source retrieval and verification helpers that pass the new end-to-end tests. Accept repeatable `--extension-source <checkout>` arguments, read the prepared default theme before it exists on disk, and validate any other authored themes against the generated shared data.
+## Token data layout and merge contract
+
+- Store verified VS Code and extension output in `src/data/tokens/generated/`: UI and semantic `definitions.jsonc` and `details.jsonc`, syntax `details.jsonc`, and `upstream-sources.jsonc`. Keep `src/data/tokens/README.md` at the common root.
+- Allow corresponding UI, semantic, and syntax files under `src/data/tokens/manual/`; every manual file is optional, and bootstrap and refresh never create or write one. Upstream source history exists only in `generated/`.
+- Keep the `standard`, `sourceCode`, `nonStandard`, and `deprecated` category roots in both layers. They describe token classification, while the directories describe ownership. Retain the existing UI group arrays, exact semantic selector arrays, nested UI detail records, and syntax detail records. Do not change theme-owned token file shapes or syntax rule order.
+- Decode each present file with its own path and schema, merge records by exact family and ID, then validate the effective snapshot before theme validation, builds, generators, or watcher invalidation. Missing manual files act as empty categories. Keep raw generated records and source text available separately to bootstrap, refresh, and generated-data checks.
+- Manual UI and semantic definitions add IDs absent from generated definitions. Reject duplicate IDs, including attempted category changes, with both source locations. A manual-only UI or semantic detail must match a manual definition's category. Disallow manual-only `standard` definitions without verified baseline membership; require reviewed evidence for `sourceCode` or `deprecated` classification.
+- Manual detail fields override generated fields for the same ID and category; omitted fields retain generated values, and an authored array replaces the generated array. Reject category mismatches. Generated `source` attribution and `scopeEvidence` are immutable: manual records cannot replace them. A manual-only nonstandard UI or semantic definition requires a matching manual detail with a valid, sorted, unique `Publisher.extension` source array. Manual syntax details may document new default-theme rule IDs with reviewed immutable `scopeEvidence`; their categories and exact scope coverage must validate against the default theme.
+- Build scope indexes and watcher projections from the merged snapshot. Preserve origin labels for clear merge and classification diagnostics. Keep generated files deterministically alphabetized using the existing helper while preserving comments and meaningful array order.
+
+## Bootstrap and refresh implementation
+
+- Bundle starter theme templates outside `src/`. Create metadata named from `package.json` (`displayName`, falling back to `name`), a valid neutral palette, paired token definitions and details, editor background and foreground colors, one semantic variable, and one syntax comment rule. Keep the starter small and validate it against the merged inventory.
+- Complete upstream token generation as an internal stage of `bootstrap`, retaining only source retrieval and verification helpers that pass the end-to-end tests. Accept repeatable `--extension-source <checkout>` arguments. Prepare a missing default theme in memory before extraction so its syntax rules and theme-owned IDs are available; read an existing default theme unchanged. Generate token candidates, merge them with existing manual data, and validate the prepared default and every other authored theme before writing. Manual-only IDs supported by the merged inventory must not be rejected solely for lacking an extracted registration.
 - Check the latest stable and supplemental main revisions on each online bootstrap, then reuse verified exact-revision entries in `dev/.cache/token-details/`. Download only missing, invalid, or newly resolved revisions; deleting `src/` must not discard the cache.
 - Move all project cache paths from `.cache/` to `dev/.cache/`, including visual-check downloads, Playwright output, Docker mounts, and CI report paths. Keep the directory ignored and excluded from packages. Document a one-time rename for existing checkouts so downloaded caches can be preserved without overwriting a new cache.
-- Prepare and validate every source file, including `src/data/tokens/README.md`, before applying them in one guarded, rollback-capable transaction. Show progress during quiet stages and print `npm run build` after success; bootstrap itself will create source files only.
-- Remove the `bootstrap:tokens` script and wrapper. Update its documentation and interrupted-generation recovery guidance to use `bootstrap`, so there is one supported bootstrap command.
-- Document the command and its manual-deletion rule in the README, development guide, and changelog. Follow the repository's script ordering and JavaScript documentation rules, then commit only this feature's changes.
+- Update refresh and its `--check` mode to read and compare generated inputs only, write only generated details and source history, and validate the resulting merged snapshot. Manual overrides must never be copied into generated output or affect generated drift comparisons. Preserve generated description history and source attribution; a generated-only no-op retains bytes and timestamps.
+- Prepare every output file, including `src/data/tokens/README.md` if absent and a missing default theme, before one guarded, rollback-capable transaction. Preserve an existing shared-data README. Include existing manual files, themes, upstream inputs, and output destinations in freshness checks without adding preserved files to the output set. Validate all candidates before writes; cancellation, stale inputs, failed validation, and interrupted application must leave no partial generation or explain the owning recovery command.
+- Update centralized paths, codecs, schemas, `.vscode/settings.json` associations, build/check/watch tooling, generators, fixtures, documentation checks, and reachability checks for the two layers and merged behavior. Keep ordinary builds and checks local and independent of upstream retrieval or cache state.
+- Remove the `bootstrap:tokens` script and wrapper. Update command documentation and interrupted-generation recovery guidance to use `bootstrap`, so there is one supported bootstrap command. Show visible progress during quiet stages and print `npm run build` after success; bootstrap itself creates source files only.
+- Document bootstrap, manual authoring, classification and evidence rules, refresh ownership, and recovery in the README, development guide, shared-data README, and changelog. Follow repository script ordering and JavaScript documentation rules, then commit only this feature's changes.
 
 ## Tests
 
-- In isolated projects, verify successful bootstrap with both directories absent and confirm the resulting sources build.
-- Verify that either existing directory, a partial directory, or a symlink blocks all writes with a manual-deletion message.
-- Verify upstream, validation, cancellation, and injected application failures leave no partial source tree; a clean retry succeeds.
-- Verify existing additional themes and extension sources are included in validation. Run the relevant checks and `npm pack --dry-run` to confirm the command and templates are packaged.
-- Verify repeated online bootstrap preparation reuses a valid stable cache after checking the latest revision, while a changed or invalid revision is fetched again.
-- Verify token and visual tooling use `dev/.cache/`, CI collects reports from the new path, and package contents exclude the cache.
+- In isolated projects, bootstrap with no generated layer and either a missing or existing default theme; confirm a small new default builds and an existing default remains byte-identical. Verify an absent or populated manual layer remains untouched while its additions and overrides appear in the effective build.
+- Verify any existing `generated/` entry, including an empty or partial directory and a symlink, blocks bootstrap before source or theme writes. Verify invalid manual data, conflicting categories, missing nonstandard attribution, unsupported manual-only standard IDs, and invalid syntax evidence fail before writes with source locations.
+- Exercise generated-only, manual-only additions, and combined loading; field and array overrides; preservation of generated `source` and `scopeEvidence`; exact syntax scope classification; and watcher rebuilds after either layer changes.
+- Verify refresh, `--check`, and recovery operate on generated output while validating the merged snapshot. Manual files must retain their bytes and timestamps; generated ordering and repeated refresh output must be deterministic. Inject cancellation, stale-input, validation, and application failures and confirm rollback and clean retry.
+- Verify other authored themes and extension sources participate in validation. Verify repeated online bootstrap preparation reuses a valid stable cache after checking the latest revision, while a changed or invalid revision is fetched again.
+- Verify token and visual tooling use `dev/.cache/`, CI collects reports from the new path, and package contents exclude the cache. Run the relevant schema, docs, theme, lint, transaction, and behavioral checks, plus `npm pack --dry-run` to confirm the command and templates are packaged.
 - Verify `bootstrap:tokens` is no longer exposed and recovery instructions name the supported command.
 
 ## Assumptions
 
 - Package users run `npm run bootstrap` from a copied or cloned project containing its `package.json`; publishing the npm package is a later task.
-- The unanswered naming preference defaults to the project's package metadata.
-- The current working-tree deletions and default-theme edit are user changes and must be preserved.
+- The default theme name comes from package metadata. Existing manual files and default-theme inputs are authored and remain unchanged by bootstrap.
+- The current uncommitted deletions and default-theme edit remain user-owned. Their migration is outside this implementation plan.
