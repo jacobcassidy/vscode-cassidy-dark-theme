@@ -31,10 +31,12 @@ test("starter metadata retains the VS Code schema and package author", async (t)
   assert.equal(metadata.author, "Example Author");
 
   /** Full standard palette configuration survives even before registration extraction. */
-  const palette = JSON.parse(sources.get("src/themes/prod/default/palette/config.jsonc"));
+  const paletteSource = sources.get("src/themes/prod/default/palette/config.jsonc"),
+    palette = JSON.parse(paletteSource);
 
   assert.equal(Object.keys(palette.families).length, 8);
   assert.equal(Object.keys(palette.neutrals).length, 23);
+  assert.ok(paletteSource.indexOf('"000": 0.98') < paletteSource.indexOf('"100": 0.9'));
 });
 
 test("starter completion creates every standard UI and semantic definition with matching details", async (t) => {

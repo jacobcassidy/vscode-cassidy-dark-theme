@@ -48,6 +48,22 @@ const standardPalette = {
   overrides: {},
 };
 
+/** JSON's explicit property list keeps the non-index "000" tone ahead of numeric tone keys. */
+const paletteKeys = [
+  "chroma",
+  "strength",
+  "gamutFraction",
+  "families",
+  ...Object.keys(standardPalette.families),
+  "hue",
+  "lightness",
+  "baseChroma",
+  "neutrals",
+  "000",
+  ...Object.keys(standardPalette.neutrals).filter((key) => key !== "000"),
+  "overrides",
+];
+
 /**
  * Insert one UI token under its dotted path without discarding parent records.
  * @param target - Nested category records.
@@ -195,6 +211,9 @@ export async function starterTheme(root) {
     throw new Error("package.json must provide a nonempty displayName or name for bootstrap");
 
   return new Map(
-    Object.entries(sources).map(([path, value]) => [`${prefix}${path}`, `${JSON.stringify(value, null, 2)}\n`]),
+    Object.entries(sources).map(([path, value]) => [
+      `${prefix}${path}`,
+      `${JSON.stringify(value, path === "palette/config.jsonc" ? paletteKeys : null, 2)}\n`,
+    ]),
   );
 }
