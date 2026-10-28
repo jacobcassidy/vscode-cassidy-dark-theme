@@ -240,7 +240,6 @@ async function prepareTarget(target, paletteOnly, defaultPalette, readInput, sna
 
   if (!input.value.useDefaultPalette) {
     output.set(`${target.directory}/palette/default-palette.txt`, null);
-    output.set(`${target.reportDirectory}/default.txt`, null);
   }
 
   /** Resolved theme metadata used to build manifest registrations. */

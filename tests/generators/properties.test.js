@@ -32,7 +32,7 @@ test("nested property addition preserves styles, disabled entries, parent record
 
   await writeFixture(
     join(root, "src/token-data/ui/definitions.jsonc"),
-    '{"testing.iconFailed":"#000","testing.iconFailed.retired":"#000","zeta.foreground":"#000"}',
+    '{"standard":{},"sourceCode":{},"nonStandard":{"testing": {"iconFailed": {"color":"#0ff","colorReason":"UNREVIEWED: Added from a token template; choose an intentional color.","retired": {"color":"#0ff","colorReason":"UNREVIEWED: Added from a token template; choose an intentional color."}}},"zeta": {"foreground": {"color":"#0ff","colorReason":"UNREVIEWED: Added from a token template; choose an intentional color."}}},"deprecated":{}}',
   );
 
   await writeFixture(
@@ -42,7 +42,7 @@ test("nested property addition preserves styles, disabled entries, parent record
 
   await writeFixture(
     join(root, "src/themes/prod/default/tokens/ui/details.jsonc"),
-    '{"editor.background":{"description":"My wording.","inherits":["widget.background"]}}',
+    '{"standard":{},"sourceCode":{},"nonStandard":{"editor": {"background": {"description":"My wording.","inherits":["widget.background"]}}},"deprecated":{}}',
   );
 
   /** First generation fills only missing records and descriptions. */
@@ -77,10 +77,13 @@ test("shared descriptions copy history and usage without shared flags, while the
   /** Shared definition and detail metadata supplied separately from the theme. */
   const root = await createBuildProject(t);
 
-  await writeFixture(join(root, "src/token-data/ui/definitions.jsonc"), '{"new.foreground":"#000"}');
+  await writeFixture(
+    join(root, "src/token-data/ui/definitions.jsonc"),
+    '{"standard":{},"sourceCode":{},"nonStandard":{"new": {"foreground": {"color":"#0ff","colorReason":"UNREVIEWED: Added from a token template; choose an intentional color."}}},"deprecated":{}}',
+  );
   await writeFixture(
     join(root, "src/token-data/ui/details.jsonc"),
-    '{"new.foreground":{"description":"Shared purpose.","modified-desc":true,"descriptionAddedIn":"1.2.3","descriptionUpdatedIn":"1.2.3","descriptionBasedOn":"1.2.3","use":"When the verified fixture provider is active."}}',
+    '{"standard":{},"sourceCode":{},"nonStandard":{"new": {"foreground": {"description":"Shared purpose.","modified-desc":true,"descriptionAddedIn":"1.2.3","descriptionUpdatedIn":"1.2.3","descriptionBasedOn":"1.2.3","use":"When the verified fixture provider is active."}}},"deprecated":{}}',
   );
 
   await addThemeProperties({ root, themes: ["prod/default"] });
@@ -96,7 +99,7 @@ test("shared descriptions copy history and usage without shared flags, while the
 
   await writeFixture(
     join(root, "src/themes/prod/default/tokens/ui/details.jsonc"),
-    '{"new.foreground":{"description":"Theme adaptation.","descriptionBasedOn":"1.2.3"}}',
+    '{"standard":{},"sourceCode":{},"nonStandard":{"new": {"foreground": {"description":"Theme adaptation.","descriptionBasedOn":"1.2.3"}}},"deprecated":{}}',
   );
 
   await addThemeProperties({ root, themes: ["prod/default"] });
@@ -110,11 +113,7 @@ test("required syntax IDs remain stable, keep scope/order, and avoid collisions"
 
   await writeFixture(
     join(root, "src/themes/prod/default/tokens/syntax/definitions.jsonc"),
-    JSON.stringify([
-      { id: "string", scope: "string", color: "palette.yellow.400" },
-      { name: "String", scope: ["first", "second"], fontStyle: "bold" },
-      { name: "String", scope: "third" },
-    ]),
+    '{"standard":{"rules":[{"id":"string","scope":"string","color":"palette.yellow.400","order":0},{"name":"String","scope":["first","second"],"fontStyle":"bold","order":1},{"name":"String","scope":"third","order":2}]},"sourceCode":{"rules":[]},"nonStandard":{"rules":[]},"deprecated":{"rules":[]}}',
   );
 
   await addThemeProperties({ root, themes: ["prod/default"] });
@@ -140,7 +139,10 @@ test("selected fallback targets receive local additions without modifying their 
 
   await writeDefaultPaletteConfig(join(root, "src/themes/dev/selected"));
   await writeDefaultPaletteConfig(join(root, "src/themes/dev/untouched"));
-  await writeFixture(join(root, "src/token-data/ui/definitions.jsonc"), '{"new.background":"#000"}');
+  await writeFixture(
+    join(root, "src/token-data/ui/definitions.jsonc"),
+    '{"standard":{},"sourceCode":{},"nonStandard":{"new": {"background": {"color":"#0ff","colorReason":"UNREVIEWED: Added from a token template; choose an intentional color."}}},"deprecated":{}}',
+  );
 
   /** Original production input stays byte-identical. */
   const path = join(root, "src/themes/prod/default/tokens/ui/definitions.jsonc"),
@@ -162,10 +164,13 @@ test("all selected candidates validate before source or artifact writes", async 
   await writeDefaultPaletteConfig(join(root, "src/themes/dev/broken"));
   await writeFixture(
     join(root, "src/themes/dev/broken/tokens/ui/definitions.jsonc"),
-    '{"bad.foreground":{"color":"missing.alias"}}',
+    '{"standard":{},"sourceCode":{},"nonStandard":{"bad": {"foreground": {"color":"missing.alias"}}},"deprecated":{}}',
   );
 
-  await writeFixture(join(root, "src/themes/dev/broken/tokens/ui/details.jsonc"), "{}");
+  await writeFixture(
+    join(root, "src/themes/dev/broken/tokens/ui/details.jsonc"),
+    '{"standard":{},"sourceCode":{},"nonStandard":{},"deprecated":{}}',
+  );
 
   /** Earlier valid candidates must never be applied when a later input fails. */
   const path = join(root, "src/themes/prod/default/tokens/ui/definitions.jsonc"),
@@ -186,7 +191,7 @@ test("filling a missing purpose preserves interior comments and theme-reviewed r
 
   await writeFixture(
     join(root, "src/token-data/ui/details.jsonc"),
-    '{"editor.background":{"description":"Shared purpose.","inherits":["shared.review"]}}',
+    '{"standard":{},"sourceCode":{},"nonStandard":{"editor": {"background": {"description":"Shared purpose.","inherits":["shared.review"]}}},"deprecated":{}}',
   );
 
   await writeFixture(
@@ -211,7 +216,7 @@ test("same-ID scope variants get local scope-derived details while preserving th
   await writeDefaultPaletteConfig(join(root, "src/themes/dev/variant"));
   await writeFixture(
     join(root, "src/themes/dev/variant/tokens/syntax/definitions.jsonc"),
-    JSON.stringify([{ id: "string", scope: "custom.scope", color: "#010203", colorReason: "Isolated scope variant." }]),
+    '{"standard":{"rules":[{"id":"string","scope":"custom.scope","color":"#010203","colorReason":"Isolated scope variant.","order":0}]},"sourceCode":{"rules":[]},"nonStandard":{"rules":[]},"deprecated":{"rules":[]}}',
   );
 
   /** Default reference bytes are independently protected from the explicit generator operation. */

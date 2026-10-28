@@ -19,6 +19,7 @@ import {
   readThemeParts,
   themePartNames,
   writeDefaultPaletteConfig,
+  familySource,
 } from "../helpers/projects.js";
 import { join } from "node:path";
 import test from "node:test";
@@ -240,13 +241,16 @@ for (const section of ["ui", "semantic", "syntax"]) {
 
     await writeFile(
       join(root, `src/themes/prod/default/tokens/${section}/details.jsonc`),
-      JSON.stringify({
+      familySource(section, "details", {
         ...defaultDetails,
         [key]: { ...defaultDetails[key], globallyOverriddenBy: ["reviewed.replacement"] },
       }),
     );
 
-    await writeFile(join(directory, `tokens/${section}/definitions.jsonc`), JSON.stringify(tokens));
+    await writeFile(
+      join(directory, `tokens/${section}/definitions.jsonc`),
+      familySource(section, "definitions", tokens),
+    );
 
     /** Valid disabled default definition makes the inherited assertion internally consistent. */
     const defaultTokens = structuredClone(tokens);
@@ -258,14 +262,17 @@ for (const section of ["ui", "semantic", "syntax"]) {
 
     await writeFile(
       join(root, `src/themes/prod/default/tokens/${section}/definitions.jsonc`),
-      JSON.stringify(defaultTokens),
+      familySource(section, "definitions", defaultTokens),
     );
 
     await assert.rejects(buildDevThemes({ root }), /default fallback.*globallyOverriddenBy requires disabled/s);
 
     definition.disabled = true;
     definition.disabledReason = "Reviewed replacement everywhere.";
-    await writeFile(join(directory, `tokens/${section}/definitions.jsonc`), JSON.stringify(tokens));
+    await writeFile(
+      join(directory, `tokens/${section}/definitions.jsonc`),
+      familySource(section, "definitions", tokens),
+    );
     await buildDevThemes({ root });
 
     /** Successful artifacts must survive a later invalid details/token combination. */
@@ -273,24 +280,24 @@ for (const section of ["ui", "semantic", "syntax"]) {
 
     await writeFile(
       join(directory, `tokens/${section}/details.jsonc`),
-      JSON.stringify({ [key]: { globallyOverriddenBy: ["different.replacement"] } }),
+      familySource(section, "details", { [key]: { globallyOverriddenBy: ["different.replacement"] } }),
     );
 
     await rm(join(directory, `tokens/${section}/definitions.jsonc`));
     await writeFile(
       join(root, `src/themes/prod/default/tokens/${section}/details.jsonc`),
-      JSON.stringify(defaultDetails),
+      familySource(section, "details", defaultDetails),
     );
 
     await writeFile(
       join(root, `src/themes/prod/default/tokens/${section}/definitions.jsonc`),
-      JSON.stringify(createTokens()[section]),
+      familySource(section, "definitions", createTokens()[section]),
     );
 
     await assert.rejects(buildDevThemes({ root }), /globallyOverriddenBy requires disabled/);
     assert.deepEqual(await readBuildOutputs(root), before);
 
-    await writeFile(join(directory, `tokens/${section}/details.jsonc`), "{}");
+    await writeFile(join(directory, `tokens/${section}/details.jsonc`), familySource(section, "details", {}));
     await buildDevThemes({ root });
     await buildDevThemes({ root, check: true });
   });
@@ -308,12 +315,18 @@ test("empty details suppress fallback and supplied details must match whole-file
 
   await writeFile(
     join(root, "src/themes/prod/default/tokens/ui/details.jsonc"),
-    '{"editor.background":{"description":"Default background."},"editor.foreground":{"description":"Default foreground."}}',
+    '{"standard":{},"sourceCode":{},"nonStandard":{"editor": {"background": {"description":"Default background."},"foreground": {"description":"Default foreground."}}},"deprecated":{}}',
   );
 
-  await writeFile(join(directory, "tokens/ui/definitions.jsonc"), "{}");
+  await writeFile(
+    join(directory, "tokens/ui/definitions.jsonc"),
+    '{"standard":{},"sourceCode":{},"nonStandard":{},"deprecated":{}}',
+  );
   await assert.rejects(buildDevThemes({ root }), /unknown authored entry/);
-  await writeFile(join(directory, "tokens/ui/details.jsonc"), "{}");
+  await writeFile(
+    join(directory, "tokens/ui/details.jsonc"),
+    '{"standard":{},"sourceCode":{},"nonStandard":{},"deprecated":{}}',
+  );
   await buildDevThemes({ root });
 
   /** Default details edits must not affect the dev documentation replacement. */
@@ -321,7 +334,7 @@ test("empty details suppress fallback and supplied details must match whole-file
 
   await writeFile(
     join(root, "src/themes/prod/default/tokens/ui/details.jsonc"),
-    '{"editor.background":{"description":"Changed default documentation."},"editor.foreground":{"description":"Default foreground."}}',
+    '{"standard":{},"sourceCode":{},"nonStandard":{"editor": {"background": {"description":"Changed default documentation."},"foreground": {"description":"Default foreground."}}},"deprecated":{}}',
   );
 
   await buildDevThemes({ root, check: true });
@@ -424,23 +437,26 @@ test("dev targets use independent complete palettes and token sections and isola
   await mkdir(join(devThemeDirectory, "palette"), { recursive: true });
   await mkdir(join(devThemeDirectory, "tokens"));
 
-  await writeFile(join(devThemeDirectory, "tokens/ui/details.jsonc"), "{}");
+  await writeFile(
+    join(devThemeDirectory, "tokens/ui/details.jsonc"),
+    '{"standard":{},"sourceCode":{},"nonStandard":{},"deprecated":{}}',
+  );
   await writeFile(join(devThemeDirectory, "palette/config.jsonc"), JSON.stringify(input));
   await writeFile(join(devThemeDirectory, "tokens/variables/definitions.jsonc"), JSON.stringify(tokens.variables));
   await writeFile(
     join(devThemeDirectory, "tokens/ui/definitions.jsonc"),
-    '{"editor.background":{"color":"#010203","colorReason":"Preview background."}}',
+    '{"standard":{},"sourceCode":{},"nonStandard":{"editor": {"background": {"color":"#010203","colorReason":"Preview background."}}},"deprecated":{}}',
   );
 
   await writeFile(join(devThemeDirectory, "metadata.jsonc"), '{"name":"Sample","type":"dark","author":"Sample"}');
   await writeFile(
     join(devThemeDirectory, "tokens/syntax/definitions.jsonc"),
-    JSON.stringify([{ ...tokens.syntax[0], scope: "test.syntax" }]),
+    familySource("syntax", "definitions", [{ ...tokens.syntax[0], scope: "test.syntax" }]),
   );
 
   await writeFile(
     join(devThemeDirectory, "tokens/syntax/details.jsonc"),
-    '{"string":{"description":"Test syntax scopes."}}',
+    '{"standard":{"string": {"description":"Test syntax scopes."}},"sourceCode":{},"nonStandard":{},"deprecated":{}}',
   );
 
   /** Build summary inspected for target palettes and changed artifact paths. */
@@ -573,11 +589,7 @@ for (const [group, paletteOnly, useDefaultPalette] of [
     await build({ root, paletteOnly });
     await assert.rejects(readdir(generated), { code: "ENOENT" });
 
-    // Also exercise upgrading the previous layout while switching to a custom palette.
-    await mkdir(generated);
-    await writeFile(join(generated, "default.txt"), "Legacy default-palette note\n");
-
-    /** Read-only checks must leave both notes in place until the build succeeds. */
+    /** Read-only checks must retain the default note until the build succeeds. */
     const beforeCustom = await readBuildOutputs(root);
 
     /** Full settings exercise both an explicit false flag and an omitted flag. */
@@ -622,7 +634,7 @@ for (const [group, paletteOnly, useDefaultPalette] of [
   });
 }
 
-for (const contents of ["empty", "nested legacy artifacts"]) {
+for (const contents of ["empty", "nested stale artifacts"]) {
   test(`default palettes remove a generated directory containing ${contents}`, async (t) => {
     /** Fixture with the current default-palette note already generated. */
     const root = await createBuildProject(t);
@@ -639,8 +651,8 @@ for (const contents of ["empty", "nested legacy artifacts"]) {
 
     if (contents !== "empty") {
       await mkdir(join(generated, "nested"));
-      await writeFile(join(generated, "nested/old.txt"), "Old generated artifact\n");
-      await writeFile(join(generated, "default.txt"), "Old default-palette note\n");
+      await writeFile(join(generated, "nested/palette.json"), "{}\n");
+      await writeFile(join(generated, "palette.md"), "Stale palette report\n");
     }
 
     /** Read-only checks must retain the directory and every obsolete file. */
@@ -737,8 +749,16 @@ for (const [path, contents, pattern] of [
     /Unknown reference:.*variables.surface.editor/,
   ],
   ["metadata.jsonc", "{}", /theme name must be/],
-  ["tokens/ui/definitions.jsonc", '{"bad":{}}', /requires styling/],
-  ["tokens/semantic/definitions.jsonc", '{"variable":{"italic":"yes"}}', /italic must be a boolean/],
+  [
+    "tokens/ui/definitions.jsonc",
+    '{"standard":{},"sourceCode":{},"nonStandard":{"bad": {}},"deprecated":{}}',
+    /requires styling/,
+  ],
+  [
+    "tokens/semantic/definitions.jsonc",
+    '{"standard":{},"sourceCode":{},"nonStandard":{"variable": {"default": {"italic":"yes"}}},"deprecated":{}}',
+    /italic must be a boolean/,
+  ],
   ["tokens/syntax/definitions.jsonc", '{"standard":{"rules":{}}}', /expected an array/],
   ["palette/config.jsonc", "", /ValueExpected/],
   ["palette/config.jsonc", '{"chroma":', /ValueExpected/],
@@ -777,10 +797,13 @@ test("a supplied dev UI mapping replaces the whole file while omitted files inhe
   await writeDefaultPaletteConfig(join(root, "src/themes/dev/sample"));
   await mkdir(join(root, "src/themes/dev/sample/tokens"), { recursive: true });
 
-  await writeFile(join(root, "src/themes/dev/sample/tokens/ui/details.jsonc"), "{}");
+  await writeFile(
+    join(root, "src/themes/dev/sample/tokens/ui/details.jsonc"),
+    '{"standard":{},"sourceCode":{},"nonStandard":{},"deprecated":{}}',
+  );
   await writeFile(
     join(root, "src/themes/dev/sample/tokens/ui/definitions.jsonc"),
-    '{"editor.background":{"color":"#010203","colorReason":"Preview background."}}',
+    '{"standard":{},"sourceCode":{},"nonStandard":{"editor": {"background": {"color":"#010203","colorReason":"Preview background."}}},"deprecated":{}}',
   );
 
   await buildDevThemes({ root });

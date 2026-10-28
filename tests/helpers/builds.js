@@ -30,7 +30,7 @@ export async function buildDevelopment(options = {}) {
 }
 
 /**
- * Compose actual preparation/application for fixture convenience without a retired production wrapper.
+ * Compose preparation and application for focused fixture builds.
  * @param [options] - Selected mode, root, check, and operation adapters.
  */
 export async function buildFixture(options = {}) {

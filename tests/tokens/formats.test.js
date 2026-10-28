@@ -254,7 +254,7 @@ test("classification projection ignores documentation/history/placeholders/key o
 
   await writeFixture(
     join(root, "src/token-data/ui/details.jsonc"),
-    '{"fixture.foreground":{"description":"Original."}}',
+    '{"standard":{},"sourceCode":{},"nonStandard":{"fixture": {"foreground": {"description":"Original."}}},"deprecated":{}}',
   );
 
   /** Original projection is compared after non-classification edits. */
@@ -262,7 +262,7 @@ test("classification projection ignores documentation/history/placeholders/key o
 
   await writeFixture(
     join(root, "src/token-data/ui/details.jsonc"),
-    '{"fixture.foreground":{"description":"New wording.","descriptionBasedOn":"1.2.3","modified-desc":true,"use":"When the fixture is visible."}}',
+    '{"standard":{},"sourceCode":{},"nonStandard":{"fixture": {"foreground": {"description":"New wording.","descriptionBasedOn":"1.2.3","modified-desc":true,"use":"When the fixture is visible."}}},"deprecated":{}}',
   );
 
   assert.equal((await loadTokenData({ root })).projection, original);

@@ -1,5 +1,5 @@
 /**
- * Legacy and reachability audit fixtures.
+ * Executable reachability audit fixtures.
  * @file Detect dead implementations, stale subprocess/configuration references, unresolved imports, and unjustified test-only exports.
  */
 
@@ -8,7 +8,7 @@ import test from "node:test";
 import { join } from "node:path";
 import { createBuildProject, writeFixture } from "../helpers/projects.js";
 import { auditModules } from "../../tooling/maintenance/reachability.js";
-import { checkLegacy } from "../../tooling/maintenance/check-legacy.js";
+import { checkReachability } from "../../tooling/maintenance/check-reachability.js";
 
 /**
  * Build a small independent graph whose root is a supported CLI.
@@ -76,24 +76,24 @@ test("tests alone cannot justify a superseded production module or export", () =
   );
 });
 
-test("repository audit rejects stale configuration/subprocess paths and existing retired locations", async (t) => {
+test("repository audit rejects missing configuration roots and unreachable executable files", async (t) => {
   /** Small project uses actual command configuration, without importing any production workflow. */
   const root = await createBuildProject(t);
 
   await writeFixture(join(root, "package.json"), '{"scripts":{"fixture":"node scripts/cli.js"}}');
   await writeFixture(join(root, "scripts/cli.js"), 'console.log("fixture");');
-  await checkLegacy({ root, configuration: [] });
+  await checkReachability({ root, configuration: [] });
   await writeFixture(join(root, "validation.yml"), "steps:\n  - script: node tooling/missing.js\n");
   await assert.rejects(
-    checkLegacy({ root, configuration: [] }),
+    checkReachability({ root, configuration: [] }),
     /Missing declared executable root.*tooling\/missing.js/,
   );
 
   await writeFixture(join(root, "validation.yml"), "steps: []\n");
 
-  /** The retired directory is intentionally constructed only inside this negative fixture. */
-  const retired = join("scripts", "lib", "old.js");
+  /** Owned source without any executable consumer must fail repository discovery. */
+  const unused = join(root, "tooling/unused.js");
 
-  await writeFixture(join(root, retired), "console.log('obsolete');");
-  await assert.rejects(checkLegacy({ root, configuration: [] }), /Retired path exists/);
+  await writeFixture(unused, "console.log('unused');");
+  await assert.rejects(checkReachability({ root, configuration: [] }), /Unreachable executable module.*unused/);
 });

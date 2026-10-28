@@ -8,7 +8,7 @@ import { mkdir, mkdtemp, readFile, readdir, rm, writeFile } from "node:fs/promis
 import { tmpdir } from "node:os";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
-import { categories, decode } from "../../tooling/tokens/formats.js";
+import { decode } from "../../tooling/tokens/formats.js";
 import { emptyFamily, recordPath, editSource } from "../../tooling/generators/source-edits.js";
 import { parseJsonc } from "../../tooling/shared/jsonc.js";
 
@@ -138,10 +138,9 @@ export async function createBuildProject(t) {
     await mkdir(join(root, "src/themes/prod/default", name, ".."), { recursive: true });
     await writeFile(
       join(root, "src/themes/prod/default", `${name}.jsonc`),
-      fixtureSource(
-        join(root, "src/themes/prod/default", `${name}.jsonc`),
-        JSON.stringify(section ? inputs[kind === "details" ? "details" : group][section] : inputs[group]),
-      ),
+      section && section !== "variables"
+        ? familySource(section, kind, inputs[kind === "details" ? "details" : group][section])
+        : JSON.stringify(section ? inputs[kind === "details" ? "details" : group][section] : inputs[group]),
     );
   }
 
@@ -269,62 +268,30 @@ export async function createPreviewProject(t) {
  */
 export async function writeFixture(path, source, options) {
   await mkdir(dirname(path), { recursive: true });
-  await writeFile(path, fixtureSource(path, source), options);
+  await writeFile(path, source, options);
 }
 
 /**
- * Encode intentionally compact fixture records into the supported categorized source shape.
- * @param path - Final fixture filename identifies family and file role.
- * @param source - Compact test data or deliberately malformed source.
+ * Build categorized fixture source from normalized compiler records.
+ * @param family - ui, semantic, or syntax.
+ * @param kind - definitions or details.
+ * @param records - Canonical-ID record map, or ordered syntax definitions.
+ * @returns Complete authored JSON text for the selected family.
  */
-function fixtureSource(path, source) {
-  /** Supported fixture family and file role, kept outside production readers. */
-  const match = path.match(/\/(?:tokens|token-data)\/(ui|semantic|syntax|variables)\/(definitions|details)\.jsonc$/);
-
-  if (!match || typeof source !== "string") return source;
-
-  /** Compact fixture values; malformed JSONC remains available to negative workflow tests. */
-  let parsed;
-
-  try {
-    parsed = parseJsonc(source, path);
-  } catch {
-    return source;
-  }
-
-  /** Family context and fixture-only placeholder wrapper. */
-  const [, family, kind] = match;
-
-  /** Parsed compact fixture data before encoding the supported final source shape. */
-  const value = parsed.value;
-
-  if (family === "variables" || categories.some((category) => Object.hasOwn(value, category))) return source;
-
-  /** Final shape starts with all required empty categories. */
+export function familySource(family, kind, records) {
+  /** Every source contains the current required categories. */
   let output = JSON.stringify(emptyFamily(family, kind));
 
   if (family === "syntax" && kind === "definitions") {
-    if (!Array.isArray(value)) return source;
-
     return editSource(
       output,
       ["standard", "rules"],
-      value.map((rule, order) => ({ ...rule, order })),
+      records.map((rule, order) => ({ ...rule, order })),
     );
   }
 
-  /** Independent fixture authorities use nonStandard for custom test IDs. */
-  const records = value.colors ?? value.semanticTokenColors ?? value;
-
-  if (!records || typeof records !== "object" || Array.isArray(records)) return source;
-
   for (const [id, record] of Object.entries(records)) {
-    /** Source metadata is never used as styling; reference values are discovery placeholders. */
-    const candidate =
-      path.includes("/token-data/") && kind === "definitions"
-        ? { color: "#0ff", colorReason: "UNREVIEWED: Added from a token template; choose an intentional color." }
-        : record;
-    output = editSource(output, recordPath(family, family === "syntax" ? "standard" : "nonStandard", id), candidate);
+    output = editSource(output, recordPath(family, family === "syntax" ? "standard" : "nonStandard", id), record);
   }
 
   return output;

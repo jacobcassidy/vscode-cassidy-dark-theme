@@ -171,7 +171,7 @@ export function scopeList(rule) {
 }
 
 /**
- * Decode one complete source file; retired flat/category formats are rejected.
+ * Decode one complete categorized source file with exact field validation.
  * @param input - Parsed JSONC input with source/tree/label, or supplied value/label.
  * @param family - ui, semantic, syntax, or variables.
  * @param kind - definitions or details.

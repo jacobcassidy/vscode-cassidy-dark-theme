@@ -188,10 +188,13 @@ test("watch rebuilds dev overrides, refreshes metadata registrations, and preser
 
   await mkdir(join(project.root, "src/themes/dev/sample/tokens"));
 
-  await writeFile(join(project.root, "src/themes/dev/sample/tokens/ui/details.jsonc"), "{}");
+  await writeFile(
+    join(project.root, "src/themes/dev/sample/tokens/ui/details.jsonc"),
+    '{"standard":{},"sourceCode":{},"nonStandard":{},"deprecated":{}}',
+  );
   await writeFile(
     join(project.root, "src/themes/dev/sample/tokens/ui/definitions.jsonc"),
-    '{"editor.background":{"color":"#010203","colorReason":"Dev preview background."}}',
+    '{"standard":{},"sourceCode":{},"nonStandard":{"editor": {"background": {"color":"#010203","colorReason":"Dev preview background."}}},"deprecated":{}}',
   );
 
   await writeFile(join(project.root, "src/themes/dev/sample/metadata.jsonc"), '{"name":"Renamed","type":"light"}');

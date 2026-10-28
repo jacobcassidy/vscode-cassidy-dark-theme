@@ -194,7 +194,7 @@ test("retained styles reject unknown references, cycles, duplicate IDs, and inva
     [{ color: "ui.bad" }, /Token cycle/],
     [{ color: "palette.blue.400", alpha: 2 }, /finite number/],
     [{ color: "#xyz", colorReason: "Invalid." }, /hex color/],
-    [{ color: "palette.blue.400", reason: "Legacy." }, /unknown field reason/],
+    [{ color: "palette.blue.400", unexpected: "Invalid." }, /unknown field unexpected/],
     [{ alpha: 0.5 }, /requires a color/],
     [{ color: "" }, /nonempty string/],
     [{ color: null }, /nonempty string/],

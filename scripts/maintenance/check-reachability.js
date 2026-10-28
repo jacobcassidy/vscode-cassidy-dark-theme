@@ -1,14 +1,14 @@
 /**
- * Legacy consumer audit command.
- * @file Run read-only retired-path, source-contract, and executable reachability checks.
+ * Executable reachability audit command.
+ * @file Check executable references, module reachability, and consumed exports without running workflows.
  */
 
-import { checkLegacy } from "../../tooling/maintenance/check-legacy.js";
+import { checkReachability } from "../../tooling/maintenance/check-reachability.js";
 import { formatMessage } from "../../tooling/shared/terminal-output.js";
 
 try {
   /** Audited executable module and supported entry-point counts. */
-  const result = await checkLegacy();
+  const result = await checkReachability();
 
   console.log(
     formatMessage(

@@ -55,7 +55,7 @@ function same(left, right) {
  * Canonicalize a resource even when its final directories have not been created.
  * @param path - Resource root or destination.
  */
-export async function canonicalPath(path) {
+async function canonicalPath(path) {
   try {
     return await realpath(path);
   } catch (error) {

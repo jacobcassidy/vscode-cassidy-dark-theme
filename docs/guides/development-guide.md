@@ -118,7 +118,7 @@ Every shared definition/detail file begins with purpose/provenance/license comme
 
 Shared detail records alone accept boolean `modified-desc`; exactly true protects a nonempty description and known history. False/absent permits refresh. Theme-local wording is authored documentation and accepts no protection flag. Shared refresh never imports theme overrides. NonStandard records may have nonempty `use` describing verified activation/display context; omit unknown context, preserve authored usage independently from protection, and reconcile conflicting shared usage explicitly.
 
-Description history is optional and uses normalized stable versions. `descriptionAddedIn` records the first known successful description extraction, not token introduction. `descriptionUpdatedIn` records the latest upstream text-changing refresh; omit it when equal to `descriptionAddedIn`. `descriptionBasedOn` records the known extracted baseline or basis of a manual adaptation. New local/unresolved text receives no stamps. Unchanged wording or newer source versions alone do not advance known text history. Unknown migrated history remains absent; manual edits never masquerade as upstream refreshes.
+Description history is optional and uses normalized stable versions. `descriptionAddedIn` records the first known successful description extraction, not token introduction. `descriptionUpdatedIn` records the latest upstream text-changing refresh; omit it when equal to `descriptionAddedIn`. `descriptionBasedOn` records the known extracted baseline or basis of a manual adaptation. New local/unresolved text receives no stamps. Unchanged wording or newer source versions alone do not advance known text history. Unknown history remains absent; manual edits never masquerade as upstream refreshes.
 
 Upstream inventory/category/scope changes are informational proposals, with exact IDs/scopes, evidence, revisions, and affected files. The updater preserves accepted categories/definition inventory and never rewrites themes. Required-source zero results or loss of prior resolved evidence fails before publication unless an exact checked-in reviewed transition exception applies. Its recorded accepted outcome authorizes only identical-identity/coverage replay; more loss or a newer empty revision needs renewed review. Apply approved category/evidence edits separately across authorities and affected themes, reconcile `use`, then validate and commit together.
 
@@ -132,9 +132,9 @@ Upstream inventory/category/scope changes are informational proposals, with exac
 | `npm run check:generated`                  | Compare prepared artifacts and pending cleanup without writes/sync.                         |
 | `npm run check:theme`                      | Validate sources plus generated themes, registrations, and assets.                          |
 | `npm run check:docs`                       | Validate maintained local links/anchors and complete examples without networking/writes.    |
-| `npm run check:legacy`                     | Audit retired active contracts and executable module/export reachability.                   |
+| `npm run check:reachability`               | Audit executable references, module reachability, and consumed exports.                     |
 | `npm test`                                 | Discover only recursive `.test.js` suites, excluding fixture programs and language samples. |
-| `npm run check`                            | Run generated/docs/legacy/format/lint/theme/tests checks.                                   |
+| `npm run check`                            | Run generated/docs/reachability/format/lint/theme/tests checks.                             |
 
 Focused tests use `node --test tests/tokens/formats.test.js` or another explicit suite. Native watcher/process/symlink/rollback acceptance requires macOS and Linux with locked tools and isolated projects. Native Windows development tooling is unverified and outside this required matrix; published theme engine/platform compatibility retains its existing scope. Grammar samples are visual probes, excluded from runtime lint/execution.
 

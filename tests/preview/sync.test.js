@@ -4,7 +4,7 @@
  */
 
 import assert from "node:assert/strict";
-import { lstat, mkdir, readFile, realpath, rm, stat, symlink } from "node:fs/promises";
+import { mkdir, readFile, readlink, realpath, rm, stat, symlink } from "node:fs/promises";
 import { writeFixture as writeFile, createPreviewProject } from "../helpers/projects.js";
 import { join } from "node:path";
 import test from "node:test";
@@ -77,24 +77,35 @@ test("dev extension sync refuses a linked manifest without overwriting its targe
   assert.equal(await readFile(join(project.root, "package.json"), "utf8"), source);
 });
 
-for (const kind of ["directory", "wrong symlink"]) {
-  test(`dev extension sync refuses an asset occupied by a ${kind}`, async (t) => {
-    /** Isolated preview/source fixture with cleanup registered by the test. */
-    const project = await createPreviewProject(t);
+for (const directory of ["themes", "preview", "images"]) {
+  for (const kind of ["directory", "wrong symlink", "dangling symlink"]) {
+    test(`dev extension sync protects the ${directory} asset occupied by a ${kind}`, async (t) => {
+      /** Isolated preview/source fixture with cleanup registered by the test. */
+      const project = await createPreviewProject(t);
 
-    /** Preview asset-link path inspected by the symlink protection test. */
-    const link = join(project.extensionDirectory, "themes");
+      /** Preview asset-link path inspected by the symlink protection test. */
+      const link = join(project.extensionDirectory, directory);
 
-    await mkdir(project.extensionDirectory);
+      /** Unrelated or missing target whose symlink must remain unchanged. */
+      const target = join(
+        project.root,
+        kind === "dangling symlink" ? "missing-assets" : directory === "images" ? "themes" : "images",
+      );
 
-    if (kind === "directory") {
-      await mkdir(link);
-    } else {
-      await symlink(join(project.root, "images"), link, "dir");
-    }
+      await mkdir(project.extensionDirectory);
 
-    await assert.rejects(syncDevExtension(project), /Expected a symlink/);
-  });
+      if (kind === "directory") {
+        await mkdir(link);
+      } else {
+        await symlink(target, link, "dir");
+      }
+
+      await assert.rejects(syncDevExtension(project), /Expected a symlink/);
+
+      if (kind === "directory") assert.equal((await stat(link)).isDirectory(), true);
+      else assert.equal(await readlink(link), target);
+    });
+  }
 }
 
 test("dev extension sync includes all prod themes, derives dev theme types, and labels sorted snapshots", async (t) => {
@@ -358,15 +369,4 @@ test("preview reload detection follows snapshot additions, metadata changes, and
   assert.equal((await syncDevExtension(project)).reloadRequired, false);
   await rm(path);
   assert.equal((await syncDevExtension(project)).reloadRequired, true);
-});
-
-test("preview migration repairs only checkout-owned former links, including dangling links", async (t) => {
-  /** Isolated preview project with no former directory remaining. */
-  const { root, extensionDirectory } = await createPreviewProject(t);
-  await mkdir(extensionDirectory, { recursive: true });
-  await symlink(join(root, "dev-extension"), join(extensionDirectory, "dev-extension"), "dir");
-  await symlink(join(root, "dev-extension"), join(extensionDirectory, "preview"), "dir");
-  assert.equal((await syncDevExtension({ root, extensionDirectory })).reloadRequired, true);
-  assert.equal(await realpath(join(extensionDirectory, "preview")), await realpath(join(root, "preview")));
-  await assert.rejects(lstat(join(extensionDirectory, "dev-extension")), { code: "ENOENT" });
 });

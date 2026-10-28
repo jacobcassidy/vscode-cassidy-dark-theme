@@ -26,10 +26,13 @@ for (const group of ["prod", "dev"]) {
 
     await writeFixture(
       join(root, "src/token-data/ui/definitions.jsonc"),
-      '{"a.foreground":"#f00","z.background":"#f00"}',
+      '{"standard":{},"sourceCode":{},"nonStandard":{"a": {"foreground": {"color":"#0ff","colorReason":"UNREVIEWED: Added from a token template; choose an intentional color."}},"z": {"background": {"color":"#0ff","colorReason":"UNREVIEWED: Added from a token template; choose an intentional color."}}},"deprecated":{}}',
     );
 
-    await writeFixture(join(root, "src/token-data/semantic/definitions.jsonc"), '{"enum":"#f00","*.readonly":"#f00"}');
+    await writeFixture(
+      join(root, "src/token-data/semantic/definitions.jsonc"),
+      '{"standard":{},"sourceCode":{},"nonStandard":{"*": {"readonly": {"color":"#0ff","colorReason":"UNREVIEWED: Added from a token template; choose an intentional color."}},"enum": {"default": {"color":"#0ff","colorReason":"UNREVIEWED: Added from a token template; choose an intentional color."}}},"deprecated":{}}',
+    );
 
     /** Production files must stay unchanged during creation. */
     const before = await readFile(join(root, "src/themes/prod/default/tokens/ui/definitions.jsonc"), "utf8");

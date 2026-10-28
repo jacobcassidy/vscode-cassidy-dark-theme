@@ -249,7 +249,10 @@ test("prepared dependencies and destinations reject outside changes before write
 
   /** Fully validated preparation retained for checking or coordinated application. */
   const prepared = await prepareBuild({ root, mode: "prod" });
-  await writeFile(join(root, "src/themes/prod/default/tokens/ui/definitions.jsonc"), "{}");
+  await writeFile(
+    join(root, "src/themes/prod/default/tokens/ui/definitions.jsonc"),
+    '{"standard":{},"sourceCode":{},"nonStandard":{},"deprecated":{}}',
+  );
   await assert.rejects(applyBuild(prepared), /Stale prepared input/);
   await assert.rejects(readFile(join(root, "themes/cassidy-dark-color-theme.json")), { code: "ENOENT" });
 });

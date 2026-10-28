@@ -3,17 +3,10 @@
  * @file Build a separate preview manifest and link checkout assets into the local development extension.
  */
 
-import { readFile, writeFile, mkdir, lstat, realpath, symlink, readlink, rm } from "node:fs/promises";
-import {
-  canonicalPath,
-  assertFresh,
-  capturePaths,
-  requireStable,
-  withGuards,
-  observeWriter,
-} from "../shared/transactions.js";
+import { readFile, writeFile, mkdir, lstat, realpath, symlink } from "node:fs/promises";
+import { assertFresh, capturePaths, requireStable, withGuards, observeWriter } from "../shared/transactions.js";
 import { homedir } from "node:os";
-import { dirname, join, resolve } from "node:path";
+import { join } from "node:path";
 import { repositoryRoot } from "../shared/paths.js";
 import { canonicalJson } from "../shared/serialization.js";
 import { formatMessage } from "../shared/terminal-output.js";
@@ -218,29 +211,6 @@ export async function syncDevExtension({
     /** Whether registrations or repaired preview assets require VS Code to reload. */
     let reloadRequired = previewRegistrations(previous) !== previewRegistrations(current);
 
-    /** Former asset directory recognized only for checkout-owned migration repair. */
-    const formerName = "dev-extension";
-
-    /** Canonical former source also identifies dangling checkout-owned links. */
-    const formerSource = await canonicalPath(join(root, formerName));
-
-    /** Former asset entry may be repaired only when owned by this checkout. */
-    const formerLink = join(extensionDirectory, formerName);
-
-    /** Existing former asset entry inspected without following a dangling link. */
-    const formerInfo = await statIfPresent(formerLink);
-
-    if (formerInfo) {
-      if (
-        !formerInfo.isSymbolicLink() ||
-        (await canonicalPath(resolve(dirname(formerLink), await readlink(formerLink)))) !== formerSource
-      )
-        throw new Error(`Unrelated former preview asset entry is protected: ${formerLink}`);
-
-      await rm(formerLink);
-      reloadRequired = true;
-    }
-
     // Link assets directly to the checkout so edits appear without copying files.
     for (const directory of ["themes", "preview", "images"]) {
       /** Checkout asset directory to expose through the preview extension. */
@@ -265,16 +235,7 @@ export async function syncDevExtension({
         await symlink(sourceDirectory, link, "dir");
         reloadRequired = true;
       } else {
-        /** Resolve link text without requiring the former target to exist. */
-        const linkedSource = linkInfo.isSymbolicLink()
-          ? await canonicalPath(resolve(dirname(link), await readlink(link)))
-          : null;
-
-        if (directory === "preview" && linkedSource === formerSource) {
-          await rm(link);
-          await symlink(sourceDirectory, link, "dir");
-          reloadRequired = true;
-        } else if (linkedSource !== sourceRealPath) {
+        if (!linkInfo.isSymbolicLink() || (await realpath(link).catch(() => null)) !== sourceRealPath) {
           throw new Error(`Expected a symlink to ${sourceDirectory}: ${link}`);
         }
       }

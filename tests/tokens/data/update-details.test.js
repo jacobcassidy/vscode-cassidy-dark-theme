@@ -202,7 +202,7 @@ test("protected shared wording and usage survive refresh; removing protection pe
 
   await writeFixture(
     join(root, "src/token-data/ui/details.jsonc"),
-    '{"editor.background":{"description":"Manual shared wording.","modified-desc":true,"descriptionBasedOn":"1.0.0","use":"When the fixture provider is active."}}',
+    '{"standard":{},"sourceCode":{},"nonStandard":{"editor": {"background": {"description":"Manual shared wording.","modified-desc":true,"descriptionBasedOn":"1.0.0","use":"When the fixture provider is active."}}},"deprecated":{}}',
   );
 
   await updateTokenDetails(options);
@@ -213,7 +213,7 @@ test("protected shared wording and usage survive refresh; removing protection pe
 
   await writeFixture(
     join(root, "src/token-data/ui/details.jsonc"),
-    '{"editor.background":{"description":"Manual shared wording.","modified-desc":false,"descriptionBasedOn":"1.0.0","use":"When the fixture provider is active."}}',
+    '{"standard":{},"sourceCode":{},"nonStandard":{"editor": {"background": {"description":"Manual shared wording.","modified-desc":false,"descriptionBasedOn":"1.0.0","use":"When the fixture provider is active."}}},"deprecated":{}}',
   );
 
   await updateTokenDetails(options);

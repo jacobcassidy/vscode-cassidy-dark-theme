@@ -6,6 +6,7 @@ All notable changes to this project are documented in this file.
 
 ### Changed
 
+- Removed completed migration tests, frozen fixtures, retired-path inventories, and preview/palette layout repairs; replaced `check:legacy` with the current executable `check:reachability` audit and preserved archived records. Fixture writes now preserve supplied source without implicit format conversion.
 - Removed completed refactor checkpoint, approved-difference, and performance records from `docs/references/refactor-2b/`; historical evidence remains in Git history.
 - Removed the redundant `sync:preview` command; builds synchronize previews and watch automatically retries failed synchronization.
 - Grouped theme definitions/details by family, adopted categorized nested token sources, and separated shared inventory/documentation under `src/token-data/` without changing theme styling or syntax precedence.
