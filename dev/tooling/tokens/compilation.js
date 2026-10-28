@@ -122,7 +122,7 @@ function validateDetails(details, entries, requireDetails) {
  */
 export function compileTokens(tokens, details, palette, requireDetails = false) {
   fields(tokens, ["variables", "ui", "semantic", "syntax"], "tokens");
-  fields(tokens.variables, ["surface", "text", "diagnostic", "diff", "placeholder"], "tokens.variables");
+  fields(tokens.variables, ["default", "diagnostic", "diff"], "tokens.variables");
   object(tokens.ui, "tokens.ui");
   object(tokens.semantic, "tokens.semantic");
 

@@ -273,11 +273,26 @@ export function decode(input, family, kind, { shared = false } = {}) {
   object(input.value, input.label ?? family);
 
   if (family === "variables") {
-    if (kind === "definitions")
-      fields(input.value, ["surface", "text", "diagnostic", "diff", "placeholder"], input.label ?? "variables");
+    if (kind === "definitions") fields(input.value, ["default", "diagnostic", "diff"], input.label ?? "variables");
 
     if (kind === "details") {
-      for (const [id, record] of Object.entries(input.value)) register(id, record, undefined, [id]);
+      /**
+       * Collect nested variable descriptions using the matching dotted definition IDs.
+       * @param node - Nested variable detail group or leaf description.
+       * @param path - Dotted variable path built so far.
+       */
+      function variableDetails(node, path) {
+        object(node, location(path));
+        if (Object.hasOwn(node, "description")) {
+          register(path.join("."), node, undefined, path);
+
+          return;
+        }
+
+        for (const [key, child] of Object.entries(node)) variableDetails(child, [...path, key]);
+      }
+
+      variableDetails(input.value, []);
     } else {
       /**
        * Collect theme-owned nested roles without category wrappers.

@@ -166,10 +166,34 @@ export async function starterTheme(root) {
     },
     "palette/config.jsonc": standardPalette,
     "tokens/variables/definitions.jsonc": {
-      placeholder: { color: "#f0f", colorReason: defaultColorReason },
+      default: {
+        background: { color: "palette.gray.900" },
+        foreground: { color: "palette.gray.200" },
+        placeholder: { color: "#f0f", colorReason: defaultColorReason },
+      },
+      diagnostic: {
+        "error.foreground": { color: "palette.red.500" },
+        "warning.foreground": { color: "palette.orange.500" },
+      },
+      diff: {
+        "added.foreground": { color: "palette.green.400" },
+        "removed.foreground": { color: "palette.red.400" },
+      },
     },
     "tokens/variables/details.jsonc": {
-      placeholder: { description: "Placeholder color for bootstrap token values awaiting review." },
+      default: {
+        background: { description: "Default background color." },
+        foreground: { description: "Default foreground color." },
+        placeholder: { description: "Placeholder color for bootstrap token values awaiting review." },
+      },
+      diagnostic: {
+        "error.foreground": { description: "Foreground color for error diagnostics." },
+        "warning.foreground": { description: "Foreground color for warning diagnostics." },
+      },
+      diff: {
+        "added.foreground": { description: "Foreground color for added content in diffs." },
+        "removed.foreground": { description: "Foreground color for removed content in diffs." },
+      },
     },
     "tokens/ui/definitions.jsonc": { standard: {}, sourceCode: {}, nonStandard: {}, deprecated: {} },
     "tokens/ui/details.jsonc": { standard: {}, sourceCode: {}, nonStandard: {}, deprecated: {} },
