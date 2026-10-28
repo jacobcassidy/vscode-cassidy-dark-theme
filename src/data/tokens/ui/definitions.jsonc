@@ -30,7 +30,6 @@ SOFTWARE.
   "standard": {
     "actionBar": {
       "toggledBackground": {
-        // -- STANDARD --
         "$token": true
       }
     },
@@ -438,7 +437,6 @@ SOFTWARE.
         "$token": true
       },
       "inputWorkingBorderColor2": {
-        // -- DEPRECATED --
         "$token": true
       },
       "inputWorkingBorderColor3": {
@@ -3486,7 +3484,6 @@ SOFTWARE.
     },
     "agentsMobileDiff": {
       "addedForeground": {
-        // -- SOURCE -- (In vscode source files, but not in the scheme, according to AI)
         "$token": true
       },
       "deletedForeground": {
