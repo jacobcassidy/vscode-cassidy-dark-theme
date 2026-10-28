@@ -100,7 +100,7 @@ export async function loadTokenData({ root = repositoryRoot, recovery = false } 
 
   for (const path of tokenDataPaths) {
     /** Family and file role taken only from the centralized inventory. */
-    const [, , family, filename] = path.split("/"),
+    const [, , , family, filename] = path.split("/"),
       kind = filename.replace(".jsonc", "");
 
     /** Original or prepared source data retained for this operation. */
