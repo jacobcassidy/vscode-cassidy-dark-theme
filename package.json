@@ -84,7 +84,7 @@
     "lint:es:fix": "eslint --fix",
     "lint:md": "markdownlint-cli2 \"**/*.md\"",
     "lint:md:fix": "markdownlint-cli2 \"**/*.md\" --fix",
-    "release": "npm run release:publish",
+    "publish": "npm run release:publish",
     "release:github-recover": "bash scripts/release/publish/create-github-release.sh",
     "release:package-vsix": "npm run check && bash scripts/release/package-vsix.sh",
     "release:publish": "bash scripts/release/publish/run-azure-pipeline.sh",
