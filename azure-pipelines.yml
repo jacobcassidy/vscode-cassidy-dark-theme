@@ -33,8 +33,7 @@ steps:
   - script: |
       set -euo pipefail
       npm ci
-      npm run check
-    displayName: "Install locked tools and validate project"
+    displayName: "Install locked tools"
     workingDirectory: "$(Build.SourcesDirectory)"
 
   - script: |
@@ -43,7 +42,7 @@ steps:
       vsix="$BUILD_ARTIFACTSTAGINGDIRECTORY/cassidy-dark-$version.vsix"
       npm run package:vsix -- "$vsix"
       echo "##vso[task.setvariable variable=ExtensionVsix]$vsix"
-    displayName: "Package extension"
+    displayName: "Validate project and package extension"
     workingDirectory: "$(Build.SourcesDirectory)"
 
   - task: PublishPipelineArtifact@1

@@ -3,7 +3,7 @@
  * @file Validate consolidated tokens and details, resolve aliases, and emit ordered JSONC with disabled entries.
  */
 
-import { detailFields } from "./formats.js";
+import { detailFields, nonempty } from "./formats.js";
 import { fields, object } from "../shared/jsonc.js";
 import { validateHex, withAlpha } from "../shared/color-math.js";
 
@@ -15,15 +15,6 @@ const disablingFields = ["disabled", "disabledReason"];
 
 /** Semantic formatting flags supported by VS Code. */
 const formattingFields = ["bold", "italic", "underline", "strikethrough"];
-
-/**
- * Require a nonempty explanation or documentation string.
- * @param value - Authored string to validate.
- * @param label - Diagnostic location.
- */
-function nonempty(value, label) {
-  if (typeof value !== "string" || !value.trim()) throw new Error(`${label}: expected a nonempty string`);
-}
 
 /**
  * Validate a retained or active color descriptor, including literal explanations and alpha.

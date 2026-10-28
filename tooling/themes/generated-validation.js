@@ -22,8 +22,9 @@ function isObject(value) {
  * Parse a theme file and validate its metadata, workbench colors, and token sections.
  *
  * @param path - Path to the file, directory, or configuration value being processed.
+ * @param [registration] - Production registration whose UI type must match the theme.
  */
-async function readTheme(path) {
+async function readTheme(path, registration) {
   /** Parsed theme being checked for required sections and metadata. */
   let theme;
 
@@ -45,9 +46,11 @@ async function readTheme(path) {
     throw new Error(`${path}: semanticHighlighting must be a boolean`);
   }
 
-  themeUiType(theme, path);
+  /** Validated theme type shared by metadata and registration checks. */
+  const uiTheme = themeUiType(theme, path);
 
-  return theme;
+  if (registration && registration.uiTheme !== uiTheme)
+    throw new Error(`${registration.path}: manifest uiTheme does not match theme type ${theme.type}`);
 }
 
 /**
@@ -106,13 +109,7 @@ export async function checkGeneratedThemes(root = repositoryRoot) {
       throw new Error(`Invalid or duplicate prod theme path: ${theme.path}`);
     }
 
-    /** Validated theme metadata used to check the manifest’s UI type. */
-    const metadata = await readTheme(join(root, path));
-
-    if (theme.uiTheme !== themeUiType(metadata, path)) {
-      throw new Error(`${theme.path}: manifest uiTheme does not match theme type ${metadata.type}`);
-    }
-
+    await readTheme(join(root, path), theme);
     paths.add(path);
   }
 
@@ -124,12 +121,14 @@ export async function checkGeneratedThemes(root = repositoryRoot) {
 
   for (const directory of ["preview/themes", "preview/snapshots"]) {
     for (const file of await listFiles(join(root, directory))) {
-      if (file.endsWith(".json")) paths.add(`${directory}/${file}`);
-    }
-  }
+      if (!file.endsWith(".json")) continue;
 
-  for (const path of paths) {
-    await readTheme(join(root, path));
+      /** Preview theme path validated once before being included in the total. */
+      const path = `${directory}/${file}`;
+
+      await readTheme(join(root, path));
+      paths.add(path);
+    }
   }
 
   return paths.size;

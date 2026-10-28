@@ -548,7 +548,7 @@ export async function prepareBuild({
   if (!recoveryOwner && JSON.stringify(await requireStable(root)) !== JSON.stringify(generation))
     throw Object.assign(new Error("Stale application generation; retry the build."), { code: "STALE_INPUT" });
 
-  return { root, mode, output, expected, selected, palette: baseline.palette };
+  return { root, output, expected, selected };
 }
 
 /**
@@ -560,7 +560,7 @@ export async function prepareBuild({
  */
 export async function applyBuild(prepared, { check = false, operations } = {}) {
   /** Validated immutable preparation data. */
-  const { root, output, expected, selected, palette } = prepared;
+  const { root, output, expected, selected } = prepared;
 
   if (check) {
     await requireStable(root);
@@ -575,7 +575,6 @@ export async function applyBuild(prepared, { check = false, operations } = {}) {
   return {
     changed,
     removed: changed.filter((path) => output.get(path) === null),
-    palette,
     targets: selected.map((target) => ({
       name: target.name,
       group: target.group,

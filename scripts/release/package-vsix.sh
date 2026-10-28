@@ -2,7 +2,6 @@
 set -euo pipefail
 
 cd "$(dirname "$0")/../.."
-npm run check:generated
 
 version=$(node -p "require('./package.json').version")
 vsix=${1:-"dist/cassidy-dark-$version.vsix"}

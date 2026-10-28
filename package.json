@@ -30,7 +30,6 @@
     "Night Theme"
   ],
   "devDependencies": {
-    "@eslint/compat": "^2.1.1",
     "@eslint/js": "^10.0.1",
     "@vscode/vsce": "^4.0.0",
     "acorn": "^8.19.0",

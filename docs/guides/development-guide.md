@@ -162,7 +162,7 @@ Use [preserved snapshots](../../preview/snapshots/) for historical comparisons. 
 
 ## Packaging, releases, and recovery
 
-Run `npm run package:vsix` for full local validation and VSIX creation. It preserves production theme/image assets and excludes authored inputs, tooling, tests, samples, preview assets, docs, and caches. Inspect the archive before release. Packaging performs no publication.
+Run `npm run package:vsix` for full local validation and VSIX creation. Local and pipeline packaging run the full checks once before creating the VSIX. It preserves production theme/image assets and excludes authored inputs, tooling, tests, samples, preview assets, docs, and caches. Inspect the archive before release. Packaging performs no publication.
 
 Prepare the intended `package.json` version with aligned lockfile root metadata and a matching nonempty `## [VERSION] - YYYY-MM-DD` changelog section. Validate locally and inspect notes with `bash scripts/release/publish/get-changelog-notes.sh`. Commit and push the intended release commit to remote `main` before explicitly submitting publication; local changes are not uploaded by the queue command.
 
