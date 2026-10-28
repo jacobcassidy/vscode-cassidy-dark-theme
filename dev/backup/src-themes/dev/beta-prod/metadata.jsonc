@@ -1,0 +1,8 @@
+{
+  "$schema": "vscode://schemas/color-theme",
+  "name": "Cassidy Dark",
+  "previewName": "Beta Prod",
+  "type": "dark",
+  "author": "Jacob Cassidy",
+  "semanticHighlighting": true
+}

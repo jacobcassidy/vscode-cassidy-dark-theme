@@ -1,0 +1,36 @@
+{
+  "surface": {
+    "editor": {
+      "color": "palette.gray.900"
+    }
+  },
+  "text": {
+    "default": {
+      "color": "palette.gray.200"
+    }
+  },
+  "diagnostic": {
+    "error": {
+      "foreground": {
+        "color": "palette.red.500"
+      }
+    },
+    "warning": {
+      "foreground": {
+        "color": "palette.orange.400"
+      }
+    }
+  },
+  "diff": {
+    "added": {
+      "foreground": {
+        "color": "palette.green.400"
+      }
+    },
+    "removed": {
+      "foreground": {
+        "color": "palette.red.400"
+      }
+    }
+  }
+}
