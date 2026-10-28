@@ -54,8 +54,9 @@ test("a versioned snapshot replays without runtime access and reports extraction
 
   assert.equal(prepared.path, "dev/docs/refreshes/vscode-1.2.3/color-theme.json");
 
-  await mkdir(join(root, "dev/docs/refreshes"), { recursive: true });
+  await mkdir(join(root, "dev/docs/refreshes/vscode-1.2.3"), { recursive: true });
   await writeFile(join(root, prepared.path), prepared.source);
+  await mkdir(join(root, "dev/docs/refreshes/vscode-1.2.4"), { recursive: true });
   await writeFile(
     join(root, "dev/docs/refreshes/vscode-1.2.4/color-theme.json"),
     JSON.stringify({ ...prepared.snapshot, version: "1.2.4" }),

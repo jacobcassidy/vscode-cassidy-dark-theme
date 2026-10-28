@@ -40,36 +40,7 @@
   },
   "type": "object",
   "properties": {
-    "surface": {
-      "anyOf": [
-        {
-          "type": "object",
-          "properties": {
-            "color": {
-              "type": "string",
-              "pattern": "\\S"
-            },
-            "alpha": {
-              "type": "number",
-              "minimum": 0,
-              "maximum": 1
-            },
-            "colorReason": {
-              "type": "string",
-              "pattern": "\\S"
-            }
-          },
-          "additionalProperties": false,
-          "required": [
-            "color"
-          ]
-        },
-        {
-          "$ref": "#/definitions/branch"
-        }
-      ]
-    },
-    "text": {
+    "default": {
       "anyOf": [
         {
           "type": "object",
@@ -155,9 +126,6 @@
           "$ref": "#/definitions/branch"
         }
       ]
-    },
-    "placeholder": {
-      "$ref": "#/properties/surface/anyOf/0"
     }
   },
   "additionalProperties": false

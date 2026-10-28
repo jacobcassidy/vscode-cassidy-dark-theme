@@ -186,7 +186,7 @@ test("failed prod validation leaves all previous outputs intact and palette-only
 
   await writeFile(
     join(root, "src/themes/prod/default/tokens/variables/definitions.jsonc"),
-    '{"surface":{"editor":{"color":"missing.color"}}}',
+    '{"default":{"background":{"color":"missing.color"}}}',
   );
 
   await assert.rejects(buildProdThemes({ root }), /Unknown reference/);
@@ -210,7 +210,7 @@ test("editing prod token details leaves all generated artifacts unchanged", asyn
 
   await writeFile(
     join(root, "src/themes/prod/default/tokens/variables/details.jsonc"),
-    JSON.stringify({ "surface.editor": { description: "Editor background." } }),
+    JSON.stringify({ default: { background: { description: "Editor background." } } }),
   );
 
   assert.deepEqual((await buildProdThemes({ root, check: true })).changed, []);
@@ -387,7 +387,7 @@ test("prod palette reports include 600 contrast from final hex and flag transluc
   assert.match(await readFile(path, "utf8"), /`palette.blue.600`\s*\|\s*`#00000080`\s*\|\s*Needs backdrop/);
 });
 
-test("the bootstrap starter resolves its placeholder variable across color sections", async (t) => {
+test("the bootstrap starter resolves mapped UI variables and remaining placeholders", async (t) => {
   /** Isolated theme candidates filled from the checked-in standard shared inventory. */
   const root = await createBuildProject(t),
     sources = completeStarterTheme(await starterTheme(root), await loadTokenData());
@@ -407,7 +407,10 @@ test("the bootstrap starter resolves its placeholder variable across color secti
   const theme = parse(renderTheme(parts.metadata, compileTokens(parts.tokens, parts.details, palette)));
 
   assert.equal(theme.colors["editor.foreground"], "#f0f");
-  assert.equal(theme.colors["editor.background"], "#f0f");
+  assert.equal(theme.colors["editor.background"], palette.get("palette.gray.900").hex);
+  assert.equal(theme.colors.foreground, palette.get("palette.gray.200").hex);
+  assert.equal(theme.colors["diffEditorOverview.insertedForeground"], palette.get("palette.green.400").hex);
+  assert.equal(theme.colors["diffEditorOverview.removedForeground"], palette.get("palette.red.400").hex);
   assert.equal(theme.semanticTokenColors.variable.foreground, "#f0f");
   assert.equal(theme.tokenColors[0].settings.foreground, "#f0f");
 });
@@ -743,7 +746,7 @@ for (const [path, contents, pattern] of [
   [
     "tokens/variables/definitions.jsonc",
     "{}",
-    /Unknown reference:.*variables.surface.editor/,
+    /Unknown reference:.*variables.default.background/,
   ],
   ["metadata.jsonc", "{}", /theme name must be/],
   [
@@ -761,7 +764,7 @@ for (const [path, contents, pattern] of [
   ["palette/config.jsonc", '{"chroma":', /ValueExpected/],
   [
     "tokens/variables/definitions.jsonc",
-    '{"surface":{"one":{"color":"variables.surface.two"},"two":{"color":"variables.surface.one"}}}',
+    '{"default":{"one":{"color":"variables.default.two"},"two":{"color":"variables.default.one"}}}',
     /Token cycle/,
   ],
 ]) {
@@ -840,7 +843,7 @@ for (const group of ["prod", "dev"]) {
     await writeFile(join(root, "src/themes/prod/default/palette/config.jsonc"), JSON.stringify(config));
     await writeFile(
       join(target, "tokens/variables/definitions.jsonc"),
-      '{"surface":{"unused":{"color":"unknown.color"}}}',
+      '{"default":{"unused":{"color":"unknown.color"}}}',
     );
 
     await assert.rejects(build({ root }), /Unknown reference/);

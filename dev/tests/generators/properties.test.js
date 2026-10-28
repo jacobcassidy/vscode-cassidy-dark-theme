@@ -37,7 +37,7 @@ test("nested property addition preserves styles, disabled entries, parent record
 
   await writeFixture(
     join(root, "src/themes/prod/default/tokens/ui/definitions.jsonc"),
-    '{"standard":{},"sourceCode":{},"nonStandard":{"testing":{"iconFailed":{/* Parent explanation. */"disabled":true,"disabledReason":"Retain the upstream fallback."}},"editor":{"background":{"color":"variables.surface.editor"},"foreground":{"color":"syntax.string"}}},"deprecated":{}}',
+    '{"standard":{},"sourceCode":{},"nonStandard":{"testing":{"iconFailed":{/* Parent explanation. */"disabled":true,"disabledReason":"Retain the upstream fallback."}},"editor":{"background":{"color":"variables.default.background"},"foreground":{"color":"syntax.string"}}},"deprecated":{}}',
   );
 
   await writeFixture(
@@ -61,7 +61,7 @@ test("nested property addition preserves styles, disabled entries, parent record
 
   assert.equal(definitions.value["testing.iconFailed"].disabled, true);
   assert.equal(definitions.value["testing.iconFailed.retired"].color, "#0ff");
-  assert.equal(definitions.value["editor.background"].color, "variables.surface.editor");
+  assert.equal(definitions.value["editor.background"].color, "variables.default.background");
   assert.equal(details.value["editor.background"].description, "My wording.");
   assert.deepEqual([...details.value["editor.background"].inherits], ["widget.background"]);
   assert.match(definitions.input.source, /Parent explanation/);

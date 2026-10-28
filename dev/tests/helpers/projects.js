@@ -37,9 +37,9 @@ export const themePartNames = themeInputPaths.map((path) => path.replace(/\.json
 /** Create consolidated tokens exercising references, formatting, backgrounds, and scope order. */
 export function createTokens() {
   return {
-    variables: { surface: { editor: { color: "palette.gray.900" } } },
+    variables: { default: { background: { color: "palette.gray.900" } } },
     ui: {
-      "editor.background": { color: "variables.surface.editor" },
+      "editor.background": { color: "variables.default.background" },
       "editor.foreground": { color: "syntax.string" },
     },
     semantic: {
@@ -52,7 +52,7 @@ export function createTokens() {
         name: "Ordered scopes",
         scope: ["second", "first"],
         color: "palette.yellow.400",
-        background: { color: "variables.surface.editor" },
+        background: { color: "variables.default.background" },
         fontStyle: "bold italic",
       },
     ],
@@ -112,7 +112,7 @@ export async function createBuildProject(t) {
     metadata: { name: "Fixture", type: "dark", semanticHighlighting: true },
     tokens: createTokens(),
     details: {
-      variables: { "surface.editor": { description: "Shared editor surface." } },
+      variables: { default: { background: { description: "Shared editor background." } } },
       ui: {
         "editor.background": { description: "Editor background." },
         "editor.foreground": { description: "Editor foreground." },

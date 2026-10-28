@@ -43,9 +43,17 @@ test("starter metadata retains the VS Code schema and package author", async (t)
     variableDetails = JSON.parse(sources.get("src/themes/prod/default/tokens/variables/details.jsonc")),
     syntax = JSON.parse(sources.get("src/themes/prod/default/tokens/syntax/definitions.jsonc"));
 
-  assert.equal(variables.placeholder.color, "#f0f");
-  assert.match(variableDetails.placeholder.description, /Placeholder color/);
-  assert.equal(syntax.standard.rules[0].color, "variables.placeholder");
+  assert.equal(variables.default.placeholder.color, "#f0f");
+  assert.match(variables.default.placeholder.colorReason, /Review this selector/);
+  assert.match(variableDetails.default.placeholder.description, /Placeholder color/);
+  assert.equal(variables.default.background.color, "palette.gray.900");
+  assert.equal(variables.default.foreground.color, "palette.gray.200");
+  assert.equal(variables.diagnostic["error.foreground"].color, "palette.red.500");
+  assert.equal(variables.diagnostic["warning.foreground"].color, "palette.orange.500");
+  assert.equal(variables.diff["added.foreground"].color, "palette.green.400");
+  assert.equal(variables.diff["removed.foreground"].color, "palette.red.400");
+  assert.equal(syntax.standard.rules[0].color, "variables.default.placeholder");
+  assert.equal(syntax.standard.rules[0].colorReason, undefined);
 });
 
 test("starter completion creates every standard UI and semantic definition with matching details", async (t) => {
@@ -64,14 +72,24 @@ test("starter completion creates every standard UI and semantic definition with 
     return { category, value: { description } };
   }
 
+  /** Representative mapped variables and fallback tokens exercise every starter role. */
+  const uiColors = new Map([
+    ["editor", "variables.default.placeholder"],
+    ["editor.background", "variables.default.background"],
+    ["editor.foreground", "variables.default.placeholder"],
+    ["foreground", "variables.default.foreground"],
+    ["errorForeground", "variables.diagnostic.error.foreground"],
+    ["editorWarning.foreground", "variables.diagnostic.warning.foreground"],
+    ["diffEditorOverview.insertedForeground", "variables.diff.added.foreground"],
+    ["diffEditorOverview.removedForeground", "variables.diff.removed.foreground"],
+  ]);
+
   /** Exact category authority and description records used by completion. */
   const snapshot = {
     definitions: {
       ui: {
         records: new Map([
-          ["editor", record("standard", "Editor root")],
-          ["editor.background", record("standard", "Editor background")],
-          ["editor.foreground", record("standard", "Editor foreground")],
+          ...[...uiColors.keys()].map((id) => [id, record("standard", `Purpose of ${id}.`)]),
           ["custom.color", record("nonStandard", "Custom")],
         ]),
       },
@@ -86,9 +104,7 @@ test("starter completion creates every standard UI and semantic definition with 
     details: {
       ui: {
         records: new Map([
-          ["editor", record("standard", "Editor root")],
-          ["editor.background", record("standard", "Editor background")],
-          ["editor.foreground", record("standard", "Editor foreground")],
+          ...[...uiColors.keys()].map((id) => [id, record("standard", `Purpose of ${id}.`)]),
         ]),
       },
       semantic: {
@@ -105,10 +121,11 @@ test("starter completion creates every standard UI and semantic definition with 
     prefix = "src/themes/prod/default/tokens/";
 
   for (const [family, expected] of [
-    ["ui", ["editor", "editor.background", "editor.foreground"]],
+    ["ui", [...uiColors.keys()].sort()],
     ["semantic", ["*.readonly", "variable"]],
   ]) {
     for (const kind of ["definitions", "details"]) {
+      /** Prepared source and normalized records for this family and file role. */
       const path = `${prefix}${family}/${kind}.jsonc`,
         decoded = parseFormat(sources.get(path), path, family, kind);
 
@@ -117,8 +134,8 @@ test("starter completion creates every standard UI and semantic definition with 
 
       if (kind === "definitions")
         for (const entry of decoded.records.values()) {
-          assert.equal(entry.value.color, "variables.placeholder");
-          assert.equal(entry.value.colorReason, "Default bootstrap value. Review this selector before publication");
+          assert.equal(entry.value.color, family === "ui" ? uiColors.get(entry.id) : "variables.default.placeholder");
+          assert.equal(entry.value.colorReason, undefined);
         }
     }
   }

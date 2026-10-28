@@ -516,7 +516,7 @@
           "properties": {
             "path": {
               "type": "string",
-              "pattern": "^dev/docs/refreshes/vscode-color-theme-[0-9]+\\.[0-9]+\\.[0-9]+\\.json$"
+              "pattern": "^dev/docs/refreshes/vscode-[0-9]+\\.[0-9]+\\.[0-9]+/color-theme\\.json$"
             },
             "revision": {
               "type": "string",

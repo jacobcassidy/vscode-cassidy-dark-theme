@@ -79,7 +79,7 @@ export function validateSourceConfig(config) {
       fields(schema, ["path", "revision", "digest"], "lastSuccessful.colorThemeSchema");
 
       if (
-        schema.path !== `dev/docs/refreshes/vscode-color-theme-${resolution.version}.json` ||
+        schema.path !== `dev/docs/refreshes/vscode-${resolution.version}/color-theme.json` ||
         schema.revision !== resolution.inputs[0].revision ||
         !/^sha256:[a-f0-9]{64}$/.test(schema.digest)
       )

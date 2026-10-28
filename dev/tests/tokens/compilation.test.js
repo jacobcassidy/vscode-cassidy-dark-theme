@@ -30,12 +30,12 @@ test("forward and cross-section aliases preserve alpha replacement and exact sel
   /** Authored sections with forward aliases and independent formatting. */
   const tokens = createTokens();
 
-  tokens.variables.text = {
+  tokens.variables.default.aliases = {
     first: { color: "semantic.function.defaultLibrary", alpha: 0.1 },
-    second: { color: "variables.text.first", alpha: 0.2 },
-    opaque: { color: "variables.text.second", alpha: 1 },
-    empty: { color: "variables.text.second", alpha: 0 },
-    inherited: { color: "variables.text.second" },
+    second: { color: "variables.default.aliases.first", alpha: 0.2 },
+    opaque: { color: "variables.default.aliases.second", alpha: 1 },
+    empty: { color: "variables.default.aliases.second", alpha: 0 },
+    inherited: { color: "variables.default.aliases.second" },
   };
 
   tokens.semantic["function.defaultLibrary"] = { color: "ui.editor.foreground" };
@@ -46,11 +46,11 @@ test("forward and cross-section aliases preserve alpha replacement and exact sel
   /** Resolved values indexed by aliases and compiled selectors. */
   const result = compile(tokens);
 
-  assert.equal(result.resolved.get("variables.text.first"), "#f1dda51a");
-  assert.equal(result.resolved.get("variables.text.second"), "#f1dda533");
-  assert.equal(result.resolved.get("variables.text.opaque"), "#f1dda5");
-  assert.equal(result.resolved.get("variables.text.empty"), "#f1dda500");
-  assert.equal(result.resolved.get("variables.text.inherited"), "#f1dda533");
+  assert.equal(result.resolved.get("variables.default.aliases.first"), "#f1dda51a");
+  assert.equal(result.resolved.get("variables.default.aliases.second"), "#f1dda533");
+  assert.equal(result.resolved.get("variables.default.aliases.opaque"), "#f1dda5");
+  assert.equal(result.resolved.get("variables.default.aliases.empty"), "#f1dda500");
+  assert.equal(result.resolved.get("variables.default.aliases.inherited"), "#f1dda533");
   assert.equal(result.resolved.get("ui.wildcard"), palette.get("palette.blue.400").hex);
   assert.deepEqual(result.semanticTokenColors.at(-1).value, {
     bold: false,
@@ -216,24 +216,28 @@ test("retained styles reject unknown references, cycles, duplicate IDs, and inva
   tokens.syntax.push({ ...tokens.syntax[0] });
   assert.throws(() => compile(tokens), /duplicate token ID syntax.string/);
   tokens.syntax.pop();
-  tokens.variables.surface = {
+  tokens.variables.default = {
     nested: { one: { color: "palette.blue.400" } },
     "nested.one": { color: "palette.blue.400" },
   };
 
-  assert.throws(() => compile(tokens), /duplicate token ID variables.surface.nested.one/);
+  assert.throws(() => compile(tokens), /duplicate token ID variables.default.nested.one/);
 });
 
 test("token schemas validate selectors, flags, syntax backgrounds, and source-only fields", () => {
   for (const [section, value, pattern] of [
     ["variables", { unknown: {} }, /unknown field/],
-    ["variables", { surface: { editor: { color: "palette.blue.400", disabled: false } } }, /unknown field disabled/],
     [
       "variables",
-      { surface: { editor: { color: "palette.blue.400", disabledReason: "Unused." } } },
+      { default: { background: { color: "palette.blue.400", disabled: false } } },
+      /unknown field disabled/,
+    ],
+    [
+      "variables",
+      { default: { background: { color: "palette.blue.400", disabledReason: "Unused." } } },
       /unknown field disabledReason/,
     ],
-    ["variables", { surface: { "bad key": { color: "palette.blue.400" } } }, /invalid variable ID/],
+    ["variables", { default: { "bad key": { color: "palette.blue.400" } } }, /invalid variable ID/],
     ["ui", { invalid: "#123456" }, /expected an object/],
     ["ui", { "bad key": { color: "palette.blue.400" } }, /invalid ui key/],
     ["ui", { bad: {} }, /requires styling/],
@@ -284,7 +288,7 @@ test("details enforce reviewed global replacements independently from aliases an
     assert.doesNotThrow(() => compile(tokens, details));
   }
 
-  details.variables["surface.editor"] = { globallyOverriddenBy: ["editor.background"] };
+  details.variables["default.background"] = { globallyOverriddenBy: ["editor.background"] };
   assert.throws(() => compile(tokens, details), /internal variables cannot be globallyOverriddenBy/);
 });
 

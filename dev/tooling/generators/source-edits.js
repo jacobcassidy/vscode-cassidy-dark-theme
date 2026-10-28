@@ -35,7 +35,13 @@ export function emptyFamily(family, kind, shared = false) {
  * @param id - Canonical ID, selector, or variable path.
  */
 export function recordPath(family, category, id) {
-  if (family === "variables") return [id];
+  if (family === "variables") {
+    /** Variable details retain their group root and dotted property suffix. */
+    const [group, ...property] = id.split(".");
+
+    return property.length ? [group, property.join(".")] : [group];
+  }
+
   return [category, ...(family === "ui" ? id.split(".") : [id])];
 }
 

@@ -6,6 +6,7 @@ All notable changes to this project are documented in this file.
 
 ### Changed
 
+- Updated test fixtures for grouped default variables, mapped bootstrap colors, and versioned schema snapshot directories; aligned variable schemas, refresh provenance validation, and property-fill paths with those formats.
 - Extracted UI fallback inheritance from upstream color registrations during bootstrap and refresh, and preserved shared relationships and history in starter theme details.
 - Routed default bootstrap token colors through `variables.placeholder` (`#f0f`) and gave each definition the same publication-review reason.
 - Filled bootstrap's missing default theme with the full standard palette and matching definitions and details for every verified standard UI color and semantic type/modifier selector.
