@@ -7,6 +7,9 @@ All notable changes to this project are documented in this file.
 ### Changed
 
 - Added current-stage and elapsed-time feedback to `refresh`, with an animated terminal spinner, plain redirected progress, and cleanup before completion or errors.
+- Added pinned Linux VS Code screenshot checks for the published Cassidy Dark theme, with representative languages, semantic highlighting off/on, Problems and terminal states, explicit baseline updates, and automatic Ubuntu CI comparison reports.
+- Required complete one-to-one source coverage identities and rejected missing named/default imports and re-exports in the executable audit.
+- Verified both embedded VSIX identities, peeled tag commits, and existing asset bytes before GitHub recovery; preserved release notes and uploaded only frozen validated archives.
 - Removed redundant token examples from `docs/references/examples/`, linked the development guide to the default theme sources, and removed standalone example checks and schema associations.
 - Simplified release commands to `package`, `publish`, and `recover`, updating the Azure packaging step and development guidance.
 - Kept native watcher subscriptions open on macOS to prevent edits from being lost at build completion; limited recursive subscription rebinding to the Linux replacement-save workaround and added a regression test.

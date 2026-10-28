@@ -24,3 +24,18 @@ steps:
     displayName: Install locked dependencies
   - script: npm run check
     displayName: Validate sources, audits, native workflows, and package inventory
+  - script: |
+      status=0
+      npm run check:visual || status=$?
+      if [[ -f .cache/visual/report/index.html ]]; then
+        echo "##vso[task.setvariable variable=VisualReportAvailable]true"
+      fi
+      exit "$status"
+    displayName: Check published theme screenshots in pinned Linux VS Code
+    condition: and(succeeded(), eq(variables['image'], 'ubuntu-latest'))
+  - task: PublishPipelineArtifact@1
+    displayName: Upload visual comparison report
+    condition: and(succeededOrFailed(), eq(variables['VisualReportAvailable'], 'true'))
+    inputs:
+      targetPath: .cache/visual/report
+      artifact: visual-comparisons

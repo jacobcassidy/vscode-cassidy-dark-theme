@@ -20,6 +20,34 @@ function audit(entries, roots = ["scripts/cli.js"], testRoots = []) {
   return auditModules({ sources: new Map(entries), roots, testRoots });
 }
 
+test("named/default imports and named re-exports must exist, including cyclic star barrels", () => {
+  /** Valid star and renamed re-exports preserve their actual public binding names. */
+  const graph = [
+    ["scripts/cli.js", 'import { renamed, current, tools } from "../tooling/barrel.js";'],
+    [
+      "tooling/barrel.js",
+      'export { current as renamed } from "./current.js"; export * from "./cycle.js"; export * as tools from "./current.js";',
+    ],
+    ["tooling/cycle.js", 'export * from "./barrel.js"; export * from "./current.js";'],
+    ["tooling/current.js", "export const current = true;"],
+  ];
+
+  assert.deepEqual(audit(graph), []);
+  graph[0][1] = 'import { missing } from "../tooling/barrel.js";';
+  assert.match(audit(graph).join("\n"), /missing export missing from tooling\/barrel.js/);
+  graph[0][1] = 'import missing from "../tooling/barrel.js";';
+  assert.match(audit(graph).join("\n"), /missing export default/);
+  graph[1][1] = 'export { absent as renamed } from "./current.js";';
+  assert.match(audit(graph).join("\n"), /missing export absent from tooling\/current.js/);
+  assert.deepEqual(
+    audit([
+      ["scripts/cli.js", 'import current from "../tooling/current.js";'],
+      ["tooling/current.js", "export default true;"],
+    ]),
+    [],
+  );
+});
+
 test("unreachable implementation and unused exports fail while CLI/configuration roots remain valid", () => {
   /** Concrete imports consume only the named current public API. */
   const graph = [

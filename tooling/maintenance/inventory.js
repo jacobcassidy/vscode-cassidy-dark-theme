@@ -4,7 +4,13 @@
  */
 
 /** Configuration-loaded executable roots that have no ordinary module importer. */
-export const configurationRoots = ["eslint.config.js", "prettier.config.js"];
+export const configurationRoots = [
+  "eslint.config.js",
+  "prettier.config.js",
+  "playwright.config.js",
+  "tests/visual/theme.spec.js",
+  "tests/visual/fixture-extension/extension.js",
+];
 
 /** Focused pure-contract/test interfaces retained with concrete current consumers. */
 export const testInterfaces = [

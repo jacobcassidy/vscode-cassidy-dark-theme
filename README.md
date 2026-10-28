@@ -30,4 +30,6 @@ Run `npm run refresh` to refresh shared token descriptions, `npm run fill -- pro
 
 The [development guide](docs/guides/development-guide.md) covers paired family inputs, palettes, shared categorized token data, generators, explicit upstream description updates, validation, [visual language samples](samples/grammar/), packaging, and release/recovery workflows. `npm run check` validates generated artifacts, documentation, executable reachability, formatting, lint, themes, and recursive behavioral suites.
 
+`npm run check:visual` compares the published theme in a pinned Linux VS Code container, locally and in Ubuntu CI. Docker is required; update baselines explicitly with `npm run check:visual -- --update`.
+
 Shared data lives in [`src/token-data/`](src/token-data/); authored themes live in [`src/themes/`](src/themes/). Generated previews and preserved snapshots live in [`preview/`](preview/). Theme builds and watch synchronize preview setup automatically.

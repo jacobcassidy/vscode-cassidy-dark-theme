@@ -33,6 +33,6 @@ test("VSIX inventory contains production assets and excludes tooling, sources, t
   for (const path of paths)
     assert.doesNotMatch(
       path,
-      /^(?:src|tooling|scripts|tests|samples|preview|docs|\.cache|\.vscode)\/|^(?:azure-.*\.yml|AGENTS\.md|eslint\.config\.js|prettier\.config\.js)$/,
+      /^(?:src|tooling|scripts|tests|samples|preview|docs|\.cache|\.vscode)\/|^(?:azure-.*\.yml|AGENTS\.md|eslint\.config\.js|prettier\.config\.js|playwright\.config\.js)$/,
     );
 });

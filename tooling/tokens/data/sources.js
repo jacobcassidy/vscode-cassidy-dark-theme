@@ -97,15 +97,24 @@ export function validateSourceConfig(config) {
     if (config.lastSuccessful.coverage.length !== resolution.inputs.length)
       throw new Error("Recorded coverage does not cover every source input");
 
+    /** Every immutable input has exactly one coverage record with the same full identity. */
+    const covered = new Set();
+
     for (const coverage of config.lastSuccessful.coverage) {
       fields(coverage, ["identity", "ui", "types", "modifiers", "scopes"], "recorded coverage");
 
+      /** Identity fields include contributor and kind, independently from revision spelling. */
+      const identity = resolution.inputs.find((input) => input.id === coverage.identity?.id);
+
       if (
-        !resolution.inputs.some(
-          (identity) => identity.id === coverage.identity?.id && identity.revision === coverage.identity.revision,
-        )
+        !identity ||
+        covered.has(identity.id) ||
+        Object.keys(coverage.identity).some((key) => !Object.hasOwn(identity, key)) ||
+        Object.keys(identity).some((key) => identity[key] !== coverage.identity[key])
       )
-        throw new Error("Coverage identity differs from successful resolution");
+        throw new Error("Coverage identities must match every successful source exactly once");
+
+      covered.add(identity.id);
 
       for (const family of ["ui", "types", "modifiers", "scopes"]) {
         if (

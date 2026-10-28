@@ -5,7 +5,12 @@
 
 import assert from "node:assert/strict";
 import test from "node:test";
-import { createRetrieval, resolveLatest, retryDelay } from "../../../tooling/tokens/data/sources.js";
+import {
+  createRetrieval,
+  resolveLatest,
+  retryDelay,
+  validateSourceConfig,
+} from "../../../tooling/tokens/data/sources.js";
 
 /**
  * Construct a minimal HTTP response for deterministic injected transports.
@@ -28,6 +33,58 @@ function response(status, value, headers = {}) {
 
 /** Finite local policies avoid real timers/retry waits in every test. */
 const policy = { requestMs: 30, attempts: 3, totalMs: 3000 };
+
+test("recorded coverage is a bijection over full source identities", () => {
+  /** Independent core and contributor inputs require distinct complete coverage identities. */
+  const inputs = [
+    { id: "vscode-stable", kind: "core", revision: "a".repeat(40) },
+    { id: "extension-1", kind: "extension", revision: "b".repeat(40), contributor: "fixture.extension" },
+  ];
+
+  /** Valid replay metadata is independent from parser/updater output. */
+  const config = {
+    policy: "latest-stable",
+    repository: "microsoft/vscode",
+    supplementalMain: false,
+    retrieval: policy,
+    coverageExceptions: [],
+    lastSuccessful: {
+      resolution: { version: "1.2.3", tag: "1.2.3", inputs },
+      coverage: inputs.map((identity) => ({ identity: { ...identity }, ui: [], types: [], modifiers: [], scopes: [] })),
+      acceptedCoverage: [],
+      localSyntax: {
+        path: "src/themes/prod/default/tokens/syntax/definitions.jsonc",
+        revision: `sha256:${"c".repeat(64)}`,
+      },
+    },
+  };
+
+  validateSourceConfig(config);
+
+  for (const mutate of [
+    (candidate) => {
+      candidate.lastSuccessful.coverage[1] = structuredClone(candidate.lastSuccessful.coverage[0]);
+    },
+    (candidate) => {
+      candidate.lastSuccessful.coverage.pop();
+    },
+    (candidate) => {
+      candidate.lastSuccessful.coverage[1].identity.contributor = "other.extension";
+    },
+    (candidate) => {
+      candidate.lastSuccessful.coverage[0].identity.kind = "extension";
+    },
+    (candidate) => {
+      candidate.lastSuccessful.coverage[0].identity.extra = true;
+    },
+  ]) {
+    /** Each malformed record starts from a separately valid configuration. */
+    const candidate = structuredClone(config);
+
+    mutate(candidate);
+    assert.throws(() => validateSourceConfig(candidate), /coverage|Coverage/);
+  }
+});
 
 for (const release of [
   { tag_name: "1.2.3", draft: true },

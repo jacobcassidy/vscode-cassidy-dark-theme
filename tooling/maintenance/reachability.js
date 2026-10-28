@@ -40,7 +40,11 @@ export function auditModules({ sources, roots, testRoots = [], interfaces = [] }
   for (const [path, source] of sources) {
     /** Each module's import/reference edges and declared public surface. */
     const edges = [],
-      exports = new Set();
+      exports = new Set(),
+      stars = [];
+
+    /** External star re-exports have an opaque public surface outside the owned graph. */
+    let externalStar = false;
 
     /** Parsed JavaScript syntax tree used for concrete reference analysis. */
     const tree = parse(source, { ecmaVersion: "latest", sourceType: "module", allowHashBang: true, locations: true });
@@ -63,6 +67,8 @@ export function auditModules({ sources, roots, testRoots = [], interfaces = [] }
       }
 
       edges.push({ target, symbols });
+
+      return target;
     }
 
     walk(tree, (node, ancestors) => {
@@ -74,7 +80,7 @@ export function auditModules({ sources, roots, testRoots = [], interfaces = [] }
               ? "*"
               : specifier.type === "ImportDefaultSpecifier"
                 ? "default"
-                : specifier.imported.name,
+                : (specifier.imported.name ?? specifier.imported.value),
           ),
         );
 
@@ -92,7 +98,7 @@ export function auditModules({ sources, roots, testRoots = [], interfaces = [] }
         if (node.source)
           edge(
             node.source.value,
-            node.specifiers.map((specifier) => specifier.local.name),
+            node.specifiers.map((specifier) => specifier.local.name ?? specifier.local.value),
           );
 
         if (node.declaration?.id) exports.add(node.declaration.id.name);
@@ -103,10 +109,17 @@ export function auditModules({ sources, roots, testRoots = [], interfaces = [] }
           else exports.add(declaration.id.name);
         }
 
-        for (const specifier of node.specifiers) exports.add(specifier.exported.name);
+        for (const specifier of node.specifiers) exports.add(specifier.exported.name ?? specifier.exported.value);
       }
 
-      if (node.type === "ExportAllDeclaration") edge(node.source.value, ["*"]);
+      if (node.type === "ExportAllDeclaration") {
+        /** Owned star surfaces resolve transitively; namespace re-exports expose one named binding. */
+        const target = edge(node.source.value, ["*"]);
+
+        if (node.exported) exports.add(node.exported.name ?? node.exported.value);
+        else if (target) stars.push(target);
+        else if (!node.source.value.startsWith(".")) externalStar = true;
+      }
 
       if (node.type === "NewExpression" && node.callee.name === "URL") {
         /** Static module URLs include independently invoked child-process fixtures. */
@@ -132,7 +145,36 @@ export function auditModules({ sources, roots, testRoots = [], interfaces = [] }
       }
     });
 
-    graph.set(path, { edges, exports });
+    graph.set(path, { edges, exports, stars, externalStar });
+  }
+
+  /**
+   * Resolve a public name through owned star barrels without allowing default or cycles to invent bindings.
+   * @param path - Owned module whose public surface is requested.
+   * @param symbol - Exact imported/exported name.
+   * @param [seen] - Modules already visited along this resolution branch.
+   * @returns {boolean} Whether the public name exists in the owned graph.
+   */
+  function hasExport(path, symbol, seen = new Set()) {
+    if (seen.has(path)) return false;
+
+    /** Direct exports take precedence over inherited star surfaces. */
+    const module = graph.get(path);
+
+    if (!module) return false;
+    if (module.exports.has(symbol)) return true;
+    if (symbol === "default") return false;
+
+    return module.externalStar || module.stars.some((target) => hasExport(target, symbol, new Set([...seen, path])));
+  }
+
+  for (const [path, module] of graph) {
+    for (const { target, symbols } of module.edges) {
+      for (const symbol of symbols) {
+        if (symbol !== "*" && !hasExport(target, symbol))
+          failures.push(`${path}: missing export ${symbol} from ${target}`);
+      }
+    }
   }
 
   /**
