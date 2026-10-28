@@ -5,7 +5,8 @@
 
 import { mkdirSync } from "node:fs";
 import { resolve } from "node:path";
-import { spawnSync } from "node:child_process";
+import { spawn } from "node:child_process";
+import { createTerminalProgress } from "../../tooling/shared/terminal-progress.js";
 
 /** Explicit baseline changes are the only supported command option. */
 const update = process.argv.slice(2);
@@ -59,9 +60,45 @@ args.push(
     (update.length ? " --update-snapshots" : ""),
 );
 
-/** Forward test output and preserve failure status. */
-const result = spawnSync("docker", args, { stdio: "inherit" });
+/** Forward container output while showing the active task whenever Docker is quiet. */
+const child = spawn("docker", args, { stdio: ["inherit", "pipe", "pipe"] });
 
-if (result.error) console.error(`Docker is required for visual checks: ${result.error.message}`);
+/** Quiet-output timer and currently displayed task. */
+let quietTimer, progress;
 
-process.exitCode = result.status ?? 1;
+/** Start task feedback after a full second without child output. */
+function expectOutput() {
+  clearTimeout(quietTimer);
+  quietTimer = setTimeout(() => {
+    progress = createTerminalProgress("Running VS Code visual checks in Docker");
+  }, 1000);
+}
+
+/**
+ * Forward a child chunk and resume feedback if the next output is delayed.
+ * @param {Buffer} chunk - Container output chunk.
+ * @param {NodeJS.WriteStream} stream - Matching parent output stream.
+ */
+function forwardOutput(chunk, stream) {
+  progress?.stop();
+  progress = undefined;
+  stream.write(chunk);
+  expectOutput();
+}
+
+child.stdout.on("data", (chunk) => forwardOutput(chunk, process.stdout));
+child.stderr.on("data", (chunk) => forwardOutput(chunk, process.stderr));
+expectOutput();
+
+child.on("error", (error) => {
+  clearTimeout(quietTimer);
+  progress?.stop();
+  console.error(`Docker is required for visual checks: ${error.message}`);
+  process.exitCode = 1;
+});
+
+child.on("close", (status) => {
+  clearTimeout(quietTimer);
+  progress?.stop();
+  process.exitCode = status ?? 1;
+});

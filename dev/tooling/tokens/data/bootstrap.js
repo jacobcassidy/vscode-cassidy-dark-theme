@@ -46,8 +46,11 @@ function serialize(family, kind, value) {
  * @param options.root - Checkout root.
  * @param options.extensionSources - Explicit extension checkout paths.
  * @param options.signal - Cancellation signal.
+ * @param options.onProgress - Report the current stage before potentially slow work.
  */
-export async function bootstrapTokenData({ root = repositoryRoot, extensionSources = [], signal }) {
+export async function bootstrapTokenData({ root = repositoryRoot, extensionSources = [], signal, onProgress }) {
+  onProgress?.("Checking bootstrap destinations and writer state");
+
   /** Shared files that must be absent before a clean bootstrap. */
   const paths = [
     "src/data/tokens/ui/definitions.jsonc",
@@ -75,12 +78,17 @@ export async function bootstrapTokenData({ root = repositoryRoot, extensionSourc
   /** Stable-first VS Code release and verified extension inputs. */
   const policy = { repository: "microsoft/vscode", supplementalMain: true };
   const retrieval = createRetrieval({ policy: { requestMs: 30000, attempts: 3, totalMs: 300000 }, signal });
+  onProgress?.("Resolving the latest VS Code sources");
   const resolution = await resolveLatest(policy, retrieval);
   const sources = [];
 
-  for (const identity of resolution.inputs) sources.push(await obtainSource({ root, identity, retrieval }));
+  for (const identity of resolution.inputs) {
+    onProgress?.(`Retrieving and verifying ${identity.id}`);
+    sources.push(await obtainSource({ root, identity, retrieval }));
+  }
 
-  for (const [index, directory] of extensionSources.entries())
+  for (const [index, directory] of extensionSources.entries()) {
+    onProgress?.(`Verifying extension source ${index + 1}: ${directory}`);
     sources.push(
       await verifySource(
         isAbsolute(directory) ? directory : resolve(root, directory),
@@ -88,9 +96,15 @@ export async function bootstrapTokenData({ root = repositoryRoot, extensionSourc
         retrieval,
       ),
     );
+  }
 
   const extracted = [];
-  for (const source of sources) extracted.push(await extractSource(source, signal));
+  for (const source of sources) {
+    onProgress?.(`Extracting token registrations from ${source.identity.id}`);
+    extracted.push(await extractSource(source, signal));
+  }
+
+  onProgress?.("Preparing shared token inventories and details");
 
   /** Source records grouped by family, retaining every extension contributor. */
   const ui = new Map(),
@@ -258,6 +272,7 @@ export async function bootstrapTokenData({ root = repositoryRoot, extensionSourc
   );
 
   /** Guarded all-file application after source and destination freshness checks. */
+  onProgress?.("Validating and applying shared token files");
   const expected = await capturePaths([
     ...sources.map((source) => source.directory),
     ...targets.map((target) => join(root, target.directory)),

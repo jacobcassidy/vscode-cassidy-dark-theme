@@ -610,6 +610,7 @@ function logSummary(summary, targets, changedFiles, removedFiles, hasFollowingSu
  * @param [options.mode] - Build selection: all, prod, dev, or palette.
  * @param [options.check] - Whether to validate generated outputs without synchronizing previews.
  * @param [options.logger] - Logger receiving progress, changed paths, and reload reminders.
+ * @param [options.onProgress] - Report the current quiet stage, or clear it before other output.
  * @returns Preview synchronization result, or undefined for checks and palette-only builds.
  */
 export async function runBuild({
@@ -618,13 +619,17 @@ export async function runBuild({
   mode = "all",
   check = false,
   logger = console,
+  onProgress,
 } = {}) {
   if (!["all", "prod", "dev", "palette"].includes(mode)) throw new Error(`Unknown build mode: ${mode}`);
 
   logger.log(formatMessage(`${check ? "Checking" : "Building"} ${mode} themes...`, "heading"));
+  onProgress?.(`${check ? "Checking" : "Building"} ${mode} theme outputs`);
 
   /** Both groups validate before the first replacement. */
   const result = await buildThemes({ root, mode, check });
+
+  onProgress?.();
 
   logSummary(
     `${check ? "Validated" : "Built"} ${result.targets.length} themes; ${result.changed.length - result.removed.length} generated files updated${result.removed.length ? `; ${result.removed.length} generated output${result.removed.length === 1 ? "" : "s"} removed` : ""}.`,
@@ -641,6 +646,7 @@ export async function runBuild({
   let preview;
 
   try {
+    onProgress?.("Synchronizing the development preview");
     preview = await syncDevExtension({ root, extensionDirectory });
   } catch (error) {
     throw Object.assign(
@@ -651,6 +657,7 @@ export async function runBuild({
     );
   }
 
+  onProgress?.();
   logger.log(formatMessage(`Synced dev manifest: ${preview.manifestPath}`, "success"));
 
   if (preview.reloadRequired) logReloadReminder(logger);

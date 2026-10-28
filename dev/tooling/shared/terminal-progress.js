@@ -61,3 +61,21 @@ export function createTerminalProgress(initialMessage, stream = process.stderr) 
     },
   };
 }
+
+/**
+ * Keep a command's current task visible until its asynchronous work settles.
+ * @template T
+ * @param {string} message - Work shown while the operation is pending.
+ * @param {(update: (message: string) => void) => Promise<T>} operation - Work that may report a more specific stage.
+ * @returns {Promise<T>} The operation's result.
+ */
+export async function withTerminalProgress(message, operation) {
+  /** Active terminal feedback, cleared before the caller prints a result or error. */
+  const progress = createTerminalProgress(message);
+
+  try {
+    return await operation(progress.update);
+  } finally {
+    progress.stop();
+  }
+}

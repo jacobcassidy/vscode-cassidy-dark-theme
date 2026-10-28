@@ -6,16 +6,21 @@
 import { verifyBuildRestored } from "../../tooling/themes/build.js";
 import { addTheme } from "../../tooling/generators/add-theme.js";
 import { formatMessage } from "../../tooling/shared/terminal-output.js";
+import { withTerminalProgress } from "../../tooling/shared/terminal-progress.js";
 
 try {
   if (process.argv.length === 3 && process.argv[2] === "--recover=verify-restored") {
-    await verifyBuildRestored({ operation: "add-theme" });
+    await withTerminalProgress("Verifying restored theme generation", () =>
+      verifyBuildRestored({ operation: "add-theme" }),
+    );
     console.log(formatMessage("Verified complete restored generation.", "success"));
   } else {
     if (process.argv.length !== 3) throw new Error("Usage: npm run create -- <prod/name|dev/name>");
 
     /** Created theme files and property counts reported to the command-line caller. */
-    const result = await addTheme({ theme: process.argv[2] });
+    const result = await withTerminalProgress(`Creating ${process.argv[2]} theme`, () =>
+      addTheme({ theme: process.argv[2] }),
+    );
 
     console.log(formatMessage(`Created new ${result.theme} theme`, "success"));
 

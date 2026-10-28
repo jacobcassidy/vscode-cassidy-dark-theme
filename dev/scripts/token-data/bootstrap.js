@@ -6,6 +6,7 @@
 import { bootstrapTokenData } from "../../tooling/tokens/data/bootstrap.js";
 import { repositoryRoot } from "../../tooling/shared/paths.js";
 import { formatMessage } from "../../tooling/shared/terminal-output.js";
+import { withTerminalProgress } from "../../tooling/shared/terminal-progress.js";
 
 /** Cancellation propagates to source retrieval and guarded application. */
 const cancellation = new AbortController();
@@ -30,7 +31,14 @@ try {
     extensionSources.push(path);
   }
 
-  const result = await bootstrapTokenData({ root: repositoryRoot, extensionSources, signal: cancellation.signal });
+  const result = await withTerminalProgress("Bootstrapping shared token data", (update) =>
+    bootstrapTokenData({
+      root: repositoryRoot,
+      extensionSources,
+      signal: cancellation.signal,
+      onProgress: update,
+    }),
+  );
   console.log(formatMessage(`Generated ${result.changed.length} shared token files.`, "success"));
   for (const warning of result.warnings) console.warn(formatMessage(warning, "info"));
 } catch (error) {

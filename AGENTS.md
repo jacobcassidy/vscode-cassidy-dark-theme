@@ -6,6 +6,7 @@
 - Match the existing commit message style and formatting; use a plain, sentence-case imperative subject without adding prefixes or changing the format.
 - When relevant, document completed tasks or features in `CHANGELOG.md` and/or `README.md`.
 - Order `package.json` scripts in two groups: single-word commands first, then all other commands (such as colon-separated names). Sort each group alphabetically by script name.
+- Keep the current task visible in interactive terminal output whenever a project script can run for more than one second without producing output. Use `createTerminalProgress` for JavaScript commands, update its message as the work changes, and stop it before final output and on every error or cancellation path. For redirected output, print plain stage messages without animation or terminal control sequences. Apply equivalent visible progress to shell commands and child processes during quiet work.
 
 ## JavaScript documentation
 

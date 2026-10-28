@@ -10,6 +10,7 @@ if [[ "$branch" != "main" ]]; then
   exit 1
 fi
 
+printf 'Queueing Azure publication pipeline...\n' >&2
 az pipelines run \
   --organization 'https://dev.azure.com/jacobcassidy' \
   --project 'Cassidy Dark Theme' \

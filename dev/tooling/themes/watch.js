@@ -49,6 +49,7 @@ function sourceEvent(filename) {
  * @param [options.debounceMs] - Save-burst coalescing delay.
  * @param [options.recoveryMs] - Bounded external-state/preview retry observation interval.
  * @param [options.logger] - Progress/error logger.
+ * @param [options.onProgress] - Report active quiet work, or clear it before other output.
  * @param [operations] - Narrow scheduler/workflow replacements for deterministic tests.
  */
 export function watchThemes(
@@ -58,6 +59,7 @@ export function watchThemes(
     debounceMs = 150,
     recoveryMs = 1000,
     logger = console,
+    onProgress,
   } = {},
   operations = {},
 ) {
@@ -146,6 +148,7 @@ export function watchThemes(
     if (lastDiagnostic === error.message) return;
 
     lastDiagnostic = error.message;
+    onProgress?.();
     logger.error(
       `${formatMessage(`[watch] ${error.message}`, "error")}\n${formatMessage("[watch] Waiting for a corrected input, preview retry, or explicit recovery.", "info")}`,
     );
@@ -167,6 +170,7 @@ export function watchThemes(
     if (preview) pendingPreview = true;
 
     try {
+      onProgress?.("Checking changed theme sources");
       await services.requireStable(root);
 
       /** A stable shared snapshot is loaded once per pass requiring a reload. */
@@ -182,7 +186,9 @@ export function watchThemes(
       const sourceProjection = source ? await services.inputProjection(root) : lastSourceProjection;
 
       if ((source && sourceProjection !== lastSourceProjection) || failed || classificationChanged || manifestChanged) {
+        onProgress?.();
         logger.log(formatMessage("[watch] Building prod and dev themes...", "heading"));
+        onProgress?.("Building prod and dev theme outputs");
 
         /** Complete combined preparation precedes every output write. */
         const prepared = await services.prepareBuild({ root, snapshot: current });
@@ -199,9 +205,12 @@ export function watchThemes(
 
       if (pendingPreview) {
         try {
+          onProgress?.("Synchronizing the development preview");
+
           /** Preview-only retries use already successful generated artifacts and no compiler/palette work. */
           const preview = await services.syncDevExtension({ root, extensionDirectory });
           pendingPreview = false;
+          onProgress?.();
           logger.log(formatMessage(`[watch] Synced dev manifest: ${preview.manifestPath}`, "success"));
           if (preview.reloadRequired) logReloadReminder(logger);
         } catch (error) {
@@ -218,6 +227,7 @@ export function watchThemes(
       }
 
       if (pendingSummary) {
+        onProgress?.();
         reportSummary(pendingSummary);
         pendingSummary = undefined;
       }
@@ -242,6 +252,7 @@ export function watchThemes(
 
       report(error);
     } finally {
+      onProgress?.();
       refreshWatchers();
     }
   }

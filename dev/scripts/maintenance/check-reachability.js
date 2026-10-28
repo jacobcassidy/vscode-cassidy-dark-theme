@@ -5,10 +5,11 @@
 
 import { checkReachability } from "../../tooling/maintenance/check-reachability.js";
 import { formatMessage } from "../../tooling/shared/terminal-output.js";
+import { withTerminalProgress } from "../../tooling/shared/terminal-progress.js";
 
 try {
   /** Audited executable module and supported entry-point counts. */
-  const result = await checkReachability();
+  const result = await withTerminalProgress("Auditing executable reachability", () => checkReachability());
 
   console.log(
     formatMessage(
