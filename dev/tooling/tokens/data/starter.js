@@ -100,8 +100,7 @@ export function completeStarterTheme(prepared, snapshot) {
     if (record.category !== "standard") continue;
 
     insertUi(uiDefinitions.standard, id, {
-      color: "variables.placeholder",
-      colorReason: defaultColorReason,
+      color: "variables.default.placeholder",
     });
 
     /** Exact verified description, with a visible marker for unresolved wording. */
@@ -120,8 +119,7 @@ export function completeStarterTheme(prepared, snapshot) {
     if (record.category !== "standard") continue;
 
     semanticDefinitions.standard[id] = {
-      color: "variables.placeholder",
-      colorReason: defaultColorReason,
+      color: "variables.default.placeholder",
     };
     semanticDetails.standard[id] = {
       description:
@@ -206,8 +204,7 @@ export async function starterTheme(root) {
             id: "comment",
             name: "Comments",
             scope: "comment",
-            color: "variables.placeholder",
-            colorReason: defaultColorReason,
+            color: "variables.default.placeholder",
             order: 0,
           },
         ],
