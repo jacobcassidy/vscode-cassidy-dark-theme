@@ -274,7 +274,7 @@ export function decode(input, family, kind, { shared = false } = {}) {
 
   if (family === "variables") {
     if (kind === "definitions")
-      fields(input.value, ["surface", "text", "diagnostic", "diff"], input.label ?? "variables");
+      fields(input.value, ["surface", "text", "diagnostic", "diff", "placeholder"], input.label ?? "variables");
 
     if (kind === "details") {
       for (const [id, record] of Object.entries(input.value)) register(id, record, undefined, [id]);

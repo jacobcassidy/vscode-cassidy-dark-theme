@@ -1,11 +1,14 @@
 /**
- * Neutral bootstrap theme templates.
+ * Bootstrap theme templates.
  * @file Prepare a complete standard-token default theme in memory from verified shared data.
  */
 
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 import { defaultThemeDirectory } from "../../shared/paths.js";
+
+/** Consistent review prompt attached to every default bootstrap color. */
+const defaultColorReason = "Default bootstrap value. Review this selector before publication";
 
 /** Complete standard chromatic families and neutral tones used by the default palette. */
 const standardPalette = {
@@ -83,20 +86,6 @@ function insertUi(target, id, value) {
 }
 
 /**
- * Select a neutral or restrained accent role for a standard workbench color.
- * @param id - Exact UI color ID.
- */
-function uiColor(id) {
-  if (id === "editor.background") return "palette.gray.900";
-  if (id === "editor.foreground") return "palette.gray.100";
-  if (/background|shadow|dropbackground/i.test(id)) return "palette.gray.800";
-  if (/foreground|text|icon/i.test(id)) return "palette.gray.100";
-  if (/border|separator|outline/i.test(id)) return "palette.gray.600";
-
-  return "palette.blue.400";
-}
-
-/**
  * Complete a missing default theme from the effective verified standard inventory.
  * @param prepared - Initial in-memory theme candidates from starterTheme.
  * @param snapshot - Merged shared token definitions and details.
@@ -111,8 +100,8 @@ export function completeStarterTheme(prepared, snapshot) {
     if (record.category !== "standard") continue;
 
     insertUi(uiDefinitions.standard, id, {
-      color: uiColor(id),
-      colorReason: "Neutral bootstrap color; review this workbench role before publication.",
+      color: "variables.placeholder",
+      colorReason: defaultColorReason,
     });
 
     /** Exact verified description, with a visible marker for unresolved wording. */
@@ -131,8 +120,8 @@ export function completeStarterTheme(prepared, snapshot) {
     if (record.category !== "standard") continue;
 
     semanticDefinitions.standard[id] = {
-      color: "palette.yellow.400",
-      colorReason: "Neutral bootstrap semantic accent; review this selector before publication.",
+      color: "variables.placeholder",
+      colorReason: defaultColorReason,
     };
     semanticDetails.standard[id] = {
       description:
@@ -176,8 +165,12 @@ export async function starterTheme(root) {
       semanticHighlighting: true,
     },
     "palette/config.jsonc": standardPalette,
-    "tokens/variables/definitions.jsonc": {},
-    "tokens/variables/details.jsonc": {},
+    "tokens/variables/definitions.jsonc": {
+      placeholder: { color: "#f0f", colorReason: defaultColorReason },
+    },
+    "tokens/variables/details.jsonc": {
+      placeholder: { description: "Placeholder color for bootstrap token values awaiting review." },
+    },
     "tokens/ui/definitions.jsonc": { standard: {}, sourceCode: {}, nonStandard: {}, deprecated: {} },
     "tokens/ui/details.jsonc": { standard: {}, sourceCode: {}, nonStandard: {}, deprecated: {} },
     "tokens/semantic/definitions.jsonc": { standard: {}, sourceCode: {}, nonStandard: {}, deprecated: {} },
@@ -189,8 +182,8 @@ export async function starterTheme(root) {
             id: "comment",
             name: "Comments",
             scope: "comment",
-            color: "palette.gray.400",
-            colorReason: "Quiet comment text.",
+            color: "variables.placeholder",
+            colorReason: defaultColorReason,
             order: 0,
           },
         ],

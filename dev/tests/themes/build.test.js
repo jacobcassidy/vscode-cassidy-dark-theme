@@ -28,10 +28,11 @@ import { parse } from "jsonc-parser";
 // eslint-disable-next-line import-x/default
 import prettier from "prettier";
 
-import { contrastRatio } from "../../tooling/shared/color-math.js";
 import { parseJsonc } from "../../tooling/shared/jsonc.js";
 import { generatePalette } from "../../tooling/palette/generation.js";
 import { compileTokens, renderTheme } from "../../tooling/tokens/compilation.js";
+import { completeStarterTheme, starterTheme } from "../../tooling/tokens/data/starter.js";
+import { loadTokenData } from "../../tooling/tokens/data/load.js";
 
 test("JSONC parsing rejects duplicate keys and reports file locations", () => {
   assert.throws(
@@ -386,25 +387,29 @@ test("prod palette reports include 600 contrast from final hex and flag transluc
   assert.match(await readFile(path, "utf8"), /`palette.blue.600`\s*\|\s*`#00000080`\s*\|\s*Needs backdrop/);
 });
 
-test("the neutral starter keeps editor, semantic, and comment text readable", async () => {
-  /** Palette configuration parsed from authored inputs or created for this scenario. */
-  const config = parseJsonc(
-    await readFile(new URL("../../../src/themes/prod/default/palette/config.jsonc", import.meta.url), "utf8"),
-    "palette",
-  ).value;
+test("the bootstrap starter resolves its placeholder variable across color sections", async (t) => {
+  /** Isolated theme candidates filled from the checked-in standard shared inventory. */
+  const root = await createBuildProject(t),
+    sources = completeStarterTheme(await starterTheme(root), await loadTokenData());
 
-  /** Effective consolidated source inputs used for readability assertions. */
-  const parts = await readThemeParts(new URL("../../../src/themes/prod/default", import.meta.url));
+  for (const [path, source] of sources) await writeFile(join(root, path), source);
 
-  /** Generated palette measured against the final authored colors. */
+  /** Palette configuration and complete source files prepared by bootstrap. */
+  const config = parseJsonc(sources.get("src/themes/prod/default/palette/config.jsonc"), "palette").value;
+
+  /** Effective consolidated source inputs used for placeholder assertions. */
+  const parts = await readThemeParts(join(root, "src/themes/prod/default"));
+
+  /** Generated palette needed to compile source aliases. */
   const palette = generatePalette(config);
 
-  /** Compiled default theme used for readability checks. */
+  /** Compiled default theme used to verify shared alias resolution. */
   const theme = parse(renderTheme(parts.metadata, compileTokens(parts.tokens, parts.details, palette)));
 
-  assert.ok(contrastRatio(theme.colors["editor.foreground"], theme.colors["editor.background"]) >= 4.5);
-  assert.ok(contrastRatio(theme.semanticTokenColors.variable.foreground, theme.colors["editor.background"]) >= 4.5);
-  assert.ok(contrastRatio(theme.tokenColors[0].settings.foreground, theme.colors["editor.background"]) >= 4.5);
+  assert.equal(theme.colors["editor.foreground"], "#f0f");
+  assert.equal(theme.colors["editor.background"], "#f0f");
+  assert.equal(theme.semanticTokenColors.variable.foreground, "#f0f");
+  assert.equal(theme.tokenColors[0].settings.foreground, "#f0f");
 });
 
 test("dev targets use independent complete palettes and token sections and isolate outputs", async (t) => {

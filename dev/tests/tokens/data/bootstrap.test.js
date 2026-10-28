@@ -37,6 +37,15 @@ test("starter metadata retains the VS Code schema and package author", async (t)
   assert.equal(Object.keys(palette.families).length, 8);
   assert.equal(Object.keys(palette.neutrals).length, 23);
   assert.ok(paletteSource.indexOf('"000": 0.98') < paletteSource.indexOf('"100": 0.9'));
+
+  /** One authored alias supplies the conspicuous unresolved color for every starter token. */
+  const variables = JSON.parse(sources.get("src/themes/prod/default/tokens/variables/definitions.jsonc")),
+    variableDetails = JSON.parse(sources.get("src/themes/prod/default/tokens/variables/details.jsonc")),
+    syntax = JSON.parse(sources.get("src/themes/prod/default/tokens/syntax/definitions.jsonc"));
+
+  assert.equal(variables.placeholder.color, "#f0f");
+  assert.match(variableDetails.placeholder.description, /Placeholder color/);
+  assert.equal(syntax.standard.rules[0].color, "variables.placeholder");
 });
 
 test("starter completion creates every standard UI and semantic definition with matching details", async (t) => {
@@ -105,6 +114,12 @@ test("starter completion creates every standard UI and semantic definition with 
 
       assert.deepEqual([...decoded.records.keys()].sort(), expected);
       assert.ok([...decoded.records.values()].every((entry) => entry.category === "standard"));
+
+      if (kind === "definitions")
+        for (const entry of decoded.records.values()) {
+          assert.equal(entry.value.color, "variables.placeholder");
+          assert.equal(entry.value.colorReason, "Default bootstrap value. Review this selector before publication");
+        }
     }
   }
 });
