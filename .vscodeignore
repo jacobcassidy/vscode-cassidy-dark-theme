@@ -1,11 +1,7 @@
 # Directories to ignore
 .vscode
-dev-extension
-dist
-docs
-scripts
+dev
 src
-tests
 
 # Files to ignore
 .editorconfig
@@ -16,6 +12,9 @@ tests
 .shellcheckrc
 AGENTS.md
 azure-pipelines.yml
+azure-validation.yml
 eslint.config.js
 lefthook.yml
 prettier.config.js
+dev/.cache
+playwright.config.js

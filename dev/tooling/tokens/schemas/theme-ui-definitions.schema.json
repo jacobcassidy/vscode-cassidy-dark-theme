@@ -1,0 +1,308 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Theme ui definitions",
+  "type": "object",
+  "properties": {
+    "standard": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/definitions/standard"
+      }
+    },
+    "sourceCode": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/definitions/sourceCode"
+      }
+    },
+    "nonStandard": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/definitions/nonStandard"
+      }
+    },
+    "deprecated": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/definitions/deprecated"
+      }
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "standard",
+    "sourceCode",
+    "nonStandard",
+    "deprecated"
+  ],
+  "definitions": {
+    "standard": {
+      "anyOf": [
+        {
+          "type": "object",
+          "minProperties": 1,
+          "additionalProperties": {
+            "$ref": "#/definitions/standard"
+          }
+        },
+        {
+          "type": "object",
+          "properties": {
+            "color": {
+              "type": "string",
+              "pattern": "\\S"
+            },
+            "alpha": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "colorReason": {
+              "type": "string",
+              "pattern": "\\S"
+            },
+            "disabled": {
+              "type": "boolean"
+            },
+            "disabledReason": {
+              "type": "string",
+              "pattern": "\\S"
+            }
+          },
+          "additionalProperties": {
+            "$ref": "#/definitions/standard"
+          },
+          "minProperties": 1,
+          "anyOf": [
+            {
+              "required": [
+                "color"
+              ]
+            },
+            {
+              "required": [
+                "alpha"
+              ]
+            },
+            {
+              "required": [
+                "colorReason"
+              ]
+            },
+            {
+              "required": [
+                "disabled"
+              ]
+            },
+            {
+              "required": [
+                "disabledReason"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "sourceCode": {
+      "anyOf": [
+        {
+          "type": "object",
+          "minProperties": 1,
+          "additionalProperties": {
+            "$ref": "#/definitions/sourceCode"
+          }
+        },
+        {
+          "type": "object",
+          "properties": {
+            "color": {
+              "type": "string",
+              "pattern": "\\S"
+            },
+            "alpha": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "colorReason": {
+              "type": "string",
+              "pattern": "\\S"
+            },
+            "disabled": {
+              "type": "boolean"
+            },
+            "disabledReason": {
+              "type": "string",
+              "pattern": "\\S"
+            }
+          },
+          "additionalProperties": {
+            "$ref": "#/definitions/sourceCode"
+          },
+          "minProperties": 1,
+          "anyOf": [
+            {
+              "required": [
+                "color"
+              ]
+            },
+            {
+              "required": [
+                "alpha"
+              ]
+            },
+            {
+              "required": [
+                "colorReason"
+              ]
+            },
+            {
+              "required": [
+                "disabled"
+              ]
+            },
+            {
+              "required": [
+                "disabledReason"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "nonStandard": {
+      "anyOf": [
+        {
+          "type": "object",
+          "minProperties": 1,
+          "additionalProperties": {
+            "$ref": "#/definitions/nonStandard"
+          }
+        },
+        {
+          "type": "object",
+          "properties": {
+            "color": {
+              "type": "string",
+              "pattern": "\\S"
+            },
+            "alpha": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "colorReason": {
+              "type": "string",
+              "pattern": "\\S"
+            },
+            "disabled": {
+              "type": "boolean"
+            },
+            "disabledReason": {
+              "type": "string",
+              "pattern": "\\S"
+            }
+          },
+          "additionalProperties": {
+            "$ref": "#/definitions/nonStandard"
+          },
+          "minProperties": 1,
+          "anyOf": [
+            {
+              "required": [
+                "color"
+              ]
+            },
+            {
+              "required": [
+                "alpha"
+              ]
+            },
+            {
+              "required": [
+                "colorReason"
+              ]
+            },
+            {
+              "required": [
+                "disabled"
+              ]
+            },
+            {
+              "required": [
+                "disabledReason"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "deprecated": {
+      "anyOf": [
+        {
+          "type": "object",
+          "minProperties": 1,
+          "additionalProperties": {
+            "$ref": "#/definitions/deprecated"
+          }
+        },
+        {
+          "type": "object",
+          "properties": {
+            "color": {
+              "type": "string",
+              "pattern": "\\S"
+            },
+            "alpha": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "colorReason": {
+              "type": "string",
+              "pattern": "\\S"
+            },
+            "disabled": {
+              "type": "boolean"
+            },
+            "disabledReason": {
+              "type": "string",
+              "pattern": "\\S"
+            }
+          },
+          "additionalProperties": {
+            "$ref": "#/definitions/deprecated"
+          },
+          "minProperties": 1,
+          "anyOf": [
+            {
+              "required": [
+                "color"
+              ]
+            },
+            {
+              "required": [
+                "alpha"
+              ]
+            },
+            {
+              "required": [
+                "colorReason"
+              ]
+            },
+            {
+              "required": [
+                "disabled"
+              ]
+            },
+            {
+              "required": [
+                "disabledReason"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

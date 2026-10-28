@@ -1,0 +1,22 @@
+{
+  "standard": {
+    "rules": [
+      {
+        "id": "comment",
+        "name": "Comments",
+        "scope": "comment",
+        "color": "variables.default.placeholder",
+        "order": 0
+      }
+    ]
+  },
+  "sourceCode": {
+    "rules": []
+  },
+  "nonStandard": {
+    "rules": []
+  },
+  "deprecated": {
+    "rules": []
+  }
+}

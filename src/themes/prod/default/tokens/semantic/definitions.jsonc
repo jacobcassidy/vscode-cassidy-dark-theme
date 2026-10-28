@@ -1,0 +1,100 @@
+{
+  "standard": {
+    "*.abstract": {
+      "color": "variables.default.placeholder"
+    },
+    "*.async": {
+      "color": "variables.default.placeholder"
+    },
+    "*.declaration": {
+      "color": "variables.default.placeholder"
+    },
+    "*.deprecated": {
+      "color": "variables.default.placeholder"
+    },
+    "*.documentation": {
+      "color": "variables.default.placeholder"
+    },
+    "*.modification": {
+      "color": "variables.default.placeholder"
+    },
+    "*.readonly": {
+      "color": "variables.default.placeholder"
+    },
+    "*.static": {
+      "color": "variables.default.placeholder"
+    },
+    "class": {
+      "color": "variables.default.placeholder"
+    },
+    "comment": {
+      "color": "variables.default.placeholder"
+    },
+    "decorator": {
+      "color": "variables.default.placeholder"
+    },
+    "enum": {
+      "color": "variables.default.placeholder"
+    },
+    "enumMember": {
+      "color": "variables.default.placeholder"
+    },
+    "event": {
+      "color": "variables.default.placeholder"
+    },
+    "function": {
+      "color": "variables.default.placeholder"
+    },
+    "interface": {
+      "color": "variables.default.placeholder"
+    },
+    "keyword": {
+      "color": "variables.default.placeholder"
+    },
+    "label": {
+      "color": "variables.default.placeholder"
+    },
+    "macro": {
+      "color": "variables.default.placeholder"
+    },
+    "method": {
+      "color": "variables.default.placeholder"
+    },
+    "namespace": {
+      "color": "variables.default.placeholder"
+    },
+    "number": {
+      "color": "variables.default.placeholder"
+    },
+    "operator": {
+      "color": "variables.default.placeholder"
+    },
+    "parameter": {
+      "color": "variables.default.placeholder"
+    },
+    "property": {
+      "color": "variables.default.placeholder"
+    },
+    "regexp": {
+      "color": "variables.default.placeholder"
+    },
+    "string": {
+      "color": "variables.default.placeholder"
+    },
+    "struct": {
+      "color": "variables.default.placeholder"
+    },
+    "type": {
+      "color": "variables.default.placeholder"
+    },
+    "typeParameter": {
+      "color": "variables.default.placeholder"
+    },
+    "variable": {
+      "color": "variables.default.placeholder"
+    }
+  },
+  "sourceCode": {},
+  "nonStandard": {},
+  "deprecated": {}
+}

@@ -1,0 +1,9 @@
+{
+  "name": "cassidy-color-schema-capture",
+  "version": "1.0.0",
+  "private": true,
+  "engines": {
+    "vscode": "^1.64.0"
+  },
+  "main": "./extension.js"
+}

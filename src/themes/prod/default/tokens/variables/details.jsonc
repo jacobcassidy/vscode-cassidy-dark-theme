@@ -1,0 +1,29 @@
+{
+  "default": {
+    "background": {
+      "description": "Default background color."
+    },
+    "foreground": {
+      "description": "Default foreground color."
+    },
+    "placeholder": {
+      "description": "Placeholder color for bootstrap token values awaiting review."
+    }
+  },
+  "diagnostic": {
+    "error.foreground": {
+      "description": "Foreground color for error diagnostics."
+    },
+    "warning.foreground": {
+      "description": "Foreground color for warning diagnostics."
+    }
+  },
+  "diff": {
+    "added.foreground": {
+      "description": "Foreground color for added content in diffs."
+    },
+    "removed.foreground": {
+      "description": "Foreground color for removed content in diffs."
+    }
+  }
+}

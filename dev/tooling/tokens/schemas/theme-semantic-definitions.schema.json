@@ -1,0 +1,194 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Theme semantic definitions",
+  "type": "object",
+  "properties": {
+    "standard": {
+      "type": "object",
+      "propertyNames": {
+        "pattern": "^(?:\\*|[a-zA-Z][\\w-]*)(?:\\.[a-zA-Z][\\w-]*)*(?::[a-zA-Z][\\w+-]*)?$"
+      },
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "color": {
+            "type": "string",
+            "pattern": "\\S"
+          },
+          "alpha": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "colorReason": {
+            "type": "string",
+            "pattern": "\\S"
+          },
+          "disabled": {
+            "type": "boolean"
+          },
+          "disabledReason": {
+            "type": "string",
+            "pattern": "\\S"
+          },
+          "bold": {
+            "type": "boolean"
+          },
+          "italic": {
+            "type": "boolean"
+          },
+          "underline": {
+            "type": "boolean"
+          },
+          "strikethrough": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false,
+        "minProperties": 1
+      }
+    },
+    "sourceCode": {
+      "type": "object",
+      "propertyNames": {
+        "pattern": "^(?:\\*|[a-zA-Z][\\w-]*)(?:\\.[a-zA-Z][\\w-]*)*(?::[a-zA-Z][\\w+-]*)?$"
+      },
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "color": {
+            "type": "string",
+            "pattern": "\\S"
+          },
+          "alpha": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "colorReason": {
+            "type": "string",
+            "pattern": "\\S"
+          },
+          "disabled": {
+            "type": "boolean"
+          },
+          "disabledReason": {
+            "type": "string",
+            "pattern": "\\S"
+          },
+          "bold": {
+            "type": "boolean"
+          },
+          "italic": {
+            "type": "boolean"
+          },
+          "underline": {
+            "type": "boolean"
+          },
+          "strikethrough": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false,
+        "minProperties": 1
+      }
+    },
+    "nonStandard": {
+      "type": "object",
+      "propertyNames": {
+        "pattern": "^(?:\\*|[a-zA-Z][\\w-]*)(?:\\.[a-zA-Z][\\w-]*)*(?::[a-zA-Z][\\w+-]*)?$"
+      },
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "color": {
+            "type": "string",
+            "pattern": "\\S"
+          },
+          "alpha": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "colorReason": {
+            "type": "string",
+            "pattern": "\\S"
+          },
+          "disabled": {
+            "type": "boolean"
+          },
+          "disabledReason": {
+            "type": "string",
+            "pattern": "\\S"
+          },
+          "bold": {
+            "type": "boolean"
+          },
+          "italic": {
+            "type": "boolean"
+          },
+          "underline": {
+            "type": "boolean"
+          },
+          "strikethrough": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false,
+        "minProperties": 1
+      }
+    },
+    "deprecated": {
+      "type": "object",
+      "propertyNames": {
+        "pattern": "^(?:\\*|[a-zA-Z][\\w-]*)(?:\\.[a-zA-Z][\\w-]*)*(?::[a-zA-Z][\\w+-]*)?$"
+      },
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "color": {
+            "type": "string",
+            "pattern": "\\S"
+          },
+          "alpha": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "colorReason": {
+            "type": "string",
+            "pattern": "\\S"
+          },
+          "disabled": {
+            "type": "boolean"
+          },
+          "disabledReason": {
+            "type": "string",
+            "pattern": "\\S"
+          },
+          "bold": {
+            "type": "boolean"
+          },
+          "italic": {
+            "type": "boolean"
+          },
+          "underline": {
+            "type": "boolean"
+          },
+          "strikethrough": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false,
+        "minProperties": 1
+      }
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "standard",
+    "sourceCode",
+    "nonStandard",
+    "deprecated"
+  ]
+}

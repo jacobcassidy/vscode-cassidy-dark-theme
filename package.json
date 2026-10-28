@@ -30,17 +30,25 @@
     "Night Theme"
   ],
   "devDependencies": {
-    "@eslint/compat": "^2.1.1",
     "@eslint/js": "^10.0.1",
+    "@playwright/test": "1.64.1",
+    "@vscode/test-electron": "3.1.0",
     "@vscode/vsce": "^4.0.0",
+    "acorn": "^8.19.0",
+    "ajv": "^8.20.0",
     "eslint": "^10.13.0",
     "eslint-plugin-import-x": "^4.17.1",
     "globals": "^17.13.0",
     "jsonc-parser": "^3.3.1",
     "lefthook": "^2.2.2",
+    "markdown-it": "^15.0.3",
     "markdownlint-cli2": "^0.24.0",
     "prettier": "^3.9.10",
-    "prettier-plugin-multiline-arrays": "^4.1.11"
+    "prettier-plugin-multiline-arrays": "^4.1.11",
+    "typescript": "^6.0.3",
+    "xml2js": "0.6.2",
+    "yauzl": "3.4.0",
+    "yazl": "3.3.1"
   },
   "allowScripts": {
     "lefthook@2.2.2": true,
@@ -56,33 +64,38 @@
   "contributes": {
     "themes": [
       {
-        "label": "Cassidy Dark",
+        "label": "Cassidy Dark Theme",
         "uiTheme": "vs-dark",
         "path": "./themes/cassidy-dark-color-theme.json"
       }
     ]
   },
   "scripts": {
-    "add:properties": "node scripts/themes/add-properties.js",
-    "add:theme": "node scripts/themes/add-theme.js",
-    "build": "node scripts/themes/build.js --all",
-    "build:dev": "node scripts/themes/build.js --dev",
-    "build:palette": "node scripts/themes/build.js --palette-only",
-    "build:prod": "node scripts/themes/build.js",
-    "check": "npm run check:generated && npm run check:prettier && npm run lint && npm run check:theme && npm test",
-    "check:generated": "node scripts/themes/build.js --check && node scripts/themes/build.js --dev --check",
-    "check:prettier": "prettier . --check",
-    "check:theme": "node scripts/themes/check.js",
+    "bootstrap": "node dev/scripts/themes/bootstrap.js",
+    "build": "node dev/scripts/themes/build.js --all",
+    "check": "npm run check:theme && npm run check:docs && npm run check:reachability && npm run check:prettier && npm run lint && npm test",
+    "create": "node dev/scripts/themes/add-theme.js",
+    "fill": "node dev/scripts/themes/add-properties.js",
     "format": "prettier . --write",
     "lint": "npm run lint:md && npm run lint:es",
+    "package": "npm run check && bash dev/scripts/release/package-vsix.sh",
+    "publish": "bash dev/scripts/release/publish/run-azure-pipeline.sh",
+    "recover": "node dev/scripts/release/publish/create-github-release.js",
+    "refresh": "node dev/scripts/token-data/update-token-details.js",
+    "test": "node --test \"dev/tests/**/*.test.js\"",
+    "watch": "node dev/scripts/themes/watch.js",
+    "build:dev": "node dev/scripts/themes/build.js --dev",
+    "build:palette": "node dev/scripts/themes/build.js --palette-only",
+    "build:prod": "node dev/scripts/themes/build.js",
+    "check:docs": "node dev/scripts/docs/check.js",
+    "check:generated": "node dev/scripts/themes/build.js --all --check",
+    "check:prettier": "prettier . --check",
+    "check:reachability": "node dev/scripts/maintenance/check-reachability.js",
+    "check:theme": "node dev/scripts/themes/check.js",
+    "check:visual": "node dev/scripts/visual/check.js",
     "lint:es": "eslint",
     "lint:es:fix": "eslint --fix",
     "lint:md": "markdownlint-cli2 \"**/*.md\"",
-    "lint:md:fix": "markdownlint-cli2 \"**/*.md\" --fix",
-    "package:vsix": "npm run check && bash scripts/release/package-vsix.sh",
-    "release:github-recover": "bash scripts/release/publish/create-github-release.sh",
-    "release:publish": "bash scripts/release/publish/run-azure-pipeline.sh",
-    "test": "node --test \"tests/*.test.js\"",
-    "watch": "node scripts/themes/watch.js"
+    "lint:md:fix": "markdownlint-cli2 \"**/*.md\" --fix"
   }
 }

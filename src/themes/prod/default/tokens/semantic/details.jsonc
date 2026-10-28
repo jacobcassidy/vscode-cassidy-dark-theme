@@ -1,0 +1,100 @@
+{
+  "standard": {
+    "*.abstract": {
+      "description": "Symbols of any semantic token type. Style to use for symbols that are abstract."
+    },
+    "*.async": {
+      "description": "Symbols of any semantic token type. Style to use for symbols that are async."
+    },
+    "*.declaration": {
+      "description": "Symbols of any semantic token type. Style for all symbol declarations."
+    },
+    "*.deprecated": {
+      "description": "Symbols of any semantic token type. Style to use for symbols that are deprecated."
+    },
+    "*.documentation": {
+      "description": "Symbols of any semantic token type. Style to use for references in documentation."
+    },
+    "*.modification": {
+      "description": "Symbols of any semantic token type. Style to use for write accesses."
+    },
+    "*.readonly": {
+      "description": "Symbols of any semantic token type. Style to use for symbols that are read-only."
+    },
+    "*.static": {
+      "description": "Symbols of any semantic token type. Style to use for symbols that are static."
+    },
+    "class": {
+      "description": "Style for classes."
+    },
+    "comment": {
+      "description": "Style for comments."
+    },
+    "decorator": {
+      "description": "Style for decorators & annotations."
+    },
+    "enum": {
+      "description": "Style for enums."
+    },
+    "enumMember": {
+      "description": "Style for enum members."
+    },
+    "event": {
+      "description": "Style for events."
+    },
+    "function": {
+      "description": "Style for functions"
+    },
+    "interface": {
+      "description": "Style for interfaces."
+    },
+    "keyword": {
+      "description": "Style for keywords."
+    },
+    "label": {
+      "description": "Style for labels. "
+    },
+    "macro": {
+      "description": "Style for macros."
+    },
+    "method": {
+      "description": "Style for method (member functions)"
+    },
+    "namespace": {
+      "description": "Style for namespaces."
+    },
+    "number": {
+      "description": "Style for numbers."
+    },
+    "operator": {
+      "description": "Style for operators."
+    },
+    "parameter": {
+      "description": "Style for parameters."
+    },
+    "property": {
+      "description": "Style for properties."
+    },
+    "regexp": {
+      "description": "Style for expressions."
+    },
+    "string": {
+      "description": "Style for strings."
+    },
+    "struct": {
+      "description": "Style for structs."
+    },
+    "type": {
+      "description": "Style for types."
+    },
+    "typeParameter": {
+      "description": "Style for type parameters."
+    },
+    "variable": {
+      "description": "Style for variables."
+    }
+  },
+  "sourceCode": {},
+  "nonStandard": {},
+  "deprecated": {}
+}

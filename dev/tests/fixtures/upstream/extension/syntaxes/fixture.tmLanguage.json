@@ -1,0 +1,10 @@
+{
+  "scopeName": "source.fixture",
+  "patterns": [
+    {
+      "name": "extension.special",
+      "match": "fixture"
+    }
+  ],
+  "name": "Fixture language"
+}

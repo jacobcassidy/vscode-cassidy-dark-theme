@@ -1,0 +1,534 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Upstream extraction policy and successful source history",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "policy",
+    "repository",
+    "supplementalMain",
+    "retrieval",
+    "coverageExceptions"
+  ],
+  "properties": {
+    "policy": {
+      "const": "latest-stable"
+    },
+    "repository": {
+      "const": "microsoft/vscode"
+    },
+    "supplementalMain": {
+      "type": "boolean"
+    },
+    "retrieval": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "requestMs",
+        "attempts",
+        "totalMs"
+      ],
+      "properties": {
+        "requestMs": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "attempts": {
+          "type": "integer",
+          "exclusiveMinimum": 0
+        },
+        "totalMs": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        }
+      }
+    },
+    "coverageExceptions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "inputId",
+          "from",
+          "to",
+          "lost",
+          "allowEmpty",
+          "reason",
+          "evidence"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "inputId": {
+            "type": "string",
+            "minLength": 1
+          },
+          "from": {
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^([a-f0-9]{40}|sha256:[a-f0-9]{64})$"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "to": {
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^([a-f0-9]{40}|sha256:[a-f0-9]{64})$"
+              },
+              {
+                "const": "removed"
+              }
+            ]
+          },
+          "lost": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "ui",
+              "types",
+              "modifiers",
+              "scopes"
+            ],
+            "properties": {
+              "ui": {
+                "type": "array",
+                "uniqueItems": true,
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              },
+              "types": {
+                "type": "array",
+                "uniqueItems": true,
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              },
+              "modifiers": {
+                "type": "array",
+                "uniqueItems": true,
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              },
+              "scopes": {
+                "type": "array",
+                "uniqueItems": true,
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              }
+            }
+          },
+          "allowEmpty": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "enum": [
+                "ui",
+                "semantic"
+              ]
+            }
+          },
+          "reason": {
+            "type": "string",
+            "minLength": 1
+          },
+          "evidence": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "lastSuccessful": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "resolution",
+        "coverage",
+        "acceptedCoverage",
+        "localSyntax"
+      ],
+      "properties": {
+        "resolution": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "version",
+            "tag",
+            "inputs"
+          ],
+          "properties": {
+            "version": {
+              "type": "string",
+              "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+            },
+            "tag": {
+              "type": "string",
+              "minLength": 1
+            },
+            "inputs": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "id",
+                  "kind",
+                  "revision"
+                ],
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "kind": {
+                    "enum": [
+                      "core",
+                      "extension"
+                    ]
+                  },
+                  "revision": {
+                    "type": "string",
+                    "pattern": "^([a-f0-9]{40}|sha256:[a-f0-9]{64})$"
+                  },
+                  "contributor": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                }
+              }
+            }
+          }
+        },
+        "coverage": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "identity",
+              "ui",
+              "types",
+              "modifiers",
+              "scopes"
+            ],
+            "properties": {
+              "identity": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "id",
+                  "kind",
+                  "revision"
+                ],
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "kind": {
+                    "enum": [
+                      "core",
+                      "extension"
+                    ]
+                  },
+                  "revision": {
+                    "type": "string",
+                    "pattern": "^([a-f0-9]{40}|sha256:[a-f0-9]{64})$"
+                  },
+                  "contributor": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                }
+              },
+              "ui": {
+                "type": "array",
+                "uniqueItems": true,
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              },
+              "types": {
+                "type": "array",
+                "uniqueItems": true,
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              },
+              "modifiers": {
+                "type": "array",
+                "uniqueItems": true,
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              },
+              "scopes": {
+                "type": "array",
+                "uniqueItems": true,
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              }
+            }
+          }
+        },
+        "acceptedCoverage": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "exception",
+              "coverage"
+            ],
+            "properties": {
+              "exception": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "id",
+                  "inputId",
+                  "from",
+                  "to",
+                  "lost",
+                  "allowEmpty",
+                  "reason",
+                  "evidence"
+                ],
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "inputId": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "from": {
+                    "anyOf": [
+                      {
+                        "type": "string",
+                        "pattern": "^([a-f0-9]{40}|sha256:[a-f0-9]{64})$"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "to": {
+                    "anyOf": [
+                      {
+                        "type": "string",
+                        "pattern": "^([a-f0-9]{40}|sha256:[a-f0-9]{64})$"
+                      },
+                      {
+                        "const": "removed"
+                      }
+                    ]
+                  },
+                  "lost": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "ui",
+                      "types",
+                      "modifiers",
+                      "scopes"
+                    ],
+                    "properties": {
+                      "ui": {
+                        "type": "array",
+                        "uniqueItems": true,
+                        "items": {
+                          "type": "string",
+                          "minLength": 1
+                        }
+                      },
+                      "types": {
+                        "type": "array",
+                        "uniqueItems": true,
+                        "items": {
+                          "type": "string",
+                          "minLength": 1
+                        }
+                      },
+                      "modifiers": {
+                        "type": "array",
+                        "uniqueItems": true,
+                        "items": {
+                          "type": "string",
+                          "minLength": 1
+                        }
+                      },
+                      "scopes": {
+                        "type": "array",
+                        "uniqueItems": true,
+                        "items": {
+                          "type": "string",
+                          "minLength": 1
+                        }
+                      }
+                    }
+                  },
+                  "allowEmpty": {
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                      "enum": [
+                        "ui",
+                        "semantic"
+                      ]
+                    }
+                  },
+                  "reason": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "evidence": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                }
+              },
+              "coverage": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "identity",
+                  "ui",
+                  "types",
+                  "modifiers",
+                  "scopes"
+                ],
+                "properties": {
+                  "identity": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "id",
+                      "kind",
+                      "revision"
+                    ],
+                    "properties": {
+                      "id": {
+                        "type": "string",
+                        "minLength": 1
+                      },
+                      "kind": {
+                        "enum": [
+                          "core",
+                          "extension"
+                        ]
+                      },
+                      "revision": {
+                        "type": "string",
+                        "pattern": "^([a-f0-9]{40}|sha256:[a-f0-9]{64}|removed)$"
+                      },
+                      "contributor": {
+                        "type": "string",
+                        "minLength": 1
+                      }
+                    }
+                  },
+                  "ui": {
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                      "type": "string",
+                      "minLength": 1
+                    }
+                  },
+                  "types": {
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                      "type": "string",
+                      "minLength": 1
+                    }
+                  },
+                  "modifiers": {
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                      "type": "string",
+                      "minLength": 1
+                    }
+                  },
+                  "scopes": {
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                      "type": "string",
+                      "minLength": 1
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "localSyntax": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "path",
+            "revision"
+          ],
+          "properties": {
+            "path": {
+              "const": "src/themes/prod/default/tokens/syntax/definitions.jsonc"
+            },
+            "revision": {
+              "type": "string",
+              "pattern": "^sha256:[a-f0-9]{64}$"
+            }
+          }
+        },
+        "colorThemeSchema": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "path",
+            "revision",
+            "digest"
+          ],
+          "properties": {
+            "path": {
+              "type": "string",
+              "pattern": "^dev/docs/refreshes/vscode-[0-9]+\\.[0-9]+\\.[0-9]+/color-theme\\.json$"
+            },
+            "revision": {
+              "type": "string",
+              "pattern": "^[a-f0-9]{40}$"
+            },
+            "digest": {
+              "type": "string",
+              "pattern": "^sha256:[a-f0-9]{64}$"
+            }
+          }
+        }
+      }
+    }
+  }
+}

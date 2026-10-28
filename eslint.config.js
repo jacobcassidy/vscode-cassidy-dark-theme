@@ -22,7 +22,7 @@ const gitignorePath = fileURLToPath(new URL(".gitignore", import.meta.url));
  */
 export default defineConfig([
   includeIgnoreFile(gitignorePath, "Imported .gitignore patterns"),
-  globalIgnores(["**/*.min.js", "docs"]),
+  globalIgnores(["**/*.min.js", "dev/docs", "dev/samples/grammar"]),
   {
     plugins: {
       "import-x": importX,
@@ -39,10 +39,11 @@ export default defineConfig([
       },
     },
     linterOptions: {
-      reportUnusedInlineConfigs: "warn",
+      reportUnusedInlineConfigs: "error",
+      reportUnusedDisableDirectives: "error",
     },
     rules: {
-      "no-unused-vars": "warn",
+      "no-unused-vars": ["error", { args: "all", argsIgnorePattern: "^_", caughtErrors: "all" }],
       yoda: ["warn", "never"],
     },
   },

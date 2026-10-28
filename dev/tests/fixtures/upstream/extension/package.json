@@ -1,0 +1,18 @@
+{
+  "publisher": "fixture",
+  "name": "extension",
+  "contributes": {
+    "colors": [
+      {
+        "id": "extension.foreground",
+        "description": "%color.description%"
+      }
+    ],
+    "semanticTokenTypes": [
+      {
+        "id": "customType",
+        "description": "Custom provider symbols."
+      }
+    ]
+  }
+}

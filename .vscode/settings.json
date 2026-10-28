@@ -1,11 +1,101 @@
 {
   "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": "explicit",
-    "source.fixAll.stylelint": "explicit"
+    "source.fixAll.eslint": "explicit"
   },
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.formatOnSave": true,
   "editor.insertSpaces": true,
   "editor.tabSize": 2,
-  "prettier.configPath": "prettier.config.js"
+  "prettier.configPath": "prettier.config.js",
+  "json.schemas": [
+    {
+      "fileMatch": [
+        "/src/themes/*/*/tokens/ui/details.jsonc"
+      ],
+      "url": "./dev/tooling/tokens/schemas/theme-ui-details.schema.json"
+    },
+    {
+      "fileMatch": [
+        "/src/data/tokens/generated/semantic/definitions.jsonc",
+        "/src/data/tokens/manual/semantic/definitions.jsonc"
+      ],
+      "url": "./dev/tooling/tokens/schemas/shared-semantic-definitions.schema.json"
+    },
+    {
+      "fileMatch": [
+        "/src/themes/*/*/tokens/syntax/definitions.jsonc"
+      ],
+      "url": "./dev/tooling/tokens/schemas/theme-syntax-definitions.schema.json"
+    },
+    {
+      "fileMatch": [
+        "/src/themes/*/*/tokens/syntax/details.jsonc"
+      ],
+      "url": "./dev/tooling/tokens/schemas/theme-syntax-details.schema.json"
+    },
+    {
+      "fileMatch": [
+        "/src/themes/*/*/tokens/variables/details.jsonc"
+      ],
+      "url": "./dev/tooling/tokens/schemas/variables-details.schema.json"
+    },
+    {
+      "fileMatch": [
+        "/src/data/tokens/generated/ui/definitions.jsonc",
+        "/src/data/tokens/manual/ui/definitions.jsonc"
+      ],
+      "url": "./dev/tooling/tokens/schemas/shared-ui-definitions.schema.json"
+    },
+    {
+      "fileMatch": [
+        "/src/data/tokens/generated/ui/details.jsonc",
+        "/src/data/tokens/manual/ui/details.jsonc"
+      ],
+      "url": "./dev/tooling/tokens/schemas/shared-ui-details.schema.json"
+    },
+    {
+      "fileMatch": [
+        "/src/themes/*/*/tokens/ui/definitions.jsonc"
+      ],
+      "url": "./dev/tooling/tokens/schemas/theme-ui-definitions.schema.json"
+    },
+    {
+      "fileMatch": [
+        "/src/data/tokens/generated/syntax/details.jsonc",
+        "/src/data/tokens/manual/syntax/details.jsonc"
+      ],
+      "url": "./dev/tooling/tokens/schemas/shared-syntax-details.schema.json"
+    },
+    {
+      "fileMatch": [
+        "/src/themes/*/*/tokens/variables/definitions.jsonc"
+      ],
+      "url": "./dev/tooling/tokens/schemas/variables-definitions.schema.json"
+    },
+    {
+      "fileMatch": [
+        "/src/themes/*/*/tokens/semantic/details.jsonc"
+      ],
+      "url": "./dev/tooling/tokens/schemas/theme-semantic-details.schema.json"
+    },
+    {
+      "fileMatch": [
+        "/src/data/tokens/generated/semantic/details.jsonc",
+        "/src/data/tokens/manual/semantic/details.jsonc"
+      ],
+      "url": "./dev/tooling/tokens/schemas/shared-semantic-details.schema.json"
+    },
+    {
+      "fileMatch": [
+        "/src/themes/*/*/tokens/semantic/definitions.jsonc"
+      ],
+      "url": "./dev/tooling/tokens/schemas/theme-semantic-definitions.schema.json"
+    },
+    {
+      "fileMatch": [
+        "/src/data/tokens/generated/upstream-sources.jsonc"
+      ],
+      "url": "./dev/tooling/tokens/schemas/upstream-sources.schema.json"
+    }
+  ]
 }

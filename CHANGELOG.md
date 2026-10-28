@@ -6,6 +6,42 @@ All notable changes to this project are documented in this file.
 
 ### Changed
 
+- Kept bootstrap and refresh schema-capture logs out of terminal progress, retained runtime diagnostics in the cache, and made bootstrap's unresolved registration details opt-in with `--debug`.
+- Updated test fixtures for grouped default variables, mapped bootstrap colors, and versioned schema snapshot directories; aligned variable schemas, refresh provenance validation, and property-fill paths with those formats.
+- Extracted UI fallback inheritance from upstream color registrations during bootstrap and refresh, and preserved shared relationships and history in starter theme details.
+- Routed default bootstrap token colors through `variables.placeholder` (`#f0f`) and gave each definition the same publication-review reason.
+- Filled bootstrap's missing default theme with the full standard palette and matching definitions and details for every verified standard UI color and semantic type/modifier selector.
+- Added layered generated and manual shared token data, a single `bootstrap` command, and a starter theme. Bootstrap and refresh capture the stable VS Code color theme schema and write versioned review reports under `dev/docs/refreshes/`.
+- Moved local caches under `dev/.cache/` and made builds, generators, and watchers validate the merged token snapshot.
+- Added a refresh completion message explaining that token proposals need review and that theme files are populated separately with `fill`.
+- Updated refresh fixtures and shared-token parsing for grouped UI name arrays and flat semantic selector arrays, preserving authored JSONC comments during description updates.
+- Show active tasks during quiet script operations, with terminal progress cleanup before results and failures.
+- Alphabetized shared token definition and detail records on disk and during refresh/bootstrap generation.
+- Replaced shared UI definition marker objects with grouped arrays of exact property names, removing `$token` from the shared UI inventory format.
+- Added a seedless shared-token bootstrap from verified VS Code and extension sources, with nonstandard source attribution and guarded all-file application.
+- Aligned semantic shared definitions with the flat category arrays in the previous semantic token reference, and flattened semantic selectors in theme definitions and details.
+- Moved development documentation, scripts, tests, tooling, samples, previews, and local packages under `dev/`; organized shared token inputs under `src/data/tokens/`. Existing preview installations must manually replace their stale `preview` asset symlink before syncing.
+
+- Added current-stage and elapsed-time feedback to `refresh`, with an animated terminal spinner, plain redirected progress, and cleanup before completion or errors.
+- Added pinned Linux VS Code screenshot checks for the published Cassidy Dark theme, with representative languages, semantic highlighting off/on, Problems and terminal states, explicit baseline updates, and automatic Ubuntu CI comparison reports.
+- Required complete one-to-one source coverage identities and rejected missing named/default imports and re-exports in the executable audit.
+- Verified both embedded VSIX identities, peeled tag commits, and existing asset bytes before GitHub recovery; preserved release notes and uploaded only frozen validated archives.
+- Removed redundant token examples from `dev/docs/references/examples/`, linked the development guide to the default theme sources, and removed standalone example checks and schema associations.
+- Simplified release commands to `package`, `publish`, and `recover`, updating the Azure packaging step and development guidance.
+- Kept native watcher subscriptions open on macOS to prevent edits from being lost at build completion; limited recursive subscription rebinding to the Linux replacement-save workaround and added a regression test.
+- Renamed `update:token-details`, `add:properties`, and `add:theme` to `refresh`, `fill`, and `create`, including command guidance and recovery instructions.
+- Renamed `package:vsix` to `release:package-vsix` and added `npm run publish` to queue Azure packaging and publication to the VS Code Marketplace and GitHub.
+- Simplified shared UI/semantic inventories to explicit `$token` membership markers, centralized generator placeholders, required local syntax identities for replay, and consolidated aggregate theme preparation and source formatting. Removed unused result fields and a redundant mode condition.
+- Removed unused tooling dependencies, palette fallback annotations, and build-result fields; shared string validation and avoided repeated generated-theme validation. Consolidated packaging validation under `package:vsix` and removed the unused Stylelint save action.
+- Removed completed migration tests, frozen fixtures, retired-path inventories, and dev/preview/palette layout repairs; replaced `check:legacy` with the current executable `check:reachability` audit and preserved archived records. Fixture writes now preserve supplied source without implicit format conversion.
+- Removed completed refactor checkpoint, approved-difference, and performance records from `dev/docs/references/refactor-2b/`; historical evidence remains in Git history.
+- Removed the redundant `sync:preview` command; builds synchronize previews and watch automatically retries failed synchronization.
+- Grouped theme definitions/details by family, adopted categorized nested token sources, and separated shared inventory/documentation under `src/data/tokens/` without changing theme styling or syntax precedence.
+- Moved preview assets to `dev/preview/`, palette settings to `palette/config.jsonc`, language probes to `dev/samples/grammar/`, reusable code to `dev/tooling/`, and behavioral suites into recursive responsibility directories.
+- Prepared combined build artifacts before application, added coordinated writers and explicit interrupted-generation verification, and enabled compilation-free preview retries and watcher recovery resumption.
+- Added explicit verified upstream description updates with protected/versioned wording, immutable replay, coverage review, bounded retrieval, and informational category/scope proposals.
+- Consolidated the development guide and added local schemas plus read-only documentation/legacy audits.
+
 - Renamed internal color aliases from `base.*` to `variables.*`, aligning references, validation, and documentation with `variables.jsonc` while preserving generated theme colors.
 
 - Corrected property purpose catalog paths after moving `lookups/` out of `references/`.
@@ -38,24 +74,24 @@ All notable changes to this project are documented in this file.
 - Changed syntax token source files to use a top-level array, with the build adding the `tokenColors` property.
 - Grouped generated file paths by theme in build output and limited blank lines to separators between theme and build summaries.
 - Moved generated development themes and static snapshots under `dev-extension/`.
-- Moved syntax highlighting samples from `dev/grammar-samples/` to `docs/grammar-samples/`.
+- Moved syntax highlighting samples from `dev/grammar-samples/` to `dev/docs/grammar-samples/`.
 
 - Added descriptive file headers and declaration JSDoc throughout the JavaScript scripts, configuration, tests, and grammar sample, with parameter documentation and ongoing requirements in `AGENTS.md`.
-- Shortened the theme script filenames to `scripts/themes/build.js`, `check.js`, and `watch.js`, updating commands, imports, usage text, and documentation.
+- Shortened the theme script filenames to `dev/scripts/themes/build.js`, `check.js`, and `watch.js`, updating commands, imports, usage text, and documentation.
 - Renamed shared modules to `color-math.js`, `jsonc-validation.js`, and `theme-source-inputs.js`; split `palette.js` into `palette-generation.js` and `color-variable-resolution.js`, updating script and test imports.
-- Grouped release publishing scripts under `scripts/release/publish/` and renamed release scripts to clarify their roles.
+- Grouped release publishing scripts under `dev/scripts/release/publish/` and renamed release scripts to clarify their roles.
 - Renamed `dev/samples/` to `dev/grammar-samples/`, shortened sample filenames to language names, and updated imports, documentation, and the samples-only TypeScript configuration.
 - Standardized theme naming on prod/dev, moved authoring sources to `src/prod/` and `src/dev/`, renamed dev extension scripts and tests, and clarified build and sync function names.
 
 - Split tests by color, palette, variable, build, validation, and local extension responsibilities; moved reusable temporary project setup into `test-projects.js` and limited test discovery to `*.test.js` files.
 - Renamed `build:theme` to `build:prod`, updated production build notices and documentation, and made `dev:sync` use the combined build.
 - Updated development tooling dependencies and the lockfile, including the version-specific Lefthook install approval.
-- Renamed `scripts/shared/` to `scripts/lib/` and updated script and test imports.
-- Implemented restructuring plan 1b: grouped production and local theme inputs under `src/`, renamed color variables and UI mappings, added whole-file fallback to the production default, and moved generated palette reports to `docs/palettes/generated-reports/<theme name>/`.
+- Renamed `dev/scripts/shared/` to `dev/scripts/lib/` and updated script and test imports.
+- Implemented restructuring plan 1b: grouped production and local theme inputs under `src/`, renamed color variables and UI mappings, added whole-file fallback to the production default, and moved generated palette reports to `dev/docs/palettes/generated-reports/<theme name>/`.
 - Renamed script groups to `themes/`, `local-extension/`, and `shared/`; added production theme registration, shared report-name collision checks, and validation of every selected target before writing outputs.
 
-- Archived palette reference documents under `docs/palettes/archive/`.
-- Moved generated palette reports to `dev/generated/palette/`, grouped build scripts under `scripts/build/`, and separated editable experiments, generated previews, and historical snapshots.
+- Archived palette reference documents under `dev/docs/palettes/archive/`.
+- Moved generated palette reports to `dev/generated/palette/`, grouped build scripts under `dev/scripts/build/`, and separated editable experiments, generated previews, and historical snapshots.
 - Grouped the production palette source, curated palette references, and generated palette reports under `palette/`.
 - Added comments above every level 1 and level 2 token property describing its UI location or when its colors are used.
 - Kept fallback relationships only in token `details.inherits`, reserved `overrides` for independently verified UI state precedence, and removed the redundant reverse relationship field.
@@ -119,7 +155,7 @@ All notable changes to this project are documented in this file.
 - Added additional Azure pipeline publishing scripts to auto-generate GitHub package releases with Changelog notes in `/scripts`:
   - `changelog-notes.sh`
   - `create-github-release.sh`
-- Added local dev workflow with `scripts/sync-dev.js`.
+- Added local dev workflow with `dev/scripts/sync-dev.js`.
 
 ### Changed
 
@@ -143,7 +179,7 @@ All notable changes to this project are documented in this file.
   - eslint.config.js
   - lefthook.yml
   - prettier.config.js
-- Added `scripts/publish-azure.sh` to only allow publishing from the main branch.
+- Added `dev/scripts/publish-azure.sh` to only allow publishing from the main branch.
 - Added the `previews` directory for grammar previews of syntax highlighting. Seeded with a PHP preview file.
 - Added the `docs` directory for development notes and reference files.
 

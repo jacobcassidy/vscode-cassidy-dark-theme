@@ -1,0 +1,30 @@
+{
+  "default": {
+    "background": {
+      "color": "palette.gray.900"
+    },
+    "foreground": {
+      "color": "palette.gray.200"
+    },
+    "placeholder": {
+      "color": "#f0f",
+      "colorReason": "Default bootstrap value. Review this selector before publication"
+    }
+  },
+  "diagnostic": {
+    "error.foreground": {
+      "color": "palette.red.500"
+    },
+    "warning.foreground": {
+      "color": "palette.orange.500"
+    }
+  },
+  "diff": {
+    "added.foreground": {
+      "color": "palette.green.400"
+    },
+    "removed.foreground": {
+      "color": "palette.red.400"
+    }
+  }
+}

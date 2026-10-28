@@ -1,8 +1,7 @@
 {
   "generated": {
     "target": "prod/default",
-    "source": "src/themes/prod/default/palette/palette-config.jsonc",
-    "fallback": false,
+    "source": "src/themes/prod/default/palette/config.jsonc",
     "rebuild": "npm run build:palette"
   },
   "primitives": {

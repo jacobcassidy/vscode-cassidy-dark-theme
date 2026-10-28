@@ -32,4 +32,4 @@
 **/**.min.js
 
 # Svelte grammar fixture: no Svelte Prettier plugin is installed in this project.
-docs/grammar-samples/svelte.svelte
+dev/samples/grammar/svelte.svelte

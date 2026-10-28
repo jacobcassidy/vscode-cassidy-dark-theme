@@ -1,0 +1,46 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Shared semantic definitions",
+  "type": "object",
+  "properties": {
+    "standard": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^(?:\\*|[a-zA-Z][\\w-]*)(?:\\.[a-zA-Z][\\w-]*)*(?::[a-zA-Z][\\w+-]*)?$"
+      }
+    },
+    "sourceCode": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^(?:\\*|[a-zA-Z][\\w-]*)(?:\\.[a-zA-Z][\\w-]*)*(?::[a-zA-Z][\\w+-]*)?$"
+      }
+    },
+    "nonStandard": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^(?:\\*|[a-zA-Z][\\w-]*)(?:\\.[a-zA-Z][\\w-]*)*(?::[a-zA-Z][\\w+-]*)?$"
+      }
+    },
+    "deprecated": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^(?:\\*|[a-zA-Z][\\w-]*)(?:\\.[a-zA-Z][\\w-]*)*(?::[a-zA-Z][\\w+-]*)?$"
+      }
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "standard",
+    "sourceCode",
+    "nonStandard",
+    "deprecated"
+  ]
+}

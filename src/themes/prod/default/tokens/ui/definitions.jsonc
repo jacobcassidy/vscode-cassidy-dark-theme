@@ -1,0 +1,3469 @@
+{
+  "standard": {
+    "contrastActiveBorder": {
+      "color": "variables.default.placeholder"
+    },
+    "contrastBorder": {
+      "color": "variables.default.placeholder"
+    },
+    "descriptionForeground": {
+      "color": "variables.default.placeholder"
+    },
+    "disabledForeground": {
+      "color": "variables.default.placeholder"
+    },
+    "errorForeground": {
+      "color": "variables.diagnostic.error.foreground"
+    },
+    "focusBorder": {
+      "color": "variables.default.placeholder"
+    },
+    "foreground": {
+      "color": "variables.default.foreground"
+    },
+    "strongForeground": {
+      "color": "variables.default.placeholder"
+    },
+    "actionBar": {
+      "toggledBackground": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "activeSessionView": {
+      "background": {
+        "color": "variables.default.placeholder"
+      },
+      "foreground": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "activityBar": {
+      "activeBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "activeBorder": {
+        "color": "variables.default.placeholder"
+      },
+      "activeFocusBorder": {
+        "color": "variables.default.placeholder"
+      },
+      "background": {
+        "color": "variables.default.placeholder"
+      },
+      "border": {
+        "color": "variables.default.placeholder"
+      },
+      "dropBorder": {
+        "color": "variables.default.placeholder"
+      },
+      "foreground": {
+        "color": "variables.default.placeholder"
+      },
+      "inactiveForeground": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "activityBarBadge": {
+      "background": {
+        "color": "variables.default.placeholder"
+      },
+      "foreground": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "activityBarTop": {
+      "activeBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "activeBorder": {
+        "color": "variables.default.placeholder"
+      },
+      "background": {
+        "color": "variables.default.placeholder"
+      },
+      "dropBorder": {
+        "color": "variables.default.placeholder"
+      },
+      "foreground": {
+        "color": "variables.default.placeholder"
+      },
+      "inactiveForeground": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "activityErrorBadge": {
+      "background": {
+        "color": "variables.default.placeholder"
+      },
+      "foreground": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "activityWarningBadge": {
+      "background": {
+        "color": "variables.default.placeholder"
+      },
+      "foreground": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "agentFeedbackEditorWidget": {
+      "background": {
+        "color": "variables.default.placeholder"
+      },
+      "border": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "agentFeedbackInputWidget": {
+      "border": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "agents": {
+      "background": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "agentsBadge": {
+      "background": {
+        "color": "variables.default.placeholder"
+      },
+      "foreground": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "agentsBottomPanel": {
+      "border": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "agentsCard": {
+      "border": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "agentsChatInput": {
+      "background": {
+        "color": "variables.default.placeholder"
+      },
+      "border": {
+        "color": "variables.default.placeholder"
+      },
+      "focusBorder": {
+        "color": "variables.default.placeholder"
+      },
+      "foreground": {
+        "color": "variables.default.placeholder"
+      },
+      "placeholderForeground": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "agentsDetail": {
+      "background": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "agentSessionReadIndicator": {
+      "foreground": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "agentSessionSelectedBadge": {
+      "border": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "agentSessionSelectedUnfocusedBadge": {
+      "border": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "agentsGradient": {
+      "tintColor": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "agentsMobileDiff": {
+      "addedForeground": {
+        "color": "variables.diff.added.foreground"
+      },
+      "deletedForeground": {
+        "color": "variables.diff.removed.foreground"
+      },
+      "modifiedForeground": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "agentsNewSessionButton": {
+      "background": {
+        "color": "variables.default.placeholder"
+      },
+      "border": {
+        "color": "variables.default.placeholder"
+      },
+      "foreground": {
+        "color": "variables.default.placeholder"
+      },
+      "hoverBackground": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "agentsPanel": {
+      "background": {
+        "color": "variables.default.placeholder"
+      },
+      "border": {
+        "color": "variables.default.placeholder"
+      },
+      "foreground": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "agentStatusIndicator": {
+      "background": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "agentsUnreadBadge": {
+      "background": {
+        "color": "variables.default.placeholder"
+      },
+      "foreground": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "agentsUpdateButton": {
+      "downloadedBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "downloadingBackground": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "agentsVoice": {
+      "speakingBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "speakingForeground": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "badge": {
+      "background": {
+        "color": "variables.default.placeholder"
+      },
+      "foreground": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "banner": {
+      "background": {
+        "color": "variables.default.placeholder"
+      },
+      "foreground": {
+        "color": "variables.default.placeholder"
+      },
+      "iconForeground": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "breadcrumb": {
+      "activeSelectionForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "background": {
+        "color": "variables.default.placeholder"
+      },
+      "focusForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "foreground": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "breadcrumbPicker": {
+      "background": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "browser": {
+      "border": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "button": {
+      "background": {
+        "color": "variables.default.placeholder"
+      },
+      "border": {
+        "color": "variables.default.placeholder"
+      },
+      "foreground": {
+        "color": "variables.default.placeholder"
+      },
+      "hoverBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "secondaryBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "secondaryBorder": {
+        "color": "variables.default.placeholder"
+      },
+      "secondaryForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "secondaryHoverBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "separator": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "chart": {
+      "axis": {
+        "color": "variables.default.placeholder"
+      },
+      "guide": {
+        "color": "variables.default.placeholder"
+      },
+      "line": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "charts": {
+      "blue": {
+        "color": "variables.default.placeholder"
+      },
+      "foreground": {
+        "color": "variables.default.placeholder"
+      },
+      "green": {
+        "color": "variables.default.placeholder"
+      },
+      "lines": {
+        "color": "variables.default.placeholder"
+      },
+      "orange": {
+        "color": "variables.default.placeholder"
+      },
+      "purple": {
+        "color": "variables.default.placeholder"
+      },
+      "red": {
+        "color": "variables.default.placeholder"
+      },
+      "yellow": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "chat": {
+      "avatarBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "avatarForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "checkpointSeparator": {
+        "color": "variables.default.placeholder"
+      },
+      "dictationActiveMicGlow": {
+        "color": "variables.default.placeholder"
+      },
+      "editedFileForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "findMatchBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "findMatchHighlightBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "inputWorkingBorderColor1": {
+        "color": "variables.default.placeholder"
+      },
+      "linesAddedForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "linesRemovedForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "mcpCompatibilityWarningForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "requestBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "requestBorder": {
+        "color": "variables.default.placeholder"
+      },
+      "requestBubbleBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "requestBubbleHoverBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "requestCodeBorder": {
+        "color": "variables.default.placeholder"
+      },
+      "slashCommandBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "slashCommandForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "statusBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "thinkingShimmer": {
+        "color": "variables.default.placeholder"
+      },
+      "voiceGlowBaseColor": {
+        "color": "variables.default.placeholder"
+      },
+      "voiceListeningGlow": {
+        "color": "variables.default.placeholder"
+      },
+      "voiceSpeakingGlow": {
+        "color": "variables.default.placeholder"
+      },
+      "workingProgressInsidersIconForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "workingProgressStableIconForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "sessionStateIndicator": {
+        "inProgressBorder": {
+          "color": "variables.default.placeholder"
+        },
+        "needsInputBorder": {
+          "color": "variables.default.placeholder"
+        },
+        "unvisitedBorder": {
+          "color": "variables.default.placeholder"
+        }
+      }
+    },
+    "checkbox": {
+      "background": {
+        "color": "variables.default.placeholder"
+      },
+      "border": {
+        "color": "variables.default.placeholder"
+      },
+      "foreground": {
+        "color": "variables.default.placeholder"
+      },
+      "selectBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "selectBorder": {
+        "color": "variables.default.placeholder"
+      },
+      "disabled": {
+        "background": {
+          "color": "variables.default.placeholder"
+        },
+        "foreground": {
+          "color": "variables.default.placeholder"
+        }
+      }
+    },
+    "commandCenter": {
+      "activeBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "activeBorder": {
+        "color": "variables.default.placeholder"
+      },
+      "activeForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "background": {
+        "color": "variables.default.placeholder"
+      },
+      "border": {
+        "color": "variables.default.placeholder"
+      },
+      "debuggingBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "foreground": {
+        "color": "variables.default.placeholder"
+      },
+      "inactiveBorder": {
+        "color": "variables.default.placeholder"
+      },
+      "inactiveForeground": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "commentsView": {
+      "resolvedIcon": {
+        "color": "variables.default.placeholder"
+      },
+      "unresolvedIcon": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "debugConsole": {
+      "errorForeground": {
+        "color": "variables.diagnostic.error.foreground"
+      },
+      "infoForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "sourceForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "warningForeground": {
+        "color": "variables.diagnostic.warning.foreground"
+      }
+    },
+    "debugConsoleInputIcon": {
+      "foreground": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "debugExceptionWidget": {
+      "background": {
+        "color": "variables.default.placeholder"
+      },
+      "border": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "debugIcon": {
+      "breakpointCurrentStackframeForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "breakpointDisabledForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "breakpointForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "breakpointStackframeForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "breakpointUnverifiedForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "continueForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "disconnectForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "pauseForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "restartForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "startForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "stepBackForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "stepIntoForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "stepOutForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "stepOverForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "stopForeground": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "debugTokenExpression": {
+      "boolean": {
+        "color": "variables.default.placeholder"
+      },
+      "error": {
+        "color": "variables.default.placeholder"
+      },
+      "name": {
+        "color": "variables.default.placeholder"
+      },
+      "number": {
+        "color": "variables.default.placeholder"
+      },
+      "string": {
+        "color": "variables.default.placeholder"
+      },
+      "type": {
+        "color": "variables.default.placeholder"
+      },
+      "value": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "debugToolBar": {
+      "background": {
+        "color": "variables.default.placeholder"
+      },
+      "border": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "debugView": {
+      "exceptionLabelBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "exceptionLabelForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "stateLabelBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "stateLabelForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "valueChangedHighlight": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "diffEditor": {
+      "border": {
+        "color": "variables.default.placeholder"
+      },
+      "diagonalFill": {
+        "color": "variables.default.placeholder"
+      },
+      "insertedLineBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "insertedTextBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "insertedTextBorder": {
+        "color": "variables.default.placeholder"
+      },
+      "removedLineBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "removedTextBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "removedTextBorder": {
+        "color": "variables.default.placeholder"
+      },
+      "unchangedCodeBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "unchangedRegionBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "unchangedRegionForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "unchangedRegionShadow": {
+        "color": "variables.default.placeholder"
+      },
+      "move": {
+        "border": {
+          "color": "variables.default.placeholder"
+        }
+      },
+      "moveActive": {
+        "border": {
+          "color": "variables.default.placeholder"
+        }
+      }
+    },
+    "diffEditorGutter": {
+      "insertedLineBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "removedLineBackground": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "diffEditorOverview": {
+      "insertedForeground": {
+        "color": "variables.diff.added.foreground"
+      },
+      "removedForeground": {
+        "color": "variables.diff.removed.foreground"
+      }
+    },
+    "dropdown": {
+      "background": {
+        "color": "variables.default.placeholder"
+      },
+      "border": {
+        "color": "variables.default.placeholder"
+      },
+      "foreground": {
+        "color": "variables.default.placeholder"
+      },
+      "listBackground": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "editor": {
+      "background": {
+        "color": "variables.default.background"
+      },
+      "border": {
+        "color": "variables.default.placeholder"
+      },
+      "compositionBorder": {
+        "color": "variables.default.placeholder"
+      },
+      "findMatchBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "findMatchBorder": {
+        "color": "variables.default.placeholder"
+      },
+      "findMatchForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "findMatchHighlightBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "findMatchHighlightBorder": {
+        "color": "variables.default.placeholder"
+      },
+      "findMatchHighlightForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "findRangeHighlightBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "findRangeHighlightBorder": {
+        "color": "variables.default.placeholder"
+      },
+      "focusedStackFrameHighlightBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "foldBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "foldPlaceholderForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "foreground": {
+        "color": "variables.default.placeholder"
+      },
+      "hoverHighlightBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "inactiveLineHighlightBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "inactiveSelectionBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "inlineValuesBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "inlineValuesForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "lineHighlightBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "lineHighlightBorder": {
+        "color": "variables.default.placeholder"
+      },
+      "linkedEditingBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "rangeHighlightBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "rangeHighlightBorder": {
+        "color": "variables.default.placeholder"
+      },
+      "selectionBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "selectionForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "selectionHighlightBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "selectionHighlightBorder": {
+        "color": "variables.default.placeholder"
+      },
+      "snippetFinalTabstopHighlightBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "snippetFinalTabstopHighlightBorder": {
+        "color": "variables.default.placeholder"
+      },
+      "snippetTabstopHighlightBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "snippetTabstopHighlightBorder": {
+        "color": "variables.default.placeholder"
+      },
+      "stackFrameHighlightBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "symbolHighlightBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "symbolHighlightBorder": {
+        "color": "variables.default.placeholder"
+      },
+      "wordHighlightBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "wordHighlightBorder": {
+        "color": "variables.default.placeholder"
+      },
+      "wordHighlightStrongBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "wordHighlightStrongBorder": {
+        "color": "variables.default.placeholder"
+      },
+      "wordHighlightTextBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "wordHighlightTextBorder": {
+        "color": "variables.default.placeholder"
+      },
+      "placeholder": {
+        "foreground": {
+          "color": "variables.default.placeholder"
+        }
+      }
+    },
+    "editorActionList": {
+      "background": {
+        "color": "variables.default.placeholder"
+      },
+      "focusBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "focusForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "foreground": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "editorBracketHighlight": {
+      "foreground1": {
+        "color": "variables.default.placeholder"
+      },
+      "foreground2": {
+        "color": "variables.default.placeholder"
+      },
+      "foreground3": {
+        "color": "variables.default.placeholder"
+      },
+      "foreground4": {
+        "color": "variables.default.placeholder"
+      },
+      "foreground5": {
+        "color": "variables.default.placeholder"
+      },
+      "foreground6": {
+        "color": "variables.default.placeholder"
+      },
+      "unexpectedBracket": {
+        "foreground": {
+          "color": "variables.default.placeholder"
+        }
+      }
+    },
+    "editorBracketMatch": {
+      "background": {
+        "color": "variables.default.placeholder"
+      },
+      "border": {
+        "color": "variables.default.placeholder"
+      },
+      "foreground": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "editorBracketPairGuide": {
+      "activeBackground1": {
+        "color": "variables.default.placeholder"
+      },
+      "activeBackground2": {
+        "color": "variables.default.placeholder"
+      },
+      "activeBackground3": {
+        "color": "variables.default.placeholder"
+      },
+      "activeBackground4": {
+        "color": "variables.default.placeholder"
+      },
+      "activeBackground5": {
+        "color": "variables.default.placeholder"
+      },
+      "activeBackground6": {
+        "color": "variables.default.placeholder"
+      },
+      "background1": {
+        "color": "variables.default.placeholder"
+      },
+      "background2": {
+        "color": "variables.default.placeholder"
+      },
+      "background3": {
+        "color": "variables.default.placeholder"
+      },
+      "background4": {
+        "color": "variables.default.placeholder"
+      },
+      "background5": {
+        "color": "variables.default.placeholder"
+      },
+      "background6": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "editorCodeLens": {
+      "foreground": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "editorCommentsWidget": {
+      "rangeActiveBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "rangeBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "replyInputBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "resolvedBorder": {
+        "color": "variables.default.placeholder"
+      },
+      "unresolvedBorder": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "editorCursor": {
+      "background": {
+        "color": "variables.default.placeholder"
+      },
+      "foreground": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "editorError": {
+      "background": {
+        "color": "variables.default.placeholder"
+      },
+      "border": {
+        "color": "variables.default.placeholder"
+      },
+      "foreground": {
+        "color": "variables.diagnostic.error.foreground"
+      }
+    },
+    "editorGhostText": {
+      "background": {
+        "color": "variables.default.placeholder"
+      },
+      "border": {
+        "color": "variables.default.placeholder"
+      },
+      "foreground": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "editorGroup": {
+      "border": {
+        "color": "variables.default.placeholder"
+      },
+      "dropBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "dropIntoPromptBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "dropIntoPromptBorder": {
+        "color": "variables.default.placeholder"
+      },
+      "dropIntoPromptForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "emptyBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "focusedEmptyBorder": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "editorGroupHeader": {
+      "border": {
+        "color": "variables.default.placeholder"
+      },
+      "connectedTabsBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "noTabsBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "tabsBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "tabsBorder": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "editorGutter": {
+      "addedBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "addedSecondaryBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "background": {
+        "color": "variables.default.placeholder"
+      },
+      "commentDraftGlyphForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "commentGlyphForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "commentRangeForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "commentUnresolvedGlyphForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "deletedBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "deletedSecondaryBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "foldingControlForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "itemBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "itemGlyphForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "modifiedBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "modifiedSecondaryBackground": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "editorHint": {
+      "border": {
+        "color": "variables.default.placeholder"
+      },
+      "foreground": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "editorHoverWidget": {
+      "background": {
+        "color": "variables.default.placeholder"
+      },
+      "border": {
+        "color": "variables.default.placeholder"
+      },
+      "foreground": {
+        "color": "variables.default.placeholder"
+      },
+      "highlightForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "statusBarBackground": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "editorIndentGuide": {
+      "activeBackground1": {
+        "color": "variables.default.placeholder"
+      },
+      "activeBackground2": {
+        "color": "variables.default.placeholder"
+      },
+      "activeBackground3": {
+        "color": "variables.default.placeholder"
+      },
+      "activeBackground4": {
+        "color": "variables.default.placeholder"
+      },
+      "activeBackground5": {
+        "color": "variables.default.placeholder"
+      },
+      "activeBackground6": {
+        "color": "variables.default.placeholder"
+      },
+      "background1": {
+        "color": "variables.default.placeholder"
+      },
+      "background2": {
+        "color": "variables.default.placeholder"
+      },
+      "background3": {
+        "color": "variables.default.placeholder"
+      },
+      "background4": {
+        "color": "variables.default.placeholder"
+      },
+      "background5": {
+        "color": "variables.default.placeholder"
+      },
+      "background6": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "editorInfo": {
+      "background": {
+        "color": "variables.default.placeholder"
+      },
+      "border": {
+        "color": "variables.default.placeholder"
+      },
+      "foreground": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "editorInlayHint": {
+      "background": {
+        "color": "variables.default.placeholder"
+      },
+      "foreground": {
+        "color": "variables.default.placeholder"
+      },
+      "parameterBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "parameterForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "typeBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "typeForeground": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "editorLightBulb": {
+      "foreground": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "editorLightBulbAi": {
+      "foreground": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "editorLightBulbAutoFix": {
+      "foreground": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "editorLineNumber": {
+      "activeForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "dimmedForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "foreground": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "editorLink": {
+      "activeForeground": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "editorMarkerNavigation": {
+      "background": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "editorMarkerNavigationError": {
+      "background": {
+        "color": "variables.default.placeholder"
+      },
+      "headerBackground": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "editorMarkerNavigationInfo": {
+      "background": {
+        "color": "variables.default.placeholder"
+      },
+      "headerBackground": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "editorMarkerNavigationWarning": {
+      "background": {
+        "color": "variables.default.placeholder"
+      },
+      "headerBackground": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "editorMinimap": {
+      "inlineChatInserted": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "editorMultiCursor": {
+      "primary": {
+        "background": {
+          "color": "variables.default.placeholder"
+        },
+        "foreground": {
+          "color": "variables.default.placeholder"
+        }
+      },
+      "secondary": {
+        "background": {
+          "color": "variables.default.placeholder"
+        },
+        "foreground": {
+          "color": "variables.default.placeholder"
+        }
+      }
+    },
+    "editorOverviewRuler": {
+      "addedForeground": {
+        "color": "variables.diff.added.foreground"
+      },
+      "agentFeedbackForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "background": {
+        "color": "variables.default.placeholder"
+      },
+      "border": {
+        "color": "variables.default.placeholder"
+      },
+      "bracketMatchForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "commentDraftForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "commentForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "commentUnresolvedForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "commonContentForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "currentContentForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "deletedForeground": {
+        "color": "variables.diff.removed.foreground"
+      },
+      "errorForeground": {
+        "color": "variables.diagnostic.error.foreground"
+      },
+      "findMatchForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "incomingContentForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "infoForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "inlineChatInserted": {
+        "color": "variables.default.placeholder"
+      },
+      "inlineChatRemoved": {
+        "color": "variables.default.placeholder"
+      },
+      "modifiedForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "rangeHighlightForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "selectionHighlightForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "warningForeground": {
+        "color": "variables.diagnostic.warning.foreground"
+      },
+      "wordHighlightForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "wordHighlightStrongForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "wordHighlightTextForeground": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "editorPane": {
+      "background": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "editorRuler": {
+      "foreground": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "editorStickyScroll": {
+      "background": {
+        "color": "variables.default.placeholder"
+      },
+      "border": {
+        "color": "variables.default.placeholder"
+      },
+      "shadow": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "editorStickyScrollGutter": {
+      "background": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "editorStickyScrollHover": {
+      "background": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "editorSuggestWidget": {
+      "background": {
+        "color": "variables.default.placeholder"
+      },
+      "border": {
+        "color": "variables.default.placeholder"
+      },
+      "focusHighlightForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "focusOutline": {
+        "color": "variables.default.placeholder"
+      },
+      "foreground": {
+        "color": "variables.default.placeholder"
+      },
+      "highlightForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "selectedBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "selectedForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "selectedIconForeground": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "editorSuggestWidgetStatus": {
+      "foreground": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "editorUnicodeHighlight": {
+      "background": {
+        "color": "variables.default.placeholder"
+      },
+      "border": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "editorUnnecessaryCode": {
+      "border": {
+        "color": "variables.default.placeholder"
+      },
+      "opacity": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "editorWarning": {
+      "background": {
+        "color": "variables.default.placeholder"
+      },
+      "border": {
+        "color": "variables.default.placeholder"
+      },
+      "foreground": {
+        "color": "variables.diagnostic.warning.foreground"
+      }
+    },
+    "editorWhitespace": {
+      "foreground": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "editorWidget": {
+      "background": {
+        "color": "variables.default.placeholder"
+      },
+      "border": {
+        "color": "variables.default.placeholder"
+      },
+      "foreground": {
+        "color": "variables.default.placeholder"
+      },
+      "resizeBorder": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "editorWordWrapIndicator": {
+      "foreground": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "extensionBadge": {
+      "remoteBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "remoteForeground": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "extensionButton": {
+      "background": {
+        "color": "variables.default.placeholder"
+      },
+      "border": {
+        "color": "variables.default.placeholder"
+      },
+      "foreground": {
+        "color": "variables.default.placeholder"
+      },
+      "hoverBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "prominentBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "prominentForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "prominentHoverBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "separator": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "extensionIcon": {
+      "preReleaseForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "privateForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "sponsorForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "starForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "verifiedForeground": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "git": {
+      "blame": {
+        "editorDecorationForeground": {
+          "color": "variables.default.placeholder"
+        }
+      }
+    },
+    "gitDecoration": {
+      "addedResourceForeground": {
+        "color": "variables.diff.added.foreground"
+      },
+      "conflictingResourceForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "deletedResourceForeground": {
+        "color": "variables.diff.removed.foreground"
+      },
+      "ignoredResourceForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "modifiedResourceForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "renamedResourceForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "stageDeletedResourceForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "stageModifiedResourceForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "submoduleResourceForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "untrackedResourceForeground": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "icon": {
+      "foreground": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "inactiveSessionView": {
+      "background": {
+        "color": "variables.default.placeholder"
+      },
+      "foreground": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "inlineChat": {
+      "background": {
+        "color": "variables.default.placeholder"
+      },
+      "border": {
+        "color": "variables.default.placeholder"
+      },
+      "foreground": {
+        "color": "variables.default.placeholder"
+      },
+      "shadow": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "inlineChatDiff": {
+      "inserted": {
+        "color": "variables.default.placeholder"
+      },
+      "removed": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "inlineChatInput": {
+      "background": {
+        "color": "variables.default.placeholder"
+      },
+      "border": {
+        "color": "variables.default.placeholder"
+      },
+      "focusBorder": {
+        "color": "variables.default.placeholder"
+      },
+      "placeholderForeground": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "inlineEdit": {
+      "modifiedBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "modifiedBorder": {
+        "color": "variables.default.placeholder"
+      },
+      "modifiedChangedLineBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "modifiedChangedTextBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "originalBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "originalBorder": {
+        "color": "variables.default.placeholder"
+      },
+      "originalChangedLineBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "originalChangedTextBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "tabWillAcceptModifiedBorder": {
+        "color": "variables.default.placeholder"
+      },
+      "tabWillAcceptOriginalBorder": {
+        "color": "variables.default.placeholder"
+      },
+      "gutterIndicator": {
+        "background": {
+          "color": "variables.default.placeholder"
+        },
+        "primaryBackground": {
+          "color": "variables.default.placeholder"
+        },
+        "primaryBorder": {
+          "color": "variables.default.placeholder"
+        },
+        "primaryForeground": {
+          "color": "variables.default.placeholder"
+        },
+        "secondaryBackground": {
+          "color": "variables.default.placeholder"
+        },
+        "secondaryBorder": {
+          "color": "variables.default.placeholder"
+        },
+        "secondaryForeground": {
+          "color": "variables.default.placeholder"
+        },
+        "successfulBackground": {
+          "color": "variables.default.placeholder"
+        },
+        "successfulBorder": {
+          "color": "variables.default.placeholder"
+        },
+        "successfulForeground": {
+          "color": "variables.default.placeholder"
+        }
+      }
+    },
+    "input": {
+      "background": {
+        "color": "variables.default.placeholder"
+      },
+      "border": {
+        "color": "variables.default.placeholder"
+      },
+      "foreground": {
+        "color": "variables.default.placeholder"
+      },
+      "placeholderForeground": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "inputOption": {
+      "activeBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "activeBorder": {
+        "color": "variables.default.placeholder"
+      },
+      "activeForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "hoverBackground": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "inputValidation": {
+      "errorBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "errorBorder": {
+        "color": "variables.default.placeholder"
+      },
+      "errorForeground": {
+        "color": "variables.diagnostic.error.foreground"
+      },
+      "infoBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "infoBorder": {
+        "color": "variables.default.placeholder"
+      },
+      "infoForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "warningBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "warningBorder": {
+        "color": "variables.default.placeholder"
+      },
+      "warningForeground": {
+        "color": "variables.diagnostic.warning.foreground"
+      }
+    },
+    "interactive": {
+      "activeCodeBorder": {
+        "color": "variables.default.placeholder"
+      },
+      "inactiveCodeBorder": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "keybindingLabel": {
+      "background": {
+        "color": "variables.default.placeholder"
+      },
+      "border": {
+        "color": "variables.default.placeholder"
+      },
+      "bottomBorder": {
+        "color": "variables.default.placeholder"
+      },
+      "foreground": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "keybindingTable": {
+      "headerBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "rowsBackground": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "list": {
+      "activeSelectionBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "activeSelectionForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "activeSelectionIconForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "deemphasizedForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "dropBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "dropBetweenBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "errorForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "filterMatchBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "filterMatchBorder": {
+        "color": "variables.default.placeholder"
+      },
+      "focusAndSelectionOutline": {
+        "color": "variables.default.placeholder"
+      },
+      "focusBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "focusForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "focusHighlightForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "focusOutline": {
+        "color": "variables.default.placeholder"
+      },
+      "highlightForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "hoverBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "hoverForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "inactiveFocusBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "inactiveFocusOutline": {
+        "color": "variables.default.placeholder"
+      },
+      "inactiveSelectionBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "inactiveSelectionForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "inactiveSelectionIconForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "invalidItemForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "warningForeground": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "listFilterWidget": {
+      "background": {
+        "color": "variables.default.placeholder"
+      },
+      "noMatchesOutline": {
+        "color": "variables.default.placeholder"
+      },
+      "outline": {
+        "color": "variables.default.placeholder"
+      },
+      "shadow": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "markdownAlert": {
+      "caution": {
+        "foreground": {
+          "color": "variables.default.placeholder"
+        }
+      },
+      "important": {
+        "foreground": {
+          "color": "variables.default.placeholder"
+        }
+      },
+      "note": {
+        "foreground": {
+          "color": "variables.default.placeholder"
+        }
+      },
+      "tip": {
+        "foreground": {
+          "color": "variables.default.placeholder"
+        }
+      },
+      "warning": {
+        "foreground": {
+          "color": "variables.default.placeholder"
+        }
+      }
+    },
+    "mcpIcon": {
+      "starForeground": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "menu": {
+      "background": {
+        "color": "variables.default.placeholder"
+      },
+      "border": {
+        "color": "variables.default.placeholder"
+      },
+      "foreground": {
+        "color": "variables.default.placeholder"
+      },
+      "selectionBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "selectionBorder": {
+        "color": "variables.default.placeholder"
+      },
+      "selectionForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "separatorBackground": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "menubar": {
+      "selectionBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "selectionBorder": {
+        "color": "variables.default.placeholder"
+      },
+      "selectionForeground": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "merge": {
+      "border": {
+        "color": "variables.default.placeholder"
+      },
+      "commonContentBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "commonHeaderBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "currentContentBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "currentHeaderBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "incomingContentBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "incomingHeaderBackground": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "mergeEditor": {
+      "change": {
+        "background": {
+          "color": "variables.default.placeholder"
+        },
+        "word": {
+          "background": {
+            "color": "variables.default.placeholder"
+          }
+        }
+      },
+      "changeBase": {
+        "background": {
+          "color": "variables.default.placeholder"
+        },
+        "word": {
+          "background": {
+            "color": "variables.default.placeholder"
+          }
+        }
+      },
+      "conflict": {
+        "handled": {
+          "minimapOverViewRuler": {
+            "color": "variables.default.placeholder"
+          }
+        },
+        "handledFocused": {
+          "border": {
+            "color": "variables.default.placeholder"
+          }
+        },
+        "handledUnfocused": {
+          "border": {
+            "color": "variables.default.placeholder"
+          }
+        },
+        "input1": {
+          "background": {
+            "color": "variables.default.placeholder"
+          }
+        },
+        "input2": {
+          "background": {
+            "color": "variables.default.placeholder"
+          }
+        },
+        "unhandled": {
+          "minimapOverViewRuler": {
+            "color": "variables.default.placeholder"
+          }
+        },
+        "unhandledFocused": {
+          "border": {
+            "color": "variables.default.placeholder"
+          }
+        },
+        "unhandledUnfocused": {
+          "border": {
+            "color": "variables.default.placeholder"
+          }
+        }
+      },
+      "conflictingLines": {
+        "background": {
+          "color": "variables.default.placeholder"
+        }
+      }
+    },
+    "minimap": {
+      "background": {
+        "color": "variables.default.placeholder"
+      },
+      "chatEditHighlight": {
+        "color": "variables.default.placeholder"
+      },
+      "errorHighlight": {
+        "color": "variables.default.placeholder"
+      },
+      "findMatchHighlight": {
+        "color": "variables.default.placeholder"
+      },
+      "foregroundOpacity": {
+        "color": "variables.default.placeholder"
+      },
+      "infoHighlight": {
+        "color": "variables.default.placeholder"
+      },
+      "selectionHighlight": {
+        "color": "variables.default.placeholder"
+      },
+      "selectionOccurrenceHighlight": {
+        "color": "variables.default.placeholder"
+      },
+      "warningHighlight": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "minimapGutter": {
+      "addedBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "deletedBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "modifiedBackground": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "minimapSlider": {
+      "activeBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "background": {
+        "color": "variables.default.placeholder"
+      },
+      "hoverBackground": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "modernActivityBar": {
+      "background": {
+        "color": "variables.default.placeholder"
+      },
+      "border": {
+        "color": "variables.default.placeholder"
+      },
+      "inactiveBackground": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "modernActivityBarItem": {
+      "activeBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "activeForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "hoverBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "hoverForeground": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "modernEditorTab": {
+      "activeActionBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "activeBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "activeForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "activeHoverActionBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "activeHoverBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "hoverActionBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "hoverBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "hoverForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "inactiveBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "selectedActionBackground": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "modernPanel": {
+      "border": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "modernSash": {
+      "gripForeground": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "modernTab": {
+      "activeBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "activeForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "hoverBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "hoverForeground": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "modernUI": {
+      "inactiveShellBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "shellBackground": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "multiDiffEditor": {
+      "background": {
+        "color": "variables.default.placeholder"
+      },
+      "border": {
+        "color": "variables.default.placeholder"
+      },
+      "headerBackground": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "notebook": {
+      "cellBorderColor": {
+        "color": "variables.default.placeholder"
+      },
+      "cellEditorBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "cellHoverBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "cellInsertionIndicator": {
+        "color": "variables.default.placeholder"
+      },
+      "cellStatusBarItemHoverBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "cellToolbarSeparator": {
+        "color": "variables.default.placeholder"
+      },
+      "editorBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "focusedCellBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "focusedCellBorder": {
+        "color": "variables.default.placeholder"
+      },
+      "focusedEditorBorder": {
+        "color": "variables.default.placeholder"
+      },
+      "inactiveFocusedCellBorder": {
+        "color": "variables.default.placeholder"
+      },
+      "inactiveSelectedCellBorder": {
+        "color": "variables.default.placeholder"
+      },
+      "outputContainerBackgroundColor": {
+        "color": "variables.default.placeholder"
+      },
+      "outputContainerBorderColor": {
+        "color": "variables.default.placeholder"
+      },
+      "selectedCellBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "selectedCellBorder": {
+        "color": "variables.default.placeholder"
+      },
+      "symbolHighlightBackground": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "notebookEditorOverviewRuler": {
+      "runningCellForeground": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "notebookScrollbarSlider": {
+      "activeBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "background": {
+        "color": "variables.default.placeholder"
+      },
+      "hoverBackground": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "notebookStatusErrorIcon": {
+      "foreground": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "notebookStatusRunningIcon": {
+      "foreground": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "notebookStatusSuccessIcon": {
+      "foreground": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "notificationCenter": {
+      "border": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "notificationCenterHeader": {
+      "background": {
+        "color": "variables.default.placeholder"
+      },
+      "foreground": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "notificationLink": {
+      "foreground": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "notifications": {
+      "background": {
+        "color": "variables.default.placeholder"
+      },
+      "border": {
+        "color": "variables.default.placeholder"
+      },
+      "foreground": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "notificationsErrorIcon": {
+      "foreground": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "notificationsInfoIcon": {
+      "foreground": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "notificationsWarningIcon": {
+      "foreground": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "notificationToast": {
+      "border": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "outputView": {
+      "background": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "outputViewStickyScroll": {
+      "background": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "panel": {
+      "background": {
+        "color": "variables.default.placeholder"
+      },
+      "border": {
+        "color": "variables.default.placeholder"
+      },
+      "dropBorder": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "panelInput": {
+      "border": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "panelSection": {
+      "border": {
+        "color": "variables.default.placeholder"
+      },
+      "dropBackground": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "panelSectionHeader": {
+      "background": {
+        "color": "variables.default.placeholder"
+      },
+      "border": {
+        "color": "variables.default.placeholder"
+      },
+      "foreground": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "panelStickyScroll": {
+      "background": {
+        "color": "variables.default.placeholder"
+      },
+      "border": {
+        "color": "variables.default.placeholder"
+      },
+      "shadow": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "panelTitle": {
+      "activeBorder": {
+        "color": "variables.default.placeholder"
+      },
+      "activeForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "border": {
+        "color": "variables.default.placeholder"
+      },
+      "inactiveForeground": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "panelTitleBadge": {
+      "background": {
+        "color": "variables.default.placeholder"
+      },
+      "foreground": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "peekView": {
+      "border": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "peekViewEditor": {
+      "background": {
+        "color": "variables.default.placeholder"
+      },
+      "matchHighlightBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "matchHighlightBorder": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "peekViewEditorGutter": {
+      "background": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "peekViewEditorStickyScroll": {
+      "background": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "peekViewEditorStickyScrollGutter": {
+      "background": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "peekViewResult": {
+      "background": {
+        "color": "variables.default.placeholder"
+      },
+      "fileForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "lineForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "matchHighlightBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "selectionBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "selectionForeground": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "peekViewTitle": {
+      "background": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "peekViewTitleDescription": {
+      "foreground": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "peekViewTitleLabel": {
+      "foreground": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "pickerGroup": {
+      "border": {
+        "color": "variables.default.placeholder"
+      },
+      "foreground": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "ports": {
+      "iconRunningProcessForeground": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "problemsErrorIcon": {
+      "foreground": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "problemsInfoIcon": {
+      "foreground": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "problemsWarningIcon": {
+      "foreground": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "profileBadge": {
+      "background": {
+        "color": "variables.default.placeholder"
+      },
+      "foreground": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "profiles": {
+      "sashBorder": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "progressBar": {
+      "background": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "quickInput": {
+      "background": {
+        "color": "variables.default.placeholder"
+      },
+      "foreground": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "quickInputList": {
+      "focusBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "focusForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "focusHighlightForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "focusIconForeground": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "quickInputTitle": {
+      "background": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "radio": {
+      "activeBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "activeBorder": {
+        "color": "variables.default.placeholder"
+      },
+      "activeForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "inactiveBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "inactiveBorder": {
+        "color": "variables.default.placeholder"
+      },
+      "inactiveForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "inactiveHoverBackground": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "sash": {
+      "hoverBorder": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "scmGraph": {
+      "foreground1": {
+        "color": "variables.default.placeholder"
+      },
+      "foreground2": {
+        "color": "variables.default.placeholder"
+      },
+      "foreground3": {
+        "color": "variables.default.placeholder"
+      },
+      "foreground4": {
+        "color": "variables.default.placeholder"
+      },
+      "foreground5": {
+        "color": "variables.default.placeholder"
+      },
+      "historyItemBaseRefColor": {
+        "color": "variables.default.placeholder"
+      },
+      "historyItemHoverAdditionsForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "historyItemHoverDefaultLabelBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "historyItemHoverDefaultLabelForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "historyItemHoverDeletionsForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "historyItemHoverLabelForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "historyItemRefColor": {
+        "color": "variables.default.placeholder"
+      },
+      "historyItemRemoteRefColor": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "scrollbar": {
+      "background": {
+        "color": "variables.default.placeholder"
+      },
+      "shadow": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "scrollbarSlider": {
+      "activeBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "background": {
+        "color": "variables.default.placeholder"
+      },
+      "hoverBackground": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "search": {
+      "resultsInfoForeground": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "searchEditor": {
+      "findMatchBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "findMatchBorder": {
+        "color": "variables.default.placeholder"
+      },
+      "textInputBorder": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "selection": {
+      "background": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "settings": {
+      "checkboxBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "checkboxBorder": {
+        "color": "variables.default.placeholder"
+      },
+      "checkboxForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "dropdownBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "dropdownBorder": {
+        "color": "variables.default.placeholder"
+      },
+      "dropdownForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "dropdownListBorder": {
+        "color": "variables.default.placeholder"
+      },
+      "focusedRowBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "focusedRowBorder": {
+        "color": "variables.default.placeholder"
+      },
+      "headerBorder": {
+        "color": "variables.default.placeholder"
+      },
+      "headerForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "modifiedItemIndicator": {
+        "color": "variables.default.placeholder"
+      },
+      "numberInputBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "numberInputBorder": {
+        "color": "variables.default.placeholder"
+      },
+      "numberInputForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "rowHoverBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "sashBorder": {
+        "color": "variables.default.placeholder"
+      },
+      "settingsHeaderHoverForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "textInputBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "textInputBorder": {
+        "color": "variables.default.placeholder"
+      },
+      "textInputForeground": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "sideBar": {
+      "background": {
+        "color": "variables.default.placeholder"
+      },
+      "border": {
+        "color": "variables.default.placeholder"
+      },
+      "dropBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "foreground": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "sideBarActivityBarTop": {
+      "border": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "sideBarSectionHeader": {
+      "background": {
+        "color": "variables.default.placeholder"
+      },
+      "border": {
+        "color": "variables.default.placeholder"
+      },
+      "foreground": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "sideBarStickyScroll": {
+      "background": {
+        "color": "variables.default.placeholder"
+      },
+      "border": {
+        "color": "variables.default.placeholder"
+      },
+      "shadow": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "sideBarTitle": {
+      "background": {
+        "color": "variables.default.placeholder"
+      },
+      "border": {
+        "color": "variables.default.placeholder"
+      },
+      "foreground": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "sideBySideEditor": {
+      "horizontalBorder": {
+        "color": "variables.default.placeholder"
+      },
+      "verticalBorder": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "simpleFindWidget": {
+      "sashBorder": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "statusBar": {
+      "background": {
+        "color": "variables.default.placeholder"
+      },
+      "border": {
+        "color": "variables.default.placeholder"
+      },
+      "debuggingBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "debuggingBorder": {
+        "color": "variables.default.placeholder"
+      },
+      "debuggingForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "focusBorder": {
+        "color": "variables.default.placeholder"
+      },
+      "foreground": {
+        "color": "variables.default.placeholder"
+      },
+      "inactiveBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "noFolderBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "noFolderBorder": {
+        "color": "variables.default.placeholder"
+      },
+      "noFolderForeground": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "statusBarItem": {
+      "activeBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "compactHoverBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "errorBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "errorForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "errorHoverBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "errorHoverForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "focusBorder": {
+        "color": "variables.default.placeholder"
+      },
+      "hoverBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "hoverForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "offlineBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "offlineForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "offlineHoverBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "offlineHoverForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "prominentBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "prominentForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "prominentHoverBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "prominentHoverForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "remoteBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "remoteForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "remoteHoverBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "remoteHoverForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "warningBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "warningForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "warningHoverBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "warningHoverForeground": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "surface": {
+      "background": {
+        "color": "variables.default.placeholder"
+      },
+      "border": {
+        "color": "variables.default.placeholder"
+      },
+      "foreground": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "symbolIcon": {
+      "arrayForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "booleanForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "classForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "colorForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "constantForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "constructorForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "enumeratorForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "enumeratorMemberForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "eventForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "fieldForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "fileForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "folderForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "functionForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "interfaceForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "keyForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "keywordForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "methodForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "moduleForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "namespaceForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "nullForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "numberForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "objectForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "operatorForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "packageForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "propertyForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "referenceForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "snippetForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "stringForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "structForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "textForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "typeParameterForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "unitForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "variableForeground": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "tab": {
+      "activeBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "activeBorder": {
+        "color": "variables.default.placeholder"
+      },
+      "activeBorderTop": {
+        "color": "variables.default.placeholder"
+      },
+      "activeForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "activeModifiedBorder": {
+        "color": "variables.default.placeholder"
+      },
+      "border": {
+        "color": "variables.default.placeholder"
+      },
+      "divider": {
+        "color": "variables.default.placeholder"
+      },
+      "dragAndDropBorder": {
+        "color": "variables.default.placeholder"
+      },
+      "hoverBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "hoverBorder": {
+        "color": "variables.default.placeholder"
+      },
+      "hoverForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "inactiveBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "inactiveForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "inactiveModifiedBorder": {
+        "color": "variables.default.placeholder"
+      },
+      "lastPinnedBorder": {
+        "color": "variables.default.placeholder"
+      },
+      "selectedBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "selectedBorderTop": {
+        "color": "variables.default.placeholder"
+      },
+      "selectedForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "unfocusedActiveBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "unfocusedActiveBorder": {
+        "color": "variables.default.placeholder"
+      },
+      "unfocusedActiveBorderTop": {
+        "color": "variables.default.placeholder"
+      },
+      "unfocusedActiveForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "unfocusedActiveModifiedBorder": {
+        "color": "variables.default.placeholder"
+      },
+      "unfocusedHoverBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "unfocusedHoverBorder": {
+        "color": "variables.default.placeholder"
+      },
+      "unfocusedHoverForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "unfocusedInactiveBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "unfocusedInactiveForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "unfocusedInactiveModifiedBorder": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "terminal": {
+      "ansiBlack": {
+        "color": "variables.default.placeholder"
+      },
+      "ansiBlue": {
+        "color": "variables.default.placeholder"
+      },
+      "ansiBrightBlack": {
+        "color": "variables.default.placeholder"
+      },
+      "ansiBrightBlue": {
+        "color": "variables.default.placeholder"
+      },
+      "ansiBrightCyan": {
+        "color": "variables.default.placeholder"
+      },
+      "ansiBrightGreen": {
+        "color": "variables.default.placeholder"
+      },
+      "ansiBrightMagenta": {
+        "color": "variables.default.placeholder"
+      },
+      "ansiBrightRed": {
+        "color": "variables.default.placeholder"
+      },
+      "ansiBrightWhite": {
+        "color": "variables.default.placeholder"
+      },
+      "ansiBrightYellow": {
+        "color": "variables.default.placeholder"
+      },
+      "ansiCyan": {
+        "color": "variables.default.placeholder"
+      },
+      "ansiGreen": {
+        "color": "variables.default.placeholder"
+      },
+      "ansiMagenta": {
+        "color": "variables.default.placeholder"
+      },
+      "ansiRed": {
+        "color": "variables.default.placeholder"
+      },
+      "ansiWhite": {
+        "color": "variables.default.placeholder"
+      },
+      "ansiYellow": {
+        "color": "variables.default.placeholder"
+      },
+      "background": {
+        "color": "variables.default.placeholder"
+      },
+      "border": {
+        "color": "variables.default.placeholder"
+      },
+      "dropBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "findMatchBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "findMatchBorder": {
+        "color": "variables.default.placeholder"
+      },
+      "findMatchHighlightBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "findMatchHighlightBorder": {
+        "color": "variables.default.placeholder"
+      },
+      "foreground": {
+        "color": "variables.default.placeholder"
+      },
+      "hoverHighlightBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "inactiveSelectionBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "initialHintForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "selectionBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "selectionForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "tab": {
+        "activeBorder": {
+          "color": "variables.default.placeholder"
+        }
+      }
+    },
+    "terminalCommandDecoration": {
+      "defaultBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "errorBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "successBackground": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "terminalCommandGuide": {
+      "foreground": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "terminalCursor": {
+      "background": {
+        "color": "variables.default.placeholder"
+      },
+      "foreground": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "terminalOverviewRuler": {
+      "border": {
+        "color": "variables.default.placeholder"
+      },
+      "cursorForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "findMatchForeground": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "terminalStickyScroll": {
+      "background": {
+        "color": "variables.default.placeholder"
+      },
+      "border": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "terminalStickyScrollHover": {
+      "background": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "terminalSymbolIcon": {
+      "aliasForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "argumentForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "branchForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "commitForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "fileForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "flagForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "folderForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "inlineSuggestionForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "methodForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "optionForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "optionValueForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "pullRequestDoneForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "pullRequestForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "remoteForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "stashForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "symbolicLinkFileForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "symbolicLinkFolderForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "symbolText": {
+        "color": "variables.default.placeholder"
+      },
+      "tagForeground": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "testing": {
+      "coverCountBadgeBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "coverCountBadgeForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "coveredBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "coveredBorder": {
+        "color": "variables.default.placeholder"
+      },
+      "coveredGutterBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "coveredMinimapBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "iconErrored": {
+        "color": "variables.default.placeholder",
+        "retired": {
+          "color": "variables.default.placeholder"
+        }
+      },
+      "iconFailed": {
+        "color": "variables.default.placeholder",
+        "retired": {
+          "color": "variables.default.placeholder"
+        }
+      },
+      "iconPassed": {
+        "color": "variables.default.placeholder",
+        "retired": {
+          "color": "variables.default.placeholder"
+        }
+      },
+      "iconQueued": {
+        "color": "variables.default.placeholder",
+        "retired": {
+          "color": "variables.default.placeholder"
+        }
+      },
+      "iconSkipped": {
+        "color": "variables.default.placeholder",
+        "retired": {
+          "color": "variables.default.placeholder"
+        }
+      },
+      "iconUnset": {
+        "color": "variables.default.placeholder",
+        "retired": {
+          "color": "variables.default.placeholder"
+        }
+      },
+      "messagePeekBorder": {
+        "color": "variables.default.placeholder"
+      },
+      "messagePeekHeaderBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "peekBorder": {
+        "color": "variables.default.placeholder"
+      },
+      "peekHeaderBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "runAction": {
+        "color": "variables.default.placeholder"
+      },
+      "uncoveredBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "uncoveredBorder": {
+        "color": "variables.default.placeholder"
+      },
+      "uncoveredBranchBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "uncoveredGutterBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "uncoveredMinimapBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "message": {
+        "error": {
+          "badgeBackground": {
+            "color": "variables.default.placeholder"
+          },
+          "badgeBorder": {
+            "color": "variables.default.placeholder"
+          },
+          "badgeForeground": {
+            "color": "variables.default.placeholder"
+          },
+          "lineBackground": {
+            "color": "variables.default.placeholder"
+          }
+        },
+        "info": {
+          "decorationForeground": {
+            "color": "variables.default.placeholder"
+          },
+          "lineBackground": {
+            "color": "variables.default.placeholder"
+          }
+        }
+      }
+    },
+    "textBlockQuote": {
+      "background": {
+        "color": "variables.default.placeholder"
+      },
+      "border": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "textCodeBlock": {
+      "background": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "textLink": {
+      "activeForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "foreground": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "textPreformat": {
+      "background": {
+        "color": "variables.default.placeholder"
+      },
+      "border": {
+        "color": "variables.default.placeholder"
+      },
+      "foreground": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "textSeparator": {
+      "foreground": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "titleBar": {
+      "activeBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "activeForeground": {
+        "color": "variables.default.placeholder"
+      },
+      "border": {
+        "color": "variables.default.placeholder"
+      },
+      "inactiveBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "inactiveForeground": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "toolbar": {
+      "activeBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "hoverBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "hoverOutline": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "tree": {
+      "inactiveIndentGuidesStroke": {
+        "color": "variables.default.placeholder"
+      },
+      "indentGuidesStroke": {
+        "color": "variables.default.placeholder"
+      },
+      "tableColumnsBorder": {
+        "color": "variables.default.placeholder"
+      },
+      "tableOddRowsBackground": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "walkThrough": {
+      "embeddedEditorBackground": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "walkthrough": {
+      "stepTitle": {
+        "foreground": {
+          "color": "variables.default.placeholder"
+        }
+      }
+    },
+    "welcomePage": {
+      "background": {
+        "color": "variables.default.placeholder"
+      },
+      "tileBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "tileBorder": {
+        "color": "variables.default.placeholder"
+      },
+      "tileHoverBackground": {
+        "color": "variables.default.placeholder"
+      },
+      "progress": {
+        "background": {
+          "color": "variables.default.placeholder"
+        },
+        "foreground": {
+          "color": "variables.default.placeholder"
+        }
+      }
+    },
+    "widget": {
+      "border": {
+        "color": "variables.default.placeholder"
+      },
+      "shadow": {
+        "color": "variables.default.placeholder"
+      }
+    },
+    "window": {
+      "activeBorder": {
+        "color": "variables.default.placeholder"
+      },
+      "inactiveBorder": {
+        "color": "variables.default.placeholder"
+      }
+    }
+  },
+  "sourceCode": {},
+  "nonStandard": {},
+  "deprecated": {}
+}

@@ -4,6 +4,7 @@
 # IGNORE DEVELOPMENT FILES
 *.vsix
 .vsixmanifest
-/docs/TODO.md
-dist/
+/dev/TODO.md
+dev/packages/
 node_modules
+dev/.cache/
