@@ -582,6 +582,10 @@ export async function updateTokenDetails({
         resolution.version,
       );
 
+      for (const field of ["inherits", "overrides"]) {
+        if (candidate[field] === undefined && upstream?.[field]?.length) candidate[field] = upstream[field];
+      }
+
       if (category === "nonStandard" && contributors[family]?.has(id)) candidate.source = contributors[family].get(id);
 
       if (family === "syntax" && candidate["modified-desc"] !== true && description)

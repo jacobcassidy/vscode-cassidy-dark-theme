@@ -20,6 +20,7 @@ export async function extractSource(source, signal) {
     modifiers = new Map(),
     scopes = new Map(),
     scopeDescriptions = new Map(),
+    uiDefaults = new Map(),
     warnings = [];
 
   /**
@@ -258,10 +259,71 @@ export async function extractSource(source, signal) {
       return value;
     }
 
+    if (ts.isCallExpression(node) && /(?:^|\.)registerColor$/.test(node.expression.getText()))
+      return evaluate(node.arguments[0], path, seen);
+
     if (ts.isCallExpression(node) && /(?:^|\.)localize2?$/.test(node.expression.getText()))
       return evaluate(node.arguments[1], path, seen);
 
     return undefined;
+  }
+
+  /**
+   * Follow default-color references and supported transforms without executing source code.
+   * @param node - Default expression or referenced initializer.
+   * @param path - Source-relative owning module.
+   * @param [seen] - Binding identities already visited on this reference path.
+   * @returns Candidate color IDs, filtered against registrations after extraction.
+   */
+  function colorReferences(node, path, seen = []) {
+    if (!node || seen.length > 40) return [];
+
+    /** Statically resolved color identifiers include constants returned by registerColor. */
+    const value = evaluate(node, path);
+
+    if (typeof value === "string") return [value];
+
+    if (ts.isIdentifier(node)) {
+      /** Module binding identity bounds cyclic default expressions. */
+      const key = `${path}:${node.text}`;
+
+      if (seen.includes(key)) return [];
+
+      /** Initializer or imported binding to inspect when its transform is not a literal value. */
+      const data = module(path),
+        binding = data.imports.get(node.text);
+
+      if (data.declarations.has(node.text))
+        return colorReferences(data.declarations.get(node.text), path, [...seen, key]);
+
+      if (binding?.name)
+        return colorReferences(module(binding.path).declarations.get(binding.name), binding.path, [...seen, key]);
+    }
+
+    if (ts.isParenthesizedExpression(node) || ts.isAsExpression(node) || ts.isSatisfiesExpression(node))
+      return colorReferences(node.expression, path, seen);
+
+    if (ts.isObjectLiteralExpression(node))
+      return node.properties.flatMap((property) =>
+        ts.isPropertyAssignment(property) ? colorReferences(property.initializer, path, seen) : [],
+      );
+
+    if (ts.isConditionalExpression(node))
+      return [...colorReferences(node.whenTrue, path, seen), ...colorReferences(node.whenFalse, path, seen)];
+
+    if (ts.isCallExpression(node)) {
+      /** Only known color transformations provide evidence of fallback color dependencies. */
+      const name = ts.isPropertyAccessExpression(node.expression)
+        ? node.expression.name.text
+        : node.expression.getText();
+
+      if (["transparent", "darken", "lighten", "oneOf", "lessProminent", "opaque", "ifDefinedThenElse"].includes(name))
+        return [...node.arguments]
+          .slice(name === "ifDefinedThenElse" ? 1 : 0)
+          .flatMap((argument) => colorReferences(argument, path, seen));
+    }
+
+    return [];
   }
 
   /**
@@ -275,8 +337,9 @@ export async function extractSource(source, signal) {
    * @param [context.name] - Registration API name.
    * @param [context.expression] - Source expression passed as the registration ID.
    * @param [context.position] - One-based source line and column.
+   * @param [defaults] - UI default-color expression retained for inheritance extraction.
    */
-  function register(collection, id, description, path, deprecated = false, context) {
+  function register(collection, id, description, path, deprecated = false, context, defaults) {
     if (typeof id !== "string" || !id.trim()) {
       const registration = context ?? {
         name: "registration",
@@ -301,7 +364,9 @@ export async function extractSource(source, signal) {
             ? "sourceCode"
             : "standard";
 
-    if (!collection.has(id))
+    if (!collection.has(id)) {
+      if (collection === ui && defaults) uiDefaults.set(id, { node: defaults, path });
+
       collection.set(id, {
         description: typeof description === "string" && description.trim() ? description : undefined,
         category,
@@ -310,6 +375,7 @@ export async function extractSource(source, signal) {
         path,
         ...(source.identity.contributor ? { extensionId: source.identity.contributor } : {}),
       });
+    }
   }
 
   for (const [path, bytes] of source.files) {
@@ -362,6 +428,7 @@ export async function extractSource(source, signal) {
                 path,
                 Boolean(evaluate(node.arguments[4], path)),
                 context,
+                node.arguments[1],
               );
 
             if (name === "registerTokenType")
@@ -452,6 +519,13 @@ export async function extractSource(source, signal) {
 
       grammarScopes(grammar, true);
     }
+  }
+
+  for (const [id, { node, path }] of uiDefaults) {
+    /** Ordered unique upstream fallbacks; literals and unknown strings are excluded. */
+    const inherits = [...new Set(colorReferences(node, path))].filter((parent) => parent !== id && ui.has(parent));
+
+    if (inherits.length) ui.get(id).inherits = inherits;
   }
 
   return { identity: source.identity, ui, types, modifiers, scopes, scopeDescriptions, warnings };

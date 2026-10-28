@@ -265,6 +265,8 @@ export async function bootstrapTokenData({
     uiDefinitions[category][group].push(property);
     insert(uiDetails[category], id, {
       description: records[0].description || `UNREVIEWED: Describe UI token ${id}.`,
+      ...(records[0].inherits ? { inherits: records[0].inherits } : {}),
+      ...(records[0].overrides ? { overrides: records[0].overrides } : {}),
       ...(category === "nonStandard" ? { source: contributors } : {}),
     });
   }

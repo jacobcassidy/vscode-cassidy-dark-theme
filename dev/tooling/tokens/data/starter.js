@@ -6,6 +6,7 @@
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 import { defaultThemeDirectory } from "../../shared/paths.js";
+import { detailFields } from "../formats.js";
 
 /** Consistent review prompt attached to every default bootstrap color. */
 const defaultColorReason = "Default bootstrap value. Review this selector before publication";
@@ -109,6 +110,34 @@ function insertUi(target, id, value) {
 }
 
 /**
+ * Copy eligible shared documentation and relationships into a standard theme detail.
+ * @param record - Effective shared detail fields, including any reviewed relationships.
+ * @param fallback - Description used when upstream wording is absent.
+ * @returns Theme-owned metadata without shared-only fields.
+ */
+function starterDetail(record, fallback) {
+  return {
+    ...Object.fromEntries(
+      detailFields
+        .filter((field) => !["source", "use"].includes(field) && Object.hasOwn(record, field))
+        .map((field) => [field, record[field]]),
+    ),
+    description: record.description ?? fallback,
+  };
+}
+
+/**
+ * Disable definitions whose shared details explicitly document reviewed complete replacement.
+ * @param detail - Theme detail fields copied from shared metadata.
+ * @returns Required disabling fields or an empty descriptor.
+ */
+function replacementStyle(detail) {
+  return detail.globallyOverriddenBy
+    ? { disabled: true, disabledReason: `Reviewed complete replacement by ${detail.globallyOverriddenBy.join(", ")}.` }
+    : {};
+}
+
+/**
  * Complete a missing default theme from the effective verified standard inventory.
  * @param prepared - Initial in-memory theme candidates from starterTheme.
  * @param snapshot - Merged shared token definitions and details.
@@ -122,16 +151,18 @@ export function completeStarterTheme(prepared, snapshot) {
   for (const [id, record] of snapshot.definitions.ui.records) {
     if (record.category !== "standard") continue;
 
+    /** Shared wording, history, and evidenced relationships for the starter definition. */
+    const detail = starterDetail(
+      snapshot.details.ui.records.get(id)?.value ?? {},
+      `UNREVIEWED: Describe workbench color ${id}.`,
+    );
+
     insertUi(uiDefinitions.standard, id, {
       color: uiVariableReferences.get(id) ?? "variables.default.placeholder",
+      ...replacementStyle(detail),
     });
 
-    /** Exact verified description, with a visible marker for unresolved wording. */
-    const description = snapshot.details.ui.records.get(id)?.value.description;
-
-    insertUi(uiDetails.standard, id, {
-      description: description ?? `UNREVIEWED: Describe workbench color ${id}.`,
-    });
+    insertUi(uiDetails.standard, id, detail);
   }
 
   /** Complete standard semantic type and wildcard-modifier selectors. */
@@ -141,13 +172,18 @@ export function completeStarterTheme(prepared, snapshot) {
   for (const [id, record] of snapshot.definitions.semantic.records) {
     if (record.category !== "standard") continue;
 
+    /** Semantic documentation retains the same eligible relationship fields as UI details. */
+    const detail = starterDetail(
+      snapshot.details.semantic.records.get(id)?.value ?? {},
+      `UNREVIEWED: Describe semantic selector ${id}.`,
+    );
+
     semanticDefinitions.standard[id] = {
       color: "variables.default.placeholder",
+      ...replacementStyle(detail),
     };
-    semanticDetails.standard[id] = {
-      description:
-        snapshot.details.semantic.records.get(id)?.value.description ?? `UNREVIEWED: Describe semantic selector ${id}.`,
-    };
+
+    semanticDetails.standard[id] = detail;
   }
 
   for (const [path, value] of [

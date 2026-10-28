@@ -6,6 +6,7 @@ All notable changes to this project are documented in this file.
 
 ### Changed
 
+- Extracted UI fallback inheritance from upstream color registrations during bootstrap and refresh, and preserved shared relationships and history in starter theme details.
 - Routed default bootstrap token colors through `variables.placeholder` (`#f0f`) and gave each definition the same publication-review reason.
 - Filled bootstrap's missing default theme with the full standard palette and matching definitions and details for every verified standard UI color and semantic type/modifier selector.
 - Added layered generated and manual shared token data, a single `bootstrap` command, and a starter theme. Bootstrap and refresh capture the stable VS Code color theme schema and write versioned review reports under `dev/docs/refreshes/`.

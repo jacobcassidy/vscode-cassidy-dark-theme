@@ -195,6 +195,14 @@ export async function prepareProperties({ root, themes, overrides = new Map(), a
         /** Preserve authored wording/history/relationships; fill only missing purposes. */
         let candidate = existing ? { ...existing } : {};
 
+        for (const field of [
+          "inherits",
+          "overrides",
+          ...(record.value.disabled === true ? ["globallyOverriddenBy"] : []),
+        ]) {
+          if (candidate[field] === undefined && reusable?.[field]?.length) candidate[field] = reusable[field];
+        }
+
         if (candidate.description !== undefined && typeof candidate.description !== "string")
           throw new Error(`${detailPath}:${path.join(".")}.description: expected a string`);
 
