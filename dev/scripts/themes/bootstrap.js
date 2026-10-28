@@ -16,6 +16,43 @@ function cancel() {
   cancellation.abort(new Error("Token bootstrap cancelled"));
 }
 
+/**
+ * Print unresolved registration ID expressions grouped by source and file.
+ * @param warnings - Tab-separated source, file, position, and registration diagnostics.
+ */
+function printWarnings(warnings) {
+  /** Diagnostics grouped as source ID → file path → formatted registrations. */
+  const grouped = new Map();
+
+  for (const warning of warnings) {
+    /** Source origin and registration details emitted by static extraction. */
+    const [source, path, position, ...detail] = warning.split("\t");
+
+    /** Registration lines for the current source snapshot. */
+    let files = grouped.get(source);
+
+    if (!files) {
+      files = new Map();
+      grouped.set(source, files);
+    }
+
+    /** Existing or newly created diagnostics for this source file. */
+    const registrations = files.get(path) ?? [];
+    registrations.push(`${position}: ${detail.join("\t")}`);
+    files.set(path, registrations);
+  }
+
+  for (const [source, files] of grouped) {
+    console.warn(formatMessage(`${source}:`, "info"));
+
+    for (const [path, registrations] of files) {
+      console.warn(`  ${path}:`);
+
+      for (const registration of registrations) console.warn(`    ${registration}`);
+    }
+  }
+}
+
 process.on("SIGINT", cancel);
 process.on("SIGTERM", cancel);
 
@@ -40,7 +77,7 @@ try {
     }),
   );
   console.log(formatMessage(`Generated ${result.changed.length} source files. Run npm run build.`, "success"));
-  for (const warning of result.warnings) console.warn(formatMessage(warning, "info"));
+  printWarnings(result.warnings);
 } catch (error) {
   console.error(formatMessage(error.message, "error"));
   process.exitCode = 1;

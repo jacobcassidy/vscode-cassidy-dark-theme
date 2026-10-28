@@ -271,10 +271,23 @@ export async function extractSource(source, signal) {
    * @param description - Static registration description.
    * @param path - Verified source-relative path.
    * @param [deprecated] - Explicit upstream retirement evidence.
+   * @param [context] - Source expression and position for an unresolved registration.
+   * @param [context.name] - Registration API name.
+   * @param [context.expression] - Source expression passed as the registration ID.
+   * @param [context.position] - One-based source line and column.
    */
-  function register(collection, id, description, path, deprecated = false) {
+  function register(collection, id, description, path, deprecated = false, context) {
     if (typeof id !== "string" || !id.trim()) {
-      warnings.push(`${source.identity.id}:${path}: unresolved dynamic registration`);
+      const registration = context ?? {
+        name: "registration",
+        expression: "<unavailable>",
+        position: "unknown location",
+      };
+
+      warnings.push(
+        `${source.identity.id}\t${path}\t${registration.position}\t${registration.name} ID expression ${JSON.stringify(registration.expression)}: unresolved dynamic registration`,
+      );
+
       return;
     }
 
@@ -330,20 +343,47 @@ export async function extractSource(source, signal) {
               ? node.expression.text
               : "";
 
-          if (name === "registerColor")
-            register(
-              ui,
-              evaluate(node.arguments[0], path),
-              evaluate(node.arguments[2], path),
-              path,
-              Boolean(evaluate(node.arguments[4], path)),
-            );
+          if (["registerColor", "registerTokenType", "registerTokenModifier"].includes(name)) {
+            /** Exact unresolved registration argument and one-based source position for terminal review. */
+            const context = {
+              name,
+              expression: node.arguments[0]?.getText(parsed.tree).replaceAll(/\s+/g, " ") ?? "<missing ID argument>",
+              position: (() => {
+                const { line, character } = parsed.tree.getLineAndCharacterOfPosition(node.getStart(parsed.tree));
+                return `${line + 1}:${character + 1}`;
+              })(),
+            };
 
-          if (name === "registerTokenType")
-            register(types, evaluate(node.arguments[0], path), evaluate(node.arguments[1], path), path);
+            if (name === "registerColor")
+              register(
+                ui,
+                evaluate(node.arguments[0], path),
+                evaluate(node.arguments[2], path),
+                path,
+                Boolean(evaluate(node.arguments[4], path)),
+                context,
+              );
 
-          if (name === "registerTokenModifier")
-            register(modifiers, evaluate(node.arguments[0], path), evaluate(node.arguments[1], path), path);
+            if (name === "registerTokenType")
+              register(
+                types,
+                evaluate(node.arguments[0], path),
+                evaluate(node.arguments[1], path),
+                path,
+                false,
+                context,
+              );
+
+            if (name === "registerTokenModifier")
+              register(
+                modifiers,
+                evaluate(node.arguments[0], path),
+                evaluate(node.arguments[1], path),
+                path,
+                false,
+                context,
+              );
+          }
         }
 
         ts.forEachChild(node, visit);
