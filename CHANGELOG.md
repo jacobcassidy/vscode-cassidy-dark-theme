@@ -6,6 +6,7 @@ All notable changes to this project are documented in this file.
 
 ### Changed
 
+- Removed redundant token examples from `docs/references/examples/`, linked the development guide to the default theme sources, and removed standalone example checks and schema associations.
 - Simplified release commands to `package`, `publish`, and `recover`, updating the Azure packaging step and development guidance.
 - Kept native watcher subscriptions open on macOS to prevent edits from being lost at build completion; limited recursive subscription rebinding to the Linux replacement-save workaround and added a regression test.
 - Renamed `update:token-details`, `add:properties`, and `add:theme` to `refresh`, `fill`, and `create`, including command guidance and recovery instructions.

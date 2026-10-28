@@ -38,10 +38,10 @@ test("local/reference links, duplicate heading anchors, directories, and links i
   /** Complete checkout bytes must remain unchanged through successful validation. */
   const before = await snapshot(root);
 
-  await checkDocs({ root, files: ["guide.md"], examples: [] });
+  await checkDocs({ root, files: ["guide.md"] });
   assert.deepEqual(await snapshot(root), before);
   await writeFixture(join(root, "guide.md"), "[Broken](target.md#missing-anchor)");
-  await assert.rejects(checkDocs({ root, files: ["guide.md"], examples: [] }), /guide.md:1.*missing anchor/);
+  await assert.rejects(checkDocs({ root, files: ["guide.md"] }), /guide.md:1.*missing anchor/);
 });
 
 test("complete fences use local schemas/codecs and partial excerpts require explicit markers", async (t) => {
@@ -57,19 +57,16 @@ test("complete fences use local schemas/codecs and partial excerpts require expl
     `<!-- token-example: ui definitions theme -->\n\n\`\`\`jsonc\n${complete}\n\`\`\`\n`,
   );
 
-  await checkDocs({ root, files: ["guide.md"], examples: [] });
+  await checkDocs({ root, files: ["guide.md"] });
   await writeFixture(join(root, "guide.md"), '<!-- partial-jsonc -->\n```jsonc\n"partial": {\n```\n');
-  await checkDocs({ root, files: ["guide.md"], examples: [] });
+  await checkDocs({ root, files: ["guide.md"] });
   await writeFixture(join(root, "guide.md"), "```jsonc\n{}\n```\n");
-  await assert.rejects(
-    checkDocs({ root, files: ["guide.md"], examples: [] }),
-    /needs a complete token-example contract/,
-  );
+  await assert.rejects(checkDocs({ root, files: ["guide.md"] }), /needs a complete token-example contract/);
 
   await writeFixture(
     join(root, "guide.md"),
     `<!-- token-example: ui definitions theme -->\n\`\`\`jsonc\n${complete.replace('"disabled":true', '"disabled":"yes"')}\n\`\`\``,
   );
 
-  await assert.rejects(checkDocs({ root, files: ["guide.md"], examples: [] }), /schema validation failed/);
+  await assert.rejects(checkDocs({ root, files: ["guide.md"] }), /schema validation failed/);
 });

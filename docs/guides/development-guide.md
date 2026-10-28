@@ -41,7 +41,7 @@ tests/                   recursive behavioral suites and local fixtures
 themes/                  generated production themes
 preview/{themes,snapshots}/
 samples/grammar/         visual language probes and adjacent tsconfig.json
-docs/references/         maintained examples and historical reference artifacts
+docs/references/         maintained and historical reference artifacts
 ```
 
 The production default at `src/themes/prod/default/` supplies **independent whole-file fallback** for omitted metadata, definitions, and details. A family directory alone creates no override. A local definition file replaces only definitions; a local detail file independently replaces details. Empty categorized inputs suppress their own fallback: UI/semantic/detail files contain four empty category objects; syntax definitions contain four objects with empty `rules` arrays. Variables remain theme-owned nested roles, with a flat canonical-path detail map.
@@ -73,7 +73,7 @@ UI, semantic, and syntax inputs have exactly these category roots, in order: `st
 
 UI splits dotted IDs into nested objects. Parent records can also have children, such as `testing.iconFailed` and `testing.iconFailed.retired`. Semantic records use type and suffix keys: `parameter.default` emits `parameter`, `*.builtin.deprecated` retains its exact compound suffix, and `variable:typescript.readonly` emits `variable.readonly:typescript`. Modifier order/case and language qualifiers remain exact. `default` is reserved for the unmodified selector; modifier combinations imply no inheritance. A deprecated modifier is an active selector, independent of the retired category.
 
-See complete [UI](../references/examples/example-ui.jsonc), [semantic](../references/examples/example-semantic.jsonc), and [syntax](../references/examples/example-syntax.jsonc) examples. This smaller UI example is a complete definitions file:
+See the default theme’s [UI](../../src/themes/prod/default/tokens/ui/definitions.jsonc), [semantic](../../src/themes/prod/default/tokens/semantic/definitions.jsonc), and [syntax](../../src/themes/prod/default/tokens/syntax/definitions.jsonc) source files for complete definitions. This smaller UI example is a complete definitions file:
 
 <!-- token-example: ui definitions theme -->
 

@@ -3,7 +3,7 @@
  * @file Check local Markdown links/anchors and complete JSONC examples against local schemas/codecs without writes or networking.
  */
 
-import { readFile, readdir, stat } from "node:fs/promises";
+import { readFile, stat } from "node:fs/promises";
 import { dirname, extname, join, relative, resolve } from "node:path";
 import MarkdownIt from "markdown-it";
 import Ajv from "ajv";
@@ -62,17 +62,15 @@ function anchors(tokens) {
 }
 
 /**
- * Validate maintained documentation and discover every complete maintained example.
+ * Validate maintained documentation links and complete inline JSONC examples.
  * @param [options] - Read-only checker options.
  * @param [options.root] - Checkout or isolated fixture root.
  * @param [options.files] - Explicit maintained Markdown inputs for focused tests.
- * @param [options.examples] - Explicit complete example filename/family/kind/shared contracts.
  * @param [options.schemaDirectory] - Local schema directory; defaults to this checkout's bundled schemas.
  */
 export async function checkDocs({
   root = repositoryRoot,
   files = maintained,
-  examples,
   schemaDirectory = join(repositoryRoot, "tooling/tokens/schemas"),
 } = {}) {
   /** Local parser/validator and per-pass document/schema caches. */
@@ -189,28 +187,6 @@ export async function checkDocs({
     }
   }
 
-  if (examples === undefined) {
-    /** Every maintained example filename must have a recognized contract, never a silent skip. */
-    const directory = "docs/references/examples";
-
-    examples = (await readdir(join(root, directory)))
-      .filter((name) => name.endsWith(".jsonc"))
-      .map((name) => {
-        /** Filename declares the complete authored definition contract. */
-        const match = name.match(/^example-(ui|semantic|syntax)\.jsonc$/);
-        if (!match) throw new Error(`Unclassified maintained example: ${directory}/${name}`);
-        return { path: `${directory}/${name}`, family: match[1], kind: "definitions", shared: false };
-      });
-  }
-
-  for (const entry of examples) {
-    try {
-      await example(await readFile(join(root, entry.path), "utf8"), entry.path, entry.family, entry.kind, entry.shared);
-    } catch (error) {
-      failures.push(error.message);
-    }
-  }
-
   if (root === repositoryRoot && files === maintained) {
     for (const path of tokenDataPaths) {
       /** Every shared opening header keeps its required final updater instruction and provenance/license. */
@@ -229,5 +205,5 @@ export async function checkDocs({
 
   if (failures.length) throw new Error(failures.join("\n"));
 
-  return { documents: files.length, examples: examples.length };
+  return { documents: files.length };
 }

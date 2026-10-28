@@ -7,15 +7,10 @@ import { checkDocs } from "../../tooling/docs/check.js";
 import { formatMessage } from "../../tooling/shared/terminal-output.js";
 
 try {
-  /** Validated maintained documents and complete examples. */
+  /** Validated maintained documents, including their links and inline examples. */
   const result = await checkDocs();
 
-  console.log(
-    formatMessage(
-      `Validated ${result.documents} maintained documents and ${result.examples} complete examples.`,
-      "success",
-    ),
-  );
+  console.log(formatMessage(`Validated ${result.documents} maintained documents.`, "success"));
 } catch (error) {
   console.error(formatMessage(error.message, "error"));
   process.exitCode = 1;

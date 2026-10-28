@@ -22,8 +22,7 @@
     },
     {
       "fileMatch": [
-        "/src/themes/*/*/tokens/syntax/definitions.jsonc",
-        "/docs/references/examples/example-syntax.jsonc"
+        "/src/themes/*/*/tokens/syntax/definitions.jsonc"
       ],
       "url": "./tooling/tokens/schemas/theme-syntax-definitions.schema.json"
     },
@@ -53,8 +52,7 @@
     },
     {
       "fileMatch": [
-        "/src/themes/*/*/tokens/ui/definitions.jsonc",
-        "/docs/references/examples/example-ui.jsonc"
+        "/src/themes/*/*/tokens/ui/definitions.jsonc"
       ],
       "url": "./tooling/tokens/schemas/theme-ui-definitions.schema.json"
     },
@@ -84,8 +82,7 @@
     },
     {
       "fileMatch": [
-        "/src/themes/*/*/tokens/semantic/definitions.jsonc",
-        "/docs/references/examples/example-semantic.jsonc"
+        "/src/themes/*/*/tokens/semantic/definitions.jsonc"
       ],
       "url": "./tooling/tokens/schemas/theme-semantic-definitions.schema.json"
     },
