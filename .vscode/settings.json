@@ -1,7 +1,4 @@
 {
-  "files.exclude": {
-    "**/dev/.cache": true
-  },
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "explicit"
   },
