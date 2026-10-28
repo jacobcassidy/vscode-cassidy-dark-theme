@@ -148,7 +148,7 @@ export async function createBuildProject(t) {
     for (const kind of family === "syntax" ? ["details"] : ["definitions", "details"]) {
       await writeFixture(
         join(root, `src/data/tokens/${family}/${kind}.jsonc`),
-        JSON.stringify(emptyFamily(family, kind)),
+        JSON.stringify(emptyFamily(family, kind, true)),
       );
     }
   }

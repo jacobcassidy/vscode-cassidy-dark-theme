@@ -34,11 +34,11 @@ test("named/default imports and named re-exports must exist, including cyclic st
 
   assert.deepEqual(audit(graph), []);
   graph[0][1] = 'import { missing } from "../tooling/barrel.js";';
-  assert.match(audit(graph).join("\n"), /missing export missing from tooling\/barrel.js/);
+  assert.match(audit(graph).join("\n"), /missing export missing from dev\/tooling\/barrel.js/);
   graph[0][1] = 'import missing from "../tooling/barrel.js";';
   assert.match(audit(graph).join("\n"), /missing export default/);
   graph[1][1] = 'export { absent as renamed } from "./current.js";';
-  assert.match(audit(graph).join("\n"), /missing export absent from tooling\/current.js/);
+  assert.match(audit(graph).join("\n"), /missing export absent from dev\/tooling\/current.js/);
   assert.deepEqual(
     audit([
       ["dev/scripts/cli.js", 'import current from "../tooling/current.js";'],

@@ -243,17 +243,6 @@ export function decode(input, family, kind, { shared = false } = {}) {
 
     if (kind === "details") validateDetail(record, category, label, { shared, family });
 
-    if (shared && kind === "definitions") {
-      fields(record, ["use"], label);
-    }
-
-    if (kind === "definitions" && Object.hasOwn(record, "use")) {
-      if (!shared || category !== "nonStandard" || !["ui", "semantic"].includes(family))
-        throw new Error(`${label}.use is shared nonStandard generator documentation only`);
-
-      nonempty(record.use, `${label}.use`);
-    }
-
     records.set(id, { id, value: record, category, path, label, inputPath: input.path });
 
     if (!(family === "syntax" && kind === "definitions")) value[id] = record;
@@ -344,6 +333,7 @@ export function decode(input, family, kind, { shared = false } = {}) {
         for (const [index, id] of input.value[category].entries()) {
           if (typeof id !== "string") throw new Error(`${location([category, index])}: expected a semantic selector`);
 
+          semanticPath(id);
           register(id, {}, category, [category, index]);
         }
       } else {
@@ -367,14 +357,16 @@ export function decode(input, family, kind, { shared = false } = {}) {
           continue;
         }
 
+        if (!Object.keys(groups).length) throw new Error(`${location([category])}: empty categories must use []`);
+
         for (const [group, properties] of Object.entries(groups)) {
           if (
             typeof group !== "string" ||
             (group !== "_root" && group.split(".").some((part) => !/^[a-zA-Z][\w-]*$/.test(part)))
           )
             throw new Error(`${location([category, group])}: invalid UI group path`);
-          if (!Array.isArray(properties) || new Set(properties).size !== properties.length)
-            throw new Error(`${location([category, group])}: expected a unique array of UI property names`);
+          if (!Array.isArray(properties) || !properties.length || new Set(properties).size !== properties.length)
+            throw new Error(`${location([category, group])}: expected a nonempty unique array of UI property names`);
 
           for (const [index, property] of properties.entries()) {
             if (typeof property !== "string" || !/^[a-zA-Z][\w-]*$/.test(property))
@@ -389,11 +381,7 @@ export function decode(input, family, kind, { shared = false } = {}) {
 
       /** Record vocabulary distinguishes nested UI children from authoring fields. */
       const allowed =
-        kind === "definitions"
-          ? shared
-            ? ["$token", "use"]
-            : definitionFields
-          : [...detailFields, ...(shared ? ["modified-desc"] : [])];
+        kind === "definitions" ? definitionFields : [...detailFields, ...(shared ? ["modified-desc"] : [])];
 
       /**
        * Collect parent records and continue into children rather than stopping at a descriptor.
@@ -405,9 +393,7 @@ export function decode(input, family, kind, { shared = false } = {}) {
 
         if (path.length && !Object.keys(node).length)
           throw new Error(
-            shared && kind === "definitions"
-              ? `${location([category, ...path])}: shared definitions require $token: true`
-              : `${location([category, ...path])}: enabled entry requires styling; empty child nodes are not records`,
+            `${location([category, ...path])}: enabled entry requires styling; empty child nodes are not records`,
           );
 
         /** Record fields are copied separately from child branches. */

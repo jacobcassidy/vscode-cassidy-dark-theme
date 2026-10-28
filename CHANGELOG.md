@@ -6,6 +6,7 @@ All notable changes to this project are documented in this file.
 
 ### Changed
 
+- Updated refresh fixtures and shared-token parsing for grouped UI name arrays and flat semantic selector arrays, preserving authored JSONC comments during description updates.
 - Show active tasks during quiet script operations, with terminal progress cleanup before results and failures.
 - Alphabetized shared token definition and detail records on disk and during refresh/bootstrap generation.
 - Replaced shared UI definition marker objects with grouped arrays of exact property names, removing `$token` from the shared UI inventory format.

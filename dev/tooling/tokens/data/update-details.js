@@ -615,7 +615,7 @@ export async function updateTokenDetails({
   // Validate the prepared shared files with the same local codec before application.
   for (const [path, source] of output) {
     if (path === configPath) continue;
-    decode({ ...parseJsonc(source, path), source, path, label: path }, path.split("/")[2], "details", { shared: true });
+    decode({ ...parseJsonc(source, path), source, path, label: path }, path.split("/")[3], "details", { shared: true });
   }
 
   for (const source of sources) await (services.assertSourceFresh ?? assertSourceFresh)(source);

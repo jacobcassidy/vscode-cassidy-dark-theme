@@ -11,12 +11,20 @@ import { categories, detailFields } from "../tokens/formats.js";
  * Construct an explicit empty family file, preserving independent suppression semantics.
  * @param family - Token family.
  * @param kind - definitions or details.
+ * @param [shared] - Whether this is the shared inventory rather than a theme input.
  */
-export function emptyFamily(family, kind) {
+export function emptyFamily(family, kind, shared = false) {
   return family === "variables"
     ? {}
     : Object.fromEntries(
-        categories.map((category) => [category, family === "syntax" && kind === "definitions" ? { rules: [] } : {}]),
+        categories.map((category) => [
+          category,
+          family === "syntax" && kind === "definitions"
+            ? { rules: [] }
+            : shared && kind === "definitions" && ["ui", "semantic"].includes(family)
+              ? []
+              : {},
+        ]),
       );
 }
 

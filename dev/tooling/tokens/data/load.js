@@ -121,11 +121,6 @@ export async function loadTokenData({ root = repositoryRoot, recovery = false } 
           `${detail.label}: ${family} token "${id}" has no exact standard definition in ${definitions[family].input.path}`,
         );
 
-      if (definition?.value.use && detail.value.use && definition.value.use !== detail.value.use)
-        throw new Error(
-          `${detail.label}: conflicting shared usage for ${family} token "${id}"; authority ${definition.label}`,
-        );
-
       if (definition && definition.category !== detail.category)
         throw new Error(
           `${detail.label}: ${family} token "${id}" has conflicting category ${detail.category}; expected ${definition.category} from ${definition.label}`,

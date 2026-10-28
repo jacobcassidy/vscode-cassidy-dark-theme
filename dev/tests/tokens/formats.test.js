@@ -24,11 +24,31 @@ function categorized(category, values) {
   return { ...emptyFamily("ui", "details"), [category]: values };
 }
 
-test("shared inventory markers preserve parent/child IDs and restrict membership and usage metadata", async () => {
+test("shared inventory arrays preserve exact UI and semantic IDs without styling metadata", async () => {
   /** Shared inventories use independent editor schemas alongside the runtime codec. */
   const ajv = new Ajv({ strict: false });
 
-  for (const family of ["ui", "semantic"]) {
+  for (const [family, category, accepted, rejected] of [
+    [
+      "ui",
+      { testing: ["iconFailed"], "testing.iconFailed": ["retired"] },
+      ["testing.iconFailed", "testing.iconFailed.retired"],
+      [
+        { testing: { iconFailed: { $token: true } } },
+        {},
+        { testing: [] },
+        { testing: ["iconFailed", "iconFailed"] },
+        { "bad group": ["foreground"] },
+        { testing: ["bad property"] },
+      ],
+    ],
+    [
+      "semantic",
+      ["variable", "variable.readonly:typescript"],
+      ["variable", "variable.readonly:typescript"],
+      [["variable", "variable"], ["bad selector"], { variable: { $token: true } }],
+    ],
+  ]) {
     /** Per-family schema validates the same explicit membership contract as the codec. */
     const schema = JSON.parse(
       await readFile(new URL(`../../tooling/tokens/schemas/shared-${family}-definitions.schema.json`, import.meta.url)),
@@ -37,46 +57,20 @@ test("shared inventory markers preserve parent/child IDs and restrict membership
     /** Compiled editor schema for the current inventory family. */
     const validate = ajv.compile(schema);
 
-    for (const [record, accepted] of [
-      [{ $token: true }, true],
-      [{ $token: true, use: "When the fixture provider is active." }, true],
-      [{}, false],
-      [{ $token: false }, false],
-      [{ $token: true, color: "#0ff" }, false],
-      [{ $token: true, use: " " }, false],
-    ]) {
-      /** Independent authored records exercise accepted markers and rejected metadata. */
-      const value = categorized("nonStandard", {
-        Fixture: family === "ui" ? { foreground: record } : { default: record },
-      });
+    /** Current array format has no per-token marker or usage fields. */
+    const value = { ...emptyFamily(family, "definitions", true), standard: category };
 
-      assert.equal(validate(value), accepted, `${family}: ${JSON.stringify(record)}`);
+    assert.equal(validate(value), true, `${family}: ${JSON.stringify(validate.errors)}`);
+    assert.deepEqual([...decode({ value }, family, "definitions", { shared: true }).records.keys()], accepted);
 
-      if (accepted) assert.equal(decode({ value }, family, "definitions", { shared: true }).records.size, 1);
-      else assert.throws(() => decode({ value }, family, "definitions", { shared: true }));
+    for (const invalid of rejected) {
+      /** Rejected shape replaces only one category in an otherwise valid inventory. */
+      const candidate = { ...value, standard: invalid };
+
+      assert.equal(validate(candidate), false, `${family}: ${JSON.stringify(invalid)}`);
+      assert.throws(() => decode({ value: candidate }, family, "definitions", { shared: true }));
     }
-
-    /** Usage metadata cannot be applied to core inventory categories. */
-    const standard = categorized("standard", {
-      fixture:
-        family === "ui"
-          ? { foreground: { $token: true, use: "Invalid standard usage." } }
-          : { default: { $token: true, use: "Invalid standard usage." } },
-    });
-
-    assert.equal(validate(standard), false);
-    assert.throws(() => decode({ value: standard }, family, "definitions", { shared: true }), /use/);
   }
-
-  /** Parent membership and its child must remain two separate exact inventory IDs. */
-  const value = categorized("standard", {
-    testing: { iconFailed: { $token: true, retired: { $token: true } } },
-  });
-
-  assert.deepEqual(
-    [...decode({ value }, "ui", "definitions", { shared: true }).records.keys()],
-    ["testing.iconFailed", "testing.iconFailed.retired"],
-  );
 });
 
 for (const [id, path] of [
@@ -169,7 +163,7 @@ test("independent exact authorities reject disabled standard impostors and defin
 
   await writeFixture(
     join(root, "src/data/tokens/ui/definitions.jsonc"),
-    JSON.stringify(categorized("standard", { editor: { background: { $token: true } } })),
+    JSON.stringify({ ...emptyFamily("ui", "definitions", true), standard: { editor: ["background"] } }),
   );
 
   await writeFixture(

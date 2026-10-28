@@ -3,6 +3,7 @@
  * @file Alphabetize shared definition/detail records while retaining file headers and meaningful array order.
  */
 
+import { createScanner, SyntaxKind } from "jsonc-parser";
 import { parseJsonc } from "../../shared/jsonc.js";
 
 /** Shared category order used by every categorized token file. */
@@ -39,8 +40,22 @@ function sortValue(value, root = false) {
  * @returns Header-preserving, deterministically ordered JSONC text.
  */
 export function alphabetizeTokenData(source, path) {
+  /** Parsed token data and its original leading provenance comments. */
   const parsed = parseJsonc(source, path);
   const header = source.slice(0, parsed.tree.offset);
+
+  /** JSONC comments within records must stay attached to their authored values. */
+  const scanner = createScanner(source);
+
+  for (let token = scanner.scan(); token !== SyntaxKind.EOF; token = scanner.scan()) {
+    if (
+      scanner.getTokenOffset() > parsed.tree.offset &&
+      [SyntaxKind.LineCommentTrivia, SyntaxKind.BlockCommentTrivia].includes(token)
+    )
+      return source;
+  }
+
+  /** Sorted JSON-compatible tree for sources without interior comments. */
   const value = sortValue(parsed.value, true);
 
   if (path.endsWith("definitions.jsonc")) {

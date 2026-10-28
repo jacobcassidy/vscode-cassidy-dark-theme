@@ -11,11 +11,13 @@
         },
         {
           "type": "object",
+          "minProperties": 1,
           "propertyNames": {
             "pattern": "^(?:_root|[a-zA-Z][\\w-]*(?:\\.[a-zA-Z][\\w-]*)*)$"
           },
           "additionalProperties": {
             "type": "array",
+            "minItems": 1,
             "uniqueItems": true,
             "items": {
               "type": "string",
@@ -33,11 +35,13 @@
         },
         {
           "type": "object",
+          "minProperties": 1,
           "propertyNames": {
             "pattern": "^(?:_root|[a-zA-Z][\\w-]*(?:\\.[a-zA-Z][\\w-]*)*)$"
           },
           "additionalProperties": {
             "type": "array",
+            "minItems": 1,
             "uniqueItems": true,
             "items": {
               "type": "string",
@@ -55,11 +59,13 @@
         },
         {
           "type": "object",
+          "minProperties": 1,
           "propertyNames": {
             "pattern": "^(?:_root|[a-zA-Z][\\w-]*(?:\\.[a-zA-Z][\\w-]*)*)$"
           },
           "additionalProperties": {
             "type": "array",
+            "minItems": 1,
             "uniqueItems": true,
             "items": {
               "type": "string",
@@ -77,11 +83,13 @@
         },
         {
           "type": "object",
+          "minProperties": 1,
           "propertyNames": {
             "pattern": "^(?:_root|[a-zA-Z][\\w-]*(?:\\.[a-zA-Z][\\w-]*)*)$"
           },
           "additionalProperties": {
             "type": "array",
+            "minItems": 1,
             "uniqueItems": true,
             "items": {
               "type": "string",

@@ -26,7 +26,7 @@ for (const group of ["prod", "dev"]) {
 
     await writeFixture(
       join(root, "src/data/tokens/ui/definitions.jsonc"),
-      '{"standard":{},"sourceCode":{},"nonStandard":{"a": {"foreground": {"$token":true}},"z": {"background": {"$token":true}}},"deprecated":{}}',
+      '{"standard":[],"sourceCode":[],"nonStandard":{"a":["foreground"],"z":["background"]},"deprecated":[]}',
     );
 
     await writeFixture(

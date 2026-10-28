@@ -249,6 +249,34 @@ test("online refresh always discovers latest, no-op/replay preserves bytes, and 
   );
 });
 
+test("refresh reads grouped UI and flat semantic inventories without rewriting their definitions", async (t) => {
+  /** Existing categorized inventory is authoritative even when upstream suggests another category. */
+  const { root, options } = await project(t);
+
+  /** Exact shared definition paths retain the current array-based source format. */
+  const uiPath = join(root, "src/data/tokens/ui/definitions.jsonc"),
+    semanticPath = join(root, "src/data/tokens/semantic/definitions.jsonc");
+
+  await writeFixture(
+    uiPath,
+    '{"standard":[],"sourceCode":[],"nonStandard":{"editor":["background","foreground"]},"deprecated":[]}',
+  );
+  await writeFixture(
+    semanticPath,
+    '{"standard":[],"sourceCode":[],"nonStandard":["function","variable"],"deprecated":[]}',
+  );
+
+  /** Refresh may update shared details while definition bytes remain authored. */
+  const before = await Promise.all([uiPath, semanticPath].map((path) => readFile(path, "utf8")));
+  const result = await updateTokenDetails(options);
+  const snapshot = await loadTokenData({ root });
+
+  assert.deepEqual(await Promise.all([uiPath, semanticPath].map((path) => readFile(path, "utf8"))), before);
+  assert.equal(snapshot.details.ui.value["editor.background"].description, "Upstream editor background.");
+  assert.equal(snapshot.details.semantic.value.variable.description, "Upstream variables.");
+  assert.ok(result.proposals.some((proposal) => proposal.family === "semantic" && proposal.id === "variable"));
+});
+
 test("protected shared wording and usage survive refresh; removing protection permits upstream text", async (t) => {
   /** Protected shared description differs intentionally from the theme-local copy. */
   const { root, options } = await project(t);

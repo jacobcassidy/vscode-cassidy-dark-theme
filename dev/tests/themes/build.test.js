@@ -756,7 +756,7 @@ for (const [path, contents, pattern] of [
   ],
   [
     "tokens/semantic/definitions.jsonc",
-    '{"standard":{},"sourceCode":{},"nonStandard":{"variable": {"default": {"italic":"yes"}}},"deprecated":{}}',
+    '{"standard":{},"sourceCode":{},"nonStandard":{"variable":{"italic":"yes"}},"deprecated":{}}',
     /italic must be a boolean/,
   ],
   ["tokens/syntax/definitions.jsonc", '{"standard":{"rules":{}}}', /expected an array/],
