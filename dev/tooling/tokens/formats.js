@@ -244,9 +244,7 @@ export function decode(input, family, kind, { shared = false } = {}) {
     if (kind === "details") validateDetail(record, category, label, { shared, family });
 
     if (shared && kind === "definitions") {
-      fields(record, ["$token", "use"], label);
-
-      if (record.$token !== true) throw new Error(`${label}: shared definitions require $token: true`);
+      fields(record, ["use"], label);
     }
 
     if (kind === "definitions" && Object.hasOwn(record, "use")) {
@@ -290,7 +288,12 @@ export function decode(input, family, kind, { shared = false } = {}) {
   fields(input.value, categories, input.label ?? family);
 
   for (const category of categories) {
-    if (!(family === "semantic" && shared && kind === "definitions" && Array.isArray(input.value[category])))
+    if (!(
+      shared &&
+      kind === "definitions" &&
+      ["semantic", "ui"].includes(family) &&
+      Array.isArray(input.value[category])
+    ))
       object(input.value[category], location([category]));
 
     if (family === "syntax" && kind === "definitions") {
@@ -341,7 +344,7 @@ export function decode(input, family, kind, { shared = false } = {}) {
         for (const [index, id] of input.value[category].entries()) {
           if (typeof id !== "string") throw new Error(`${location([category, index])}: expected a semantic selector`);
 
-          register(id, { $token: true }, category, [category, index]);
+          register(id, {}, category, [category, index]);
         }
       } else {
         for (const [id, record] of Object.entries(input.value[category])) {
@@ -356,6 +359,34 @@ export function decode(input, family, kind, { shared = false } = {}) {
         }
       }
     } else {
+      if (shared && kind === "definitions") {
+        const groups = input.value[category];
+
+        if (Array.isArray(groups)) {
+          if (groups.length) throw new Error(`${location([category])}: empty categories must use []`);
+          continue;
+        }
+
+        for (const [group, properties] of Object.entries(groups)) {
+          if (
+            typeof group !== "string" ||
+            (group !== "_root" && group.split(".").some((part) => !/^[a-zA-Z][\w-]*$/.test(part)))
+          )
+            throw new Error(`${location([category, group])}: invalid UI group path`);
+          if (!Array.isArray(properties) || new Set(properties).size !== properties.length)
+            throw new Error(`${location([category, group])}: expected a unique array of UI property names`);
+
+          for (const [index, property] of properties.entries()) {
+            if (typeof property !== "string" || !/^[a-zA-Z][\w-]*$/.test(property))
+              throw new Error(`${location([category, group, index])}: invalid UI property name`);
+            const id = group === "_root" ? property : `${group}.${property}`;
+            register(id, {}, category, [category, group, index]);
+          }
+        }
+
+        continue;
+      }
+
       /** Record vocabulary distinguishes nested UI children from authoring fields. */
       const allowed =
         kind === "definitions"

@@ -28,3530 +28,1524 @@ SOFTWARE.
 // Updater (run from the repository root): npm run refresh
 {
   "standard": {
-    "actionBar": {
-      "toggledBackground": {
-        "$token": true
-      }
-    },
-    "activeSessionView": {
-      "background": {
-        "$token": true
-      },
-      "foreground": {
-        "$token": true
-      }
-    },
-    "activityBar": {
-      "activeBackground": {
-        "$token": true
-      },
-      "activeBorder": {
-        "$token": true
-      },
-      "activeFocusBorder": {
-        "$token": true
-      },
-      "background": {
-        "$token": true
-      },
-      "border": {
-        "$token": true
-      },
-      "dropBorder": {
-        "$token": true
-      },
-      "foreground": {
-        "$token": true
-      },
-      "inactiveForeground": {
-        "$token": true
-      }
-    },
-    "activityBarBadge": {
-      "background": {
-        "$token": true
-      },
-      "foreground": {
-        "$token": true
-      }
-    },
-    "activityBarTop": {
-      "activeBackground": {
-        "$token": true
-      },
-      "activeBorder": {
-        "$token": true
-      },
-      "background": {
-        "$token": true
-      },
-      "dropBorder": {
-        "$token": true
-      },
-      "foreground": {
-        "$token": true
-      },
-      "inactiveForeground": {
-        "$token": true
-      }
-    },
-    "activityErrorBadge": {
-      "background": {
-        "$token": true
-      },
-      "foreground": {
-        "$token": true
-      }
-    },
-    "activityWarningBadge": {
-      "background": {
-        "$token": true
-      },
-      "foreground": {
-        "$token": true
-      }
-    },
-    "agentFeedbackEditorWidget": {
-      "background": {
-        "$token": true
-      },
-      "border": {
-        "$token": true
-      }
-    },
-    "agentFeedbackInputWidget": {
-      "border": {
-        "$token": true
-      }
-    },
-    "agentSessionReadIndicator": {
-      "foreground": {
-        "$token": true
-      }
-    },
-    "agentSessionSelectedBadge": {
-      "border": {
-        "$token": true
-      }
-    },
-    "agentSessionSelectedUnfocusedBadge": {
-      "border": {
-        "$token": true
-      }
-    },
-    "agentStatusIndicator": {
-      "background": {
-        "$token": true
-      }
-    },
-    "agents": {
-      "background": {
-        "$token": true
-      }
-    },
-    "agentsBadge": {
-      "background": {
-        "$token": true
-      },
-      "foreground": {
-        "$token": true
-      }
-    },
-    "agentsBottomPanel": {
-      "border": {
-        "$token": true
-      }
-    },
-    "agentsCard": {
-      "border": {
-        "$token": true
-      }
-    },
-    "agentsChatInput": {
-      "background": {
-        "$token": true
-      },
-      "border": {
-        "$token": true
-      },
-      "focusBorder": {
-        "$token": true
-      },
-      "foreground": {
-        "$token": true
-      },
-      "placeholderForeground": {
-        "$token": true
-      }
-    },
-    "agentsDetail": {
-      "background": {
-        "$token": true
-      }
-    },
-    "agentsGradient": {
-      "tintColor": {
-        "$token": true
-      }
-    },
-    "agentsNewSessionButton": {
-      "background": {
-        "$token": true
-      },
-      "border": {
-        "$token": true
-      },
-      "foreground": {
-        "$token": true
-      },
-      "hoverBackground": {
-        "$token": true
-      }
-    },
-    "agentsPanel": {
-      "background": {
-        "$token": true
-      },
-      "border": {
-        "$token": true
-      },
-      "foreground": {
-        "$token": true
-      }
-    },
-    "agentsUnreadBadge": {
-      "background": {
-        "$token": true
-      },
-      "foreground": {
-        "$token": true
-      }
-    },
-    "agentsUpdateButton": {
-      "downloadedBackground": {
-        "$token": true
-      },
-      "downloadingBackground": {
-        "$token": true
-      }
-    },
-    "agentsVoice": {
-      "speakingBackground": {
-        "$token": true
-      },
-      "speakingForeground": {
-        "$token": true
-      }
-    },
-    "badge": {
-      "background": {
-        "$token": true
-      },
-      "foreground": {
-        "$token": true
-      }
-    },
-    "banner": {
-      "background": {
-        "$token": true
-      },
-      "foreground": {
-        "$token": true
-      },
-      "iconForeground": {
-        "$token": true
-      }
-    },
-    "breadcrumb": {
-      "activeSelectionForeground": {
-        "$token": true
-      },
-      "background": {
-        "$token": true
-      },
-      "focusForeground": {
-        "$token": true
-      },
-      "foreground": {
-        "$token": true
-      }
-    },
-    "breadcrumbPicker": {
-      "background": {
-        "$token": true
-      }
-    },
-    "browser": {
-      "border": {
-        "$token": true
-      }
-    },
-    "button": {
-      "background": {
-        "$token": true
-      },
-      "border": {
-        "$token": true
-      },
-      "foreground": {
-        "$token": true
-      },
-      "hoverBackground": {
-        "$token": true
-      },
-      "secondaryBackground": {
-        "$token": true
-      },
-      "secondaryBorder": {
-        "$token": true
-      },
-      "secondaryForeground": {
-        "$token": true
-      },
-      "secondaryHoverBackground": {
-        "$token": true
-      },
-      "separator": {
-        "$token": true
-      }
-    },
-    "chart": {
-      "axis": {
-        "$token": true
-      },
-      "guide": {
-        "$token": true
-      },
-      "line": {
-        "$token": true
-      }
-    },
-    "charts": {
-      "blue": {
-        "$token": true
-      },
-      "foreground": {
-        "$token": true
-      },
-      "green": {
-        "$token": true
-      },
-      "lines": {
-        "$token": true
-      },
-      "orange": {
-        "$token": true
-      },
-      "purple": {
-        "$token": true
-      },
-      "red": {
-        "$token": true
-      },
-      "yellow": {
-        "$token": true
-      }
-    },
-    "chat": {
-      "avatarBackground": {
-        "$token": true
-      },
-      "avatarForeground": {
-        "$token": true
-      },
-      "checkpointSeparator": {
-        "$token": true
-      },
-      "dictationActiveMicGlow": {
-        "$token": true
-      },
-      "editedFileForeground": {
-        "$token": true
-      },
-      "findMatchBackground": {
-        "$token": true
-      },
-      "findMatchHighlightBackground": {
-        "$token": true
-      },
-      "inputWorkingBorderColor1": {
-        "$token": true
-      },
-      "linesAddedForeground": {
-        "$token": true
-      },
-      "linesRemovedForeground": {
-        "$token": true
-      },
-      "mcpCompatibilityWarningForeground": {
-        "$token": true
-      },
-      "requestBackground": {
-        "$token": true
-      },
-      "requestBorder": {
-        "$token": true
-      },
-      "requestBubbleBackground": {
-        "$token": true
-      },
-      "requestBubbleHoverBackground": {
-        "$token": true
-      },
-      "requestCodeBorder": {
-        "$token": true
-      },
-      "sessionStateIndicator": {
-        "inProgressBorder": {
-          "$token": true
-        },
-        "needsInputBorder": {
-          "$token": true
-        },
-        "unvisitedBorder": {
-          "$token": true
-        }
-      },
-      "slashCommandBackground": {
-        "$token": true
-      },
-      "slashCommandForeground": {
-        "$token": true
-      },
-      "statusBackground": {
-        "$token": true
-      },
-      "thinkingShimmer": {
-        "$token": true
-      },
-      "voiceGlowBaseColor": {
-        "$token": true
-      },
-      "voiceListeningGlow": {
-        "$token": true
-      },
-      "workingProgressInsidersIconForeground": {
-        "$token": true
-      },
-      "workingProgressStableIconForeground": {
-        "$token": true
-      },
-      "inputWorkingBorderColor2": {
-        "$token": true
-      },
-      "inputWorkingBorderColor3": {
-        "$token": true
-      }
-    },
-    "checkbox": {
-      "background": {
-        "$token": true
-      },
-      "border": {
-        "$token": true
-      },
-      "disabled": {
-        "background": {
-          "$token": true
-        },
-        "foreground": {
-          "$token": true
-        }
-      },
-      "foreground": {
-        "$token": true
-      },
-      "selectBackground": {
-        "$token": true
-      },
-      "selectBorder": {
-        "$token": true
-      }
-    },
-    "commandCenter": {
-      "activeBackground": {
-        "$token": true
-      },
-      "activeBorder": {
-        "$token": true
-      },
-      "activeForeground": {
-        "$token": true
-      },
-      "background": {
-        "$token": true
-      },
-      "border": {
-        "$token": true
-      },
-      "debuggingBackground": {
-        "$token": true
-      },
-      "foreground": {
-        "$token": true
-      },
-      "inactiveBorder": {
-        "$token": true
-      },
-      "inactiveForeground": {
-        "$token": true
-      }
-    },
-    "commentsView": {
-      "resolvedIcon": {
-        "$token": true
-      },
-      "unresolvedIcon": {
-        "$token": true
-      }
-    },
-    "contrastActiveBorder": {
-      "$token": true
-    },
-    "contrastBorder": {
-      "$token": true
-    },
-    "debugConsole": {
-      "errorForeground": {
-        "$token": true
-      },
-      "infoForeground": {
-        "$token": true
-      },
-      "sourceForeground": {
-        "$token": true
-      },
-      "warningForeground": {
-        "$token": true
-      }
-    },
-    "debugConsoleInputIcon": {
-      "foreground": {
-        "$token": true
-      }
-    },
-    "debugExceptionWidget": {
-      "background": {
-        "$token": true
-      },
-      "border": {
-        "$token": true
-      }
-    },
-    "debugIcon": {
-      "breakpointCurrentStackframeForeground": {
-        "$token": true
-      },
-      "breakpointDisabledForeground": {
-        "$token": true
-      },
-      "breakpointForeground": {
-        "$token": true
-      },
-      "breakpointStackframeForeground": {
-        "$token": true
-      },
-      "breakpointUnverifiedForeground": {
-        "$token": true
-      },
-      "continueForeground": {
-        "$token": true
-      },
-      "disconnectForeground": {
-        "$token": true
-      },
-      "pauseForeground": {
-        "$token": true
-      },
-      "restartForeground": {
-        "$token": true
-      },
-      "startForeground": {
-        "$token": true
-      },
-      "stepBackForeground": {
-        "$token": true
-      },
-      "stepIntoForeground": {
-        "$token": true
-      },
-      "stepOutForeground": {
-        "$token": true
-      },
-      "stepOverForeground": {
-        "$token": true
-      },
-      "stopForeground": {
-        "$token": true
-      }
-    },
-    "debugTokenExpression": {
-      "boolean": {
-        "$token": true
-      },
-      "error": {
-        "$token": true
-      },
-      "name": {
-        "$token": true
-      },
-      "number": {
-        "$token": true
-      },
-      "string": {
-        "$token": true
-      },
-      "type": {
-        "$token": true
-      },
-      "value": {
-        "$token": true
-      }
-    },
-    "debugToolBar": {
-      "background": {
-        "$token": true
-      },
-      "border": {
-        "$token": true
-      }
-    },
-    "debugView": {
-      "exceptionLabelBackground": {
-        "$token": true
-      },
-      "exceptionLabelForeground": {
-        "$token": true
-      },
-      "stateLabelBackground": {
-        "$token": true
-      },
-      "stateLabelForeground": {
-        "$token": true
-      },
-      "valueChangedHighlight": {
-        "$token": true
-      }
-    },
-    "descriptionForeground": {
-      "$token": true
-    },
-    "diffEditor": {
-      "border": {
-        "$token": true
-      },
-      "diagonalFill": {
-        "$token": true
-      },
-      "insertedLineBackground": {
-        "$token": true
-      },
-      "insertedTextBackground": {
-        "$token": true
-      },
-      "insertedTextBorder": {
-        "$token": true
-      },
-      "move": {
-        "border": {
-          "$token": true
-        }
-      },
-      "moveActive": {
-        "border": {
-          "$token": true
-        }
-      },
-      "removedLineBackground": {
-        "$token": true
-      },
-      "removedTextBackground": {
-        "$token": true
-      },
-      "removedTextBorder": {
-        "$token": true
-      },
-      "unchangedCodeBackground": {
-        "$token": true
-      },
-      "unchangedRegionBackground": {
-        "$token": true
-      },
-      "unchangedRegionForeground": {
-        "$token": true
-      },
-      "unchangedRegionShadow": {
-        "$token": true
-      }
-    },
-    "diffEditorGutter": {
-      "insertedLineBackground": {
-        "$token": true
-      },
-      "removedLineBackground": {
-        "$token": true
-      }
-    },
-    "diffEditorOverview": {
-      "insertedForeground": {
-        "$token": true
-      },
-      "removedForeground": {
-        "$token": true
-      }
-    },
-    "disabledForeground": {
-      "$token": true
-    },
-    "dropdown": {
-      "background": {
-        "$token": true
-      },
-      "border": {
-        "$token": true
-      },
-      "foreground": {
-        "$token": true
-      },
-      "listBackground": {
-        "$token": true
-      }
-    },
-    "editor": {
-      "background": {
-        "$token": true
-      },
-      "border": {
-        "$token": true
-      },
-      "compositionBorder": {
-        "$token": true
-      },
-      "findMatchBackground": {
-        "$token": true
-      },
-      "findMatchBorder": {
-        "$token": true
-      },
-      "findMatchForeground": {
-        "$token": true
-      },
-      "findMatchHighlightBackground": {
-        "$token": true
-      },
-      "findMatchHighlightBorder": {
-        "$token": true
-      },
-      "findMatchHighlightForeground": {
-        "$token": true
-      },
-      "findRangeHighlightBackground": {
-        "$token": true
-      },
-      "findRangeHighlightBorder": {
-        "$token": true
-      },
-      "focusedStackFrameHighlightBackground": {
-        "$token": true
-      },
-      "foldBackground": {
-        "$token": true
-      },
-      "foldPlaceholderForeground": {
-        "$token": true
-      },
-      "foreground": {
-        "$token": true
-      },
-      "hoverHighlightBackground": {
-        "$token": true
-      },
-      "inactiveLineHighlightBackground": {
-        "$token": true
-      },
-      "inactiveSelectionBackground": {
-        "$token": true
-      },
-      "inlineValuesBackground": {
-        "$token": true
-      },
-      "inlineValuesForeground": {
-        "$token": true
-      },
-      "lineHighlightBackground": {
-        "$token": true
-      },
-      "lineHighlightBorder": {
-        "$token": true
-      },
-      "linkedEditingBackground": {
-        "$token": true
-      },
-      "placeholder": {
-        "foreground": {
-          "$token": true
-        }
-      },
-      "rangeHighlightBackground": {
-        "$token": true
-      },
-      "rangeHighlightBorder": {
-        "$token": true
-      },
-      "selectionBackground": {
-        "$token": true
-      },
-      "selectionForeground": {
-        "$token": true
-      },
-      "selectionHighlightBackground": {
-        "$token": true
-      },
-      "selectionHighlightBorder": {
-        "$token": true
-      },
-      "snippetFinalTabstopHighlightBackground": {
-        "$token": true
-      },
-      "snippetFinalTabstopHighlightBorder": {
-        "$token": true
-      },
-      "snippetTabstopHighlightBackground": {
-        "$token": true
-      },
-      "snippetTabstopHighlightBorder": {
-        "$token": true
-      },
-      "stackFrameHighlightBackground": {
-        "$token": true
-      },
-      "symbolHighlightBackground": {
-        "$token": true
-      },
-      "symbolHighlightBorder": {
-        "$token": true
-      },
-      "wordHighlightBackground": {
-        "$token": true
-      },
-      "wordHighlightBorder": {
-        "$token": true
-      },
-      "wordHighlightStrongBackground": {
-        "$token": true
-      },
-      "wordHighlightStrongBorder": {
-        "$token": true
-      },
-      "wordHighlightTextBackground": {
-        "$token": true
-      },
-      "wordHighlightTextBorder": {
-        "$token": true
-      }
-    },
-    "editorActionList": {
-      "background": {
-        "$token": true
-      },
-      "focusBackground": {
-        "$token": true
-      },
-      "focusForeground": {
-        "$token": true
-      },
-      "foreground": {
-        "$token": true
-      }
-    },
-    "editorBracketHighlight": {
-      "foreground1": {
-        "$token": true
-      },
-      "foreground2": {
-        "$token": true
-      },
-      "foreground3": {
-        "$token": true
-      },
-      "foreground4": {
-        "$token": true
-      },
-      "foreground5": {
-        "$token": true
-      },
-      "foreground6": {
-        "$token": true
-      },
-      "unexpectedBracket": {
-        "foreground": {
-          "$token": true
-        }
-      }
-    },
-    "editorBracketMatch": {
-      "background": {
-        "$token": true
-      },
-      "border": {
-        "$token": true
-      },
-      "foreground": {
-        "$token": true
-      }
-    },
-    "editorBracketPairGuide": {
-      "activeBackground1": {
-        "$token": true
-      },
-      "activeBackground2": {
-        "$token": true
-      },
-      "activeBackground3": {
-        "$token": true
-      },
-      "activeBackground4": {
-        "$token": true
-      },
-      "activeBackground5": {
-        "$token": true
-      },
-      "activeBackground6": {
-        "$token": true
-      },
-      "background1": {
-        "$token": true
-      },
-      "background2": {
-        "$token": true
-      },
-      "background3": {
-        "$token": true
-      },
-      "background4": {
-        "$token": true
-      },
-      "background5": {
-        "$token": true
-      },
-      "background6": {
-        "$token": true
-      }
-    },
-    "editorCodeLens": {
-      "foreground": {
-        "$token": true
-      }
-    },
-    "editorCommentsWidget": {
-      "rangeActiveBackground": {
-        "$token": true
-      },
-      "rangeBackground": {
-        "$token": true
-      },
-      "replyInputBackground": {
-        "$token": true
-      },
-      "resolvedBorder": {
-        "$token": true
-      },
-      "unresolvedBorder": {
-        "$token": true
-      }
-    },
-    "editorCursor": {
-      "background": {
-        "$token": true
-      },
-      "foreground": {
-        "$token": true
-      }
-    },
-    "editorError": {
-      "background": {
-        "$token": true
-      },
-      "border": {
-        "$token": true
-      },
-      "foreground": {
-        "$token": true
-      }
-    },
-    "editorGhostText": {
-      "background": {
-        "$token": true
-      },
-      "border": {
-        "$token": true
-      },
-      "foreground": {
-        "$token": true
-      }
-    },
-    "editorGroup": {
-      "border": {
-        "$token": true
-      },
-      "dropBackground": {
-        "$token": true
-      },
-      "dropIntoPromptBackground": {
-        "$token": true
-      },
-      "dropIntoPromptBorder": {
-        "$token": true
-      },
-      "dropIntoPromptForeground": {
-        "$token": true
-      },
-      "emptyBackground": {
-        "$token": true
-      },
-      "focusedEmptyBorder": {
-        "$token": true
-      }
-    },
-    "editorGroupHeader": {
-      "border": {
-        "$token": true
-      },
-      "connectedTabsBackground": {
-        "$token": true
-      },
-      "noTabsBackground": {
-        "$token": true
-      },
-      "tabsBackground": {
-        "$token": true
-      },
-      "tabsBorder": {
-        "$token": true
-      }
-    },
-    "editorGutter": {
-      "addedBackground": {
-        "$token": true
-      },
-      "addedSecondaryBackground": {
-        "$token": true
-      },
-      "background": {
-        "$token": true
-      },
-      "commentDraftGlyphForeground": {
-        "$token": true
-      },
-      "commentGlyphForeground": {
-        "$token": true
-      },
-      "commentRangeForeground": {
-        "$token": true
-      },
-      "commentUnresolvedGlyphForeground": {
-        "$token": true
-      },
-      "deletedBackground": {
-        "$token": true
-      },
-      "deletedSecondaryBackground": {
-        "$token": true
-      },
-      "foldingControlForeground": {
-        "$token": true
-      },
-      "itemBackground": {
-        "$token": true
-      },
-      "itemGlyphForeground": {
-        "$token": true
-      },
-      "modifiedBackground": {
-        "$token": true
-      },
-      "modifiedSecondaryBackground": {
-        "$token": true
-      }
-    },
-    "editorHint": {
-      "border": {
-        "$token": true
-      },
-      "foreground": {
-        "$token": true
-      }
-    },
-    "editorHoverWidget": {
-      "background": {
-        "$token": true
-      },
-      "border": {
-        "$token": true
-      },
-      "foreground": {
-        "$token": true
-      },
-      "highlightForeground": {
-        "$token": true
-      },
-      "statusBarBackground": {
-        "$token": true
-      }
-    },
-    "editorIndentGuide": {
-      "activeBackground1": {
-        "$token": true
-      },
-      "activeBackground2": {
-        "$token": true
-      },
-      "activeBackground3": {
-        "$token": true
-      },
-      "activeBackground4": {
-        "$token": true
-      },
-      "activeBackground5": {
-        "$token": true
-      },
-      "activeBackground6": {
-        "$token": true
-      },
-      "background1": {
-        "$token": true
-      },
-      "background2": {
-        "$token": true
-      },
-      "background3": {
-        "$token": true
-      },
-      "background4": {
-        "$token": true
-      },
-      "background5": {
-        "$token": true
-      },
-      "background6": {
-        "$token": true
-      }
-    },
-    "editorInfo": {
-      "background": {
-        "$token": true
-      },
-      "border": {
-        "$token": true
-      },
-      "foreground": {
-        "$token": true
-      }
-    },
-    "editorInlayHint": {
-      "background": {
-        "$token": true
-      },
-      "foreground": {
-        "$token": true
-      },
-      "parameterBackground": {
-        "$token": true
-      },
-      "parameterForeground": {
-        "$token": true
-      },
-      "typeBackground": {
-        "$token": true
-      },
-      "typeForeground": {
-        "$token": true
-      }
-    },
-    "editorLightBulb": {
-      "foreground": {
-        "$token": true
-      }
-    },
-    "editorLightBulbAi": {
-      "foreground": {
-        "$token": true
-      }
-    },
-    "editorLightBulbAutoFix": {
-      "foreground": {
-        "$token": true
-      }
-    },
-    "editorLineNumber": {
-      "activeForeground": {
-        "$token": true
-      },
-      "dimmedForeground": {
-        "$token": true
-      },
-      "foreground": {
-        "$token": true
-      }
-    },
-    "editorLink": {
-      "activeForeground": {
-        "$token": true
-      }
-    },
-    "editorMarkerNavigation": {
-      "background": {
-        "$token": true
-      }
-    },
-    "editorMarkerNavigationError": {
-      "background": {
-        "$token": true
-      },
-      "headerBackground": {
-        "$token": true
-      }
-    },
-    "editorMarkerNavigationInfo": {
-      "background": {
-        "$token": true
-      },
-      "headerBackground": {
-        "$token": true
-      }
-    },
-    "editorMarkerNavigationWarning": {
-      "background": {
-        "$token": true
-      },
-      "headerBackground": {
-        "$token": true
-      }
-    },
-    "editorMinimap": {
-      "inlineChatInserted": {
-        "$token": true
-      }
-    },
-    "editorMultiCursor": {
-      "primary": {
-        "background": {
-          "$token": true
-        },
-        "foreground": {
-          "$token": true
-        }
-      },
-      "secondary": {
-        "background": {
-          "$token": true
-        },
-        "foreground": {
-          "$token": true
-        }
-      }
-    },
-    "editorOverviewRuler": {
-      "addedForeground": {
-        "$token": true
-      },
-      "background": {
-        "$token": true
-      },
-      "border": {
-        "$token": true
-      },
-      "bracketMatchForeground": {
-        "$token": true
-      },
-      "commentDraftForeground": {
-        "$token": true
-      },
-      "commentForeground": {
-        "$token": true
-      },
-      "commentUnresolvedForeground": {
-        "$token": true
-      },
-      "commonContentForeground": {
-        "$token": true
-      },
-      "currentContentForeground": {
-        "$token": true
-      },
-      "deletedForeground": {
-        "$token": true
-      },
-      "errorForeground": {
-        "$token": true
-      },
-      "findMatchForeground": {
-        "$token": true
-      },
-      "incomingContentForeground": {
-        "$token": true
-      },
-      "infoForeground": {
-        "$token": true
-      },
-      "inlineChatInserted": {
-        "$token": true
-      },
-      "inlineChatRemoved": {
-        "$token": true
-      },
-      "modifiedForeground": {
-        "$token": true
-      },
-      "rangeHighlightForeground": {
-        "$token": true
-      },
-      "selectionHighlightForeground": {
-        "$token": true
-      },
-      "warningForeground": {
-        "$token": true
-      },
-      "wordHighlightForeground": {
-        "$token": true
-      },
-      "wordHighlightStrongForeground": {
-        "$token": true
-      },
-      "wordHighlightTextForeground": {
-        "$token": true
-      },
-      "agentFeedbackForeground": {
-        "$token": true
-      }
-    },
-    "editorPane": {
-      "background": {
-        "$token": true
-      }
-    },
-    "editorRuler": {
-      "foreground": {
-        "$token": true
-      }
-    },
-    "editorStickyScroll": {
-      "background": {
-        "$token": true
-      },
-      "border": {
-        "$token": true
-      },
-      "shadow": {
-        "$token": true
-      }
-    },
-    "editorStickyScrollGutter": {
-      "background": {
-        "$token": true
-      }
-    },
-    "editorStickyScrollHover": {
-      "background": {
-        "$token": true
-      }
-    },
-    "editorSuggestWidget": {
-      "background": {
-        "$token": true
-      },
-      "border": {
-        "$token": true
-      },
-      "focusHighlightForeground": {
-        "$token": true
-      },
-      "focusOutline": {
-        "$token": true
-      },
-      "foreground": {
-        "$token": true
-      },
-      "highlightForeground": {
-        "$token": true
-      },
-      "selectedBackground": {
-        "$token": true
-      },
-      "selectedForeground": {
-        "$token": true
-      },
-      "selectedIconForeground": {
-        "$token": true
-      }
-    },
-    "editorSuggestWidgetStatus": {
-      "foreground": {
-        "$token": true
-      }
-    },
-    "editorUnicodeHighlight": {
-      "background": {
-        "$token": true
-      },
-      "border": {
-        "$token": true
-      }
-    },
-    "editorUnnecessaryCode": {
-      "border": {
-        "$token": true
-      },
-      "opacity": {
-        "$token": true
-      }
-    },
-    "editorWarning": {
-      "background": {
-        "$token": true
-      },
-      "border": {
-        "$token": true
-      },
-      "foreground": {
-        "$token": true
-      }
-    },
-    "editorWhitespace": {
-      "foreground": {
-        "$token": true
-      }
-    },
-    "editorWidget": {
-      "background": {
-        "$token": true
-      },
-      "border": {
-        "$token": true
-      },
-      "foreground": {
-        "$token": true
-      },
-      "resizeBorder": {
-        "$token": true
-      }
-    },
-    "editorWordWrapIndicator": {
-      "foreground": {
-        "$token": true
-      }
-    },
-    "errorForeground": {
-      "$token": true
-    },
-    "extensionBadge": {
-      "remoteBackground": {
-        "$token": true
-      },
-      "remoteForeground": {
-        "$token": true
-      }
-    },
-    "extensionButton": {
-      "background": {
-        "$token": true
-      },
-      "border": {
-        "$token": true
-      },
-      "foreground": {
-        "$token": true
-      },
-      "hoverBackground": {
-        "$token": true
-      },
-      "prominentBackground": {
-        "$token": true
-      },
-      "prominentForeground": {
-        "$token": true
-      },
-      "prominentHoverBackground": {
-        "$token": true
-      },
-      "separator": {
-        "$token": true
-      }
-    },
-    "extensionIcon": {
-      "preReleaseForeground": {
-        "$token": true
-      },
-      "privateForeground": {
-        "$token": true
-      },
-      "sponsorForeground": {
-        "$token": true
-      },
-      "starForeground": {
-        "$token": true
-      },
-      "verifiedForeground": {
-        "$token": true
-      }
-    },
-    "focusBorder": {
-      "$token": true
-    },
-    "foreground": {
-      "$token": true
-    },
-    "git": {
-      "blame": {
-        "editorDecorationForeground": {
-          "$token": true
-        }
-      }
-    },
-    "gitDecoration": {
-      "addedResourceForeground": {
-        "$token": true
-      },
-      "conflictingResourceForeground": {
-        "$token": true
-      },
-      "deletedResourceForeground": {
-        "$token": true
-      },
-      "ignoredResourceForeground": {
-        "$token": true
-      },
-      "modifiedResourceForeground": {
-        "$token": true
-      },
-      "renamedResourceForeground": {
-        "$token": true
-      },
-      "stageDeletedResourceForeground": {
-        "$token": true
-      },
-      "stageModifiedResourceForeground": {
-        "$token": true
-      },
-      "submoduleResourceForeground": {
-        "$token": true
-      },
-      "untrackedResourceForeground": {
-        "$token": true
-      }
-    },
-    "icon": {
-      "foreground": {
-        "$token": true
-      }
-    },
-    "inactiveSessionView": {
-      "background": {
-        "$token": true
-      },
-      "foreground": {
-        "$token": true
-      }
-    },
-    "inlineChat": {
-      "background": {
-        "$token": true
-      },
-      "border": {
-        "$token": true
-      },
-      "foreground": {
-        "$token": true
-      },
-      "shadow": {
-        "$token": true
-      }
-    },
-    "inlineChatDiff": {
-      "inserted": {
-        "$token": true
-      },
-      "removed": {
-        "$token": true
-      }
-    },
-    "inlineChatInput": {
-      "background": {
-        "$token": true
-      },
-      "border": {
-        "$token": true
-      },
-      "focusBorder": {
-        "$token": true
-      },
-      "placeholderForeground": {
-        "$token": true
-      }
-    },
-    "inlineEdit": {
-      "gutterIndicator": {
-        "background": {
-          "$token": true
-        },
-        "primaryBackground": {
-          "$token": true
-        },
-        "primaryBorder": {
-          "$token": true
-        },
-        "primaryForeground": {
-          "$token": true
-        },
-        "secondaryBackground": {
-          "$token": true
-        },
-        "secondaryBorder": {
-          "$token": true
-        },
-        "secondaryForeground": {
-          "$token": true
-        },
-        "successfulBackground": {
-          "$token": true
-        },
-        "successfulBorder": {
-          "$token": true
-        },
-        "successfulForeground": {
-          "$token": true
-        }
-      },
-      "modifiedBackground": {
-        "$token": true
-      },
-      "modifiedBorder": {
-        "$token": true
-      },
-      "modifiedChangedLineBackground": {
-        "$token": true
-      },
-      "modifiedChangedTextBackground": {
-        "$token": true
-      },
-      "originalBackground": {
-        "$token": true
-      },
-      "originalBorder": {
-        "$token": true
-      },
-      "originalChangedLineBackground": {
-        "$token": true
-      },
-      "originalChangedTextBackground": {
-        "$token": true
-      },
-      "tabWillAcceptModifiedBorder": {
-        "$token": true
-      },
-      "tabWillAcceptOriginalBorder": {
-        "$token": true
-      }
-    },
-    "input": {
-      "background": {
-        "$token": true
-      },
-      "border": {
-        "$token": true
-      },
-      "foreground": {
-        "$token": true
-      },
-      "placeholderForeground": {
-        "$token": true
-      }
-    },
-    "inputOption": {
-      "activeBackground": {
-        "$token": true
-      },
-      "activeBorder": {
-        "$token": true
-      },
-      "activeForeground": {
-        "$token": true
-      },
-      "hoverBackground": {
-        "$token": true
-      }
-    },
-    "inputValidation": {
-      "errorBackground": {
-        "$token": true
-      },
-      "errorBorder": {
-        "$token": true
-      },
-      "errorForeground": {
-        "$token": true
-      },
-      "infoBackground": {
-        "$token": true
-      },
-      "infoBorder": {
-        "$token": true
-      },
-      "infoForeground": {
-        "$token": true
-      },
-      "warningBackground": {
-        "$token": true
-      },
-      "warningBorder": {
-        "$token": true
-      },
-      "warningForeground": {
-        "$token": true
-      }
-    },
-    "interactive": {
-      "activeCodeBorder": {
-        "$token": true
-      },
-      "inactiveCodeBorder": {
-        "$token": true
-      }
-    },
-    "keybindingLabel": {
-      "background": {
-        "$token": true
-      },
-      "border": {
-        "$token": true
-      },
-      "bottomBorder": {
-        "$token": true
-      },
-      "foreground": {
-        "$token": true
-      }
-    },
-    "keybindingTable": {
-      "headerBackground": {
-        "$token": true
-      },
-      "rowsBackground": {
-        "$token": true
-      }
-    },
-    "list": {
-      "activeSelectionBackground": {
-        "$token": true
-      },
-      "activeSelectionForeground": {
-        "$token": true
-      },
-      "activeSelectionIconForeground": {
-        "$token": true
-      },
-      "deemphasizedForeground": {
-        "$token": true
-      },
-      "dropBackground": {
-        "$token": true
-      },
-      "dropBetweenBackground": {
-        "$token": true
-      },
-      "errorForeground": {
-        "$token": true
-      },
-      "filterMatchBackground": {
-        "$token": true
-      },
-      "filterMatchBorder": {
-        "$token": true
-      },
-      "focusAndSelectionOutline": {
-        "$token": true
-      },
-      "focusBackground": {
-        "$token": true
-      },
-      "focusForeground": {
-        "$token": true
-      },
-      "focusHighlightForeground": {
-        "$token": true
-      },
-      "focusOutline": {
-        "$token": true
-      },
-      "highlightForeground": {
-        "$token": true
-      },
-      "hoverBackground": {
-        "$token": true
-      },
-      "hoverForeground": {
-        "$token": true
-      },
-      "inactiveFocusBackground": {
-        "$token": true
-      },
-      "inactiveFocusOutline": {
-        "$token": true
-      },
-      "inactiveSelectionBackground": {
-        "$token": true
-      },
-      "inactiveSelectionForeground": {
-        "$token": true
-      },
-      "inactiveSelectionIconForeground": {
-        "$token": true
-      },
-      "invalidItemForeground": {
-        "$token": true
-      },
-      "warningForeground": {
-        "$token": true
-      }
-    },
-    "listFilterWidget": {
-      "background": {
-        "$token": true
-      },
-      "noMatchesOutline": {
-        "$token": true
-      },
-      "outline": {
-        "$token": true
-      },
-      "shadow": {
-        "$token": true
-      }
-    },
-    "markdownAlert": {
-      "caution": {
-        "foreground": {
-          "$token": true
-        }
-      },
-      "important": {
-        "foreground": {
-          "$token": true
-        }
-      },
-      "note": {
-        "foreground": {
-          "$token": true
-        }
-      },
-      "tip": {
-        "foreground": {
-          "$token": true
-        }
-      },
-      "warning": {
-        "foreground": {
-          "$token": true
-        }
-      }
-    },
-    "mcpIcon": {
-      "starForeground": {
-        "$token": true
-      }
-    },
-    "menu": {
-      "background": {
-        "$token": true
-      },
-      "border": {
-        "$token": true
-      },
-      "foreground": {
-        "$token": true
-      },
-      "selectionBackground": {
-        "$token": true
-      },
-      "selectionBorder": {
-        "$token": true
-      },
-      "selectionForeground": {
-        "$token": true
-      },
-      "separatorBackground": {
-        "$token": true
-      }
-    },
-    "menubar": {
-      "selectionBackground": {
-        "$token": true
-      },
-      "selectionBorder": {
-        "$token": true
-      },
-      "selectionForeground": {
-        "$token": true
-      }
-    },
-    "merge": {
-      "border": {
-        "$token": true
-      },
-      "commonContentBackground": {
-        "$token": true
-      },
-      "commonHeaderBackground": {
-        "$token": true
-      },
-      "currentContentBackground": {
-        "$token": true
-      },
-      "currentHeaderBackground": {
-        "$token": true
-      },
-      "incomingContentBackground": {
-        "$token": true
-      },
-      "incomingHeaderBackground": {
-        "$token": true
-      }
-    },
-    "mergeEditor": {
-      "change": {
-        "background": {
-          "$token": true
-        },
-        "word": {
-          "background": {
-            "$token": true
-          }
-        }
-      },
-      "changeBase": {
-        "background": {
-          "$token": true
-        },
-        "word": {
-          "background": {
-            "$token": true
-          }
-        }
-      },
-      "conflict": {
-        "handled": {
-          "minimapOverViewRuler": {
-            "$token": true
-          }
-        },
-        "handledFocused": {
-          "border": {
-            "$token": true
-          }
-        },
-        "handledUnfocused": {
-          "border": {
-            "$token": true
-          }
-        },
-        "input1": {
-          "background": {
-            "$token": true
-          }
-        },
-        "input2": {
-          "background": {
-            "$token": true
-          }
-        },
-        "unhandled": {
-          "minimapOverViewRuler": {
-            "$token": true
-          }
-        },
-        "unhandledFocused": {
-          "border": {
-            "$token": true
-          }
-        },
-        "unhandledUnfocused": {
-          "border": {
-            "$token": true
-          }
-        }
-      },
-      "conflictingLines": {
-        "background": {
-          "$token": true
-        }
-      }
-    },
-    "minimap": {
-      "background": {
-        "$token": true
-      },
-      "chatEditHighlight": {
-        "$token": true
-      },
-      "errorHighlight": {
-        "$token": true
-      },
-      "findMatchHighlight": {
-        "$token": true
-      },
-      "foregroundOpacity": {
-        "$token": true
-      },
-      "infoHighlight": {
-        "$token": true
-      },
-      "selectionHighlight": {
-        "$token": true
-      },
-      "selectionOccurrenceHighlight": {
-        "$token": true
-      },
-      "warningHighlight": {
-        "$token": true
-      }
-    },
-    "minimapGutter": {
-      "addedBackground": {
-        "$token": true
-      },
-      "deletedBackground": {
-        "$token": true
-      },
-      "modifiedBackground": {
-        "$token": true
-      }
-    },
-    "minimapSlider": {
-      "activeBackground": {
-        "$token": true
-      },
-      "background": {
-        "$token": true
-      },
-      "hoverBackground": {
-        "$token": true
-      }
-    },
-    "modernActivityBar": {
-      "background": {
-        "$token": true
-      },
-      "border": {
-        "$token": true
-      },
-      "inactiveBackground": {
-        "$token": true
-      }
-    },
-    "modernActivityBarItem": {
-      "activeBackground": {
-        "$token": true
-      },
-      "activeForeground": {
-        "$token": true
-      },
-      "hoverBackground": {
-        "$token": true
-      },
-      "hoverForeground": {
-        "$token": true
-      }
-    },
-    "modernEditorTab": {
-      "activeActionBackground": {
-        "$token": true
-      },
-      "activeBackground": {
-        "$token": true
-      },
-      "activeForeground": {
-        "$token": true
-      },
-      "activeHoverActionBackground": {
-        "$token": true
-      },
-      "activeHoverBackground": {
-        "$token": true
-      },
-      "hoverActionBackground": {
-        "$token": true
-      },
-      "hoverBackground": {
-        "$token": true
-      },
-      "hoverForeground": {
-        "$token": true
-      },
-      "inactiveBackground": {
-        "$token": true
-      },
-      "selectedActionBackground": {
-        "$token": true
-      }
-    },
-    "modernPanel": {
-      "border": {
-        "$token": true
-      }
-    },
-    "modernSash": {
-      "gripForeground": {
-        "$token": true
-      }
-    },
-    "modernTab": {
-      "activeBackground": {
-        "$token": true
-      },
-      "activeForeground": {
-        "$token": true
-      },
-      "hoverBackground": {
-        "$token": true
-      },
-      "hoverForeground": {
-        "$token": true
-      }
-    },
-    "modernUI": {
-      "inactiveShellBackground": {
-        "$token": true
-      },
-      "shellBackground": {
-        "$token": true
-      }
-    },
-    "multiDiffEditor": {
-      "background": {
-        "$token": true
-      },
-      "border": {
-        "$token": true
-      },
-      "headerBackground": {
-        "$token": true
-      }
-    },
-    "notebook": {
-      "cellBorderColor": {
-        "$token": true
-      },
-      "cellEditorBackground": {
-        "$token": true
-      },
-      "cellHoverBackground": {
-        "$token": true
-      },
-      "cellInsertionIndicator": {
-        "$token": true
-      },
-      "cellStatusBarItemHoverBackground": {
-        "$token": true
-      },
-      "cellToolbarSeparator": {
-        "$token": true
-      },
-      "editorBackground": {
-        "$token": true
-      },
-      "focusedCellBackground": {
-        "$token": true
-      },
-      "focusedCellBorder": {
-        "$token": true
-      },
-      "focusedEditorBorder": {
-        "$token": true
-      },
-      "inactiveFocusedCellBorder": {
-        "$token": true
-      },
-      "inactiveSelectedCellBorder": {
-        "$token": true
-      },
-      "outputContainerBackgroundColor": {
-        "$token": true
-      },
-      "outputContainerBorderColor": {
-        "$token": true
-      },
-      "selectedCellBackground": {
-        "$token": true
-      },
-      "selectedCellBorder": {
-        "$token": true
-      },
-      "symbolHighlightBackground": {
-        "$token": true
-      }
-    },
-    "notebookEditorOverviewRuler": {
-      "runningCellForeground": {
-        "$token": true
-      }
-    },
-    "notebookScrollbarSlider": {
-      "activeBackground": {
-        "$token": true
-      },
-      "background": {
-        "$token": true
-      },
-      "hoverBackground": {
-        "$token": true
-      }
-    },
-    "notebookStatusErrorIcon": {
-      "foreground": {
-        "$token": true
-      }
-    },
-    "notebookStatusRunningIcon": {
-      "foreground": {
-        "$token": true
-      }
-    },
-    "notebookStatusSuccessIcon": {
-      "foreground": {
-        "$token": true
-      }
-    },
-    "notificationCenter": {
-      "border": {
-        "$token": true
-      }
-    },
-    "notificationCenterHeader": {
-      "background": {
-        "$token": true
-      },
-      "foreground": {
-        "$token": true
-      }
-    },
-    "notificationLink": {
-      "foreground": {
-        "$token": true
-      }
-    },
-    "notificationToast": {
-      "border": {
-        "$token": true
-      }
-    },
-    "notifications": {
-      "background": {
-        "$token": true
-      },
-      "border": {
-        "$token": true
-      },
-      "foreground": {
-        "$token": true
-      }
-    },
-    "notificationsErrorIcon": {
-      "foreground": {
-        "$token": true
-      }
-    },
-    "notificationsInfoIcon": {
-      "foreground": {
-        "$token": true
-      }
-    },
-    "notificationsWarningIcon": {
-      "foreground": {
-        "$token": true
-      }
-    },
-    "outputView": {
-      "background": {
-        "$token": true
-      }
-    },
-    "outputViewStickyScroll": {
-      "background": {
-        "$token": true
-      }
-    },
-    "panel": {
-      "background": {
-        "$token": true
-      },
-      "border": {
-        "$token": true
-      },
-      "dropBorder": {
-        "$token": true
-      }
-    },
-    "panelInput": {
-      "border": {
-        "$token": true
-      }
-    },
-    "panelSection": {
-      "border": {
-        "$token": true
-      },
-      "dropBackground": {
-        "$token": true
-      }
-    },
-    "panelSectionHeader": {
-      "background": {
-        "$token": true
-      },
-      "border": {
-        "$token": true
-      },
-      "foreground": {
-        "$token": true
-      }
-    },
-    "panelStickyScroll": {
-      "background": {
-        "$token": true
-      },
-      "border": {
-        "$token": true
-      },
-      "shadow": {
-        "$token": true
-      }
-    },
-    "panelTitle": {
-      "activeBorder": {
-        "$token": true
-      },
-      "activeForeground": {
-        "$token": true
-      },
-      "border": {
-        "$token": true
-      },
-      "inactiveForeground": {
-        "$token": true
-      }
-    },
-    "panelTitleBadge": {
-      "background": {
-        "$token": true
-      },
-      "foreground": {
-        "$token": true
-      }
-    },
-    "peekView": {
-      "border": {
-        "$token": true
-      }
-    },
-    "peekViewEditor": {
-      "background": {
-        "$token": true
-      },
-      "matchHighlightBackground": {
-        "$token": true
-      },
-      "matchHighlightBorder": {
-        "$token": true
-      }
-    },
-    "peekViewEditorGutter": {
-      "background": {
-        "$token": true
-      }
-    },
-    "peekViewEditorStickyScroll": {
-      "background": {
-        "$token": true
-      }
-    },
-    "peekViewEditorStickyScrollGutter": {
-      "background": {
-        "$token": true
-      }
-    },
-    "peekViewResult": {
-      "background": {
-        "$token": true
-      },
-      "fileForeground": {
-        "$token": true
-      },
-      "lineForeground": {
-        "$token": true
-      },
-      "matchHighlightBackground": {
-        "$token": true
-      },
-      "selectionBackground": {
-        "$token": true
-      },
-      "selectionForeground": {
-        "$token": true
-      }
-    },
-    "peekViewTitle": {
-      "background": {
-        "$token": true
-      }
-    },
-    "peekViewTitleDescription": {
-      "foreground": {
-        "$token": true
-      }
-    },
-    "peekViewTitleLabel": {
-      "foreground": {
-        "$token": true
-      }
-    },
-    "pickerGroup": {
-      "border": {
-        "$token": true
-      },
-      "foreground": {
-        "$token": true
-      }
-    },
-    "ports": {
-      "iconRunningProcessForeground": {
-        "$token": true
-      }
-    },
-    "problemsErrorIcon": {
-      "foreground": {
-        "$token": true
-      }
-    },
-    "problemsInfoIcon": {
-      "foreground": {
-        "$token": true
-      }
-    },
-    "problemsWarningIcon": {
-      "foreground": {
-        "$token": true
-      }
-    },
-    "profileBadge": {
-      "background": {
-        "$token": true
-      },
-      "foreground": {
-        "$token": true
-      }
-    },
-    "profiles": {
-      "sashBorder": {
-        "$token": true
-      }
-    },
-    "progressBar": {
-      "background": {
-        "$token": true
-      }
-    },
-    "quickInput": {
-      "background": {
-        "$token": true
-      },
-      "foreground": {
-        "$token": true
-      }
-    },
-    "quickInputList": {
-      "focusBackground": {
-        "$token": true
-      },
-      "focusForeground": {
-        "$token": true
-      },
-      "focusHighlightForeground": {
-        "$token": true
-      },
-      "focusIconForeground": {
-        "$token": true
-      }
-    },
-    "quickInputTitle": {
-      "background": {
-        "$token": true
-      }
-    },
-    "radio": {
-      "activeBackground": {
-        "$token": true
-      },
-      "activeBorder": {
-        "$token": true
-      },
-      "activeForeground": {
-        "$token": true
-      },
-      "inactiveBackground": {
-        "$token": true
-      },
-      "inactiveBorder": {
-        "$token": true
-      },
-      "inactiveForeground": {
-        "$token": true
-      },
-      "inactiveHoverBackground": {
-        "$token": true
-      }
-    },
-    "sash": {
-      "hoverBorder": {
-        "$token": true
-      }
-    },
-    "scmGraph": {
-      "foreground1": {
-        "$token": true
-      },
-      "foreground2": {
-        "$token": true
-      },
-      "foreground3": {
-        "$token": true
-      },
-      "foreground4": {
-        "$token": true
-      },
-      "foreground5": {
-        "$token": true
-      },
-      "historyItemBaseRefColor": {
-        "$token": true
-      },
-      "historyItemHoverAdditionsForeground": {
-        "$token": true
-      },
-      "historyItemHoverDefaultLabelBackground": {
-        "$token": true
-      },
-      "historyItemHoverDefaultLabelForeground": {
-        "$token": true
-      },
-      "historyItemHoverDeletionsForeground": {
-        "$token": true
-      },
-      "historyItemHoverLabelForeground": {
-        "$token": true
-      },
-      "historyItemRefColor": {
-        "$token": true
-      },
-      "historyItemRemoteRefColor": {
-        "$token": true
-      }
-    },
-    "scrollbar": {
-      "background": {
-        "$token": true
-      },
-      "shadow": {
-        "$token": true
-      }
-    },
-    "scrollbarSlider": {
-      "activeBackground": {
-        "$token": true
-      },
-      "background": {
-        "$token": true
-      },
-      "hoverBackground": {
-        "$token": true
-      }
-    },
-    "search": {
-      "resultsInfoForeground": {
-        "$token": true
-      }
-    },
-    "searchEditor": {
-      "findMatchBackground": {
-        "$token": true
-      },
-      "findMatchBorder": {
-        "$token": true
-      },
-      "textInputBorder": {
-        "$token": true
-      }
-    },
-    "selection": {
-      "background": {
-        "$token": true
-      }
-    },
-    "settings": {
-      "checkboxBackground": {
-        "$token": true
-      },
-      "checkboxBorder": {
-        "$token": true
-      },
-      "checkboxForeground": {
-        "$token": true
-      },
-      "dropdownBackground": {
-        "$token": true
-      },
-      "dropdownBorder": {
-        "$token": true
-      },
-      "dropdownForeground": {
-        "$token": true
-      },
-      "dropdownListBorder": {
-        "$token": true
-      },
-      "focusedRowBackground": {
-        "$token": true
-      },
-      "focusedRowBorder": {
-        "$token": true
-      },
-      "headerBorder": {
-        "$token": true
-      },
-      "headerForeground": {
-        "$token": true
-      },
-      "modifiedItemIndicator": {
-        "$token": true
-      },
-      "numberInputBackground": {
-        "$token": true
-      },
-      "numberInputBorder": {
-        "$token": true
-      },
-      "numberInputForeground": {
-        "$token": true
-      },
-      "rowHoverBackground": {
-        "$token": true
-      },
-      "sashBorder": {
-        "$token": true
-      },
-      "settingsHeaderHoverForeground": {
-        "$token": true
-      },
-      "textInputBackground": {
-        "$token": true
-      },
-      "textInputBorder": {
-        "$token": true
-      },
-      "textInputForeground": {
-        "$token": true
-      }
-    },
-    "sideBar": {
-      "background": {
-        "$token": true
-      },
-      "border": {
-        "$token": true
-      },
-      "dropBackground": {
-        "$token": true
-      },
-      "foreground": {
-        "$token": true
-      }
-    },
-    "sideBarActivityBarTop": {
-      "border": {
-        "$token": true
-      }
-    },
-    "sideBarSectionHeader": {
-      "background": {
-        "$token": true
-      },
-      "border": {
-        "$token": true
-      },
-      "foreground": {
-        "$token": true
-      }
-    },
-    "sideBarStickyScroll": {
-      "background": {
-        "$token": true
-      },
-      "border": {
-        "$token": true
-      },
-      "shadow": {
-        "$token": true
-      }
-    },
-    "sideBarTitle": {
-      "background": {
-        "$token": true
-      },
-      "border": {
-        "$token": true
-      },
-      "foreground": {
-        "$token": true
-      }
-    },
-    "sideBySideEditor": {
-      "horizontalBorder": {
-        "$token": true
-      },
-      "verticalBorder": {
-        "$token": true
-      }
-    },
-    "simpleFindWidget": {
-      "sashBorder": {
-        "$token": true
-      }
-    },
-    "statusBar": {
-      "background": {
-        "$token": true
-      },
-      "border": {
-        "$token": true
-      },
-      "debuggingBackground": {
-        "$token": true
-      },
-      "debuggingBorder": {
-        "$token": true
-      },
-      "debuggingForeground": {
-        "$token": true
-      },
-      "focusBorder": {
-        "$token": true
-      },
-      "foreground": {
-        "$token": true
-      },
-      "inactiveBackground": {
-        "$token": true
-      },
-      "noFolderBackground": {
-        "$token": true
-      },
-      "noFolderBorder": {
-        "$token": true
-      },
-      "noFolderForeground": {
-        "$token": true
-      }
-    },
-    "statusBarItem": {
-      "activeBackground": {
-        "$token": true
-      },
-      "compactHoverBackground": {
-        "$token": true
-      },
-      "errorBackground": {
-        "$token": true
-      },
-      "errorForeground": {
-        "$token": true
-      },
-      "errorHoverBackground": {
-        "$token": true
-      },
-      "errorHoverForeground": {
-        "$token": true
-      },
-      "focusBorder": {
-        "$token": true
-      },
-      "hoverBackground": {
-        "$token": true
-      },
-      "hoverForeground": {
-        "$token": true
-      },
-      "offlineBackground": {
-        "$token": true
-      },
-      "offlineForeground": {
-        "$token": true
-      },
-      "offlineHoverBackground": {
-        "$token": true
-      },
-      "offlineHoverForeground": {
-        "$token": true
-      },
-      "prominentBackground": {
-        "$token": true
-      },
-      "prominentForeground": {
-        "$token": true
-      },
-      "prominentHoverBackground": {
-        "$token": true
-      },
-      "prominentHoverForeground": {
-        "$token": true
-      },
-      "remoteBackground": {
-        "$token": true
-      },
-      "remoteForeground": {
-        "$token": true
-      },
-      "remoteHoverBackground": {
-        "$token": true
-      },
-      "remoteHoverForeground": {
-        "$token": true
-      },
-      "warningBackground": {
-        "$token": true
-      },
-      "warningForeground": {
-        "$token": true
-      },
-      "warningHoverBackground": {
-        "$token": true
-      },
-      "warningHoverForeground": {
-        "$token": true
-      }
-    },
-    "strongForeground": {
-      "$token": true
-    },
-    "surface": {
-      "background": {
-        "$token": true
-      },
-      "border": {
-        "$token": true
-      },
-      "foreground": {
-        "$token": true
-      }
-    },
-    "symbolIcon": {
-      "arrayForeground": {
-        "$token": true
-      },
-      "booleanForeground": {
-        "$token": true
-      },
-      "classForeground": {
-        "$token": true
-      },
-      "colorForeground": {
-        "$token": true
-      },
-      "constantForeground": {
-        "$token": true
-      },
-      "constructorForeground": {
-        "$token": true
-      },
-      "enumeratorForeground": {
-        "$token": true
-      },
-      "enumeratorMemberForeground": {
-        "$token": true
-      },
-      "eventForeground": {
-        "$token": true
-      },
-      "fieldForeground": {
-        "$token": true
-      },
-      "fileForeground": {
-        "$token": true
-      },
-      "folderForeground": {
-        "$token": true
-      },
-      "functionForeground": {
-        "$token": true
-      },
-      "interfaceForeground": {
-        "$token": true
-      },
-      "keyForeground": {
-        "$token": true
-      },
-      "keywordForeground": {
-        "$token": true
-      },
-      "methodForeground": {
-        "$token": true
-      },
-      "moduleForeground": {
-        "$token": true
-      },
-      "namespaceForeground": {
-        "$token": true
-      },
-      "nullForeground": {
-        "$token": true
-      },
-      "numberForeground": {
-        "$token": true
-      },
-      "objectForeground": {
-        "$token": true
-      },
-      "operatorForeground": {
-        "$token": true
-      },
-      "packageForeground": {
-        "$token": true
-      },
-      "propertyForeground": {
-        "$token": true
-      },
-      "referenceForeground": {
-        "$token": true
-      },
-      "snippetForeground": {
-        "$token": true
-      },
-      "stringForeground": {
-        "$token": true
-      },
-      "structForeground": {
-        "$token": true
-      },
-      "textForeground": {
-        "$token": true
-      },
-      "typeParameterForeground": {
-        "$token": true
-      },
-      "unitForeground": {
-        "$token": true
-      },
-      "variableForeground": {
-        "$token": true
-      }
-    },
-    "tab": {
-      "activeBackground": {
-        "$token": true
-      },
-      "activeBorder": {
-        "$token": true
-      },
-      "activeBorderTop": {
-        "$token": true
-      },
-      "activeForeground": {
-        "$token": true
-      },
-      "activeModifiedBorder": {
-        "$token": true
-      },
-      "border": {
-        "$token": true
-      },
-      "divider": {
-        "$token": true
-      },
-      "dragAndDropBorder": {
-        "$token": true
-      },
-      "hoverBackground": {
-        "$token": true
-      },
-      "hoverBorder": {
-        "$token": true
-      },
-      "hoverForeground": {
-        "$token": true
-      },
-      "inactiveBackground": {
-        "$token": true
-      },
-      "inactiveForeground": {
-        "$token": true
-      },
-      "inactiveModifiedBorder": {
-        "$token": true
-      },
-      "lastPinnedBorder": {
-        "$token": true
-      },
-      "selectedBackground": {
-        "$token": true
-      },
-      "selectedBorderTop": {
-        "$token": true
-      },
-      "selectedForeground": {
-        "$token": true
-      },
-      "unfocusedActiveBackground": {
-        "$token": true
-      },
-      "unfocusedActiveBorder": {
-        "$token": true
-      },
-      "unfocusedActiveBorderTop": {
-        "$token": true
-      },
-      "unfocusedActiveForeground": {
-        "$token": true
-      },
-      "unfocusedActiveModifiedBorder": {
-        "$token": true
-      },
-      "unfocusedHoverBackground": {
-        "$token": true
-      },
-      "unfocusedHoverBorder": {
-        "$token": true
-      },
-      "unfocusedHoverForeground": {
-        "$token": true
-      },
-      "unfocusedInactiveBackground": {
-        "$token": true
-      },
-      "unfocusedInactiveForeground": {
-        "$token": true
-      },
-      "unfocusedInactiveModifiedBorder": {
-        "$token": true
-      }
-    },
-    "terminal": {
-      "ansiBlack": {
-        "$token": true
-      },
-      "ansiBlue": {
-        "$token": true
-      },
-      "ansiBrightBlack": {
-        "$token": true
-      },
-      "ansiBrightBlue": {
-        "$token": true
-      },
-      "ansiBrightCyan": {
-        "$token": true
-      },
-      "ansiBrightGreen": {
-        "$token": true
-      },
-      "ansiBrightMagenta": {
-        "$token": true
-      },
-      "ansiBrightRed": {
-        "$token": true
-      },
-      "ansiBrightWhite": {
-        "$token": true
-      },
-      "ansiBrightYellow": {
-        "$token": true
-      },
-      "ansiCyan": {
-        "$token": true
-      },
-      "ansiGreen": {
-        "$token": true
-      },
-      "ansiMagenta": {
-        "$token": true
-      },
-      "ansiRed": {
-        "$token": true
-      },
-      "ansiWhite": {
-        "$token": true
-      },
-      "ansiYellow": {
-        "$token": true
-      },
-      "background": {
-        "$token": true
-      },
-      "border": {
-        "$token": true
-      },
-      "dropBackground": {
-        "$token": true
-      },
-      "findMatchBackground": {
-        "$token": true
-      },
-      "findMatchBorder": {
-        "$token": true
-      },
-      "findMatchHighlightBackground": {
-        "$token": true
-      },
-      "findMatchHighlightBorder": {
-        "$token": true
-      },
-      "foreground": {
-        "$token": true
-      },
-      "hoverHighlightBackground": {
-        "$token": true
-      },
-      "inactiveSelectionBackground": {
-        "$token": true
-      },
-      "initialHintForeground": {
-        "$token": true
-      },
-      "selectionBackground": {
-        "$token": true
-      },
-      "selectionForeground": {
-        "$token": true
-      },
-      "tab": {
-        "activeBorder": {
-          "$token": true
-        }
-      }
-    },
-    "terminalCommandDecoration": {
-      "defaultBackground": {
-        "$token": true
-      },
-      "errorBackground": {
-        "$token": true
-      },
-      "successBackground": {
-        "$token": true
-      }
-    },
-    "terminalCommandGuide": {
-      "foreground": {
-        "$token": true
-      }
-    },
-    "terminalCursor": {
-      "background": {
-        "$token": true
-      },
-      "foreground": {
-        "$token": true
-      }
-    },
-    "terminalOverviewRuler": {
-      "border": {
-        "$token": true
-      },
-      "cursorForeground": {
-        "$token": true
-      },
-      "findMatchForeground": {
-        "$token": true
-      }
-    },
-    "terminalStickyScroll": {
-      "background": {
-        "$token": true
-      },
-      "border": {
-        "$token": true
-      }
-    },
-    "terminalStickyScrollHover": {
-      "background": {
-        "$token": true
-      }
-    },
-    "terminalSymbolIcon": {
-      "aliasForeground": {
-        "$token": true
-      },
-      "argumentForeground": {
-        "$token": true
-      },
-      "branchForeground": {
-        "$token": true
-      },
-      "commitForeground": {
-        "$token": true
-      },
-      "fileForeground": {
-        "$token": true
-      },
-      "flagForeground": {
-        "$token": true
-      },
-      "folderForeground": {
-        "$token": true
-      },
-      "inlineSuggestionForeground": {
-        "$token": true
-      },
-      "methodForeground": {
-        "$token": true
-      },
-      "optionForeground": {
-        "$token": true
-      },
-      "optionValueForeground": {
-        "$token": true
-      },
-      "pullRequestDoneForeground": {
-        "$token": true
-      },
-      "pullRequestForeground": {
-        "$token": true
-      },
-      "remoteForeground": {
-        "$token": true
-      },
-      "stashForeground": {
-        "$token": true
-      },
-      "symbolText": {
-        "$token": true
-      },
-      "symbolicLinkFileForeground": {
-        "$token": true
-      },
-      "symbolicLinkFolderForeground": {
-        "$token": true
-      },
-      "tagForeground": {
-        "$token": true
-      }
-    },
-    "testing": {
-      "coverCountBadgeBackground": {
-        "$token": true
-      },
-      "coverCountBadgeForeground": {
-        "$token": true
-      },
-      "coveredBackground": {
-        "$token": true
-      },
-      "coveredBorder": {
-        "$token": true
-      },
-      "coveredGutterBackground": {
-        "$token": true
-      },
-      "coveredMinimapBackground": {
-        "$token": true
-      },
-      "iconErrored": {
-        "$token": true,
-        "retired": {
-          "$token": true
-        }
-      },
-      "iconFailed": {
-        "$token": true,
-        "retired": {
-          "$token": true
-        }
-      },
-      "iconPassed": {
-        "$token": true,
-        "retired": {
-          "$token": true
-        }
-      },
-      "iconQueued": {
-        "$token": true,
-        "retired": {
-          "$token": true
-        }
-      },
-      "iconSkipped": {
-        "$token": true,
-        "retired": {
-          "$token": true
-        }
-      },
-      "iconUnset": {
-        "$token": true,
-        "retired": {
-          "$token": true
-        }
-      },
-      "message": {
-        "error": {
-          "badgeBackground": {
-            "$token": true
-          },
-          "badgeBorder": {
-            "$token": true
-          },
-          "badgeForeground": {
-            "$token": true
-          },
-          "lineBackground": {
-            "$token": true
-          }
-        },
-        "info": {
-          "decorationForeground": {
-            "$token": true
-          },
-          "lineBackground": {
-            "$token": true
-          }
-        }
-      },
-      "messagePeekBorder": {
-        "$token": true
-      },
-      "messagePeekHeaderBackground": {
-        "$token": true
-      },
-      "peekBorder": {
-        "$token": true
-      },
-      "peekHeaderBackground": {
-        "$token": true
-      },
-      "runAction": {
-        "$token": true
-      },
-      "uncoveredBackground": {
-        "$token": true
-      },
-      "uncoveredBorder": {
-        "$token": true
-      },
-      "uncoveredBranchBackground": {
-        "$token": true
-      },
-      "uncoveredGutterBackground": {
-        "$token": true
-      },
-      "uncoveredMinimapBackground": {
-        "$token": true
-      }
-    },
-    "textBlockQuote": {
-      "background": {
-        "$token": true
-      },
-      "border": {
-        "$token": true
-      }
-    },
-    "textCodeBlock": {
-      "background": {
-        "$token": true
-      }
-    },
-    "textLink": {
-      "activeForeground": {
-        "$token": true
-      },
-      "foreground": {
-        "$token": true
-      }
-    },
-    "textPreformat": {
-      "background": {
-        "$token": true
-      },
-      "border": {
-        "$token": true
-      },
-      "foreground": {
-        "$token": true
-      }
-    },
-    "textSeparator": {
-      "foreground": {
-        "$token": true
-      }
-    },
-    "titleBar": {
-      "activeBackground": {
-        "$token": true
-      },
-      "activeForeground": {
-        "$token": true
-      },
-      "border": {
-        "$token": true
-      },
-      "inactiveBackground": {
-        "$token": true
-      },
-      "inactiveForeground": {
-        "$token": true
-      }
-    },
-    "toolbar": {
-      "activeBackground": {
-        "$token": true
-      },
-      "hoverBackground": {
-        "$token": true
-      },
-      "hoverOutline": {
-        "$token": true
-      }
-    },
-    "tree": {
-      "inactiveIndentGuidesStroke": {
-        "$token": true
-      },
-      "indentGuidesStroke": {
-        "$token": true
-      },
-      "tableColumnsBorder": {
-        "$token": true
-      },
-      "tableOddRowsBackground": {
-        "$token": true
-      }
-    },
-    "walkThrough": {
-      "embeddedEditorBackground": {
-        "$token": true
-      }
-    },
-    "walkthrough": {
-      "stepTitle": {
-        "foreground": {
-          "$token": true
-        }
-      }
-    },
-    "welcomePage": {
-      "background": {
-        "$token": true
-      },
-      "progress": {
-        "background": {
-          "$token": true
-        },
-        "foreground": {
-          "$token": true
-        }
-      },
-      "tileBackground": {
-        "$token": true
-      },
-      "tileBorder": {
-        "$token": true
-      },
-      "tileHoverBackground": {
-        "$token": true
-      }
-    },
-    "widget": {
-      "border": {
-        "$token": true
-      },
-      "shadow": {
-        "$token": true
-      }
-    },
-    "window": {
-      "activeBorder": {
-        "$token": true
-      },
-      "inactiveBorder": {
-        "$token": true
-      }
-    },
-    "agentsMobileDiff": {
-      "addedForeground": {
-        "$token": true
-      },
-      "deletedForeground": {
-        "$token": true
-      },
-      "modifiedForeground": {
-        "$token": true
-      }
-    }
+    "actionBar": [
+      "toggledBackground"
+    ],
+    "activeSessionView": [
+      "background",
+      "foreground"
+    ],
+    "activityBar": [
+      "activeBackground",
+      "activeBorder",
+      "activeFocusBorder",
+      "background",
+      "border",
+      "dropBorder",
+      "foreground",
+      "inactiveForeground"
+    ],
+    "activityBarBadge": [
+      "background",
+      "foreground"
+    ],
+    "activityBarTop": [
+      "activeBackground",
+      "activeBorder",
+      "background",
+      "dropBorder",
+      "foreground",
+      "inactiveForeground"
+    ],
+    "activityErrorBadge": [
+      "background",
+      "foreground"
+    ],
+    "activityWarningBadge": [
+      "background",
+      "foreground"
+    ],
+    "agentFeedbackEditorWidget": [
+      "background",
+      "border"
+    ],
+    "agentFeedbackInputWidget": [
+      "border"
+    ],
+    "agentSessionReadIndicator": [
+      "foreground"
+    ],
+    "agentSessionSelectedBadge": [
+      "border"
+    ],
+    "agentSessionSelectedUnfocusedBadge": [
+      "border"
+    ],
+    "agentStatusIndicator": [
+      "background"
+    ],
+    "agents": [
+      "background"
+    ],
+    "agentsBadge": [
+      "background",
+      "foreground"
+    ],
+    "agentsBottomPanel": [
+      "border"
+    ],
+    "agentsCard": [
+      "border"
+    ],
+    "agentsChatInput": [
+      "background",
+      "border",
+      "focusBorder",
+      "foreground",
+      "placeholderForeground"
+    ],
+    "agentsDetail": [
+      "background"
+    ],
+    "agentsGradient": [
+      "tintColor"
+    ],
+    "agentsNewSessionButton": [
+      "background",
+      "border",
+      "foreground",
+      "hoverBackground"
+    ],
+    "agentsPanel": [
+      "background",
+      "border",
+      "foreground"
+    ],
+    "agentsUnreadBadge": [
+      "background",
+      "foreground"
+    ],
+    "agentsUpdateButton": [
+      "downloadedBackground",
+      "downloadingBackground"
+    ],
+    "agentsVoice": [
+      "speakingBackground",
+      "speakingForeground"
+    ],
+    "badge": [
+      "background",
+      "foreground"
+    ],
+    "banner": [
+      "background",
+      "foreground",
+      "iconForeground"
+    ],
+    "breadcrumb": [
+      "activeSelectionForeground",
+      "background",
+      "focusForeground",
+      "foreground"
+    ],
+    "breadcrumbPicker": [
+      "background"
+    ],
+    "browser": [
+      "border"
+    ],
+    "button": [
+      "background",
+      "border",
+      "foreground",
+      "hoverBackground",
+      "secondaryBackground",
+      "secondaryBorder",
+      "secondaryForeground",
+      "secondaryHoverBackground",
+      "separator"
+    ],
+    "chart": [
+      "axis",
+      "guide",
+      "line"
+    ],
+    "charts": [
+      "blue",
+      "foreground",
+      "green",
+      "lines",
+      "orange",
+      "purple",
+      "red",
+      "yellow"
+    ],
+    "chat": [
+      "avatarBackground",
+      "avatarForeground",
+      "checkpointSeparator",
+      "dictationActiveMicGlow",
+      "editedFileForeground",
+      "findMatchBackground",
+      "findMatchHighlightBackground",
+      "inputWorkingBorderColor1",
+      "inputWorkingBorderColor2",
+      "inputWorkingBorderColor3",
+      "linesAddedForeground",
+      "linesRemovedForeground",
+      "mcpCompatibilityWarningForeground",
+      "requestBackground",
+      "requestBorder",
+      "requestBubbleBackground",
+      "requestBubbleHoverBackground",
+      "requestCodeBorder",
+      "slashCommandBackground",
+      "slashCommandForeground",
+      "statusBackground",
+      "thinkingShimmer",
+      "voiceGlowBaseColor",
+      "voiceListeningGlow",
+      "workingProgressInsidersIconForeground",
+      "workingProgressStableIconForeground"
+    ],
+    "chat.sessionStateIndicator": [
+      "inProgressBorder",
+      "needsInputBorder",
+      "unvisitedBorder"
+    ],
+    "checkbox": [
+      "background",
+      "border",
+      "foreground",
+      "selectBackground",
+      "selectBorder"
+    ],
+    "checkbox.disabled": [
+      "background",
+      "foreground"
+    ],
+    "commandCenter": [
+      "activeBackground",
+      "activeBorder",
+      "activeForeground",
+      "background",
+      "border",
+      "debuggingBackground",
+      "foreground",
+      "inactiveBorder",
+      "inactiveForeground"
+    ],
+    "commentsView": [
+      "resolvedIcon",
+      "unresolvedIcon"
+    ],
+    "_root": [
+      "contrastActiveBorder",
+      "contrastBorder",
+      "descriptionForeground",
+      "disabledForeground",
+      "errorForeground",
+      "focusBorder",
+      "foreground",
+      "strongForeground"
+    ],
+    "debugConsole": [
+      "errorForeground",
+      "infoForeground",
+      "sourceForeground",
+      "warningForeground"
+    ],
+    "debugConsoleInputIcon": [
+      "foreground"
+    ],
+    "debugExceptionWidget": [
+      "background",
+      "border"
+    ],
+    "debugIcon": [
+      "breakpointCurrentStackframeForeground",
+      "breakpointDisabledForeground",
+      "breakpointForeground",
+      "breakpointStackframeForeground",
+      "breakpointUnverifiedForeground",
+      "continueForeground",
+      "disconnectForeground",
+      "pauseForeground",
+      "restartForeground",
+      "startForeground",
+      "stepBackForeground",
+      "stepIntoForeground",
+      "stepOutForeground",
+      "stepOverForeground",
+      "stopForeground"
+    ],
+    "debugTokenExpression": [
+      "boolean",
+      "error",
+      "name",
+      "number",
+      "string",
+      "type",
+      "value"
+    ],
+    "debugToolBar": [
+      "background",
+      "border"
+    ],
+    "debugView": [
+      "exceptionLabelBackground",
+      "exceptionLabelForeground",
+      "stateLabelBackground",
+      "stateLabelForeground",
+      "valueChangedHighlight"
+    ],
+    "diffEditor": [
+      "border",
+      "diagonalFill",
+      "insertedLineBackground",
+      "insertedTextBackground",
+      "insertedTextBorder",
+      "removedLineBackground",
+      "removedTextBackground",
+      "removedTextBorder",
+      "unchangedCodeBackground",
+      "unchangedRegionBackground",
+      "unchangedRegionForeground",
+      "unchangedRegionShadow"
+    ],
+    "diffEditor.move": [
+      "border"
+    ],
+    "diffEditor.moveActive": [
+      "border"
+    ],
+    "diffEditorGutter": [
+      "insertedLineBackground",
+      "removedLineBackground"
+    ],
+    "diffEditorOverview": [
+      "insertedForeground",
+      "removedForeground"
+    ],
+    "dropdown": [
+      "background",
+      "border",
+      "foreground",
+      "listBackground"
+    ],
+    "editor": [
+      "background",
+      "border",
+      "compositionBorder",
+      "findMatchBackground",
+      "findMatchBorder",
+      "findMatchForeground",
+      "findMatchHighlightBackground",
+      "findMatchHighlightBorder",
+      "findMatchHighlightForeground",
+      "findRangeHighlightBackground",
+      "findRangeHighlightBorder",
+      "focusedStackFrameHighlightBackground",
+      "foldBackground",
+      "foldPlaceholderForeground",
+      "foreground",
+      "hoverHighlightBackground",
+      "inactiveLineHighlightBackground",
+      "inactiveSelectionBackground",
+      "inlineValuesBackground",
+      "inlineValuesForeground",
+      "lineHighlightBackground",
+      "lineHighlightBorder",
+      "linkedEditingBackground",
+      "rangeHighlightBackground",
+      "rangeHighlightBorder",
+      "selectionBackground",
+      "selectionForeground",
+      "selectionHighlightBackground",
+      "selectionHighlightBorder",
+      "snippetFinalTabstopHighlightBackground",
+      "snippetFinalTabstopHighlightBorder",
+      "snippetTabstopHighlightBackground",
+      "snippetTabstopHighlightBorder",
+      "stackFrameHighlightBackground",
+      "symbolHighlightBackground",
+      "symbolHighlightBorder",
+      "wordHighlightBackground",
+      "wordHighlightBorder",
+      "wordHighlightStrongBackground",
+      "wordHighlightStrongBorder",
+      "wordHighlightTextBackground",
+      "wordHighlightTextBorder"
+    ],
+    "editor.placeholder": [
+      "foreground"
+    ],
+    "editorActionList": [
+      "background",
+      "focusBackground",
+      "focusForeground",
+      "foreground"
+    ],
+    "editorBracketHighlight": [
+      "foreground1",
+      "foreground2",
+      "foreground3",
+      "foreground4",
+      "foreground5",
+      "foreground6"
+    ],
+    "editorBracketHighlight.unexpectedBracket": [
+      "foreground"
+    ],
+    "editorBracketMatch": [
+      "background",
+      "border",
+      "foreground"
+    ],
+    "editorBracketPairGuide": [
+      "activeBackground1",
+      "activeBackground2",
+      "activeBackground3",
+      "activeBackground4",
+      "activeBackground5",
+      "activeBackground6",
+      "background1",
+      "background2",
+      "background3",
+      "background4",
+      "background5",
+      "background6"
+    ],
+    "editorCodeLens": [
+      "foreground"
+    ],
+    "editorCommentsWidget": [
+      "rangeActiveBackground",
+      "rangeBackground",
+      "replyInputBackground",
+      "resolvedBorder",
+      "unresolvedBorder"
+    ],
+    "editorCursor": [
+      "background",
+      "foreground"
+    ],
+    "editorError": [
+      "background",
+      "border",
+      "foreground"
+    ],
+    "editorGhostText": [
+      "background",
+      "border",
+      "foreground"
+    ],
+    "editorGroup": [
+      "border",
+      "dropBackground",
+      "dropIntoPromptBackground",
+      "dropIntoPromptBorder",
+      "dropIntoPromptForeground",
+      "emptyBackground",
+      "focusedEmptyBorder"
+    ],
+    "editorGroupHeader": [
+      "border",
+      "connectedTabsBackground",
+      "noTabsBackground",
+      "tabsBackground",
+      "tabsBorder"
+    ],
+    "editorGutter": [
+      "addedBackground",
+      "addedSecondaryBackground",
+      "background",
+      "commentDraftGlyphForeground",
+      "commentGlyphForeground",
+      "commentRangeForeground",
+      "commentUnresolvedGlyphForeground",
+      "deletedBackground",
+      "deletedSecondaryBackground",
+      "foldingControlForeground",
+      "itemBackground",
+      "itemGlyphForeground",
+      "modifiedBackground",
+      "modifiedSecondaryBackground"
+    ],
+    "editorHint": [
+      "border",
+      "foreground"
+    ],
+    "editorHoverWidget": [
+      "background",
+      "border",
+      "foreground",
+      "highlightForeground",
+      "statusBarBackground"
+    ],
+    "editorIndentGuide": [
+      "activeBackground1",
+      "activeBackground2",
+      "activeBackground3",
+      "activeBackground4",
+      "activeBackground5",
+      "activeBackground6",
+      "background1",
+      "background2",
+      "background3",
+      "background4",
+      "background5",
+      "background6"
+    ],
+    "editorInfo": [
+      "background",
+      "border",
+      "foreground"
+    ],
+    "editorInlayHint": [
+      "background",
+      "foreground",
+      "parameterBackground",
+      "parameterForeground",
+      "typeBackground",
+      "typeForeground"
+    ],
+    "editorLightBulb": [
+      "foreground"
+    ],
+    "editorLightBulbAi": [
+      "foreground"
+    ],
+    "editorLightBulbAutoFix": [
+      "foreground"
+    ],
+    "editorLineNumber": [
+      "activeForeground",
+      "dimmedForeground",
+      "foreground"
+    ],
+    "editorLink": [
+      "activeForeground"
+    ],
+    "editorMarkerNavigation": [
+      "background"
+    ],
+    "editorMarkerNavigationError": [
+      "background",
+      "headerBackground"
+    ],
+    "editorMarkerNavigationInfo": [
+      "background",
+      "headerBackground"
+    ],
+    "editorMarkerNavigationWarning": [
+      "background",
+      "headerBackground"
+    ],
+    "editorMinimap": [
+      "inlineChatInserted"
+    ],
+    "editorMultiCursor.primary": [
+      "background",
+      "foreground"
+    ],
+    "editorMultiCursor.secondary": [
+      "background",
+      "foreground"
+    ],
+    "editorOverviewRuler": [
+      "addedForeground",
+      "agentFeedbackForeground",
+      "background",
+      "border",
+      "bracketMatchForeground",
+      "commentDraftForeground",
+      "commentForeground",
+      "commentUnresolvedForeground",
+      "commonContentForeground",
+      "currentContentForeground",
+      "deletedForeground",
+      "errorForeground",
+      "findMatchForeground",
+      "incomingContentForeground",
+      "infoForeground",
+      "inlineChatInserted",
+      "inlineChatRemoved",
+      "modifiedForeground",
+      "rangeHighlightForeground",
+      "selectionHighlightForeground",
+      "warningForeground",
+      "wordHighlightForeground",
+      "wordHighlightStrongForeground",
+      "wordHighlightTextForeground"
+    ],
+    "editorPane": [
+      "background"
+    ],
+    "editorRuler": [
+      "foreground"
+    ],
+    "editorStickyScroll": [
+      "background",
+      "border",
+      "shadow"
+    ],
+    "editorStickyScrollGutter": [
+      "background"
+    ],
+    "editorStickyScrollHover": [
+      "background"
+    ],
+    "editorSuggestWidget": [
+      "background",
+      "border",
+      "focusHighlightForeground",
+      "focusOutline",
+      "foreground",
+      "highlightForeground",
+      "selectedBackground",
+      "selectedForeground",
+      "selectedIconForeground"
+    ],
+    "editorSuggestWidgetStatus": [
+      "foreground"
+    ],
+    "editorUnicodeHighlight": [
+      "background",
+      "border"
+    ],
+    "editorUnnecessaryCode": [
+      "border",
+      "opacity"
+    ],
+    "editorWarning": [
+      "background",
+      "border",
+      "foreground"
+    ],
+    "editorWhitespace": [
+      "foreground"
+    ],
+    "editorWidget": [
+      "background",
+      "border",
+      "foreground",
+      "resizeBorder"
+    ],
+    "editorWordWrapIndicator": [
+      "foreground"
+    ],
+    "extensionBadge": [
+      "remoteBackground",
+      "remoteForeground"
+    ],
+    "extensionButton": [
+      "background",
+      "border",
+      "foreground",
+      "hoverBackground",
+      "prominentBackground",
+      "prominentForeground",
+      "prominentHoverBackground",
+      "separator"
+    ],
+    "extensionIcon": [
+      "preReleaseForeground",
+      "privateForeground",
+      "sponsorForeground",
+      "starForeground",
+      "verifiedForeground"
+    ],
+    "git.blame": [
+      "editorDecorationForeground"
+    ],
+    "gitDecoration": [
+      "addedResourceForeground",
+      "conflictingResourceForeground",
+      "deletedResourceForeground",
+      "ignoredResourceForeground",
+      "modifiedResourceForeground",
+      "renamedResourceForeground",
+      "stageDeletedResourceForeground",
+      "stageModifiedResourceForeground",
+      "submoduleResourceForeground",
+      "untrackedResourceForeground"
+    ],
+    "icon": [
+      "foreground"
+    ],
+    "inactiveSessionView": [
+      "background",
+      "foreground"
+    ],
+    "inlineChat": [
+      "background",
+      "border",
+      "foreground",
+      "shadow"
+    ],
+    "inlineChatDiff": [
+      "inserted",
+      "removed"
+    ],
+    "inlineChatInput": [
+      "background",
+      "border",
+      "focusBorder",
+      "placeholderForeground"
+    ],
+    "inlineEdit.gutterIndicator": [
+      "background",
+      "primaryBackground",
+      "primaryBorder",
+      "primaryForeground",
+      "secondaryBackground",
+      "secondaryBorder",
+      "secondaryForeground",
+      "successfulBackground",
+      "successfulBorder",
+      "successfulForeground"
+    ],
+    "inlineEdit": [
+      "modifiedBackground",
+      "modifiedBorder",
+      "modifiedChangedLineBackground",
+      "modifiedChangedTextBackground",
+      "originalBackground",
+      "originalBorder",
+      "originalChangedLineBackground",
+      "originalChangedTextBackground",
+      "tabWillAcceptModifiedBorder",
+      "tabWillAcceptOriginalBorder"
+    ],
+    "input": [
+      "background",
+      "border",
+      "foreground",
+      "placeholderForeground"
+    ],
+    "inputOption": [
+      "activeBackground",
+      "activeBorder",
+      "activeForeground",
+      "hoverBackground"
+    ],
+    "inputValidation": [
+      "errorBackground",
+      "errorBorder",
+      "errorForeground",
+      "infoBackground",
+      "infoBorder",
+      "infoForeground",
+      "warningBackground",
+      "warningBorder",
+      "warningForeground"
+    ],
+    "interactive": [
+      "activeCodeBorder",
+      "inactiveCodeBorder"
+    ],
+    "keybindingLabel": [
+      "background",
+      "border",
+      "bottomBorder",
+      "foreground"
+    ],
+    "keybindingTable": [
+      "headerBackground",
+      "rowsBackground"
+    ],
+    "list": [
+      "activeSelectionBackground",
+      "activeSelectionForeground",
+      "activeSelectionIconForeground",
+      "deemphasizedForeground",
+      "dropBackground",
+      "dropBetweenBackground",
+      "errorForeground",
+      "filterMatchBackground",
+      "filterMatchBorder",
+      "focusAndSelectionOutline",
+      "focusBackground",
+      "focusForeground",
+      "focusHighlightForeground",
+      "focusOutline",
+      "highlightForeground",
+      "hoverBackground",
+      "hoverForeground",
+      "inactiveFocusBackground",
+      "inactiveFocusOutline",
+      "inactiveSelectionBackground",
+      "inactiveSelectionForeground",
+      "inactiveSelectionIconForeground",
+      "invalidItemForeground",
+      "warningForeground"
+    ],
+    "listFilterWidget": [
+      "background",
+      "noMatchesOutline",
+      "outline",
+      "shadow"
+    ],
+    "markdownAlert.caution": [
+      "foreground"
+    ],
+    "markdownAlert.important": [
+      "foreground"
+    ],
+    "markdownAlert.note": [
+      "foreground"
+    ],
+    "markdownAlert.tip": [
+      "foreground"
+    ],
+    "markdownAlert.warning": [
+      "foreground"
+    ],
+    "mcpIcon": [
+      "starForeground"
+    ],
+    "menu": [
+      "background",
+      "border",
+      "foreground",
+      "selectionBackground",
+      "selectionBorder",
+      "selectionForeground",
+      "separatorBackground"
+    ],
+    "menubar": [
+      "selectionBackground",
+      "selectionBorder",
+      "selectionForeground"
+    ],
+    "merge": [
+      "border",
+      "commonContentBackground",
+      "commonHeaderBackground",
+      "currentContentBackground",
+      "currentHeaderBackground",
+      "incomingContentBackground",
+      "incomingHeaderBackground"
+    ],
+    "mergeEditor.change": [
+      "background"
+    ],
+    "mergeEditor.change.word": [
+      "background"
+    ],
+    "mergeEditor.changeBase": [
+      "background"
+    ],
+    "mergeEditor.changeBase.word": [
+      "background"
+    ],
+    "mergeEditor.conflict.handled": [
+      "minimapOverViewRuler"
+    ],
+    "mergeEditor.conflict.handledFocused": [
+      "border"
+    ],
+    "mergeEditor.conflict.handledUnfocused": [
+      "border"
+    ],
+    "mergeEditor.conflict.input1": [
+      "background"
+    ],
+    "mergeEditor.conflict.input2": [
+      "background"
+    ],
+    "mergeEditor.conflict.unhandled": [
+      "minimapOverViewRuler"
+    ],
+    "mergeEditor.conflict.unhandledFocused": [
+      "border"
+    ],
+    "mergeEditor.conflict.unhandledUnfocused": [
+      "border"
+    ],
+    "mergeEditor.conflictingLines": [
+      "background"
+    ],
+    "minimap": [
+      "background",
+      "chatEditHighlight",
+      "errorHighlight",
+      "findMatchHighlight",
+      "foregroundOpacity",
+      "infoHighlight",
+      "selectionHighlight",
+      "selectionOccurrenceHighlight",
+      "warningHighlight"
+    ],
+    "minimapGutter": [
+      "addedBackground",
+      "deletedBackground",
+      "modifiedBackground"
+    ],
+    "minimapSlider": [
+      "activeBackground",
+      "background",
+      "hoverBackground"
+    ],
+    "modernActivityBar": [
+      "background",
+      "border",
+      "inactiveBackground"
+    ],
+    "modernActivityBarItem": [
+      "activeBackground",
+      "activeForeground",
+      "hoverBackground",
+      "hoverForeground"
+    ],
+    "modernEditorTab": [
+      "activeActionBackground",
+      "activeBackground",
+      "activeForeground",
+      "activeHoverActionBackground",
+      "activeHoverBackground",
+      "hoverActionBackground",
+      "hoverBackground",
+      "hoverForeground",
+      "inactiveBackground",
+      "selectedActionBackground"
+    ],
+    "modernPanel": [
+      "border"
+    ],
+    "modernSash": [
+      "gripForeground"
+    ],
+    "modernTab": [
+      "activeBackground",
+      "activeForeground",
+      "hoverBackground",
+      "hoverForeground"
+    ],
+    "modernUI": [
+      "inactiveShellBackground",
+      "shellBackground"
+    ],
+    "multiDiffEditor": [
+      "background",
+      "border",
+      "headerBackground"
+    ],
+    "notebook": [
+      "cellBorderColor",
+      "cellEditorBackground",
+      "cellHoverBackground",
+      "cellInsertionIndicator",
+      "cellStatusBarItemHoverBackground",
+      "cellToolbarSeparator",
+      "editorBackground",
+      "focusedCellBackground",
+      "focusedCellBorder",
+      "focusedEditorBorder",
+      "inactiveFocusedCellBorder",
+      "inactiveSelectedCellBorder",
+      "outputContainerBackgroundColor",
+      "outputContainerBorderColor",
+      "selectedCellBackground",
+      "selectedCellBorder",
+      "symbolHighlightBackground"
+    ],
+    "notebookEditorOverviewRuler": [
+      "runningCellForeground"
+    ],
+    "notebookScrollbarSlider": [
+      "activeBackground",
+      "background",
+      "hoverBackground"
+    ],
+    "notebookStatusErrorIcon": [
+      "foreground"
+    ],
+    "notebookStatusRunningIcon": [
+      "foreground"
+    ],
+    "notebookStatusSuccessIcon": [
+      "foreground"
+    ],
+    "notificationCenter": [
+      "border"
+    ],
+    "notificationCenterHeader": [
+      "background",
+      "foreground"
+    ],
+    "notificationLink": [
+      "foreground"
+    ],
+    "notificationToast": [
+      "border"
+    ],
+    "notifications": [
+      "background",
+      "border",
+      "foreground"
+    ],
+    "notificationsErrorIcon": [
+      "foreground"
+    ],
+    "notificationsInfoIcon": [
+      "foreground"
+    ],
+    "notificationsWarningIcon": [
+      "foreground"
+    ],
+    "outputView": [
+      "background"
+    ],
+    "outputViewStickyScroll": [
+      "background"
+    ],
+    "panel": [
+      "background",
+      "border",
+      "dropBorder"
+    ],
+    "panelInput": [
+      "border"
+    ],
+    "panelSection": [
+      "border",
+      "dropBackground"
+    ],
+    "panelSectionHeader": [
+      "background",
+      "border",
+      "foreground"
+    ],
+    "panelStickyScroll": [
+      "background",
+      "border",
+      "shadow"
+    ],
+    "panelTitle": [
+      "activeBorder",
+      "activeForeground",
+      "border",
+      "inactiveForeground"
+    ],
+    "panelTitleBadge": [
+      "background",
+      "foreground"
+    ],
+    "peekView": [
+      "border"
+    ],
+    "peekViewEditor": [
+      "background",
+      "matchHighlightBackground",
+      "matchHighlightBorder"
+    ],
+    "peekViewEditorGutter": [
+      "background"
+    ],
+    "peekViewEditorStickyScroll": [
+      "background"
+    ],
+    "peekViewEditorStickyScrollGutter": [
+      "background"
+    ],
+    "peekViewResult": [
+      "background",
+      "fileForeground",
+      "lineForeground",
+      "matchHighlightBackground",
+      "selectionBackground",
+      "selectionForeground"
+    ],
+    "peekViewTitle": [
+      "background"
+    ],
+    "peekViewTitleDescription": [
+      "foreground"
+    ],
+    "peekViewTitleLabel": [
+      "foreground"
+    ],
+    "pickerGroup": [
+      "border",
+      "foreground"
+    ],
+    "ports": [
+      "iconRunningProcessForeground"
+    ],
+    "problemsErrorIcon": [
+      "foreground"
+    ],
+    "problemsInfoIcon": [
+      "foreground"
+    ],
+    "problemsWarningIcon": [
+      "foreground"
+    ],
+    "profileBadge": [
+      "background",
+      "foreground"
+    ],
+    "profiles": [
+      "sashBorder"
+    ],
+    "progressBar": [
+      "background"
+    ],
+    "quickInput": [
+      "background",
+      "foreground"
+    ],
+    "quickInputList": [
+      "focusBackground",
+      "focusForeground",
+      "focusHighlightForeground",
+      "focusIconForeground"
+    ],
+    "quickInputTitle": [
+      "background"
+    ],
+    "radio": [
+      "activeBackground",
+      "activeBorder",
+      "activeForeground",
+      "inactiveBackground",
+      "inactiveBorder",
+      "inactiveForeground",
+      "inactiveHoverBackground"
+    ],
+    "sash": [
+      "hoverBorder"
+    ],
+    "scmGraph": [
+      "foreground1",
+      "foreground2",
+      "foreground3",
+      "foreground4",
+      "foreground5",
+      "historyItemBaseRefColor",
+      "historyItemHoverAdditionsForeground",
+      "historyItemHoverDefaultLabelBackground",
+      "historyItemHoverDefaultLabelForeground",
+      "historyItemHoverDeletionsForeground",
+      "historyItemHoverLabelForeground",
+      "historyItemRefColor",
+      "historyItemRemoteRefColor"
+    ],
+    "scrollbar": [
+      "background",
+      "shadow"
+    ],
+    "scrollbarSlider": [
+      "activeBackground",
+      "background",
+      "hoverBackground"
+    ],
+    "search": [
+      "resultsInfoForeground"
+    ],
+    "searchEditor": [
+      "findMatchBackground",
+      "findMatchBorder",
+      "textInputBorder"
+    ],
+    "selection": [
+      "background"
+    ],
+    "settings": [
+      "checkboxBackground",
+      "checkboxBorder",
+      "checkboxForeground",
+      "dropdownBackground",
+      "dropdownBorder",
+      "dropdownForeground",
+      "dropdownListBorder",
+      "focusedRowBackground",
+      "focusedRowBorder",
+      "headerBorder",
+      "headerForeground",
+      "modifiedItemIndicator",
+      "numberInputBackground",
+      "numberInputBorder",
+      "numberInputForeground",
+      "rowHoverBackground",
+      "sashBorder",
+      "settingsHeaderHoverForeground",
+      "textInputBackground",
+      "textInputBorder",
+      "textInputForeground"
+    ],
+    "sideBar": [
+      "background",
+      "border",
+      "dropBackground",
+      "foreground"
+    ],
+    "sideBarActivityBarTop": [
+      "border"
+    ],
+    "sideBarSectionHeader": [
+      "background",
+      "border",
+      "foreground"
+    ],
+    "sideBarStickyScroll": [
+      "background",
+      "border",
+      "shadow"
+    ],
+    "sideBarTitle": [
+      "background",
+      "border",
+      "foreground"
+    ],
+    "sideBySideEditor": [
+      "horizontalBorder",
+      "verticalBorder"
+    ],
+    "simpleFindWidget": [
+      "sashBorder"
+    ],
+    "statusBar": [
+      "background",
+      "border",
+      "debuggingBackground",
+      "debuggingBorder",
+      "debuggingForeground",
+      "focusBorder",
+      "foreground",
+      "inactiveBackground",
+      "noFolderBackground",
+      "noFolderBorder",
+      "noFolderForeground"
+    ],
+    "statusBarItem": [
+      "activeBackground",
+      "compactHoverBackground",
+      "errorBackground",
+      "errorForeground",
+      "errorHoverBackground",
+      "errorHoverForeground",
+      "focusBorder",
+      "hoverBackground",
+      "hoverForeground",
+      "offlineBackground",
+      "offlineForeground",
+      "offlineHoverBackground",
+      "offlineHoverForeground",
+      "prominentBackground",
+      "prominentForeground",
+      "prominentHoverBackground",
+      "prominentHoverForeground",
+      "remoteBackground",
+      "remoteForeground",
+      "remoteHoverBackground",
+      "remoteHoverForeground",
+      "warningBackground",
+      "warningForeground",
+      "warningHoverBackground",
+      "warningHoverForeground"
+    ],
+    "surface": [
+      "background",
+      "border",
+      "foreground"
+    ],
+    "symbolIcon": [
+      "arrayForeground",
+      "booleanForeground",
+      "classForeground",
+      "colorForeground",
+      "constantForeground",
+      "constructorForeground",
+      "enumeratorForeground",
+      "enumeratorMemberForeground",
+      "eventForeground",
+      "fieldForeground",
+      "fileForeground",
+      "folderForeground",
+      "functionForeground",
+      "interfaceForeground",
+      "keyForeground",
+      "keywordForeground",
+      "methodForeground",
+      "moduleForeground",
+      "namespaceForeground",
+      "nullForeground",
+      "numberForeground",
+      "objectForeground",
+      "operatorForeground",
+      "packageForeground",
+      "propertyForeground",
+      "referenceForeground",
+      "snippetForeground",
+      "stringForeground",
+      "structForeground",
+      "textForeground",
+      "typeParameterForeground",
+      "unitForeground",
+      "variableForeground"
+    ],
+    "tab": [
+      "activeBackground",
+      "activeBorder",
+      "activeBorderTop",
+      "activeForeground",
+      "activeModifiedBorder",
+      "border",
+      "divider",
+      "dragAndDropBorder",
+      "hoverBackground",
+      "hoverBorder",
+      "hoverForeground",
+      "inactiveBackground",
+      "inactiveForeground",
+      "inactiveModifiedBorder",
+      "lastPinnedBorder",
+      "selectedBackground",
+      "selectedBorderTop",
+      "selectedForeground",
+      "unfocusedActiveBackground",
+      "unfocusedActiveBorder",
+      "unfocusedActiveBorderTop",
+      "unfocusedActiveForeground",
+      "unfocusedActiveModifiedBorder",
+      "unfocusedHoverBackground",
+      "unfocusedHoverBorder",
+      "unfocusedHoverForeground",
+      "unfocusedInactiveBackground",
+      "unfocusedInactiveForeground",
+      "unfocusedInactiveModifiedBorder"
+    ],
+    "terminal": [
+      "ansiBlack",
+      "ansiBlue",
+      "ansiBrightBlack",
+      "ansiBrightBlue",
+      "ansiBrightCyan",
+      "ansiBrightGreen",
+      "ansiBrightMagenta",
+      "ansiBrightRed",
+      "ansiBrightWhite",
+      "ansiBrightYellow",
+      "ansiCyan",
+      "ansiGreen",
+      "ansiMagenta",
+      "ansiRed",
+      "ansiWhite",
+      "ansiYellow",
+      "background",
+      "border",
+      "dropBackground",
+      "findMatchBackground",
+      "findMatchBorder",
+      "findMatchHighlightBackground",
+      "findMatchHighlightBorder",
+      "foreground",
+      "hoverHighlightBackground",
+      "inactiveSelectionBackground",
+      "initialHintForeground",
+      "selectionBackground",
+      "selectionForeground"
+    ],
+    "terminal.tab": [
+      "activeBorder"
+    ],
+    "terminalCommandDecoration": [
+      "defaultBackground",
+      "errorBackground",
+      "successBackground"
+    ],
+    "terminalCommandGuide": [
+      "foreground"
+    ],
+    "terminalCursor": [
+      "background",
+      "foreground"
+    ],
+    "terminalOverviewRuler": [
+      "border",
+      "cursorForeground",
+      "findMatchForeground"
+    ],
+    "terminalStickyScroll": [
+      "background",
+      "border"
+    ],
+    "terminalStickyScrollHover": [
+      "background"
+    ],
+    "terminalSymbolIcon": [
+      "aliasForeground",
+      "argumentForeground",
+      "branchForeground",
+      "commitForeground",
+      "fileForeground",
+      "flagForeground",
+      "folderForeground",
+      "inlineSuggestionForeground",
+      "methodForeground",
+      "optionForeground",
+      "optionValueForeground",
+      "pullRequestDoneForeground",
+      "pullRequestForeground",
+      "remoteForeground",
+      "stashForeground",
+      "symbolText",
+      "symbolicLinkFileForeground",
+      "symbolicLinkFolderForeground",
+      "tagForeground"
+    ],
+    "testing": [
+      "coverCountBadgeBackground",
+      "coverCountBadgeForeground",
+      "coveredBackground",
+      "coveredBorder",
+      "coveredGutterBackground",
+      "coveredMinimapBackground",
+      "iconErrored",
+      "iconFailed",
+      "iconPassed",
+      "iconQueued",
+      "iconSkipped",
+      "iconUnset",
+      "messagePeekBorder",
+      "messagePeekHeaderBackground",
+      "peekBorder",
+      "peekHeaderBackground",
+      "runAction",
+      "uncoveredBackground",
+      "uncoveredBorder",
+      "uncoveredBranchBackground",
+      "uncoveredGutterBackground",
+      "uncoveredMinimapBackground"
+    ],
+    "testing.iconErrored": [
+      "retired"
+    ],
+    "testing.iconFailed": [
+      "retired"
+    ],
+    "testing.iconPassed": [
+      "retired"
+    ],
+    "testing.iconQueued": [
+      "retired"
+    ],
+    "testing.iconSkipped": [
+      "retired"
+    ],
+    "testing.iconUnset": [
+      "retired"
+    ],
+    "testing.message.error": [
+      "badgeBackground",
+      "badgeBorder",
+      "badgeForeground",
+      "lineBackground"
+    ],
+    "testing.message.info": [
+      "decorationForeground",
+      "lineBackground"
+    ],
+    "textBlockQuote": [
+      "background",
+      "border"
+    ],
+    "textCodeBlock": [
+      "background"
+    ],
+    "textLink": [
+      "activeForeground",
+      "foreground"
+    ],
+    "textPreformat": [
+      "background",
+      "border",
+      "foreground"
+    ],
+    "textSeparator": [
+      "foreground"
+    ],
+    "titleBar": [
+      "activeBackground",
+      "activeForeground",
+      "border",
+      "inactiveBackground",
+      "inactiveForeground"
+    ],
+    "toolbar": [
+      "activeBackground",
+      "hoverBackground",
+      "hoverOutline"
+    ],
+    "tree": [
+      "inactiveIndentGuidesStroke",
+      "indentGuidesStroke",
+      "tableColumnsBorder",
+      "tableOddRowsBackground"
+    ],
+    "walkThrough": [
+      "embeddedEditorBackground"
+    ],
+    "walkthrough.stepTitle": [
+      "foreground"
+    ],
+    "welcomePage": [
+      "background",
+      "tileBackground",
+      "tileBorder",
+      "tileHoverBackground"
+    ],
+    "welcomePage.progress": [
+      "background",
+      "foreground"
+    ],
+    "widget": [
+      "border",
+      "shadow"
+    ],
+    "window": [
+      "activeBorder",
+      "inactiveBorder"
+    ],
+    "agentsMobileDiff": [
+      "addedForeground",
+      "deletedForeground",
+      "modifiedForeground"
+    ]
   },
   "sourceCode": {
-    "agentsWindowGraphic": {
-      "orange": {
-        "$token": true
-      }
-    },
-    "chat": {
-      "fusionBadgeForeground": {
-        "$token": true
-      },
-      "fusionBadgeGradientEnd": {
-        "$token": true
-      },
-      "fusionBadgeGradientStart": {
-        "$token": true
-      }
-    }
+    "agentsWindowGraphic": [
+      "orange"
+    ],
+    "chat": [
+      "fusionBadgeForeground",
+      "fusionBadgeGradientEnd",
+      "fusionBadgeGradientStart"
+    ]
   },
-  "nonStandard": {},
+  "nonStandard": [],
   "deprecated": {
-    "chat": {
-      "voiceSpeakingGlow": {
-        "$token": true
-      }
-    },
-    "editorActiveLineNumber": {
-      "foreground": {
-        "$token": true
-      }
-    },
-    "editorIndentGuide": {
-      "activeBackground": {
-        "$token": true
-      },
-      "background": {
-        "$token": true
-      }
-    },
-    "modernActivityBar": {
-      "activeBackground": {
-        "$token": true
-      },
-      "activeForeground": {
-        "$token": true
-      },
-      "hoverBackground": {
-        "$token": true
-      },
-      "hoverForeground": {
-        "$token": true
-      }
-    },
-    "quickInput": {
-      "list": {
-        "focusBackground": {
-          "$token": true
-        }
-      }
-    }
+    "chat": [
+      "voiceSpeakingGlow"
+    ],
+    "editorActiveLineNumber": [
+      "foreground"
+    ],
+    "editorIndentGuide": [
+      "activeBackground",
+      "background"
+    ],
+    "modernActivityBar": [
+      "activeBackground",
+      "activeForeground",
+      "hoverBackground",
+      "hoverForeground"
+    ],
+    "quickInput.list": [
+      "focusBackground"
+    ]
   }
 }

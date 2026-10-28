@@ -141,11 +141,20 @@ export async function bootstrapTokenData({ root = repositoryRoot, extensionSourc
     ].sort();
     if (category === "nonStandard" && !contributors.length)
       throw new Error(`No verified extension source for nonstandard UI token ${id}`);
-    insert(uiDefinitions[category], id, { $token: true });
+    const [property, ...parents] = id.split(".").reverse();
+    const group = parents.reverse().join(".") || "_root";
+    uiDefinitions[category][group] ??= [];
+    uiDefinitions[category][group].push(property);
     insert(uiDetails[category], id, {
       description: records[0].description || `UNREVIEWED: Describe UI token ${id}.`,
       ...(category === "nonStandard" ? { source: contributors } : {}),
     });
+  }
+
+  for (const category of Object.keys(uiDefinitions)) {
+    const groups = uiDefinitions[category];
+    for (const properties of Object.values(groups)) properties.sort();
+    if (!Object.keys(groups).length) uiDefinitions[category] = [];
   }
 
   for (const id of themeUiIds)

@@ -4,28 +4,92 @@
   "type": "object",
   "properties": {
     "standard": {
-      "type": "object",
-      "additionalProperties": {
-        "$ref": "#/definitions/standard"
-      }
+      "anyOf": [
+        {
+          "type": "array",
+          "maxItems": 0
+        },
+        {
+          "type": "object",
+          "propertyNames": {
+            "pattern": "^(?:_root|[a-zA-Z][\\w-]*(?:\\.[a-zA-Z][\\w-]*)*)$"
+          },
+          "additionalProperties": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "pattern": "^[a-zA-Z][\\w-]*$"
+            }
+          }
+        }
+      ]
     },
     "sourceCode": {
-      "type": "object",
-      "additionalProperties": {
-        "$ref": "#/definitions/sourceCode"
-      }
+      "anyOf": [
+        {
+          "type": "array",
+          "maxItems": 0
+        },
+        {
+          "type": "object",
+          "propertyNames": {
+            "pattern": "^(?:_root|[a-zA-Z][\\w-]*(?:\\.[a-zA-Z][\\w-]*)*)$"
+          },
+          "additionalProperties": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "pattern": "^[a-zA-Z][\\w-]*$"
+            }
+          }
+        }
+      ]
     },
     "nonStandard": {
-      "type": "object",
-      "additionalProperties": {
-        "$ref": "#/definitions/nonStandard"
-      }
+      "anyOf": [
+        {
+          "type": "array",
+          "maxItems": 0
+        },
+        {
+          "type": "object",
+          "propertyNames": {
+            "pattern": "^(?:_root|[a-zA-Z][\\w-]*(?:\\.[a-zA-Z][\\w-]*)*)$"
+          },
+          "additionalProperties": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "pattern": "^[a-zA-Z][\\w-]*$"
+            }
+          }
+        }
+      ]
     },
     "deprecated": {
-      "type": "object",
-      "additionalProperties": {
-        "$ref": "#/definitions/deprecated"
-      }
+      "anyOf": [
+        {
+          "type": "array",
+          "maxItems": 0
+        },
+        {
+          "type": "object",
+          "propertyNames": {
+            "pattern": "^(?:_root|[a-zA-Z][\\w-]*(?:\\.[a-zA-Z][\\w-]*)*)$"
+          },
+          "additionalProperties": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "pattern": "^[a-zA-Z][\\w-]*$"
+            }
+          }
+        }
+      ]
     }
   },
   "additionalProperties": false,
@@ -34,166 +98,5 @@
     "sourceCode",
     "nonStandard",
     "deprecated"
-  ],
-  "definitions": {
-    "standard": {
-      "anyOf": [
-        {
-          "type": "object",
-          "minProperties": 1,
-          "propertyNames": {
-            "pattern": "^[a-zA-Z][\\w-]*$"
-          },
-          "additionalProperties": {
-            "$ref": "#/definitions/standard"
-          }
-        },
-        {
-          "type": "object",
-          "properties": {
-            "$token": {
-              "const": true
-            },
-            "use": false
-          },
-          "additionalProperties": {
-            "$ref": "#/definitions/standard"
-          },
-          "required": [
-            "$token"
-          ],
-          "propertyNames": {
-            "anyOf": [
-              {
-                "pattern": "^[a-zA-Z][\\w-]*$"
-              },
-              {
-                "const": "$token"
-              }
-            ]
-          }
-        }
-      ]
-    },
-    "sourceCode": {
-      "anyOf": [
-        {
-          "type": "object",
-          "minProperties": 1,
-          "propertyNames": {
-            "pattern": "^[a-zA-Z][\\w-]*$"
-          },
-          "additionalProperties": {
-            "$ref": "#/definitions/sourceCode"
-          }
-        },
-        {
-          "type": "object",
-          "properties": {
-            "$token": {
-              "const": true
-            },
-            "use": false
-          },
-          "additionalProperties": {
-            "$ref": "#/definitions/sourceCode"
-          },
-          "required": [
-            "$token"
-          ],
-          "propertyNames": {
-            "anyOf": [
-              {
-                "pattern": "^[a-zA-Z][\\w-]*$"
-              },
-              {
-                "const": "$token"
-              }
-            ]
-          }
-        }
-      ]
-    },
-    "nonStandard": {
-      "anyOf": [
-        {
-          "type": "object",
-          "minProperties": 1,
-          "propertyNames": {
-            "pattern": "^[a-zA-Z][\\w-]*$"
-          },
-          "additionalProperties": {
-            "$ref": "#/definitions/nonStandard"
-          }
-        },
-        {
-          "type": "object",
-          "properties": {
-            "$token": {
-              "const": true
-            },
-            "use": {
-              "type": "string",
-              "pattern": "\\S"
-            }
-          },
-          "additionalProperties": {
-            "$ref": "#/definitions/nonStandard"
-          },
-          "required": [
-            "$token"
-          ],
-          "propertyNames": {
-            "anyOf": [
-              {
-                "pattern": "^[a-zA-Z][\\w-]*$"
-              },
-              {
-                "const": "$token"
-              }
-            ]
-          }
-        }
-      ]
-    },
-    "deprecated": {
-      "anyOf": [
-        {
-          "type": "object",
-          "minProperties": 1,
-          "propertyNames": {
-            "pattern": "^[a-zA-Z][\\w-]*$"
-          },
-          "additionalProperties": {
-            "$ref": "#/definitions/deprecated"
-          }
-        },
-        {
-          "type": "object",
-          "properties": {
-            "$token": {
-              "const": true
-            },
-            "use": false
-          },
-          "additionalProperties": {
-            "$ref": "#/definitions/deprecated"
-          },
-          "required": [
-            "$token"
-          ],
-          "propertyNames": {
-            "anyOf": [
-              {
-                "pattern": "^[a-zA-Z][\\w-]*$"
-              },
-              {
-                "const": "$token"
-              }
-            ]
-          }
-        }
-      ]
-    }
-  }
+  ]
 }
