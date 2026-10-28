@@ -60,15 +60,13 @@ export function validateSourceConfig(config) {
     if (!Array.isArray(resolution.inputs) || !resolution.inputs.length || resolution.inputs[0].id !== "vscode-stable")
       throw new Error("Recorded source inputs must begin with vscode-stable");
 
-    if (config.lastSuccessful.localSyntax !== undefined) {
-      fields(config.lastSuccessful.localSyntax, ["path", "revision"], "lastSuccessful.localSyntax");
+    fields(config.lastSuccessful.localSyntax, ["path", "revision"], "lastSuccessful.localSyntax");
 
-      if (
-        config.lastSuccessful.localSyntax.path !== "src/themes/prod/default/tokens/syntax/definitions.jsonc" ||
-        !/^sha256:[a-f0-9]{64}$/.test(config.lastSuccessful.localSyntax.revision)
-      )
-        throw new Error("Malformed immutable local syntax identity");
-    }
+    if (
+      config.lastSuccessful.localSyntax.path !== "src/themes/prod/default/tokens/syntax/definitions.jsonc" ||
+      !/^sha256:[a-f0-9]{64}$/.test(config.lastSuccessful.localSyntax.revision)
+    )
+      throw new Error("Malformed immutable local syntax identity");
 
     /** Input IDs must remain unique and immutable across replay. */
     const ids = new Set();
@@ -287,7 +285,7 @@ export function createRetrieval({
     await wait(ms, undefined, { signal });
   }
 
-  return { request, git, remaining, signal, pause };
+  return { request, git, remaining, pause };
 }
 
 /**

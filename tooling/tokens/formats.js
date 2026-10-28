@@ -4,7 +4,6 @@
  */
 
 import { findNodeAtLocation } from "jsonc-parser";
-import { validateHex } from "../shared/color-math.js";
 import { fields, object, parseJsonc } from "../shared/jsonc.js";
 
 /** Accepted roots, in canonical serialization order. */
@@ -230,9 +229,9 @@ export function decode(input, family, kind, { shared = false } = {}) {
     if (kind === "details") validateDetail(record, category, label, { shared, family });
 
     if (shared && kind === "definitions") {
-      fields(record, ["color", "colorReason", "use"], label);
-      validateHex(record.color, `${label}.color`);
-      nonempty(record.colorReason, `${label}.colorReason`);
+      fields(record, ["$token", "use"], label);
+
+      if (record.$token !== true) throw new Error(`${label}: shared definitions require $token: true`);
     }
 
     if (kind === "definitions" && Object.hasOwn(record, "use")) {
@@ -327,7 +326,9 @@ export function decode(input, family, kind, { shared = false } = {}) {
           fields(
             record,
             kind === "definitions"
-              ? [...definitionFields, ...(shared ? ["use"] : [])]
+              ? shared
+                ? ["$token", "use"]
+                : definitionFields
               : [...detailFields, ...(shared ? ["modified-desc"] : [])],
             location([category, type, suffix]),
           );
@@ -339,7 +340,9 @@ export function decode(input, family, kind, { shared = false } = {}) {
       /** Record vocabulary distinguishes nested UI children from authoring fields. */
       const allowed =
         kind === "definitions"
-          ? [...definitionFields, ...(shared ? ["use"] : [])]
+          ? shared
+            ? ["$token", "use"]
+            : definitionFields
           : [...detailFields, ...(shared ? ["modified-desc"] : [])];
 
       /**
@@ -352,7 +355,9 @@ export function decode(input, family, kind, { shared = false } = {}) {
 
         if (path.length && !Object.keys(node).length)
           throw new Error(
-            `${location([category, ...path])}: enabled entry requires styling; empty child nodes are not records`,
+            shared && kind === "definitions"
+              ? `${location([category, ...path])}: shared definitions require $token: true`
+              : `${location([category, ...path])}: enabled entry requires styling; empty child nodes are not records`,
           );
 
         /** Record fields are copied separately from child branches. */

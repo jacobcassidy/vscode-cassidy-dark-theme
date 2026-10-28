@@ -72,7 +72,7 @@
     "build:dev": "node scripts/themes/build.js --dev",
     "build:palette": "node scripts/themes/build.js --palette-only",
     "build:prod": "node scripts/themes/build.js",
-    "check": "npm run check:generated && npm run check:docs && npm run check:reachability && npm run check:prettier && npm run lint && npm run check:theme && npm test",
+    "check": "npm run check:theme && npm run check:docs && npm run check:reachability && npm run check:prettier && npm run lint && npm test",
     "check:docs": "node scripts/docs/check.js",
     "check:generated": "node scripts/themes/build.js --all --check",
     "check:prettier": "prettier . --check",

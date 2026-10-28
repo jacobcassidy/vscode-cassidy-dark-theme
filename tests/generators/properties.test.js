@@ -32,7 +32,7 @@ test("nested property addition preserves styles, disabled entries, parent record
 
   await writeFixture(
     join(root, "src/token-data/ui/definitions.jsonc"),
-    '{"standard":{},"sourceCode":{},"nonStandard":{"testing": {"iconFailed": {"color":"#0ff","colorReason":"UNREVIEWED: Added from a token template; choose an intentional color.","retired": {"color":"#0ff","colorReason":"UNREVIEWED: Added from a token template; choose an intentional color."}}},"zeta": {"foreground": {"color":"#0ff","colorReason":"UNREVIEWED: Added from a token template; choose an intentional color."}}},"deprecated":{}}',
+    '{"standard":{},"sourceCode":{},"nonStandard":{"testing": {"iconFailed": {"$token":true,"retired": {"$token":true}}},"zeta": {"foreground": {"$token":true}}},"deprecated":{}}',
   );
 
   await writeFixture(
@@ -79,7 +79,7 @@ test("shared descriptions copy history and usage without shared flags, while the
 
   await writeFixture(
     join(root, "src/token-data/ui/definitions.jsonc"),
-    '{"standard":{},"sourceCode":{},"nonStandard":{"new": {"foreground": {"color":"#0ff","colorReason":"UNREVIEWED: Added from a token template; choose an intentional color."}}},"deprecated":{}}',
+    '{"standard":{},"sourceCode":{},"nonStandard":{"new": {"foreground": {"$token":true}}},"deprecated":{}}',
   );
   await writeFixture(
     join(root, "src/token-data/ui/details.jsonc"),
@@ -141,7 +141,7 @@ test("selected fallback targets receive local additions without modifying their 
   await writeDefaultPaletteConfig(join(root, "src/themes/dev/untouched"));
   await writeFixture(
     join(root, "src/token-data/ui/definitions.jsonc"),
-    '{"standard":{},"sourceCode":{},"nonStandard":{"new": {"background": {"color":"#0ff","colorReason":"UNREVIEWED: Added from a token template; choose an intentional color."}}},"deprecated":{}}',
+    '{"standard":{},"sourceCode":{},"nonStandard":{"new": {"background": {"$token":true}}},"deprecated":{}}',
   );
 
   /** Original production input stays byte-identical. */

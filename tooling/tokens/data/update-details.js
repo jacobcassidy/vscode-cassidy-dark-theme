@@ -582,7 +582,7 @@ export async function updateTokenDetails({
     if (changed.length)
       throw Object.assign(new Error(`Shared detail refresh drift: ${changed.join(", ")}`), { proposals, warnings });
 
-    return { changed, proposals, warnings, resolution, replay: true };
+    return { changed, proposals, warnings, replay: true };
   }
 
   await withGuards([root], async ([owner]) => {
@@ -606,5 +606,5 @@ export async function updateTokenDetails({
     });
   });
 
-  return { changed, proposals, warnings, resolution, replay };
+  return { changed, proposals, warnings, replay };
 }

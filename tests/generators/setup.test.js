@@ -26,12 +26,12 @@ for (const group of ["prod", "dev"]) {
 
     await writeFixture(
       join(root, "src/token-data/ui/definitions.jsonc"),
-      '{"standard":{},"sourceCode":{},"nonStandard":{"a": {"foreground": {"color":"#0ff","colorReason":"UNREVIEWED: Added from a token template; choose an intentional color."}},"z": {"background": {"color":"#0ff","colorReason":"UNREVIEWED: Added from a token template; choose an intentional color."}}},"deprecated":{}}',
+      '{"standard":{},"sourceCode":{},"nonStandard":{"a": {"foreground": {"$token":true}},"z": {"background": {"$token":true}}},"deprecated":{}}',
     );
 
     await writeFixture(
       join(root, "src/token-data/semantic/definitions.jsonc"),
-      '{"standard":{},"sourceCode":{},"nonStandard":{"*": {"readonly": {"color":"#0ff","colorReason":"UNREVIEWED: Added from a token template; choose an intentional color."}},"enum": {"default": {"color":"#0ff","colorReason":"UNREVIEWED: Added from a token template; choose an intentional color."}}},"deprecated":{}}',
+      '{"standard":{},"sourceCode":{},"nonStandard":{"*": {"readonly": {"$token":true}},"enum": {"default": {"$token":true}}},"deprecated":{}}',
     );
 
     /** Production files must stay unchanged during creation. */

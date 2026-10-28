@@ -18,6 +18,12 @@ import { editSource, recordPath, editDetailRecord, emptyFamily } from "./source-
 /** Default explicit authoring selection; edit this allowlist to change command defaults. */
 const includedThemes = ["prod/default", "dev/test"];
 
+/** New theme entries use one visible placeholder until an intentional style is authored. */
+const placeholderStyle = {
+  color: "#0ff",
+  colorReason: "UNREVIEWED: Added from a token template; choose an intentional color.",
+};
+
 /**
  * Read an existing detail leaf without losing authored fields or accepting malformed JSONC.
  * @param source - Complete details source.
@@ -88,13 +94,7 @@ export async function prepareProperties({ root, themes, overrides = new Map(), a
         for (const [id, record] of snapshot.definitions[family].records) {
           if (decoded.records.has(id)) continue;
 
-          /** Shared placeholders contain documentation-only usage that never becomes styling. */
-          const style = {
-            color: "#0ff",
-            colorReason: "UNREVIEWED: Added from a token template; choose an intentional color.",
-          };
-
-          source = editSource(source, recordPath(family, record.category, id), style);
+          source = editSource(source, recordPath(family, record.category, id), placeholderStyle);
           added.push(id);
         }
       } else if (family === "syntax" && target.directory === defaultThemeDirectory) {

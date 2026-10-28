@@ -5,6 +5,7 @@
 
 import assert from "node:assert/strict";
 import test from "node:test";
+import Ajv from "ajv";
 import { cp, readFile, writeFile, readdir } from "node:fs/promises";
 import { join } from "node:path";
 import { createBuildProject, writeFixture } from "../../helpers/projects.js";
@@ -66,6 +67,34 @@ async function project(t) {
     },
   };
 }
+
+test("successful replay requires the recorded local syntax identity in both schema and runtime validation", async (t) => {
+  /** A real local update establishes every required successful replay field. */
+  const { root, options } = await project(t);
+
+  await updateTokenDetails(options);
+
+  /** Successful recorded source configuration is checked independently by its editor schema. */
+  const path = join(root, "src/token-data/upstream-sources.jsonc"),
+    config = parseJsonc(await readFile(path, "utf8"), path).value;
+
+  /** Local schema enforces the same replay identity requirement as the runtime reader. */
+  const schema = JSON.parse(
+    await readFile(new URL("../../../tooling/tokens/schemas/upstream-sources.schema.json", import.meta.url)),
+  );
+
+  /** Compiled schema accepts current records and rejects records without local syntax provenance. */
+  const validate = new Ajv({ strict: false }).compile(schema);
+
+  assert.equal(validate(config), true, JSON.stringify(validate.errors));
+  delete config.lastSuccessful.localSyntax;
+  assert.equal(validate(config), false);
+  await writeFile(path, JSON.stringify(config));
+  await assert.rejects(
+    updateTokenDetails({ ...options, offline: true }),
+    /lastSuccessful.localSyntax: expected an object/,
+  );
+});
 
 for (const [previous, extracted, expected] of [
   [undefined, "New.", { description: "New.", descriptionAddedIn: "1.2.3", descriptionBasedOn: "1.2.3" }],

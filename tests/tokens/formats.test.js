@@ -24,6 +24,61 @@ function categorized(category, values) {
   return { ...emptyFamily("ui", "details"), [category]: values };
 }
 
+test("shared inventory markers preserve parent/child IDs and restrict membership and usage metadata", async () => {
+  /** Shared inventories use independent editor schemas alongside the runtime codec. */
+  const ajv = new Ajv({ strict: false });
+
+  for (const family of ["ui", "semantic"]) {
+    /** Per-family schema validates the same explicit membership contract as the codec. */
+    const schema = JSON.parse(
+      await readFile(new URL(`../../tooling/tokens/schemas/shared-${family}-definitions.schema.json`, import.meta.url)),
+    );
+
+    /** Compiled editor schema for the current inventory family. */
+    const validate = ajv.compile(schema);
+
+    for (const [record, accepted] of [
+      [{ $token: true }, true],
+      [{ $token: true, use: "When the fixture provider is active." }, true],
+      [{}, false],
+      [{ $token: false }, false],
+      [{ $token: true, color: "#0ff" }, false],
+      [{ $token: true, use: " " }, false],
+    ]) {
+      /** Independent authored records exercise accepted markers and rejected metadata. */
+      const value = categorized("nonStandard", {
+        Fixture: family === "ui" ? { foreground: record } : { default: record },
+      });
+
+      assert.equal(validate(value), accepted, `${family}: ${JSON.stringify(record)}`);
+
+      if (accepted) assert.equal(decode({ value }, family, "definitions", { shared: true }).records.size, 1);
+      else assert.throws(() => decode({ value }, family, "definitions", { shared: true }));
+    }
+
+    /** Usage metadata cannot be applied to core inventory categories. */
+    const standard = categorized("standard", {
+      fixture:
+        family === "ui"
+          ? { foreground: { $token: true, use: "Invalid standard usage." } }
+          : { default: { $token: true, use: "Invalid standard usage." } },
+    });
+
+    assert.equal(validate(standard), false);
+    assert.throws(() => decode({ value: standard }, family, "definitions", { shared: true }), /use/);
+  }
+
+  /** Parent membership and its child must remain two separate exact inventory IDs. */
+  const value = categorized("standard", {
+    testing: { iconFailed: { $token: true, retired: { $token: true } } },
+  });
+
+  assert.deepEqual(
+    [...decode({ value }, "ui", "definitions", { shared: true }).records.keys()],
+    ["testing.iconFailed", "testing.iconFailed.retired"],
+  );
+});
+
 for (const [id, path] of [
   ["parameter", ["parameter", "default"]],
   ["*.builtin.deprecated", ["*", "builtin.deprecated"]],
@@ -114,7 +169,7 @@ test("independent exact authorities reject disabled standard impostors and defin
 
   await writeFixture(
     join(root, "src/token-data/ui/definitions.jsonc"),
-    JSON.stringify(categorized("standard", { editor: { background: { color: "#0ff", colorReason: "Placeholder." } } })),
+    JSON.stringify(categorized("standard", { editor: { background: { $token: true } } })),
   );
 
   await writeFixture(
@@ -248,7 +303,7 @@ test("all checked-in authored/shared token files satisfy their associated local 
   assert.deepEqual(categories, ["standard", "sourceCode", "nonStandard", "deprecated"]);
 });
 
-test("classification projection ignores documentation/history/placeholders/key order and retains reference scope coverage", async (t) => {
+test("classification projection ignores documentation/history/key order and retains reference scope coverage", async (t) => {
   /** Accepted membership is supplied independently of subsequent documentation changes. */
   const root = await createBuildProject(t);
 

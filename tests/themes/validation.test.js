@@ -4,11 +4,39 @@
  */
 
 import assert from "node:assert/strict";
-import {} from "node:fs/promises";
-import { writeFixture as writeFile, createPreviewProject } from "../helpers/projects.js";
+import { readFile } from "node:fs/promises";
+import {
+  writeFixture as writeFile,
+  createPreviewProject,
+  createBuildProject,
+  readBuildOutputs,
+} from "../helpers/projects.js";
 import { join } from "node:path";
 import test from "node:test";
 import { checkGeneratedThemes as checkThemes } from "../../tooling/themes/generated-validation.js";
+import { checkThemes as checkCurrentThemes } from "../../tooling/themes/check.js";
+import { prepareBuild, applyBuild } from "../../tooling/themes/build.js";
+
+test("combined theme validation compares generated artifacts and checks manifest assets without writes", async (t) => {
+  /** Complete authored fixture supports source preparation as well as generated validation. */
+  const root = await createBuildProject(t);
+
+  /** Production manifest receives the icon required by generated asset validation. */
+  const manifest = JSON.parse(await readFile(join(root, "package.json"), "utf8"));
+
+  manifest.icon = "images/icon.png";
+  await writeFile(join(root, "package.json"), JSON.stringify(manifest));
+  await writeFile(join(root, manifest.icon), "fixture");
+  await applyBuild(await prepareBuild({ root }));
+  assert.equal(await checkCurrentThemes(root), 1);
+  await writeFile(join(root, "src/themes/prod/default/palette/generated/palette.md"), "Stale report\n");
+
+  /** A failed comparison must preserve every byte, including the deliberately stale report. */
+  const before = await readBuildOutputs(root);
+
+  await assert.rejects(checkCurrentThemes(root), /missing or stale/);
+  assert.deepEqual(await readBuildOutputs(root), before);
+});
 
 test("theme validation accepts JSONC in both prod and dev themes", async (t) => {
   /** Temporary source project root for this test scenario. */

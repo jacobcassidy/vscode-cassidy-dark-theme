@@ -41,6 +41,9 @@
         {
           "type": "object",
           "minProperties": 1,
+          "propertyNames": {
+            "pattern": "^[a-zA-Z][\\w-]*$"
+          },
           "additionalProperties": {
             "$ref": "#/definitions/standard"
           }
@@ -48,35 +51,27 @@
         {
           "type": "object",
           "properties": {
-            "color": {
-              "type": "string",
-              "pattern": "\\S"
+            "$token": {
+              "const": true
             },
-            "colorReason": {
-              "type": "string",
-              "pattern": "\\S"
-            }
+            "use": false
           },
           "additionalProperties": {
             "$ref": "#/definitions/standard"
           },
-          "minProperties": 1,
-          "anyOf": [
-            {
-              "required": [
-                "color"
-              ]
-            },
-            {
-              "required": [
-                "colorReason"
-              ]
-            }
-          ],
           "required": [
-            "color",
-            "colorReason"
-          ]
+            "$token"
+          ],
+          "propertyNames": {
+            "anyOf": [
+              {
+                "pattern": "^[a-zA-Z][\\w-]*$"
+              },
+              {
+                "const": "$token"
+              }
+            ]
+          }
         }
       ]
     },
@@ -85,6 +80,9 @@
         {
           "type": "object",
           "minProperties": 1,
+          "propertyNames": {
+            "pattern": "^[a-zA-Z][\\w-]*$"
+          },
           "additionalProperties": {
             "$ref": "#/definitions/sourceCode"
           }
@@ -92,35 +90,27 @@
         {
           "type": "object",
           "properties": {
-            "color": {
-              "type": "string",
-              "pattern": "\\S"
+            "$token": {
+              "const": true
             },
-            "colorReason": {
-              "type": "string",
-              "pattern": "\\S"
-            }
+            "use": false
           },
           "additionalProperties": {
             "$ref": "#/definitions/sourceCode"
           },
-          "minProperties": 1,
-          "anyOf": [
-            {
-              "required": [
-                "color"
-              ]
-            },
-            {
-              "required": [
-                "colorReason"
-              ]
-            }
-          ],
           "required": [
-            "color",
-            "colorReason"
-          ]
+            "$token"
+          ],
+          "propertyNames": {
+            "anyOf": [
+              {
+                "pattern": "^[a-zA-Z][\\w-]*$"
+              },
+              {
+                "const": "$token"
+              }
+            ]
+          }
         }
       ]
     },
@@ -129,6 +119,9 @@
         {
           "type": "object",
           "minProperties": 1,
+          "propertyNames": {
+            "pattern": "^[a-zA-Z][\\w-]*$"
+          },
           "additionalProperties": {
             "$ref": "#/definitions/nonStandard"
           }
@@ -136,13 +129,8 @@
         {
           "type": "object",
           "properties": {
-            "color": {
-              "type": "string",
-              "pattern": "\\S"
-            },
-            "colorReason": {
-              "type": "string",
-              "pattern": "\\S"
+            "$token": {
+              "const": true
             },
             "use": {
               "type": "string",
@@ -152,28 +140,19 @@
           "additionalProperties": {
             "$ref": "#/definitions/nonStandard"
           },
-          "minProperties": 1,
-          "anyOf": [
-            {
-              "required": [
-                "color"
-              ]
-            },
-            {
-              "required": [
-                "colorReason"
-              ]
-            },
-            {
-              "required": [
-                "use"
-              ]
-            }
-          ],
           "required": [
-            "color",
-            "colorReason"
-          ]
+            "$token"
+          ],
+          "propertyNames": {
+            "anyOf": [
+              {
+                "pattern": "^[a-zA-Z][\\w-]*$"
+              },
+              {
+                "const": "$token"
+              }
+            ]
+          }
         }
       ]
     },
@@ -182,6 +161,9 @@
         {
           "type": "object",
           "minProperties": 1,
+          "propertyNames": {
+            "pattern": "^[a-zA-Z][\\w-]*$"
+          },
           "additionalProperties": {
             "$ref": "#/definitions/deprecated"
           }
@@ -189,35 +171,27 @@
         {
           "type": "object",
           "properties": {
-            "color": {
-              "type": "string",
-              "pattern": "\\S"
+            "$token": {
+              "const": true
             },
-            "colorReason": {
-              "type": "string",
-              "pattern": "\\S"
-            }
+            "use": false
           },
           "additionalProperties": {
             "$ref": "#/definitions/deprecated"
           },
-          "minProperties": 1,
-          "anyOf": [
-            {
-              "required": [
-                "color"
-              ]
-            },
-            {
-              "required": [
-                "colorReason"
-              ]
-            }
-          ],
           "required": [
-            "color",
-            "colorReason"
-          ]
+            "$token"
+          ],
+          "propertyNames": {
+            "anyOf": [
+              {
+                "pattern": "^[a-zA-Z][\\w-]*$"
+              },
+              {
+                "const": "$token"
+              }
+            ]
+          }
         }
       ]
     }

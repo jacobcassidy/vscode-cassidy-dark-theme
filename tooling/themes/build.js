@@ -13,9 +13,7 @@ import {
 import { readFile, lstat } from "node:fs/promises";
 import { join } from "node:path";
 import { applyEdits, modify } from "jsonc-parser";
-// Prettier's generated entry point hides its default export from the import resolver.
-// eslint-disable-next-line import-x/default
-import prettier from "prettier";
+import { formatSource } from "../shared/formatting.js";
 import { logReloadReminder, syncDevExtension } from "../preview/sync.js";
 import { formatMessage } from "../shared/terminal-output.js";
 import { fields, object, parseJsonc } from "../shared/jsonc.js";
@@ -160,27 +158,6 @@ function validateTheme(theme) {
       }
     }
   }
-}
-
-/**
- * Apply repository formatting to generated text, preserving SVG and using JSONC for theme files.
- *
- * @param root - Repository or isolated project root directory.
- * @param path - Output path or JSON property path inspected by the current build helper.
- * @param source - Authored or generated JSONC source text for this build phase.
- */
-async function formatted(root, path, source) {
-  if (path.endsWith(".svg") || path.endsWith(".txt")) return source;
-
-  /** Absolute output path used to select Prettier configuration. */
-  const filepath = join(root, path);
-
-  /** Formatter settings resolved for this output file. */
-  const options = await prettier.resolveConfig(filepath);
-
-  /** Whether this output needs JSONC theme formatting. */
-  const theme = path.startsWith("themes/") || path.startsWith("preview/themes/");
-  return prettier.format(source, { ...options, filepath, ...(theme ? { parser: "jsonc" } : {}) });
 }
 
 /**
@@ -400,7 +377,7 @@ async function prepareOutputs(root, output) {
     if (source === null) continue;
 
     /** Formatted generated source ready for validation and comparison. */
-    const text = await formatted(root, path, source);
+    const text = await formatSource(root, path, source);
 
     if (path.startsWith("themes/") || path.startsWith("preview/themes/")) {
       validateTheme(parseJsonc(text, path).value);
@@ -527,7 +504,7 @@ export async function prepareBuild({
     for (const [path, text] of prepared.outputs) output.set(path, text);
   }
 
-  if ((mode === "all" || mode === "prod") && !paletteOnly)
+  if (mode === "all" || mode === "prod")
     output.set(
       "package.json",
       await prodManifestOutput(

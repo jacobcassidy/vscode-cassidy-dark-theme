@@ -160,7 +160,8 @@
       "required": [
         "resolution",
         "coverage",
-        "acceptedCoverage"
+        "acceptedCoverage",
+        "localSyntax"
       ],
       "properties": {
         "resolution": {

@@ -6,6 +6,7 @@ All notable changes to this project are documented in this file.
 
 ### Changed
 
+- Simplified shared UI/semantic inventories to explicit `$token` membership markers, centralized generator placeholders, required local syntax identities for replay, and consolidated aggregate theme preparation and source formatting. Removed unused result fields and a redundant mode condition.
 - Removed unused tooling dependencies, palette fallback annotations, and build-result fields; shared string validation and avoided repeated generated-theme validation. Consolidated packaging validation under `package:vsix` and removed the unused Stylelint save action.
 - Removed completed migration tests, frozen fixtures, retired-path inventories, and preview/palette layout repairs; replaced `check:legacy` with the current executable `check:reachability` audit and preserved archived records. Fixture writes now preserve supplied source without implicit format conversion.
 - Removed completed refactor checkpoint, approved-difference, and performance records from `docs/references/refactor-2b/`; historical evidence remains in Git history.

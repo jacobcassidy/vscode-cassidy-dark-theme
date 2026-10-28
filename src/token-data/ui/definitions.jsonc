@@ -1,4 +1,4 @@
-// Shared ui token definitions: inventory, categories, and generator placeholders.
+// Shared ui token definitions: inventory and category membership.
 // Upstream inputs last processed: VS Code 1.143.1
 // Stable commit: unknown (historical source tag; commit not recorded)
 // Supplemental main commit: 1184ad4d45794110deb6b897ea83b15aac44ed89
@@ -31,4480 +31,3487 @@ SOFTWARE.
     "actionBar": {
       "toggledBackground": {
         // -- STANDARD --
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "activeSessionView": {
       "background": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "foreground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "activityBar": {
       "activeBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "activeBorder": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "activeFocusBorder": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "background": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "border": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "dropBorder": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "foreground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "inactiveForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "activityBarBadge": {
       "background": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "foreground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "activityBarTop": {
       "activeBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "activeBorder": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "background": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "dropBorder": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "foreground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "inactiveForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "activityErrorBadge": {
       "background": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "foreground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "activityWarningBadge": {
       "background": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "foreground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "agentFeedbackEditorWidget": {
       "background": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "border": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "agentFeedbackInputWidget": {
       "border": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "agentSessionReadIndicator": {
       "foreground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "agentSessionSelectedBadge": {
       "border": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "agentSessionSelectedUnfocusedBadge": {
       "border": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "agentStatusIndicator": {
       "background": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "agents": {
       "background": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "agentsBadge": {
       "background": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "foreground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "agentsBottomPanel": {
       "border": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "agentsCard": {
       "border": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "agentsChatInput": {
       "background": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "border": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "focusBorder": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "foreground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "placeholderForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "agentsDetail": {
       "background": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "agentsGradient": {
       "tintColor": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "agentsNewSessionButton": {
       "background": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "border": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "foreground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "hoverBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "agentsPanel": {
       "background": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "border": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "foreground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "agentsUnreadBadge": {
       "background": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "foreground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "agentsUpdateButton": {
       "downloadedBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "downloadingBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "agentsVoice": {
       "speakingBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "speakingForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "badge": {
       "background": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "foreground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "banner": {
       "background": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "foreground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "iconForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "breadcrumb": {
       "activeSelectionForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "background": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "focusForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "foreground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "breadcrumbPicker": {
       "background": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "browser": {
       "border": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "button": {
       "background": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "border": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "foreground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "hoverBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "secondaryBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "secondaryBorder": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "secondaryForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "secondaryHoverBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "separator": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "chart": {
       "axis": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "guide": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "line": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "charts": {
       "blue": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "foreground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "green": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "lines": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "orange": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "purple": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "red": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "yellow": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "chat": {
       "avatarBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "avatarForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "checkpointSeparator": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "dictationActiveMicGlow": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "editedFileForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "findMatchBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "findMatchHighlightBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "inputWorkingBorderColor1": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "linesAddedForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "linesRemovedForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "mcpCompatibilityWarningForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "requestBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "requestBorder": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "requestBubbleBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "requestBubbleHoverBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "requestCodeBorder": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "sessionStateIndicator": {
         "inProgressBorder": {
-          "color": "#0ff",
-          "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+          "$token": true
         },
         "needsInputBorder": {
-          "color": "#0ff",
-          "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+          "$token": true
         },
         "unvisitedBorder": {
-          "color": "#0ff",
-          "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+          "$token": true
         }
       },
       "slashCommandBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "slashCommandForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "statusBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "thinkingShimmer": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "voiceGlowBaseColor": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "voiceListeningGlow": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "workingProgressInsidersIconForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "workingProgressStableIconForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "inputWorkingBorderColor2": {
         // -- DEPRECATED --
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "inputWorkingBorderColor3": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "checkbox": {
       "background": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "border": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "disabled": {
         "background": {
-          "color": "#0ff",
-          "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+          "$token": true
         },
         "foreground": {
-          "color": "#0ff",
-          "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+          "$token": true
         }
       },
       "foreground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "selectBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "selectBorder": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "commandCenter": {
       "activeBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "activeBorder": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "activeForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "background": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "border": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "debuggingBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "foreground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "inactiveBorder": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "inactiveForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "commentsView": {
       "resolvedIcon": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "unresolvedIcon": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "contrastActiveBorder": {
-      "color": "#0ff",
-      "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+      "$token": true
     },
     "contrastBorder": {
-      "color": "#0ff",
-      "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+      "$token": true
     },
     "debugConsole": {
       "errorForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "infoForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "sourceForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "warningForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "debugConsoleInputIcon": {
       "foreground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "debugExceptionWidget": {
       "background": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "border": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "debugIcon": {
       "breakpointCurrentStackframeForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "breakpointDisabledForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "breakpointForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "breakpointStackframeForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "breakpointUnverifiedForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "continueForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "disconnectForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "pauseForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "restartForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "startForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "stepBackForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "stepIntoForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "stepOutForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "stepOverForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "stopForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "debugTokenExpression": {
       "boolean": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "error": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "name": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "number": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "string": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "type": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "value": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "debugToolBar": {
       "background": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "border": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "debugView": {
       "exceptionLabelBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "exceptionLabelForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "stateLabelBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "stateLabelForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "valueChangedHighlight": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "descriptionForeground": {
-      "color": "#0ff",
-      "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+      "$token": true
     },
     "diffEditor": {
       "border": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "diagonalFill": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "insertedLineBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "insertedTextBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "insertedTextBorder": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "move": {
         "border": {
-          "color": "#0ff",
-          "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+          "$token": true
         }
       },
       "moveActive": {
         "border": {
-          "color": "#0ff",
-          "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+          "$token": true
         }
       },
       "removedLineBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "removedTextBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "removedTextBorder": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "unchangedCodeBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "unchangedRegionBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "unchangedRegionForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "unchangedRegionShadow": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "diffEditorGutter": {
       "insertedLineBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "removedLineBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "diffEditorOverview": {
       "insertedForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "removedForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "disabledForeground": {
-      "color": "#0ff",
-      "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+      "$token": true
     },
     "dropdown": {
       "background": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "border": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "foreground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "listBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "editor": {
       "background": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "border": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "compositionBorder": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "findMatchBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "findMatchBorder": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "findMatchForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "findMatchHighlightBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "findMatchHighlightBorder": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "findMatchHighlightForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "findRangeHighlightBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "findRangeHighlightBorder": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "focusedStackFrameHighlightBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "foldBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "foldPlaceholderForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "foreground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "hoverHighlightBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "inactiveLineHighlightBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "inactiveSelectionBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "inlineValuesBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "inlineValuesForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "lineHighlightBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "lineHighlightBorder": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "linkedEditingBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "placeholder": {
         "foreground": {
-          "color": "#0ff",
-          "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+          "$token": true
         }
       },
       "rangeHighlightBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "rangeHighlightBorder": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "selectionBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "selectionForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "selectionHighlightBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "selectionHighlightBorder": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "snippetFinalTabstopHighlightBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "snippetFinalTabstopHighlightBorder": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "snippetTabstopHighlightBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "snippetTabstopHighlightBorder": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "stackFrameHighlightBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "symbolHighlightBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "symbolHighlightBorder": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "wordHighlightBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "wordHighlightBorder": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "wordHighlightStrongBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "wordHighlightStrongBorder": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "wordHighlightTextBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "wordHighlightTextBorder": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "editorActionList": {
       "background": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "focusBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "focusForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "foreground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "editorBracketHighlight": {
       "foreground1": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "foreground2": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "foreground3": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "foreground4": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "foreground5": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "foreground6": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "unexpectedBracket": {
         "foreground": {
-          "color": "#0ff",
-          "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+          "$token": true
         }
       }
     },
     "editorBracketMatch": {
       "background": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "border": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "foreground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "editorBracketPairGuide": {
       "activeBackground1": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "activeBackground2": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "activeBackground3": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "activeBackground4": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "activeBackground5": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "activeBackground6": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "background1": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "background2": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "background3": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "background4": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "background5": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "background6": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "editorCodeLens": {
       "foreground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "editorCommentsWidget": {
       "rangeActiveBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "rangeBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "replyInputBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "resolvedBorder": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "unresolvedBorder": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "editorCursor": {
       "background": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "foreground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "editorError": {
       "background": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "border": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "foreground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "editorGhostText": {
       "background": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "border": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "foreground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "editorGroup": {
       "border": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "dropBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "dropIntoPromptBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "dropIntoPromptBorder": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "dropIntoPromptForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "emptyBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "focusedEmptyBorder": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "editorGroupHeader": {
       "border": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "connectedTabsBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "noTabsBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "tabsBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "tabsBorder": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "editorGutter": {
       "addedBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "addedSecondaryBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "background": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "commentDraftGlyphForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "commentGlyphForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "commentRangeForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "commentUnresolvedGlyphForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "deletedBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "deletedSecondaryBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "foldingControlForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "itemBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "itemGlyphForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "modifiedBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "modifiedSecondaryBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "editorHint": {
       "border": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "foreground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "editorHoverWidget": {
       "background": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "border": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "foreground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "highlightForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "statusBarBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "editorIndentGuide": {
       "activeBackground1": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "activeBackground2": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "activeBackground3": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "activeBackground4": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "activeBackground5": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "activeBackground6": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "background1": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "background2": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "background3": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "background4": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "background5": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "background6": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "editorInfo": {
       "background": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "border": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "foreground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "editorInlayHint": {
       "background": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "foreground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "parameterBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "parameterForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "typeBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "typeForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "editorLightBulb": {
       "foreground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "editorLightBulbAi": {
       "foreground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "editorLightBulbAutoFix": {
       "foreground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "editorLineNumber": {
       "activeForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "dimmedForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "foreground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "editorLink": {
       "activeForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "editorMarkerNavigation": {
       "background": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "editorMarkerNavigationError": {
       "background": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "headerBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "editorMarkerNavigationInfo": {
       "background": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "headerBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "editorMarkerNavigationWarning": {
       "background": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "headerBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "editorMinimap": {
       "inlineChatInserted": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "editorMultiCursor": {
       "primary": {
         "background": {
-          "color": "#0ff",
-          "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+          "$token": true
         },
         "foreground": {
-          "color": "#0ff",
-          "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+          "$token": true
         }
       },
       "secondary": {
         "background": {
-          "color": "#0ff",
-          "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+          "$token": true
         },
         "foreground": {
-          "color": "#0ff",
-          "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+          "$token": true
         }
       }
     },
     "editorOverviewRuler": {
       "addedForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "background": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "border": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "bracketMatchForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "commentDraftForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "commentForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "commentUnresolvedForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "commonContentForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "currentContentForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "deletedForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "errorForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "findMatchForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "incomingContentForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "infoForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "inlineChatInserted": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "inlineChatRemoved": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "modifiedForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "rangeHighlightForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "selectionHighlightForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "warningForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "wordHighlightForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "wordHighlightStrongForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "wordHighlightTextForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "agentFeedbackForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "editorPane": {
       "background": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "editorRuler": {
       "foreground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "editorStickyScroll": {
       "background": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "border": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "shadow": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "editorStickyScrollGutter": {
       "background": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "editorStickyScrollHover": {
       "background": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "editorSuggestWidget": {
       "background": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "border": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "focusHighlightForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "focusOutline": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "foreground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "highlightForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "selectedBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "selectedForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "selectedIconForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "editorSuggestWidgetStatus": {
       "foreground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "editorUnicodeHighlight": {
       "background": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "border": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "editorUnnecessaryCode": {
       "border": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "opacity": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "editorWarning": {
       "background": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "border": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "foreground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "editorWhitespace": {
       "foreground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "editorWidget": {
       "background": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "border": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "foreground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "resizeBorder": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "editorWordWrapIndicator": {
       "foreground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "errorForeground": {
-      "color": "#0ff",
-      "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+      "$token": true
     },
     "extensionBadge": {
       "remoteBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "remoteForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "extensionButton": {
       "background": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "border": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "foreground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "hoverBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "prominentBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "prominentForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "prominentHoverBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "separator": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "extensionIcon": {
       "preReleaseForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "privateForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "sponsorForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "starForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "verifiedForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "focusBorder": {
-      "color": "#0ff",
-      "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+      "$token": true
     },
     "foreground": {
-      "color": "#0ff",
-      "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+      "$token": true
     },
     "git": {
       "blame": {
         "editorDecorationForeground": {
-          "color": "#0ff",
-          "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+          "$token": true
         }
       }
     },
     "gitDecoration": {
       "addedResourceForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "conflictingResourceForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "deletedResourceForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "ignoredResourceForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "modifiedResourceForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "renamedResourceForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "stageDeletedResourceForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "stageModifiedResourceForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "submoduleResourceForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "untrackedResourceForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "icon": {
       "foreground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "inactiveSessionView": {
       "background": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "foreground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "inlineChat": {
       "background": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "border": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "foreground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "shadow": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "inlineChatDiff": {
       "inserted": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "removed": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "inlineChatInput": {
       "background": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "border": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "focusBorder": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "placeholderForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "inlineEdit": {
       "gutterIndicator": {
         "background": {
-          "color": "#0ff",
-          "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+          "$token": true
         },
         "primaryBackground": {
-          "color": "#0ff",
-          "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+          "$token": true
         },
         "primaryBorder": {
-          "color": "#0ff",
-          "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+          "$token": true
         },
         "primaryForeground": {
-          "color": "#0ff",
-          "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+          "$token": true
         },
         "secondaryBackground": {
-          "color": "#0ff",
-          "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+          "$token": true
         },
         "secondaryBorder": {
-          "color": "#0ff",
-          "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+          "$token": true
         },
         "secondaryForeground": {
-          "color": "#0ff",
-          "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+          "$token": true
         },
         "successfulBackground": {
-          "color": "#0ff",
-          "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+          "$token": true
         },
         "successfulBorder": {
-          "color": "#0ff",
-          "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+          "$token": true
         },
         "successfulForeground": {
-          "color": "#0ff",
-          "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+          "$token": true
         }
       },
       "modifiedBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "modifiedBorder": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "modifiedChangedLineBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "modifiedChangedTextBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "originalBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "originalBorder": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "originalChangedLineBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "originalChangedTextBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "tabWillAcceptModifiedBorder": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "tabWillAcceptOriginalBorder": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "input": {
       "background": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "border": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "foreground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "placeholderForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "inputOption": {
       "activeBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "activeBorder": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "activeForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "hoverBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "inputValidation": {
       "errorBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "errorBorder": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "errorForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "infoBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "infoBorder": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "infoForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "warningBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "warningBorder": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "warningForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "interactive": {
       "activeCodeBorder": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "inactiveCodeBorder": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "keybindingLabel": {
       "background": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "border": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "bottomBorder": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "foreground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "keybindingTable": {
       "headerBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "rowsBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "list": {
       "activeSelectionBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "activeSelectionForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "activeSelectionIconForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "deemphasizedForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "dropBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "dropBetweenBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "errorForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "filterMatchBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "filterMatchBorder": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "focusAndSelectionOutline": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "focusBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "focusForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "focusHighlightForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "focusOutline": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "highlightForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "hoverBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "hoverForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "inactiveFocusBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "inactiveFocusOutline": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "inactiveSelectionBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "inactiveSelectionForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "inactiveSelectionIconForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "invalidItemForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "warningForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "listFilterWidget": {
       "background": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "noMatchesOutline": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "outline": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "shadow": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "markdownAlert": {
       "caution": {
         "foreground": {
-          "color": "#0ff",
-          "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+          "$token": true
         }
       },
       "important": {
         "foreground": {
-          "color": "#0ff",
-          "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+          "$token": true
         }
       },
       "note": {
         "foreground": {
-          "color": "#0ff",
-          "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+          "$token": true
         }
       },
       "tip": {
         "foreground": {
-          "color": "#0ff",
-          "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+          "$token": true
         }
       },
       "warning": {
         "foreground": {
-          "color": "#0ff",
-          "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+          "$token": true
         }
       }
     },
     "mcpIcon": {
       "starForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "menu": {
       "background": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "border": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "foreground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "selectionBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "selectionBorder": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "selectionForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "separatorBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "menubar": {
       "selectionBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "selectionBorder": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "selectionForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "merge": {
       "border": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "commonContentBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "commonHeaderBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "currentContentBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "currentHeaderBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "incomingContentBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "incomingHeaderBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "mergeEditor": {
       "change": {
         "background": {
-          "color": "#0ff",
-          "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+          "$token": true
         },
         "word": {
           "background": {
-            "color": "#0ff",
-            "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+            "$token": true
           }
         }
       },
       "changeBase": {
         "background": {
-          "color": "#0ff",
-          "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+          "$token": true
         },
         "word": {
           "background": {
-            "color": "#0ff",
-            "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+            "$token": true
           }
         }
       },
       "conflict": {
         "handled": {
           "minimapOverViewRuler": {
-            "color": "#0ff",
-            "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+            "$token": true
           }
         },
         "handledFocused": {
           "border": {
-            "color": "#0ff",
-            "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+            "$token": true
           }
         },
         "handledUnfocused": {
           "border": {
-            "color": "#0ff",
-            "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+            "$token": true
           }
         },
         "input1": {
           "background": {
-            "color": "#0ff",
-            "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+            "$token": true
           }
         },
         "input2": {
           "background": {
-            "color": "#0ff",
-            "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+            "$token": true
           }
         },
         "unhandled": {
           "minimapOverViewRuler": {
-            "color": "#0ff",
-            "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+            "$token": true
           }
         },
         "unhandledFocused": {
           "border": {
-            "color": "#0ff",
-            "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+            "$token": true
           }
         },
         "unhandledUnfocused": {
           "border": {
-            "color": "#0ff",
-            "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+            "$token": true
           }
         }
       },
       "conflictingLines": {
         "background": {
-          "color": "#0ff",
-          "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+          "$token": true
         }
       }
     },
     "minimap": {
       "background": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "chatEditHighlight": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "errorHighlight": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "findMatchHighlight": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "foregroundOpacity": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "infoHighlight": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "selectionHighlight": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "selectionOccurrenceHighlight": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "warningHighlight": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "minimapGutter": {
       "addedBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "deletedBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "modifiedBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "minimapSlider": {
       "activeBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "background": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "hoverBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "modernActivityBar": {
       "background": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "border": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "inactiveBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "modernActivityBarItem": {
       "activeBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "activeForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "hoverBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "hoverForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "modernEditorTab": {
       "activeActionBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "activeBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "activeForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "activeHoverActionBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "activeHoverBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "hoverActionBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "hoverBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "hoverForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "inactiveBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "selectedActionBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "modernPanel": {
       "border": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "modernSash": {
       "gripForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "modernTab": {
       "activeBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "activeForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "hoverBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "hoverForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "modernUI": {
       "inactiveShellBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "shellBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "multiDiffEditor": {
       "background": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "border": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "headerBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "notebook": {
       "cellBorderColor": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "cellEditorBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "cellHoverBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "cellInsertionIndicator": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "cellStatusBarItemHoverBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "cellToolbarSeparator": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "editorBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "focusedCellBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "focusedCellBorder": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "focusedEditorBorder": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "inactiveFocusedCellBorder": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "inactiveSelectedCellBorder": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "outputContainerBackgroundColor": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "outputContainerBorderColor": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "selectedCellBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "selectedCellBorder": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "symbolHighlightBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "notebookEditorOverviewRuler": {
       "runningCellForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "notebookScrollbarSlider": {
       "activeBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "background": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "hoverBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "notebookStatusErrorIcon": {
       "foreground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "notebookStatusRunningIcon": {
       "foreground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "notebookStatusSuccessIcon": {
       "foreground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "notificationCenter": {
       "border": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "notificationCenterHeader": {
       "background": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "foreground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "notificationLink": {
       "foreground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "notificationToast": {
       "border": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "notifications": {
       "background": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "border": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "foreground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "notificationsErrorIcon": {
       "foreground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "notificationsInfoIcon": {
       "foreground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "notificationsWarningIcon": {
       "foreground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "outputView": {
       "background": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "outputViewStickyScroll": {
       "background": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "panel": {
       "background": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "border": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "dropBorder": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "panelInput": {
       "border": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "panelSection": {
       "border": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "dropBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "panelSectionHeader": {
       "background": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "border": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "foreground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "panelStickyScroll": {
       "background": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "border": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "shadow": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "panelTitle": {
       "activeBorder": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "activeForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "border": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "inactiveForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "panelTitleBadge": {
       "background": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "foreground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "peekView": {
       "border": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "peekViewEditor": {
       "background": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "matchHighlightBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "matchHighlightBorder": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "peekViewEditorGutter": {
       "background": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "peekViewEditorStickyScroll": {
       "background": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "peekViewEditorStickyScrollGutter": {
       "background": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "peekViewResult": {
       "background": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "fileForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "lineForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "matchHighlightBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "selectionBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "selectionForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "peekViewTitle": {
       "background": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "peekViewTitleDescription": {
       "foreground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "peekViewTitleLabel": {
       "foreground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "pickerGroup": {
       "border": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "foreground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "ports": {
       "iconRunningProcessForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "problemsErrorIcon": {
       "foreground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "problemsInfoIcon": {
       "foreground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "problemsWarningIcon": {
       "foreground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "profileBadge": {
       "background": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "foreground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "profiles": {
       "sashBorder": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "progressBar": {
       "background": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "quickInput": {
       "background": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "foreground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "quickInputList": {
       "focusBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "focusForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "focusHighlightForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "focusIconForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "quickInputTitle": {
       "background": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "radio": {
       "activeBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "activeBorder": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "activeForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "inactiveBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "inactiveBorder": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "inactiveForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "inactiveHoverBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "sash": {
       "hoverBorder": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "scmGraph": {
       "foreground1": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "foreground2": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "foreground3": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "foreground4": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "foreground5": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "historyItemBaseRefColor": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "historyItemHoverAdditionsForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "historyItemHoverDefaultLabelBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "historyItemHoverDefaultLabelForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "historyItemHoverDeletionsForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "historyItemHoverLabelForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "historyItemRefColor": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "historyItemRemoteRefColor": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "scrollbar": {
       "background": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "shadow": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "scrollbarSlider": {
       "activeBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "background": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "hoverBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "search": {
       "resultsInfoForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "searchEditor": {
       "findMatchBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "findMatchBorder": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "textInputBorder": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "selection": {
       "background": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "settings": {
       "checkboxBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "checkboxBorder": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "checkboxForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "dropdownBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "dropdownBorder": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "dropdownForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "dropdownListBorder": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "focusedRowBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "focusedRowBorder": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "headerBorder": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "headerForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "modifiedItemIndicator": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "numberInputBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "numberInputBorder": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "numberInputForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "rowHoverBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "sashBorder": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "settingsHeaderHoverForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "textInputBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "textInputBorder": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "textInputForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "sideBar": {
       "background": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "border": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "dropBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "foreground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "sideBarActivityBarTop": {
       "border": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "sideBarSectionHeader": {
       "background": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "border": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "foreground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "sideBarStickyScroll": {
       "background": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "border": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "shadow": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "sideBarTitle": {
       "background": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "border": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "foreground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "sideBySideEditor": {
       "horizontalBorder": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "verticalBorder": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "simpleFindWidget": {
       "sashBorder": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "statusBar": {
       "background": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "border": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "debuggingBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "debuggingBorder": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "debuggingForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "focusBorder": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "foreground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "inactiveBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "noFolderBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "noFolderBorder": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "noFolderForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "statusBarItem": {
       "activeBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "compactHoverBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "errorBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "errorForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "errorHoverBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "errorHoverForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "focusBorder": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "hoverBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "hoverForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "offlineBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "offlineForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "offlineHoverBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "offlineHoverForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "prominentBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "prominentForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "prominentHoverBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "prominentHoverForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "remoteBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "remoteForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "remoteHoverBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "remoteHoverForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "warningBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "warningForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "warningHoverBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "warningHoverForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "strongForeground": {
-      "color": "#0ff",
-      "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+      "$token": true
     },
     "surface": {
       "background": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "border": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "foreground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "symbolIcon": {
       "arrayForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "booleanForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "classForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "colorForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "constantForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "constructorForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "enumeratorForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "enumeratorMemberForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "eventForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "fieldForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "fileForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "folderForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "functionForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "interfaceForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "keyForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "keywordForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "methodForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "moduleForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "namespaceForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "nullForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "numberForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "objectForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "operatorForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "packageForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "propertyForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "referenceForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "snippetForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "stringForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "structForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "textForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "typeParameterForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "unitForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "variableForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "tab": {
       "activeBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "activeBorder": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "activeBorderTop": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "activeForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "activeModifiedBorder": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "border": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "divider": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "dragAndDropBorder": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "hoverBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "hoverBorder": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "hoverForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "inactiveBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "inactiveForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "inactiveModifiedBorder": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "lastPinnedBorder": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "selectedBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "selectedBorderTop": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "selectedForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "unfocusedActiveBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "unfocusedActiveBorder": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "unfocusedActiveBorderTop": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "unfocusedActiveForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "unfocusedActiveModifiedBorder": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "unfocusedHoverBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "unfocusedHoverBorder": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "unfocusedHoverForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "unfocusedInactiveBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "unfocusedInactiveForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "unfocusedInactiveModifiedBorder": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "terminal": {
       "ansiBlack": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "ansiBlue": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "ansiBrightBlack": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "ansiBrightBlue": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "ansiBrightCyan": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "ansiBrightGreen": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "ansiBrightMagenta": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "ansiBrightRed": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "ansiBrightWhite": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "ansiBrightYellow": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "ansiCyan": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "ansiGreen": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "ansiMagenta": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "ansiRed": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "ansiWhite": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "ansiYellow": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "background": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "border": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "dropBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "findMatchBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "findMatchBorder": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "findMatchHighlightBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "findMatchHighlightBorder": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "foreground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "hoverHighlightBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "inactiveSelectionBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "initialHintForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "selectionBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "selectionForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "tab": {
         "activeBorder": {
-          "color": "#0ff",
-          "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+          "$token": true
         }
       }
     },
     "terminalCommandDecoration": {
       "defaultBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "errorBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "successBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "terminalCommandGuide": {
       "foreground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "terminalCursor": {
       "background": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "foreground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "terminalOverviewRuler": {
       "border": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "cursorForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "findMatchForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "terminalStickyScroll": {
       "background": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "border": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "terminalStickyScrollHover": {
       "background": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "terminalSymbolIcon": {
       "aliasForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "argumentForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "branchForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "commitForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "fileForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "flagForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "folderForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "inlineSuggestionForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "methodForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "optionForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "optionValueForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "pullRequestDoneForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "pullRequestForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "remoteForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "stashForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "symbolText": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "symbolicLinkFileForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "symbolicLinkFolderForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "tagForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "testing": {
       "coverCountBadgeBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "coverCountBadgeForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "coveredBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "coveredBorder": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "coveredGutterBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "coveredMinimapBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "iconErrored": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color.",
+        "$token": true,
         "retired": {
-          "color": "#0ff",
-          "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+          "$token": true
         }
       },
       "iconFailed": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color.",
+        "$token": true,
         "retired": {
-          "color": "#0ff",
-          "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+          "$token": true
         }
       },
       "iconPassed": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color.",
+        "$token": true,
         "retired": {
-          "color": "#0ff",
-          "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+          "$token": true
         }
       },
       "iconQueued": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color.",
+        "$token": true,
         "retired": {
-          "color": "#0ff",
-          "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+          "$token": true
         }
       },
       "iconSkipped": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color.",
+        "$token": true,
         "retired": {
-          "color": "#0ff",
-          "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+          "$token": true
         }
       },
       "iconUnset": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color.",
+        "$token": true,
         "retired": {
-          "color": "#0ff",
-          "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+          "$token": true
         }
       },
       "message": {
         "error": {
           "badgeBackground": {
-            "color": "#0ff",
-            "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+            "$token": true
           },
           "badgeBorder": {
-            "color": "#0ff",
-            "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+            "$token": true
           },
           "badgeForeground": {
-            "color": "#0ff",
-            "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+            "$token": true
           },
           "lineBackground": {
-            "color": "#0ff",
-            "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+            "$token": true
           }
         },
         "info": {
           "decorationForeground": {
-            "color": "#0ff",
-            "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+            "$token": true
           },
           "lineBackground": {
-            "color": "#0ff",
-            "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+            "$token": true
           }
         }
       },
       "messagePeekBorder": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "messagePeekHeaderBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "peekBorder": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "peekHeaderBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "runAction": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "uncoveredBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "uncoveredBorder": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "uncoveredBranchBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "uncoveredGutterBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "uncoveredMinimapBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "textBlockQuote": {
       "background": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "border": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "textCodeBlock": {
       "background": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "textLink": {
       "activeForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "foreground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "textPreformat": {
       "background": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "border": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "foreground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "textSeparator": {
       "foreground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "titleBar": {
       "activeBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "activeForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "border": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "inactiveBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "inactiveForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "toolbar": {
       "activeBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "hoverBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "hoverOutline": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "tree": {
       "inactiveIndentGuidesStroke": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "indentGuidesStroke": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "tableColumnsBorder": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "tableOddRowsBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "walkThrough": {
       "embeddedEditorBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "walkthrough": {
       "stepTitle": {
         "foreground": {
-          "color": "#0ff",
-          "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+          "$token": true
         }
       }
     },
     "welcomePage": {
       "background": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "progress": {
         "background": {
-          "color": "#0ff",
-          "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+          "$token": true
         },
         "foreground": {
-          "color": "#0ff",
-          "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+          "$token": true
         }
       },
       "tileBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "tileBorder": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "tileHoverBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "widget": {
       "border": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "shadow": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "window": {
       "activeBorder": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "inactiveBorder": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "agentsMobileDiff": {
       "addedForeground": {
         // -- SOURCE -- (In vscode source files, but not in the scheme, according to AI)
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "deletedForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "modifiedForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     }
   },
   "sourceCode": {
     "agentsWindowGraphic": {
       "orange": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "chat": {
       "fusionBadgeForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "fusionBadgeGradientEnd": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "fusionBadgeGradientStart": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     }
   },
@@ -4512,49 +3519,40 @@ SOFTWARE.
   "deprecated": {
     "chat": {
       "voiceSpeakingGlow": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "editorActiveLineNumber": {
       "foreground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "editorIndentGuide": {
       "activeBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "background": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "modernActivityBar": {
       "activeBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "activeForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "hoverBackground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       },
       "hoverForeground": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+        "$token": true
       }
     },
     "quickInput": {
       "list": {
         "focusBackground": {
-          "color": "#0ff",
-          "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+          "$token": true
         }
       }
     }

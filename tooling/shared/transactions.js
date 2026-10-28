@@ -238,7 +238,7 @@ export async function withGuards(resources, operation) {
           }
         }
 
-        owned.push({ resource, directory, guard, token, filename });
+        owned.push({ directory, guard, token, filename });
       } finally {
         await rm(staging, { recursive: true, force: true });
       }
