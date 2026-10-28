@@ -1,6 +1,6 @@
 {
   "$schema": "vscode://schemas/color-theme",
-  "name": "Cassidy Dark",
+  "name": "Cassidy Dark Theme",
   "type": "dark",
   "author": "Jacob Cassidy",
   "semanticHighlighting": true

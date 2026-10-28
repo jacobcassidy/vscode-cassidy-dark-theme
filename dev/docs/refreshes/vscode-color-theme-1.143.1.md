@@ -1,7 +1,7 @@
 # VS Code 1.143.1 color theme schema refresh
 
 Stable commit: `e646868227c3e3a9e3f24277c8c7220be42c0be7`
-Supplemental main commit: `ea8056df9f08fb7c452589213ec77fabbd3481b9`
+Supplemental main commit: `37995fde4ddebe8bbe8b85b64f9f1334292ae523`
 Schema digest: `sha256:5a8085d52889d5d6ad61f8c2812291cbc5005df727640c4f43a22840baa8c9d6`
 
 ## Workbench colors

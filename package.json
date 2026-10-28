@@ -64,7 +64,7 @@
   "contributes": {
     "themes": [
       {
-        "label": "Cassidy Dark",
+        "label": "Cassidy Dark Theme",
         "uiTheme": "vs-dark",
         "path": "./themes/cassidy-dark-color-theme.json"
       }

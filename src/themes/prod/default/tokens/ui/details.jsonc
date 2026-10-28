@@ -1,5 +1,29 @@
 {
   "standard": {
+    "contrastActiveBorder": {
+      "description": "An extra border around active elements to separate them from others for greater contrast."
+    },
+    "contrastBorder": {
+      "description": "An extra border around elements to separate them from others for greater contrast."
+    },
+    "descriptionForeground": {
+      "description": "Foreground color for description text providing additional information, for example for a label."
+    },
+    "disabledForeground": {
+      "description": "Overall foreground for disabled elements. This color is only used if not overridden by a component."
+    },
+    "errorForeground": {
+      "description": "Overall foreground color for error messages. This color is only used if not overridden by a component."
+    },
+    "focusBorder": {
+      "description": "Overall border color for focused elements. This color is only used if not overridden by a component."
+    },
+    "foreground": {
+      "description": "Overall foreground color. This color is only used if not overridden by a component."
+    },
+    "strongForeground": {
+      "description": "Highest-contrast foreground color, intended for text or icons that need maximum legibility across various backgrounds. This color is only used if not overridden by a component."
+    },
     "actionBar": {
       "toggledBackground": {
         "description": "Background color for toggled action items in action bar."
@@ -15,7 +39,7 @@
     },
     "activityBar": {
       "activeBackground": {
-        "description": "Active activity bar item backgrounds."
+        "description": "Activity bar background color for the active item. The activity bar is showing on the far left or right and allows to switch between views of the side bar."
       },
       "activeBorder": {
         "description": "Activity bar border color for the active item. The activity bar is showing on the far left or right and allows to switch between views of the side bar."
@@ -24,33 +48,27 @@
         "description": "Activity bar focus border color for the active item. The activity bar is showing on the far left or right and allows to switch between views of the side bar."
       },
       "background": {
-        "description": "Activity bar backgrounds."
+        "description": "Activity bar background color. The activity bar is showing on the far left or right and allows to switch between views of the side bar."
       },
       "border": {
         "description": "Activity bar border color separating to the side bar. The activity bar is showing on the far left or right and allows to switch between views of the side bar."
       },
       "dropBorder": {
-        "inherits": [
-          "activityBar.foreground"
-        ],
-        "description": "Activity bar drag and drop indicators."
+        "description": "Drag and drop feedback color for the activity bar items. The activity bar is showing on the far left or right and allows to switch between views of the side bar."
       },
       "foreground": {
-        "description": "Active activity bar icons."
+        "description": "Activity bar item foreground color when it is active. The activity bar is showing on the far left or right and allows to switch between views of the side bar."
       },
       "inactiveForeground": {
-        "inherits": [
-          "activityBar.foreground"
-        ],
-        "description": "Inactive activity bar icons."
+        "description": "Activity bar item foreground color when it is inactive. The activity bar is showing on the far left or right and allows to switch between views of the side bar."
       }
     },
     "activityBarBadge": {
       "background": {
-        "description": "Activity bar notification badge backgrounds."
+        "description": "Activity notification badge background color. The activity bar is showing on the far left or right and allows to switch between views of the side bar."
       },
       "foreground": {
-        "description": "Activity bar notification badge text."
+        "description": "Activity notification badge foreground color. The activity bar is showing on the far left or right and allows to switch between views of the side bar."
       }
     },
     "activityBarTop": {
@@ -102,26 +120,6 @@
         "description": "Border color of the agent feedback input widget shown in the editor."
       }
     },
-    "agentSessionReadIndicator": {
-      "foreground": {
-        "description": "Foreground color for the read indicator in an agent session."
-      }
-    },
-    "agentSessionSelectedBadge": {
-      "border": {
-        "description": "Border color for the badges in selected agent session items."
-      }
-    },
-    "agentSessionSelectedUnfocusedBadge": {
-      "border": {
-        "description": "Border color for the badges in selected agent session items when the view is unfocused."
-      }
-    },
-    "agentStatusIndicator": {
-      "background": {
-        "description": "Background color of the agent status indicator in the titlebar."
-      }
-    },
     "agents": {
       "background": {
         "description": "Background color of the agent sessions window shell and gradient base."
@@ -167,6 +165,21 @@
         "description": "Background color of the docked details pane in the agent sessions window."
       }
     },
+    "agentSessionReadIndicator": {
+      "foreground": {
+        "description": "Foreground color for the read indicator in an agent session."
+      }
+    },
+    "agentSessionSelectedBadge": {
+      "border": {
+        "description": "Border color for the badges in selected agent session items."
+      }
+    },
+    "agentSessionSelectedUnfocusedBadge": {
+      "border": {
+        "description": "Border color for the badges in selected agent session items when the view is unfocused."
+      }
+    },
     "agentsGradient": {
       "tintColor": {
         "description": "Tint color used in the background gradient of the agent sessions window shell."
@@ -208,6 +221,11 @@
         "description": "Foreground color of the card panels (chat, files, terminal) in the agent sessions window."
       }
     },
+    "agentStatusIndicator": {
+      "background": {
+        "description": "Background color of the agent status indicator in the titlebar."
+      }
+    },
     "agentsUnreadBadge": {
       "background": {
         "description": "Background color of the unread sessions count badge on the sidebar toggle."
@@ -234,10 +252,10 @@
     },
     "badge": {
       "background": {
-        "description": "Count badge backgrounds, such as Problems totals."
+        "description": "Badge background color. Badges are small information labels, e.g. for search results count."
       },
       "foreground": {
-        "description": "Count badge text."
+        "description": "Badge foreground color. Badges are small information labels, e.g. for search results count."
       }
     },
     "banner": {
@@ -277,40 +295,28 @@
     },
     "button": {
       "background": {
-        "description": "Primary button backgrounds."
+        "description": "Button background color."
       },
       "border": {
         "description": "Button border color."
       },
       "foreground": {
-        "description": "Primary button text."
+        "description": "Button foreground color."
       },
       "hoverBackground": {
-        "inherits": [
-          "button.background"
-        ],
-        "description": "Primary button backgrounds on hover."
+        "description": "Button background color when hovering."
       },
       "secondaryBackground": {
-        "inherits": [
-          "list.hoverBackground"
-        ],
-        "description": "Secondary button backgrounds."
+        "description": "Secondary button background color."
       },
       "secondaryBorder": {
         "description": "Secondary button border color."
       },
       "secondaryForeground": {
-        "inherits": [
-          "foreground"
-        ],
-        "description": "Secondary button text."
+        "description": "Secondary button foreground color."
       },
       "secondaryHoverBackground": {
-        "inherits": [
-          "list.hoverBackground"
-        ],
-        "description": "Secondary button backgrounds on hover."
+        "description": "Secondary button background color when hovering."
       },
       "separator": {
         "description": "Button separator color."
@@ -335,16 +341,16 @@
         "description": "The foreground color used in charts."
       },
       "green": {
-        "description": "Green chart markers, including source control graphs."
+        "description": "The green color used in chart visualizations."
       },
       "lines": {
         "description": "The color used for horizontal lines in charts."
       },
       "orange": {
-        "description": "Orange chart markers, including source control graphs."
+        "description": "The orange color used in chart visualizations."
       },
       "purple": {
-        "description": "Purple chart markers, including source control graphs."
+        "description": "The purple color used in chart visualizations."
       },
       "red": {
         "description": "The red color used in chart visualizations."
@@ -378,12 +384,6 @@
       "inputWorkingBorderColor1": {
         "description": "Accent color of the animated chat input border shown while a request is in flight."
       },
-      "inputWorkingBorderColor2": {
-        "description": "Unused secondary chat input accent color."
-      },
-      "inputWorkingBorderColor3": {
-        "description": "Unused tertiary chat input accent color."
-      },
       "linesAddedForeground": {
         "description": "Foreground color of lines added in chat code block pill."
       },
@@ -408,17 +408,6 @@
       "requestCodeBorder": {
         "description": "Border color of code blocks within the chat request bubble."
       },
-      "sessionStateIndicator": {
-        "inProgressBorder": {
-          "description": "Border color of a Chat Editor with a request in progress."
-        },
-        "needsInputBorder": {
-          "description": "Border color of a Chat Editor that needs attention."
-        },
-        "unvisitedBorder": {
-          "description": "Border color of a Chat Editor with an unvisited completion."
-        }
-      },
       "slashCommandBackground": {
         "description": "The background color of a chat slash command."
       },
@@ -435,13 +424,27 @@
         "description": "Base accent the Voice Mode ambient glow is derived from. The listening and speaking glows are hue-shifted from this color."
       },
       "voiceListeningGlow": {
-        "description": "Accent color of the Voice Mode glow while listening."
+        "description": "Accent color of the Voice Mode glow while listening. Derived from {0} when unset."
+      },
+      "voiceSpeakingGlow": {
+        "description": "Accent color of the Voice Mode glow while the agent is speaking. Derived from {0} when unset."
       },
       "workingProgressInsidersIconForeground": {
         "description": "Foreground color of the Insiders VS Code icon in the chat working progress indicator."
       },
       "workingProgressStableIconForeground": {
         "description": "Foreground color of the Stable VS Code icon in the chat working progress indicator."
+      },
+      "sessionStateIndicator": {
+        "inProgressBorder": {
+          "description": "Border color of a Chat Editor with a request in progress."
+        },
+        "needsInputBorder": {
+          "description": "Border color of a Chat Editor that needs attention."
+        },
+        "unvisitedBorder": {
+          "description": "Border color of a Chat Editor with an unvisited completion."
+        }
       }
     },
     "checkbox": {
@@ -451,14 +454,6 @@
       "border": {
         "description": "Border color of checkbox widget."
       },
-      "disabled": {
-        "background": {
-          "description": "Background of a disabled checkbox."
-        },
-        "foreground": {
-          "description": "Foreground of a disabled checkbox."
-        }
-      },
       "foreground": {
         "description": "Foreground color of checkbox widget."
       },
@@ -467,6 +462,14 @@
       },
       "selectBorder": {
         "description": "Border color of checkbox widget when the element it's in is selected."
+      },
+      "disabled": {
+        "background": {
+          "description": "Background of a disabled checkbox."
+        },
+        "foreground": {
+          "description": "Foreground of a disabled checkbox."
+        }
       }
     },
     "commandCenter": {
@@ -506,29 +509,23 @@
         "description": "Icon color for unresolved comments."
       }
     },
-    "contrastActiveBorder": {
-      "description": "An extra border around active elements to separate them from others for greater contrast."
-    },
-    "contrastBorder": {
-      "description": "An extra border around elements to separate them from others for greater contrast."
-    },
     "debugConsole": {
       "errorForeground": {
-        "description": "'Foreground color for error messages in debug REPL console.'"
+        "description": "Foreground color for error messages in debug REPL console."
       },
       "infoForeground": {
-        "description": "'Foreground color for info messages in debug REPL console.'"
+        "description": "Foreground color for info messages in debug REPL console."
       },
       "sourceForeground": {
-        "description": "'Foreground color for source filenames in debug REPL console.'"
+        "description": "Foreground color for source filenames in debug REPL console."
       },
       "warningForeground": {
-        "description": "'Foreground color for warning messages in debug REPL console.'"
+        "description": "Foreground color for warning messages in debug REPL console."
       }
     },
     "debugConsoleInputIcon": {
       "foreground": {
-        "description": "'Foreground color for debug console input marker icon.'"
+        "description": "Foreground color for debug console input marker icon."
       }
     },
     "debugExceptionWidget": {
@@ -588,25 +585,25 @@
     },
     "debugTokenExpression": {
       "boolean": {
-        "description": "'Foreground color for booleans in the debug views (ie. the Variables or Watch view).'"
+        "description": "Foreground color for booleans in the debug views (ie. the Variables or Watch view)."
       },
       "error": {
-        "description": "'Foreground color for expression errors in the debug views (ie. the Variables or Watch view) and for error logs shown in the debug console.'"
+        "description": "Foreground color for expression errors in the debug views (ie. the Variables or Watch view) and for error logs shown in the debug console."
       },
       "name": {
-        "description": "'Foreground color for the token names shown in the debug views (ie. the Variables or Watch view).'"
+        "description": "Foreground color for the token names shown in the debug views (ie. the Variables or Watch view)."
       },
       "number": {
-        "description": "'Foreground color for numbers in the debug views (ie. the Variables or Watch view).'"
+        "description": "Foreground color for numbers in the debug views (ie. the Variables or Watch view)."
       },
       "string": {
-        "description": "'Foreground color for strings in the debug views (ie. the Variables or Watch view).'"
+        "description": "Foreground color for strings in the debug views (ie. the Variables or Watch view)."
       },
       "type": {
-        "description": "'Foreground color for the token types shown in the debug views (ie. the Variables or Watch view).'"
+        "description": "Foreground color for the token types shown in the debug views (ie. the Variables or Watch view)."
       },
       "value": {
-        "description": "'Foreground color for the token values shown in the debug views (ie. the Variables or Watch view).'"
+        "description": "Foreground color for the token values shown in the debug views (ie. the Variables or Watch view)."
       }
     },
     "debugToolBar": {
@@ -619,39 +616,57 @@
     },
     "debugView": {
       "exceptionLabelBackground": {
-        "description": "'Background color for a label shown in the CALL STACK view when the debugger breaks on an exception.'"
+        "description": "Background color for a label shown in the CALL STACK view when the debugger breaks on an exception."
       },
       "exceptionLabelForeground": {
-        "description": "'Foreground color for a label shown in the CALL STACK view when the debugger breaks on an exception.'"
+        "description": "Foreground color for a label shown in the CALL STACK view when the debugger breaks on an exception."
       },
       "stateLabelBackground": {
-        "description": "'Background color for a label in the CALL STACK view showing the current session\\'s or thread\\'s state.'"
+        "description": "Background color for a label in the CALL STACK view showing the current session's or thread's state."
       },
       "stateLabelForeground": {
-        "description": "'Foreground color for a label in the CALL STACK view showing the current session\\'s or thread\\'s state.'"
+        "description": "Foreground color for a label in the CALL STACK view showing the current session's or thread's state."
       },
       "valueChangedHighlight": {
-        "description": "'Color used to highlight value changes in the debug views (ie. in the Variables view).'"
+        "description": "Color used to highlight value changes in the debug views (ie. in the Variables view)."
       }
-    },
-    "descriptionForeground": {
-      "description": "Foreground color for description text providing additional information, for example for a label."
     },
     "diffEditor": {
       "border": {
         "description": "Border color between the two text editors."
       },
       "diagonalFill": {
-        "description": "Color of the diff editor's diagonal fill."
+        "description": "Color of the diff editor's diagonal fill. The diagonal fill is used in side-by-side diff views."
       },
       "insertedLineBackground": {
-        "description": "Background color for lines that got inserted."
+        "description": "Background color for lines that got inserted. The color must not be opaque so as not to hide underlying decorations."
       },
       "insertedTextBackground": {
-        "description": "Background color for text that got inserted."
+        "description": "Background color for text that got inserted. The color must not be opaque so as not to hide underlying decorations."
       },
       "insertedTextBorder": {
         "description": "Outline color for the text that got inserted."
+      },
+      "removedLineBackground": {
+        "description": "Background color for lines that got removed. The color must not be opaque so as not to hide underlying decorations."
+      },
+      "removedTextBackground": {
+        "description": "Background color for text that got removed. The color must not be opaque so as not to hide underlying decorations."
+      },
+      "removedTextBorder": {
+        "description": "Outline color for text that got removed."
+      },
+      "unchangedCodeBackground": {
+        "description": "The background color of unchanged code in the diff editor."
+      },
+      "unchangedRegionBackground": {
+        "description": "The background color of unchanged blocks in the diff editor."
+      },
+      "unchangedRegionForeground": {
+        "description": "The foreground color of unchanged blocks in the diff editor."
+      },
+      "unchangedRegionShadow": {
+        "description": "The color of the shadow around unchanged region widgets."
       },
       "move": {
         "border": {
@@ -662,33 +677,6 @@
         "border": {
           "description": "The active border color for text that got moved in the diff editor."
         }
-      },
-      "removedLineBackground": {
-        "description": "Background color for lines that got removed."
-      },
-      "removedTextBackground": {
-        "description": "Background color for text that got removed."
-      },
-      "removedTextBorder": {
-        "description": "Outline color for text that got removed."
-      },
-      "unchangedCodeBackground": {
-        "description": "The background color of unchanged code in the diff editor."
-      },
-      "unchangedRegionBackground": {
-        "inherits": [
-          "sideBar.background"
-        ],
-        "description": "The background color of unchanged blocks in the diff editor."
-      },
-      "unchangedRegionForeground": {
-        "inherits": [
-          "foreground"
-        ],
-        "description": "The foreground color of unchanged blocks in the diff editor."
-      },
-      "unchangedRegionShadow": {
-        "description": "The color of the shadow around unchanged region widgets."
       }
     },
     "diffEditorGutter": {
@@ -707,32 +695,23 @@
         "description": "Diff overview ruler foreground for removed content."
       }
     },
-    "disabledForeground": {
-      "description": "Disabled workbench text and icons."
-    },
     "dropdown": {
       "background": {
         "description": "Dropdown background."
       },
       "border": {
-        "inherits": [
-          "dropdown.background"
-        ],
         "description": "Dropdown border."
       },
       "foreground": {
         "description": "Dropdown foreground."
       },
       "listBackground": {
-        "inherits": [
-          "dropdown.background"
-        ],
         "description": "Dropdown list background."
       }
     },
     "editor": {
       "background": {
-        "description": "Editor backgrounds."
+        "description": "Editor background color."
       },
       "border": {
         "description": "Border color of the editor surface in the modern layout."
@@ -741,25 +720,25 @@
         "description": "The border color for an IME composition."
       },
       "findMatchBackground": {
-        "description": "Current search match backgrounds."
+        "description": "Color of the current search match."
       },
       "findMatchBorder": {
         "description": "Border color of the current search match."
       },
       "findMatchForeground": {
-        "description": "Current search match text."
+        "description": "Text color of the current search match."
       },
       "findMatchHighlightBackground": {
-        "description": "Other search match backgrounds."
+        "description": "Color of the other search matches. The color must not be opaque so as not to hide underlying decorations."
       },
       "findMatchHighlightBorder": {
         "description": "Border color of the other search matches."
       },
       "findMatchHighlightForeground": {
-        "description": "Other search match text."
+        "description": "Foreground color of the other search matches."
       },
       "findRangeHighlightBackground": {
-        "description": "Selected search range backgrounds."
+        "description": "Color of the range limiting the search. The color must not be opaque so as not to hide underlying decorations."
       },
       "findRangeHighlightBorder": {
         "description": "Border color of the range limiting the search. The color must not be opaque so as not to hide underlying decorations."
@@ -768,19 +747,16 @@
         "description": "Background color for the highlight of line at focused stack frame position."
       },
       "foldBackground": {
-        "inherits": [
-          "editor.selectionBackground"
-        ],
-        "description": "Background color behind folded ranges."
+        "description": "Background color behind folded ranges. The color must not be opaque so as not to hide underlying decorations."
       },
       "foldPlaceholderForeground": {
-        "description": "Collapsed code placeholders."
+        "description": "Color of the collapsed text after the first line of a folded range."
       },
       "foreground": {
-        "description": "Default editor text."
+        "description": "Editor default foreground color."
       },
       "hoverHighlightBackground": {
-        "description": "Highlight below the word for which a hover is shown."
+        "description": "Highlight below the word for which a hover is shown. The color must not be opaque so as not to hide underlying decorations."
       },
       "inactiveLineHighlightBackground": {
         "description": "Background color for the highlight of line at the cursor position when the editor is not focused."
@@ -803,13 +779,8 @@
       "linkedEditingBackground": {
         "description": "Background color when the editor auto renames on type."
       },
-      "placeholder": {
-        "foreground": {
-          "description": "Foreground color of the placeholder text in the editor."
-        }
-      },
       "rangeHighlightBackground": {
-        "description": "Background color of highlighted ranges, like by quick open and find features."
+        "description": "Background color of highlighted ranges, like by quick open and find features. The color must not be opaque so as not to hide underlying decorations."
       },
       "rangeHighlightBorder": {
         "description": "Background color of the border around highlighted ranges."
@@ -848,13 +819,13 @@
         "description": "Background color of the border around highlighted symbols."
       },
       "wordHighlightBackground": {
-        "description": "Background color of a symbol during read-access, like reading a variable."
+        "description": "Background color of a symbol during read-access, like reading a variable. The color must not be opaque so as not to hide underlying decorations."
       },
       "wordHighlightBorder": {
         "description": "Border color of a symbol during read-access, like reading a variable."
       },
       "wordHighlightStrongBackground": {
-        "description": "Background color of a symbol during write-access, like writing to a variable."
+        "description": "Background color of a symbol during write-access, like writing to a variable. The color must not be opaque so as not to hide underlying decorations."
       },
       "wordHighlightStrongBorder": {
         "description": "Border color of a symbol during write-access, like writing to a variable."
@@ -864,6 +835,11 @@
       },
       "wordHighlightTextBorder": {
         "description": "Border color of a textual occurrence for a symbol."
+      },
+      "placeholder": {
+        "foreground": {
+          "description": "Foreground color of the placeholder text in the editor."
+        }
       }
     },
     "editorActionList": {
@@ -910,7 +886,7 @@
         "description": "Background color behind matching brackets"
       },
       "border": {
-        "description": "Color for matching brackets boxes."
+        "description": "Color for matching brackets boxes"
       },
       "foreground": {
         "description": "Foreground color for matching brackets"
@@ -956,7 +932,7 @@
     },
     "editorCodeLens": {
       "foreground": {
-        "description": "CodeLens actions above code."
+        "description": "Foreground color of editor CodeLens"
       }
     },
     "editorCommentsWidget": {
@@ -978,7 +954,7 @@
     },
     "editorCursor": {
       "background": {
-        "description": "The background color of the editor cursor."
+        "description": "The background color of the editor cursor. Allows customizing the color of a character overlapped by a block cursor."
       },
       "foreground": {
         "description": "Color of the editor cursor."
@@ -1003,15 +979,15 @@
         "description": "Border color of ghost text in the editor."
       },
       "foreground": {
-        "description": "Inline suggestion text."
+        "description": "Foreground color of the ghost text in the editor."
       }
     },
     "editorGroup": {
       "border": {
-        "description": "Color to separate multiple editor groups from each other."
+        "description": "Color to separate multiple editor groups from each other. Editor groups are the containers of editors."
       },
       "dropBackground": {
-        "description": "Background color when dragging editors around."
+        "description": "Background color when dragging editors around. The color should have transparency so that the editor contents can still shine through."
       },
       "dropIntoPromptBackground": {
         "description": "Background color of text shown over editors when dragging files. This text informs the user that they can hold shift to drop into the editor."
@@ -1040,7 +1016,7 @@
         "description": "Background color of the editor group title header when (`\"workbench.editor.showTabs\": \"single\"`). Editor groups are the containers of editors."
       },
       "tabsBackground": {
-        "description": "Background color of the editor group title header when tabs are enabled."
+        "description": "Background color of the editor group title header when tabs are enabled. Editor groups are the containers of editors."
       },
       "tabsBorder": {
         "description": "Border color of the editor group title header when tabs are enabled. Editor groups are the containers of editors."
@@ -1063,19 +1039,12 @@
         "description": "Editor gutter decoration color for commenting glyphs."
       },
       "commentRangeForeground": {
-        "inherits": [
-          "list.inactiveSelectionBackground",
-          "editor.background"
-        ],
-        "description": "Comment range markers in the editor gutter."
+        "description": "Editor gutter decoration color for commenting ranges. This color should be opaque."
       },
       "commentUnresolvedGlyphForeground": {
         "description": "Editor gutter decoration color for commenting glyphs for unresolved comment threads."
       },
       "deletedBackground": {
-        "inherits": [
-          "editorError.foreground"
-        ],
         "description": "Editor gutter background color for lines that are deleted."
       },
       "deletedSecondaryBackground": {
@@ -1124,9 +1093,6 @@
     },
     "editorIndentGuide": {
       "activeBackground1": {
-        "inherits": [
-          "editorIndentGuide.activeBackground"
-        ],
         "description": "Color of the active editor indentation guides (1)."
       },
       "activeBackground2": {
@@ -1201,9 +1167,6 @@
     },
     "editorLightBulbAi": {
       "foreground": {
-        "inherits": [
-          "editorLightBulb.foreground"
-        ],
         "description": "The color used for the lightbulb AI icon."
       }
     },
@@ -1214,10 +1177,7 @@
     },
     "editorLineNumber": {
       "activeForeground": {
-        "inherits": [
-          "editorActiveLineNumber.foreground"
-        ],
-        "description": "Color of editor active line number."
+        "description": "Color of editor active line number"
       },
       "dimmedForeground": {
         "description": "Color of the final editor line when editor.renderFinalNewline is set to dimmed."
@@ -1285,9 +1245,6 @@
     },
     "editorOverviewRuler": {
       "addedForeground": {
-        "inherits": [
-          "editorGutter.addedBackground"
-        ],
         "description": "Overview ruler marker color for added content."
       },
       "agentFeedbackForeground": {
@@ -1318,24 +1275,18 @@
         "description": "Current overview ruler foreground for inline merge-conflicts."
       },
       "deletedForeground": {
-        "inherits": [
-          "editorGutter.deletedBackground"
-        ],
         "description": "Overview ruler marker color for deleted content."
       },
       "errorForeground": {
         "description": "Overview ruler marker color for errors."
       },
       "findMatchForeground": {
-        "description": "Overview ruler marker color for find matches."
+        "description": "Overview ruler marker color for find matches. The color must not be opaque so as not to hide underlying decorations."
       },
       "incomingContentForeground": {
         "description": "Incoming overview ruler foreground for inline merge-conflicts."
       },
       "infoForeground": {
-        "inherits": [
-          "editorInfo.foreground"
-        ],
         "description": "Overview ruler marker color for infos."
       },
       "inlineChatInserted": {
@@ -1345,28 +1296,22 @@
         "description": "Overview ruler marker color for inline chat removed content."
       },
       "modifiedForeground": {
-        "inherits": [
-          "editorGutter.modifiedBackground"
-        ],
         "description": "Overview ruler marker color for modified content."
       },
       "rangeHighlightForeground": {
         "description": "Overview ruler marker color for range highlights. The color must not be opaque so as not to hide underlying decorations."
       },
       "selectionHighlightForeground": {
-        "description": "Overview ruler marker color for selection highlights."
+        "description": "Overview ruler marker color for selection highlights. The color must not be opaque so as not to hide underlying decorations."
       },
       "warningForeground": {
-        "inherits": [
-          "editorWarning.foreground"
-        ],
         "description": "Overview ruler marker color for warnings."
       },
       "wordHighlightForeground": {
-        "description": "Overview ruler marker color for symbol highlights."
+        "description": "Overview ruler marker color for symbol highlights. The color must not be opaque so as not to hide underlying decorations."
       },
       "wordHighlightStrongForeground": {
-        "description": "Overview ruler marker color for write-access symbol highlights."
+        "description": "Overview ruler marker color for write-access symbol highlights. The color must not be opaque so as not to hide underlying decorations."
       },
       "wordHighlightTextForeground": {
         "description": "Overview ruler marker color of a textual occurrence for a symbol. The color must not be opaque so as not to hide underlying decorations."
@@ -1384,10 +1329,7 @@
     },
     "editorStickyScroll": {
       "background": {
-        "inherits": [
-          "editor.background"
-        ],
-        "description": "Background color of sticky scroll in the editor."
+        "description": "Background color of sticky scroll in the editor"
       },
       "border": {
         "description": "Border color of sticky scroll in the editor"
@@ -1403,7 +1345,7 @@
     },
     "editorStickyScrollHover": {
       "background": {
-        "description": "Background color of sticky scroll on hover in the editor."
+        "description": "Background color of sticky scroll on hover in the editor"
       }
     },
     "editorSuggestWidget": {
@@ -1442,15 +1384,9 @@
     },
     "editorUnicodeHighlight": {
       "background": {
-        "inherits": [
-          "editorWarning.background"
-        ],
         "description": "Background color used to highlight unicode characters."
       },
       "border": {
-        "inherits": [
-          "editorWarning.foreground"
-        ],
         "description": "Border color used to highlight unicode characters."
       }
     },
@@ -1483,10 +1419,7 @@
         "description": "Background color of editor widgets, such as find/replace."
       },
       "border": {
-        "inherits": [
-          "editorWidget.foreground"
-        ],
-        "description": "Border color of editor widgets."
+        "description": "Border color of editor widgets. The color is only used if the widget chooses to have a border and if the color is not overridden by a widget."
       },
       "foreground": {
         "description": "Foreground color of editor widgets, such as find/replace."
@@ -1499,9 +1432,6 @@
       "foreground": {
         "description": "Color of the indicator shown at the end of a soft wrapped line in the editor."
       }
-    },
-    "errorForeground": {
-      "description": "Default error message text."
     },
     "extensionBadge": {
       "remoteBackground": {
@@ -1553,12 +1483,6 @@
       "verifiedForeground": {
         "description": "The icon color for extension verified publisher."
       }
-    },
-    "focusBorder": {
-      "description": "Default keyboard focus borders."
-    },
-    "foreground": {
-      "description": "Default workbench text."
     },
     "git": {
       "blame": {
@@ -1649,6 +1573,36 @@
       }
     },
     "inlineEdit": {
+      "modifiedBackground": {
+        "description": "Background color for the modified text in inline edits."
+      },
+      "modifiedBorder": {
+        "description": "Border color for the modified text in inline edits."
+      },
+      "modifiedChangedLineBackground": {
+        "description": "Background color for the changed lines in the modified text of inline edits."
+      },
+      "modifiedChangedTextBackground": {
+        "description": "Overlay color for the changed text in the modified text of inline edits."
+      },
+      "originalBackground": {
+        "description": "Background color for the original text in inline edits."
+      },
+      "originalBorder": {
+        "description": "Border color for the original text in inline edits."
+      },
+      "originalChangedLineBackground": {
+        "description": "Background color for the changed lines in the original text of inline edits."
+      },
+      "originalChangedTextBackground": {
+        "description": "Overlay color for the changed text in the original text of inline edits."
+      },
+      "tabWillAcceptModifiedBorder": {
+        "description": "Modified border color for the inline edits widget when tab will accept it."
+      },
+      "tabWillAcceptOriginalBorder": {
+        "description": "Original border color for the inline edits widget over the original text when tab will accept it."
+      },
       "gutterIndicator": {
         "background": {
           "description": "Background color for the inline edit gutter indicator."
@@ -1680,36 +1634,6 @@
         "successfulForeground": {
           "description": "Foreground color for the successful inline edit gutter indicator."
         }
-      },
-      "modifiedBackground": {
-        "description": "Background color for the modified text in inline edits."
-      },
-      "modifiedBorder": {
-        "description": "Border color for the modified text in inline edits."
-      },
-      "modifiedChangedLineBackground": {
-        "description": "Background color for the changed lines in the modified text of inline edits."
-      },
-      "modifiedChangedTextBackground": {
-        "description": "Overlay color for the changed text in the modified text of inline edits."
-      },
-      "originalBackground": {
-        "description": "Background color for the original text in inline edits."
-      },
-      "originalBorder": {
-        "description": "Border color for the original text in inline edits."
-      },
-      "originalChangedLineBackground": {
-        "description": "Background color for the changed lines in the original text of inline edits."
-      },
-      "originalChangedTextBackground": {
-        "description": "Overlay color for the changed text in the original text of inline edits."
-      },
-      "tabWillAcceptModifiedBorder": {
-        "description": "Modified border color for the inline edits widget when tab will accept it."
-      },
-      "tabWillAcceptOriginalBorder": {
-        "description": "Original border color for the inline edits widget over the original text when tab will accept it."
       }
     },
     "input": {
@@ -1720,23 +1644,14 @@
         "description": "Input box border."
       },
       "foreground": {
-        "inherits": [
-          "foreground"
-        ],
         "description": "Input box foreground."
       },
       "placeholderForeground": {
-        "inherits": [
-          "foreground"
-        ],
-        "description": "Input placeholder text."
+        "description": "Input box foreground color for placeholder text."
       }
     },
     "inputOption": {
       "activeBackground": {
-        "inherits": [
-          "focusBorder"
-        ],
         "description": "Background hover color of options in input fields."
       },
       "activeBorder": {
@@ -1788,38 +1703,35 @@
     },
     "keybindingLabel": {
       "background": {
-        "description": "Keybinding label background color."
+        "description": "Keybinding label background color. The keybinding label is used to represent a keyboard shortcut."
       },
       "border": {
-        "description": "Keybinding label border color."
+        "description": "Keybinding label border color. The keybinding label is used to represent a keyboard shortcut."
       },
       "bottomBorder": {
-        "description": "Keybinding label border bottom color."
+        "description": "Keybinding label border bottom color. The keybinding label is used to represent a keyboard shortcut."
       },
       "foreground": {
-        "description": "Keybinding label foreground color."
+        "description": "Keybinding label foreground color. The keybinding label is used to represent a keyboard shortcut."
       }
     },
     "keybindingTable": {
       "headerBackground": {
-        "inherits": [
-          "tree.tableOddRowsBackground"
-        ],
-        "description": "'Background color for the keyboard shortcuts table header.'."
+        "description": "Background color for the keyboard shortcuts table header."
       },
       "rowsBackground": {
-        "description": "'Background color for the keyboard shortcuts table alternating rows.'"
+        "description": "Background color for the keyboard shortcuts table alternating rows."
       }
     },
     "list": {
       "activeSelectionBackground": {
-        "description": "List/Tree background color for the selected item when the list/tree is active."
+        "description": "List/Tree background color for the selected item when the list/tree is active. An active list/tree has keyboard focus, an inactive does not."
       },
       "activeSelectionForeground": {
-        "description": "List/Tree foreground color for the selected item when the list/tree is active."
+        "description": "List/Tree foreground color for the selected item when the list/tree is active. An active list/tree has keyboard focus, an inactive does not."
       },
       "activeSelectionIconForeground": {
-        "description": "List/Tree icon foreground color for the selected item when the list/tree is active."
+        "description": "List/Tree icon foreground color for the selected item when the list/tree is active. An active list/tree has keyboard focus, an inactive does not."
       },
       "deemphasizedForeground": {
         "description": "List/Tree foreground color for items that are deemphasized."
@@ -1840,7 +1752,7 @@
         "description": "Border color of the filtered match."
       },
       "focusAndSelectionOutline": {
-        "description": "List/Tree outline color for the focused item when the list/tree is active and selected."
+        "description": "List/Tree outline color for the focused item when the list/tree is active and selected. An active list/tree has keyboard focus, an inactive does not."
       },
       "focusBackground": {
         "description": "List/Tree background color for the focused item when the list/tree is active. An active list/tree has keyboard focus, an inactive does not."
@@ -1870,7 +1782,7 @@
         "description": "List/Tree outline color for the focused item when the list/tree is inactive. An active list/tree has keyboard focus, an inactive does not."
       },
       "inactiveSelectionBackground": {
-        "description": "List/Tree background color for the selected item when the list/tree is inactive."
+        "description": "List/Tree background color for the selected item when the list/tree is inactive. An active list/tree has keyboard focus, an inactive does not."
       },
       "inactiveSelectionForeground": {
         "description": "List/Tree foreground color for the selected item when the list/tree is inactive. An active list/tree has keyboard focus, an inactive does not."
@@ -2068,36 +1980,21 @@
         "description": "Minimap marker color for errors."
       },
       "findMatchHighlight": {
-        "inherits": [
-          "editor.findMatchHighlightBackground"
-        ],
         "description": "Minimap marker color for find matches."
       },
       "foregroundOpacity": {
-        "description": "Opacity of minimap text and symbols."
+        "description": "Opacity of foreground elements rendered in the minimap. For example, \"#000000c0\" will render the elements with 75% opacity."
       },
       "infoHighlight": {
-        "inherits": [
-          "editorInfo.foreground"
-        ],
         "description": "Minimap marker color for infos."
       },
       "selectionHighlight": {
-        "inherits": [
-          "editor.selectionBackground"
-        ],
         "description": "Minimap marker color for the editor selection."
       },
       "selectionOccurrenceHighlight": {
-        "inherits": [
-          "editor.selectionHighlightBackground"
-        ],
         "description": "Minimap marker color for repeating editor selections."
       },
       "warningHighlight": {
-        "inherits": [
-          "editorWarning.foreground"
-        ],
         "description": "Minimap marker color for warnings."
       }
     },
@@ -2220,14 +2117,11 @@
         "description": "The border color of the multi file diff editor"
       },
       "headerBackground": {
-        "description": "The background color of the diff editor's header."
+        "description": "The background color of the diff editor's header"
       }
     },
     "notebook": {
       "cellBorderColor": {
-        "inherits": [
-          "list.inactiveSelectionBackground"
-        ],
         "description": "The border color for notebook cells."
       },
       "cellEditorBackground": {
@@ -2328,11 +2222,6 @@
         "description": "Notification links foreground color. Notifications slide in from the bottom right of the window."
       }
     },
-    "notificationToast": {
-      "border": {
-        "description": "Notification toast border color. Notifications slide in from the bottom right of the window."
-      }
-    },
     "notifications": {
       "background": {
         "description": "Notifications background color. Notifications slide in from the bottom right of the window."
@@ -2359,6 +2248,11 @@
         "description": "The color used for the icon of warning notifications. Notifications slide in from the bottom right of the window."
       }
     },
+    "notificationToast": {
+      "border": {
+        "description": "Notification toast border color. Notifications slide in from the bottom right of the window."
+      }
+    },
     "outputView": {
       "background": {
         "description": "Output view background color."
@@ -2366,27 +2260,18 @@
     },
     "outputViewStickyScroll": {
       "background": {
-        "inherits": [
-          "outputView.background"
-        ],
         "description": "Output view sticky scroll background color."
       }
     },
     "panel": {
       "background": {
-        "inherits": [
-          "editor.background"
-        ],
-        "description": "Panel background color."
+        "description": "Panel background color. Panels are shown below the editor area and contain views like output and integrated terminal."
       },
       "border": {
-        "description": "Panel border color to separate the panel from the editor."
+        "description": "Panel border color to separate the panel from the editor. Panels are shown below the editor area and contain views like output and integrated terminal."
       },
       "dropBorder": {
-        "inherits": [
-          "panelTitle.activeForeground"
-        ],
-        "description": "Drag and drop feedback color for the panel titles."
+        "description": "Drag and drop feedback color for the panel titles. Panels are shown below the editor area and contain views like output and integrated terminal."
       }
     },
     "panelInput": {
@@ -2404,7 +2289,7 @@
     },
     "panelSectionHeader": {
       "background": {
-        "description": "Panel section header background color."
+        "description": "Panel section header background color. Panels are shown below the editor area and contain views like output and integrated terminal. Panel sections are views nested within the panels."
       },
       "border": {
         "description": "Panel section header border color used when multiple views are stacked vertically in the panel. Panels are shown below the editor area and contain views like output and integrated terminal. Panel sections are views nested within the panels."
@@ -2415,9 +2300,6 @@
     },
     "panelStickyScroll": {
       "background": {
-        "inherits": [
-          "panel.background"
-        ],
         "description": "Background color of sticky scroll in the panel."
       },
       "border": {
@@ -2429,22 +2311,16 @@
     },
     "panelTitle": {
       "activeBorder": {
-        "inherits": [
-          "panelTitle.activeForeground"
-        ],
-        "description": "Border color for the active panel title."
+        "description": "Border color for the active panel title. Panels are shown below the editor area and contain views like output and integrated terminal."
       },
       "activeForeground": {
-        "description": "Title color for the active panel."
+        "description": "Title color for the active panel. Panels are shown below the editor area and contain views like output and integrated terminal."
       },
       "border": {
         "description": "Panel title border color on the bottom, separating the title from the views. Panels are shown below the editor area and contain views like output and integrated terminal."
       },
       "inactiveForeground": {
-        "inherits": [
-          "panelTitle.activeForeground"
-        ],
-        "description": "Title color for the inactive panel."
+        "description": "Title color for the inactive panel. Panels are shown below the editor area and contain views like output and integrated terminal."
       }
     },
     "panelTitleBadge": {
@@ -2457,9 +2333,6 @@
     },
     "peekView": {
       "border": {
-        "inherits": [
-          "editorInfo.foreground"
-        ],
         "description": "Color of the peek view borders and arrow."
       }
     },
@@ -2554,10 +2427,10 @@
     },
     "profileBadge": {
       "background": {
-        "description": "Profile badge background color."
+        "description": "Profile badge background color. The profile badge shows on top of the settings gear icon in the activity bar."
       },
       "foreground": {
-        "description": "Profile badge foreground color."
+        "description": "Profile badge foreground color. The profile badge shows on top of the settings gear icon in the activity bar."
       }
     },
     "profiles": {
@@ -2594,7 +2467,7 @@
     },
     "quickInputTitle": {
       "background": {
-        "description": "Quick picker title background color."
+        "description": "Quick picker title background color. The quick picker widget is the container for pickers like the command palette."
       }
     },
     "radio": {
@@ -2703,7 +2576,7 @@
     },
     "selection": {
       "background": {
-        "description": "The background color of text selections in the workbench (e.g. for input fields or text areas)."
+        "description": "The background color of text selections in the workbench (e.g. for input fields or text areas). Note that this does not apply to selections within the editor."
       }
     },
     "settings": {
@@ -2732,9 +2605,6 @@
         "description": "The background color of a settings row when focused."
       },
       "focusedRowBorder": {
-        "inherits": [
-          "focusBorder"
-        ],
         "description": "The color of the row's top and bottom border when the row is focused."
       },
       "headerBorder": {
@@ -2776,7 +2646,7 @@
     },
     "sideBar": {
       "background": {
-        "description": "Side bar background color."
+        "description": "Side bar background color. The side bar is the container for views like explorer and search."
       },
       "border": {
         "description": "Side bar border color on the side separating to the editor. The side bar is the container for views like explorer and search."
@@ -2795,23 +2665,17 @@
     },
     "sideBarSectionHeader": {
       "background": {
-        "description": "Side bar section header background color."
+        "description": "Side bar section header background color. The side bar is the container for views like explorer and search. Side bar sections are views nested within the side bar."
       },
       "border": {
         "description": "Side bar section header border color. The side bar is the container for views like explorer and search. Side bar sections are views nested within the side bar."
       },
       "foreground": {
-        "inherits": [
-          "sideBar.foreground"
-        ],
-        "description": "Side bar section header foreground color."
+        "description": "Side bar section header foreground color. The side bar is the container for views like explorer and search. Side bar sections are views nested within the side bar."
       }
     },
     "sideBarStickyScroll": {
       "background": {
-        "inherits": [
-          "sideBar.background"
-        ],
         "description": "Background color of sticky scroll in the side bar."
       },
       "border": {
@@ -2829,10 +2693,7 @@
         "description": "Side bar title border color on the bottom, separating the title from the views. The side bar is the container for views like explorer and search."
       },
       "foreground": {
-        "inherits": [
-          "sideBar.foreground"
-        ],
-        "description": "Sidebar titles, such as Explorer."
+        "description": "Side bar title foreground color. The side bar is the container for views like explorer and search."
       }
     },
     "sideBySideEditor": {
@@ -2850,60 +2711,37 @@
     },
     "statusBar": {
       "background": {
-        "description": "Status bar background color when a workspace or folder is opened."
+        "description": "Status bar background color when a workspace or folder is opened. The status bar is shown in the bottom of the window."
       },
       "border": {
         "description": "Status bar border color separating to the sidebar and editor. The status bar is shown in the bottom of the window."
       },
       "debuggingBackground": {
-        "overrides": [
-          "statusBar.background",
-          "statusBar.noFolderBackground"
-        ],
-        "description": "Status bar background color when a program is being debugged."
+        "description": "Status bar background color when a program is being debugged. The status bar is shown in the bottom of the window"
       },
       "debuggingBorder": {
         "description": "Status bar border color separating to the sidebar and editor when a program is being debugged. The status bar is shown in the bottom of the window"
       },
       "debuggingForeground": {
-        "inherits": [
-          "statusBar.foreground"
-        ],
-        "overrides": [
-          "statusBar.foreground",
-          "statusBar.noFolderForeground"
-        ],
-        "description": "Status bar foreground color when a program is being debugged."
+        "description": "Status bar foreground color when a program is being debugged. The status bar is shown in the bottom of the window"
       },
       "focusBorder": {
-        "inherits": [
-          "statusBar.foreground"
-        ],
-        "description": "Status bar border color when focused on keyboard navigation."
+        "description": "Status bar border color when focused on keyboard navigation. The status bar is shown in the bottom of the window."
       },
       "foreground": {
-        "description": "Status bar foreground color when a workspace or folder is opened."
+        "description": "Status bar foreground color when a workspace or folder is opened. The status bar is shown in the bottom of the window."
       },
       "inactiveBackground": {
         "description": "Status bar background color when a workspace or folder is opened and the window is inactive. Debugging and other background overrides take precedence. If not set, the current status bar background is used."
       },
       "noFolderBackground": {
-        "overrides": [
-          "statusBar.background"
-        ],
-        "description": "Status bar background color when no folder is opened."
+        "description": "Status bar background color when no folder is opened. The status bar is shown in the bottom of the window."
       },
       "noFolderBorder": {
         "description": "Status bar border color separating to the sidebar and editor when no folder is opened. The status bar is shown in the bottom of the window."
       },
       "noFolderForeground": {
-        "inherits": [
-          "statusBar.foreground"
-        ],
-        "overrides": [
-          "statusBar.foreground"
-        ],
-        "description": "Status bar foreground color when no folder is opened."
+        "description": "Status bar foreground color when no folder is opened. The status bar is shown in the bottom of the window."
       }
     },
     "statusBarItem": {
@@ -2926,19 +2764,13 @@
         "description": "Status bar error items foreground color when hovering. Error items stand out from other status bar entries to indicate error conditions. The status bar is shown in the bottom of the window."
       },
       "focusBorder": {
-        "inherits": [
-          "statusBar.foreground"
-        ],
-        "description": "Status bar item border color when focused on keyboard navigation."
+        "description": "Status bar item border color when focused on keyboard navigation. The status bar is shown in the bottom of the window."
       },
       "hoverBackground": {
         "description": "Status bar item background color when hovering. The status bar is shown in the bottom of the window."
       },
       "hoverForeground": {
-        "inherits": [
-          "statusBar.foreground"
-        ],
-        "description": "Status bar item foreground color when hovering."
+        "description": "Status bar item foreground color when hovering. The status bar is shown in the bottom of the window."
       },
       "offlineBackground": {
         "description": "Status bar item background color when the workbench is offline."
@@ -2965,27 +2797,15 @@
         "description": "Status bar prominent items foreground color when hovering. Prominent items stand out from other status bar entries to indicate importance. The status bar is shown in the bottom of the window."
       },
       "remoteBackground": {
-        "inherits": [
-          "activityBarBadge.background"
-        ],
         "description": "Background color for the remote indicator on the status bar."
       },
       "remoteForeground": {
-        "inherits": [
-          "activityBarBadge.foreground"
-        ],
         "description": "Foreground color for the remote indicator on the status bar."
       },
       "remoteHoverBackground": {
-        "inherits": [
-          "statusBarItem.hoverBackground"
-        ],
         "description": "Background color for the remote indicator on the status bar when hovering."
       },
       "remoteHoverForeground": {
-        "inherits": [
-          "statusBarItem.hoverForeground"
-        ],
         "description": "Foreground color for the remote indicator on the status bar when hovering."
       },
       "warningBackground": {
@@ -3000,9 +2820,6 @@
       "warningHoverForeground": {
         "description": "Status bar warning items foreground color when hovering. Warning items stand out from other status bar entries to indicate warning conditions. The status bar is shown in the bottom of the window."
       }
-    },
-    "strongForeground": {
-      "description": "Highest-contrast foreground color, intended for text or icons that need maximum legibility across various backgrounds. This color is only used if not overridden by a component."
     },
     "surface": {
       "background": {
@@ -3023,7 +2840,7 @@
         "description": "The foreground color for boolean symbols. These symbols appear in the outline, breadcrumb, and suggest widget."
       },
       "classForeground": {
-        "description": "Class icons in outlines, breadcrumbs, and suggestions."
+        "description": "The foreground color for class symbols. These symbols appear in the outline, breadcrumb, and suggest widget."
       },
       "colorForeground": {
         "description": "The foreground color for color symbols. These symbols appear in the outline, breadcrumb, and suggest widget."
@@ -3053,7 +2870,7 @@
         "description": "The foreground color for folder symbols. These symbols appear in the outline, breadcrumb, and suggest widget."
       },
       "functionForeground": {
-        "description": "Function icons in outlines, breadcrumbs, and suggestions."
+        "description": "The foreground color for function symbols. These symbols appear in the outline, breadcrumb, and suggest widget."
       },
       "interfaceForeground": {
         "description": "The foreground color for interface symbols. These symbols appear in the outline, breadcrumb, and suggest widget."
@@ -3113,7 +2930,7 @@
         "description": "The foreground color for unit symbols. These symbols appear in the outline, breadcrumb, and suggest widget."
       },
       "variableForeground": {
-        "description": "Variable icons in outlines, breadcrumbs, and suggestions."
+        "description": "The foreground color for variable symbols. These symbols appear in the outline, breadcrumb, and suggest widget."
       }
     },
     "tab": {
@@ -3127,22 +2944,19 @@
         "description": "Border to the top of an active tab. Tabs are the containers for editors in the editor area. Multiple tabs can be opened in one editor group. There can be multiple editor groups."
       },
       "activeForeground": {
-        "description": "Active tab foreground color in an active group."
+        "description": "Active tab foreground color in an active group. Tabs are the containers for editors in the editor area. Multiple tabs can be opened in one editor group. There can be multiple editor groups."
       },
       "activeModifiedBorder": {
         "description": "Border on the top of modified active tabs in an active group. Tabs are the containers for editors in the editor area. Multiple tabs can be opened in one editor group. There can be multiple editor groups."
       },
       "border": {
-        "description": "Border around tabs."
+        "description": "Border around tabs. Tabs are the containers for editors in the editor area. Multiple tabs can be opened in one editor group. There can be multiple editor groups."
       },
       "divider": {
         "description": "Color of dividers between editor tabs."
       },
       "dragAndDropBorder": {
-        "inherits": [
-          "tab.activeForeground"
-        ],
-        "description": "Border between tabs to indicate that a tab can be inserted between two tabs."
+        "description": "Border between tabs to indicate that a tab can be inserted between two tabs. Tabs are the containers for editors in the editor area. Multiple tabs can be opened in one editor group. There can be multiple editor groups."
       },
       "hoverBackground": {
         "description": "Tab background color when hovering. Tabs are the containers for editors in the editor area. Multiple tabs can be opened in one editor group. There can be multiple editor groups."
@@ -3151,16 +2965,13 @@
         "description": "Border to highlight tabs when hovering. Tabs are the containers for editors in the editor area. Multiple tabs can be opened in one editor group. There can be multiple editor groups."
       },
       "hoverForeground": {
-        "description": "Tab foreground color when hovering."
+        "description": "Tab foreground color when hovering. Tabs are the containers for editors in the editor area. Multiple tabs can be opened in one editor group. There can be multiple editor groups."
       },
       "inactiveBackground": {
-        "description": "Inactive tab background color in an active group."
+        "description": "Inactive tab background color in an active group. Tabs are the containers for editors in the editor area. Multiple tabs can be opened in one editor group. There can be multiple editor groups."
       },
       "inactiveForeground": {
-        "inherits": [
-          "tab.activeForeground"
-        ],
-        "description": "Inactive tab foreground color in an active group."
+        "description": "Inactive tab foreground color in an active group. Tabs are the containers for editors in the editor area. Multiple tabs can be opened in one editor group. There can be multiple editor groups."
       },
       "inactiveModifiedBorder": {
         "description": "Border on the top of modified inactive tabs in an active group. Tabs are the containers for editors in the editor area. Multiple tabs can be opened in one editor group. There can be multiple editor groups."
@@ -3187,10 +2998,7 @@
         "description": "Border to the top of an active tab in an unfocused group. Tabs are the containers for editors in the editor area. Multiple tabs can be opened in one editor group. There can be multiple editor groups."
       },
       "unfocusedActiveForeground": {
-        "inherits": [
-          "tab.activeForeground"
-        ],
-        "description": "Active tab foreground color in an unfocused group."
+        "description": "Active tab foreground color in an unfocused group. Tabs are the containers for editors in the editor area. Multiple tabs can be opened in one editor group. There can be multiple editor groups."
       },
       "unfocusedActiveModifiedBorder": {
         "description": "Border on the top of modified active tabs in an unfocused group. Tabs are the containers for editors in the editor area. Multiple tabs can be opened in one editor group. There can be multiple editor groups."
@@ -3202,19 +3010,13 @@
         "description": "Border to highlight tabs in an unfocused group when hovering. Tabs are the containers for editors in the editor area. Multiple tabs can be opened in one editor group. There can be multiple editor groups."
       },
       "unfocusedHoverForeground": {
-        "inherits": [
-          "tab.hoverForeground"
-        ],
-        "description": "Tab foreground color in an unfocused group when hovering."
+        "description": "Tab foreground color in an unfocused group when hovering. Tabs are the containers for editors in the editor area. Multiple tabs can be opened in one editor group. There can be multiple editor groups."
       },
       "unfocusedInactiveBackground": {
         "description": "Inactive tab background color in an unfocused group. Tabs are the containers for editors in the editor area. Multiple tabs can be opened in one editor group. There can be multiple editor groups."
       },
       "unfocusedInactiveForeground": {
-        "inherits": [
-          "tab.inactiveForeground"
-        ],
-        "description": "Inactive tab foreground color in an unfocused group."
+        "description": "Inactive tab foreground color in an unfocused group. Tabs are the containers for editors in the editor area. Multiple tabs can be opened in one editor group. There can be multiple editor groups."
       },
       "unfocusedInactiveModifiedBorder": {
         "description": "Border on the top of modified inactive tabs in an unfocused group. Tabs are the containers for editors in the editor area. Multiple tabs can be opened in one editor group. There can be multiple editor groups."
@@ -3222,60 +3024,55 @@
     },
     "terminal": {
       "ansiBlack": {
-        "description": "Terminal ANSI black."
+        "description": "UNREVIEWED: Describe UI token terminal.ansiBlack."
       },
       "ansiBlue": {
-        "description": "Terminal ANSI blue."
+        "description": "UNREVIEWED: Describe UI token terminal.ansiBlue."
       },
       "ansiBrightBlack": {
-        "description": "Terminal ANSI bright black."
+        "description": "UNREVIEWED: Describe UI token terminal.ansiBrightBlack."
       },
       "ansiBrightBlue": {
-        "description": "Terminal ANSI bright blue."
+        "description": "UNREVIEWED: Describe UI token terminal.ansiBrightBlue."
       },
       "ansiBrightCyan": {
-        "description": "Terminal ANSI bright cyan."
+        "description": "UNREVIEWED: Describe UI token terminal.ansiBrightCyan."
       },
       "ansiBrightGreen": {
-        "description": "Terminal ANSI bright green."
+        "description": "UNREVIEWED: Describe UI token terminal.ansiBrightGreen."
       },
       "ansiBrightMagenta": {
-        "description": "Terminal ANSI bright magenta."
+        "description": "UNREVIEWED: Describe UI token terminal.ansiBrightMagenta."
       },
       "ansiBrightRed": {
-        "description": "Terminal ANSI bright red."
+        "description": "UNREVIEWED: Describe UI token terminal.ansiBrightRed."
       },
       "ansiBrightWhite": {
-        "description": "Terminal ANSI bright white."
+        "description": "UNREVIEWED: Describe UI token terminal.ansiBrightWhite."
       },
       "ansiBrightYellow": {
-        "description": "Terminal ANSI bright yellow."
+        "description": "UNREVIEWED: Describe UI token terminal.ansiBrightYellow."
       },
       "ansiCyan": {
-        "description": "Terminal ANSI cyan."
+        "description": "UNREVIEWED: Describe UI token terminal.ansiCyan."
       },
       "ansiGreen": {
-        "description": "Terminal ANSI green."
+        "description": "UNREVIEWED: Describe UI token terminal.ansiGreen."
       },
       "ansiMagenta": {
-        "description": "Terminal ANSI magenta."
+        "description": "UNREVIEWED: Describe UI token terminal.ansiMagenta."
       },
       "ansiRed": {
-        "description": "Terminal ANSI red."
+        "description": "UNREVIEWED: Describe UI token terminal.ansiRed."
       },
       "ansiWhite": {
-        "description": "Terminal ANSI white."
+        "description": "UNREVIEWED: Describe UI token terminal.ansiWhite."
       },
       "ansiYellow": {
-        "description": "Terminal ANSI yellow."
+        "description": "UNREVIEWED: Describe UI token terminal.ansiYellow."
       },
       "background": {
-        "inherits": [
-          "editor.background",
-          "panel.background",
-          "sideBar.background"
-        ],
-        "description": "Terminal backgrounds in the editor, panel, or sidebar."
+        "description": "The background color of the terminal, this allows coloring the terminal differently to the panel."
       },
       "border": {
         "description": "The color of the border that separates split panes within the terminal. This defaults to panel.border."
@@ -3413,14 +3210,14 @@
       "stashForeground": {
         "description": "The foreground color for a stash icon. These icons will appear in the terminal suggest widget."
       },
-      "symbolText": {
-        "description": "The foreground color for a plaintext suggestion. These icons will appear in the terminal suggest widget."
-      },
       "symbolicLinkFileForeground": {
         "description": "The foreground color for a symbolic link file icon. These icons will appear in the terminal suggest widget."
       },
       "symbolicLinkFolderForeground": {
         "description": "The foreground color for a symbolic link folder icon. These icons will appear in the terminal suggest widget."
+      },
+      "symbolText": {
+        "description": "The foreground color for a plaintext suggestion. These icons will appear in the terminal suggest widget."
       },
       "tagForeground": {
         "description": "The foreground color for a tag icon. These icons will appear in the terminal suggest widget."
@@ -3481,30 +3278,6 @@
           "description": "Retired color for the 'Unset' icon in the test explorer."
         }
       },
-      "message": {
-        "error": {
-          "badgeBackground": {
-            "description": "Background color of test error messages shown inline in the editor."
-          },
-          "badgeBorder": {
-            "description": "Border color of test error messages shown inline in the editor."
-          },
-          "badgeForeground": {
-            "description": "Text color of test error messages shown inline in the editor."
-          },
-          "lineBackground": {
-            "description": "Margin color beside error messages shown inline in the editor."
-          }
-        },
-        "info": {
-          "decorationForeground": {
-            "description": "Text color of test info messages shown inline in the editor."
-          },
-          "lineBackground": {
-            "description": "Margin color beside info messages shown inline in the editor."
-          }
-        }
-      },
       "messagePeekBorder": {
         "description": "Color of the peek view borders and arrow when peeking a logged message."
       },
@@ -3534,6 +3307,30 @@
       },
       "uncoveredMinimapBackground": {
         "description": "Minimap color of regions where code was not covered."
+      },
+      "message": {
+        "error": {
+          "badgeBackground": {
+            "description": "Background color of test error messages shown inline in the editor."
+          },
+          "badgeBorder": {
+            "description": "Border color of test error messages shown inline in the editor."
+          },
+          "badgeForeground": {
+            "description": "Text color of test error messages shown inline in the editor."
+          },
+          "lineBackground": {
+            "description": "Margin color beside error messages shown inline in the editor."
+          }
+        },
+        "info": {
+          "decorationForeground": {
+            "description": "Text color of test info messages shown inline in the editor."
+          },
+          "lineBackground": {
+            "description": "Margin color beside info messages shown inline in the editor."
+          }
+        }
       }
     },
     "textBlockQuote": {
@@ -3584,15 +3381,9 @@
         "description": "Title bar border color."
       },
       "inactiveBackground": {
-        "inherits": [
-          "titleBar.activeBackground"
-        ],
         "description": "Title bar background when the window is inactive."
       },
       "inactiveForeground": {
-        "inherits": [
-          "titleBar.activeForeground"
-        ],
         "description": "Title bar foreground when the window is inactive."
       }
     },
@@ -3601,7 +3392,7 @@
         "description": "Toolbar background when holding the mouse over actions"
       },
       "hoverBackground": {
-        "description": "Toolbar background when hovering over actions using the mouse."
+        "description": "Toolbar background when hovering over actions using the mouse"
       },
       "hoverOutline": {
         "description": "Toolbar outline when hovering over actions using the mouse"
@@ -3618,9 +3409,6 @@
         "description": "Table border color between columns."
       },
       "tableOddRowsBackground": {
-        "inherits": [
-          "foreground"
-        ],
         "description": "Background color for odd table rows."
       }
     },
@@ -3632,27 +3420,13 @@
     "walkthrough": {
       "stepTitle": {
         "foreground": {
-          "description": "Foreground color of the heading of each walkthrough step."
+          "description": "Foreground color of the heading of each walkthrough step"
         }
       }
     },
     "welcomePage": {
       "background": {
         "description": "Background color for the Welcome page."
-      },
-      "progress": {
-        "background": {
-          "inherits": [
-            "input.background"
-          ],
-          "description": "Welcome page progress tracks."
-        },
-        "foreground": {
-          "inherits": [
-            "textLink.foreground"
-          ],
-          "description": "Welcome page progress fills."
-        }
       },
       "tileBackground": {
         "description": "Background color for the tiles on the Welcome page."
@@ -3662,6 +3436,14 @@
       },
       "tileHoverBackground": {
         "description": "Hover background color for the tiles on the Welcome."
+      },
+      "progress": {
+        "background": {
+          "description": "Foreground color for the Welcome page progress bars."
+        },
+        "foreground": {
+          "description": "Background color for the Welcome page progress bars."
+        }
       }
     },
     "widget": {
@@ -3681,174 +3463,7 @@
       }
     }
   },
-  "sourceCode": {
-    "agentsWindowGraphic": {
-      "orange": {
-        "description": "Orange used for a project and for code in the graphic that explains the Agents window on the Welcome page."
-      }
-    },
-    "chat": {
-      "fusionBadgeForeground": {
-        "description": "Foreground color of the Copilot Fusion badge (discount or Recommended) in the model picker."
-      },
-      "fusionBadgeGradientEnd": {
-        "description": "End color of the gradient behind the Copilot Fusion badge (discount or Recommended) in the model picker."
-      },
-      "fusionBadgeGradientStart": {
-        "description": "Start color of the gradient behind the Copilot Fusion badge (discount or Recommended) in the model picker."
-      }
-    }
-  },
-  "nonStandard": {
-    "editorWatermark": {
-      "foreground": {
-        "description": "Legacy reference color for the empty editor watermark; not registered in the reviewed VS Code snapshots."
-      }
-    },
-    "gitblame": {
-      "inlineMessage": {
-        "description": "Inline blame annotation text contributed by a Git blame extension; extension registration is unverified."
-      }
-    },
-    "remoteHub": {
-      "decorations": {
-        "addedForegroundColor": {
-          "description": "Remote Repositories decoration for added resources; extension registration is unverified."
-        },
-        "conflictForegroundColor": {
-          "description": "Remote Repositories decoration for conflicting resources; extension registration is unverified."
-        },
-        "deletedForegroundColor": {
-          "description": "Remote Repositories decoration for deleted resources; extension registration is unverified."
-        },
-        "ignoredResourceForeground": {
-          "description": "Remote Repositories decoration for ignored resources; extension registration is unverified."
-        },
-        "incomingAddedForegroundColor": {
-          "description": "Remote Repositories decoration for incoming added resources; extension registration is unverified."
-        },
-        "incomingDeletedForegroundColor": {
-          "description": "Remote Repositories decoration for incoming deleted resources; extension registration is unverified."
-        },
-        "incomingModifiedForegroundColor": {
-          "description": "Remote Repositories decoration for incoming modified resources; extension registration is unverified."
-        },
-        "incomingRenamedForegroundColor": {
-          "description": "Remote Repositories decoration for incoming renamed resources; extension registration is unverified."
-        },
-        "modifiedForegroundColor": {
-          "description": "Remote Repositories decoration for modified resources; extension registration is unverified."
-        },
-        "possibleConflictForegroundColor": {
-          "description": "Remote Repositories decoration for resources with possible conflicts; extension registration is unverified."
-        },
-        "submoduleForegroundColor": {
-          "description": "Remote Repositories decoration for submodules; extension registration is unverified."
-        },
-        "workspaceRepositoriesView": {
-          "hasUncommittedChangesForegroundColor": {
-            "description": "Remote Repositories decoration for repositories with uncommitted changes in the workspace repositories view; extension registration is unverified."
-          }
-        }
-      }
-    },
-    "scm": {
-      "historyGraph": {
-        "green": {
-          "description": "Legacy green source control history graph lane; not registered in the reviewed VS Code snapshots."
-        },
-        "historyItemGroupBase": {
-          "description": "Legacy base revision group in the source control history graph; not registered in the reviewed VS Code snapshots."
-        },
-        "historyItemGroupHoverLabelForeground": {
-          "description": "Legacy hover label text for source control history groups; not registered in the reviewed VS Code snapshots."
-        },
-        "historyItemGroupLocal": {
-          "description": "Legacy local revision group in the source control history graph; not registered in the reviewed VS Code snapshots."
-        },
-        "historyItemGroupRemote": {
-          "description": "Legacy remote revision group in the source control history graph; not registered in the reviewed VS Code snapshots."
-        },
-        "red": {
-          "description": "Legacy red source control history graph lane; not registered in the reviewed VS Code snapshots."
-        },
-        "yellow": {
-          "description": "Legacy yellow source control history graph lane; not registered in the reviewed VS Code snapshots."
-        }
-      },
-      "historyItemAdditionsForeground": {
-        "description": "Legacy added-line statistics in source control history items; not registered in the reviewed VS Code snapshots."
-      },
-      "historyItemDeletionsForeground": {
-        "description": "Legacy deleted-line statistics in source control history items; not registered in the reviewed VS Code snapshots."
-      },
-      "historyItemSelectedStatisticsBorder": {
-        "description": "Legacy statistics border on selected source control history items; not registered in the reviewed VS Code snapshots."
-      },
-      "historyItemStatisticsBorder": {
-        "description": "Legacy statistics border on source control history items; not registered in the reviewed VS Code snapshots."
-      }
-    },
-    "scmGraph": {
-      "historyItemGroupBase": {
-        "description": "Legacy base revision group in the SCM graph; not registered in the reviewed VS Code snapshots."
-      },
-      "historyItemGroupLocal": {
-        "description": "Legacy local revision group in the SCM graph; not registered in the reviewed VS Code snapshots."
-      },
-      "historyItemGroupRemote": {
-        "description": "Legacy remote revision group in the SCM graph; not registered in the reviewed VS Code snapshots."
-      }
-    },
-    "testing": {
-      "message": {
-        "error": {
-          "decorationForeground": {
-            "description": "Legacy reference foreground for inline test error decorations; not registered in the reviewed VS Code snapshots."
-          }
-        }
-      }
-    }
-  },
-  "deprecated": {
-    "chat": {
-      "voiceSpeakingGlow": {
-        "description": "Accent color of the Voice Mode glow while the agent is speaking."
-      }
-    },
-    "editorActiveLineNumber": {
-      "foreground": {
-        "description": "Color of editor active line number"
-      }
-    },
-    "editorIndentGuide": {
-      "activeBackground": {
-        "description": "Color of the active editor indentation guides."
-      },
-      "background": {
-        "description": "Color of the editor indentation guides."
-      }
-    },
-    "modernActivityBar": {
-      "activeBackground": {
-        "description": "Background color of active Activity bar items in the default side position when the modern UI is enabled."
-      },
-      "activeForeground": {
-        "description": "Foreground color of active Activity bar items in the default side position when the modern UI is enabled."
-      },
-      "hoverBackground": {
-        "description": "Background color of Activity bar items in the default side position when hovering and the modern UI is enabled."
-      },
-      "hoverForeground": {
-        "description": "Foreground color of Activity bar items in the default side position when hovering and the modern UI is enabled."
-      }
-    },
-    "quickInput": {
-      "list": {
-        "focusBackground": {
-          "description": "''"
-        }
-      }
-    }
-  }
+  "sourceCode": {},
+  "nonStandard": {},
+  "deprecated": {}
 }

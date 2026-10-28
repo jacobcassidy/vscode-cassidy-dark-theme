@@ -1,219 +1,100 @@
 {
   "standard": {
     "*.abstract": {
-      "description": "Abstract symbols of any semantic token type."
+      "description": "Symbols of any semantic token type. Style to use for symbols that are abstract."
     },
     "*.async": {
-      "description": "Asynchronous symbols of any semantic token type."
+      "description": "Symbols of any semantic token type. Style to use for symbols that are async."
     },
     "*.declaration": {
-      "description": "Symbol declarations of any semantic token type."
+      "description": "Symbols of any semantic token type. Style for all symbol declarations."
     },
     "*.deprecated": {
-      "description": "Deprecated symbols of any semantic token type."
+      "description": "Symbols of any semantic token type. Style to use for symbols that are deprecated."
     },
     "*.documentation": {
-      "description": "References in documentation of any semantic token type."
+      "description": "Symbols of any semantic token type. Style to use for references in documentation."
     },
     "*.modification": {
-      "description": "Write accesses to symbols of any semantic token type."
+      "description": "Symbols of any semantic token type. Style to use for write accesses."
     },
     "*.readonly": {
-      "description": "Read-only symbols of any semantic token type."
+      "description": "Symbols of any semantic token type. Style to use for symbols that are read-only."
     },
     "*.static": {
-      "description": "Static symbols of any semantic token type."
+      "description": "Symbols of any semantic token type. Style to use for symbols that are static."
     },
     "class": {
-      "inherits": [
-        "scope:entity.name.type.class",
-        "scope:support.class"
-      ],
-      "description": "Semantic class symbols."
+      "description": "Style for classes."
     },
     "comment": {
-      "description": "Semantic comments."
+      "description": "Style for comments."
     },
     "decorator": {
-      "description": "Semantic decorators and annotations."
+      "description": "Style for decorators & annotations."
     },
     "enum": {
-      "description": "Semantic enumeration type names."
+      "description": "Style for enums."
     },
     "enumMember": {
-      "description": "Semantic enumeration members."
+      "description": "Style for enum members."
     },
     "event": {
-      "description": "Semantic event symbols."
+      "description": "Style for events."
     },
     "function": {
-      "inherits": [
-        "scope:entity.name.function",
-        "scope:support.function"
-      ],
-      "description": "Semantic function symbols."
-    },
-    "function.defaultLibrary": {
-      "inherits": [
-        "semantic.function",
-        "scope:support.function"
-      ],
-      "description": "Semantic built-in function symbols."
+      "description": "Style for functions"
     },
     "interface": {
-      "description": "Semantic interface type names."
+      "description": "Style for interfaces."
     },
     "keyword": {
-      "description": "Semantic language keywords."
+      "description": "Style for keywords."
+    },
+    "label": {
+      "description": "Style for labels. "
     },
     "macro": {
-      "description": "Semantic preprocessor macros."
+      "description": "Style for macros."
     },
     "method": {
-      "inherits": [
-        "scope:entity.name.function.member",
-        "scope:support.function"
-      ],
-      "description": "Semantic method symbols."
+      "description": "Style for method (member functions)"
     },
     "namespace": {
-      "inherits": [
-        "scope:entity.name.namespace"
-      ],
-      "description": "Semantic namespace symbols."
+      "description": "Style for namespaces."
     },
     "number": {
-      "description": "Semantic numeric literals."
+      "description": "Style for numbers."
     },
     "operator": {
-      "description": "Semantic operators."
+      "description": "Style for operators."
     },
     "parameter": {
-      "inherits": [
-        "scope:variable.parameter"
-      ],
-      "description": "Semantic parameter symbols."
+      "description": "Style for parameters."
     },
     "property": {
-      "inherits": [
-        "scope:variable.other.property"
-      ],
-      "description": "Semantic property symbols."
+      "description": "Style for properties."
     },
     "regexp": {
-      "description": "Semantic regular expression literals."
+      "description": "Style for expressions."
     },
     "string": {
-      "description": "Semantic string literals."
+      "description": "Style for strings."
     },
     "struct": {
-      "description": "Semantic structure type names."
+      "description": "Style for structs."
     },
     "type": {
-      "description": "Semantic type names."
+      "description": "Style for types."
     },
     "typeParameter": {
-      "description": "Semantic generic type parameters."
+      "description": "Style for type parameters."
     },
     "variable": {
-      "inherits": [
-        "scope:variable.other.readwrite",
-        "scope:entity.name.variable"
-      ],
-      "description": "Semantic variable symbols."
-    },
-    "variable.defaultLibrary": {
-      "inherits": [
-        "semantic.variable",
-        "scope:support.variable",
-        "scope:support.other.variable"
-      ],
-      "description": "Semantic built-in variable symbols."
-    },
-    "variable.definition": {
-      "description": "Provider-defined variable definitions."
+      "description": "Style for variables."
     }
   },
   "sourceCode": {},
-  "nonStandard": {
-    "*.builtin": {
-      "description": "Provider-defined built-in symbols of any semantic token type."
-    },
-    "*.callable": {
-      "description": "Provider-defined callable symbols of any semantic token type."
-    },
-    "*.classMember": {
-      "description": "Provider-defined class members of any semantic token type."
-    },
-    "*.decorator": {
-      "description": "Provider-defined decorator uses of any semantic token type."
-    },
-    "*.escapeCharacter": {
-      "description": "Provider-defined escape sequences of any semantic token type."
-    },
-    "*.invalid": {
-      "description": "Provider-defined invalid tokens of any semantic token type."
-    },
-    "*.keywordArgument": {
-      "description": "Provider-defined keyword arguments of any semantic token type."
-    },
-    "*.library": {
-      "description": "Provider-defined library symbols of any semantic token type."
-    },
-    "*.overridden": {
-      "description": "Provider-defined overridden symbols of any semantic token type."
-    },
-    "*.typeHint": {
-      "description": "Provider-defined type hints of any semantic token type."
-    },
-    "*.typeHintComment": {
-      "description": "Provider-defined type hints inside comments of any semantic token type."
-    },
-    "arrow": {
-      "description": "Provider-defined arrow punctuation."
-    },
-    "bracket": {
-      "description": "Provider-defined square bracket punctuation."
-    },
-    "builtinConstant": {
-      "description": "Provider-defined built-in constants."
-    },
-    "clsParameter": {
-      "description": "Provider-defined implicit class parameters, such as Python cls."
-    },
-    "colon": {
-      "description": "Provider-defined colon punctuation."
-    },
-    "curlybrace": {
-      "description": "Provider-defined curly brace punctuation."
-    },
-    "defaultLibrary": {
-      "description": "Provider-defined defaultLibrary token type; built-in symbols normally use the defaultLibrary modifier on their actual token type."
-    },
-    "intrinsic": {
-      "description": "Provider-defined intrinsic types and symbols."
-    },
-    "label": {
-      "description": "Semantic labels."
-    },
-    "magicFunction": {
-      "description": "Provider-defined special functions, such as Python special methods."
-    },
-    "module": {
-      "description": "Provider-defined module names."
-    },
-    "parameter.readwrite": {
-      "description": "Provider-defined read/write parameter symbols."
-    },
-    "parenthesis": {
-      "description": "Provider-defined parenthesis punctuation."
-    },
-    "selfParameter": {
-      "description": "Provider-defined implicit instance parameters, such as Python self."
-    },
-    "semicolon": {
-      "description": "Provider-defined semicolon punctuation."
-    }
-  },
+  "nonStandard": {},
   "deprecated": {}
 }

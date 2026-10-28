@@ -22,7 +22,7 @@
         {
           "id": "vscode-main",
           "kind": "core",
-          "revision": "ea8056df9f08fb7c452589213ec77fabbd3481b9"
+          "revision": "37995fde4ddebe8bbe8b85b64f9f1334292ae523"
         }
       ]
     },
@@ -8338,7 +8338,7 @@
         "identity": {
           "id": "vscode-main",
           "kind": "core",
-          "revision": "ea8056df9f08fb7c452589213ec77fabbd3481b9"
+          "revision": "37995fde4ddebe8bbe8b85b64f9f1334292ae523"
         },
         "ui": [
           "actionBar.toggledBackground",
@@ -16648,7 +16648,7 @@
     "acceptedCoverage": [],
     "localSyntax": {
       "path": "src/themes/prod/default/tokens/syntax/definitions.jsonc",
-      "revision": "sha256:9896bb78ab6912afdf6097b350faff8ce6eb34f17da68f7399eb03d584323c9b"
+      "revision": "sha256:b70a3b8c8982a755f9ff73c984b72b5df379365a108a7ed5a5fb764b645620df"
     },
     "colorThemeSchema": {
       "path": "dev/docs/refreshes/vscode-color-theme-1.143.1.json",

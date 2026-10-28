@@ -1,235 +1,131 @@
 {
   "standard": {
     "*.abstract": {
-      "color": "#0ff",
-      "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+      "color": "variables.default.placeholder",
+      "colorReason": "Default bootstrap value. Review this selector before publication"
     },
     "*.async": {
-      "color": "#0ff",
-      "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+      "color": "variables.default.placeholder",
+      "colorReason": "Default bootstrap value. Review this selector before publication"
     },
     "*.declaration": {
-      "color": "#0ff",
-      "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+      "color": "variables.default.placeholder",
+      "colorReason": "Default bootstrap value. Review this selector before publication"
     },
     "*.deprecated": {
-      "color": "#0ff",
-      "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+      "color": "variables.default.placeholder",
+      "colorReason": "Default bootstrap value. Review this selector before publication"
     },
     "*.documentation": {
-      "color": "#0ff",
-      "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+      "color": "variables.default.placeholder",
+      "colorReason": "Default bootstrap value. Review this selector before publication"
     },
     "*.modification": {
-      "color": "#0ff",
-      "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+      "color": "variables.default.placeholder",
+      "colorReason": "Default bootstrap value. Review this selector before publication"
     },
     "*.readonly": {
-      "color": "#0ff",
-      "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+      "color": "variables.default.placeholder",
+      "colorReason": "Default bootstrap value. Review this selector before publication"
     },
     "*.static": {
-      "color": "#0ff",
-      "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+      "color": "variables.default.placeholder",
+      "colorReason": "Default bootstrap value. Review this selector before publication"
     },
     "class": {
-      "color": "syntax.function"
+      "color": "variables.default.placeholder",
+      "colorReason": "Default bootstrap value. Review this selector before publication"
     },
     "comment": {
-      "color": "#0ff",
-      "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+      "color": "variables.default.placeholder",
+      "colorReason": "Default bootstrap value. Review this selector before publication"
     },
     "decorator": {
-      "color": "#0ff",
-      "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+      "color": "variables.default.placeholder",
+      "colorReason": "Default bootstrap value. Review this selector before publication"
     },
     "enum": {
-      "color": "#0ff",
-      "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+      "color": "variables.default.placeholder",
+      "colorReason": "Default bootstrap value. Review this selector before publication"
     },
     "enumMember": {
-      "color": "#0ff",
-      "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+      "color": "variables.default.placeholder",
+      "colorReason": "Default bootstrap value. Review this selector before publication"
     },
     "event": {
-      "color": "#0ff",
-      "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+      "color": "variables.default.placeholder",
+      "colorReason": "Default bootstrap value. Review this selector before publication"
     },
     "function": {
-      "color": "syntax.function"
-    },
-    "function.defaultLibrary": {
-      "color": "syntax.support"
+      "color": "variables.default.placeholder",
+      "colorReason": "Default bootstrap value. Review this selector before publication"
     },
     "interface": {
-      "color": "#0ff",
-      "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+      "color": "variables.default.placeholder",
+      "colorReason": "Default bootstrap value. Review this selector before publication"
     },
     "keyword": {
-      "color": "#0ff",
-      "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+      "color": "variables.default.placeholder",
+      "colorReason": "Default bootstrap value. Review this selector before publication"
+    },
+    "label": {
+      "color": "variables.default.placeholder",
+      "colorReason": "Default bootstrap value. Review this selector before publication"
     },
     "macro": {
-      "color": "#0ff",
-      "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+      "color": "variables.default.placeholder",
+      "colorReason": "Default bootstrap value. Review this selector before publication"
     },
     "method": {
-      "color": "syntax.support"
+      "color": "variables.default.placeholder",
+      "colorReason": "Default bootstrap value. Review this selector before publication"
     },
     "namespace": {
-      "color": "syntax.constant"
+      "color": "variables.default.placeholder",
+      "colorReason": "Default bootstrap value. Review this selector before publication"
     },
     "number": {
-      "color": "#0ff",
-      "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+      "color": "variables.default.placeholder",
+      "colorReason": "Default bootstrap value. Review this selector before publication"
     },
     "operator": {
-      "color": "#0ff",
-      "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+      "color": "variables.default.placeholder",
+      "colorReason": "Default bootstrap value. Review this selector before publication"
     },
     "parameter": {
-      "color": "syntax.parameter"
+      "color": "variables.default.placeholder",
+      "colorReason": "Default bootstrap value. Review this selector before publication"
     },
     "property": {
-      "color": "syntax.property"
+      "color": "variables.default.placeholder",
+      "colorReason": "Default bootstrap value. Review this selector before publication"
     },
     "regexp": {
-      "color": "#0ff",
-      "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+      "color": "variables.default.placeholder",
+      "colorReason": "Default bootstrap value. Review this selector before publication"
     },
     "string": {
-      "color": "#0ff",
-      "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+      "color": "variables.default.placeholder",
+      "colorReason": "Default bootstrap value. Review this selector before publication"
     },
     "struct": {
-      "color": "#0ff",
-      "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+      "color": "variables.default.placeholder",
+      "colorReason": "Default bootstrap value. Review this selector before publication"
     },
     "type": {
-      "color": "#0ff",
-      "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+      "color": "variables.default.placeholder",
+      "colorReason": "Default bootstrap value. Review this selector before publication"
     },
     "typeParameter": {
-      "color": "#0ff",
-      "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+      "color": "variables.default.placeholder",
+      "colorReason": "Default bootstrap value. Review this selector before publication"
     },
     "variable": {
-      "color": "syntax.variable"
-    },
-    "variable.defaultLibrary": {
-      "color": "syntax.defaultLibrary"
-    },
-    "variable.definition": {
-      "color": "#0ff",
-      "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+      "color": "variables.default.placeholder",
+      "colorReason": "Default bootstrap value. Review this selector before publication"
     }
   },
   "sourceCode": {},
-  "nonStandard": {
-    "*.builtin": {
-      "color": "#0ff",
-      "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
-    },
-    "*.callable": {
-      "color": "#0ff",
-      "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
-    },
-    "*.classMember": {
-      "color": "#0ff",
-      "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
-    },
-    "*.decorator": {
-      "color": "#0ff",
-      "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
-    },
-    "*.escapeCharacter": {
-      "color": "#0ff",
-      "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
-    },
-    "*.invalid": {
-      "color": "#0ff",
-      "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
-    },
-    "*.keywordArgument": {
-      "color": "#0ff",
-      "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
-    },
-    "*.library": {
-      "color": "#0ff",
-      "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
-    },
-    "*.overridden": {
-      "color": "#0ff",
-      "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
-    },
-    "*.typeHint": {
-      "color": "#0ff",
-      "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
-    },
-    "*.typeHintComment": {
-      "color": "#0ff",
-      "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
-    },
-    "arrow": {
-      "color": "#0ff",
-      "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
-    },
-    "bracket": {
-      "color": "#0ff",
-      "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
-    },
-    "builtinConstant": {
-      "color": "#0ff",
-      "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
-    },
-    "clsParameter": {
-      "color": "#0ff",
-      "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
-    },
-    "colon": {
-      "color": "#0ff",
-      "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
-    },
-    "curlybrace": {
-      "color": "#0ff",
-      "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
-    },
-    "defaultLibrary": {
-      "color": "#0ff",
-      "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
-    },
-    "intrinsic": {
-      "color": "#0ff",
-      "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
-    },
-    "label": {
-      "color": "#0ff",
-      "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
-    },
-    "magicFunction": {
-      "color": "#0ff",
-      "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
-    },
-    "module": {
-      "color": "#0ff",
-      "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
-    },
-    "parameter.readwrite": {
-      "color": "#0ff",
-      "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
-    },
-    "parenthesis": {
-      "color": "#0ff",
-      "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
-    },
-    "selfParameter": {
-      "color": "#0ff",
-      "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
-    },
-    "semicolon": {
-      "color": "#0ff",
-      "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
-    }
-  },
+  "nonStandard": {},
   "deprecated": {}
 }
