@@ -10,6 +10,29 @@ import { defaultThemeDirectory } from "../../shared/paths.js";
 /** Consistent review prompt attached to every default bootstrap color. */
 const defaultColorReason = "Default bootstrap value. Review this selector before publication";
 
+/** Verified UI IDs that reuse a matching default, diagnostic, or diff color variable. */
+const uiVariableReferences = new Map([
+  ["foreground", "variables.default.foreground"],
+  ["editor.background", "variables.default.background"],
+  ["errorForeground", "variables.diagnostic.error.foreground"],
+  ["debugConsole.errorForeground", "variables.diagnostic.error.foreground"],
+  ["editorError.foreground", "variables.diagnostic.error.foreground"],
+  ["editorOverviewRuler.errorForeground", "variables.diagnostic.error.foreground"],
+  ["inputValidation.errorForeground", "variables.diagnostic.error.foreground"],
+  ["editorWarning.foreground", "variables.diagnostic.warning.foreground"],
+  ["debugConsole.warningForeground", "variables.diagnostic.warning.foreground"],
+  ["editorOverviewRuler.warningForeground", "variables.diagnostic.warning.foreground"],
+  ["inputValidation.warningForeground", "variables.diagnostic.warning.foreground"],
+  ["diffEditorOverview.insertedForeground", "variables.diff.added.foreground"],
+  ["editorOverviewRuler.addedForeground", "variables.diff.added.foreground"],
+  ["agentsMobileDiff.addedForeground", "variables.diff.added.foreground"],
+  ["gitDecoration.addedResourceForeground", "variables.diff.added.foreground"],
+  ["diffEditorOverview.removedForeground", "variables.diff.removed.foreground"],
+  ["editorOverviewRuler.deletedForeground", "variables.diff.removed.foreground"],
+  ["agentsMobileDiff.deletedForeground", "variables.diff.removed.foreground"],
+  ["gitDecoration.deletedResourceForeground", "variables.diff.removed.foreground"],
+]);
+
 /** Complete standard chromatic families and neutral tones used by the default palette. */
 const standardPalette = {
   chroma: { strength: 0.5, gamutFraction: 0.9 },
@@ -100,7 +123,7 @@ export function completeStarterTheme(prepared, snapshot) {
     if (record.category !== "standard") continue;
 
     insertUi(uiDefinitions.standard, id, {
-      color: "variables.default.placeholder",
+      color: uiVariableReferences.get(id) ?? "variables.default.placeholder",
     });
 
     /** Exact verified description, with a visible marker for unresolved wording. */
