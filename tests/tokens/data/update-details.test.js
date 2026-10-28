@@ -68,6 +68,30 @@ async function project(t) {
   };
 }
 
+test("refresh reports the active stage before an upstream discovery failure", async (t) => {
+  /** Fixture failure avoids network access and leaves authored files untouched. */
+  const { options } = await project(t);
+
+  /** Recorded stages prove the caller receives useful feedback before slow discovery begins. */
+  const messages = [];
+
+  /**
+   * Retain progress messages in emission order.
+   * @param {string} message - Current refresh stage.
+   */
+  options.onProgress = (message) => messages.push(message);
+
+  /** Fail discovery only after the caller has received its current activity. */
+  options.services.resolveLatest = async () => {
+    assert.match(messages.at(-1), /Resolving latest VS Code/);
+
+    throw new Error("Upstream unavailable");
+  };
+
+  await assert.rejects(updateTokenDetails(options), /Upstream unavailable/);
+  assert.match(messages[0], /Validating local token data/);
+});
+
 test("successful replay requires the recorded local syntax identity in both schema and runtime validation", async (t) => {
   /** A real local update establishes every required successful replay field. */
   const { root, options } = await project(t);

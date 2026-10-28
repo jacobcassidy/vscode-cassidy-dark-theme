@@ -5,9 +5,13 @@
 
 import { updateTokenDetails } from "../../tooling/tokens/data/update-details.js";
 import { formatMessage } from "../../tooling/shared/terminal-output.js";
+import { createTerminalProgress } from "../../tooling/shared/terminal-progress.js";
 
 /** One cancellation signal propagates through retrieval, extraction, and application boundaries. */
 const cancellation = new AbortController();
+
+/** Progress cleanup remains available on success, failure, and cancellation. */
+let progress;
 
 /** Stop pending retrieval/application when an orderly termination signal arrives. */
 function cancel() {
@@ -39,9 +43,18 @@ try {
     } else throw new Error(`Unknown updater option: ${flag}`);
   }
 
+  progress = createTerminalProgress("Starting token detail refresh");
+
+  /**
+   * Display refresh activity through the command's terminal feedback.
+   * @param {string} message - Current refresh stage.
+   */
+  options.onProgress = progress.update;
+
   /** Prepared/applied refresh and nonfatal review proposals. */
   const result = await updateTokenDetails(options);
 
+  progress.stop();
   console.log(
     formatMessage(
       result.verifiedRestored
@@ -56,6 +69,7 @@ try {
   for (const proposal of result.proposals)
     console.log(formatMessage(`Review proposal: ${JSON.stringify(proposal)}`, "action"));
 } catch (error) {
+  progress?.stop();
   console.error(formatMessage(error.message, "error"));
 
   for (const proposal of error.proposals ?? [])
@@ -63,6 +77,7 @@ try {
 
   process.exitCode = 1;
 } finally {
+  progress?.stop();
   process.off("SIGINT", cancel);
   process.off("SIGTERM", cancel);
 }

@@ -269,6 +269,7 @@ function referenceDescription(record, input, grammarNames) {
  * @param [options.vscodeMainSource] - Matching supplemental-main checkout.
  * @param [options.extensionSources] - Verified extension/provider source directories.
  * @param [options.signal] - Invocation cancellation signal.
+ * @param {(message: string) => void} [options.onProgress] - Report the current stage before potentially slow work.
  * @param [options.services] - Injected retrieval/extraction/failure operations for deterministic tests.
  */
 export async function updateTokenDetails({
@@ -280,6 +281,7 @@ export async function updateTokenDetails({
   vscodeMainSource,
   extensionSources = [],
   signal,
+  onProgress,
   services = {},
 } = {}) {
   if (check && recover) throw new Error("--check cannot be combined with recovery");
@@ -290,6 +292,7 @@ export async function updateTokenDetails({
   const configPath = "src/token-data/upstream-sources.jsonc";
 
   if (recover === "verify-restored") {
+    onProgress?.("Verifying restored token data");
     await verifyRestored(
       root,
       async () => {
@@ -301,6 +304,8 @@ export async function updateTokenDetails({
 
     return { verifiedRestored: true, changed: [], proposals: [], warnings: [] };
   }
+
+  onProgress?.("Validating local token data and theme inputs");
 
   /** Complete dependencies are captured before discovery/extraction, outside application guards. */
   const expected = await capturePaths([join(root, "src"), join(root, "package.json")]);
@@ -342,6 +347,10 @@ export async function updateTokenDetails({
   if (replay && !config.lastSuccessful?.resolution)
     throw new Error("No successful recorded sources. Run an online npm run refresh first.");
 
+  onProgress?.(
+    replay ? "Loading recorded upstream revisions" : "Resolving latest VS Code release and source revisions",
+  );
+
   /** Online mode always discovers latest, regardless of existing cache entries. */
   const resolution = replay
     ? structuredClone(config.lastSuccessful.resolution)
@@ -351,6 +360,7 @@ export async function updateTokenDetails({
   const sources = [];
 
   for (const identity of resolution.inputs.filter((input) => input.kind === "core")) {
+    onProgress?.(`Retrieving and verifying ${identity.id} (${identity.revision.slice(0, 12)})`);
     sources.push(
       await (services.obtainSource ?? obtainSource)({
         root,
@@ -363,6 +373,8 @@ export async function updateTokenDetails({
   }
 
   for (const [index, directory] of extensionSources.entries()) {
+    onProgress?.(`Verifying extension source ${index + 1}: ${directory}`);
+
     /** Replay requires a matching recorded identity; online runs verify the supplied contributor anew. */
     const recorded = replay
       ? resolution.inputs.find((input) => input.kind === "extension" && input.id === `extension-${index + 1}`)
@@ -385,8 +397,11 @@ export async function updateTokenDetails({
 
   for (const source of sources) {
     signal?.throwIfAborted();
+    onProgress?.(`Extracting token registrations from ${source.identity.id}`);
     extracted.push(await (services.extractSource ?? extractSource)(source, signal));
   }
+
+  onProgress?.("Validating upstream extraction coverage");
 
   /** Successful coverage baselines and exact reviewed accepted outcomes form one resolution candidate. */
   const coverage = extracted.map(coverageRecord);
@@ -424,6 +439,8 @@ export async function updateTokenDetails({
   const output = new Map();
 
   for (const family of ["ui", "semantic", "syntax"]) {
+    onProgress?.(`Refreshing ${family} token descriptions`);
+
     /** Refresh the union without expanding definition inventories or changing accepted categories. */
     const ids = new Set([
       ...snapshot.details[family].records.keys(),
@@ -560,6 +577,8 @@ export async function updateTokenDetails({
 
   output.set(configPath, await formatSource(root, configPath, updatedConfig));
 
+  onProgress?.("Validating refreshed files and checking source changes");
+
   // Validate the prepared shared files with the same local codec before application.
   for (const [path, source] of output) {
     if (path === configPath) continue;
@@ -585,6 +604,7 @@ export async function updateTokenDetails({
     return { changed, proposals, warnings, replay: true };
   }
 
+  onProgress?.("Applying refreshed token data");
   await withGuards([root], async ([owner]) => {
     for (const source of sources) await (services.assertSourceFresh ?? assertSourceFresh)(source);
 
