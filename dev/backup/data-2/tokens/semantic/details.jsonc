@@ -1,0 +1,213 @@
+// Shared semantic token details: reusable documentation; accepted categories remain subject to review.
+// Upstream inputs last processed: VS Code 1.143.1
+// Stable commit: unknown (historical source tag; commit not recorded)
+// Supplemental main commit: 1184ad4d45794110deb6b897ea83b15aac44ed89
+/*
+MIT License
+
+Copyright (c) 2015 - present Microsoft Corporation
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+*/
+// Updater (run from the repository root): npm run refresh
+{
+  "standard": {
+    "*.abstract": {
+      "description": "Abstract symbols of any semantic token type."
+    },
+    "*.async": {
+      "description": "Asynchronous symbols of any semantic token type."
+    },
+    "*.declaration": {
+      "description": "Symbol declarations of any semantic token type."
+    },
+    "*.deprecated": {
+      "description": "Deprecated symbols of any semantic token type."
+    },
+    "*.documentation": {
+      "description": "References in documentation of any semantic token type."
+    },
+    "*.modification": {
+      "description": "Write accesses to symbols of any semantic token type."
+    },
+    "*.readonly": {
+      "description": "Read-only symbols of any semantic token type."
+    },
+    "*.static": {
+      "description": "Static symbols of any semantic token type."
+    },
+    "class": {
+      "description": "Semantic class symbols."
+    },
+    "comment": {
+      "description": "Semantic comments."
+    },
+    "decorator": {
+      "description": "Semantic decorators and annotations."
+    },
+    "enum": {
+      "description": "Semantic enumeration type names."
+    },
+    "enumMember": {
+      "description": "Semantic enumeration members."
+    },
+    "event": {
+      "description": "Semantic event symbols."
+    },
+    "function": {
+      "description": "Semantic function symbols."
+    },
+    "function.defaultLibrary": {
+      "description": "Semantic built-in function symbols."
+    },
+    "interface": {
+      "description": "Semantic interface type names."
+    },
+    "keyword": {
+      "description": "Semantic language keywords."
+    },
+    "macro": {
+      "description": "Semantic preprocessor macros."
+    },
+    "method": {
+      "description": "Semantic method symbols."
+    },
+    "namespace": {
+      "description": "Semantic namespace symbols."
+    },
+    "number": {
+      "description": "Semantic numeric literals."
+    },
+    "operator": {
+      "description": "Semantic operators."
+    },
+    "parameter": {
+      "description": "Semantic parameter symbols."
+    },
+    "property": {
+      "description": "Semantic property symbols."
+    },
+    "regexp": {
+      "description": "Semantic regular expression literals."
+    },
+    "string": {
+      "description": "Semantic string literals."
+    },
+    "struct": {
+      "description": "Semantic structure type names."
+    },
+    "type": {
+      "description": "Semantic type names."
+    },
+    "typeParameter": {
+      "description": "Semantic generic type parameters."
+    },
+    "variable": {
+      "description": "Semantic variable symbols."
+    },
+    "variable.defaultLibrary": {
+      "description": "Semantic built-in variable symbols."
+    },
+    "variable.definition": {
+      "description": "Provider-defined variable definitions."
+    }
+  },
+  "sourceCode": {},
+  "nonStandard": {
+    "*.builtin": {
+      "description": "Provider-defined built-in symbols of any semantic token type."
+    },
+    "*.callable": {
+      "description": "Provider-defined callable symbols of any semantic token type."
+    },
+    "*.classMember": {
+      "description": "Provider-defined class members of any semantic token type."
+    },
+    "*.decorator": {
+      "description": "Provider-defined decorator uses of any semantic token type."
+    },
+    "*.escapeCharacter": {
+      "description": "Provider-defined escape sequences of any semantic token type."
+    },
+    "*.invalid": {
+      "description": "Provider-defined invalid tokens of any semantic token type."
+    },
+    "*.keywordArgument": {
+      "description": "Provider-defined keyword arguments of any semantic token type."
+    },
+    "*.library": {
+      "description": "Provider-defined library symbols of any semantic token type."
+    },
+    "*.overridden": {
+      "description": "Provider-defined overridden symbols of any semantic token type."
+    },
+    "*.typeHint": {
+      "description": "Provider-defined type hints of any semantic token type."
+    },
+    "*.typeHintComment": {
+      "description": "Provider-defined type hints inside comments of any semantic token type."
+    },
+    "arrow": {
+      "description": "Provider-defined arrow punctuation."
+    },
+    "bracket": {
+      "description": "Provider-defined square bracket punctuation."
+    },
+    "builtinConstant": {
+      "description": "Provider-defined built-in constants."
+    },
+    "clsParameter": {
+      "description": "Provider-defined implicit class parameters, such as Python cls."
+    },
+    "colon": {
+      "description": "Provider-defined colon punctuation."
+    },
+    "curlybrace": {
+      "description": "Provider-defined curly brace punctuation."
+    },
+    "defaultLibrary": {
+      "description": "Provider-defined defaultLibrary token type; built-in symbols normally use the defaultLibrary modifier on their actual token type."
+    },
+    "intrinsic": {
+      "description": "Provider-defined intrinsic types and symbols."
+    },
+    "label": {
+      "description": "Semantic labels."
+    },
+    "magicFunction": {
+      "description": "Provider-defined special functions, such as Python special methods."
+    },
+    "module": {
+      "description": "Provider-defined module names."
+    },
+    "parameter.readwrite": {
+      "description": "Provider-defined read/write parameter symbols."
+    },
+    "parenthesis": {
+      "description": "Provider-defined parenthesis punctuation."
+    },
+    "selfParameter": {
+      "description": "Provider-defined implicit instance parameters, such as Python self."
+    },
+    "semicolon": {
+      "description": "Provider-defined semicolon punctuation."
+    }
+  },
+  "deprecated": {}
+}

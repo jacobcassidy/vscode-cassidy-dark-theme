@@ -1,0 +1,174 @@
+// Shared syntax token details: reusable documentation; accepted categories remain subject to review.
+// Upstream inputs last processed: VS Code 1.143.1
+// Stable commit: unknown (historical source tag; commit not recorded)
+// Supplemental main commit: 1184ad4d45794110deb6b897ea83b15aac44ed89
+// Local syntax input: src/themes/prod/default/tokens/syntax/definitions.jsonc (migrated reference; historical revision unknown).
+/*
+MIT License
+
+Copyright (c) 2015 - present Microsoft Corporation
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+*/
+// Updater (run from the repository root): npm run refresh
+{
+  "standard": {
+    "attributeNamespace": {
+      "description": "Attribute namespace prefixes."
+    },
+    "blue-400": {
+      "description": "Rainbow extension numeric scope at color index 7."
+    },
+    "bold": {
+      "description": "Bold formatting for Markdown bold spans."
+    },
+    "bold-italic": {
+      "description": "Combined bold and italic formatting for nested Markdown emphasis."
+    },
+    "code": {
+      "description": "Inline Markdown code."
+    },
+    "comment": {
+      "description": "Comments and comment punctuation."
+    },
+    "constant": {
+      "description": "Constants, units, and regular expressions."
+    },
+    "cyan-400": {
+      "description": "Rainbow extension generic scope at color index 1."
+    },
+    "defaultLibrary": {
+      "description": "Library objects and shell scope names."
+    },
+    "dockerfile-cyan-400": {
+      "description": "Dockerfile instruction keywords classified as special methods."
+    },
+    "dockerfile-gray-white": {
+      "description": "Dockerfile string contents."
+    },
+    "dockerfile-green-400": {
+      "description": "Dockerfile entity names."
+    },
+    "dockerfile-orange-400": {
+      "description": "Dockerfile instruction option constants."
+    },
+    "dockerfile-red-400": {
+      "description": "Shell command conjunction separators inside Dockerfile instructions."
+    },
+    "function": {
+      "description": "Function and type names."
+    },
+    "gray-light-oklch-82": {
+      "description": "Rainbow extension comment scope at color index 4."
+    },
+    "gray-medium-oklch-66-punctuation": {
+      "description": "Nginx character constants and punctuation."
+    },
+    "gray-white-oklch-98": {
+      "description": "Support tokens in code.log grammar output."
+    },
+    "gray-white-oklch-98-2": {
+      "description": "Rainbow extension bold-markup scope at color index 9."
+    },
+    "green-400": {
+      "description": "Rainbow extension string scope at color index 5."
+    },
+    "invalid": {
+      "description": "Invalid code and Markdown link underlines."
+    },
+    "italic": {
+      "description": "Italic formatting for comments, invalid code, this references, Markdown headings and emphasis, and selected PHP and TypeScript type syntax."
+    },
+    "keyword": {
+      "description": "Keywords, tags, and storage modifiers."
+    },
+    "linkStrikethrough": {
+      "description": "Links inside struck-through Markdown text."
+    },
+    "nginx-blue-400": {
+      "description": "Nginx module language constants."
+    },
+    "nginx-cyan-400": {
+      "description": "Nginx language constants."
+    },
+    "nginx-gray-light-oklch-82": {
+      "description": "Default foreground for Nginx source scopes."
+    },
+    "nginx-red-400": {
+      "description": "Nginx main-module directives."
+    },
+    "normal": {
+      "description": "Reset font styles for rainbow comment and invalid-token scopes."
+    },
+    "orange-400": {
+      "description": "Rainbow extension parameter scope at color index 6."
+    },
+    "parameter": {
+      "description": "Parameters, CSS IDs, and keyframe offsets."
+    },
+    "pink-400": {
+      "description": "Rainbow extension type-name scope at color index 8."
+    },
+    "property": {
+      "description": "Properties, labels, and CSS classes."
+    },
+    "punctuation": {
+      "description": "Punctuation, brackets, and generic names."
+    },
+    "purple-400": {
+      "description": "Rainbow extension function-name scope at color index 3."
+    },
+    "red-400": {
+      "description": "Invalid tokens in code.log grammar output."
+    },
+    "red-400-2": {
+      "description": "Rainbow extension invalid-token scope at color index 10."
+    },
+    "red-500": {
+      "description": "Reserved syntax rule with no scope selectors or styling; currently has no highlighting effect."
+    },
+    "storageType": {
+      "description": "Type keywords, paths, and linked text."
+    },
+    "strikethrough": {
+      "description": "Strikethrough formatting for Markdown deleted text."
+    },
+    "string": {
+      "description": "Strings and selected Markdown text."
+    },
+    "support": {
+      "description": "Built-in functions, HTML text, and support names."
+    },
+    "text": {
+      "description": "Embedded text and attribute names."
+    },
+    "typeHint": {
+      "description": "PHP type hints and TypeScript type operators."
+    },
+    "variable": {
+      "description": "Variables and variable sigils."
+    },
+    "yellow-400": {
+      "description": "Rainbow extension keyword scope at color index 2."
+    }
+  },
+  "sourceCode": {},
+  "nonStandard": {},
+  "deprecated": {}
+}
