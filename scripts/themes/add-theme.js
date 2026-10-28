@@ -12,7 +12,7 @@ try {
     await verifyBuildRestored({ operation: "add-theme" });
     console.log(formatMessage("Verified complete restored generation.", "success"));
   } else {
-    if (process.argv.length !== 3) throw new Error("Usage: npm run add:theme -- <prod/name|dev/name>");
+    if (process.argv.length !== 3) throw new Error("Usage: npm run create -- <prod/name|dev/name>");
 
     /** Created theme files and property counts reported to the command-line caller. */
     const result = await addTheme({ theme: process.argv[2] });

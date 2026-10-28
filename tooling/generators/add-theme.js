@@ -103,7 +103,7 @@ export async function addTheme({ root = repositoryRoot, theme, operations } = {}
       owner,
       operations,
       operation: "add-theme",
-      recovery: "npm run add:theme -- --recover=verify-restored",
+      recovery: "npm run create -- --recover=verify-restored",
     }),
   );
 

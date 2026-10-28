@@ -26,6 +26,8 @@ If you come across any issues, please feel free to [report them here](https://gi
 
 Use Node.js 24 and `npm ci`, then run `npm run build` and `npm run watch`. Reload VS Code after initial setup and select a **Cassidy Dark Preview** theme. Ordinary color edits load live; registration/setup changes print a reload reminder.
 
+Run `npm run refresh` to refresh shared token descriptions, `npm run fill -- prod/default dev/test` to fill missing theme properties and documentation, or `npm run create -- dev/my-theme` to create a theme.
+
 The [development guide](docs/guides/development-guide.md) covers paired family inputs, palettes, shared categorized token data, generators, explicit upstream description updates, validation, [visual language samples](samples/grammar/), packaging, and release/recovery workflows. `npm run check` validates generated artifacts, documentation, executable reachability, formatting, lint, themes, and recursive behavioral suites.
 
 Shared data lives in [`src/token-data/`](src/token-data/); authored themes live in [`src/themes/`](src/themes/). Generated previews and preserved snapshots live in [`preview/`](preview/). Theme builds and watch synchronize preview setup automatically.

@@ -215,7 +215,7 @@ function refreshedHeader(source, resolution, family, localSyntax) {
   /** Verified stable and optional supplemental main inputs for provenance. */
   const stable = resolution.inputs.find((input) => input.id === "vscode-stable"),
     main = resolution.inputs.find((input) => input.id === "vscode-main");
-  return `${purpose}\n// Upstream inputs last processed: VS Code ${resolution.version}\n// Stable commit: ${stable.revision}\n${main ? `// Supplemental main commit: ${main.revision}\n` : ""}${family === "syntax" ? `// Local syntax input: ${localSyntax.path}\n// Local syntax revision: ${localSyntax.revision}\n` : ""}${license}${license ? "\n" : ""}// Updater (run from the repository root): npm run update:token-details\n${source.slice(root)}`;
+  return `${purpose}\n// Upstream inputs last processed: VS Code ${resolution.version}\n// Stable commit: ${stable.revision}\n${main ? `// Supplemental main commit: ${main.revision}\n` : ""}${family === "syntax" ? `// Local syntax input: ${localSyntax.path}\n// Local syntax revision: ${localSyntax.revision}\n` : ""}${license}${license ? "\n" : ""}// Updater (run from the repository root): npm run refresh\n${source.slice(root)}`;
 }
 
 /**
@@ -340,7 +340,7 @@ export async function updateTokenDetails({
   const retrieval = createRetrieval({ policy: config.retrieval, signal, ...services.retrieval });
 
   if (replay && !config.lastSuccessful?.resolution)
-    throw new Error("No successful recorded sources. Run an online npm run update:token-details first.");
+    throw new Error("No successful recorded sources. Run an online npm run refresh first.");
 
   /** Online mode always discovers latest, regardless of existing cache entries. */
   const resolution = replay
@@ -598,8 +598,7 @@ export async function updateTokenDetails({
       expected,
       owner,
       allowRecovery: recover ? state.marker?.id : undefined,
-      recovery:
-        "npm run update:token-details -- --recover (or restore the complete set and use --recover=verify-restored)",
+      recovery: "npm run refresh -- --recover (or restore the complete set and use --recover=verify-restored)",
       operations: services.operations,
       signal,
       operation: "token-details",

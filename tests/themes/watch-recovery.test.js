@@ -89,7 +89,7 @@ test(
           pid: process.pid,
           operation: "token-details",
           before,
-          recovery: "npm run update:token-details -- --recover=verify-restored",
+          recovery: "npm run refresh -- --recover=verify-restored",
         }),
       );
     });

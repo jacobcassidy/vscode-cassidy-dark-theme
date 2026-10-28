@@ -264,7 +264,7 @@ export async function addThemeProperties({ root = repositoryRoot, themes = inclu
       owner,
       operations,
       operation: "add-properties",
-      recovery: "npm run add:properties -- --recover=verify-restored",
+      recovery: "npm run fill -- --recover=verify-restored",
     }),
   );
 

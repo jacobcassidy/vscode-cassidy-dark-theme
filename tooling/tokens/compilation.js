@@ -69,7 +69,7 @@ function validateDetails(details, entries, requireDetails) {
     if (requireDetails) {
       for (const key of definitions.keys()) {
         if (!Object.hasOwn(details[section], key)) {
-          throw new Error(`details.${section}.${key}: missing property details; run npm run add:properties`);
+          throw new Error(`details.${section}.${key}: missing property details; run npm run fill`);
         }
 
         nonempty(details[section][key]?.description, `details.${section}.${key}.description`);
@@ -259,7 +259,7 @@ export function compileTokens(tokens, details, palette, requireDetails = false) 
 
       register("syntax", rule.id, rule);
     } else if (requireDetails) {
-      throw new Error(`${label}: default syntax rules require an id for property details; run npm run add:properties`);
+      throw new Error(`${label}: default syntax rules require an id for property details; run npm run fill`);
     }
   }
 

@@ -219,7 +219,7 @@ export async function checkDocs({
 
       if (
         !header.startsWith("// Shared ") ||
-        !header.trimEnd().endsWith("// Updater (run from the repository root): npm run update:token-details") ||
+        !header.trimEnd().endsWith("// Updater (run from the repository root): npm run refresh") ||
         !header.includes("Microsoft Corporation") ||
         !header.includes("Upstream inputs last processed:")
       )
