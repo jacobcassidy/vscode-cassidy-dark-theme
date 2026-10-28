@@ -315,6 +315,13 @@ export async function extractSource(source, signal) {
        * @param node - AST node.
        */
       function visit(node) {
+        if (
+          ts.isPropertyAssignment(node) &&
+          ts.isStringLiteral(node.name) &&
+          /^terminal\.ansi[A-Z]/.test(node.name.text)
+        )
+          register(ui, node.name.text, undefined, path);
+
         if (ts.isCallExpression(node)) {
           /** Callable leaf name supports namespace/property registrations. */
           const name = ts.isPropertyAccessExpression(node.expression)
