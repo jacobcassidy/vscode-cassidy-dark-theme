@@ -283,7 +283,7 @@ export function decode(input, family, kind, { shared = false } = {}) {
        */
       function variableDetails(node, path) {
         object(node, location(path));
-        if (Object.hasOwn(node, "description")) {
+        if (Object.keys(node).some((key) => detailFields.includes(key))) {
           register(path.join("."), node, undefined, path);
 
           return;

@@ -206,9 +206,15 @@ export async function prepareProperties({ root, themes, overrides = new Map(), a
             ...(reusable
               ? Object.fromEntries(
                   Object.entries(reusable).filter(([key]) =>
-                    ["description", "descriptionAddedIn", "descriptionUpdatedIn", "descriptionBasedOn", "use"].includes(
-                      key,
-                    ),
+                    [
+                      "description",
+                      "descriptionAddedIn",
+                      "descriptionUpdatedIn",
+                      "descriptionBasedOn",
+                      "use",
+                      "inherits",
+                      "overrides",
+                    ].includes(key),
                   ),
                 )
               : {}),
