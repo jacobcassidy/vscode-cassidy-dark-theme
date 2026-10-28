@@ -74,6 +74,10 @@
       "default": {
         "color": "#0ff",
         "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+      },
+      "defaultLibrary": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
       }
     },
     "interface": {
@@ -161,6 +165,18 @@
       }
     },
     "variable": {
+      "abstract": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+      },
+      "async": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+      },
+      "declaration": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+      },
       "default": {
         "color": "#0ff",
         "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
@@ -170,6 +186,26 @@
         "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
       },
       "definition": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+      },
+      "deprecated": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+      },
+      "documentation": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+      },
+      "modification": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+      },
+      "readonly": {
+        "color": "#0ff",
+        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
+      },
+      "static": {
         "color": "#0ff",
         "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
       }
@@ -285,12 +321,6 @@
     },
     "module": {
       "default": {
-        "color": "#0ff",
-        "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
-      }
-    },
-    "parameter": {
-      "readwrite": {
         "color": "#0ff",
         "colorReason": "UNREVIEWED: Added from a token template; choose an intentional color."
       }
