@@ -28,6 +28,16 @@ SOFTWARE.
 // Updater (run from the repository root): npm run refresh
 {
   "standard": {
+    "_root": [
+      "contrastActiveBorder",
+      "contrastBorder",
+      "descriptionForeground",
+      "disabledForeground",
+      "errorForeground",
+      "focusBorder",
+      "foreground",
+      "strongForeground"
+    ],
     "actionBar": [
       "toggledBackground"
     ],
@@ -72,18 +82,6 @@ SOFTWARE.
     "agentFeedbackInputWidget": [
       "border"
     ],
-    "agentSessionReadIndicator": [
-      "foreground"
-    ],
-    "agentSessionSelectedBadge": [
-      "border"
-    ],
-    "agentSessionSelectedUnfocusedBadge": [
-      "border"
-    ],
-    "agentStatusIndicator": [
-      "background"
-    ],
     "agents": [
       "background"
     ],
@@ -107,8 +105,22 @@ SOFTWARE.
     "agentsDetail": [
       "background"
     ],
+    "agentSessionReadIndicator": [
+      "foreground"
+    ],
+    "agentSessionSelectedBadge": [
+      "border"
+    ],
+    "agentSessionSelectedUnfocusedBadge": [
+      "border"
+    ],
     "agentsGradient": [
       "tintColor"
+    ],
+    "agentsMobileDiff": [
+      "addedForeground",
+      "deletedForeground",
+      "modifiedForeground"
     ],
     "agentsNewSessionButton": [
       "background",
@@ -120,6 +132,9 @@ SOFTWARE.
       "background",
       "border",
       "foreground"
+    ],
+    "agentStatusIndicator": [
+      "background"
     ],
     "agentsUnreadBadge": [
       "background",
@@ -238,16 +253,6 @@ SOFTWARE.
     "commentsView": [
       "resolvedIcon",
       "unresolvedIcon"
-    ],
-    "_root": [
-      "contrastActiveBorder",
-      "contrastBorder",
-      "descriptionForeground",
-      "disabledForeground",
-      "errorForeground",
-      "focusBorder",
-      "foreground",
-      "strongForeground"
     ],
     "debugConsole": [
       "errorForeground",
@@ -694,18 +699,6 @@ SOFTWARE.
       "focusBorder",
       "placeholderForeground"
     ],
-    "inlineEdit.gutterIndicator": [
-      "background",
-      "primaryBackground",
-      "primaryBorder",
-      "primaryForeground",
-      "secondaryBackground",
-      "secondaryBorder",
-      "secondaryForeground",
-      "successfulBackground",
-      "successfulBorder",
-      "successfulForeground"
-    ],
     "inlineEdit": [
       "modifiedBackground",
       "modifiedBorder",
@@ -717,6 +710,18 @@ SOFTWARE.
       "originalChangedTextBackground",
       "tabWillAcceptModifiedBorder",
       "tabWillAcceptOriginalBorder"
+    ],
+    "inlineEdit.gutterIndicator": [
+      "background",
+      "primaryBackground",
+      "primaryBorder",
+      "primaryForeground",
+      "secondaryBackground",
+      "secondaryBorder",
+      "secondaryForeground",
+      "successfulBackground",
+      "successfulBorder",
+      "successfulForeground"
     ],
     "input": [
       "background",
@@ -978,9 +983,6 @@ SOFTWARE.
     "notificationLink": [
       "foreground"
     ],
-    "notificationToast": [
-      "border"
-    ],
     "notifications": [
       "background",
       "border",
@@ -994,6 +996,9 @@ SOFTWARE.
     ],
     "notificationsWarningIcon": [
       "foreground"
+    ],
+    "notificationToast": [
+      "border"
     ],
     "outputView": [
       "background"
@@ -1392,9 +1397,9 @@ SOFTWARE.
       "pullRequestForeground",
       "remoteForeground",
       "stashForeground",
-      "symbolText",
       "symbolicLinkFileForeground",
       "symbolicLinkFolderForeground",
+      "symbolText",
       "tagForeground"
     ],
     "testing": [
@@ -1509,11 +1514,6 @@ SOFTWARE.
     "window": [
       "activeBorder",
       "inactiveBorder"
-    ],
-    "agentsMobileDiff": [
-      "addedForeground",
-      "deletedForeground",
-      "modifiedForeground"
     ]
   },
   "sourceCode": {

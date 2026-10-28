@@ -33,6 +33,7 @@ import {
 import { extractSource, semanticDescription } from "./extraction.js";
 import { editDetailRecord, recordPath } from "../../generators/source-edits.js";
 import { formatSource } from "../../shared/formatting.js";
+import { alphabetizeTokenData } from "./alphabetize.js";
 
 /**
  * Update description text history only for actual successful extraction.
@@ -598,7 +599,7 @@ export async function updateTokenDetails({
     }
 
     source = refreshedHeader(source, resolution, family, localSyntax);
-    output.set(input.path, await formatSource(root, input.path, source));
+    output.set(input.path, await formatSource(root, input.path, alphabetizeTokenData(source, input.path)));
   }
 
   /** Successful source resolution advances only with its complete refreshed data generation. */

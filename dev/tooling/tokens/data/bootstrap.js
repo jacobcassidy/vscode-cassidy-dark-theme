@@ -13,6 +13,7 @@ import { repositoryRoot } from "../../shared/paths.js";
 import { decode, semanticPath } from "../formats.js";
 import { applyArtifacts, assertFresh, capturePaths, observeWriter, withGuards } from "../../shared/transactions.js";
 import { parseJsonc } from "../../shared/jsonc.js";
+import { alphabetizeTokenData } from "./alphabetize.js";
 import { formatSource } from "../../shared/formatting.js";
 
 /**
@@ -205,11 +206,11 @@ export async function bootstrapTokenData({ root = repositoryRoot, extensionSourc
 
   /** Each candidate is decoded before any destination is created. */
   const candidates = new Map([
-    [paths[0], serialize("ui", "definitions", uiDefinitions)],
-    [paths[1], serialize("ui", "details", uiDetails)],
-    [paths[2], serialize("semantic", "definitions", semanticDefinitions)],
-    [paths[3], serialize("semantic", "details", semanticDetails)],
-    [paths[4], serialize("syntax", "details", syntaxDetails)],
+    [paths[0], alphabetizeTokenData(serialize("ui", "definitions", uiDefinitions), paths[0])],
+    [paths[1], alphabetizeTokenData(serialize("ui", "details", uiDetails), paths[1])],
+    [paths[2], alphabetizeTokenData(serialize("semantic", "definitions", semanticDefinitions), paths[2])],
+    [paths[3], alphabetizeTokenData(serialize("semantic", "details", semanticDetails), paths[3])],
+    [paths[4], alphabetizeTokenData(serialize("syntax", "details", syntaxDetails), paths[4])],
   ]);
 
   for (const [path, source] of candidates) {

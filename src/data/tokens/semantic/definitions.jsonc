@@ -89,14 +89,14 @@ SOFTWARE.
     "clsParameter",
     "colon",
     "curlybrace",
+    "defaultLibrary",
     "intrinsic",
     "label",
     "magicFunction",
     "module",
     "parenthesis",
     "selfParameter",
-    "semicolon",
-    "defaultLibrary"
+    "semicolon"
   ],
   "deprecated": []
 }

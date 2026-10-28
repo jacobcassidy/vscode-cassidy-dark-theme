@@ -124,26 +124,6 @@ SOFTWARE.
         "description": "Border color of the agent feedback input widget shown in the editor."
       }
     },
-    "agentSessionReadIndicator": {
-      "foreground": {
-        "description": "Foreground color for the read indicator in an agent session."
-      }
-    },
-    "agentSessionSelectedBadge": {
-      "border": {
-        "description": "Border color for the badges in selected agent session items."
-      }
-    },
-    "agentSessionSelectedUnfocusedBadge": {
-      "border": {
-        "description": "Border color for the badges in selected agent session items when the view is unfocused."
-      }
-    },
-    "agentStatusIndicator": {
-      "background": {
-        "description": "Background color of the agent status indicator in the titlebar."
-      }
-    },
     "agents": {
       "background": {
         "description": "Background color of the agent sessions window shell and gradient base."
@@ -189,6 +169,21 @@ SOFTWARE.
         "description": "Background color of the docked details pane in the agent sessions window."
       }
     },
+    "agentSessionReadIndicator": {
+      "foreground": {
+        "description": "Foreground color for the read indicator in an agent session."
+      }
+    },
+    "agentSessionSelectedBadge": {
+      "border": {
+        "description": "Border color for the badges in selected agent session items."
+      }
+    },
+    "agentSessionSelectedUnfocusedBadge": {
+      "border": {
+        "description": "Border color for the badges in selected agent session items when the view is unfocused."
+      }
+    },
     "agentsGradient": {
       "tintColor": {
         "description": "Tint color used in the background gradient of the agent sessions window shell."
@@ -228,6 +223,11 @@ SOFTWARE.
       },
       "foreground": {
         "description": "Foreground color of the card panels (chat, files, terminal) in the agent sessions window."
+      }
+    },
+    "agentStatusIndicator": {
+      "background": {
+        "description": "Background color of the agent status indicator in the titlebar."
       }
     },
     "agentsUnreadBadge": {
@@ -2250,11 +2250,6 @@ SOFTWARE.
         "description": "Notification links foreground color. Notifications slide in from the bottom right of the window."
       }
     },
-    "notificationToast": {
-      "border": {
-        "description": "Notification toast border color. Notifications slide in from the bottom right of the window."
-      }
-    },
     "notifications": {
       "background": {
         "description": "Notifications background color. Notifications slide in from the bottom right of the window."
@@ -2279,6 +2274,11 @@ SOFTWARE.
     "notificationsWarningIcon": {
       "foreground": {
         "description": "The color used for the icon of warning notifications. Notifications slide in from the bottom right of the window."
+      }
+    },
+    "notificationToast": {
+      "border": {
+        "description": "Notification toast border color. Notifications slide in from the bottom right of the window."
       }
     },
     "outputView": {
@@ -3241,14 +3241,14 @@ SOFTWARE.
       "stashForeground": {
         "description": "The foreground color for a stash icon. These icons will appear in the terminal suggest widget."
       },
-      "symbolText": {
-        "description": "The foreground color for a plaintext suggestion. These icons will appear in the terminal suggest widget."
-      },
       "symbolicLinkFileForeground": {
         "description": "The foreground color for a symbolic link file icon. These icons will appear in the terminal suggest widget."
       },
       "symbolicLinkFolderForeground": {
         "description": "The foreground color for a symbolic link folder icon. These icons will appear in the terminal suggest widget."
+      },
+      "symbolText": {
+        "description": "The foreground color for a plaintext suggestion. These icons will appear in the terminal suggest widget."
       },
       "tagForeground": {
         "description": "The foreground color for a tag icon. These icons will appear in the terminal suggest widget."
@@ -3443,16 +3443,16 @@ SOFTWARE.
         "description": "Background color for odd table rows."
       }
     },
-    "walkThrough": {
-      "embeddedEditorBackground": {
-        "description": "Background color for the embedded editors on the Interactive Playground."
-      }
-    },
     "walkthrough": {
       "stepTitle": {
         "foreground": {
           "description": "Foreground color of the heading of each walkthrough step."
         }
+      }
+    },
+    "walkThrough": {
+      "embeddedEditorBackground": {
+        "description": "Background color for the embedded editors on the Interactive Playground."
       }
     },
     "welcomePage": {
