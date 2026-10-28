@@ -28,8 +28,8 @@ Use Node.js 24 and `npm ci`, then run `npm run build` and `npm run watch`. Reloa
 
 Run `npm run refresh` to refresh shared token descriptions, `npm run fill -- prod/default dev/test` to fill missing theme properties and documentation, or `npm run create -- dev/my-theme` to create a theme.
 
-The [development guide](docs/guides/development-guide.md) covers paired family inputs, palettes, shared categorized token data, generators, explicit upstream description updates, validation, [visual language samples](samples/grammar/), packaging, and release/recovery workflows. `npm run check` validates generated artifacts, documentation, executable reachability, formatting, lint, themes, and recursive behavioral suites.
+The [development guide](dev/docs/guides/development-guide.md) covers paired family inputs, palettes, shared categorized token data, generators, explicit upstream description updates, validation, [visual language samples](dev/samples/grammar/), packaging, and release/recovery workflows. `npm run check` validates generated artifacts, documentation, executable reachability, formatting, lint, themes, and recursive behavioral suites.
 
 `npm run check:visual` compares the published theme in a pinned Linux VS Code container, locally and in Ubuntu CI. Docker is required; update baselines explicitly with `npm run check:visual -- --update`.
 
-Shared data lives in [`src/token-data/`](src/token-data/); authored themes live in [`src/themes/`](src/themes/). Generated previews and preserved snapshots live in [`preview/`](preview/). Theme builds and watch synchronize preview setup automatically.
+Shared data lives in [`src/data/tokens/`](src/data/tokens/); authored themes live in [`src/themes/`](src/themes/). Development documentation, samples, scripts, tests, tooling, generated previews, snapshots, and local VSIX packages live in [`dev/`](dev/). Theme builds and watch synchronize preview setup automatically. After updating from an earlier layout, remove the installed preview extension's `preview` symlink only after confirming it points to this checkout's old `preview/` directory, then rebuild to create the new link.

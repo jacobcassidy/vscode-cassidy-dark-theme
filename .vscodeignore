@@ -1,13 +1,7 @@
 # Directories to ignore
 .vscode
-preview
-dist
-docs
-scripts
-tooling
-samples
+dev
 src
-tests
 
 # Files to ignore
 .editorconfig

@@ -12,85 +12,85 @@
       "fileMatch": [
         "/src/themes/*/*/tokens/ui/details.jsonc"
       ],
-      "url": "./tooling/tokens/schemas/theme-ui-details.schema.json"
+      "url": "./dev/tooling/tokens/schemas/theme-ui-details.schema.json"
     },
     {
       "fileMatch": [
-        "/src/token-data/semantic/definitions.jsonc"
+        "/src/data/tokens/semantic/definitions.jsonc"
       ],
-      "url": "./tooling/tokens/schemas/shared-semantic-definitions.schema.json"
+      "url": "./dev/tooling/tokens/schemas/shared-semantic-definitions.schema.json"
     },
     {
       "fileMatch": [
         "/src/themes/*/*/tokens/syntax/definitions.jsonc"
       ],
-      "url": "./tooling/tokens/schemas/theme-syntax-definitions.schema.json"
+      "url": "./dev/tooling/tokens/schemas/theme-syntax-definitions.schema.json"
     },
     {
       "fileMatch": [
         "/src/themes/*/*/tokens/syntax/details.jsonc"
       ],
-      "url": "./tooling/tokens/schemas/theme-syntax-details.schema.json"
+      "url": "./dev/tooling/tokens/schemas/theme-syntax-details.schema.json"
     },
     {
       "fileMatch": [
         "/src/themes/*/*/tokens/variables/details.jsonc"
       ],
-      "url": "./tooling/tokens/schemas/variables-details.schema.json"
+      "url": "./dev/tooling/tokens/schemas/variables-details.schema.json"
     },
     {
       "fileMatch": [
-        "/src/token-data/ui/definitions.jsonc"
+        "/src/data/tokens/ui/definitions.jsonc"
       ],
-      "url": "./tooling/tokens/schemas/shared-ui-definitions.schema.json"
+      "url": "./dev/tooling/tokens/schemas/shared-ui-definitions.schema.json"
     },
     {
       "fileMatch": [
-        "/src/token-data/ui/details.jsonc"
+        "/src/data/tokens/ui/details.jsonc"
       ],
-      "url": "./tooling/tokens/schemas/shared-ui-details.schema.json"
+      "url": "./dev/tooling/tokens/schemas/shared-ui-details.schema.json"
     },
     {
       "fileMatch": [
         "/src/themes/*/*/tokens/ui/definitions.jsonc"
       ],
-      "url": "./tooling/tokens/schemas/theme-ui-definitions.schema.json"
+      "url": "./dev/tooling/tokens/schemas/theme-ui-definitions.schema.json"
     },
     {
       "fileMatch": [
-        "/src/token-data/syntax/details.jsonc"
+        "/src/data/tokens/syntax/details.jsonc"
       ],
-      "url": "./tooling/tokens/schemas/shared-syntax-details.schema.json"
+      "url": "./dev/tooling/tokens/schemas/shared-syntax-details.schema.json"
     },
     {
       "fileMatch": [
         "/src/themes/*/*/tokens/variables/definitions.jsonc"
       ],
-      "url": "./tooling/tokens/schemas/variables-definitions.schema.json"
+      "url": "./dev/tooling/tokens/schemas/variables-definitions.schema.json"
     },
     {
       "fileMatch": [
         "/src/themes/*/*/tokens/semantic/details.jsonc"
       ],
-      "url": "./tooling/tokens/schemas/theme-semantic-details.schema.json"
+      "url": "./dev/tooling/tokens/schemas/theme-semantic-details.schema.json"
     },
     {
       "fileMatch": [
-        "/src/token-data/semantic/details.jsonc"
+        "/src/data/tokens/semantic/details.jsonc"
       ],
-      "url": "./tooling/tokens/schemas/shared-semantic-details.schema.json"
+      "url": "./dev/tooling/tokens/schemas/shared-semantic-details.schema.json"
     },
     {
       "fileMatch": [
         "/src/themes/*/*/tokens/semantic/definitions.jsonc"
       ],
-      "url": "./tooling/tokens/schemas/theme-semantic-definitions.schema.json"
+      "url": "./dev/tooling/tokens/schemas/theme-semantic-definitions.schema.json"
     },
     {
       "fileMatch": [
-        "/src/token-data/upstream-sources.jsonc"
+        "/src/data/tokens/upstream-sources.jsonc"
       ],
-      "url": "./tooling/tokens/schemas/upstream-sources.schema.json"
+      "url": "./dev/tooling/tokens/schemas/upstream-sources.schema.json"
     }
   ]
 }

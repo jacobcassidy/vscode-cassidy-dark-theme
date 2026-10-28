@@ -6,7 +6,7 @@
 import { defineConfig } from "@playwright/test";
 
 export default defineConfig({
-  testDir: "./tests/visual",
+  testDir: "./dev/tests/visual",
   testMatch: "theme.spec.js",
   workers: 1,
   retries: 0,
