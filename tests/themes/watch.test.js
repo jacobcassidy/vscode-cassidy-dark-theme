@@ -4,6 +4,7 @@
  */
 
 import assert from "node:assert/strict";
+import { readFileSync, renameSync, writeFileSync } from "node:fs";
 import { mkdir, readFile, realpath, rename, rm } from "node:fs/promises";
 import { writeFixture as writeFile, createBuildProject, writeDefaultPaletteConfig } from "../helpers/projects.js";
 import { join } from "node:path";
@@ -28,8 +29,11 @@ async function waitFor(predicate) {
   }
 }
 
-/** Capture watcher messages and expose build and reload-reminder counters. */
-function captureLogs() {
+/**
+ * Capture watcher messages and expose build and reload-reminder counters.
+ * @param [onBuild] - Synchronous callback invoked as a completed build is reported.
+ */
+function captureLogs(onBuild) {
   /** Captured normal watcher messages. */
   const logs = [];
 
@@ -52,6 +56,8 @@ function captureLogs() {
       log: (message = "") => {
         rawLogs.push(message);
         logs.push(stripVTControlCharacters(message));
+
+        if (stripVTControlCharacters(message).startsWith("[watch] Built ")) onBuild?.();
       },
 
       /**
@@ -76,8 +82,9 @@ function captureLogs() {
  * @param t - Node.js test context used to register fixture cleanup.
  * @param [options] - Options passed to this operation.
  * @param [options.dev] - Whether to include a development source target in the test fixture.
+ * @param [options.onBuild] - Synchronous callback receiving the fixture root at build completion.
  */
-async function createWatchProject(t, { dev = true } = {}) {
+async function createWatchProject(t, { dev = true, onBuild } = {}) {
   /** Temporary theme-source project root. */
   const root = await createBuildProject(t);
 
@@ -92,7 +99,7 @@ async function createWatchProject(t, { dev = true } = {}) {
   }
 
   /** Captured messages and counters for the current watcher. */
-  const output = captureLogs();
+  const output = captureLogs(() => onBuild?.(root));
 
   /** Watcher lifecycle handle registered for test cleanup. */
   const controller = watchThemes({ root, extensionDirectory, debounceMs: 25, logger: output.logger });
@@ -134,6 +141,41 @@ test("watch builds both groups on startup and syncs linked dev theme registratio
   );
 
   await project.controller.close();
+});
+
+test("watch observes a manifest replacement made as the startup build completes", async (t) => {
+  /** Only the first completed build triggers a replacement save. */
+  let replaced = false;
+
+  /** Native subscription must retain the edit through the end of the current pass. */
+  const project = await createWatchProject(t, {
+    /**
+     * Replace the manifest synchronously before build completion can rebind native subscriptions.
+     * @param root - Isolated project root containing the generated manifest.
+     */
+    onBuild(root) {
+      if (replaced) return;
+
+      replaced = true;
+
+      /** Root manifest retains the authored edit through the following generation. */
+      const path = join(root, "package.json"),
+        manifest = JSON.parse(readFileSync(path, "utf8"));
+
+      manifest.description = "Edited at startup build completion.";
+      writeFileSync(`${path}.tmp`, JSON.stringify(manifest));
+      renameSync(`${path}.tmp`, path);
+    },
+  });
+
+  await waitFor(() => project.builds() >= 2);
+  await project.controller.whenIdle();
+  assert.equal(
+    JSON.parse(await readFile(join(project.root, "package.json"), "utf8")).description,
+    "Edited at startup build completion.",
+  );
+
+  assert.deepEqual(project.errors, []);
 });
 
 test("watch rebuilds prod and inherited dev colors and follows repeated replacement saves", async (t) => {

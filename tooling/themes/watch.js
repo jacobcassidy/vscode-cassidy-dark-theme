@@ -352,11 +352,12 @@ export function watchThemes(
     watchers.push({ path, recursive, listener, watcher: openWatcher(path, recursive, listener) });
   }
 
-  /** Rebind recursive native file watches after each pass, including malformed replacement recovery. */
+  /** Rebind Linux recursive file watches after each pass, including malformed replacement recovery. */
   function refreshWatchers() {
     // Linux recursive fs.watch can retain the replaced inode and miss later in-place edits.
+    // Keep macOS directory subscriptions open so stream restarts cannot drop edits between passes.
     // Fake scheduler subscriptions have no inode state and intentionally retain their explicit handles.
-    if (stopping || services.watch !== watchDirectory) return;
+    if (process.platform !== "linux" || stopping || services.watch !== watchDirectory) return;
 
     try {
       for (const entry of watchers) {
