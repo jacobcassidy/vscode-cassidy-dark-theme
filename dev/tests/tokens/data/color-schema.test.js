@@ -52,12 +52,12 @@ test("a versioned snapshot replays without runtime access and reports extraction
   /** Fresh capture supplied without launching VS Code. */
   const prepared = await prepareColorSchema({ root, resolution, capture: async () => schemas() });
 
-  assert.equal(prepared.path, "dev/docs/refreshes/vscode-color-theme-1.2.3.json");
+  assert.equal(prepared.path, "dev/docs/refreshes/vscode-1.2.3/color-theme.json");
 
   await mkdir(join(root, "dev/docs/refreshes"), { recursive: true });
   await writeFile(join(root, prepared.path), prepared.source);
   await writeFile(
-    join(root, "dev/docs/refreshes/vscode-color-theme-1.2.4.json"),
+    join(root, "dev/docs/refreshes/vscode-1.2.4/color-theme.json"),
     JSON.stringify({ ...prepared.snapshot, version: "1.2.4" }),
   );
 

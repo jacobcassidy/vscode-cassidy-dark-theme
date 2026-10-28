@@ -162,8 +162,8 @@ export async function prepareColorSchema({
   /** Stable identity and per-release documentation paths. */
   const commit = resolution.inputs.find((input) => input.id === "vscode-stable")?.revision,
     version = resolution.version,
-    path = `dev/docs/refreshes/vscode-color-theme-${version}.json`,
-    reportPath = `dev/docs/refreshes/vscode-color-theme-${version}.md`;
+    path = `dev/docs/refreshes/vscode-${version}/color-theme.json`,
+    reportPath = `dev/docs/refreshes/vscode-${version}/color-theme.md`;
 
   if (!/^[a-f0-9]{40}$/.test(commit ?? "")) throw new Error("Schema capture requires a verified stable commit");
 
@@ -217,16 +217,16 @@ export async function colorSchemaReport({ root, resolution, schema, extracted, g
   try {
     /** Numerical version ordering avoids lexicographic release mistakes. */
     const versions = (await readdir(directory))
-      .map((name) => /^vscode-color-theme-(\d+\.\d+\.\d+)\.json$/.exec(name)?.[1])
+      .map((name) => /^vscode-(\d+\.\d+\.\d+)$/.exec(name)?.[1])
       .filter(Boolean)
       .filter((version) => version.localeCompare(resolution.version, undefined, { numeric: true }) < 0)
       .sort((left, right) => left.localeCompare(right, undefined, { numeric: true }));
 
     if (versions.length) {
-      previous = JSON.parse(await readFile(join(directory, `vscode-color-theme-${versions.at(-1)}.json`), "utf8"));
+      previous = JSON.parse(await readFile(join(directory, `vscode-${versions.at(-1)}`, "color-theme.json"), "utf8"));
 
       if (previous.version !== versions.at(-1) || previous.digest !== digest(previous.schemas))
-        throw new Error(`Corrupt prior color schema snapshot: vscode-color-theme-${versions.at(-1)}.json`);
+        throw new Error(`Corrupt prior color schema snapshot: vscode-${versions.at(-1)}/color-theme.json`);
     }
   } catch (error) {
     if (error.code !== "ENOENT") throw error;
