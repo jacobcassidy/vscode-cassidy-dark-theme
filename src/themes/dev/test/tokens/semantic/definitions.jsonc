@@ -1,319 +1,239 @@
 {
   "standard": {
-    "*": {
-      "abstract": {
-        "color": "#ff0000",
-        "colorReason": "Highlight *.abstract in the semantic selector preview."
-      },
-      "async": {
-        "color": "#ff0000",
-        "colorReason": "Highlight *.async in the semantic selector preview."
-      },
-      "declaration": {
-        "color": "#ff0000",
-        "colorReason": "Highlight *.declaration in the semantic selector preview."
-      },
-      "deprecated": {
-        "color": "#ff0000",
-        "colorReason": "Highlight *.deprecated in the semantic selector preview."
-      },
-      "documentation": {
-        "color": "#ff0000",
-        "colorReason": "Highlight *.documentation in the semantic selector preview."
-      },
-      "modification": {
-        "color": "#ff0000",
-        "colorReason": "Highlight *.modification in the semantic selector preview."
-      },
-      "readonly": {
-        "color": "#ff0000",
-        "colorReason": "Highlight *.readonly in the semantic selector preview."
-      },
-      "static": {
-        "color": "#ff0000",
-        "colorReason": "Highlight *.static in the semantic selector preview."
-      }
+    "*.abstract": {
+      "color": "#ff0000",
+      "colorReason": "Highlight *.abstract in the semantic selector preview."
+    },
+    "*.async": {
+      "color": "#ff0000",
+      "colorReason": "Highlight *.async in the semantic selector preview."
+    },
+    "*.declaration": {
+      "color": "#ff0000",
+      "colorReason": "Highlight *.declaration in the semantic selector preview."
+    },
+    "*.deprecated": {
+      "color": "#ff0000",
+      "colorReason": "Highlight *.deprecated in the semantic selector preview."
+    },
+    "*.documentation": {
+      "color": "#ff0000",
+      "colorReason": "Highlight *.documentation in the semantic selector preview."
+    },
+    "*.modification": {
+      "color": "#ff0000",
+      "colorReason": "Highlight *.modification in the semantic selector preview."
+    },
+    "*.readonly": {
+      "color": "#ff0000",
+      "colorReason": "Highlight *.readonly in the semantic selector preview."
+    },
+    "*.static": {
+      "color": "#ff0000",
+      "colorReason": "Highlight *.static in the semantic selector preview."
     },
     "class": {
-      "default": {
-        "color": "#ff0000",
-        "colorReason": "Highlight class in the semantic selector preview."
-      }
+      "color": "#ff0000",
+      "colorReason": "Highlight class in the semantic selector preview."
     },
     "comment": {
-      "default": {
-        "color": "#ff0000",
-        "colorReason": "Highlight comment in the semantic selector preview."
-      }
+      "color": "#ff0000",
+      "colorReason": "Highlight comment in the semantic selector preview."
     },
     "decorator": {
-      "default": {
-        "color": "#ff0000",
-        "colorReason": "Highlight decorator in the semantic selector preview."
-      }
+      "color": "#ff0000",
+      "colorReason": "Highlight decorator in the semantic selector preview."
     },
     "enum": {
-      "default": {
-        "color": "#ff0000",
-        "colorReason": "Highlight enum in the semantic selector preview."
-      }
+      "color": "#ff0000",
+      "colorReason": "Highlight enum in the semantic selector preview."
     },
     "enumMember": {
-      "default": {
-        "color": "#ff0000",
-        "colorReason": "Highlight enumMember in the semantic selector preview."
-      }
+      "color": "#ff0000",
+      "colorReason": "Highlight enumMember in the semantic selector preview."
     },
     "event": {
-      "default": {
-        "color": "#ff0000",
-        "colorReason": "Highlight event in the semantic selector preview."
-      }
+      "color": "#ff0000",
+      "colorReason": "Highlight event in the semantic selector preview."
     },
     "function": {
-      "default": {
-        "color": "#ff0000",
-        "colorReason": "Highlight function in the semantic selector preview."
-      }
+      "color": "#ff0000",
+      "colorReason": "Highlight function in the semantic selector preview."
     },
     "interface": {
-      "default": {
-        "color": "#ff0000",
-        "colorReason": "Highlight interface in the semantic selector preview."
-      }
+      "color": "#ff0000",
+      "colorReason": "Highlight interface in the semantic selector preview."
     },
     "keyword": {
-      "default": {
-        "color": "#ff0000",
-        "colorReason": "Highlight keyword in the semantic selector preview."
-      }
+      "color": "#ff0000",
+      "colorReason": "Highlight keyword in the semantic selector preview."
     },
     "macro": {
-      "default": {
-        "color": "#ff0000",
-        "colorReason": "Highlight macro in the semantic selector preview."
-      }
+      "color": "#ff0000",
+      "colorReason": "Highlight macro in the semantic selector preview."
     },
     "method": {
-      "default": {
-        "color": "#ff0000",
-        "colorReason": "Highlight method in the semantic selector preview."
-      }
+      "color": "#ff0000",
+      "colorReason": "Highlight method in the semantic selector preview."
     },
     "namespace": {
-      "default": {
-        "color": "#ff0000",
-        "colorReason": "Highlight namespace in the semantic selector preview."
-      }
+      "color": "#ff0000",
+      "colorReason": "Highlight namespace in the semantic selector preview."
     },
     "number": {
-      "default": {
-        "color": "#ff0000",
-        "colorReason": "Highlight number in the semantic selector preview."
-      }
+      "color": "#ff0000",
+      "colorReason": "Highlight number in the semantic selector preview."
     },
     "operator": {
-      "default": {
-        "color": "#ff0000",
-        "colorReason": "Highlight operator in the semantic selector preview."
-      }
+      "color": "#ff0000",
+      "colorReason": "Highlight operator in the semantic selector preview."
     },
     "parameter": {
-      "default": {
-        "color": "#ff0000",
-        "colorReason": "Highlight parameter in the semantic selector preview."
-      }
+      "color": "#ff0000",
+      "colorReason": "Highlight parameter in the semantic selector preview."
     },
     "property": {
-      "default": {
-        "color": "#ff0000",
-        "colorReason": "Highlight property in the semantic selector preview."
-      }
+      "color": "#ff0000",
+      "colorReason": "Highlight property in the semantic selector preview."
     },
     "regexp": {
-      "default": {
-        "color": "#ff0000",
-        "colorReason": "Highlight regexp in the semantic selector preview."
-      }
+      "color": "#ff0000",
+      "colorReason": "Highlight regexp in the semantic selector preview."
     },
     "string": {
-      "default": {
-        "color": "#ff0000",
-        "colorReason": "Highlight string in the semantic selector preview."
-      }
+      "color": "#ff0000",
+      "colorReason": "Highlight string in the semantic selector preview."
     },
     "struct": {
-      "default": {
-        "color": "#ff0000",
-        "colorReason": "Highlight struct in the semantic selector preview."
-      }
+      "color": "#ff0000",
+      "colorReason": "Highlight struct in the semantic selector preview."
     },
     "type": {
-      "default": {
-        "color": "#ff0000",
-        "colorReason": "Highlight type in the semantic selector preview."
-      }
+      "color": "#ff0000",
+      "colorReason": "Highlight type in the semantic selector preview."
     },
     "typeParameter": {
-      "default": {
-        "color": "#ff0000",
-        "colorReason": "Highlight typeParameter in the semantic selector preview."
-      }
+      "color": "#ff0000",
+      "colorReason": "Highlight typeParameter in the semantic selector preview."
     },
     "variable": {
-      "default": {
-        "color": "#ff0000",
-        "colorReason": "Highlight variable in the semantic selector preview."
-      },
-      "defaultLibrary": {
-        "color": "#ff0",
-        "colorReason": "Highlight variable.defaultLibrary in the semantic selector preview."
-      },
-      "definition": {
-        "color": "#ff0",
-        "colorReason": "Highlight variable.definition in the semantic selector preview."
-      }
+      "color": "#ff0000",
+      "colorReason": "Highlight variable in the semantic selector preview."
+    },
+    "variable.defaultLibrary": {
+      "color": "#ff0",
+      "colorReason": "Highlight variable.defaultLibrary in the semantic selector preview."
+    },
+    "variable.definition": {
+      "color": "#ff0",
+      "colorReason": "Highlight variable.definition in the semantic selector preview."
     }
   },
   "sourceCode": {},
   "nonStandard": {
-    "*": {
-      "builtin": {
-        "color": "#ff0000",
-        "colorReason": "Highlight *.builtin in the semantic selector preview."
-      },
-      "callable": {
-        "color": "#ff0000",
-        "colorReason": "Highlight *.callable in the semantic selector preview."
-      },
-      "classMember": {
-        "color": "#ff0000",
-        "colorReason": "Highlight *.classMember in the semantic selector preview."
-      },
-      "decorator": {
-        "color": "#ff0000",
-        "colorReason": "Highlight *.decorator in the semantic selector preview."
-      },
-      "escapeCharacter": {
-        "color": "#ff0000",
-        "colorReason": "Highlight *.escapeCharacter in the semantic selector preview."
-      },
-      "invalid": {
-        "color": "#ff0000",
-        "colorReason": "Highlight *.invalid in the semantic selector preview."
-      },
-      "keywordArgument": {
-        "color": "#ff0000",
-        "colorReason": "Highlight *.keywordArgument in the semantic selector preview."
-      },
-      "library": {
-        "color": "#ff0000",
-        "colorReason": "Highlight *.library in the semantic selector preview."
-      },
-      "overridden": {
-        "color": "#ff0000",
-        "colorReason": "Highlight *.overridden in the semantic selector preview."
-      },
-      "typeHint": {
-        "color": "#ff0000",
-        "colorReason": "Highlight *.typeHint in the semantic selector preview."
-      },
-      "typeHintComment": {
-        "color": "#ff0000",
-        "colorReason": "Highlight *.typeHintComment in the semantic selector preview."
-      }
+    "*.builtin": {
+      "color": "#ff0000",
+      "colorReason": "Highlight *.builtin in the semantic selector preview."
+    },
+    "*.callable": {
+      "color": "#ff0000",
+      "colorReason": "Highlight *.callable in the semantic selector preview."
+    },
+    "*.classMember": {
+      "color": "#ff0000",
+      "colorReason": "Highlight *.classMember in the semantic selector preview."
+    },
+    "*.decorator": {
+      "color": "#ff0000",
+      "colorReason": "Highlight *.decorator in the semantic selector preview."
+    },
+    "*.escapeCharacter": {
+      "color": "#ff0000",
+      "colorReason": "Highlight *.escapeCharacter in the semantic selector preview."
+    },
+    "*.invalid": {
+      "color": "#ff0000",
+      "colorReason": "Highlight *.invalid in the semantic selector preview."
+    },
+    "*.keywordArgument": {
+      "color": "#ff0000",
+      "colorReason": "Highlight *.keywordArgument in the semantic selector preview."
+    },
+    "*.library": {
+      "color": "#ff0000",
+      "colorReason": "Highlight *.library in the semantic selector preview."
+    },
+    "*.overridden": {
+      "color": "#ff0000",
+      "colorReason": "Highlight *.overridden in the semantic selector preview."
+    },
+    "*.typeHint": {
+      "color": "#ff0000",
+      "colorReason": "Highlight *.typeHint in the semantic selector preview."
+    },
+    "*.typeHintComment": {
+      "color": "#ff0000",
+      "colorReason": "Highlight *.typeHintComment in the semantic selector preview."
     },
     "arrow": {
-      "default": {
-        "color": "#ff0000",
-        "colorReason": "Highlight arrow in the semantic selector preview."
-      }
+      "color": "#ff0000",
+      "colorReason": "Highlight arrow in the semantic selector preview."
     },
     "bracket": {
-      "default": {
-        "color": "#ff0000",
-        "colorReason": "Highlight bracket in the semantic selector preview."
-      }
+      "color": "#ff0000",
+      "colorReason": "Highlight bracket in the semantic selector preview."
     },
     "builtinConstant": {
-      "default": {
-        "color": "#ff0000",
-        "colorReason": "Highlight builtinConstant in the semantic selector preview."
-      }
+      "color": "#ff0000",
+      "colorReason": "Highlight builtinConstant in the semantic selector preview."
     },
     "clsParameter": {
-      "default": {
-        "color": "#ff0000",
-        "colorReason": "Highlight clsParameter in the semantic selector preview."
-      }
+      "color": "#ff0000",
+      "colorReason": "Highlight clsParameter in the semantic selector preview."
     },
     "colon": {
-      "default": {
-        "color": "#ff0000",
-        "colorReason": "Highlight colon in the semantic selector preview."
-      }
+      "color": "#ff0000",
+      "colorReason": "Highlight colon in the semantic selector preview."
     },
     "curlybrace": {
-      "default": {
-        "color": "#ff0000",
-        "colorReason": "Highlight curlybrace in the semantic selector preview."
-      }
+      "color": "#ff0000",
+      "colorReason": "Highlight curlybrace in the semantic selector preview."
     },
     "intrinsic": {
-      "default": {
-        "color": "#ff0000",
-        "colorReason": "Highlight intrinsic in the semantic selector preview."
-      }
+      "color": "#ff0000",
+      "colorReason": "Highlight intrinsic in the semantic selector preview."
     },
     "label": {
-      "default": {
-        "color": "#ff0000",
-        "colorReason": "Highlight label in the semantic selector preview."
-      }
+      "color": "#ff0000",
+      "colorReason": "Highlight label in the semantic selector preview."
     },
     "magicFunction": {
-      "default": {
-        "color": "#ff0000",
-        "colorReason": "Highlight magicFunction in the semantic selector preview."
-      }
+      "color": "#ff0000",
+      "colorReason": "Highlight magicFunction in the semantic selector preview."
     },
     "module": {
-      "default": {
-        "color": "#ff0000",
-        "colorReason": "Highlight module in the semantic selector preview."
-      }
+      "color": "#ff0000",
+      "colorReason": "Highlight module in the semantic selector preview."
     },
     "parenthesis": {
-      "default": {
-        "color": "#ff0000",
-        "colorReason": "Highlight parenthesis in the semantic selector preview."
-      }
+      "color": "#ff0000",
+      "colorReason": "Highlight parenthesis in the semantic selector preview."
     },
     "selfParameter": {
-      "default": {
-        "color": "#ff0000",
-        "colorReason": "Highlight selfParameter in the semantic selector preview."
-      }
+      "color": "#ff0000",
+      "colorReason": "Highlight selfParameter in the semantic selector preview."
     },
     "semicolon": {
-      "default": {
-        "color": "#ff0000",
-        "colorReason": "Highlight semicolon in the semantic selector preview."
-      }
+      "color": "#ff0000",
+      "colorReason": "Highlight semicolon in the semantic selector preview."
     },
     "defaultLibrary": {
-      "default": {
-        // Other examples - not in scheme
-
-        "color": "#ff0",
-        "colorReason": "Highlight defaultLibrary in the semantic selector preview."
-      }
+      "color": "#ff0",
+      "colorReason": "Highlight defaultLibrary in the semantic selector preview."
     },
-    "parameter": {
-      "readwrite": {
-        "color": "#ff0",
-        "colorReason": "Highlight parameter.readwrite in the semantic selector preview."
-      }
+    "parameter.readwrite": {
+      "color": "#ff0",
+      "colorReason": "Highlight parameter.readwrite in the semantic selector preview."
     }
   },
   "deprecated": {}

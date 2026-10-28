@@ -4,103 +4,35 @@
   "type": "object",
   "properties": {
     "standard": {
-      "type": "object",
-      "propertyNames": {
-        "pattern": "^(\\*|[a-zA-Z][\\w-]*)(:[a-zA-Z][\\w+-]*)?$"
-      },
-      "additionalProperties": {
-        "type": "object",
-        "propertyNames": {
-          "pattern": "^[a-zA-Z][\\w-]*(\\.[a-zA-Z][\\w-]*)*$"
-        },
-        "additionalProperties": {
-          "type": "object",
-          "properties": {
-            "$token": {
-              "const": true
-            }
-          },
-          "additionalProperties": false,
-          "required": [
-            "$token"
-          ]
-        }
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^(?:\\*|[a-zA-Z][\\w-]*)(?:\\.[a-zA-Z][\\w-]*)*(?::[a-zA-Z][\\w+-]*)?$"
       }
     },
     "sourceCode": {
-      "type": "object",
-      "propertyNames": {
-        "pattern": "^(\\*|[a-zA-Z][\\w-]*)(:[a-zA-Z][\\w+-]*)?$"
-      },
-      "additionalProperties": {
-        "type": "object",
-        "propertyNames": {
-          "pattern": "^[a-zA-Z][\\w-]*(\\.[a-zA-Z][\\w-]*)*$"
-        },
-        "additionalProperties": {
-          "type": "object",
-          "properties": {
-            "$token": {
-              "const": true
-            }
-          },
-          "additionalProperties": false,
-          "required": [
-            "$token"
-          ]
-        }
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^(?:\\*|[a-zA-Z][\\w-]*)(?:\\.[a-zA-Z][\\w-]*)*(?::[a-zA-Z][\\w+-]*)?$"
       }
     },
     "nonStandard": {
-      "type": "object",
-      "propertyNames": {
-        "pattern": "^(\\*|[a-zA-Z][\\w-]*)(:[a-zA-Z][\\w+-]*)?$"
-      },
-      "additionalProperties": {
-        "type": "object",
-        "propertyNames": {
-          "pattern": "^[a-zA-Z][\\w-]*(\\.[a-zA-Z][\\w-]*)*$"
-        },
-        "additionalProperties": {
-          "type": "object",
-          "properties": {
-            "$token": {
-              "const": true
-            },
-            "use": {
-              "type": "string",
-              "pattern": "\\S"
-            }
-          },
-          "additionalProperties": false,
-          "required": [
-            "$token"
-          ]
-        }
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^(?:\\*|[a-zA-Z][\\w-]*)(?:\\.[a-zA-Z][\\w-]*)*(?::[a-zA-Z][\\w+-]*)?$"
       }
     },
     "deprecated": {
-      "type": "object",
-      "propertyNames": {
-        "pattern": "^(\\*|[a-zA-Z][\\w-]*)(:[a-zA-Z][\\w+-]*)?$"
-      },
-      "additionalProperties": {
-        "type": "object",
-        "propertyNames": {
-          "pattern": "^[a-zA-Z][\\w-]*(\\.[a-zA-Z][\\w-]*)*$"
-        },
-        "additionalProperties": {
-          "type": "object",
-          "properties": {
-            "$token": {
-              "const": true
-            }
-          },
-          "additionalProperties": false,
-          "required": [
-            "$token"
-          ]
-        }
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^(?:\\*|[a-zA-Z][\\w-]*)(?:\\.[a-zA-Z][\\w-]*)*(?::[a-zA-Z][\\w+-]*)?$"
       }
     }
   },

@@ -275,7 +275,8 @@ export function decode(input, family, kind, { shared = false } = {}) {
   fields(input.value, categories, input.label ?? family);
 
   for (const category of categories) {
-    object(input.value[category], location([category]));
+    if (!(family === "semantic" && shared && kind === "definitions" && Array.isArray(input.value[category])))
+      object(input.value[category], location([category]));
 
     if (family === "syntax" && kind === "definitions") {
       fields(input.value[category], ["rules"], location([category]));
@@ -318,22 +319,25 @@ export function decode(input, family, kind, { shared = false } = {}) {
     } else if (family === "syntax") {
       for (const [id, record] of Object.entries(input.value[category])) register(id, record, category, [category, id]);
     } else if (family === "semantic") {
-      for (const [type, suffixes] of Object.entries(input.value[category])) {
-        object(suffixes, location([category, type]));
+      if (shared && kind === "definitions") {
+        if (!Array.isArray(input.value[category]))
+          throw new Error(`${location([category])}: shared semantic definitions must be arrays of exact selectors`);
 
-        for (const [suffix, record] of Object.entries(suffixes)) {
-          object(record, location([category, type, suffix]));
+        for (const [index, id] of input.value[category].entries()) {
+          if (typeof id !== "string") throw new Error(`${location([category, index])}: expected a semantic selector`);
+
+          register(id, { $token: true }, category, [category, index]);
+        }
+      } else {
+        for (const [id, record] of Object.entries(input.value[category])) {
+          object(record, location([category, id]));
+          semanticPath(id);
           fields(
             record,
-            kind === "definitions"
-              ? shared
-                ? ["$token", "use"]
-                : definitionFields
-              : [...detailFields, ...(shared ? ["modified-desc"] : [])],
-            location([category, type, suffix]),
+            kind === "definitions" ? definitionFields : [...detailFields, ...(shared ? ["modified-desc"] : [])],
+            location([category, id]),
           );
-
-          register(semanticId(type, suffix), record, category, [category, type, suffix]);
+          register(id, record, category, [category, id]);
         }
       }
     } else {

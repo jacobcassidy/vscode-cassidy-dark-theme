@@ -27,287 +27,76 @@ SOFTWARE.
 */
 // Updater (run from the repository root): npm run refresh
 {
-  "standard": {
-    "*": {
-      "abstract": {
-        // -- STANDARD --
-        "$token": true
-      },
-      "async": {
-        "$token": true
-      },
-      "declaration": {
-        "$token": true
-      },
-      "deprecated": {
-        "$token": true
-      },
-      "documentation": {
-        "$token": true
-      },
-      "modification": {
-        "$token": true
-      },
-      "readonly": {
-        "$token": true
-      },
-      "static": {
-        "$token": true
-      }
-    },
-    "class": {
-      "default": {
-        "$token": true
-      }
-    },
-    "comment": {
-      "default": {
-        "$token": true
-      }
-    },
-    "decorator": {
-      "default": {
-        "$token": true
-      }
-    },
-    "enum": {
-      "default": {
-        "$token": true
-      }
-    },
-    "enumMember": {
-      "default": {
-        "$token": true
-      }
-    },
-    "event": {
-      "default": {
-        "$token": true
-      }
-    },
-    "function": {
-      "default": {
-        "$token": true
-      },
-      "defaultLibrary": {
-        "$token": true
-      }
-    },
-    "interface": {
-      "default": {
-        "$token": true
-      }
-    },
-    "keyword": {
-      "default": {
-        "$token": true
-      }
-    },
-    "macro": {
-      "default": {
-        "$token": true
-      }
-    },
-    "method": {
-      "default": {
-        "$token": true
-      }
-    },
-    "namespace": {
-      "default": {
-        "$token": true
-      }
-    },
-    "number": {
-      "default": {
-        "$token": true
-      }
-    },
-    "operator": {
-      "default": {
-        "$token": true
-      }
-    },
-    "parameter": {
-      "default": {
-        "$token": true
-      }
-    },
-    "property": {
-      "default": {
-        "$token": true
-      }
-    },
-    "regexp": {
-      "default": {
-        "$token": true
-      }
-    },
-    "string": {
-      "default": {
-        "$token": true
-      }
-    },
-    "struct": {
-      "default": {
-        "$token": true
-      }
-    },
-    "type": {
-      "default": {
-        "$token": true
-      }
-    },
-    "typeParameter": {
-      "default": {
-        "$token": true
-      }
-    },
-    "variable": {
-      "default": {
-        "$token": true
-      },
-      "abstract": {
-        // -- STANDARD MODIFIERS --
-        "$token": true
-      },
-      "async": {
-        "$token": true
-      },
-      "declaration": {
-        "$token": true
-      },
-      "defaultLibrary": {
-        "$token": true
-      },
-      "definition": {
-        "$token": true
-      },
-      "deprecated": {
-        "$token": true
-      },
-      "documentation": {
-        "$token": true
-      },
-      "modification": {
-        "$token": true
-      },
-      "readonly": {
-        "$token": true
-      },
-      "static": {
-        "$token": true
-      }
-    }
-  },
-  "sourceCode": {},
-  "nonStandard": {
-    "*": {
-      "builtin": {
-        "$token": true
-      },
-      "callable": {
-        "$token": true
-      },
-      "classMember": {
-        "$token": true
-      },
-      "decorator": {
-        "$token": true
-      },
-      "escapeCharacter": {
-        "$token": true
-      },
-      "invalid": {
-        "$token": true
-      },
-      "keywordArgument": {
-        "$token": true
-      },
-      "library": {
-        "$token": true
-      },
-      "overridden": {
-        "$token": true
-      },
-      "typeHint": {
-        "$token": true
-      },
-      "typeHintComment": {
-        "$token": true
-      }
-    },
-    "arrow": {
-      "default": {
-        "$token": true
-      }
-    },
-    "bracket": {
-      "default": {
-        "$token": true
-      }
-    },
-    "builtinConstant": {
-      "default": {
-        "$token": true
-      }
-    },
-    "clsParameter": {
-      "default": {
-        "$token": true
-      }
-    },
-    "colon": {
-      "default": {
-        "$token": true
-      }
-    },
-    "curlybrace": {
-      "default": {
-        "$token": true
-      }
-    },
-    "intrinsic": {
-      "default": {
-        "$token": true
-      }
-    },
-    "label": {
-      "default": {
-        "$token": true
-      }
-    },
-    "magicFunction": {
-      "default": {
-        "$token": true
-      }
-    },
-    "module": {
-      "default": {
-        "$token": true
-      }
-    },
-    "parenthesis": {
-      "default": {
-        "$token": true
-      }
-    },
-    "selfParameter": {
-      "default": {
-        "$token": true
-      }
-    },
-    "semicolon": {
-      "default": {
-        "$token": true
-      }
-    },
-    "defaultLibrary": {
-      "default": {
-        // -- NON-STANDARD --
-        "$token": true
-      }
-    }
-  },
-  "deprecated": {}
+  "standard": [
+    "*.abstract",
+    "*.async",
+    "*.declaration",
+    "*.deprecated",
+    "*.documentation",
+    "*.modification",
+    "*.readonly",
+    "*.static",
+    "class",
+    "comment",
+    "decorator",
+    "enum",
+    "enumMember",
+    "event",
+    "function",
+    "function.defaultLibrary",
+    "interface",
+    "keyword",
+    "macro",
+    "method",
+    "namespace",
+    "number",
+    "operator",
+    "parameter",
+    "property",
+    "regexp",
+    "string",
+    "struct",
+    "type",
+    "typeParameter",
+    "variable",
+    "variable.abstract",
+    "variable.async",
+    "variable.declaration",
+    "variable.defaultLibrary",
+    "variable.definition",
+    "variable.deprecated",
+    "variable.documentation",
+    "variable.modification",
+    "variable.readonly",
+    "variable.static"
+  ],
+  "sourceCode": [],
+  "nonStandard": [
+    "*.builtin",
+    "*.callable",
+    "*.classMember",
+    "*.decorator",
+    "*.escapeCharacter",
+    "*.invalid",
+    "*.keywordArgument",
+    "*.library",
+    "*.overridden",
+    "*.typeHint",
+    "*.typeHintComment",
+    "arrow",
+    "bracket",
+    "builtinConstant",
+    "clsParameter",
+    "colon",
+    "curlybrace",
+    "intrinsic",
+    "label",
+    "magicFunction",
+    "module",
+    "parenthesis",
+    "selfParameter",
+    "semicolon",
+    "defaultLibrary"
+  ],
+  "deprecated": []
 }

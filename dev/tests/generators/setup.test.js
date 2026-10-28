@@ -31,7 +31,7 @@ for (const group of ["prod", "dev"]) {
 
     await writeFixture(
       join(root, "src/data/tokens/semantic/definitions.jsonc"),
-      '{"standard":{},"sourceCode":{},"nonStandard":{"*": {"readonly": {"$token":true}},"enum": {"default": {"$token":true}}},"deprecated":{}}',
+      '{"standard":[],"sourceCode":[],"nonStandard":["*.readonly","enum"],"deprecated":[]}',
     );
 
     /** Production files must stay unchanged during creation. */

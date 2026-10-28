@@ -5,7 +5,7 @@
 
 import { applyEdits, modify, findNodeAtLocation, getNodeValue } from "jsonc-parser";
 import { parseJsonc } from "../shared/jsonc.js";
-import { semanticPath, categories, detailFields } from "../tokens/formats.js";
+import { categories, detailFields } from "../tokens/formats.js";
 
 /**
  * Construct an explicit empty family file, preserving independent suppression semantics.
@@ -28,7 +28,7 @@ export function emptyFamily(family, kind) {
  */
 export function recordPath(family, category, id) {
   if (family === "variables") return [id];
-  return [category, ...(family === "ui" ? id.split(".") : family === "semantic" ? semanticPath(id) : [id])];
+  return [category, ...(family === "ui" ? id.split(".") : [id])];
 }
 
 /**
